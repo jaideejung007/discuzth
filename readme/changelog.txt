@@ -1,0 +1,22 @@
++======================================+
+   Discuz! X3.2 Release 20140603
++======================================+
+优化 部分页面，提升效率
+调整 插件机制，提供更多接口
+新增 对微信登录、微社区的支持
+修复 旧版中存在的已知问题和安全隐患
+
++--------------------------------------+
+往日版本( Old Version )
++--------------------------------------+
+Discuz! X1 Beta Release 20100501
+Discuz! X1 Release 20100518
+Discuz! X1 Release 20100601
+Discuz! X1 Release 20100613
+Discuz! X1 Release 20100723
+Discuz! X1.5RC Release 20100901
+Discuz! X1.5
+Discuz! X2
+Discuz! X2.5
+Discuz! X3
+Discuz! X3.1
