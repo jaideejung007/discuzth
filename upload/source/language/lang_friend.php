@@ -12,15 +12,15 @@ if(!defined('IN_DISCUZ')) {
 }
 
 $lang = array(
-	'friend_group_default' => '其他',
-	'friend_group_1' => '通过本站认识',
-	'friend_group_2' => '通过活动认识',
-	'friend_group_3' => '通过朋友认识',
-	'friend_group_4' => '亲人',
-	'friend_group_5' => '同事',
-	'friend_group_6' => '同学',
-	'friend_group_7' => '不认识',
-	'friend_group_more' => '自定义{num}'
+	'friend_group_default' => 'อื่น ๆ',
+	'friend_group_1' => 'เพื่อนในเว็บนี้',
+	'friend_group_2' => 'เพื่อนร่วมกิจกรรม',
+	'friend_group_3' => 'เพื่อนของเพื่อน',
+	'friend_group_4' => 'ญาติพี่น้อง',
+	'friend_group_5' => 'เพื่อนร่วมงาน',
+	'friend_group_6' => 'เพื่อนร่วมเรียน',
+	'friend_group_7' => 'เพื่อนสนิท',
+	'friend_group_more' => 'กำหนดเอง{num}'
 );
 
 ?>

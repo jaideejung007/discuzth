@@ -13,20 +13,20 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'google_name' => 'Google 搜索',
-	'google_desc' => 'Google 搜索框',
-	'google_lang' => '搜索网页的语言',
-	'google_lang_comment' => '设置适合自己论坛的网页语言可以有效的提高搜索结果的质量',
-	'google_lang_any' => '任何语言',
-	'google_lang_en' => '英文',
-	'google_lang_zh-CN' => '简体中文',
-	'google_lang_zh-TW' => '繁体中文',
-	'google_default' => '默认搜索选择',
-	'google_default_comment' => '搜索框默认选择的项目',
-	'google_default_0' => '网页搜索',
-	'google_default_1' => '站内搜索',
-	'google_client' => '搜索联盟 ID',
-	'google_client_comment' => '如果您加入了 Google 搜索联盟，可以在这里填写 ID',
+	'google_name' => 'ค้นหาด้วย Google',
+	'google_desc' => 'กล่องค้นหา Google',
+	'google_lang' => 'ค้นหาเว็บ ด้วยภาษา',
+	'google_lang_comment' => 'ตั้งค่าภาษาหน้าเว็บไซต์ของคุณ ซึ่งสามารถอัปเดตคุณภาพของผลลัพธ์การค้นหาได้อย่างมีประสิทธิภาพ',
+	'google_lang_any' => 'ภาษาใดก็ได้',
+	'google_lang_en' => 'ภาษาอังกฤษ',
+	'google_lang_zh-CN' => 'จีนประยุกต์',
+	'google_lang_zh-TW' => 'จีนดั้งเดิม',
+	'google_default' => 'ตัวเลือกการเริ่มต้นค้นหา',
+	'google_default_comment' => 'เลือกรายการกล่องค้นหาเริ่มต้น',
+	'google_default_0' => 'ค้นหาเว็บ',
+	'google_default_1' => 'ค้นหา',
+	'google_client' => 'ID กูเกิลแอดเซ็นท์',
+	'google_client_comment' => 'หากคุณเข้าร่วม Google แอดเซ็นท์, คุณสามารถกรอกข้อมูล ID ได้ที่นี่',
 );
 
 ?>

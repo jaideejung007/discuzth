@@ -13,14 +13,14 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'portalcategory_thecatid' => '指定栏目',
-	'portalcategory_thecatid_comment' => '指定栏目的ID，多个ID之间用半角逗号（,）分割',
-	'portalcategory_catid' => '指定父级栏目',
-	'portalcategory_catid_comment' => '选择父级栏目',
-	'portalcategory_orderby' => '排序方式',
-	'portalcategory_orderby_comment' => '设置以哪一字段或方式对分类进行排序',
-	'portalcategory_orderby_displayorder' => '按默认顺序排序',
-	'portalcategory_orderby_articles' => '按文章数倒序',
+	'portalcategory_thecatid' => 'คอลัมน์ที่ระบุ',
+	'portalcategory_thecatid_comment' => 'ID ของคอลัมน์ที่ระบุ ถ้ามีหลาย ID ให้ใช้เครื่องหมายคอมม่า（,） เป็นตัวคั่นระหว่าง ID',
+	'portalcategory_catid' => 'หมวดหมู่หลัก',
+	'portalcategory_catid_comment' => 'เลือกหมวดหมู่หลัก',
+	'portalcategory_orderby' => 'การจัดเรียงลำดับหมวดหมู่',
+	'portalcategory_orderby_comment' => 'ตั้งค่าการจัดเรียงลำดับของหมวดหมู่หลัก',
+	'portalcategory_orderby_displayorder' => 'เรียงลำดับตามค่าเริ่มต้น',
+	'portalcategory_orderby_articles' => 'เรียงลำดับตามจำนวนของบทความ',
 );
 
 ?>

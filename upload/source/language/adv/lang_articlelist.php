@@ -13,16 +13,16 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'articlelist_name' => '门户 文章列表广告',
-	'articlelist_desc' => '展现方式: 文章广告显示于频道文章分类的文章列表页面，分为顶部、底部 2 个投放位置。',
-	'articlelist_position' => '投放位置',
-	'articlelist_position_comment' => '分为 4 个位置，上下各有 2 个紧邻的显示位置',
-	'articlelist_position_up1' => '顶部(上)',
-	'articlelist_position_up2' => '顶部(下)',
-	'articlelist_position_down1' => '底部(上)',
-	'articlelist_position_down2' => '底部(下)',
-	'articlelist_category' => '投放频道分类',
-	'articlelist_category_comment' => '设置广告投放的频道分类',
+	'articlelist_name' => 'หน้ารายการบทความ',
+	'articlelist_desc' => 'Show method: the ads shown at the article list page, divided into two placements: top or bottom.',
+	'articlelist_position' => 'Position',
+	'articlelist_position_comment' => 'is divided into four locations, each of two adjacent upper and lower display position',
+	'articlelist_position_up1' => 'Top part (top)',
+	'articlelist_position_up2' => 'Top part (below)',
+	'articlelist_position_down1' => 'Bottom part (top)',
+	'articlelist_position_down2' => 'Bottom part (below)',
+	'articlelist_category' => 'Portal Category',
+	'articlelist_category_comment' => 'Set the portal category to show the ads',
 );
 
 ?>

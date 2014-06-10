@@ -15,19 +15,19 @@ function make_html(url, obj) {
 		if(ret && (ret=ret['data']) && ret['status'] == 'html_ok') {
 			if(obj) {
 				obj.style.color = 'blue';
-				obj.innerHTML = '<a href="'+ret['path']+'" target="_blank">'+title+'生成成功</a>';
+				obj.innerHTML = '<a href="'+ret['path']+'" target="_blank">'+title+'สร้างสำเร็จ</a>';
 			}
 			if(ret['nexturl']) {
 				if(obj) {
 					obj.style.color = 'green';
-					obj.innerHTML = '生成'+title+(Math.round((ret['current']/ret['count'])*100))+'%';
+					obj.innerHTML = 'สร้าง '+title+(Math.round((ret['current']/ret['count'])*100))+'%';
 				}
 				make_html(ret['nexturl'], obj);
 			}
 		} else {
 			if(obj) {
 				obj.style.color = 'red';
-				obj.innerHTML = title+'生成失败';
+				obj.innerHTML = title+' สร้างล้มเหลว';
 			}
 		}
 	});
@@ -52,13 +52,13 @@ function make_html_batch(url, ids, callback, dom, single) {
 		child.style.color = 'green';
 		var cent = ((1/this.count)*100).toFixed(2);
 		progress_bar(cent);
-		child.innerHTML = '开始生成'+this.dom.getAttribute('mktitle');
+		child.innerHTML = 'เริ่มต้นสร้าง '+this.dom.getAttribute('mktitle');
 		this.dom.innerHTML = '';
 		this.dom.appendChild(child);
 		this.make(id, child);
 		this.child = child;
 		var child2 = document.createElement('div');
-		child2.innerHTML = '<a href="javascript:void(0);" id="mk_goon">如果您的浏览器没有反应，请点击继续...</a>';
+		child2.innerHTML = '<a href="javascript:void(0);" id="mk_goon">ถ้าเบราว์เซอร์ของคุณไม่ตอบสนอง คลิกที่นี่เพื่อดำเนินการต่อไป...</a>';
 		this.dom.appendChild(child2);
 		var obj = this;
 		$('mk_goon').onclick = function (e) {make_html_batch.prototype.make_goon.call(obj, e)};
@@ -96,7 +96,7 @@ make_html_batch.prototype = {
 					makehtml_error.style.height = '200px';
 					makehtml_error.style.overflow = 'scroll';
 					makehtml_error.id = 'makehtml_error';
-					makehtml_error.innerHTML = '错误信息';
+					makehtml_error.innerHTML = 'ข้อผิดพลาด';
 					obj.dom.appendChild(makehtml_error);
 				}
 				makehtml_error.innerHTML += '<br>[id:' + id + ']' + ret['message'];
@@ -105,7 +105,7 @@ make_html_batch.prototype = {
 
 			if(obj.single) {
 				child.style.color = 'blue';
-				child.innerHTML = '<div class="mk_msg">'+'<a href="'+data['path']+'" target="_blank">'+obj.dom.getAttribute('mktitle')+'</a>生成完成'+'</div>';
+				child.innerHTML = '<div class="mk_msg">'+'<a href="'+data['path']+'" target="_blank">'+obj.dom.getAttribute('mktitle')+'</a> สร้างสำเร็จ'+'</div>';
 				if(obj.callback) {
 					setTimeout(function(){(obj.callback)();}, 2000);
 				}
@@ -113,12 +113,12 @@ make_html_batch.prototype = {
 				var current = obj.count - obj.ids.length;
 				var cent = ((current/obj.count)*100).toFixed(2);
 				progress_bar(cent);
-				var str = '本次共需要生成'+obj.count+'个'+obj.dom.getAttribute('mktitle')+'文件，成功生成'+obj.makedcount+'个，';
+				var str = 'จำนวนทั้งหมดที่จะต้องสร้าง '+obj.count+' ไฟล์ '+obj.dom.getAttribute('mktitle')+' สร้างเสร็จแล้วทั้งหมด '+obj.makedcount+' ไฟล์,';
 				if(cent != 100) {
-					child.innerHTML = str+'正在生成第'+current+'个，已经完成'+cent+'%';
+					child.innerHTML = str+'กำลังสร้างไฟล์ '+current+' ไฟล์และเสร็จไปแล้ว '+cent+'%';
 				} else {
 					child.style.color = 'blue';
-					child.innerHTML = str+obj.dom.getAttribute('mktitle')+'生成完成';
+					child.innerHTML = str+obj.dom.getAttribute('mktitle')+' สร้างเสร็จเรียบร้อย';
 				}
 				if(id) {
 					obj.make(id, child);

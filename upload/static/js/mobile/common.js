@@ -558,9 +558,9 @@ var popup = {
 		if(typeof pop == 'string') {
 			$('#ntcmsg').remove();
 			if(type == 'alert') {
-				pop = '<div class="tip"><dt>'+ pop +'</dt><dd><input class="button2" type="button" value="确定" onclick="popup.close();"></dd></div>'
+				pop = '<div class="tip"><dt>'+ pop +'</dt><dd><input class="button2" type="button" value="กำหนด" onclick="popup.close();"></dd></div>'
 			} else if(type == 'confirm') {
-				pop = '<div class="tip"><dt>'+ pop +'</dt><dd><input class="redirect button2" type="button" value="确定" href="'+ url +'"><a href="javascript:;" onclick="popup.close();">取消</a></dd></div>'
+				pop = '<div class="tip"><dt>'+ pop +'</dt><dd><input class="redirect button2" type="button" value="กำหนด" href="'+ url +'"><a href="javascript:;" onclick="popup.close();">ยกเลิก</a></dd></div>'
 			}
 			$('body').append('<div id="ntcmsg" style="display:none;">'+ pop +'</div>');
 			pop = $('#ntcmsg');
@@ -702,16 +702,16 @@ var geo = {
 		geo.errmsg = 'error';
 		switch(error.code) {
 			case error.TIMEOUT:
-				geo.errmsg = "获取位置超时，请重试";
+				geo.errmsg = "Get location timeouts, please try again";
 				break;
 			case error.POSITION_UNAVAILABLE:
-				geo.errmsg = '无法检测到您的当前位置';
+				geo.errmsg = 'Can not detect your current location';
 			    break;
 		    case error.PERMISSION_DENIED:
-		        geo.errmsg = '请允许能够正常访问您的当前位置';
+		        geo.errmsg = 'Please allow normal access to your current location';
 		        break;
 		    case error.UNKNOWN_ERROR:
-		        geo.errmsg = '发生未知错误';
+		        geo.errmsg = 'An unknown error occurred';
 		        break;
 		}
 	},
@@ -763,7 +763,7 @@ var pullrefresh = {
 				contentobj = document.createElement('div');
 				contentobj = $(contentobj);
 				contentobj.css({'position':'absolute', 'height':'30px', 'top': '-30px', 'left':'50%'});
-				contentobj.html('<img src="'+ STATICURL + 'image/mobile/images/icon_arrow.gif" style="vertical-align:middle;margin-right:5px;-moz-transform:rotate(180deg);-webkit-transform:rotate(180deg);-o-transform:rotate(180deg);transform:rotate(180deg);"><span id="refreshtxt">下拉可以刷新</span>');
+				contentobj.html('<img src="'+ STATICURL + 'image/mobile/images/icon_arrow.gif" style="vertical-align:middle;margin-right:5px;-moz-transform:rotate(180deg);-webkit-transform:rotate(180deg);-o-transform:rotate(180deg);transform:rotate(180deg);"><span id="refreshtxt">Tab to refresh</span>');
 				contentobj.find('img').css({'-webkit-transition':'all 0.5s ease-in-out'});
 				divobj.prepend(contentobj);
 				pos.topx = pos.curposx;

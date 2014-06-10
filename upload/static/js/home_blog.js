@@ -9,8 +9,8 @@ function validate_ajax(obj) {
 	var subject = $('subject');
 	if (subject) {
 		var slen = strlen(subject.value);
-		if (slen < 1 || slen > 80) {
-			alert("标题长度(1~80字符)不符合要求");
+		if (slen < 1 || slen > 255) {
+			alert("ชื่อบล็อกยาวเกินไป (ระหว่าง 1 ถึง 255 ตัวอักษร)");
 			subject.focus();
 			return false;
 		}

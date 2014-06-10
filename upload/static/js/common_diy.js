@@ -715,7 +715,7 @@ var Util = {
 				var dom = document.createElement('div');
 				dom.className = 'edit hide';
 				dom.id = id+'_edit';
-				dom.innerHTML = '<span id="'+id+'_edit_menu">编辑</span>';
+				dom.innerHTML = '<span id="'+id+'_edit_menu">แก้ไข</span>';
 				ele.appendChild(dom);
 				$(id+'_edit_menu').onclick = function (e){Drag.prototype.toggleMenu.call(_method, e, this);};
 			}
@@ -1224,7 +1224,7 @@ var Util = {
 		setClose : function () {
 			if (!this.isChange) {
 				window.onbeforeunload = function() {
-					return '您的数据已经修改,退出将无法保存您的修改。';
+					return 'ข้อมูลมีการแก้ไข หากคุณออกจากการทำงานนี้ ระบบจะไม่บันทึกการเปลี่ยนแปลงใดๆ ทั้งสิ้น';
 				};
 			}
 			this.isChange = true;
@@ -1872,7 +1872,7 @@ var Util = {
 		},
 		uploadSubmit : function (){
 			if (document.uploadpic.attach.value.length<3) {
-				alert('请选择您要上传的图片');
+				alert('กรุณาเลือกรูปภาพของคุณเพื่ออัปโหลด');
 				return false;
 			}
 			if (document.uploadpic.albumid != null) document.uploadpic.albumid.value = $('selectalbum').value;
@@ -1884,7 +1884,7 @@ var Util = {
 		cancel : function () {
 			var flag = false;
 			if (this.isChange) {
-				flag = confirm(this.cancelConfirm ? this.cancelConfirm : '退出将不会保存您刚才的设置。是否确认退出？');
+				flag = confirm(this.cancelConfirm ? this.cancelConfirm : 'ระบบจะไม่บันทึกการตั้งค่าของคุณ แน่ใจหรือไม่ว่าต้องการจบการทำงานนี้');
 			}
 			if (!this.isChange || flag) {
 				location.href = location.href.replace(/[\?|\&]diy\=yes/g,'');

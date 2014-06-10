@@ -13,9 +13,9 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'updateline_name' => '救生圈',
-	'updateline_desc' => '把自己日志的发布时间更新为当前时间',
-	'updateline_info' => '把自己日志的发布时间更新为当前时间',
+	'updateline_name' => 'อัปเดตวันเวลา',
+	'updateline_desc' => 'อัปเดตวันเวลาในบันทึกของคุณเป็นเวลาปัจจุบัน',
+	'updateline_info' => 'อัปเดตวันเวลาในบันทึกของคุณเป็นเวลาปัจจุบัน',
 );
 
 ?>

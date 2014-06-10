@@ -13,8 +13,8 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'line_style' => '分割线样式',
-	'line_style_line' => '实线',
-	'line_style_dash' => '虚线',
+	'line_style' => 'ลักษณะเส้นคั่น',
+	'line_style_line' => 'เส้นทึบ',
+	'line_style_dash' => 'เส้นประ',
 );
 ?>

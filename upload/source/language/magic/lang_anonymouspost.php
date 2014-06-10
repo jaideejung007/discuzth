@@ -13,17 +13,17 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'anonymouspost_name' => '匿名卡',
-	'anonymouspost_desc' => '在指定的地方，让自己的名字显示为匿名。',
-	'anonymouspost_num' => '拥有个数: {magicnum}',
-	'anonymouspost_forum' => '允许使用本道具的版块',
-	'anonymouspost_info' => '将自己的帖子设置为匿名身份，请输入帖子的 ID',
-	'anonymouspost_info_nonexistence' => '请指定要匿名的帖子',
-	'anonymouspost_succeed' => '成功设置为匿名',
-	'anonymouspost_use_error' => '参数错误，不能在此处使用本道具。',
-	'anonymouspost_info_noperm' => '对不起，主题所在版块不允许使用本道具',
-	'anonymouspost_info_user_noperm' => '对不起，您不能对此人使用本道具',
-	'anonymouspost_once_limit' => '已经是匿名状态了，不能重复使用本道具。',
+	'anonymouspost_name' => 'ไม่แสดงชื่อ',
+	'anonymouspost_desc' => 'โพสต์ของคุณจะไม่ระบุชื่อผู้โพสต์',
+	'anonymouspost_num' => 'มีจำนวน: {magicnum}',
+	'anonymouspost_forum' => 'สามารถใช้งานได้ในเว็บบอร์ด',
+	'anonymouspost_info' => 'โพสต์ของคุณจะถูกตั้งค่าให้ไม่ระบุชื่อ กรุณากรอก ID โพสต์',
+	'anonymouspost_info_nonexistence' => 'กรุณาระบุข้อความที่ไม่ระบุชื่อ',
+	'anonymouspost_succeed' => 'โพสต์ของคุณถูกตั้งค่าให้ไม่ระบุชื่อเรียบร้อย',
+	'anonymouspost_use_error' => 'เกิดข้อผิดพลาด คุณไม่สามารถใช้ไอเท็มนี้ได้',
+	'anonymouspost_info_noperm' => 'ขออภัย! บอร์ดนี้ไม่อนุญาตให้ใช้ไอเท็มนี้',
+	'anonymouspost_info_user_noperm' => 'ขออภัย! คุณไม่สามารถใช้ไอเท็มนี้ได้',
+	'anonymouspost_once_limit' => 'ไม่สามารถใช้ไอเท็ม ไม่แสดงชื่อ อีกครั้ง',
 );
 
 ?>

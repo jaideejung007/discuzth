@@ -159,7 +159,7 @@ function announcement() {
 }
 
 function removeindexheats() {
-	return confirm('您确认要把此主题从热点主题中移除么？');
+	return confirm('แน่ใจหรือว่าต้องการเอากระทู้นี้ออกจากกระทู้ยอดนิยม?');
 }
 
 function showTypes(id, mod) {
@@ -169,7 +169,7 @@ function showTypes(id, mod) {
 	mod = isUndefined(mod) ? 1 : mod;
 	var baseh = o.getElementsByTagName('li')[0].offsetHeight * 2;
 	var tmph = o.offsetHeight;
-	var lang = ['展开', '收起'];
+	var lang = ['ขยาย', 'ย่อ'];
 	var cls = ['unfold', 'fold'];
 	if(tmph > baseh) {
 		var octrl = document.createElement('li');
@@ -210,14 +210,14 @@ function fastpostvalidate(theform, noajaxpost) {
 		}
 	}
 	if(theform.message.value == '' || theform.subject.value == '') {
-		s = '抱歉，您尚未输入标题或内容';
+		s = 'ขออภัย! คุณยังไม่ได้ใส่ชื่อกระทู้หรือเนื้อหาใดๆ เลย';
 		theform.message.focus();
-	} else if(mb_strlen(theform.subject.value) > 80) {
-		s = '您的标题超过 80 个字符的限制';
+	} else if(mb_strlen(theform.subject.value) > 255) {
+		s = 'ชื่อกระทู้จะต้องไม่ยาวเกิน 255 ตัวอักษร';
 		theform.subject.focus();
 	}
 	if(!disablepostctrl && ((postminchars != 0 && mb_strlen(theform.message.value) < postminchars) || (postmaxchars != 0 && mb_strlen(theform.message.value) > postmaxchars))) {
-		s = '您的帖子长度不符合要求。\n\n当前长度: ' + mb_strlen(theform.message.value) + ' ' + '字节\n系统限制: ' + postminchars + ' 到 ' + postmaxchars + ' 字节';
+		s = 'แจ้งเตือน\n\nคุณพิมพ์ข้อความแล้ว: ' + mb_strlen(theform.message.value) + ' ' + ' ไบต์\nจะต้องอยู่ในระหว่าง: ' + postminchars + ' ถึง ' + postmaxchars + ' ไบต์เท่านั้น';
 	}
 	if(s) {
 		showError(s);
@@ -284,12 +284,12 @@ function loadData(quiet, formobj) {
 
 	if(in_array((data = trim(data)), ['', 'null', 'false', null, false])) {
 		if(!quiet) {
-			showDialog('没有可以恢复的数据！', 'info');
+			showDialog('ไม่มีข้อมูลที่จะกู้คืน!', 'info');
 		}
 		return;
 	}
 
-	if(!quiet && !confirm('此操作将覆盖当前帖子内容，确定要恢复数据吗？')) {
+	if(!quiet && !confirm('การดำเนินการนี้จะเขียนทับเนื้อหาในโพสต์ปัจจุบันของคุณ แน่ใจว่าจะกู้คืนข้อมูลจากการบันทึกล่าสุดนี้?')) {
 		return;
 	}
 
@@ -380,7 +380,7 @@ function checkForumnew(fid, lasttime) {
 			}
 			removetbodyrow(table, 'forumnewshow');
 			var colspan = table.getElementsByTagName('tbody')[0].rows[0].children.length;
-			var checknew = {'tid':'', 'thread':{'common':{'className':'', 'val':'<a href="javascript:void(0);" onclick="ajaxget(\'forum.php?mod=ajax&action=forumchecknew&fid=' + fid+ '&time='+lasttime+'&uncheck=1&inajax=yes\', \'forumnew\');">有新回复的主题，点击查看', 'colspan': colspan }}};
+			var checknew = {'tid':'', 'thread':{'common':{'className':'', 'val':'<a href="javascript:void(0);" onclick="ajaxget(\'forum.php?mod=ajax&action=forumchecknew&fid=' + fid+ '&time='+lasttime+'&uncheck=1&inajax=yes\', \'forumnew\');">มีโพสต์เข้ามาใหม่ คลิกเพื่อดู', 'colspan': colspan }}};
 			addtbodyrow(table, ['tbody'], ['forumnewshow'], 'separatorline', checknew);
 		} else {
 			if(checkForumcount < 50) {
@@ -492,7 +492,7 @@ function showtime() {
 	for(i=0; i<=DTimers.length; i++) {
 		if(DItemIDs[i]) {
 			if(DTimers[i] == 0) {
-				$(DItemIDs[i]).innerHTML = '已结束';
+				$(DItemIDs[i]).innerHTML = 'สิ้นสุด';
 				DItemIDs[i] = '';
 				continue;
 			}
@@ -502,16 +502,16 @@ function showtime() {
 			var timer_minute = Math.floor(((DTimers[i] % 86400) % 3600) / 60);
 			var timer_second = (((DTimers[i] % 86400) % 3600) % 60);
 			if(timer_day > 0) {
-				timestr += timer_day + '天';
+				timestr += timer_day + 'วัน';
 			}
 			if(timer_hour > 0) {
-				timestr += timer_hour + '小时'
+				timestr += timer_hour + 'ชั่วโมง'
 			}
 			if(timer_minute > 0) {
-				timestr += timer_minute + '分'
+				timestr += timer_minute + 'นาที'
 			}
 			if(timer_second > 0) {
-				timestr += timer_second + '秒'
+				timestr += timer_second + 'วินาที'
 			}
 			DTimers[i] = DTimers[i] - 1;
 			$(DItemIDs[i]).innerHTML = timestr;

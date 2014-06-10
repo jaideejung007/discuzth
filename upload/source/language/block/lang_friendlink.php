@@ -13,19 +13,19 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'friendlink_content' => '展示样式',
-	'friendlink_content_both' => 'logo和文字',
-	'friendlink_content_logo' => '仅logo',
-	'friendlink_content_text' => '仅文字',
-	'friendlink_type' => '链接分组',
-	'friendlink_type_group1' => '分组1',
-	'friendlink_type_group2' => '分组2',
-	'friendlink_type_group3' => '分组3',
-	'friendlink_type_group4' => '分组4',
-	'friendlink_titlelength' => '站点名称长度',
-	'friendlink_titlelength_comment' => '设置站点名称的最大长度',
-	'friendlink_summarylength' => '简介长度',
-	'friendlink_summarylength_comment' => '设置站点简介最大长度',
+	'friendlink_content' => 'ลักษณะการแสดงผล',
+	'friendlink_content_both' => 'โลโก้และข้อความ',
+	'friendlink_content_logo' => 'โลโก้เท่านั้น',
+	'friendlink_content_text' => 'ข้อความเท่านั้น',
+	'friendlink_type' => 'กลุ่มของลิงก์',
+	'friendlink_type_group1' => 'กลุ่ม 1',
+	'friendlink_type_group2' => 'กลุ่ม 2',
+	'friendlink_type_group3' => 'กลุ่ม 3',
+	'friendlink_type_group4' => 'กลุ่ม 4',
+	'friendlink_titlelength' => 'ความยาวชื่อของเว็บไซต์',
+	'friendlink_titlelength_comment' => 'การตั้งค่า ความยาวสูงสุดของ ชื่อเว็บไซต์',
+	'friendlink_summarylength' => 'ความยาวของข้อมูลส่วนตัว',
+	'friendlink_summarylength_comment' => 'การตั้งค่า ความยาวสูงสุดของ รายละเอียด เว็บไซต์',
 );
 
 ?>

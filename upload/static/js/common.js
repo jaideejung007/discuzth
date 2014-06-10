@@ -203,7 +203,7 @@ function getcookie(name, nounescape) {
 
 function Ajax(recvType, waitId) {
 	var aj = new Object();
-	aj.loading = '请稍候...';
+	aj.loading = 'กรุณารอสักครู่...';
 	aj.recvType = recvType ? recvType : 'XML';
 	aj.waitId = waitId ? $(waitId) : null;
 	aj.resultHandle = null;
@@ -532,7 +532,7 @@ function showPreview(val, id) {
 
 function showloading(display, waiting) {
 	var display = display ? display : 'block';
-	var waiting = waiting ? waiting : '请稍候...';
+	var waiting = waiting ? waiting : 'กรุณารอสักครู่...';
 	$('ajaxwaitid').innerHTML = waiting;
 	$('ajaxwaitid').style.display = display;
 }
@@ -1081,7 +1081,7 @@ function showDialog(msg, mode, t, func, cover, funccancel, leftmsg, confirmtxt, 
 	var menuid = 'fwin_dialog';
 	var menuObj = $(menuid);
 	var showconfirm = 1;
-	confirmtxtdefault = '确定';
+	confirmtxtdefault = 'ตกลง';
 	closetime = isUndefined(closetime) ? '' : closetime;
 	closefunc = function () {
 		if(typeof func == 'function') func();
@@ -1094,12 +1094,12 @@ function showDialog(msg, mode, t, func, cover, funccancel, leftmsg, confirmtxt, 
 	}
 	locationtime = isUndefined(locationtime) ? '' : locationtime;
 	if(locationtime) {
-		leftmsg = locationtime + ' 秒后页面跳转';
+		leftmsg = locationtime + ' วินาทีจะรีเฟรชหน้าใหม่';
 		showDialogST = setTimeout(closefunc, locationtime * 1000);
 		showconfirm = 0;
 	}
 	confirmtxt = confirmtxt ? confirmtxt : confirmtxtdefault;
-	canceltxt = canceltxt ? canceltxt : '取消';
+	canceltxt = canceltxt ? canceltxt : 'ยกเลิก';
 
 	if(menuObj) hideMenu('fwin_dialog', 'dialog');
 	menuObj = document.createElement('div');
@@ -1112,8 +1112,8 @@ function showDialog(msg, mode, t, func, cover, funccancel, leftmsg, confirmtxt, 
 		hidedom = '<style type="text/css">object{visibility:hidden;}</style>';
 	}
 	var s = hidedom + '<table cellpadding="0" cellspacing="0" class="fwin"><tr><td class="t_l"></td><td class="t_c"></td><td class="t_r"></td></tr><tr><td class="m_l">&nbsp;&nbsp;</td><td class="m_c"><h3 class="flb"><em>';
-	s += t ? t : '提示信息';
-	s += '</em><span><a href="javascript:;" id="fwin_dialog_close" class="flbc" onclick="hideMenu(\'' + menuid + '\', \'dialog\')" title="关闭">关闭</a></span></h3>';
+	s += t ? t : 'คำแนะนำ';
+	s += '</em><span><a href="javascript:;" id="fwin_dialog_close" class="flbc" onclick="hideMenu(\'' + menuid + '\', \'dialog\')" title="ปิด">ปิด</a></span></h3>';
 	if(mode == 'info') {
 		s += msg ? msg : '';
 	} else {
@@ -1173,7 +1173,7 @@ function showWindow(k, url, mode, cache, menuv) {
 			ajaxpost(url, 'fwin_content_' + k, '', '', '', function() {initMenu();show();});
 		}
 		if(parseInt(BROWSER.ie) != 6) {
-			loadingst = setTimeout(function() {showDialog('', 'info', '<img src="' + IMGDIR + '/loading.gif"> 请稍候...')}, 500);
+			loadingst = setTimeout(function() {showDialog('', 'info', '<img src="' + IMGDIR + '/loading.gif"> กำลังโหลด..')}, 500);
 		}
 	};
 	var initMenu = function() {
@@ -1231,7 +1231,7 @@ function showError(msg) {
 	var p = /<script[^\>]*?>([^\x00]*?)<\/script>/ig;
 	msg = msg.replace(p, '');
 	if(msg !== '') {
-		showDialog(msg, 'alert', '错误信息', null, true, null, '', '', '', 3);
+		showDialog(msg, 'alert', 'ข้อผิดพลาด', null, true, null, '', '', '', 3);
 	}
 }
 
@@ -1601,20 +1601,20 @@ function initSearchmenu(searchform, cloudSearchUrl) {
 	var tclass = searchtxt.className;
 	searchtxt.className = tclass + ' xg1';
 	if (!!("placeholder" in document.createElement("input"))) {
-		if(searchtxt.value == '请输入搜索内容') {
+		if(searchtxt.value == 'ดิสคัส! ค้นหาอะไรก็เจอ') {
 			searchtxt.value = '';
 		}
-		searchtxt.placeholder = '请输入搜索内容';
+		searchtxt.placeholder = 'ดิสคัส! ค้นหาอะไรก็เจอ';
 	} else {
 		searchtxt.onfocus = function () {
-			if(searchtxt.value == '请输入搜索内容') {
+			if(searchtxt.value == 'ดิสคัส! ค้นหาอะไรก็เจอ') {
 				searchtxt.value = '';
 				searchtxt.className = tclass;
 			}
 		};
 		searchtxt.onblur = function () {
 			if(searchtxt.value == '' ) {
-				searchtxt.value = '请输入搜索内容';
+				searchtxt.value = 'ดิสคัส! ค้นหาอะไรก็เจอ';
 				searchtxt.className = tclass + ' xg1';
 			}
 		};
@@ -1656,7 +1656,7 @@ function initSearchmenu(searchform, cloudSearchUrl) {
 }
 
 function searchFocus(obj) {
-	if(obj.value == '请输入搜索内容') {
+	if(obj.value == 'ดิสคัส! ค้นหาอะไรก็เจอ') {
 		obj.value = '';
 	}
 	if($('cloudsearchquery') != null) {
@@ -1783,7 +1783,7 @@ function noticeTitle() {
 
 function noticeTitleFlash() {
 	if(NOTICETITLE.flashNumber < 5 || NOTICETITLE.flashNumber > 4 && !NOTICETITLE['State']) {
-		document.title = (NOTICETITLE['State'] ? '【　　　】' : '【新提醒】') + NOTICETITLE['oldTitle'];
+		document.title = (NOTICETITLE['State'] ? '' : '(แจ้งเตือนใหม่)') + NOTICETITLE['oldTitle'];
 		NOTICETITLE['State'] = !NOTICETITLE['State'];
 	}
 	NOTICETITLE.flashNumber = NOTICETITLE.flashNumber < NOTICETITLE.sleep ? ++NOTICETITLE.flashNumber : 0;
@@ -1840,7 +1840,7 @@ function addFavorite(url, title) {
 		try {
 			window.sidebar.addPanel(title, url, '');
         	} catch (e) {
-			showDialog("请按 Ctrl+D 键添加到收藏夹", 'notice');
+			showDialog("กดปุ่ม Ctrl+D เพื่อเพิ่มลงในบุ๊คมาร์ก", 'notice');
 		}
 	}
 }
@@ -1850,7 +1850,7 @@ function setHomepage(sURL) {
 		document.body.style.behavior = 'url(#default#homepage)';
 		document.body.setHomePage(sURL);
 	} else {
-		showDialog("非 IE 浏览器请手动将本站设为首页", 'notice');
+		showDialog("เบราว์เซอร์ที่คุณใช้ไม่ใช่ IE ไม่สามารถใช้ฟังก์ชันนี้ได้ กรุณาตั้งหน้าแรกด้วยตัวเอง", 'notice');
 		doane();
 	}
 }
@@ -1906,10 +1906,10 @@ function toggleBlind(dom) {
 	if(dom) {
 		if(loadUserdata('is_blindman')) {
 			saveUserdata('is_blindman', '');
-			dom.title = '开启辅助访问';
+			dom.title = 'เปิดโหมดผู้บกพร่องทางสายตา';
 		} else {
 			saveUserdata('is_blindman', '1');
-			dom.title = '关闭辅助访问';
+			dom.title = 'ปิดโหมดผู้บกพร่องทางสายตา';
 		}
 	}
 }
@@ -1918,9 +1918,9 @@ function checkBlind() {
 	var dom = $('switchblind');
 	if(dom) {
 		if(loadUserdata('is_blindman')) {
-			dom.title = '关闭辅助访问';
+			dom.title = 'เปิดโหมดผู้บกพร่องทางสายตา';
 		} else {
-			dom.title = '开启辅助访问';
+			dom.title = 'ปิดโหมดผู้บกพร่องทางสายตา';
 		}
 	}
 }

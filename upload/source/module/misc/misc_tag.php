@@ -32,7 +32,7 @@ if($id || $name) {
 	if($id) {
 		$tag = C::t('common_tag')->fetch_info($id);
 	} else {
-		if(!preg_match('/^([\x7f-\xff_-]|\w|\s)+$/', $name) || strlen($name) > 20) {
+		if(!preg_match('/^([\x7f-\xff_-]|\w|\s)+$/', $name) || strlen($name) > 40) {
 			showmessage('parameters_error');
 		}
 		$name = addslashes($name);

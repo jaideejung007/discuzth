@@ -69,7 +69,7 @@ function block_pushitem(bid, itemid) {
 }
 
 function block_delete_item(bid, itemid, itemtype, itemfrom, from) {
-	var msg = itemtype==1 ? '您确定要删除该数据吗？' : '您确定要屏蔽该数据吗？';
+	var msg = itemtype==1 ? 'คุณแน่ใจหรือว่าต้องการลบข้อมูลนี้?' : 'คุณแน่ใจหรือว่าจะไม่ลบข้อมูลนี้?';
 	if(confirm(msg)) {
 		var url = 'portal.php?mod=portalcp&ac=block&op=remove&bid='+bid+'&itemid='+itemid;
 		if(itemfrom=='ajax') {
@@ -143,7 +143,7 @@ function recommenditem_check() {
 		document.forms['recommendform'].action = document.forms['recommendform'].action+'&bid='+sel.value;
 		return true;
 	} else {
-		alert("请选择一个模块！");
+		alert("กรุณาเลือกโมดูล!");
 		return false;
 	}
 }
@@ -155,7 +155,7 @@ function recommenditem_byblock(bid, id, idtype) {
 		ajaxinnerhtml(olditemeditarea, editarea.innerHTML);
 		if(!$('recommendback')) {
 			var back = document.createElement('div');
-			back.innerHTML = '<em id="recommendback" onclick="recommenditem_back()" class="cur1">&nbsp;&nbsp;&laquo;返回</em>';
+			back.innerHTML = '<em id="recommendback" onclick="recommenditem_back()" class="cur1">&nbsp;&nbsp;&laquo;กลับ</em>';
 			var return_mods = $('return_mods') || $('return_recommend') || $('return_');
 			if(return_mods) {
 				return_mods.parentNode.appendChild(back.childNodes[0]);
@@ -223,10 +223,10 @@ function blockSetCacheTime(timer) {
 function toggleSettingShow() {
 	if(!$('tbody_setting').style.display) {
 		$('tbody_setting').style.display = 'none';
-		$('a_setting_show').innerHTML = '展开设置项';
+		$('a_setting_show').innerHTML = 'ขยายการตั้งค่า';
 	} else {
 		$('tbody_setting').style.display = '';
-		$('a_setting_show').innerHTML = '收起设置项';
+		$('a_setting_show').innerHTML = 'ซ่อนการตั้งค่า';
 	}
 	doane();
 }
@@ -234,16 +234,16 @@ function switchSetting() {
 	var checked = $('isblank').checked;
 	if(checked) {
 		$('tbody_setting').style.display = 'none';
-		$('a_setting_show').innerHTML = '展开设置项';
+		$('a_setting_show').innerHTML = 'ขยายการตั้งค่า';
 	} else {
 		$('tbody_setting').style.display = '';
-		$('a_setting_show').innerHTML = '收起设置项';
+		$('a_setting_show').innerHTML = 'ซ่อนการตั้งค่า';
 	}
 }
 
 function checkblockname(form) {
 	if(!(trim(form.name.value) > '')) {
-		showDialog('模块标识不能为空', 'error', null, function(){form.name.focus();});
+		showDialog('ID โมดูลไม่ควรเว้นค่าว่างไว้', 'error', null, function(){form.name.focus();});
 		return false;
 	}
 	if(form.summary && form.summary.value) {
@@ -251,7 +251,7 @@ function checkblockname(form) {
 		if(tag) {
 			showBlockSummary();
 			form.summary.focus();
-			showDialog('自定义内容错误，HTML代码：'+tag+' 标签不匹配', 'error', null, function(){form.summary.select();});
+			showDialog('เนื้อหาแบบกำหนดเองเกิดข้อผิดพลาด โค้ด HTML: '+tag+' แท็กไม่ตรงกัน', 'error', null, function(){form.summary.select();});
 			return false;
 		}
 	}
@@ -287,7 +287,7 @@ function blockCheckTag(summary, returnValue) {
 				if(returnValue) {
 					return tag;
 				} else {
-					showDialog('HTML代码：'+tag+' 标签不匹配', 'error', null, fn, true, fn);
+					showDialog('โค้ด HTML: '+tag+' แท็กไม่ตรงกัน', 'error', null, fn, true, fn);
 					return false;
 				}
 			}
@@ -312,7 +312,7 @@ function hideBlockSummary() {
 
 function blockconver(ele,bid) {
 	if(ele && bid) {
-		if(confirm('您确定要转换模块的类型从 '+ele.options[0].innerHTML+' 到 '+ele.options[ele.selectedIndex].innerHTML)) {
+		if(confirm('คุณแน่ใจหรือว่าต้องการแปลงประเภทของโมดูลจาก '+ele.options[0].innerHTML+' เป็น '+ele.options[ele.selectedIndex].innerHTML)) {
 			ajaxget('portal.php?mod=portalcp&ac=block&op=convert&bid='+bid+'&toblockclass='+ele.value,'blockshow');
 		} else {
 			ele.selectedIndex = 0;
@@ -338,10 +338,10 @@ function strLenCalc(obj, checklen, maxlen) {
 	checklen = $(checklen);
 	if(checklen.style.display == 'none') checklen.style.display = '';
 	if(curlen <= maxlen) {
-		checklen.innerHTML = '已输入 <b>'+(curlen)+'</b> 个字符';
+		checklen.innerHTML = 'พิมพ์ไปแล้ว <b>'+(curlen)+'</b> ตัวอักษร';
 		return true;
 	} else {
-		checklen.innerHTML = '超出 <b style="color:red">'+(curlen - maxlen)+'</b> 个字符';
+		checklen.innerHTML = 'เกินแล้ว <b style="color:red">'+(curlen - maxlen)+'</b> ตัวอักษร';
 		return false;
 	}
 }
@@ -349,12 +349,12 @@ function strLenCalc(obj, checklen, maxlen) {
 function check_itemdata_lentgh(form) {
 	if(form.title && (!strLenCalc(form.title, "titlechk", form.title.getAttribute('_maxlength')) || !form.title.value)) {
 		form.title.focus();
-		showDialog('标题长度不正确', 'error', null, function(){form.title.select();});
+		showDialog('ชื่อเรื่องไม่ถูกต้อง', 'error', null, function(){form.title.select();});
 		return false;
 	}
 	if(form.summary && !strLenCalc(form.summary, "summarychk", form.summary.getAttribute('_maxlength'))) {
 		form.summary.focus();
-		showDialog('简介长度不正确', 'error', null, function(){form.summary.select();});
+		showDialog('รายละเอียดไม่ถูกต้อง', 'error', null, function(){form.summary.select();});
 		return false;
 	}
 	return true;

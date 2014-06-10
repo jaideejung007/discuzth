@@ -14,93 +14,93 @@ if(!defined('IN_DISCUZ')) {
 $lang = array
 (
 
-	'feed_blog_password' => '{actor} 发表了新加密日志 {subject}',
-	'feed_blog_title' => '{actor} 发表了新日志',
+	'feed_blog_password' => '{actor} เขียนบล็อก {subject} เก็บไว้เป็นบล็อกส่วนตัว',
+	'feed_blog_title' => '{actor} เขียนบล็อกใหม่',
 	'feed_blog_body' => '<b>{subject}</b><br />{summary}',
-	'feed_album_title' => '{actor} 更新了相册',
-	'feed_album_body' => '<b>{album}</b><br />共 {picnum} 张图片',
-	'feed_pic_title' => '{actor} 上传了新图片',
+	'feed_album_title' => '{actor} อัปเดตอัลบั้ม',
+	'feed_album_body' => '<b>{album}</b><br />ทั้งหมด {picnum} ภาพ',
+	'feed_pic_title' => '{actor} อัปโหลดภาพใหม่',
 	'feed_pic_body' => '{title}',
 
 
 
-	'feed_poll' => '{actor} 发起了新投票',
+	'feed_poll' => '{actor} สร้างโพลสำรวจใหม่',
 
-	'feed_comment_space' => '{actor} 在 {touser} 的留言板留了言',
-	'feed_comment_image' => '{actor} 评论了 {touser} 的图片',
-	'feed_comment_blog' => '{actor} 评论了 {touser} 的日志 {blog}',
-	'feed_comment_poll' => '{actor} 评论了 {touser} 的投票 {poll}',
-	'feed_comment_event' => '{actor} 在 {touser} 组织的活动 {event} 中留言了',
-	'feed_comment_share' => '{actor} 对 {touser} 分享的 {share} 发表了评论',
+	'feed_comment_space' => '{actor} แสดงความคิดเห็นในโปรไฟล์ของ {touser}',
+	'feed_comment_image' => '{actor} แสดงความคิดเห็นในรูปภาพของ {touser}',
+	'feed_comment_blog' => '{actor} แสดงความคิดเห็นในบล็อก {blog} ของ {touser}',
+	'feed_comment_poll' => '{actor} แสดงความคิดเห็นในโพล {poll} ของ {touser}',
+	'feed_comment_event' => '{actor} แสดงความคิดเห็นในกิจกรรม {event} ของ {touser}',
+	'feed_comment_share' => '{actor} แสดงความคิดเห็นในการแชร์ {share} ของ {touser}',
 
-	'feed_showcredit' => '{actor} 赠送给 {fusername} 竞价积分 {credit} 个，帮助好友提升在<a href="misc.php?mod=ranklist&type=member" target="_blank">竞价排行榜</a>中的名次',
-	'feed_showcredit_self' => '{actor} 增加竞价积分 {credit} 个，提升自己在<a href="misc.php?mod=ranklist&type=member" target="_blank">竞价排行榜</a>中的名次',
-	'feed_doing_title' => '{actor}：{message}',
-	'feed_friend_title' => '{actor} 和 {touser} 成为了好友',
-
-
-
-	'feed_click_blog' => '{actor} 送了一个“{click}”给 {touser} 的日志 {subject}',
-	'feed_click_thread' => '{actor} 送了一个“{click}”给 {touser} 的话题 {subject}',
-	'feed_click_pic' => '{actor} 送了一个“{click}”给 {touser} 的图片',
-	'feed_click_article' => '{actor} 送了一个“{click}”给 {touser} 的文章 {subject}',
+	'feed_showcredit' => '{actor} เสนอ {credit} เครดิต เพื่อจัดอันดับให้กับ {fusername} ร่วมจัดอันดับได้ที่<a href="misc.php?mod=ranklist&type=member" target="_blank">รายการจัดอันดับ</a>',
+	'feed_showcredit_self' => '{actor} เสนอ {credit} เครดิต เพื่อจัดอันดับให้ตัวเอง ร่วมจัดอันดับได้ที่<a href="misc.php?mod=ranklist&type=member" target="_blank">รายการจัดอันดับ</a>',
+	'feed_doing_title' => '{actor}: {message}',
+	'feed_friend_title' => '{actor} และ {touser} เป็นเพื่อนกันแล้ว',
 
 
-	'feed_task' => '{actor} 完成了有奖任务 {task}',
-	'feed_task_credit' => '{actor} 完成了有奖任务 {task}，领取了 {credit} 个奖励积分',
 
-	'feed_profile_update_base' => '{actor} 更新了自己的基本资料',
-	'feed_profile_update_contact' => '{actor} 更新了自己的联系方式',
-	'feed_profile_update_edu' => '{actor} 更新了自己的教育情况',
-	'feed_profile_update_work' => '{actor} 更新了自己的工作信息',
-	'feed_profile_update_info' => '{actor} 更新了自己的个人信息',
-	'feed_profile_update_bbs' => '{actor} 更新了自己的论坛信息',
-	'feed_profile_update_verify' => '{actor} 更新了自己的认证信息',
-
-	'feed_add_attachsize' => '{actor} 用 {credit} 个积分兑换了 {size} 附件空间，可以上传更多的图片啦(<a href="home.php?mod=spacecp&ac=credit&op=addsize">我也来兑换</a>)',
-
-	'feed_invite' => '{actor} 发起邀请，和 {username} 成为了好友',
-
-	'magicuse_thunder_announce_title' => '<strong>{username} 发出了“雷鸣之声”</strong>',
-	'magicuse_thunder_announce_body' => '大家好，我上线啦<br /><a href="home.php?mod=space&uid={uid}" target="_blank">欢迎来我家串个门</a>',
+	'feed_click_blog' => '{actor} แสดงความรู้สึก “{click}” ในบล็อก {subject} ของ {touser}',
+	'feed_click_thread' => '{actor} แสดงความรู้สึก “{click}” ในหัวข้อ {subject} ของ {touser}',
+	'feed_click_pic' => '{actor} แสดงความรู้สึก “{click}” ในรูปภาพของ {touser}',
+	'feed_click_article' => '{actor} แสดงความรู้สึก “{click}” ในบทความ {subject} ของ {touser}',
 
 
-	'feed_thread_title' =>			'{actor} 发表了新话题',
+	'feed_task' => '{actor} เข้าร่วมกิจกรรม {task} เสร็จและรับรางวัลเรียบร้อยแล้ว',
+	'feed_task_credit' => '{actor} เข้าร่วมกิจกรรม {task} เสร็จและรับรางวัล {credit} เครดิต',
+
+	'feed_profile_update_base' => '{actor} อัปเดตข้อมูลพื้นฐานของเขาใหม่',
+	'feed_profile_update_contact' => '{actor} อัปเดตข้อมูลที่ติดต่อของเขาใหม่',
+	'feed_profile_update_edu' => '{actor} อัปเดตข้อมูลการศึกษาของเขาใหม่',
+	'feed_profile_update_work' => '{actor} อัปเดตข้อมูลการทำงานของเขาใหม่',
+	'feed_profile_update_info' => '{actor} อัปเดตข้อมูลส่วนตัวของเขาใหม่',
+	'feed_profile_update_bbs' => '{actor} อัปเดตข้อมูลส่วนตัว',
+	'feed_profile_update_verify' => '{actor} อัปเดตข้อมูลเกี่ยวกับการรับรองของเขาใหม่',
+
+	'feed_add_attachsize' => '{actor} แลก {credit} กับความจุพื้นที่เก็บไฟล์แนบ {size} เพื่อสามารถอัปโหลดรูปภาพได้มากขึ้น (<a href="home.php?mod=spacecp&ac=credit&op=addsize">ฉันต้องการแลกเปลี่ยน</a>)',
+
+	'feed_invite' => '{actor} ยอมรับอินไวท์ และเป็นเพื่อนกับ {username}',
+
+	'magicuse_thunder_announce_title' => '<strong>{username} โปรโมทโปรไฟล์</strong>',
+	'magicuse_thunder_announce_body' => 'สวัสดี ฉันอยากจะชวนเพื่อนๆไปเยี่ยมชมโปรไฟล์ของฉัน<br /><a href="home.php?mod=space&uid={uid}" target="_blank">คลิกที่นี่เพื่อเข้าเยี่ยมโปรไฟล์ของฉัน</a>',
+
+
+	'feed_thread_title' =>			'{actor} ตั้งกระทู้ใหม่',
 	'feed_thread_message' =>		'<b>{subject}</b><br />{message}',
 
-	'feed_reply_title' =>			'{actor} 回复了 {author} 的话题 {subject}',
-	'feed_reply_title_anonymous' =>		'{actor} 回复了话题 {subject}',
+	'feed_reply_title' =>			'{actor} ตอบกระทู้ {subject} ของ {author} ',
+	'feed_reply_title_anonymous' =>		'{actor} ตอบกระทู้ {subject}',
 	'feed_reply_message' =>			'',
 
-	'feed_thread_poll_title' =>		'{actor} 发起了新投票',
+	'feed_thread_poll_title' =>		'{actor} สร้างโพลสำรวจใหม่',
 	'feed_thread_poll_message' =>		'<b>{subject}</b><br />{message}',
 
-	'feed_thread_votepoll_title' =>		'{actor} 参与了关于 {subject} 的投票',
+	'feed_thread_votepoll_title' =>		'{actor} เข้าร่วมโหวตโพลสำรวจ {subject}',
 	'feed_thread_votepoll_message' =>	'',
 
-	'feed_thread_goods_title' =>		'{actor} 出售了一个新商品',
-	'feed_thread_goods_message_1' =>	'<b>{itemname}</b><br />售价 {itemprice} 元 附加 {itemcredit}{creditunit}',
-	'feed_thread_goods_message_2' =>	'<b>{itemname}</b><br />售价 {itemprice} 元',
-	'feed_thread_goods_message_3' =>	'<b>{itemname}</b><br />售价 {itemcredit}{creditunit}',
+	'feed_thread_goods_title' =>		'{actor} ขายสินค้าใหม่',
+	'feed_thread_goods_message_1' =>	'<b>{itemname}</b><br />ราคา {itemprice} บาท เพิ่มเติม {itemcredit}{creditunit}',
+	'feed_thread_goods_message_2' =>	'<b>{itemname}</b><br />ราคา {itemprice} บาท',
+	'feed_thread_goods_message_3' =>	'<b>{itemname}</b><br />ราคา {itemcredit}{creditunit}',
 
-	'feed_thread_reward_title' =>		'{actor} 发起了新悬赏',
-	'feed_thread_reward_message' =>		'<b>{subject}</b><br />悬赏 {rewardprice}{extcredits}',
+	'feed_thread_reward_title' =>		'{actor} แจกรางวัลใหม่',
+	'feed_thread_reward_message' =>		'<b>{subject}</b><br />รางวัล {rewardprice}{extcredits}',
 
-	'feed_reply_reward_title' =>		'{actor} 回复了关于 {subject} 的悬赏',
+	'feed_reply_reward_title' =>		'{actor} ตอบคำถาม {subject} ถูกต้อง และรับรางวัล',
 	'feed_reply_reward_message' =>		'',
 
-	'feed_thread_activity_title' =>		'{actor} 发起了新活动',
-	'feed_thread_activity_message' =>	'<b>{subject}</b><br />开始时间：{starttimefrom}<br />活动地点：{activityplace}<br />{message}',
+	'feed_thread_activity_title' =>		'{actor} จัดกิจกรรมใหม่',
+	'feed_thread_activity_message' =>	'<b>{subject}</b><br />เริ่มเวลา: {starttimefrom}<br />สถานที่จัดกิจกรรม: {activityplace}<br />{message}',
 
-	'feed_reply_activity_title' =>		'{actor} 报名参加了 {subject} 的活动',
+	'feed_reply_activity_title' =>		'{actor} สมัครเข้าร่วมกิจกรรม {subject}',
 	'feed_reply_activity_message' =>	'',
 
-	'feed_thread_debate_title' =>		'{actor} 发起了新辩论',
-	'feed_thread_debate_message' =>		'<b>{subject}</b><br />正方：{affirmpoint}<br />反方：{negapoint}<br />{message}',
+	'feed_thread_debate_title' =>		'{actor} เปิดประเด็นโต้วาทีใหม่',
+	'feed_thread_debate_message' =>		'<b>{subject}</b><br />เห็นด้วย: {affirmpoint}<br />ไม่เห็นด้วย: {negapoint}<br />{message}',
 
-	'feed_thread_debatevote_title_1' =>	'{actor} 以正方身份参与了关于 {subject} 的辩论',
-	'feed_thread_debatevote_title_2' =>	'{actor} 以反方身份参与了关于 {subject} 的辩论',
-	'feed_thread_debatevote_title_3' =>	'{actor} 以中立身份参与了关于 {subject} 的辩论',
+	'feed_thread_debatevote_title_1' =>	'{actor} เข้าร่วมโต้วาทีเห็นด้วยใน {subject}',
+	'feed_thread_debatevote_title_2' =>	'{actor} เข้าร่วมโต้วาทีไม่เห็นด้วยใน {subject}',
+	'feed_thread_debatevote_title_3' =>	'{actor} เข้าร่วมโต้วาทีเป็นกลางใน {subject}',
 	'feed_thread_debatevote_message_1' =>	'',
 	'feed_thread_debatevote_message_2' =>	'',
 	'feed_thread_debatevote_message_3' =>	'',

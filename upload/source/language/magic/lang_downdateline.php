@@ -13,9 +13,9 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'downdateline_name' => '时光机',
-	'downdateline_desc' => '把自己日志的发布时间修改为过去',
-	'downdateline_info' => '把自己日志的发布时间修改为过去',
+	'downdateline_name' => 'ย้อนวันเวลา',
+	'downdateline_desc' => 'เปลี่ยนแปลงวันเวลาในการบันทึกของคุณเป็นเวลาที่ผ่านมา',
+	'downdateline_info' => 'เปลี่ยนแปลงวันเวลาในการบันทึกของคุณเป็นเวลาที่ผ่านมา',
 );
 
 ?>

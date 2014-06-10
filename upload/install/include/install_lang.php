@@ -11,355 +11,354 @@ if(!defined('IN_COMSENZ')) {
 	exit('Access Denied');
 }
 
-define('UC_VERNAME', '中文版');
+define('UC_VERNAME', 'ภาษาไทย');
 $lang = array(
 	'SC_GBK' => '简体中文版',
 	'TC_BIG5' => '繁体中文版',
 	'SC_UTF8' => '简体中文 UTF8 版',
 	'TC_UTF8' => '繁体中文 UTF8 版',
 	'EN_ISO' => 'ENGLISH ISO8859',
-	'EN_UTF8' => 'ENGLIST UTF-8',
+	'EN_UTF8' => 'ENGLIST UTF-8','TH_UTF8' => 'ภาษาไทย UTF-8',
 
-	'title_install' => SOFT_NAME.' 安装向导',
-	'agreement_yes' => '我同意',
-	'agreement_no' => '我不同意',
-	'notset' => '不限制',
+	'title_install' => 'เครื่องมือติดตั้ง '.SOFT_NAME.'',
+	'agreement_yes' => 'ยอมรับข้อตกลง',
+	'agreement_no' => 'ปฏิเสธข้อตกลง',
+	'notset' => 'ไม่จำกัด',
 
-	'message_title' => '提示信息',
-	'error_message' => '错误信息',
-	'message_return' => '返回',
-	'return' => '返回',
-	'install_wizard' => '安装向导',
-	'config_nonexistence' => '配置文件不存在',
-	'nodir' => '目录不存在',
-	'redirect' => '浏览器会自动跳转页面，无需人工干预。<br>除非当您的浏览器没有自动跳转时，请点击这里',
-	'auto_redirect' => '浏览器会自动跳转页面，无需人工干预',
-	'database_errno_2003' => '无法连接数据库，请检查数据库是否启动，数据库服务器地址是否正确',
-	'database_errno_1044' => '无法创建新的数据库，请检查数据库名称填写是否正确',
-	'database_errno_1045' => '无法连接数据库，请检查数据库用户名或者密码是否正确',
-	'database_errno_1064' => 'SQL 语法错误',
+	'message_title' => 'คำชี้แจง',
+	'error_message' => 'ข้อความผิดพลาด',
+	'message_return' => 'คลิกที่นี่เพื่อย้อนกลับ',
+	'return' => 'ย้อนกลับ',
+	'install_wizard' => 'ตัวช่วยการติดตั้ง',
+	'config_nonexistence' => 'ไฟล์กำหนดค่าไม่มี',
+	'nodir' => 'ไม่มีโฟลเดอร์',
+	'redirect' => 'เบราเซอร์จะไปยังหน้าต่อไปโดยอัตโนมัติ, โดยไม่ต้องกระทำการใดๆ...<br>หากเบราว์เซอร์ของคุณไม่ไปยังหน้าต่อไปโดยอัตโนมัติโปรดคลิกที่นี่',
+	'auto_redirect' => 'เบราเซอร์จะข้ามไปยังหน้าต่อไปโดยอัตโนมัติ',
+	'database_errno_2003' => 'ไม่สามารถเชื่อมต่อกับฐานข้อมูล โปรดตรวจสอบฐานข้อมูลว่าเชื่อมต่ออยู่เซิร์ฟเวอร์ฐานข้อมูลถูกต้องหรือไม่',
+	'database_errno_1044' => 'ไม่สามารถสร้างฐานข้อมูลใหม่โปรดตรวจสอบชื่อฐานข้อมูลที่กรอกให้ถูกต้อง',
+	'database_errno_1045' => 'ไม่สามารถเชื่อมต่อกับฐานข้อมูลโปรดตรวจสอบชื่อผู้ใช้ฐานข้อมูลและรหัสผ่านให้ถูกต้อง',
+	'database_errno_1064' => 'SQL เกิดข้อผิดพลาด',
 
-	'dbpriv_createtable' => '没有CREATE TABLE权限，无法继续安装',
-	'dbpriv_insert' => '没有INSERT权限，无法继续安装',
-	'dbpriv_select' => '没有SELECT权限，无法继续安装',
-	'dbpriv_update' => '没有UPDATE权限，无法继续安装',
-	'dbpriv_delete' => '没有DELETE权限，无法继续安装',
-	'dbpriv_droptable' => '没有DROP TABLE权限，无法安装',
+	'dbpriv_createtable' => 'ในการติดตั้งนี้ ไม่อนุญาตให้ CREATE TABLE ไม่สามารถดำเนินการต่อให้สมบูรณ์ได้',
+	'dbpriv_insert' => 'ในการติดตั้งนี้ ไม่อนุญาตให้ INSERT ไม่สามารถดำเนินการต่อให้สมบูรณ์ได้',
+	'dbpriv_select' => 'ในการติดตั้งนี้ ไม่อนุญาตให้ SELECT ไม่สามารถดำเนินการต่อให้สมบูรณ์ได้',
+	'dbpriv_update' => 'ในการติดตั้งนี้ ไม่อนุญาตให้ UPDATE ไม่สามารถดำเนินการต่อให้สมบูรณ์ได้',
+	'dbpriv_delete' => 'ในการติดตั้งนี้ ไม่อนุญาตให้ DELETE ไม่สามารถดำเนินการต่อให้สมบูรณ์ได้',
+	'dbpriv_droptable' => 'ในการติดตั้งนี้ ไม่อนุญาตให้ DROP TABLE ไม่สามารถดำเนินการต่อให้สมบูรณ์ได้',
 
-	'db_not_null' => '数据库中已经安装过 UCenter, 继续安装会清空原有数据。',
-	'db_drop_table_confirm' => '继续安装会清空全部原有数据，您确定要继续吗?',
+	'db_not_null' => 'ในระบบฐานข้อมูลมีการติดตั้ง UCenter แล้ว  ให้ดำเนินการต่อเพื่อลบข้อมูลเก่า',
+	'db_drop_table_confirm' => 'ฉันแน่ใจว่าต้องการดำเนินการล้างข้อมูลเก่า?',
 
-	'writeable' => '可写',
-	'unwriteable' => '不可写',
-	'old_step' => '上一步',
-	'new_step' => '下一步',
+	'writeable' => 'สามารถเขียนได้',
+	'unwriteable' => 'ไม่สามารถเขียนได้',
+	'old_step' => 'ขั้นตอนก่อนหน้า',
+	'new_step' => 'ขั้นตอนถัดไป',
 
-	'database_errno_2003' => '无法连接数据库，请检查数据库是否启动，数据库服务器地址是否正确',
-	'database_errno_1044' => '无法创建新的数据库，请检查数据库名称填写是否正确',
-	'database_errno_1045' => '无法连接数据库，请检查数据库用户名或者密码是否正确',
-	'database_connect_error' => '数据库连接错误',
+	'database_errno_2003' => 'ไม่สามารถเชื่อมต่อกับฐานข้อมูล โปรดตรวจสอบฐานข้อมูลว่าเชื่อมต่ออยู่เซิร์ฟเวอร์ฐานข้อมูลถูกต้องหรือไม่',
+	'database_errno_1044' => 'ไม่สามารถสร้างฐานข้อมูลใหม่โปรดตรวจสอบชื่อฐานข้อมูลที่กรอกให้ถูกต้อง',
+	'database_errno_1045' => 'ไม่สามารถเชื่อมต่อกับฐานข้อมูลโปรดตรวจสอบชื่อผู้ใช้ฐานข้อมูลและรหัสผ่านให้ถูกต้อง',
+	'database_connect_error' => 'การเชื่อมต่อฐานข้อมูลผิดพลาด',
 
-	'step_title_1' => '检查安装环境',
-	'step_title_2' => '设置运行环境',
-	'step_title_3' => '创建数据库',
-	'step_title_4' => '安装',
-	'step_env_check_title' => '开始安装',
-	'step_env_check_desc' => '环境以及文件目录权限检查',
-	'step_db_init_title' => '安装数据库',
-	'step_db_init_desc' => '正在执行数据库安装',
+	'step_title_1' => 'การตรวจสอบก่อนติดตั้ง',
+	'step_title_2' => 'กำหนดข้อมูลระบบ',
+	'step_title_3' => 'สร้างฐานข้อมูล',
+	'step_title_4' => 'ติดตั้ง',
+	'step_env_check_title' => 'เริ่มต้นการติดตั้ง',
+	'step_env_check_desc' => 'ตรวจสอบระบบการเข้าถึงของไฟล์และโฟลเดอร์',
+	'step_db_init_title' => 'ติดตั้งฐานข้อมูล',
+	'step_db_init_desc' => 'ดำเนินการติดตั้งฐานข้อมูล และ สร้างผู้ดูแลระบบ',
 
-	'step1_file' => '目录文件',
-	'step1_need_status' => '所需状态',
-	'step1_status' => '当前状态',
-	'not_continue' => '请将以上红叉部分修正再试',
+	'step1_file' => 'โฟลเดอร์และไฟล์',
+	'step1_need_status' => 'สถานะที่ต้องการ',
+	'step1_status' => 'สถานะปัจจุบัน',
+	'not_continue' => 'กรุณาตรวจสอบโฟลเดอร์/ไฟล์ สีแดงและลองอีกครั้ง',
 
-	'tips_dbinfo' => '填写数据库信息',
+	'tips_dbinfo' => 'กรอกข้อมูลระบบฐานข้อมูล',
 	'tips_dbinfo_comment' => '',
-	'tips_admininfo' => '填写管理员信息',
-	'step_ext_info_title' => '安装成功。',
-	'step_ext_info_comment' => '点击进入登录',
+	'tips_admininfo' => 'กรอกข้อมูลผู้ดูแลระบบ',
+	'step_ext_info_title' => 'การติดตั้งสำเร็จ',
+	'step_ext_info_comment' => 'คลิกที่นี่เพื่อเข้าสู่ระบบ',
 
-	'ext_info_succ' => '安装成功。',
-	'install_submit' => '提交',
-	'install_locked' => '安装锁定，已经安装过了，如果您确定要重新安装，请到服务器上删除<br /> '.str_replace(ROOT_PATH, '', $lockfile),
-	'error_quit_msg' => '您必须解决以上问题，安装才可以继续',
+	'ext_info_succ' => 'การติดตั้งสำเร็จ',
+	'install_submit' => 'ตกลง',
+	'install_locked' => 'การติดตั้งถูกระงับ, หากคุณต้องการติดตั้งใหม่ให้ไปที่เซิร์ฟเวอร์แล้วทำการลบ<br /> '.str_replace(ROOT_PATH, '', $lockfile),
+	'error_quit_msg' => 'คุณต้องแก้ปัญหาข้างต้น, มิฉนั้นการติดตั้งจะไม่สามารถดำเนินการต่อไปได้',
 
-	'step_app_reg_title' => '设置运行环境',
-	'step_app_reg_desc' => '检测服务器环境以及设置 UCenter',
-	'tips_ucenter' => '请填写 UCenter 相关信息',
-	'tips_ucenter_comment' => 'UCenter 是 Comsenz 公司产品的核心服务程序，Discuz! Board 的安装和运行依赖此程序。如果您已经安装了 UCenter，请填写以下信息。否则，请到 <a href="http://www.discuz.com/" target="blank">Comsenz 产品中心</a> 下载并且安装，然后再继续。',
+	'step_app_reg_title' => 'ตั้งค่าระบบ',
+	'step_app_reg_desc' => 'ทดสอบระบบเซิร์ฟเวอร์, และตั้งค่า UCenter',
+	'tips_ucenter' => 'กรุณากรอกข้อมูลของ UCenter ที่กำหนดไว้',
+	'tips_ucenter_comment' => 'UCenter เป็นผลิตภัณฑ์หลักของบริษัทฯ Comsenz ซึ่ง Discuz! Board ต้องติดตั้งและพึ่งพาการทำงานของโปรแกรมนี้. หากคุณติดตั้ง UCenter ไว้แล้ว กรุณากรอกข้อมูลด้านล่าง หากคุณยังไม่มีและยังไม่ได้ติดตั้ง UCenter กรุณาไปที่ <a href="http://www.discuzthai.com/" target="blank">DiscuzThai</a> เพื่อดาวน์โหลด UCenter เวอร์ชันภาษาไทย แล้วทำการติดตั้งเพื่อดำเนินการต่อไป',
 
-	'advice_mysql_connect' => '请检查 mysql 模块是否正确加载',
-	'advice_gethostbyname' => '是否 PHP 配置中禁止了 gethostbyname 函数。请联系空间商，确定开启了此项功能',
-	'advice_file_get_contents' => '该函数需要 php.ini 中 allow_url_fopen 选项开启。请联系空间商，确定开启了此项功能',
-	'advice_xml_parser_create' => '该函数需要 PHP 支持 XML。请联系空间商，确定开启了此项功能',
-	'advice_fsockopen' => '该函数需要 php.ini 中 allow_url_fopen 选项开启。请联系空间商，确定开启了此项功能',
-	'advice_pfsockopen' => '该函数需要 php.ini 中 allow_url_fopen 选项开启。请联系空间商，确定开启了此项功能',
-	'advice_stream_socket_client' => '是否 PHP 配置中禁止了 stream_socket_client 函数',
-	'advice_curl_init' => '是否 PHP 配置中禁止了 curl_init 函数',
+	'advice_mysql_connect' => 'กรุณาตรวจสอบว่า MySQL มีการเชื่อมต่ออย่างถูกต้อง',
+	'advice_gethostbyname' => 'ค่า gethostbyname.ใน PHP ถูกปิดใช้งาน   โปรดติดต่อผู้ให้บริการโฮสเพื่อตรวจสอบการเปิดคุณลักษณะนี้',
+	'advice_file_get_contents' => 'ตรวจสอบ allow_url_fopen ใน php.ini ว่าเปิดใช้งานอยู่รึเปล่า. โปรดติดต่อผู้ให้บริการโฮสเพื่อตรวจสอบการเปิดคุณลักษณะนี้',
+	'advice_xml_parser_create' => 'ต้องตรวจสอบดูว่าสนับสนุน PHP สำหรับ XML หรือไม่. โปรดติดต่อผู้ให้บริการโฮสเพื่อตรวจสอบการเปิดคุณลักษณะนี้',
+	'advice_fsockopen' => 'ตรวจสอบ allow_url_fopen ใน php.ini ว่าเปิดใช้งานอยู่รึเปล่า. โปรดติดต่อผู้ให้บริการโฮสเพื่อตรวจสอบการเปิดคุณลักษณะนี้',
+	'advice_pfsockopen' => 'ตรวจสอบไฟล์ php.ini ว่าฟังก์ชัน allow_url_fopen ได้ถูกตั้งสถานะเป็น On หรือเปิดการใช้งานอยู่หรือไม่ โปรดติดต่อผู้ให้บริการโฮสเพื่อตรวจสอบการเปิดคุณลักษณะนี้',
+	'advice_stream_socket_client' => 'ฟังก์ชันใน PHP อนุญาตให้เข้าถึงการทำงานของ stream_socket_client หรือไม่ โปรดติดต่อผู้ให้บริการโฮสเพื่อตรวจสอบการเปิดคุณลักษณะนี้',
+	'advice_curl_init' => 'ฟังก์ชันใน PHP อนุญาตให้เข้าถึงการทำงานของ curl_init หรือไม่ โปรดติดต่อผู้ให้บริการโฮสเพื่อตรวจสอบการเปิดคุณลักษณะนี้',
 
-	'ucurl' => 'UCenter 的 URL',
-	'ucpw' => 'UCenter 创始人密码',
-	'ucip' => 'UCenter 的IP地址',
-	'ucenter_ucip_invalid' => '格式错误，请填写正确的 IP 地址',
-	'ucip_comment' => '绝大多数情况下您可以不填',
+	'ucurl' => 'ที่อยู่ URL ของ UCenter',
+	'ucpw' => 'รหัสผ่านของ UCenter',
+	'ucip' => 'ที่อยู่ IP ของ UCenter',
+	'ucenter_ucip_invalid' => 'รูปแบบผิดพลาด กรุณากรอกที่อยู่ IP ให้ถูกต้อง',
+	'ucip_comment' => 'ที่อยู่ IP ไม่จำเป็นต้องกรอก',
 
-	'tips_siteinfo' => '请填写站点信息',
-	'sitename' => '站点名称',
-	'siteurl' => '站点 URL',
+	'tips_siteinfo' => 'กรุณากรอกข้อมูลเว็บไซต์',
+	'sitename' => 'ชื่อเว็บไซต์',
+	'siteurl' => 'URL เว็บไซต์',
 
-	'forceinstall' => '强制安装',
-	'dbinfo_forceinstall_invalid' => '当前数据库当中已经含有同样表前缀的数据表，您可以修改“表名前缀”来避免删除旧的数据，或者选择强制安装。强制安装会删除旧数据，且无法恢复',
+	'forceinstall' => 'กำลังติดตั้ง',
+	'dbinfo_forceinstall_invalid' => 'ในฐานข้อมูลปัจจุบันมีคำนำหน้าตารางเดียวกัน คุณสามารถปรับเปลี่ยนชื่อคำนำหน้าตาราง เพื่อหลีกเลี่ยงการลบข้อมูลเก่า หรือเลือกที่จะติดตั้งทับลงไปในข้อมูลเก่า.การติดตั้งจำเป็นจะต้องลบข้อมูลเก่า และไม่สามารถกู้คืนได้',
 
-	'click_to_back' => '点击返回上一步',
-	'adminemail' => '系统信箱 Email',
-	'adminemail_comment' => '用于发送程序错误报告',
-	'dbhost_comment' => '数据库服务器地址, 一般为 localhost',
-	'tablepre_comment' => '同一数据库运行多个论坛时，请修改前缀',
-	'forceinstall_check_label' => '我要删除数据，强制安装 !!!',
+	'click_to_back' => 'คลิกกลับไปที่ขั้นตอนที่แล้ว',
+	'adminemail' => 'อีเมลผู้ดูแล',
+	'adminemail_comment' => 'ใช้ในการส่งรายงานข้อผิดพลาด',
+	'dbhost_comment' => 'ทั่วไปจะเป็น localhost',
+	'tablepre_comment' => 'ถ้าติดตั้งในฐานข้อมูลเดียวกันกรุณาแก้ไขคำนำหน้า',
+	'forceinstall_check_label' => 'ฉันต้องการลบข้อมูลที่ติดตั้ง!!!',
 
-	'uc_url_empty' => '您没有填写 UCenter 的 URL，请返回填写',
-	'uc_url_invalid' => 'URL 格式错误',
-	'uc_url_unreachable' => 'UCenter 的 URL 地址可能填写错误，请检查',
-	'uc_ip_invalid' => '无法解析该域名，请填写站点的 IP',
-	'uc_admin_invalid' => 'UCenter 创始人密码错误，请重新填写',
-	'uc_data_invalid' => '通信失败，请检查 UCenter 的URL 地址是否正确 ',
-	'uc_dbcharset_incorrect' => 'UCenter 数据库字符集与当前应用字符集不一致',
-	'uc_api_add_app_error' => '向 UCenter 添加应用错误',
-	'uc_dns_error' => 'UCenter DNS解析错误，请返回填写一下 UCenter 的 IP地址',
+	'uc_url_empty' => 'คุณไม่ได้กรอก URL ของ UCenter กรุณากลับไปกรอก',
+	'uc_url_invalid' => 'รูปแบบของ URL ผิดพลาด',
+	'uc_url_unreachable' => 'ที่อยู่ URL ของ UCenter อาจกรอกข้อผิดกรุณากลับไปตรวจสอบ',
+	'uc_ip_invalid' => 'ไม่สามารถใส่ชื่อโดเมนโปรดกรอก IP ของเว็บไซต์',
+	'uc_admin_invalid' => 'รหัสผ่านของ UCenter ผิดพลาดกรุณากรอกใหม่',
+	'uc_data_invalid' => 'การเชื่อมต่อล้มเหลว กรุณาตรวจสอบที่อยู่ URL ของ UCenter ให้ถูกต้อง',
+	'uc_dbcharset_incorrect' => 'ข้อมูล UCenter และไม่ตรงกับปัจจุบัน',
+	'uc_api_add_app_error' => 'เพิ่มโปรแกรมไปยัง UCenter ผิดพลาด',
+	'uc_dns_error' => 'DNS ของ UCenter เกิดผิดพลาด กรุณากลับไปกรอกที่อยู่ IP ของ UCenter',
 
-	'ucenter_ucurl_invalid' => 'UCenter 的URL为空，或者格式错误，请检查',
-	'ucenter_ucpw_invalid' => 'UCenter 的创始人密码为空，或者格式错误，请检查',
-	'siteinfo_siteurl_invalid' => '站点URL为空，或者格式错误，请检查',
-	'siteinfo_sitename_invalid' => '站点名称为空，或者格式错误，请检查',
-	'dbinfo_dbhost_invalid' => '数据库服务器为空，或者格式错误，请检查',
-	'dbinfo_dbname_invalid' => '数据库名为空，或者格式错误，请检查',
-	'dbinfo_dbuser_invalid' => '数据库用户名为空，或者格式错误，请检查',
-	'dbinfo_dbpw_invalid' => '数据库密码为空，或者格式错误，请检查',
-	'dbinfo_adminemail_invalid' => '系统邮箱为空，或者格式错误，请检查',
-	'dbinfo_tablepre_invalid' => '数据表前缀为空，或者格式错误，请检查',
-	'admininfo_username_invalid' => '管理员用户名为空，或者格式错误，请检查',
-	'admininfo_email_invalid' => '管理员Email为空，或者格式错误，请检查',
-	'admininfo_password_invalid' => '管理员密码为空，请填写',
-	'admininfo_password2_invalid' => '两次密码不一致，请检查',
+	'ucenter_ucurl_invalid' => 'URL ของ UCenter ว่างเปล่าหรือผิดรูปแบบ กรุณากลับไปตรวจสอบ',
+	'ucenter_ucpw_invalid' => 'รหัสผ่านของ UCenter ว่างเปล่าหรือผิดรูปแบบ กรุณากลับไปตรวจสอบ',
+	'siteinfo_siteurl_invalid' => 'URL ของเว็บไซต์ว่างเปล่าหรือผิดรูปแบบ กรุณากลับไปตรวจสอบ',
+	'siteinfo_sitename_invalid' => 'ชื่อเว็บไซต์ว่างเปล่าหรือผิดรูปแบบ กรุณากลับไปตรวจสอบ',
+	'dbinfo_dbhost_invalid' => 'เซิร์ฟเวอร์ฐานข้อมูลว่างหรือผิดรูปแบบ กรุณากลับไปตรวจสอบ',
+	'dbinfo_dbname_invalid' => 'ชื่อฐานข้อมูลว่างเปล่าหรือผิดรูปแบบ กรุณากลับไปตรวจสอบ',
+	'dbinfo_dbuser_invalid' => 'ชื่อผู้ใช้ฐานข้อมูลว่างเปล่าหรือผิดรูปแบบ กรุณากลับไปตรวจสอบ',
+	'dbinfo_dbpw_invalid' => 'รหัสผ่านฐานข้อมูลว่างเปล่าหรือผิดรูปแบบ กรุณากลับไปตรวจสอบ',
+	'dbinfo_adminemail_invalid' => 'อีเมลผู้ดูแลระบบว่างเปล่าหรือผิดรูปแบบ กรุณากลับไปตรวจสอบ',
+	'dbinfo_tablepre_invalid' => 'คำนำหน้าตารางข้อมูลว่างเปล่าหรือผิดรูปแบบ กรุณากลับไปตรวจสอบ',
+	'admininfo_username_invalid' => 'ชื่อผู้ดูแลระบบว่างเปล่าหรือผิดรูปแบบ กรุณากลับไปตรวจสอบ',
+	'admininfo_email_invalid' => 'อีเมลผู้ดูแลระบบว่างเปล่าหรือผิดรูปแบบ กรุณากลับไปตรวจสอบ',
+	'admininfo_password_invalid' => 'รหัสผ่านผู้ดูแลระบบว่างเปล่าหรือผิดรูปแบบ กรุณากลับไปตรวจสอบ',
+	'admininfo_password2_invalid' => 'ยืนยันรหัสผ่านผู้ดูแลระบบว่างเปล่าหรือไม่ตรงกัน กรุณากลับไปตรวจสอบ',
 
-	'install_dzfull' => '<br><label><input type="radio"'.(getgpc('install_ucenter') != 'no' ? ' checked="checked"' : '').' name="install_ucenter" value="yes" onclick="if(this.checked)$(\'form_items_2\').style.display=\'none\';" /> 全新安装 Discuz! X (含 UCenter Server)</label>',
-	'install_dzonly' => '<br><label><input type="radio"'.(getgpc('install_ucenter') == 'no' ? ' checked="checked"' : '').' name="install_ucenter" value="no" onclick="if(this.checked)$(\'form_items_2\').style.display=\'\';" /> 仅安装 Discuz! X (手工指定已经安装的 UCenter Server)</label>',
+	'install_dzfull' => '<br><label><input type="radio"'.(getgpc('install_ucenter') != 'no' ? ' checked="checked"' : '').' name="install_ucenter" value="yes" onclick="if(this.checked)$(\'form_items_2\').style.display=\'none\';" /> ติดตั้ง Discuz! X ใหม่ (พร้อมด้วย UCenter Server)</label>',
+	'install_dzonly' => '<br><label><input type="radio"'.(getgpc('install_ucenter') == 'no' ? ' checked="checked"' : '').' name="install_ucenter" value="no" onclick="if(this.checked)$(\'form_items_2\').style.display=\'\';" /> ติดตั้งเฉพาะ Discuz! X เท่านั้น (กรณีที่ UCenter Server มีการติดตั้งแล้ว)</label>',
 
-	'username' => '管理员账号',
-	'email' => '管理员 Email',
-	'password' => '管理员密码',
-	'password_comment' => '管理员密码不能为空',
-	'password2' => '重复密码',
+	'username' => 'ชื่อผู้ดูแลระบบ',
+	'email' => 'อีเมล',
+	'password' => 'รหัสผ่าน',
+	'password_comment' => 'รหัสผ่านผู้ดูแลระบบต้องไม่ว่างเปล่า',
+	'password2' => 'ยืนยันรหัสผ่าน',
 
-	'admininfo_invalid' => '管理员信息不完整，请检查管理员账号，密码，邮箱',
-	'dbname_invalid' => '数据库名为空，请填写数据库名称',
-	'tablepre_invalid' => '数据表前缀为空，或者格式错误，请检查',
-	'admin_username_invalid' => '非法用户名，用户名长度不应当超过 15 个英文字符，且不能包含特殊字符，一般是中文，字母或者数字',
-	'admin_password_invalid' => '密码和上面不一致，请重新输入',
-	'admin_email_invalid' => 'Email 地址错误，此邮件地址已经被使用或者格式无效，请更换为其他地址',
-	'admin_invalid' => '您的信息管理员信息没有填写完整，请仔细填写每个项目',
-	'admin_exist_password_error' => '该用户已经存在，如果您要设置此用户为论坛的管理员，请正确输入该用户的密码，或者请更换论坛管理员的名字',
+	'admininfo_invalid' => 'ข้อมูลผู้ดูแลระบบไม่สมบูรณ์โปรดตรวจสอบ ชื่อผู้ดูแลระบบ, รหัสผ่าน, อีเมล',
+	'dbname_invalid' => 'ชื่อฐานข้อมูลว่างเปล่ากรุณากรอกชื่อฐานข้อมูล',
+	'tablepre_invalid' => 'คำนำหน้าตารางข้อมูลว่างเปล่าหรือรูปแบบไม่ถูกต้องกรุณาตรวจสอบ',
+	'admin_username_invalid' => 'ชื่อผู้ดูแลระบบไม่ถูกต้อง ความยาวชื่อผู้ดูแลระบบไม่ควรเกิน 15 ตัวอักษร และ ตัวเลข，และไม่สามารถใส่อักขระพิเศษ，โดยทั่วไปจะใช้ตัวอักษไทย จีน อังกฤษ หรือตัวเลข',
+	'admin_password_invalid' => 'รหัสผ่านที่ไม่ตรงกับข้างต้นกรุณาป้อนอีกครั้ง',
+	'admin_email_invalid' => 'ข้อผิดพลาด ที่อยู่อีเมลนี้ใช้ไปแล้วหรือรูปแบบอีเมลที่ไม่ถูกต้อง, กรุณาใช้อีเมลอื่น',
+	'admin_invalid' => 'ข้อมูลผู้ดูแลระบบของคุณไม่สมบูรณ์กรุณากรอกข้อมูลในแต่ละรายการ',
+	'admin_exist_password_error' => 'หากคุณต้องการใช้ชื่อผู้ดูแลระบบนี้ ไปตั้งค่าชื่อผู้ใช้ในเมนูผู้ดูแลระบบ ',
 
-	'tagtemplates_subject' => '标题',
-	'tagtemplates_uid' => '用户 ID',
-	'tagtemplates_username' => '发帖者',
-	'tagtemplates_dateline' => '日期',
-	'tagtemplates_url' => '主题地址',
+	'tagtemplates_subject' => 'ชื่อ',
+	'tagtemplates_uid' => 'ID ผู้ใช้',
+	'tagtemplates_username' => 'โพสต์โดย',
+	'tagtemplates_dateline' => 'วันที่',
+	'tagtemplates_url' => 'ที่อยู่หัวข้อ',
 
-	'uc_version_incorrect' => '您的 UCenter 服务端版本过低，请升级 UCenter 服务端到最新版本，并且升级，下载地址：http://www.comsenz.com/ 。',
-	'config_unwriteable' => '安装向导无法写入配置文件, 请设置 config.inc.php 程序属性为可写状态(777)',
+	'uc_version_incorrect' => 'UCenter เซิร์ฟเวอร์ ของคุณเวอร์ชันต่ำเกินไป กรุณาอัปเกรด UCenter ของคุณให้เป็นเวอร์ชันล่าสุด ดาวน์โหลดเวอร์ชันล่าสุดได้ที่: http://www.comsenz.com/',
+	'config_unwriteable' => 'ตัวช่วยการติดตั้งไม่สามารถเขียนไฟล์ config.inc.php ให้กำหนดสิทธิ์ไฟล์นี้เป็น (777)',
 
-	'install_in_processed' => '正在安装...',
-	'install_succeed' => '安装成功，点击进入',
-	'install_cloud' => '安装成功，欢迎开通Discuz!云平台<br>Discuz!云平台致力于帮助站长提高网站流量，增强网站运营能力，增加网站收入。<br>Discuz!云平台目前免费提供了QQ互联、腾讯分析、纵横搜索、漫游应用、SOSO表情服务。Discuz!云平台将陆续提供更多优质服务项目。<br>开通Discuz!平台之前，请确保您的网站（Discuz!、UCHome或SupeSite）已经升级到Discuz! X3。',
-	'to_install_cloud' => '到后台开通',
-	'to_index' => '暂不开通',
+	'install_in_processed' => 'กำลังติดตั้ง...',
+	'install_succeed' => 'ติดตั้งเสร็จสมบูรณ์, คลิกที่นี่เพื่อไปยังเว็บไซต์ของคุณ',
+	'install_cloud' => 'ขอแสดงความยินดี คุณได้ติดตั้งเสร็จสมบูรณ์แล้ว ขอต้อนรับคุณเข้าร่วมพัฒนา Discuz! แบบกลุ่มเมฆ<br>Discuz! แบบกลุ่มเมฆ จะช่วยให้เว็บมาสเตอร์ทุกคนสามารถอัปเดตจำนวนทราฟิกของเว็บไซต์ได้ และเพิ่มความสามารถในการจัดการภายในเว็บไซต์ของท่าน เพื่อเพิ่มรายได้ในเว็บของท่านได้<br>Discuz! แบบกลุ่มเมฆ จะไม่คิดค่าบริการในการเข้าถึงต่างๆ ได้แก่ QQ Internet, Tencent, vertical and horizontal search, community QQ groups, roaming, SOSO expression services. Discuz! แบบกลุ่มเมฆจะยังคงให้บริการที่มีคุณภาพมากยิ่งขึ้นต่อไป<br>ก่อนการเปิดการใช้งาน Discuz! แบบกลุ่มเมฆ ต้องมั่นใจว่าเว็บไซต์ของคุณ （Discuz!, UCHome  หรือ SupeSite）ได้รับการอัปเกรดเป็น Discuz!X3 เรียบร้อยแล้ว',
+	'to_install_cloud' => 'ติดตั้ง',
+	'to_index' => 'เปิด',
 
-	'init_credits_karma' => '威望',
-	'init_credits_money' => '金钱',
+	'init_credits_karma' => 'พลังน้ำใจ',
+	'init_credits_money' => 'เงิน',
 
-	'init_postno0' => '楼主',
-	'init_postno1' => '沙发',
-	'init_postno2' => '板凳',
-	'init_postno3' => '地板',
+	'init_postno0' => 'คัดลอกลิงก์',
+	'init_postno1' => 'คัดลอกลิงก์',
+	'init_postno2' => 'คัดลอกลิงก์',
+	'init_postno3' => 'คัดลอกลิงก์',
 
-	'init_support' => '支持',
-	'init_opposition' => '反对',
+	'init_support' => 'สนับสนุน',
+	'init_opposition' => 'คัดค้าน',
 
-	'init_group_0' => '会员',
-	'init_group_1' => '管理员',
-	'init_group_2' => '超级版主',
-	'init_group_3' => '版主',
-	'init_group_4' => '禁止发言',
-	'init_group_5' => '禁止访问',
-	'init_group_6' => '禁止 IP',
-	'init_group_7' => '游客',
-	'init_group_8' => '等待验证会员',
-	'init_group_9' => '乞丐',
-	'init_group_10' => '新手上路',
-	'init_group_11' => '注册会员',
-	'init_group_12' => '中级会员',
-	'init_group_13' => '高级会员',
-	'init_group_14' => '金牌会员',
-	'init_group_15' => '论坛元老',
+	'init_group_0' => 'สมาชิก',
+	'init_group_1' => 'ผู้ดูแลระบบ',
+	'init_group_2' => 'ผู้ดูแลพิเศษ',
+	'init_group_3' => 'ผู้ดูแลบอร์ด',
+	'init_group_4' => 'แบนห้ามโพสต์',
+	'init_group_5' => 'แบนห้ามเข้า',
+	'init_group_6' => 'แบน IP',
+	'init_group_7' => 'ผู้เยี่ยมชม',
+	'init_group_8' => 'รอยืนยัน',
+	'init_group_9' => 'Daemon',
+	'init_group_10' => 'Newbie',
+	'init_group_11' => 'Member',
+	'init_group_12' => 'Conqueror',
+	'init_group_13' => 'Senior Member',
+	'init_group_14' => 'Gold Member',
+	'init_group_15' => 'Forum Legend',
 
-	'init_rank_1' => '新生入学',
-	'init_rank_2' => '小试牛刀',
-	'init_rank_3' => '实习记者',
-	'init_rank_4' => '自由撰稿人',
-	'init_rank_5' => '特聘作家',
+	'init_rank_1' => 'ผู้เริ่มต้น',
+	'init_rank_2' => 'โพสต์มือใหม่',
+	'init_rank_3' => 'โพสต์มือสมัครเล่น',
+	'init_rank_4' => 'โพสต์มืออาชีพ',
+	'init_rank_5' => 'โพสต์มือฉมัง',
 
-	'init_cron_1' => '清空今日发帖数',
-	'init_cron_2' => '清空本月在线时间',
-	'init_cron_3' => '每日数据清理',
-	'init_cron_4' => '生日统计与邮件祝福',
-	'init_cron_5' => '主题回复通知',
-	'init_cron_6' => '每日公告清理',
-	'init_cron_7' => '限时操作清理',
-	'init_cron_8' => '论坛推广清理',
-	'init_cron_9' => '每月主题清理',
-	'init_cron_10' => '每日 X-Space更新用户',
-	'init_cron_11' => '每周主题更新',
+	'init_cron_1' => 'เคลียร์จำนวนโพสต์ในวันนี้',
+	'init_cron_2' => 'อัปเดตยกยอดเวลาออนไลน์',
+	'init_cron_3' => 'เคลียร์ข้อมูลประจำวัน',
+	'init_cron_4' => 'สถิติ และอีเมลอวยพรวันคล้ายวันเกิด',
+	'init_cron_5' => 'กู้คืนข้อความ',
+	'init_cron_6' => 'เคลียร์ประกาศ',
+	'init_cron_7' => 'อัปเดตหัวข้อที่หมดอายุ',
+	'init_cron_8' => 'เคลียร์ข้อมูลการโปรโมทเว็บ',
+	'init_cron_9' => 'เคลียร์กระทู้ประจำเดือน',
+	'init_cron_10' => 'X-Space อัปเดตสมาชิกวันนี้',
+	'init_cron_11' => 'อัปเดตหัวข้อสัปดาห์นี้',
 
-	'init_bbcode_1' => '使内容横向滚动，这个效果类似 HTML 的 marquee 标签，注意：这个效果只在 Internet Explorer 浏览器下有效。',
-	'init_bbcode_2' => '嵌入 Flash 动画',
-	'init_bbcode_3' => '显示 QQ 在线状态，点这个图标可以和他（她）聊天',
-	'init_bbcode_4' => '上标',
-	'init_bbcode_5' => '下标',
-	'init_bbcode_6' => '嵌入 Windows media 音频',
-	'init_bbcode_7' => '嵌入 Windows media 音频或视频',
+	'init_bbcode_1' => 'เนื้อหาจะเลื่อนในแนวนอน ผลลัพท์จะคล้ายกับ HTML marquee หมายเหตุ: ผลลัพท์นี้มีผลแสดงบน Internet Explorer เท่านั้น',
+	'init_bbcode_2' => 'ใส่ Flash แอนนิเมชั่น',
+	'init_bbcode_3' => 'แสดงสถานะ QQ ออนไลน์ คลิกที่ไอคอนของเขา(เธอ) เพื่อสนทนา',
+	'init_bbcode_4' => 'ตัวยก',
+	'init_bbcode_5' => 'ตัวห้อย',
+	'init_bbcode_6' => 'ใส่เสียง Windows media',
+	'init_bbcode_7' => 'ใส่เสียงหรือวีดีโอ Windows media',
 
-	'init_qihoo_searchboxtxt' =>'输入关键词,快速搜索本论坛',
-	'init_threadsticky' =>'全局置顶,分类置顶,本版置顶',
+	'init_qihoo_searchboxtxt' =>'ใส่คำที่ต้องการค้นหา สำหรับค้นหาอย่างรวดเร็วในเว็บไซต์นี้',
+	'init_threadsticky' =>'ปักหมุด เห็นทุกเว็บบอร์ด,ปักหมุด เห็นเฉพาะหมวดหมู่นี้,ปักหมุด เห็นเฉพาะห้องนี้',
 
-	'init_default_style' => '默认风格',
-	'init_default_forum' => '默认版块',
-	'init_default_template' => '默认模板套系',
-	'init_default_template_copyright' => '北京康盛新创科技有限责任公司',
+	'init_default_style' => 'Discuz! X Series',
+	'init_default_forum' => 'Discuz! X3.2',
+	'init_default_template' => 'เทมเพลทมาตรฐาน',
+	'init_default_template_copyright' => 'Beijing Hong Sing New Technology Co., Ltd.',
 
 	'init_dataformat' => 'Y-n-j',
-	'init_modreasons' => '广告/SPAM\r\n恶意灌水\r\n违规内容\r\n文不对题\r\n重复发帖\r\n\r\n我很赞同\r\n精品文章\r\n原创内容',
-	'init_userreasons' => '很给力!\r\n神马都是浮云\r\n赞一个!\r\n山寨\r\n淡定',
-	'init_link' => 'Discuz! 官方论坛',
-	'init_link_note' => '提供最新 Discuz! 产品新闻、软件下载与技术交流',
+	'init_modreasons' => 'โพสต์โฆษณา\r\nสแปมโพสต์\r\nโพสต์ไม่เข้ากับเนื้อหา\r\nโพสต์ผิดห้อง\r\n\r\nถูกใจ\r\nขำกลิ้ง\r\nหลงรัก\r\nซึ้ง\r\nสยอง\r\nทึ่ง',
+	'init_userreasons' => 'ถูกใจ\r\nขำกลิ้ง\r\nหลงรัก\r\nซึ้ง\r\nสยอง\r\nทึ่ง',
+	'init_link' => 'Discuz! Official Forum',
+	'init_link_note' => 'ติดตามความเคลื่อนไหวข่าวสารดิสคัส! รวมไปถึงการดาวน์โหลดและแลกเปลี่ยนข้อมูลทางวิชาการ',
 
-	'init_promotion_task' => '网站推广任务',
-	'init_gift_task' => '红包类任务',
-	'init_avatar_task' => '头像类任务',
+	'init_promotion_task' => 'กิจกรรมโปรโมทเว็บไซต์',
+	'init_gift_task' => 'กิจกรรมกล่องของขวัญ',
+	'init_avatar_task' => 'กิจกรรมเปลี่ยนรูปโปรไฟล์',
 
-	'license' => '<div class="license"><h1>中文版授权协议 适用于中文用户</h1>
+	'license' => '<div class="license"><h1>เวอร์ชั่นภาษาอังกฤษ (อย่างไม่เป็นทางการ) เป็นข้อตกลงใบอนุญาตสำหรับผู้ใช้ที่ไม่ใช้ภาษาจีน</h1>
 
-<p>版权所有 (c) 2001-2013，北京康盛新创科技有限责任公司保留所有权利。</p>
+<p>Copyright (c) 2001-2013, Beijing Kang Sheng Science & Technology Co. Ltd. all rights reserved.</p>
 
-<p>感谢您选择康盛产品。希望我们的努力能为您提供一个高效快速、强大的站点解决方案，和强大的社区论坛解决方案。康盛公司网址为 http://www.comsenz.com，产品官方讨论区网址为 http://www.discuz.net。</p>
+<p>Thank you for choosing Kang Sheng products. I hope our efforts can provide a fast and efficient, powerful site solution for you, and strong community forum solution. Kang Sheng company web site for the http://www.comsenz.com, the official forum for http://www.discuz.net products.</p>
 
-<p>用户须知：本协议是您与康盛公司之间关于您使用康盛公司提供的各种软件产品及服务的法律协议。无论您是个人或组织、盈利与否、用途如何（包括以学习和研究为目的），均需仔细阅读本协议，包括免除或者限制康盛责任的免责条款及对您的权利限制。请您审阅并接受或不接受本服务条款。如您不同意本服务条款及/或康盛随时对其的修改，您应不使用或主动取消康盛公司提供的康盛产品。否则，您的任何对康盛产品中的相关服务的注册、登陆、下载、查看等使用行为将被视为您对本服务条款全部的完全接受，包括接受康盛对服务条款随时所做的任何修改。
-<p>本服务条款一旦发生变更, 康盛将在网页上公布修改内容。修改后的服务条款一旦在网站管理后台上公布即有效代替原来的服务条款。您可随时登陆康盛官方论坛查阅最新版服务条款。如果您选择接受本条款，即表示您同意接受协议各项条件的约束。如果您不同意本服务条款，则不能获得使用本服务的权利。您若有违反本条款规定，康盛公司有权随时中止或终止您对康盛产品的使用资格并保留追究相关法律责任的权利。</p>
-<p>在理解、同意、并遵守本协议的全部条款后，方可开始使用康盛产品。您可能与康盛公司直接签订另一书面协议，以补充或者取代本协议的全部或者任何部分。</p></p>
+<p>Notice to user: this agreement is a legal agreement on a variety of software products and services you use Kang Sheng\'s between you and Kang Sheng company. No matter how you individual or organization, profit or not, use (include to study and research for the purpose), are required to read this Agreement carefully, including the exemption clause in the exclusion or restriction of Kang Sheng responsibility and on your right. Please review and accept or not accept the terms of service. If you agree to the terms of service and / or Kang Sheng to the revision, you should not use or cancelled Kang Sheng\'s Kang Sheng products actively. Otherwise, any container related services and products of Kang registration, landing, you download, view such behavior will be regarded as you on the terms of service all fully accepted, including any modification of the terms of service at any time, Kang Sheng do.
+<p>The terms of service once changed, Kang Sheng will be released to modify content in Webpage. The terms of service revised once published in site management background is the original instead of the terms of service. You can login Kangsheng official forum access the latest version of the terms of service. If you choose to accept these terms, you are agreeing to accept the agreement of all conditions. If you do not agree to the terms of service, it cannot be obtained using the service. If you are in violation of the provisions, Kang Sheng company has the right to suspend or terminate your and retain responsibility for related liability of Kang Sheng products use qualification at any time.</p>
+<p>In the understanding, agreed to all the terms and conditions, and to comply with this agreement after, can begin to use Kang Sheng products. A written agreement signed another Kangsheng company directly you might, to supplement or replace all or any part of this agreement.</p></p>
 
-<p>康盛拥有本软件的全部知识产权。本软件只供许可协议，并非出售。康盛只允许您在遵守本协议各项条款的情况下复制、下载、安装、使用或者以其他方式受益于本软件的功能或者知识产权。</p>
+<p>All intellectual property Kang Sheng has the software. This software is only for the license, not for sale. Kang Sheng only allows you to copy, in accordance with the terms of this agreement, download installation, use or otherwise benefit from the functions of the software or intellectual property rights.</p>
 
-<h3>I. 协议许可的权利</h3>
+<h3>I. Licensing agreement rights</h3>
 <ol>
-   <li>您可以在完全遵守本许可协议的基础上，将本软件应用于非商业用途，而不必支付软件版权许可费用。</li>
-   <li>您可以在协议规定的约束和限制范围内修改康盛产品源代码(如果被提供的话)或界面风格以适应您的网站要求。</li>
-   <li>您拥有使用本软件构建的网站中全部会员资料、文章及相关信息的所有权，并独立承担与使用本软件构建的网站内容的审核、注意义务，确保其不侵犯任何人的合法权益，独立承担因使用康盛软件和服务带来的全部责任，若造成康盛公司或用户损失的，您应予以全部赔偿。</li>
-   <li>若您需将康盛软件或服务用户商业用途，必须另行获得康盛的书面许可，您在获得商业授权之后，您可以将本软件应用于商业用途，同时依据所购买的授权类型中确定的技术支持期限、技术支持方式和技术支持内容，自购买时刻起，在技术支持期限内拥有通过指定的方式获得指定范围内的技术支持服务。商业授权用户享有反映和提出意见的权力，相关意见将被作为首要考虑，但没有一定被采纳的承诺或保证。</li>
-   <li>您可以从康盛提供的应用中心服务中下载适合您网站的应用程序，但应向应用程序开发者/所有者支付相应的费用。</li>
+<li>You can fully comply with the end user license agreement, based on the software used in this non-commercial use, without having to pay for software copyright licensing fees.</li>
+<li>Agreement you can within the constraints and limitations modify Discuz! source code (if provided) or interface styles to suit your site requirements.</li>
+<li>You have to use this software to build the forum all the membership information, articles and related information of ownership, and is independent of commitment and legal obligations related to the article content.</li>
+<li>A commercial license, you can use this software for commercial applications, while according to the type of license purchased to determine the period of technical support, technical support, technical support form and content, from the moment of purchase, within the period of technical support have a way to get through the specified designated areas of technical support services. Business authorized users have the power to reflect and comment, relevant comments will be a primary consideration, but not necessarily be accepted promise or guarantee.</li>
 </ol>
 
-<h3>II. 协议规定的约束和限制</h3>
+<h3>II. Agreement constraints and limitations</h3>
 <ol>
-   <li>未获康盛公司书面商业授权之前，不得将本软件用于商业用途（包括但不限于企业网站、经营性网站、以营利为目或实现盈利的网站）。购买商业授权请登陆http://www.discuz.com参考相关说明，也可以致电8610-51282255了解详情。</li>
-   <li>不得对本软件或与之关联的商业授权进行出租、出售、抵押或发放子许可证。</li>
-   <li>无论如何，即无论用途如何、是否经过修改或美化、修改程度如何，只要使用康盛产品的整体或任何部分，未经书面许可，页面页脚处的康盛产品名称和康盛公司下属网站（http://www.comsenz.com、或 http://www.discuz.net） 的链接都必须保留，而不能清除或修改。</li>
-   <li>禁止在康盛产品的整体或任何部分基础上以发展任何派生版本、修改版本或第三方版本用于重新分发。</li>
-   <li>您从应用中心下载的应用程序，未经应用程序开发者/所有者的书面许可，不得对其进行反向工程、反向汇编、反向编译等，不得擅自复制、修改、链接、转载、汇编、发表、出版、发展与之有关的衍生产品、作品等。</li>
-   <li>如果您未能遵守本协议的条款，您的授权将被终止，所许可的权利将被收回，同时您应承担相应法律责任。</li>
+<li>Business license has not been before, may not use this software for commercial purposes (including but not limited to business sites, business operations, for commercial purpose or profit web site). Purchase of commercial license, please visit http://www.discuz.com reference instructions, call 8610-51657885 for more details.</li>
+<li>May not associated with the software or business license for rental, sale, mortgage or grant sub-licenses.</li>
+<li>In any case, that no matter how used, whether modified or landscaping, changes to what extent, just use Discuz! the whole or any part, without the written permission of the Forum page footer Department Discuz! name and Sing Imagination (Beijing) Technology Co., Ltd. affiliated website (http://www.comsenz.com, http://www.discuz.com or http://www.discuz.net) the link must be retained, not removed or modified .</li>
+<li>Prohibited Discuz! the whole or any part of the basis for the development of any derivative version, modified version or third-party version for redistribution.</li>
+<li>If you failed to comply with the terms of this Agreement, your license will be terminated, the licensee rights will be recovered, and bear the corresponding legal responsibility.</li>
 </ol>
 
-<h3>III. 有限担保和免责声明</h3>
+<h3>III. Limited Warranty and Disclaimer</h3>
 <ol>
-   <li>本软件及所附带的文件是作为不提供任何明确的或隐含的赔偿或担保的形式提供的。</li>
-   <li>用户出于自愿而使用本软件，您必须了解使用本软件的风险，在尚未购买产品技术服务之前，我们不承诺提供任何形式的技术支持、使用担保，也不承担任何因使用本软件而产生问题的相关责任。</li>
-   <li>康盛公司不对使用本软件构建的网站中或者论坛中的文章或信息承担责任，全部责任由您自行承担。</li>
-   <li>康盛公司无法全面监控由第三方上传至应用中心的应用程序，因此不保证应用程序的合法性、安全性、完整性、真实性或品质等；您从应用中心下载应用程序时，同意自行判断并承担所有风险，而不依赖于康盛公司。但在任何情况下，康盛公司有权依法停止应用中心服务并采取相应行动，包括但不限于对于相关应用程序进行卸载，暂停服务的全部或部分，保存有关记录，并向有关机关报告。由此对您及第三人可能造成的损失，康盛公司不承担任何直接、间接或者连带的责任。</li>
-   <li>康盛公司对康盛提供的软件和服务之及时性、安全性、准确性不作担保，由于不可抗力因素、康盛公司无法控制的因素（包括黑客攻击、停断电等）等造成软件使用和服务中止或终止，而给您造成损失的，您同意放弃追究康盛公司责任的全部权利。   6.康盛公司特别提请您注意，康盛公司为了保障公司业务发展和调整的自主权，康盛公司拥有随时经或未经事先通知而修改服务内容、中止或终止部分或全部软件使用和服务的权利，修改会公布于康盛公司网站相关页面上，一经公布视为通知。 康盛公司行使修改或中止、终止部分或全部软件使用和服务的权利而造成损失的，康盛公司不需对您或任何第三方负责。</li>
+<li>The software and the accompanying documents as not to provide any express or implied, or guarantee in the form of compensation provided.</li>
+<li>User voluntary use of this software, you must understand the risks of using this software, technical services in the not to buy products before, we do not promise to provide any form of technical support, use of guarantees, nor liable for any use of this software issues related to liability arising.</li>
+<li>Hong Sing Company does not use the software to build a website or forum post or liable for the information, you assume full responsibility.</li>
+<li>Hong Sing company provides software and services in a timely manner, security, accuracy is not guaranteed, due to force majeure, Hong Sing factors beyond the control of the company (including hacker attacks, stopping power, etc.) caused by software and services Suspension or termination, and give your losses, you agree to Sing corporate responsibility waiver of all rights.</li>
+<li>Hong Sing Company specifically draw your attention to Hong Sing Company in order to protect business development and adjustment of autonomy, Hong Sing Company has at any time with or without prior notice to modify the service content, suspend or terminate some or all of the rights of software and services , changes will be posted on the relevant pages of Sing website, including without notice. Hong Sing Company to modify or discontinue the exercise, termination of some or all of the rights of software and services resulting from the loss, without Hong Sing Company to you or any third party.
+</li>
 </ol>
 
-<p>有关康盛产品最终用户授权协议、商业授权与技术服务的详细内容，均由康盛公司独家提供。康盛公司拥有在不事先通知的情况下，修改授权协议和服务价目表的权利，修改后的协议或价目表对自改变之日起的新授权用户生效。</p>
+<p>Hong Sing products on the end user license agreement, business license and technical services to the details provided by the Hong Sing exclusive. Sing the company has without prior notice, modify the license agreement and services price list right to the modified agreement or price list from the change of the date of the new authorized user to take effect.</p>
 
-<p>一旦您开始安装康盛产品，即被视为完全理解并接受本协议的各项条款，在享有上述条款授予的权利的同时，受到相关的约束和限制。协议许可范围以外的行为，将直接违反本授权协议并构成侵权，我们有权随时终止授权，责令停止损害，并保留追究相关责任的权力。</p>
+<p>Once you start the installation Hong Sing products, shall be deemed to fully understand and accept the terms of this Agreement, the terms in the enjoyment of the rights granted at the same time, by the relevant constraints and restrictions. Licensing agreement outside the scope of acts would be a direct violation of this License Agreement and constitute an infringement, we have the right to terminate the authorization, shall be ordered to stop the damage, and retain the power to investigate related responsibilities.</p>
 
-<p>本许可协议条款的解释，效力及纠纷的解决，适用于中华人民共和国大陆法律。</p>
+<p>The interpretation of the terms of the license agreement, validity, and dispute resolution, applicable to the mainland People\'s Republic of law.</p>
 
-<p>若您和康盛之间发生任何纠纷或争议，首先应友好协商解决，协商不成的，您在此完全同意将纠纷或争议提交康盛所在地北京市海淀区人民法院管辖。康盛公司拥有对以上各项条款内容的解释权及修改权。</p>
+<p>Between Hong Sing if you and any dispute or controversy, should first be settled through friendly consultations, the consultation fails, you hereby agree to submit the dispute or controversy Sing Haidian District People\'s Court where jurisdiction. Hong Sing Company has the right to interpret the above terms and discretion.</p>
 
-<p>（正文完）</p>
+<p>(End)</p>
 
-<p align="right">康盛公司</p>
+<p align="right">Kang Sheng company</p>
 
 </div>',
 
-	'uc_installed' => '您已经安装过 UCenter，如果需要重新安装，请删除 data/install.lock 文件',
-	'i_agree' => '我已仔细阅读，并同意上述条款中的所有内容',
-	'supportted' => '支持',
-	'unsupportted' => '不支持',
-	'max_size' => '支持/最大尺寸',
-	'project' => '项目',
-	'ucenter_required' => 'Discuz! 所需配置',
-	'ucenter_best' => 'Discuz! 最佳',
-	'curr_server' => '当前服务器',
-	'env_check' => '环境检查',
-	'os' => '操作系统',
-	'php' => 'PHP 版本',
-	'attachmentupload' => '附件上传',
-	'unlimit' => '不限制',
-	'version' => '版本',
-	'gdversion' => 'GD 库',
-	'allow' => '允许 ',
-	'unix' => '类Unix',
-	'diskspace' => '磁盘空间',
-	'priv_check' => '目录、文件权限检查',
-	'func_depend' => '函数依赖性检查',
-	'func_name' => '函数名称',
-	'check_result' => '检查结果',
-	'suggestion' => '建议',
-	'advice_mysql' => '请检查 mysql 模块是否正确加载',
-	'advice_fopen' => '该函数需要 php.ini 中 allow_url_fopen 选项开启。请联系空间商，确定开启了此项功能',
-	'advice_file_get_contents' => '该函数需要 php.ini 中 allow_url_fopen 选项开启。请联系空间商，确定开启了此项功能',
-	'advice_xml' => '该函数需要 PHP 支持 XML。请联系空间商，确定开启了此项功能',
-	'none' => '无',
+	'uc_installed' => 'คุณได้ติดตั้ง UCenter ไว้อยู่แล้ว หากคุณจำเป็นต้องติดตั้งใหม่ให้ลบไฟล์ data/install.lock',
+	'i_agree' => 'ฉันได้อ่านและยอมรับข้อตกลงทั้งหมด',
+	'supportted' => 'สนับสนุน',
+	'unsupportted' => 'ไม่สนับสนุน',
+	'max_size' => 'สนับสนุน/ขนาดสูงสุด',
+	'project' => 'รายการ',
+	'ucenter_required' => 'ขั้นต่ำ',
+	'ucenter_best' => 'แนะนำ',
+	'curr_server' => 'เซิร์ฟเวอร์ปัจจุบัน',
+	'env_check' => 'ความต้องการของระบบ',
+	'os' => 'ระบบปฏิบัติการ',
+	'php' => 'PHP เวอร์ชั่น',
+	'attachmentupload' => 'อัปโหลดไฟล์',
+	'unlimit' => 'ไม่จำกัด',
+	'version' => 'เวอร์ชั่น',
+	'gdversion' => 'GD เวอร์ชั่น',
+	'allow' => 'อนุญาต',
+	'unix' => 'คลาส Unix',
+	'diskspace' => 'พื้นที่ดิสก์',
+	'priv_check' => 'ตรวจสอบสิทธิ์ไดเร็กทอรี',
+	'func_depend' => 'ตรวจสอบฟังก์ชัน',
+	'func_name' => 'ชื่อฟังก์ชัน',
+	'check_result' => 'ทดสอบผลลัพธ์',
+	'suggestion' => 'คำแนะนำ',
+	'advice_mysql' => 'ตรวจสอบว่าโมดูล MySQL โหลดอย่างถูกต้อง',
+	'advice_fopen' => 'ตรวจสอบ allow_url_fopen ใน php.ini ว่าเปิดใช้งานอยู่หรือไม่ โปรดติดต่อผู้ให้บริการโฮสต์เพื่อตรวจสอบการเปิดคุณลักษณะนี้',
+	'advice_file_get_contents' => 'ตรวจสอบ allow_url_fopen ใน php.ini ว่าเปิดใช้งานอยู่หรือไม่ โปรดติดต่อผู้ให้บริการโฮสต์เพื่อตรวจสอบการเปิดคุณลักษณะนี้',
+	'advice_xml' => 'ตรวจสอบดูว่าสนับสนุน PHP สำหรับ XML หรือไม่ โปรดติดต่อผู้ให้บริการโฮสต์เพื่อตรวจสอบการเปิดคุณลักษณะนี้',
+	'none' => 'ไม่มี',
 
-	'dbhost' => '数据库服务器',
-	'dbuser' => '数据库用户名',
-	'dbpw' => '数据库密码',
-	'dbname' => '数据库名',
-	'tablepre' => '数据表前缀',
+	'dbhost' => 'เซิร์ฟเวอร์',
+	'dbuser' => 'ชื่อผู้ใช้',
+	'dbpw' => 'รหัสผ่าน',
+	'dbname' => 'ชื่อฐานข้อมูล',
+	'tablepre' => 'คำนำหน้าตาราง',
 
-	'ucfounderpw' => '创始人密码',
-	'ucfounderpw2' => '重复创始人密码',
+	'ucfounderpw' => 'รหัสผ่าน',
+	'ucfounderpw2' => 'ยืนยันรหัสผ่าน',
 
-	'init_log' => '初始化记录',
-	'clear_dir' => '清空目录',
-	'select_db' => '选择数据库',
-	'create_table' => '建立数据表',
-	'succeed' => '成功 ',
+	'init_log' => 'บันทึกการเขียน',
+	'clear_dir' => 'ล้างเนื้อหาในโฟล์เดอร์',
+	'select_db' => 'เลือกฐานข้อมูล',
+	'create_table' => 'สร้างตารางข้อมูล',
+	'succeed' => 'สำเร็จ',
 
-	'install_data' => '正在安装数据',
-	'install_test_data' => '正在安装附加数据',
+	'install_data' => 'กำลังติดตั้งข้อมูล',
+	'install_test_data' => 'กำลังติดตั้งข้อมูลเพิ่มเติม',
 
-	'method_undefined' => '未定义方法',
-	'database_nonexistence' => '数据库操作对象不存在',
-	'skip_current' => '跳过本步',
-	'topic' => '专题',
-	'install_finish' => '您的论坛已完成安装，点此访问',
+	'method_undefined' => 'ไม่กำหนดวิธี',
+	'database_nonexistence' => 'ไม่พบฐานข้อมูลที่ต้องการ',
+	'skip_current' => 'ข้ามขั้นตอนนี้',
+	'topic' => 'หัวข้อ',
+	'install_finish' => 'Discuz! ของคุณได้ถูกติดตั้งเรียบร้อยแล้ว คลิกที่นี่เพื่อเข้าชม',
 
 );
 
 $msglang = array(
-	'config_nonexistence' => '您的 config.inc.php 不存在, 无法继续安装, 请用 FTP 将该文件上传后再试。',
+	'config_nonexistence' => 'ไม่พบไฟล์ config.inc.php ในระบบ ตัวช่วยการติดตั้งไม่สามารถดำเนินการต่อไปได้ กรุณาใช้เครื่องมือ FTP เพื่ออัปโหลดไฟล์ดังกล่าวและลองใหม่อีกครั้ง',
 );
 
 ?>

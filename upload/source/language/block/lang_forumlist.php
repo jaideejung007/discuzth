@@ -13,20 +13,20 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'forumlist_fids' => '指定版块',
-	'forumlist_fids_comment' => '填入指定版块的ID(fid)，多个版块之间用逗号(,)分隔',
-	'forumlist_fups' => '上级版块',
-	'forumlist_fups_comment' => '设置显示某些分类或版块下属的版块',
-	'forumlist_titlelength' => '名称长度',
-	'forumlist_titlelength_comment' => '设置版块名称显示的最大长度',
-	'forumlist_summarylength' => '介绍长度',
-	'forumlist_summarylength_comment' => '设置版块介绍显示的最大长度',
-	'forumlist_orderby' => '版块排序方式',
-	'forumlist_orderby_comment' => '设置以哪一字段或方式对版块进行排序',
-	'forumlist_orderby_displayorder' => '按显示顺序顺序排序',
-	'forumlist_orderby_threads' => '按主题数倒序排序',
-	'forumlist_orderby_todayposts' => '按今日发帖数倒序排序',
-	'forumlist_orderby_posts' => '按帖子数倒序排序',
+	'forumlist_fids' => 'Specified forum',
+	'forumlist_fids_comment' => 'Fill in specified forum ID (fid), separate multiple forums with a comma (,)',
+	'forumlist_fups' => 'รายการบอร์ด',
+	'forumlist_fups_comment' => 'กำหนดบอร์ดที่ต้องการให้แสดงข้อมูล',
+	'forumlist_titlelength' => 'ความยาวชื่อบอร์ด',
+	'forumlist_titlelength_comment' => 'กำหนดความยาวชื่อบอร์ด',
+	'forumlist_summarylength' => 'ความยาวรายละเอียด',
+	'forumlist_summarylength_comment' => 'กำหนดความยาวของรายละเอียด',
+	'forumlist_orderby' => 'การจัดเรียงลำดับบอร์ด',
+	'forumlist_orderby_comment' => 'ตั้งค่าการจัดเรียงลำดับบอร์ด',
+	'forumlist_orderby_displayorder' => 'จัดเรียงตามจำนวนค่าเริ่มต้น',
+	'forumlist_orderby_threads' => 'จัดเรียงตามจำนวนหัวข้อ',
+	'forumlist_orderby_todayposts' => 'จัดเรียงตามจำนวนโพสต์วันนี้',
+	'forumlist_orderby_posts' => 'จัดเรียงตามจำนวนโพสต์',
 );
 
 ?>

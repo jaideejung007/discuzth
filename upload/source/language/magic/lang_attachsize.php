@@ -13,10 +13,10 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'attachsize_name' => '附件增容卡',
-	'attachsize_desc' => '增加附件容量上限',
-	'attachsize_info' => '额外增加 {num} M 附件容量上限',
-	'attachsize_addsize' => '增加容量',
+	'attachsize_name' => 'เพิ่มพื้นที่เก็บไฟล์',
+	'attachsize_desc' => 'เพิ่มความจุพื้นที่สำหรับจัดเก็บไฟล์แนบ',
+	'attachsize_info' => 'เพิ่มพื้นที่เก็บไฟล์แนบ {num} M',
+	'attachsize_addsize' => 'เพิ่มความจุพื้นที่',
 );
 
 ?>

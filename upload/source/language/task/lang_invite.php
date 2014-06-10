@@ -13,12 +13,12 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'invite_message' => '<p style="color:red;">哇，厉害！您现在已经邀请了 {count} 个好友，请继续努力！</p><br>',
-	'invite_guide' => '<strong>请按照以下的说明来完成本任务：</strong>
+	'invite_message' => '<p style="color:red;">ว้าวๆ! คุณได้รับอินไวท์ {count}!</p><br>',
+	'invite_guide' => '<strong>คำแนะนำในการเข้าร่วมกิจกรรมนี้: </strong>
 		<ul class="task">
-		<li>在新窗口中打开<a href="home.php?mod=spacecp&ac=invite" target="_blank">好友邀请页面</a></li>
-		<li>通过 QQ、MSN 等 IM 工具，或者发送邮件，把邀请链接告诉您的好友，邀请他们加入进来吧</li>
-		<li>您需要邀请 10 个好友才算完成</li>
+		<li>เปิดในหน้าต่างใหม่ไปที่<a href="home.php?mod=spacecp&ac=invite" target="_blank">หน้าชวนเพื่อน</a></li>
+		<li>คุณสามารถใช้เครื่องมือ IM เช่น MSN QQ หรืออีเมล ส่งลิงก์นี้ให้กับเพื่อนของคุณ เพื่อเชิญชวนให้มาเข้าร่วมและเป็นเพื่อน</li>
+		<li>คุณจะต้องชวนเพื่อนให้ครบ 10 คน การดำเนินการกิจกรรมนี้ถึงจะเสร็จสมบูรณ์</li>
 		</ul>',
 
 );

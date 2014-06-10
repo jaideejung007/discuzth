@@ -24,13 +24,8 @@ function convertip($ip) {
 		} elseif($iparray[0] > 255 || $iparray[1] > 255 || $iparray[2] > 255 || $iparray[3] > 255) {
 			$return = '- Invalid IP Address';
 		} else {
-			$tinyipfile = DISCUZ_ROOT.'./data/ipdata/tinyipdata.dat';
-			$fullipfile = DISCUZ_ROOT.'./data/ipdata/wry.dat';
-			if(@file_exists($tinyipfile)) {
-				$return = convertip_tiny($ip, $tinyipfile);
-			} elseif(@file_exists($fullipfile)) {
-				$return = convertip_full($ip, $fullipfile);
-			}
+			include_once("data/ipdata/geoiploc.php");
+				$return = getCountryFromIP($ip, " NamE ");
 		}
 	}
 
@@ -512,14 +507,13 @@ function process_ipnotice($ipconverted) {
 		return '';
 	}
 
-	$ipconverted = substr($ipconverted, 1);
 	if(strpos($ipconverted, '-') !== false) {
 		$ipconverted = substr($ipconverted, 0, strpos($ipconverted, '-'));
 	}
 
 	$ipconverted = trim($ipconverted);
 
-	return '- '.$ipconverted ;
+	return !$ipconverted ? '': '- '.$ipconverted ;
 }
 
 ?>

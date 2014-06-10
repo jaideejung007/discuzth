@@ -13,15 +13,15 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'profile_name' => '完善用户资料任务',
-	'profile_desc' => '完善指定的用户资料获得相应的奖励',
+	'profile_name' => 'จัดการรายละเอียดข้อมูลส่วนตัว',
+	'profile_desc' => 'จัดการรายละเอียดข้อมูลส่วนตัวของคุณให้สมบูรณ์มากที่สุด',
 
-	'profile_view' => '<strong>您还有以下个人资料项需要补充完整：</strong><br>
+	'profile_view' => '<strong>รายการข้อมูลส่วนตัวต่อไปนี้คุณต้องจัดการให้สมบูรณ์:</strong><br>
 		<span style="color:red;">{profiles}</span><br><br>
-		<strong>请按照以下的说明来完成本任务：</strong>
+		<strong>คำแนะนำในการเข้าร่วมกิจกรรมนี้: </strong>
 		<ul>
-		<li><a href="home.php?mod=spacecp&ac=profile" target="_blank" class="xi2">点击这里打开个人资料设置页面</a></li>
-		<li>在新打开的设置页面中，将上述个人资料补充完整</li>
+		<li><a href="home.php?mod=spacecp&ac=profile" target="_blank" class="xi2">เปิดไปยังหน้าต่างใหม่เพื่อตั้งค่าข้อมูลส่วนตัว</a></li>
+		<li>ในหน้าการตั้งค่าข้อมูลส่วนตัวที่จะเปิดขึ้นมาใหม่ กรุณากรอกข้อมูลส่วนตัวให้ครบถ้วน</li>
 		</ul>',
 );
 

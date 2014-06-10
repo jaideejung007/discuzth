@@ -13,21 +13,21 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'threadlist_name' => '论坛/群组 帖子列表帖位广告',
-	'threadlist_desc' => '展现方式: 帖位广告显示于帖子列表页第一页的帖子位置，可以模拟出一个具有广告意义的帖子地址，吸引访问者的注意力。',
-	'threadlist_fids' => '投放版块',
-	'threadlist_fids_comment' => '设置广告投放的论坛版块，当广告投放范围中包含“论坛”时有效',
-	'threadlist_groups' => '投放群组分类',
-	'threadlist_groups_comment' => '设置广告投放的群组分类，当广告投放范围中包含“群组”时有效',
-	'threadlist_pos' => '投放位置',
-	'threadlist_pos_comment' => '设置在主题列表的第几个主题位置显示此广告，如不指定则将随机位置显示',
-	'threadlist_mode' => '显示模式',
-	'threadlist_mode_comment' => '自由模式，占用主题列表的全部列宽显示本广告<br />主题模式，把广告模拟成一个主题，点击广告后跳转到指定的主题',
-	'threadlist_mode_0' => '自由模式',
-	'threadlist_mode_1' => '主题模式',
-	'threadlist_tid' => '主题模式指定主题 tid',
-	'threadlist_threadurl' => '主题模式自定义主题 URL',
-	'threadlist_threadurl_comment' => '留空表示使用指定主题的 URL',
+	'threadlist_name' => 'ระหว่างกระทู้หน้ารายการกระทู้',
+	'threadlist_desc' => 'Show method: Place Adv at the first post position at a post list page. This type Adv looks like a first post to attract the attention of visitors.',
+	'threadlist_fids' => 'Target Forums',
+	'threadlist_fids_comment' => 'Set forums to diplay the Adv',
+	'threadlist_groups' => 'Target Groups',
+	'threadlist_groups_comment' => 'Set the groups to show advertising. Take effect only when ads included in the scope of &quot;group&quot;.',
+	'threadlist_pos' => 'Ads Position',
+	'threadlist_pos_comment' => 'Set the post number where to place the Ads. If you did not specified this position, the Adv will be diaplayed at random position.',
+	'threadlist_mode' => 'Display mode',
+	'threadlist_mode_comment' => 'Free mode, occupy the full column width of a topis list for show the ads.<br />This thread mode, the Ad placed into a topic, click on your Ad will jump to a specific thread',
+	'threadlist_mode_0' => 'Free mode',
+	'threadlist_mode_1' => 'This Thread',
+	'threadlist_tid' => 'Target threads ID',
+	'threadlist_threadurl' => 'Custom thread URL',
+	'threadlist_threadurl_comment' => 'Leave blank for use the specified thread URL',
 );
 
 ?>

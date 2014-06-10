@@ -13,18 +13,18 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'target_tid' => '目标主题 tid',
-	'target_pid' => '目标帖子 pid',
-	'target_username' => '目标用户名',
-	'magics_type_1' => '帖子类',
-	'magics_type_2' => '会员类',
-	'magics_type_3' => '其他类',
+	'target_tid' => 'กระทู้เป้าหมาย tid',
+	'target_pid' => 'โพสต์เป้าหมาย pid',
+	'target_username' => 'สมาชิกเป้าหมาย',
+	'magics_type_1' => 'ประเภทโพสต์',
+	'magics_type_2' => 'ระดับสมาชิก',
+	'magics_type_3' => 'อื่น ๆ',
 
-	'CCK_color' => '颜色',
-	'MOK_info' => '获得的钱币数目规则：大于 1 且小于购买价格 150% 的随机数',
-	'CODE_info' => '获得 Discuz! 测试邀请码一个',
-	'MVK_target' => '要移动到的版面',
-	'SOFA_message' => '一道闪电划破湛蓝的天空，随着一声巨响，沙发被我抢了！哈哈！',
+	'CCK_color' => 'สี',
+	'MOK_info' => 'กฎของการเพิ่มจำนวนเงิน: มากกว่า 1 และน้อยกว่า 150% ของราคาซื้อของตัวเลขที่สุ่ม',
+	'CODE_info' => 'เชิญทดสอบโค้ดดิสคัส!',
+	'MVK_target' => 'ย้ายไปยังรูปแบบ',
+	'SOFA_message' => 'ฉันจองกระทู้นี้ไว้แล้ว ฉันจะตอบกลับเป็นคนแรก! ฮา ฮา!',
 );
 
 ?>

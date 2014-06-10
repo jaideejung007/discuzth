@@ -16,19 +16,19 @@ var UPLOADWINRECALL = null;
 var imgexts = typeof imgexts == 'undefined' ? 'jpg, jpeg, gif, png, bmp' : imgexts;
 var ATTACHORIMAGE = '0';
 var STATUSMSG = {
-	'-1' : '内部服务器错误',
-	'0' : '上传成功',
-	'1' : '不支持此类扩展名',
-	'2' : '服务器限制无法上传那么大的附件',
-	'3' : '用户组限制无法上传那么大的附件',
-	'4' : '不支持此类扩展名',
-	'5' : '文件类型限制无法上传那么大的附件',
-	'6' : '今日您已无法上传更多的附件',
-	'7' : '请选择图片文件(' + imgexts + ')',
-	'8' : '附件文件无法保存',
-	'9' : '没有合法的文件被上传',
-	'10' : '非法操作',
-	'11' : '今日您已无法上传那么大的附件'
+	'-1' : 'มีข้อผิดพลาดเกิดขึ้นภายในเซิร์ฟเวอร์',
+	'0' : 'อัปโหลดไฟล์เสร็จเรียบร้อย',
+	'1' : 'รูปแบบไฟล์หรือนามสกุลนี้ไม่สนับสนุน',
+	'2' : 'ขนาดไฟล์แนบเกินข้อจำกัดของเซิร์ฟเวอร์ การอัปโหลดจะถูกระงับไว้ชั่วคราว',
+	'3' : 'ขนาดไฟล์แนบเกินข้อจำกัดของกลุ่มสมาชิก การอัปโหลดจะถูกระงับไว้ชั่วคราว',
+	'4' : 'รูปแบบไฟล์หรือนามสกุลนี้ไม่สนับสนุน',
+	'5' : 'ขนาดไฟล์แนบเกินข้อจำกัดของรูปแบบไฟล์ การอัปโหลดจะถูกระงับไว้ชั่วคราว',
+	'6' : 'วันนี้คุณไม่สามารถอัปโหลดไฟล์แนบเพิ่มได้อีกแล้ว กรุณารออัปโหลดในวันใหม่',
+	'7' : 'กรุณาเลือกไฟล์รูปภาพ (' + imgexts + ')',
+	'8' : 'ไม่สามารถบันทึกไฟล์แนบ',
+	'9' : 'ไม่มีไฟล์แนบที่จะอัปโหลด',
+	'10' : 'การดำเนินการผิดพลาด',
+	'11' : 'วันนี้คุณไม่สามารถอัปโหลดไฟล์แนบที่มีขนาดใหญ่ได้'
 };
 
 EXTRAFUNC['validator'] = [];
@@ -60,7 +60,7 @@ function checklength(theform) {
 	if(!theform.parseurloff.checked) {
 		message = parseurl(message);
 	}
-	showDialog('当前长度: ' + mb_strlen(message) + ' 字节，' + (postmaxchars != 0 ? '系统限制: ' + postminchars + ' 到 ' + postmaxchars + ' 字节。' : ''), 'notice', '字数检查');
+	showDialog('คุณมีข้อความจำนวน ' + mb_strlen(message) + ' ไบต์ ' + (postmaxchars != 0 ? 'ข้อมูลที่จะพิมพ์ได้อยู่ที่: ' + postminchars + ' ถึง ' + postmaxchars + ' ไบต์เท่านั้น!' : ''), 'notice', 'ตรวจสอบจำนวนตัวอักษร');
 }
 
 if(!tradepost) {
@@ -73,19 +73,19 @@ function validate(theform) {
 		message = parseurl(message);
 	}
 	if(($('postsubmit').name != 'replysubmit' && !($('postsubmit').name == 'editsubmit' && !isfirstpost) && theform.subject.value == "") || !sortid && !special && trim(message) == "") {
-		showError('抱歉，您尚未输入标题或内容');
+		showError('ขออภัย! คุณยังไม่ได้ใส่ชื่อกระทู้หรือเนื้อหาใดๆ เลย');
 		return false;
 	} else if(mb_strlen(theform.subject.value) > 80) {
-		showError('您的标题超过 80 个字符的限制');
+		showError('ชื่อกระทู้จะต้องไม่ยาวเกิน 80 ตัวอักษร');
 		return false;
 	}
 	if(in_array($('postsubmit').name, ['topicsubmit', 'editsubmit'])) {
 		if(theform.typeid && (theform.typeid.options && theform.typeid.options[theform.typeid.selectedIndex].value == 0) && typerequired) {
-			showError('请选择主题对应的分类');
+			showError('กรุณาเลือกประเภทของกระทู้');
 			return false;
 		}
 		if(theform.sortid && (theform.sortid.options && theform.sortid.options[theform.sortid.selectedIndex].value == 0) && sortrequired) {
-			showError('请选择主题对应的分类信息');
+			showError('กรุณาเลือกหมวดหมู่ของกระทู้');
 			return false;
 		}
 	}
@@ -99,20 +99,20 @@ function validate(theform) {
 	}
 
 	if(!disablepostctrl && !sortid && !special && ((postminchars != 0 && mb_strlen(message) < postminchars) || (postmaxchars != 0 && mb_strlen(message) > postmaxchars))) {
-		showError('您的帖子长度不符合要求。\n\n当前长度: ' + mb_strlen(message) + ' 字节\n系统限制: ' + postminchars + ' 到 ' + postmaxchars + ' 字节');
+		showError('แจ้งเตือน\n\nคุณมีข้อความจำนวน: ' + mb_strlen(message) + ' ไบต์\nจะต้องอยู่ในระหว่าง: ' + postminchars + ' ถึง ' + postmaxchars + ' ไบต์เท่านั้น');
 		return false;
 	}
 	if(UPLOADSTATUS == 0) {
-		if(!confirm('您有等待上传的附件，确认不上传这些附件吗？')) {
+		if(!confirm('กำลังอัปโหลดไฟล์แนบอยู่ในขณะนี้ แน่ใจว่าจะยกเลิก?')) {
 			return false;
 		}
 	} else if(UPLOADSTATUS == 1) {
-		showDialog('您有正在上传的附件，请稍候，上传完成后帖子将会自动发表...', 'notice');
+		showDialog('กำลังอัปโหลดไฟล์แนบของคุณ กรุณารอสักครู่ หลังจากที่อัปโหลดเสร็จแล้วระบบจะแจ้งให้ทราบทันที...', 'notice');
 		AUTOPOST = 1;
 		return false;
 	}
 	if(isfirstpost && $('adddynamic') != null && $('adddynamic').checked && $('postsave') != null && isNaN(parseInt($('postsave').value)) && ($('readperm') != null && $('readperm').value || $('price') != null && $('price').value)) {
-		if(confirm('由于您设置了阅读权限或出售帖，您确认还转播给您的听众看吗？') == false) {
+		if(confirm('เนื่องจากคุณได้กำหนดสิทธิ์การอ่านโพสต์นี้ คุณยืนยันว่าคุณจะยังเผยแพร่ข้อมูลอยู่หรือไม่') == false) {
 			return false;
 		}
 	}
@@ -129,7 +129,7 @@ function validate(theform) {
 					setTimeout(function () { validate(theform); }, 100);
 					chk = 0;
 				} else if(chkv.indexOf('check_right') == -1) {
-					showError('验证问答错误，请重新填写');
+					showError('คำถามหรือคำตอบผิด กรุณากรอกใหม่');
 					chk = 0;
 				}
 			}
@@ -139,7 +139,7 @@ function validate(theform) {
 					setTimeout(function () { validate(theform); }, 100);
 					chk = 0;
 				} else if(chkv.indexOf('check_right') === -1) {
-					showError('验证码错误，请重新填写');
+					showError('รหัสไม่ถูกต้อง กรุณากรอกใหม่');
 					chk = 0;
 				}
 			}
@@ -223,11 +223,11 @@ function uploadNextAttach() {
 	var att = CURRENTATTACH.split('|');
 	var sizelimit = '';
 	if(arr[4] == 'ban') {
-		sizelimit = '(附件类型被禁止)';
+		sizelimit = '(ไฟล์แนบถูกระงับ)';
 	} else if(arr[4] == 'perday') {
-		sizelimit = '(不能超过 ' + arr[5] + ' 字节)';
+		sizelimit = '(ต้องไม่เกิน ' + arr[5] + ' ไบต์)';
 	} else if(arr[4] > 0) {
-		sizelimit = '(不能超过 ' + arr[4] + ' 字节)';
+		sizelimit = '(ต้องไม่เกิน ' + arr[4] + ' ไบต์)';
 	}
 	uploadAttach(parseInt(att[0]), arr[0] == 'DISCUZUPLOAD' ? parseInt(arr[1]) : -1, att[1], sizelimit);
 }
@@ -266,7 +266,7 @@ function uploadAttach(curId, statusid, prefix, sizelimit) {
 				updateAttachList();
 			}
 			if(UPLOADFAILED > 0) {
-				showDialog('附件上传完成！成功 ' + UPLOADCOMPLETE + ' 个，失败 ' + UPLOADFAILED + ' 个:' + FAILEDATTACHS);
+				showDialog('อัปโหลดไฟล์แนบ! เสร็จแล้ว ' + UPLOADCOMPLETE + ' ไฟล์และล้มเหลว ' + UPLOADFAILED + ' ไฟล์:' + FAILEDATTACHS);
 				FAILEDATTACHS = '';
 			}
 			UPLOADSTATUS = 2;
@@ -281,7 +281,7 @@ function uploadAttach(curId, statusid, prefix, sizelimit) {
 				hideMenu();
 				validate($('postform'));
 			} else if(UPLOADFAILED == 0 && (prefix == 'img' || prefix == '')) {
-				showDialog('附件上传完成！', 'right', null, null, 0, null, null, null, null, 3);
+				showDialog('อัปโหลดไฟล์แนบเสร็จเรียบร้อยแล้ว!', 'right', null, null, 0, null, null, null, null, 3);
 			}
 			UPLOADFAILED = UPLOADCOMPLETE = 0;
 			CURRENTATTACH = '0';
@@ -292,7 +292,7 @@ function uploadAttach(curId, statusid, prefix, sizelimit) {
 		$(prefix + 'uploadbtn').style.display = 'none';
 		$(prefix + 'uploading').style.display = '';
 	}
-	$(prefix + 'cpdel_' + nextId).innerHTML = '<img src="' + IMGDIR + '/loading.gif" alt="上传中..." />';
+	$(prefix + 'cpdel_' + nextId).innerHTML = '<img src="' + IMGDIR + '/loading.gif" alt="กำลังโหลด..." />';
 	UPLOADSTATUS = 1;
 	$(prefix + 'attachform_' + nextId).submit();
 }
@@ -352,16 +352,16 @@ function insertAttach(prefix, id) {
 	}
 	if(extensions != '' && (re.exec(extensions) == null || ext == '')) {
 		reAddAttach(prefix, id);
-		showError('对不起，不支持上传此类扩展名的附件。');
+		showError('ขออภัย! รูปแบบไฟล์ที่เลือกไม่สามารถอัปโหลดได้');
 		return;
 	}
 	if(prefix == 'img' && imgexts.indexOf(ext) == -1) {
 		reAddAttach(prefix, id);
-		showError('请选择图片文件(' + imgexts + ')');
+		showError('เลือกไฟล์ภาพ (' + imgexts + ')');
 		return;
 	}
 
-	$(prefix + 'cpdel_' + id).innerHTML = '<a href="javascript:;" class="d" onclick="reAddAttach(\'' + prefix + '\', ' + id + ')">删除</a>';
+	$(prefix + 'cpdel_' + id).innerHTML = '<a href="javascript:;" class="d" onclick="reAddAttach(\'' + prefix + '\', ' + id + ')">ลบ</a>';
 	$(prefix + 'localfile_' + id).innerHTML = '<span>' + filename + '</span>';
 	$(prefix + 'attachnew_' + id).style.display = 'none';
 	$(prefix + 'deschidden_' + id).style.display = '';
@@ -447,7 +447,7 @@ function updateattachnum(type) {
 	var num = ATTACHNUM[type + 'used'] + ATTACHNUM[type + 'unused'];
 	if(num) {
 		if($(editorid + '_' + type)) {
-			$(editorid + '_' + type).title = '包含 ' + num + (type == 'image' ? ' 个图片附件' : ' 个附件');
+			$(editorid + '_' + type).title = 'ประกอบด้วย ' + num + (type == 'image' ? ' รูปภาพ' : ' ไฟล์อื่นๆ');
 		}
 		if($(editorid + '_' + type + 'n')) {
 			$(editorid + '_' + type + 'n').style.display = '';
@@ -455,7 +455,7 @@ function updateattachnum(type) {
 		ATTACHORIMAGE = 1;
 	} else {
 		if($(editorid + '_' + type)) {
-			$(editorid + '_' + type).title = type == 'image' ? '图片' : '附件';
+			$(editorid + '_' + type).title = type == 'image' ? 'รูปภาพ' : 'ไฟล์อื่นๆ';
 		}
 		if($(editorid + '_' + type + 'n')) {
 			$(editorid + '_' + type + 'n').style.display = 'none';
@@ -486,11 +486,11 @@ function updateImageList(action, aids) {
 function updateDownImageList(msg) {
 	hideMenu('fwin_dialog', 'dialog');
 	if(msg == '') {
-		showError('抱歉，暂无远程附件');
+		showError('ขออภัย ไม่มีไฟล์แนบจากระยะไกล');
 	} else {
 		ajaxget('forum.php?mod=ajax&action=imagelist&pid=' + pid + '&posttime=' + $('posttime').value + (!fid ? '' : '&fid=' + fid), 'imgattachlist', null, null, null, function(){if(wysiwyg) {editdoc.body.innerHTML = msg;switchEditor(0);switchEditor(1)} else {textobj.value = msg;}});
 		switchImagebutton('imgattachlist');$('imgattach_notice').style.display = '';
-		showDialog('远程附件下载完成!', 'right', null, null, 0, null, null, null, null, 3);
+		showDialog('ดาวน์โหลดไฟล์แนบจากระยะไกลเสร็จสมบูรณ์!', 'right', null, null, 0, null, null, null, null, 3);
 	}
 }
 
@@ -533,11 +533,11 @@ function uploadWindowload() {
 	} else {
 		var sizelimit = '';
 		if(arr[7] == 'ban') {
-			sizelimit = '(附件类型被禁止)';
+			sizelimit = '(ไฟล์แนบถูกระงับ)';
 		} else if(arr[7] == 'perday') {
-			sizelimit = '(不能超过 ' + arr[8] + ' 字节)';
+			sizelimit = '(ต้องไม่เกิน ' + arr[8] + ' ไบต์)';
 		} else if(arr[7] > 0) {
-			sizelimit = '(不能超过 ' + arr[7] + ' 字节)';
+			sizelimit = '(ต้องไม่เกิน ' + arr[7] + ' ไบต์)';
 		}
 		showError(STATUSMSG[arr[2]] + sizelimit);
 	}
@@ -633,7 +633,7 @@ function addpolloption() {
 		addUploadEvent(imgid, proid)
 
 	} else {
-		$('polloption_new').outerHTML = '<span>已达到最大投票数'+maxoptions+'</span>';
+		$('polloption_new').outerHTML = '<span>โหวตได้จำนวนสูงสุดถึง '+maxoptions+'</span>';
 	}
 }
 
@@ -697,8 +697,8 @@ function attachoption(type, op) {
 		display('attachnotice_' + type);
 	} else if(op == 2) {
 		showDialog('<div id="unusedwin" class="c altw" style="overflow:auto;height:100px;">' + $('unusedlist_' + type).innerHTML + '</div>' +
-			'<p class="o pns"><span class="z xg1"><label for="unusedwinchkall"><input id="unusedwinchkall" type="checkbox" onclick="attachoption(\'' + type + '\', 3)" checked="checked" />全选</label></span>' +
-			'<button onclick="attachoption(\'' + type + '\', 1);hideMenu(\'fwin_dialog\', \'dialog\')" class="pn pnc"><strong>使用</strong></button></p>', 'info', '未使用的' + (type == 'attach' ? '附件' : '图片'));
+			'<p class="o pns"><span class="z xg1"><label for="unusedwinchkall"><input id="unusedwinchkall" type="checkbox" onclick="attachoption(\'' + type + '\', 3)" checked="checked" />เลือก</label></span>' +
+			'<button onclick="attachoption(\'' + type + '\', 1);hideMenu(\'fwin_dialog\', \'dialog\')" class="pn pnc"><strong>ใช้งาน</strong></button></p>', 'info', 'ไม่ใช้งาน' + (type == 'attach' ? 'ไฟล์แนบ' : 'รูปภาพ'));
 	} else if(op == 3) {
 		list = $('unusedwin').getElementsByTagName('INPUT');
 		for(i = 0;i < list.length;i++) {
@@ -828,10 +828,10 @@ function getreplycredit() {
 	var reply_credits_sum = Math.ceil(parseInt(credit_once * times));
 
 	if(real_reply_credit > userextcredit) {
-		$('replycredit').innerHTML = '<b class="xi1">回帖奖励积分总额过大('+real_reply_credit+')</b>';
+		$('replycredit').innerHTML = '<b class="xi1">ระบุจำนวนเครดิตรางวัลของคำตอบเยอะเกินไป ('+real_reply_credit+')</b>';
 	} else {
 		if(have_replycredit > 0 && real_reply_credit < 0) {
-			$('replycredit').innerHTML = "<font class='xi1'>返还"+Math.abs(real_reply_credit)+"</font>";
+			$('replycredit').innerHTML = "<font class='xi1'>กลับ"+Math.abs(real_reply_credit)+"</font>";
 		} else {
 			$('replycredit').innerHTML = replycredit_result_lang + (real_reply_credit > 0 ? real_reply_credit : 0 );
 		}
@@ -846,7 +846,7 @@ function extraCheckall() {
 }
 
 function deleteThread() {
-	if(confirm('确定要删除该帖子吗？') != 0){
+	if(confirm('คุณแน่ใจว่าต้องการลบรายการนี้?') != 0){
 		$('delete').value = '1';
 		$('postform').submit();
 	}

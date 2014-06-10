@@ -13,7 +13,7 @@ if(!defined('IN_COMSENZ')) {
 
 define('SOFT_NAME', 'Discuz!');
 
-define('INSTALL_LANG', 'SC_UTF8');
+define('INSTALL_LANG', 'TH_UTF8');
 
 define('CONFIG', './config/config_global.php');
 define('CONFIG_UC', './config/config_ucenter.php');
@@ -130,7 +130,7 @@ $form_db_init_items = array
 		'dbhost' => array('type' => 'text', 'required' => 1, 'reg' => '/^.+$/', 'value' => array('type' => 'var', 'var' => 'dbhost')),
 		'dbname' => array('type' => 'text', 'required' => 1, 'reg' => '/^.+$/', 'value' => array('type' => 'var', 'var' => 'dbname')),
 		'dbuser' => array('type' => 'text', 'required' => 0, 'reg' => '/^.*$/', 'value' => array('type' => 'var', 'var' => 'dbuser')),
-		'dbpw' => array('type' => 'text', 'required' => 0, 'reg' => '/^.*$/', 'value' => array('type' => 'var', 'var' => 'dbpw')),
+		'dbpw' => array('type' => 'password', 'required' => 0, 'reg' => '/^.*$/', 'value' => array('type' => 'var', 'var' => 'dbpw')),
 		'tablepre' => array('type' => 'text', 'required' => 0, 'reg' => '/^.*+/', 'value' => array('type' => 'var', 'var' => 'tablepre')),
 		'adminemail' => array('type' => 'text', 'required' => 1, 'reg' => '/@/', 'value' => array('type' => 'var', 'var' => 'adminemail')),
 	),
@@ -149,7 +149,7 @@ $serialize_sql_setting = array (
     1 =>
     array (
       'img' => '',
-      'title' => '威望',
+      'title' => 'พลังน้ำใจ',
       'unit' => '',
       'ratio' => 0,
       'available' => '1',
@@ -160,7 +160,7 @@ $serialize_sql_setting = array (
     2 =>
     array (
       'img' => '',
-      'title' => '金钱',
+      'title' => 'เงิน',
       'unit' => '',
       'ratio' => 0,
       'available' => '1',
@@ -171,7 +171,7 @@ $serialize_sql_setting = array (
     3 =>
     array (
       'img' => '',
-      'title' => '贡献',
+      'title' => 'ความดี',
       'unit' => '',
       'ratio' => 0,
       'available' => '1',
@@ -237,16 +237,16 @@ $serialize_sql_setting = array (
   ),
   'postnocustom' =>
   array (
-    0 => '楼主',
-    1 => '沙发',
-    2 => '板凳',
-    3 => '地板',
+    0 => 'คัดลอกลิงก์',
+    1 => 'คัดลอกลิงก์',
+    2 => 'คัดลอกลิงก์',
+    3 => 'คัดลอกลิงก์',
   ),
   'recommendthread' =>
   array (
     'status' => '0',
-    'addtext' => '支持',
-    'subtracttext' => '反对',
+    'addtext' => 'สนับสนุน',
+    'subtracttext' => 'คัดค้าน',
     'defaultshow' => '1',
     'daycount' => '0',
     'ownthread' => '0',
@@ -254,34 +254,34 @@ $serialize_sql_setting = array (
   ),
   'seotitle' =>
   array (
-    'portal' => '门户',
-    'forum' => '论坛',
-    'group' => '群组',
-    'home' => '家园',
-    'userapp' => '应用',
+    'portal' => 'พอร์ทัล',
+    'forum' => 'เว็บบอร์ด',
+    'group' => 'คลับ',
+    'home' => 'สเปซ',
+    'userapp' => 'แอพฯ',
   ),
   'activityfield' =>
   array (
-    'realname' => '真实姓名',
-    'mobile' => '手机',
-    'qq' => 'QQ号',
+    'realname' => 'ชื่อจริง',
+    'mobile' => 'เบอร์มือถือ',
+    'qq' => 'บัญชี QQ',
   ),
   'article_tags' =>
   array (
-    1 => '原创',
-    2 => '热点',
-    3 => '组图',
-    4 => '爆料',
-    5 => '头条',
-    6 => '幻灯',
-    7 => '滚动',
-    8 => '推荐',
+    1 => 'ต้นฉบับ',
+    2 => 'ร้อนแรง',
+    3 => 'ภาพถ่าย',
+    4 => 'ร้ายแรง',
+    5 => 'หัวข้อข่าว',
+    6 => 'สไลด์',
+    7 => 'เลื่อน',
+    8 => 'แนะนำ',
   ),
   'verify' =>
   array (
     6 =>
     array (
-      'title' => '实名认证',
+      'title' => 'ยืนยันชื่อจริง',
       'available' => '0',
       'showicon' => '0',
       'viewrealname' => '0',
@@ -314,7 +314,7 @@ $serialize_sql_setting = array (
     ),
     7 =>
     array (
-      'title' => '视频认证',
+      'title' => 'ยืนยันผ่านเว็บแคม',
       'available' => '0',
       'showicon' => '0',
       'viewvideophoto' => '0',
@@ -323,7 +323,7 @@ $serialize_sql_setting = array (
   ),
   'focus' =>
   array (
-    'title' => '站长推荐',
+    'title' => 'เว็บมาสเตอร์แนะนำ',
     'data' =>
     array (
     ),
@@ -335,7 +335,7 @@ $serialize_sql_setting = array (
     array (
       'available' => 1,
       'displayorder' => 0,
-      'title' => '基本资料',
+      'title' => 'ข้อมูลพื้นฐาน',
       'field' =>
       array (
         'realname' => 'realname',
@@ -359,7 +359,7 @@ $serialize_sql_setting = array (
     ),
     'contact' =>
     array (
-      'title' => '联系方式',
+      'title' => 'ข้อมูลการติดต่อ',
       'available' => '1',
       'displayorder' => '1',
       'field' =>
@@ -377,7 +377,7 @@ $serialize_sql_setting = array (
     array (
       'available' => 1,
       'displayorder' => 2,
-      'title' => '教育情况',
+      'title' => 'ข้อมูลการศึกษา',
       'field' =>
       array (
         'graduateschool' => 'graduateschool',
@@ -388,7 +388,7 @@ $serialize_sql_setting = array (
     array (
       'available' => 1,
       'displayorder' => 3,
-      'title' => '工作情况',
+      'title' => 'ข้อมูลการทำงาน',
       'field' =>
       array (
         'occupation' => 'occupation',
@@ -399,7 +399,7 @@ $serialize_sql_setting = array (
     ),
     'info' =>
     array (
-      'title' => '个人信息',
+      'title' => 'ข้อมูลส่วนตัว',
       'available' => '1',
       'displayorder' => '4',
       'field' =>

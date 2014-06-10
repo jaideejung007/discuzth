@@ -13,21 +13,21 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'albumlist_aids' => '指定相册',
-	'albumlist_aids_comment' => '填入指定相册的ID(aid)，多个相册之间用逗号(,)分隔',
-	'albumlist_uids' => '用户UID',
-	'albumlist_uids_comment' => '填入指定用户的ID(uid)，多个用户之间用逗号(,)分隔',
-	'albumlist_catid' => '指定分类',
-	'albumlist_catid_comment' => '选择相册所属的系统相册分类，可多选',
-	'albumlist_startrow' => '起始数据行数',
-	'albumlist_startrow_comment' => '如需设定起始的数据行数，请输入具体数值，0 为从第一行开始，以此类推',
-	'albumlist_titlelength' => '标题长度',
-	'albumlist_titlelength' => '指定相册名称最大长度',
-	'albumlist_orderby' => '图片排序方式',
-	'albumlist_orderby_comment' => '设置以哪一字段或方式对图片进行排序',
-	'albumlist_orderby_dateline' => '按发布时间倒序',
-	'albumlist_orderby_picnum' => '按照片数倒序',
-	'albumlist_orderby_updatetime' => '按更新时间倒序'
+	'albumlist_aids' => 'กำหนดอัลบั้ม',
+	'albumlist_aids_comment' => 'กำหนด ID(aid) ของอัลบั้มที่ต้องการแสดงข้อมูล, หากมีมากกว่าหนึ่ง ID กรุณาใช้เครื่องหมายคอมม่า “,” เพื่อเป็นตัวคั่นหรือแยกแต่ละ ID',
+	'albumlist_uids' => 'UID สมาชิก',
+	'albumlist_uids_comment' => 'กำหนด ID(uid) สมาชิก, หากมีมากกว่าหนึ่ง ID กรุณาใช้เครื่องหมายคอมม่า “,” เพื่อเป็นตัวคั่นหรือแยกแต่ละ ID',
+	'albumlist_catid' => 'เลือกหมวดหมู่',
+	'albumlist_catid_comment' => 'เลือกหมวดหมู่อัลบั้ม',
+	'albumlist_startrow' => 'จำนวนแถวเริ่มต้นของข้อมูล',
+	'albumlist_startrow_comment' => 'ถ้าจำเป็นต้องตั้งค่าจำนวนแถวของข้อมูลเริ่มต้น, กรุณาใส่ค่าที่ต้องการ, 0 คือจะการเริ่มการทำงานจากแถวแรก, เป็นต้น',
+	'albumlist_titlelength' => 'ความยาวของชื่ออัลบั้ม',
+	'albumlist_titlelength' => 'ความยาวของชื่ออัลบั้ม',
+	'albumlist_orderby' => 'การจัดเรียงลำดับรูปภาพ',
+	'albumlist_orderby_comment' => 'ตั้งค่าการจัดเรียงลำดับรูปภาพ',
+	'albumlist_orderby_dateline' => 'จัดเรียงตามวันที่เผยแพร่',
+	'albumlist_orderby_picnum' => 'จัดเรียงตามจำนวนรูปภาพ',
+	'albumlist_orderby_updatetime' => 'จัดเรียงตามเวลาที่อัปเดตล่าสุด'
 );
 
 ?>

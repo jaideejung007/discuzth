@@ -13,14 +13,14 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'showip_name' => '窥视卡',
-	'showip_desc' => '可以查看指定用户的 IP',
-	'showip_targetuser' => '您要查看谁的 IP',
-	'showip_info_nonexistence' => '请输入用户名',
-	'showip_ip_message' => '{username} 的 IP 为 {ip}',
-	'showip_info_noperm' => '对不起，您无权查看此人的 IP',
+	'showip_name' => 'ดู IP ของสมาชิก',
+	'showip_desc' => 'ดู IP ของสมาชิกที่ต้องการ',
+	'showip_targetuser' => 'คุณต้องการดู IP ของใคร',
+	'showip_info_nonexistence' => 'กรุณากรอกชื่อสมาชิก',
+	'showip_ip_message' => '{username} ใช้ IP {ip}',
+	'showip_info_noperm' => 'ขออภัย! คุณไม่มีสิทธิ์ในการดู IP ของสมาชิก',
 
-	'showip_notification' => '您被人使用了{magicname}',
+	'showip_notification' => 'มีสมาชิกบางคนใช้ไอเท็ม {magicname} เพื่อดู IP ของคุณ',
 );
 
 ?>

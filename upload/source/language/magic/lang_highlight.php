@@ -13,23 +13,23 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'highlight_name' => '变色卡',
-	'highlight_desc' => '可以将帖子或日志的标题高亮，变更颜色',
-	'highlight_expiration' => '高亮有效期',
-	'highlight_expiration_comment' => '设置标题可以被高亮多长时间，默认 24 小时。作用于日志时无有效期。',
-	'highlight_forum' => '允许使用本道具的版块',
-	'highlight_info_tid' => '高亮主题的标题 {expiration} 小时',
-	'highlight_info_blogid' => '可以将日志或帖子的标题高亮，变更颜色',
-	'highlight_color' => '颜色',
-	'highlight_info_nonexistence_tid' => '请指定要高亮的帖子',
-	'highlight_info_nonexistence_blogid' => '请指定要高亮的日志',
-	'highlight_succeed_tid' => '您操作的帖子已高亮',
-	'highlight_succeed_blogid' => '您操作的日志已高亮',
-	'highlight_info_noperm' => '对不起，主题所在版块不允许使用本道具',
-	'highlight_info_notype' => '参数错误，没有指定操作类型。',
+	'highlight_name' => 'เน้นสีกระทู้และบล๊อก',
+	'highlight_desc' => 'เน้นสีกระทู้และบล๊อกของคุณ เปลี่ยนสีให้น่าสนใจ',
+	'highlight_expiration' => 'ระยะเวลาเน้นสี',
+	'highlight_expiration_comment' => 'ตั้งค่าระยะเวลาการเน้นสีกระทู้ ค่าเริ่มต้นคือ 24 ชั่วโมง',
+	'highlight_forum' => 'สามารถใช้งานได้ในเว็บบอร์ด',
+	'highlight_info_tid' => 'เน้นสีกระทู้เป็นระยะเวลา {expiration} ชั่วโมง',
+	'highlight_info_blogid' => 'เน้นสี เปลี่ยนสี ชื่อบล๊อก',
+	'highlight_color' => 'สี',
+	'highlight_info_nonexistence_tid' => 'กรุณาระบุกระทู้ที่คุณต้องการเน้นสี',
+	'highlight_info_nonexistence_blogid' => 'กรุณาระบุบล๊อกที่คุณต้องการเน้นสี',
+	'highlight_succeed_tid' => 'กระทู้ที่คุณต้องการถูกเน้นสีเรียบร้อยแล้ว',
+	'highlight_succeed_blogid' => 'บล๊อกที่คุณต้องการถูกเน้นสีเรียบร้อยแล้ว',
+	'highlight_info_noperm' => 'ขออภัย! บอร์ดนี้ไม่อนุญาตให้ใช้ไอเท็มนี้',
+	'highlight_info_notype' => 'เกิดข้อผิดพลาด คุณไม่ได้ระบุประเภทของการดำเนินการ',
 
-	'highlight_notification' => '您的主题 {subject} 被 {actor} 使用了{magicname}，<a href="forum.php?mod=viewthread&tid={tid}">快去看看吧！</a>',
-	'highlight_notification_blogid' => '您的日志 {subject} 被 {actor} 使用了{magicname}，<a href="home.php?mod=space&do=blog&id={blogid}">快去看看吧！</a>',
+	'highlight_notification' => '{actor} ใช้ไอเท็ม{magicname} กับกระทู้ {subject} ของคุณ <a href="forum.php?mod=viewthread&tid={tid}">ไปดูกระทู้!</a>',
+	'highlight_notification_blogid' => '{actor} ใช้ไอเท็ม{magicname} กับบล๊อก {subject} ของคุณ <a href="home.php?mod=space&do=blog&id={blogid}">ไปดูบล๊อก!</a>',
 );
 
 ?>

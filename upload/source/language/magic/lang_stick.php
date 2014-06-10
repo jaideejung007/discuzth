@@ -13,17 +13,17 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'stick_name' => '置顶卡',
-	'stick_desc' => '可以将主题置顶',
-	'stick_expiration' => '置顶有效期',
-	'stick_expiration_comment' => '设置主题可以被置顶多长时间，默认 24 小时',
-	'stick_forum' => '允许使用本道具的版块',
-	'stick_info' => '置顶指定的主题 {expiration} 小时，请输入主题的 ID',
-	'stick_info_nonexistence' => '请指定要置顶的主题',
-	'stick_succeed' => '您操作的主题已置顶',
-	'stick_info_noperm' => '对不起，主题所在版块不允许使用本道具',
+	'stick_name' => 'ปักหมุดกระทู้',
+	'stick_desc' => 'ปักหมุดกระทู้ของคุณเอง',
+	'stick_expiration' => 'ระยะเวลาปักหมุด',
+	'stick_expiration_comment' => 'ตั้งค่าระยะเวลาการปักหมุดกระทู้ ค่าเริ่มต้นคือ 24 ชั่วโมง',
+	'stick_forum' => 'สามารถใช้งานได้ในเว็บบอร์ด',
+	'stick_info' => 'ปักหมุดกระทู้เป็นระยะเวลา {expiration} ชั่วโมง กรุณากรอก ID กระทู้',
+	'stick_info_nonexistence' => 'กรุณาระบุกระทู้ที่คุณต้องการปักหมุด',
+	'stick_succeed' => 'ปักหมุดกระทู้เรียบร้อยแล้ว',
+	'stick_info_noperm' => 'ขออภัย! บอร์ดนี้ไม่อนุญาตให้ใช้ไอเท็มนี้',
 
-	'stick_notification' => '您的主题 {subject} 被 {actor} 使用了{magicname}，<a href="forum.php?mod=viewthread&tid={tid}">快去看看吧！</a>',
+	'stick_notification' => '{actor} ใช้ไอเท็ม{magicname} กับกระทู้ {subject} ของคุณ <a href="forum.php?mod=viewthread&tid={tid}">ไปดูกระทู้!</a>',
 );
 
 ?>

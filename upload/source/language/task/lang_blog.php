@@ -13,12 +13,12 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'blog_name' => '发表日志任务',
-	'blog_desc' => '发表日志即可完成任务，获得相应的奖励',
-	'blog_view' => '<strong>请按照以下的说明来参与本任务：</strong>
+	'blog_name' => 'เขียนบล็อก',
+	'blog_desc' => 'เขียนบทความลงในบล็อกของคุณ และแชร์บล็อกให้เพื่อนๆ',
+	'blog_view' => '<strong>คำแนะนำในการเข้าร่วมกิจกรรมนี้: </strong>
 		<ul>
-		<li>1. <a href="home.php?mod=spacecp&ac=blog" target="_blank">新窗口打开发表日志页面</a></li>
-		<li>2. 在新打开的页面中，书写自己的第一篇日志，并进行发布</li>
+		<li>1. <a href="home.php?mod=spacecp&ac=blog" target="_blank">เปิดหน้าต่างใหม่เพื่อเขียนบล็อก</a></li>
+		<li>2. ในหน้าบล็อกที่จะเปิดขึ้นมาใหม่ ให้คุณเขียนบล็อกตามใจที่อยากจะเขียน และเผยแพร่หรือแชร์</li>
 		</ul>',
 );
 

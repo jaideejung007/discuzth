@@ -5,7 +5,7 @@
 		<item id="plugin">
 			<item id="available"><![CDATA[1]]></item>
 			<item id="adminid"><![CDATA[1]]></item>
-			<item id="name"><![CDATA[云验证码]]></item>
+			<item id="name"><![CDATA[Cloud Captcha]]></item>
 			<item id="identifier"><![CDATA[cloudcaptcha]]></item>
 			<item id="description"><![CDATA[]]></item>
 			<item id="datatables"><![CDATA[]]></item>
@@ -16,8 +16,8 @@
 		<item id="version"><![CDATA[X3.2]]></item>
 		<item id="language">
 			<item id="scriptlang">
-				<item id="cloudcaptcha_name"><![CDATA[云验证码]]></item>
-				<item id="switch_error"><![CDATA[您需要先开启其他云平台插件，才能使用本插件]]></item>
+				<item id="cloudcaptcha_name"><![CDATA[Cloud Captcha]]></item>
+				<item id="switch_error"><![CDATA[Before using this plug-in you must enable the cloud platform]]></item>
 			</item>
 		</item>
 		<item id="enablefile"><![CDATA[switch.php]]></item>
