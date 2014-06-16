@@ -828,6 +828,7 @@ function dstrlen($str) {
 	if(strtolower(CHARSET) != 'utf-8') {
 		return strlen($str);
 	}
+/*vot*/	return mb_strlen($str);
 	$count = 0;
 	for($i = 0; $i < strlen($str); $i++){
 		$value = ord($str[$i]);
@@ -843,10 +844,10 @@ function dstrlen($str) {
 }
 
 function cutstr($string, $length, $dot = ' ...') {
-	if(strlen($string) <= $length) {
+/*vot*/	if(dstrlen($string) <= $length) {
 		return $string;
 	}
-
+//vot	return mb_substr($string,0,$length);
 	$pre = chr(1);
 	$end = chr(1);
 	$string = str_replace(array('&amp;', '&quot;', '&lt;', '&gt;'), array($pre.'&'.$end, $pre.'"'.$end, $pre.'<'.$end, $pre.'>'.$end), $string);

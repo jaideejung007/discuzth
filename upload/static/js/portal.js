@@ -327,22 +327,17 @@ function blockFavorite(bid){
 }
 
 function strLenCalc(obj, checklen, maxlen) {
-	var v = obj.value, charlen = 0, maxlen = !maxlen ? 200 : maxlen, curlen = 0, len = strlen(v);
-	for(var i = 0; i < v.length; i++) {
-		if(v.charCodeAt(i) < 0 || v.charCodeAt(i) > 255) {
-			curlen += 2;
-		} else {
-			curlen += 1;
-		}
-	}
-	checklen = $(checklen);
-	if(checklen.style.display == 'none') checklen.style.display = '';
-	if(curlen <= maxlen) {
-		checklen.innerHTML = 'พิมพ์ไปแล้ว <b>'+(curlen)+'</b> ตัวอักษร';
-		return true;
+	var v = obj.value, charlen = 0, maxlen = !maxlen ? 200 : maxlen, curlen = maxlen, len = strlen(v);
+//vot	for(var i = 0; i < v.length; i++) {
+//vot		if(v.charCodeAt(i) < 0 || v.charCodeAt(i) > 255) {
+//vot			curlen -= charset == 'utf-8' ? 2 : 1;
+//vot		}
+//vot	}
+	if(curlen >= len) {
+		$(checklen).innerHTML = curlen - len;
 	} else {
-		checklen.innerHTML = 'เกินแล้ว <b style="color:red">'+(curlen - maxlen)+'</b> ตัวอักษร';
-		return false;
+//vot		obj.value = mb_cutstr(v, maxlen, 0);
+/*vot*/		obj.value = obj.value.substr(v, maxlen);
 	}
 }
 
