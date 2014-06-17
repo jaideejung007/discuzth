@@ -61,7 +61,7 @@
 		<h2 id="spaceinfoshow">
 			<!--{eval space_merge($space, 'field_home'); $space[domainurl] = space_domain($space);getuserdiydata($space);$personalnv = isset($_G['blockposition']['nv']) ? $_G['blockposition']['nv'] : '';}-->
 			<strong id="spacename" class="mbn">
-				<!--{if $space[spacename]}-->$space[spacename]<!--{else}-->$space[username]{lang somebody_space}<!--{/if}-->
+				<!--{if $space[spacename]}-->$space[spacename]<!--{else}-->{lang somebody_space} $space[username]<!--{/if}-->
 			</strong>
 			<span class="xs0 xw0">
 				<a id="domainurl" href="$space[domainurl]" onclick="setCopy('$space[domainurl]', '{lang copy_space_address}');return false;">$space[domainurl]</a>
