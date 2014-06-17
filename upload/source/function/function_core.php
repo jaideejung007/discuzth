@@ -828,26 +828,14 @@ function dstrlen($str) {
 	if(strtolower(CHARSET) != 'utf-8') {
 		return strlen($str);
 	}
-/*vot*/	return mb_strlen($str);
-	$count = 0;
-	for($i = 0; $i < strlen($str); $i++){
-		$value = ord($str[$i]);
-		if($value > 127) {
-			$count++;
-			if($value >= 192 && $value <= 223) $i++;
-			elseif($value >= 224 && $value <= 239) $i = $i + 2;
-			elseif($value >= 240 && $value <= 247) $i = $i + 3;
-	    	}
-    		$count++;
-	}
-	return $count;
+	return mb_strlen($str,'utf-8');
 }
 
 function cutstr($string, $length, $dot = ' ...') {
-/*vot*/	if(dstrlen($string) <= $length) {
+        if(dstrlen($string) <= $length) {
 		return $string;
 	}
-//vot	return mb_substr($string,0,$length);
+
 	$pre = chr(1);
 	$end = chr(1);
 	$string = str_replace(array('&amp;', '&quot;', '&lt;', '&gt;'), array($pre.'&'.$end, $pre.'"'.$end, $pre.'<'.$end, $pre.'>'.$end), $string);
