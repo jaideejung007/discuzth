@@ -2,7 +2,7 @@
 	[Discuz!] (C)2001-2099 Comsenz Inc.
 	This is NOT a freeware, use is subject to license terms
 
-	$Id: common.js 34486 2014-05-08 01:31:08Z nemohou $
+	$Id: common.js 34611 2014-06-11 10:28:49Z nemohou $
 */
 
 function $(id) {
@@ -566,7 +566,7 @@ function doane(event, preventDefault, stopPropagation) {
 
 function loadcss(cssname) {
 	if(!CSSLOADED[cssname]) {
-		var csspath = (!CSSPATH ? 'data/cache/style_' : CSSPATH);
+		var csspath = (typeof CSSPATH == 'undefined' ? 'data/cache/style_' : CSSPATH);
 		if(!$('css_' + cssname)) {
 			css = document.createElement('link');
 			css.id = 'css_' + cssname,
@@ -1094,7 +1094,7 @@ function showDialog(msg, mode, t, func, cover, funccancel, leftmsg, confirmtxt, 
 	}
 	locationtime = isUndefined(locationtime) ? '' : locationtime;
 	if(locationtime) {
-		leftmsg = locationtime + ' วินาทีจะรีเฟรชหน้าใหม่';
+		leftmsg = locationtime + ' วินาทีจะรีเฟรชหน้าเว็บ';
 		showDialogST = setTimeout(closefunc, locationtime * 1000);
 		showconfirm = 0;
 	}
@@ -1907,10 +1907,10 @@ function toggleBlind(dom) {
 	if(dom) {
 		if(loadUserdata('is_blindman')) {
 			saveUserdata('is_blindman', '');
-			dom.title = 'เปิดโหมดผู้บกพร่องทางสายตา';
+			dom.title = 'เปิดโหมดผู้พิการทางสายตา';
 		} else {
 			saveUserdata('is_blindman', '1');
-			dom.title = 'ปิดโหมดผู้บกพร่องทางสายตา';
+			dom.title = 'ปิดโหมดผู้พิการทางสายตา';
 		}
 	}
 }
@@ -1919,9 +1919,9 @@ function checkBlind() {
 	var dom = $('switchblind');
 	if(dom) {
 		if(loadUserdata('is_blindman')) {
-			dom.title = 'เปิดโหมดผู้บกพร่องทางสายตา';
+			dom.title = 'เปิดโหมดผู้พิการทางสายตา';
 		} else {
-			dom.title = 'ปิดโหมดผู้บกพร่องทางสายตา';
+			dom.title = 'ปิดโหมดผู้พิการทางสายตา';
 		}
 	}
 }

@@ -11,7 +11,7 @@
 			<item id="datatables"><![CDATA[]]></item>
 			<item id="directory"><![CDATA[wechat/]]></item>
 			<item id="copyright"><![CDATA[Comsenz Inc.]]></item>
-			<item id="version"><![CDATA[1.0.0]]></item>
+			<item id="version"><![CDATA[1.0.1]]></item>
 			<item id="__modules">
 				<item id="0">
 					<item id="name"><![CDATA[wechat]]></item>
@@ -149,12 +149,12 @@
 				<item id="wechat_confirmtype"><![CDATA[是否启用登录确认]]></item>
 				<item id="wechat_confirmtype_comment"><![CDATA[开启后用户在微信登录时将有 PC 即将同步登录的确认提示信息，版主及以上身份用户无法关闭此确认(此设置只对认证服务号生效)]]></item>
 				<item id="wechat_disableregrule"><![CDATA[是否忽略注册规则]]></item>
-				<item id="wechat_disableregrule_comment"><![CDATA[开启后将忽略“注册与访问控制”中的一些注册规则限制，微信用户可直接注册成功]]></item>				
+				<item id="wechat_disableregrule_comment"><![CDATA[开启后将忽略“注册与访问控制”中的一些注册规则限制，微信用户可直接注册成功]]></item>
 				<item id="wechat_mptype"><![CDATA[公众号类型]]></item>
 				<item id="wechat_mptype_comment"><![CDATA[选择您的公众号类型，我们将根据您的公众号类型开启相应的功能]]></item>
 				<item id="wechat_mptype_0"><![CDATA[无公众号/订阅号/未认证服务号]]></item>
 				<item id="wechat_mptype_1"><![CDATA[订阅号]]></item>
-				<item id="wechat_mptype_2"><![CDATA[认证服务号]]></item>				
+				<item id="wechat_mptype_2"><![CDATA[认证服务号]]></item>
 				<item id="wechat_service_setting"><![CDATA[服务器配置 <span class="normal">(如果您已申请微信公众号，请把此栏中的内容填写到公众平台“功能”->“高级功能”的“服务器配置”设置中)</span>]]></item>
 				<item id="wechat_devid_setting"><![CDATA[开发者凭据 <span class="normal">(如果您的微信公众号拥有“开发者凭据”，请把该信息填写此栏目中)</span>]]></item>
 				<item id="wechat_func_setting"><![CDATA[功能设置]]></item>
@@ -169,7 +169,7 @@
 				<item id="wechat_qrcode_comment"><![CDATA[请把微信公众平台“帐号信息”中的二维码下载后上传到这里，服务号可忽略此设置<br />{qrcode}]]></item>
 				<item id="wechat_at_need"><![CDATA[服务号必须填写开发者凭据]]></item>
 				<item id="wechat_at_geterror"><![CDATA[开发者凭据填写错误或者您的服务器不支持 cURL 的 SSL 模式访问]]></item>
-				<item id="wechat_at_qrgeterror"><![CDATA[获取二维码失败，请确认您的公众号是否拥有“高级接口”服务及其“生成带参数二维码”的内容]]></item>				
+				<item id="wechat_at_qrgeterror"><![CDATA[获取二维码失败，请确认您的公众号是否拥有“高级接口”服务及其“生成带参数二维码”的内容]]></item>
 				<item id="wechat_float_qrcode"><![CDATA[是否在页面右侧显示二维码]]></item>
 				<item id="wechat_user"><![CDATA[微信注册默认用户名前缀]]></item>
 				<item id="wechat_user_comment"><![CDATA[微信注册用户的默认前缀，用户可自行修改用户名]]></item>
@@ -201,11 +201,11 @@
 				<item id="wsq_siteid"><![CDATA[微社区 Id]]></item>
 				<item id="wsq_sitetoken"><![CDATA[微社区 Token]]></item>
 				<item id="wsq_fid"><![CDATA[微社区默认版块]]></item>
-				<item id="wsq_fid_comment"><![CDATA[设置在微社区中默认显示的版块]]></item>				
+				<item id="wsq_fid_comment"><![CDATA[设置在微社区中默认显示的版块]]></item>
 				<item id="wsq_domain"><![CDATA[微社区二级域名]]></item>
 				<item id="wsq_domain_comment"><![CDATA[您可以设置一个二级域名直接访问本站的微社区(仅限拥有“高级接口”服务的公众号)。根域名设置完后，此处域名绑定才能生效</a>]]></item>
 				<item id="wsq_api_register_error"><![CDATA[微社区注册失败，请稍后再试]]></item>
-				<item id="wsq_api_edit_error"><![CDATA[微社区资料修改失败，请稍后再试]]></item>				
+				<item id="wsq_api_edit_error"><![CDATA[微社区资料修改失败，请稍后再试]]></item>
 				<item id="wsq_menu_at_error"><![CDATA[您需要填写开发者凭据后才能使用此功能]]></item>
 				<item id="wsq_menu_name"><![CDATA[菜单标题]]></item>
 				<item id="wsq_menu_keyurl"><![CDATA[菜单KEY值 / 网页链接]]></item>
@@ -221,6 +221,7 @@
 				<item id="wsq_menu_pub_succeed"><![CDATA[菜单已成功更新到您的微信公众号中]]></item>
 				<item id="wsq_menu_pub_error"><![CDATA[菜单发布失败（{errno}）]]></item>
 				<item id="wsq_fid_empty"><![CDATA[微社区默认版块不能为空]]></item>
+				<item id="wsq_mobile_plugin_error"><![CDATA[“掌上论坛”插件缺失，请检查]]></item>
 				<item id="response_keyword"><![CDATA[关键词]]></item>
 				<item id="response_content"><![CDATA[响应内容]]></item>
 				<item id="response_subscribe"><![CDATA[公众号关注]]></item>
@@ -229,7 +230,7 @@
 				<item id="access"><![CDATA[访问]]></item>
 				<item id="response_scan"><![CDATA[扫描二维码(仅限服务号)]]></item>
 				<item id="response_scan_comment"><![CDATA[留空表示使用系统默认文本]]></item>
-				<item id="scan"><![CDATA[扫描]]></item>				
+				<item id="scan"><![CDATA[扫描]]></item>
 				<item id="response_custom"><![CDATA[自定义模式]]></item>
 				<item id="response_switch_plugin_mode"><![CDATA[切换为插件模式({plugin})]]></item>
 				<item id="response_plugin_mode"><![CDATA[插件模式({plugin})]]></item>
@@ -263,11 +264,11 @@
 				<item id="api_accessCheckSuccess"><![CDATA[URL 有效性验证]]></item>
 				<item id="api_404"><![CDATA[签名验证错误]]></item>
 				<item id="api_hook"><![CDATA[嵌入点]]></item>
-				<item id="api_method"><![CDATA[方法]]></item>				
+				<item id="api_method"><![CDATA[方法]]></item>
 				<item id="lang_wechat_logintip"><![CDATA[扫一扫，访问微社区]]></item>
 				<item id="lang_wechat_login"><![CDATA[关注本站微信公众号登录]]></item>
 				<item id="lang_wechat_bind"><![CDATA[微信扫一扫以绑定帐号]]></item>
-				<item id="lang_wechat_threadmessage"><![CDATA[<br /><a href="plugin.php?id=wechat:qrcode&threadqr={tid}&access=yes&inajax=yes#post_{pid}" onmouseover="ajaxmenu(this, 500, 1, 2, '43', null, 'p_pop', '');return false;" style="font-size:12px;color:#708090;">来自: 微社区</a]]></item>
+				<item id="lang_wechat_threadmessage"><![CDATA[<br /><a onclick="return false" href="plugin.php?id=wechat:qrcode&threadqr={tid}&access=yes&inajax=yes#post_{pid}" onmouseover="ajaxmenu(this, 500, 1, 2, '43', null, 'p_pop', '');return false;" style="font-size:12px;color:#708090;">来自: 微社区</a]]></item>
 			</item>
 			<item id="templatelang">
 				<item id="wechat_qrcode_inputcode"><![CDATA[请在扫描关注后输入以下数字码<br />]]></item>
