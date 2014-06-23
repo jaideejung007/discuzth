@@ -828,11 +828,23 @@ function dstrlen($str) {
 	if(strtolower(CHARSET) != 'utf-8') {
 		return strlen($str);
 	}
-	return mb_strlen($str,'utf-8');
+//jaideejung007	$count = 0;
+//jaideejung007	for($i = 0; $i < strlen($str); $i++){
+//jaideejung007		$value = ord($str[$i]);
+//jaideejung007		if($value > 127) {
+//jaideejung007			$count++;
+//jaideejung007			if($value >= 192 && $value <= 223) $i++;
+//jaideejung007			elseif($value >= 224 && $value <= 239) $i = $i + 2;
+//jaideejung007			elseif($value >= 240 && $value <= 247) $i = $i + 3;
+//jaideejung007	    	}
+//jaideejung007    		$count++;
+//jaideejung007	}
+
+/*jaideejung007*/	return mb_strlen($str,'utf-8');
 }
 
 function cutstr($string, $length, $dot = ' ...') {
-        if(dstrlen($string) <= $length) {
+/*jaideejung007*/        if(dstrlen($string) <= $length) {
 		return $string;
 	}
 

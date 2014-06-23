@@ -12,8 +12,8 @@ if(!defined('IN_DISCUZ')) {
 }
 
 $profilevalidate = array(
-	'telephone' => '/^((\\(?\\d{2,3}\\)?)|(\\d{2,3}-)?)\\d{6,8}$/',
-	'mobile' => '/^(\+)?(66)?0?(8|9)?\d{1}(-)?\d{7}$/',
+/*jaideejung007*/	'telephone' => '/^((\\(?\\d{2,3}\\)?)|(\\d{2,3}-)?)\\d{6,8}$/',
+/*jaideejung007*/	'mobile' => '/^(\+)?(66)?0?(8|9)?\d{1}(-)?\d{7}$/',
 	'zipcode' => '/^\\d{5,6}$/',
 	'revenue' => '/^\\d+$/',
 	'height' => '/^\\d{1,3}$/',

@@ -1305,7 +1305,7 @@ EOT;
 		}
 		$forum = $mforum[$k];
 
-		if(dstrlen($_GET['namenew']) > 150) {
+/*jaideejung007*/		if(dstrlen($_GET['namenew']) > 150) {
 			cpmsg('forums_name_toolong', '', 'error');
 		}
 

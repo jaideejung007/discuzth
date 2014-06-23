@@ -339,7 +339,7 @@ Created & Modified by Alice, Monkey, Lushnis, Pony, Dfox & DragonLee.
 
 /** forum::viewthread,forum::forumdisplay,forum::post,group **/
 /* 主题图标 by michael */
-#newspecial_menu { width: 125px; }
+#newspecial_menu { width: 125px; } /*jaideejung007*/
 	#newspecial_menu li, #sti .wx { display: block; background: url({IMGDIR}/folder_new.gif) no-repeat 8px 50%; zoom: 1; }
 		#newspecial_menu .poll, #sti .poll { background-image: url({IMGDIR}/pollsmall.gif); }
 		#newspecial_menu .trade, #sti .trade { background-image: url({IMGDIR}/tradesmall.gif); }

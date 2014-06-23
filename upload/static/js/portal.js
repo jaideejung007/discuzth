@@ -328,16 +328,16 @@ function blockFavorite(bid){
 
 function strLenCalc(obj, checklen, maxlen) {
 	var v = obj.value, charlen = 0, maxlen = !maxlen ? 200 : maxlen, curlen = maxlen, len = strlen(v);
-//vot	for(var i = 0; i < v.length; i++) {
-//vot		if(v.charCodeAt(i) < 0 || v.charCodeAt(i) > 255) {
-//vot			curlen -= charset == 'utf-8' ? 2 : 1;
-//vot		}
-//vot	}
+//jaideejung007	for(var i = 0; i < v.length; i++) {
+//jaideejung007		if(v.charCodeAt(i) < 0 || v.charCodeAt(i) > 255) {
+//jaideejung007			curlen -= charset == 'utf-8' ? 2 : 1;
+//jaideejung007		}
+//jaideejung007	}
 	if(curlen >= len) {
 		$(checklen).innerHTML = curlen - len;
 	} else {
-//vot		obj.value = mb_cutstr(v, maxlen, 0);
-/*vot*/		obj.value = obj.value.substr(v, maxlen);
+//jaideejung007		obj.value = mb_cutstr(v, maxlen, 0);
+/*jaideejung007*/		obj.value = obj.value.substr(v, maxlen);
 	}
 }
 

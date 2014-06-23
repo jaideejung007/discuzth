@@ -18,7 +18,7 @@ $lang = array(
 	'SC_UTF8' => '简体中文 UTF8 版',
 	'TC_UTF8' => '繁体中文 UTF8 版',
 	'EN_ISO' => 'ENGLISH ISO8859',
-	'EN_UTF8' => 'ENGLIST UTF-8','TH_UTF8' => 'ภาษาไทย UTF-8',
+	'EN_UTF8' => 'ENGLIST UTF-8','TH_UTF8' => 'ภาษาไทย UTF-8', /*jaideejung007*/
 
 	'title_install' => 'เครื่องมือติดตั้ง '.SOFT_NAME.'',
 	'agreement_yes' => 'ยอมรับข้อตกลง',

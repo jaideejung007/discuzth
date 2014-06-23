@@ -96,7 +96,7 @@ $_G['forum_threadindex'] = '';
 $skipaids = $aimgs = $_G['forum_posthtml'] = array();
 
 $thread['subjectenc'] = rawurlencode($_G['forum_thread']['subject']);
-$thread['short_subject'] = cutstr($_G['forum_thread']['subject'], 80);
+/*jaideejung007*/$thread['short_subject'] = cutstr($_G['forum_thread']['subject'], 80);
 
 $navigation = '';
 if($_GET['from'] == 'portal') {
