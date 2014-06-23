@@ -457,7 +457,7 @@ INSERT INTO pre_common_setting VALUES ('sendmailday','0');
 INSERT INTO pre_common_setting VALUES ('seodescription','');
 INSERT INTO pre_common_setting VALUES ('seohead','');
 INSERT INTO pre_common_setting VALUES ('seokeywords','');
-INSERT INTO pre_common_setting VALUES ('seotitle','');
+INSERT INTO pre_common_setting VALUES ('seotitle','a:12:{s:6:"portal";s:40:"พอร์ทัล&#32;-&#32;{bbname}";s:11:"articlelist";s:0:"";s:7:"article";s:0:"";s:5:"forum";s:46:"เว็บบอร์ด&#32;-&#32;{bbname}";s:10:"threadlist";s:0:"";s:10:"viewthread";s:0:"";s:4:"home";s:31:"สเปซ&#32;-&#32;{bbname}";s:4:"blog";s:0:"";s:5:"album";s:0:"";s:5:"group";s:31:"คลับ&#32;-&#32;{bbname}";s:9:"grouppage";s:0:"";s:16:"viewthread_group";s:0:"";}');
 INSERT INTO pre_common_setting VALUES ('showavatars','1');
 INSERT INTO pre_common_setting VALUES ('showemail','');
 INSERT INTO pre_common_setting VALUES ('showimages','1');
