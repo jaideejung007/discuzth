@@ -549,9 +549,9 @@ function parseflv($url, $width = 0, $height = 0) {
 			}
 		}
 	} elseif(strpos($lowerurl, 'www.youtube.com/watch?') !== FALSE) {
-		if(preg_match("/http:\/\/www.youtube.com\/watch\?v=([^\/&]+)&?/i", $url, $matches)) {
-			$flv = 'http://www.youtube.com/v/'.$matches[1].'&hl=zh_CN&fs=1';
-			$iframe = 'http://www.youtube.com/embed/'.$matches[1];
+/*jaideejung007*/		if(preg_match("/https?:\/\/(www|m).youtube.com\/watch\?(.*?)v=([^\/&]+)&?/i", $url, $matches)) {
+/*jaideejung007*/			$flv = 'http://www.youtube.com/v/'.$matches[3].'&hl=th_TH&fs=1';
+/*jaideejung007*/			$iframe = 'http://www.youtube.com/embed/'.$matches[3];
 			if(!$width && !$height) {
 				$str = file_get_contents($url, false, $ctx);
 				if(!empty($str) && preg_match("/'VIDEO_HQ_THUMB':\s'(.+?)'/i", $str, $image)) {
