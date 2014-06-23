@@ -435,7 +435,7 @@ INSERT INTO pre_common_setting VALUES ('relatedtag','');
 INSERT INTO pre_common_setting VALUES ('report_reward','a:2:{s:3:\"min\";i:-3;s:3:\"max\";i:3;}');
 INSERT INTO pre_common_setting VALUES ('rewardforumid','0');
 INSERT INTO pre_common_setting VALUES ('rewritecompatible','');
-INSERT INTO pre_common_setting VALUES ('rewritestatus','0');
+INSERT INTO pre_common_setting VALUES ('rewritestatus','a:8:{i:0;s:12:"portal_topic";i:1;s:14:"portal_article";i:2;s:18:"forum_forumdisplay";i:3;s:16:"forum_viewthread";i:4;s:11:"group_group";i:5;s:10:"home_space";i:6;s:9:"home_blog";i:7;s:14:"forum_archiver";}');
 INSERT INTO pre_common_setting VALUES ('rssstatus','1');
 INSERT INTO pre_common_setting VALUES ('rssttl','60');
 INSERT INTO pre_common_setting VALUES ('runwizard','1');
