@@ -88,8 +88,8 @@ INSERT INTO pre_common_member_profile_setting VALUES('birthmonth', 1, 0, 0, 'เ
 INSERT INTO pre_common_member_profile_setting VALUES('birthday', 1, 0, 0, 'วันเกิด', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('constellation', 1, 1, 0, 'หมู่ดาว', 'หมู่ดาว (คำนวณตามวันเกิดได้โดยอัตโนมัติ)', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('zodiac', 1, 1, 0, 'ราศี', 'ราศี (คำนวณตามวันเกิดได้โดยอัตโนมัติ)', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
-INSERT INTO pre_common_member_profile_setting VALUES('telephone', 1, 1, 0, 'โทรศัพท์บ้าน', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
-INSERT INTO pre_common_member_profile_setting VALUES('mobile', 1, 1, 0, 'อุปกรณ์พกพา', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
+INSERT INTO pre_common_member_profile_setting VALUES('telephone', 1, 1, 0, 'โทรศัพท์บ้าน', '', 0, 0, 0, 0, 0, 0, 0, 'text', 10, '', '/^[0]{1}+[\d]+$/');
+INSERT INTO pre_common_member_profile_setting VALUES('mobile', 1, 1, 0, 'อุปกรณ์พกพา', '', 0, 0, 0, 0, 0, 0, 0, 'text', 9, '', '/^[0]{1}+[\d]+$/');
 INSERT INTO pre_common_member_profile_setting VALUES('idcardtype', 1, 1, 0, 'ประเภทของการ์ด', 'รหัสของการ์ด หนังสือเดินทาง ใบขับขี่ ฯลฯ', 0, 0, 0, 0, 0, 0, 0, 'select', 0, 'รหัสของการ์ด\nหนังสือเดินทาง\nใบขับขี่', '');
 INSERT INTO pre_common_member_profile_setting VALUES('idcard', 1, 1, 0, 'รหัสของการ์ด', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('address', 1, 1, 0, 'ที่อยู่', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
