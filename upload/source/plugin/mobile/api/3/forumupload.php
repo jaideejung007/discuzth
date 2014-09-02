@@ -6,6 +6,7 @@
  *
  *      $Id: forumupload.php 34314 2014-02-20 01:04:24Z nemohou $
  */
+//note 版块forum >> forumupload(版块列表) @ Discuz! X2.5
 
 if(!defined('IN_MOBILE_API')) {
 	exit('Access Denied');
@@ -20,6 +21,7 @@ $discuz->init_cron = false;
 $discuz->init_session = false;
 $discuz->init();
 
+//校验用户身份
 $_G['uid'] = intval($_POST['uid']);
 
 if((empty($_G['uid']) && $_GET['operation'] != 'upload') || $_POST['hash'] != md5(substr(md5($_G['config']['security']['authkey']), 8).$_G['uid'])) {
@@ -35,7 +37,8 @@ if((empty($_G['uid']) && $_GET['operation'] != 'upload') || $_POST['hash'] != md
 
 $_FILES['Filedata']['name'] = diconv(urldecode($_FILES['Filedata']['name']), 'UTF-8');
 $_FILES['Filedata']['type'] = $_GET['filetype'];
-
+	
+//判断版块是否有自定义类型
 $forumattachextensions = '';
 $fid = intval($_GET['fid']);
 if($fid) {
@@ -55,7 +58,7 @@ if($fid) {
 }
 
 class forum_upload_mobile extends forum_upload {
-
+	
 	function uploadmsg($statusid) {
 		$variable = array('code' => $statusid, 'ret' => array('aId' => $this->aid, 'image' => $this->attach['isimage'] ? 1 : 2));
 		mobile_core::result(mobile_core::variable($variable));

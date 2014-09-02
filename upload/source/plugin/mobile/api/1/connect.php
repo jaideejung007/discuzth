@@ -6,6 +6,7 @@
  *
  *      $Id: connect.php 34240 2013-11-21 08:32:04Z nemohou $
  */
+//note 更多more >> register(注册网页) @ Discuz! X2.5
 
 if(!defined('IN_MOBILE_API')) {
 	exit('Access Denied');
@@ -16,6 +17,7 @@ include_once 'member.php';
 
 class mobile_api {
 
+	//note 程序模块执行前需要运行的代码
 	function common() {
 		global $_G, $seccodecheck, $secqaacheck, $connect_guest;
 		if($_G['uid'] && $_G['member']['conisbind']) {
@@ -31,10 +33,11 @@ class mobile_api {
 			if(!$connect_guest) {
 				dsetcookie('con_auth_hash');
 				showmessage('qqconnect:connect_login_first');
-			}
+			}			
 		}
 	}
 
+	//note 程序模板输出前运行的代码
 	function output() {
 		if(!empty($_POST)) {
 			mobile_core::result(mobile_core::variable());

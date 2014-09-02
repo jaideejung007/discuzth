@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: upgrade.php 34397 2014-04-14 06:53:24Z nemohou $
+ *      $Id: upgrade.php 34692 2014-07-09 01:17:48Z qingrongfu $
  */
 
 if(!defined('IN_DISCUZ')) {
@@ -40,5 +40,8 @@ REPLACE INTO pre_mobile_setting VALUES ('extend_lastupdate', '1343182299');
 EOF;
 
 runquery($sql);
+
+DB::query( "REPLACE INTO ".DB::table("common_credit_rule")." VALUES (NULL, '".$installlang['mobilesign']."', 'mobilesign', '1', '0', '1', '0', '0', '2', '0', '0', '0', '0', '0', '0', '');"
+);
 
 $finish = true;

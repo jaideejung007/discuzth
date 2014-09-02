@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: mobile.class.php 34605 2014-06-10 02:37:15Z nemohou $
+ *      $Id: mobile.class.php 34740 2014-07-22 03:41:27Z nemohou $
  */
 
 define("MOBILE_PLUGIN_VERSION", "4");
@@ -88,6 +88,7 @@ class mobile_core {
 			'saltkey' => $_G['cookie']['saltkey'],
 			'member_uid' => $_G['member']['uid'],
 			'member_username' => $_G['member']['username'],
+            'member_avatar' => avatar($_G['member']['uid'], 'small', true),
 			'groupid' => $_G['groupid'],
 			'formhash' => FORMHASH,
 			'ismoderator' => $_G['forum']['ismoderator'],
@@ -106,11 +107,28 @@ class mobile_core {
 				$globals = $globals + mobile_api_sub::getvariable();
 			}
 		}
+		$pluginvariables = array();
+		if(!empty($_G['setting']['mobileapihook'])) {
+			$mobileapihook = unserialize($_G['setting']['mobileapihook']);
+			if(!empty($mobileapihook[$_GET['module']])) {
+				if(!empty($mobileapihook[$_GET['module']]['variables'])) {
+					mobile_core::activeHook($_GET['module'], $mobileapihook, $variables, true);
+					unset($mobileapihook[$_GET['module']]['variables']);
+				}
+				if(!empty($mobileapihook[$_GET['module']])) {
+					$param = array();
+					$pluginvariables = mobile_core::activeHook($_GET['module'], $mobileapihook, $param);
+				}
+			}
+		}
 		$xml = array(
 			'Version' => $_GET['version'],
 			'Charset' => strtoupper($_G['charset']),
 			'Variables' => array_merge($globals, $variables),
 		);
+		if($pluginvariables) {
+			$xml['pluginVariables'] = $pluginvariables;
+		}
 		if(!empty($_G['messageparam'])) {
 			$message_result = lang('plugin/mobile', $_G['messageparam'][0], $_G['messageparam'][2]);
 			if($message_result == $_G['messageparam'][0]) {
@@ -165,30 +183,48 @@ class mobile_core {
 		return $variables;
 	}
 
+	/**
+	 * 设置跨域请求header
+	 * @param type $request_method
+	 * @param type $origin
+	 */
 	function make_cors($request_method, $origin = '') {
 
 		$origin = $origin ? $origin : REQUEST_METHOD_DOMAIN;
 
 		if ($request_method === 'OPTIONS') {
+			// 这个*可以设置为想允许的域名比如
 			header('Access-Control-Allow-Origin:'.$origin);
 
+			/**
+			* 是否允许发送cookie，以及支持的请求。
+			*/
 			header('Access-Control-Allow-Credentials:true');
 			header('Access-Control-Allow-Methods:GET, POST, OPTIONS');
 
+			// 自定义一些头，这个也可以当作一个密钥，必须与请求时候的头是一致的。
+			//header('Access-Control-Allow-Headers:DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type');
 
+			/**
+			// 设置一个过期时间，由于options只是一个握手的工作，所以时间可以设的长一点儿
+			 *
+			 */
 			header('Access-Control-Max-Age:1728000');
 			header('Content-Type:text/plain charset=UTF-8');
 			header("status: 204");
 			header('HTTP/1.0 204 No Content');
 			header('Content-Length: 0',true);
+			//header('Content-Type: text/html',true);
 			flush();
 		}
 
+		// 真实的请求数据
 		if ($request_method === 'POST') {
 
 			header('Access-Control-Allow-Origin:'.$origin);
 			header('Access-Control-Allow-Credentials:true');
 			header('Access-Control-Allow-Methods:GET, POST, OPTIONS');
+			//header('Access-Control-Allow-Headers:DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type');
 		}
 
 		if ($request_method === 'GET') {
@@ -196,8 +232,84 @@ class mobile_core {
 			header('Access-Control-Allow-Origin:'.$origin);
 			header('Access-Control-Allow-Credentials:true');
 			header('Access-Control-Allow-Methods:GET, POST, OPTIONS');
+			//header('Access-Control-Allow-Headers:DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type');
 		}
 
+		//credentials 使用注意 http://msdn.microsoft.com/zh-cn/library/ie/dn423949(v=vs.85).aspx
+		//SEC7121 "当凭据标志设置为 True 时，不允许 Access-Control-Allow-Origin 中的通配符。
+		//服务器正在标头中返回“Access-Control-Allow-Origin: *”，但当在 XMLHttpRequest 中将 withCredentials 标志设置为 True 时，则不允许该操作。
+		//需要修改服务器端处理程序以返回“Access-Control-Allow-Origin”标头，该标头特别允许此类请求上的原点。如果你不能控制服务器端处理程序，则需要与执行此操作的开发人员联系。
+		//
+		//client:xhr.withCredentials = true;
+		//server:header('Access-Control-Allow-Credentials:true');
+	}
+
+	function usergroupIconId($groupid) {
+		global $_G;
+		if($_G['cache']['usergroupIconId']) {
+			return $_G['cache']['usergroupIconId']['variable'][$groupid];
+		}
+		loadcache('usergroupIconId');
+		if(!$_G['cache']['usergroupIconId'] || TIMESTAMP - $_G['cache']['usergroupIconId']['expiration'] > 3600) {
+			loadcache('usergroups');
+			$memberi = 0;
+			$return = array();
+			foreach($_G['cache']['usergroups'] as $groupid => $data) {
+				if($data['type'] == 'member') {
+					if(!$memberi && $groupid == $_G['setting']['newusergroupid']) {
+						$memberi = 1;
+					}
+					if($memberi > 0) {
+						$return[$groupid] = $memberi++;
+					}
+				} elseif($data['type'] == 'system' && $groupid < 4) {
+					$return[$groupid] = 'admin';
+				} elseif($data['type'] == 'special') {
+					$return[$groupid] = 'special';
+				}
+			}
+			savecache('usergroupIconId', array('variable' => $return, 'expiration' => TIMESTAMP));
+			return $return[$groupid];
+		} else {
+			return $_G['cache']['usergroupIconId']['variable'][$groupid];
+		}
+	}
+
+	function activeHook($module, $mobileapihook, &$param, $isavariables = false) {
+		global $_G;
+		if($isavariables) {
+			$mobileapihook[$module] = array(
+			    'variables' => $mobileapihook[$module]['variables']
+			);
+		}
+		foreach($mobileapihook[$module] as $hookname => $hooks) {
+			foreach($hooks as $plugin => $hook) {
+				if(!$hook['allow'] || !in_array($plugin, $_G['setting']['plugins']['available'])) {
+					continue;
+				}
+				if(!preg_match('/^[\w\_\.]+\.php$/i', $hook['include'])) {
+					continue;
+				}
+				include_once DISCUZ_ROOT . 'source/plugin/' . $plugin . '/' . $hook['include'];
+				if(!class_exists($hook['class'], false)) {
+					continue;
+				}
+				if(!isset($pluginclasses[$hook['class']])) {
+					$pluginclasses[$hook['class']] = new $hook['class'];
+				}
+				if(!method_exists($pluginclasses[$hook['class']], $hook['method'])) {
+					continue;
+				}
+				if(!$isavariables) {
+					$value[$module.'_'.$hookname][$plugin] = $pluginclasses[$hook['class']]->$hook['method']($param);
+				} else {
+					$pluginclasses[$hook['class']]->$hook['method']($param);
+				}
+			}
+		}
+		if(!$isavariables) {
+			return $value;
+		}
 	}
 }
 

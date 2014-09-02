@@ -4,8 +4,9 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: sub_threadlist.php 34650 2014-06-18 08:14:29Z laoguozhang $
+ *      $Id: sub_threadlist.php 34818 2014-08-11 02:59:57Z nemohou $
  */
+//note checkpost.sub @ Discuz! X2.5
 
 if (!defined('IN_MOBILE_API')) {
 	exit('Access Denied');
@@ -33,7 +34,11 @@ foreach ($_G['forum_threadlist'] as $k => $thread) {
 	}
 	$_G['forum_threadlist'][$k]['dateline'] = strip_tags($thread['dateline']);
 	$_G['forum_threadlist'][$k]['lastpost'] = strip_tags($thread['lastpost']);
-	$_G['forum_threadlist'][$k]['avatar'] = avatar($thread['authorid'], 'small', true);
+	$userids[] = $thread['authorid'];
+}
+
+foreach(C::t('common_member')->fetch_all($userids) as $user) {
+	$groupiconIds[$user['uid']] = mobile_core::usergroupIconId($user['groupid']);
 }
 
 if($_G['uid']) {
@@ -67,10 +72,13 @@ if($_G['forum']['icon']) {
 	}
 }
 
+$_G['forum']['threadcount'] = $_G['forum_threadcount'];
+
 $variable = array(
-    'forum' => mobile_core::getvalues($_G['forum'], array('fid', 'fup', 'name', 'threads', 'posts', 'rules', 'autoclose', 'password', 'icon')),
+    'forum' => mobile_core::getvalues($_G['forum'], array('fid', 'fup', 'name', 'threads', 'posts', 'rules', 'autoclose', 'password', 'icon', 'threadcount', 'picstyle', 'description')),
     'group' => mobile_core::getvalues($_G['group'], array('groupid', 'grouptitle')),
-    'forum_threadlist' => mobile_core::getvalues(array_values($_G['forum_threadlist']), array('/^\d+$/'), array('tid', 'author', 'authorid', 'subject', 'subject', 'dbdateline', 'dateline', 'dblastpost', 'lastpost', 'lastposter', 'attachment', 'replies', 'readperm', 'views', 'digest', 'cover', 'recommend', 'recommend_add', 'reply', 'avatar', 'displayorder')),
+    'forum_threadlist' => mobile_core::getvalues(array_values($_G['forum_threadlist']), array('/^\d+$/'), array('tid', 'author', 'special', 'authorid', 'subject', 'subject', 'dbdateline', 'dateline', 'dblastpost', 'lastpost', 'lastposter', 'attachment', 'replies', 'readperm', 'views', 'digest', 'cover', 'recommend', 'recommend_add', 'reply', 'avatar', 'displayorder', 'coverpath', 'typeid')),
+    'groupiconid' => $groupiconIds,
     'sublist' => mobile_core::getvalues($GLOBALS['sublist'], array('/^\d+$/'), array('fid', 'name', 'threads', 'todayposts', 'posts', 'icon')),
     'tpp' => $_G['tpp'],
     'page' => $GLOBALS['page'],

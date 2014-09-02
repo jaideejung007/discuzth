@@ -6,7 +6,7 @@
  *
  *      $Id: profile.php 34314 2014-02-20 01:04:24Z nemohou $
  */
-//note 更多more >> profile(个人信息) @ Discuz! X2.5
+//note 更多more >> profile(个人信息) @ Discuz! X3.x
 
 if(!defined('IN_MOBILE_API')) {
 	exit('Access Denied');
@@ -26,6 +26,12 @@ class mobile_api {
 	function output() {
 		global $_G;
 		$data = $GLOBALS['space'];
+		$data['groupiconid'] = mobile_core::usergroupIconId($data['groupid']);
+		if($data['group']['type'] == 'member' && $data['group']['groupcreditslower'] != 999999999) {
+			$data['upgradecredit'] = $data['group']['creditslower'] - $data['credits'];
+			$data['upgradeprogress'] = 100 - ceil($data['upgradecredit'] / ($data['group']['creditslower'] - $data['group']['creditshigher']) * 100);
+			$data['upgradeprogress'] = max($data['upgradeprogress'], 2);
+		}
 		unset($data['password'], $data['email'], $data['regip'], $data['lastip'], $data['regip_loc'], $data['lastip_loc']);
 		$variable = array(
 			'space' => $data,

@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: mobile.php 34588 2014-06-05 02:30:32Z nemohou $
+ *      $Id: mobile.php 34692 2014-07-09 01:17:48Z qingrongfu $
  */
 
 define('IN_MOBILE_API', 1);
@@ -21,9 +21,10 @@ $modules = array('extends', 'buyattachment', 'buythread', 'checkpost', 'connect'
 	'newthread', 'profile', 'publicpm', 'register', 'seccode',
 	'secure', 'sendpm', 'sendreply', 'sub_checkpost', 'sublist',
 	'toplist', 'viewthread', 'uploadavatar', 'pollvote', 'mynotelist',
-	'modcp', 'topicadmin', 'forumimage', 'newthreads', 'signin', 'smiley', 'threadrecommend', 'check',
+	'modcp', 'topicadmin', 'forumimage', 'newthreads', 'signin', 'smiley', 'threadrecommend', 'check', 'mobilesign',
 	'wsqindex', 'wsqsiteinfo', 'recommend',
-	'wechat', 'wechat_clearlogin', 'checkinfo', 'seccodehtml');
+	'wechat', 'wechat_clearlogin', 'checkinfo', 'seccodehtml',
+	'showactivity');
 
 $defaultversions = array(
 	'wechat' => 4,
