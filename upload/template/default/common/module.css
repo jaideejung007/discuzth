@@ -970,6 +970,8 @@ a.thread_mod { background: url({IMGDIR}/bigimg.png) no-repeat 0 -38px; padding-l
 		.psta { float: left; width: 120px; line-height:24px; overflow:hidden; }
 			.psta img { width: 24px; height: 24px; vertical-align:midden; }
 		.psti { margin-left: 120px; line-height:24px; }
+/*jaideejung007*/		.psta { width: auto !important; margin-right: 10px !important; line-height:20px !important; } /*แก้ไขช่อง แสดงความคิดเห็น โดย popiazaza*/
+/*jaideejung007*/		.psti { margin-left: 0px !important; } /*แก้ไขช่อง แสดงความคิดเห็น โดย popiazaza*/
 
 /* 点评 by monkeye */
 	.f_c .cm { overflow: hidden; }
