@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: lang_admincp.php 34486 2014-05-08 01:31:08Z nemohou $
+ *      $Id: lang_admincp.php 35170 2014-12-25 02:42:41Z nemohou $
  */
 
 if(!defined('IN_DISCUZ')) {
@@ -16,6 +16,7 @@ $lang = array
 (
 
 	'subscribe_comsenz_email' => 'กรอกที่อยู่อีเมลของคุณ เพื่อรับข่าวสารการพัฒนา คำแนะนำด้านความปลอดภัย และความเคลื่อนไหวต่างๆ ที่เกี่ยวกับดิสคัส!',
+	'scan_discuz_qrcode' => '<img src="source/plugin/wechat/image/discuz_qr.jpg" align="left" width="80" /><br />สแกน QR Code Discuz! Official micro-channel<br /><br />เพื่อติดตามข่าวสารจาก Discuz! อย่างเป็นทางการ',
 	'reglinkname_default' => 'ลงทะเบียน',
 	'yes' => 'ใช่',
 	'no' => 'ไม่',
@@ -582,7 +583,7 @@ $lang = array
 	'founder_upgrade_continue' => 'ดำเนินการต่อ',
 	'founder_upgrade_recheck' => 'ตรวจสอบใหม่อีกครั้ง',
 	'founder_upgrade_dbupdate' => 'อัปเกรดฐานข้อมูล',
-	'upgrade_right_now' => 'Discuz! ที่คุณใช้อยู่ขณะนี้มีเวอร์ชันใหม่ออกมาแล้ว กรุณาเริ่มทำการ <span>อัปเกรดเดี๋ยวนี้</span>',
+	'upgrade_right_now' => 'Discuz! มีเวอร์ชันใหม่พร้อมดาวน์โหลดแล้ว <span>อัปเกรดที่นี่</span>',
 
 	'nav_founder_optimizer' => 'ปรับปรุงประสิทธิภาพ',
 	'founder_optimizer_index' => 'Optimizer Home',
@@ -852,17 +853,17 @@ $lang = array
 	'setting_access_register_link_name_comment' => 'ลิงก์ข้อความที่หน้าลงทะเบียนของเว็บไซต์ ค่าเริ่มต้นคือ [ลงทะเบียน]',
 	'setting_access_register_strongpw' => 'Force password complexity',
 	'setting_access_register_strongpw_comment' => 'Registration of new user password must exist in the selected character type, not the election, compared with unlimited',
-	'setting_access_register_strongpw_1' => 'Digits',
-	'setting_access_register_strongpw_2' => 'Lowercase letters',
-	'setting_access_register_strongpw_3' => 'Capital letters',
-	'setting_access_register_strongpw_4' => 'Special symbols',
-	'setting_access_register_pwlength' => 'Minimum password length',
+	'setting_access_register_strongpw_1' => 'ตัวเลข',
+	'setting_access_register_strongpw_2' => 'ภาษาอังกฤษพิมพ์เล็ก',
+	'setting_access_register_strongpw_3' => 'ภาษาอังกฤษพิมพ์ใหญ่',
+	'setting_access_register_strongpw_4' => 'สัญลักษณ์พิเศษ',
+	'setting_access_register_pwlength' => 'ความยาวรหัสผ่านต่ำสุด',
 	'setting_access_register_pwlength_comment' => 'Minimum password length of the new user registration, set to 0 for no restrictions',
 	'setting_access_guest_connect_group' => 'User group for logged by QQ visitors',
 	'setting_access_guest_connect_group_comment' => 'Set an initial user group for QQ-logged users',
 
 	'setting_access_access' => 'ควบคุมการเข้าใช้',
-	'setting_access_access_newbiespan' => 'ห้ามโพสต์ก่อนกำหนด (ชั่วโมง)',
+	'setting_access_access_newbiespan' => 'ห้ามโพสต์ก่อนกำหนด (นาที)',
 	'setting_access_access_newbiespan_comment' => 'ผู้ที่ลงทะเบียนใหม่ในช่วงเวลาที่กำหนดนี้จะไม่สามารถโพสต์กระทู้ ตอบกลับและส่ง PM การตั้งค่านี้ไม่มีผลต่อผู้ดูแลและผู้ดูแลระบบ 0 คือไม่จำกัด',
 	'setting_access_access_ipaccess' => 'กำหนด IP ที่สามารถเข้าใช้งานเว็บไซต์',
 	'setting_access_access_ipaccess_comment' => 'เฉพาะสมาชิกที่มี IP อยู่ในรายการเท่านั้น จึงจะสามารถเข้าใช้งานเว็บไซต์ได้ หาก IP ของสมาชิกไม่ได้อยู่ในรายการ จะไม่สามารถเข้าใช้งานเว็บไซต์ได้ การตั้งค่านี้จะใช้กับเว็บไซต์ที่ต้องการความปลอดภัยสูง  เช่น เว็บไซต์บริษัทหรือรัฐวิสาหกิจ หรือ ภายในเว็บไซต์มีข้อมูลที่หายาก การตั้งค่านี้จะไม่มีข้อยกเว้นแม้แต่ผู้ดูแลระบบ หาก IP ผู้ดูแลไม่อยู่ในรายการ จะไม่ได้รับอนุญาตให้ลงชื่อเข้าใช้นี้ โปรดใช้คุณสมบัตินี้อย่างรอบคอบ หนึ่งแถวสำหรับแต่ละ IP คุณสามารถกรอกที่อยู่เต็ม คุณยังสามารถใส่ IP เฉพาะที่จุดเริ่มต้น ตัวอย่างเช่น "192.168."(โดยไม่มีเครื่องหมายคำพูด) คุณสามารถจับคู่ 192.168.0.0～192.168.255.255 ทั้งหมดที่อยู่ภายในขอบเขต ปล่อยว่าง หากต้องการให้เข้าใช้งานเว็บไซต์ได้ทุกคน',
@@ -4250,8 +4251,8 @@ $lang = array
 	'usergroups_edit_post_allow_down_remote_img_comment' => 'Save remote image as local files',
 	'usergroups_edit_post_allowreplycredit' => 'Allow to set award for Replies',
 	'usergroups_edit_post_allowreplycredit_comment' => 'Allow users to publish certain topics as for Replies reward points. Replies reward points can be specified in the <a href="?action=setting&operation=credits">Default global - Points settings</a>',
-	'usergroups_edit_post_allowsetpublishdate' => 'Allow to set the publish time',
-	'usergroups_edit_post_allowsetpublishdate_comment' => 'Allow users to set the specified post time when publishing of thread. It can be set only in every half hour (such as 13:00 or 13:30) for automatically published.',
+	'usergroups_edit_post_allowsetpublishdate' => 'อนุญาตให้ตั้งเวลาโพสต์ล่วงหน้า',
+	'usergroups_edit_post_allowsetpublishdate_comment' => 'อนุญาตให้ผู้ใช้งานสามารถตั้งเวลาโพสต์ล่วงหน้าได้ การระบุเวลาโพสต์จะกำหนดได้แค่แบบ ชั่วโมงและครึ่งชั่วโมงเท่านั้น เช่น เวลา 13:00 หรือ 13:30  และเมื่อถึงเวลาดังกล่าว ระบบจะทำการโพสต์ให้อัตโนมัติ (สถานะแรกของการตั้งเวลาโพสต์จะเป็นกระทู้แบบร่าง)',
 	'usergroups_edit_post_allowcommentcollection' => 'Allow collection comments',
 	'usergroups_edit_post_allowcommentcollection_comment' => 'Allow users to comment threads in collections.',
 	'usergroups_edit_post_allowimgcontent' => 'Allow to generate image of the thread content',
@@ -5862,7 +5863,7 @@ $lang = array
 	'project_option_group_allowposttag' => 'Allow to use tags',
 	'project_option_group_allowat' => 'Number of @username used',
 	'project_option_group_allowsendpmmaxnum' => 'Maximum number of PM per 24 hours',
-	'project_option_group_allowsetpublishdate' => 'Allow to set the publish time',
+	'project_option_group_allowsetpublishdate' => 'อนุญาตให้ตั้งเวลาโพสต์ล่วงหน้า',
 	'project_option_group_allowfollowcollection' => 'Maximum number of followed collections',
 	'project_option_group_allowcommentcollection' => 'Allow collection comments',
 	'project_option_group_allowcreatecollection' => 'Allowed number of collections',

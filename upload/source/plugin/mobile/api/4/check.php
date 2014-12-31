@@ -4,9 +4,8 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: check.php 34714 2014-07-14 07:31:53Z nemohou $
+ *      $Id: check.php 35044 2014-10-30 05:32:05Z nemohou $
  */
-//note °æ¿éforum >> forumnav(°æ¿éÁÐ±í) @ Discuz! X3.x
 
 if(!defined('IN_MOBILE_API')) {
 	exit('Access Denied');
@@ -37,6 +36,8 @@ if(in_array('mobile', $_G['setting']['plugins']['available'])) {
 			'pluginversion' => $_G['setting']['plugins']['version']['mobile'],
 			'regname' => $_G['setting']['regname'],
 			'qqconnect' => in_array('qqconnect', $_G['setting']['plugins']['available']) ? '1' : '0',
+			'wsqqqconnect' => in_array('qqconnect', $_G['setting']['plugins']['available']) ? '1' : '0',
+			'wsqhideregister' => $_G['wechat']['setting']['wechat_allowregister'] && $_G['wechat']['setting']['wechat_allowfastregister'] ? '1' : '0',
 			'sitename' => $_G['setting']['bbname'],
 			'mysiteid' => $_G['setting']['my_siteid'],
 			'ucenterurl' => $_G['setting']['ucenterurl'],
@@ -52,6 +53,7 @@ if(in_array('mobile', $_G['setting']['plugins']['available'])) {
     $array = array();
 }
 
+$array['testcookie'] = $_G['cookie']['testcookie'];
 $data = mobile_core::json($array);
 mobile_core::make_cors($_SERVER['REQUEST_METHOD'], REQUEST_METHOD_DOMAIN);
 

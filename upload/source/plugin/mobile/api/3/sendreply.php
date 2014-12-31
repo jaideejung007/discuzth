@@ -4,9 +4,8 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: sendreply.php 34771 2014-07-30 09:29:44Z nemohou $
+ *      $Id: sendreply.php 35024 2014-10-14 07:43:43Z nemohou $
  */
-//note 版块forum >> sendreply(回复) @ Discuz! X2.5
 
 if(!defined('IN_MOBILE_API')) {
 	exit('Access Denied');
@@ -18,7 +17,6 @@ include_once 'forum.php';
 
 class mobile_api {
 
-	//note 程序模块执行前需要运行的代码
 	function common() {
 	}
 
@@ -45,7 +43,6 @@ class mobile_api {
 				foreach($setstatus as $i => $bit) {
 					$threadstatus = setstatus(13 - $i, $bit, $threadstatus);
 				}
-				//note DB::update('forum_thread', array('status' => $threadstatus), "tid='$values[tid]'");
 				C::t('forum_thread')->update($values['tid'], array('status' => $threadstatus));
 			}
 
@@ -65,7 +62,6 @@ class mobile_api {
 					$poststatus = setstatus(10 - $i, $mobiletype{$i}, $poststatus);
 				}
 			}
-			//note DB::update($posttable, array('status' => $poststatus), "pid='$values[pid]'");
 			C::t('forum_post')->update('tid:'.$values['tid'], $values['pid'], array('status' => $poststatus));
 
 			if($_POST['location']) {
@@ -82,7 +78,6 @@ class mobile_api {
 		}
 	}
 
-	//note 程序模板输出前运行的代码
 	function output() {
 		global $_G;
 		$variable = array(

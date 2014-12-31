@@ -1,10 +1,20 @@
 +======================================+
+   Discuz! X3.2 Release 20141225
++======================================+
+Fixed some security problems, stable version
++======================================+
+   Discuz! X3.2 Release 20140618
++======================================+
+Fixed some problems, the stable version
+
++======================================+
    Discuz! X3.2 Release 20140603
 +======================================+
-优化 部分页面，提升效率
-调整 插件机制，提供更多接口
-新增 对微信登录、微社区的支持
-修复 旧版中存在的已知问题和安全隐患
+Optimized: Improve efficiency of the page sections
+Improvement: Plug-in mechanism provide more interfaces 
+New: Log on with micro-channel, Support micro-communities
+Fix: Fixed known issues and security risks from the previous versions
+
 
 +--------------------------------------+
 往日版本( Old Version )

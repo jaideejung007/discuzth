@@ -1231,7 +1231,7 @@ function showError(msg) {
 	var p = /<script[^\>]*?>([^\x00]*?)<\/script>/ig;
 	msg = msg.replace(p, '');
 	if(msg !== '') {
-		showDialog(msg, 'alert', 'ข้อผิดพลาด', null, true, null, '', '', '', 3);
+		showDialog(msg, 'alert', 'ผิดพลาด', null, true, null, '', '', '', 3);
 	}
 }
 
@@ -1601,20 +1601,20 @@ function initSearchmenu(searchform, cloudSearchUrl) {
 	var tclass = searchtxt.className;
 	searchtxt.className = tclass + ' xg1';
 	if (!!("placeholder" in document.createElement("input"))) {
-		if(searchtxt.value == 'ดิสคัส! ค้นหาอะไรก็เจอ') {
+		if(searchtxt.value == 'กรุณากรอกข้อความที่คุณต้องการค้นหา') {
 			searchtxt.value = '';
 		}
-		searchtxt.placeholder = 'ดิสคัส! ค้นหาอะไรก็เจอ';
+		searchtxt.placeholder = 'กรุณากรอกข้อความที่คุณต้องการค้นหา';
 	} else {
 		searchtxt.onfocus = function () {
-			if(searchtxt.value == 'ดิสคัส! ค้นหาอะไรก็เจอ') {
+			if(searchtxt.value == 'กรุณากรอกข้อความที่คุณต้องการค้นหา') {
 				searchtxt.value = '';
 				searchtxt.className = tclass;
 			}
 		};
 		searchtxt.onblur = function () {
 			if(searchtxt.value == '' ) {
-				searchtxt.value = 'ดิสคัส! ค้นหาอะไรก็เจอ';
+				searchtxt.value = 'กรุณากรอกข้อความที่คุณต้องการค้นหา';
 				searchtxt.className = tclass + ' xg1';
 			}
 		};
@@ -1656,7 +1656,7 @@ function initSearchmenu(searchform, cloudSearchUrl) {
 }
 
 function searchFocus(obj) {
-	if(obj.value == 'ดิสคัส! ค้นหาอะไรก็เจอ') {
+	if(obj.value == 'กรุณากรอกข้อความที่คุณต้องการค้นหา') {
 		obj.value = '';
 	}
 	if($('cloudsearchquery') != null) {

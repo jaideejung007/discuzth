@@ -4,13 +4,14 @@
 [UCenter] (C)2001-2099 Comsenz Inc.
 This is NOT a freeware, use is subject to license terms
 
-$Id: base.php 1059 2011-03-01 07:25:09Z monkey $
+$Id: base.php 1167 2014-11-03 03:06:21Z hypowang $
 */
 
 !defined('IN_UC') && exit('Access Denied');
 
 class base {
 
+	var $sid;
 	var $time;
 	var $onlineip;
 	var $db;
@@ -35,7 +36,6 @@ class base {
 		$this->init_template();
 		$this->init_note();
 		$this->init_mail();
-		//		$this->cron();
 	}
 
 	function init_var() {
@@ -92,7 +92,11 @@ class base {
 	}
 
 	function init_db() {
-		require_once UC_ROOT.'lib/db.class.php';
+		if(function_exists("mysql_connect")) {
+			require_once UC_ROOT.'lib/db.class.php';
+		} else {
+			require_once UC_ROOT.'lib/dbi.class.php';
+		}
 		$this->db = new ucserver_db();
 		$this->db->connect(UC_DBHOST, UC_DBUSER, UC_DBPW, UC_DBNAME, UC_DBCHARSET, UC_DBCONNECT, UC_DBTABLEPRE);
 	}
@@ -140,10 +144,7 @@ class base {
 
 	function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
 
-		$ckey_length = 4;	// 随机密钥长度 取值 0-32;
-		// 加入随机密钥，可以令密文无任何规律，即便是原文和密钥完全相同，加密结果也会每次不同，增大破解难度。
-		// 取值越大，密文变动规律越大，密文变化 = 16 的 $ckey_length 次方
-		// 当此值为 0 时，则不产生随机密钥
+		$ckey_length = 4;
 
 		$key = md5($key ? $key : UC_KEY);
 		$keya = md5(substr($key, 0, 16));
@@ -278,6 +279,13 @@ class base {
 			$message = $lang[$message] ? str_replace(array_keys($vars), array_values($vars), $lang[$message]) : $message;
 		}
 		$this->view->assign('message', $message);
+		if(!strpos($redirect, 'sid=') && (!strpos($redirect, 'ttp://'))) {
+			if(!strpos($redirect, '?')) {
+				$redirect .= '?sid='.$this->sid;
+			} else {
+				$redirect .= '&sid='.$this->sid;
+			}
+		}
 		$this->view->assign('redirect', $redirect);
 		if($type == 0) {
 			$this->view->display('message');
@@ -432,7 +440,7 @@ class base {
 			$value = '';
 			$life = -1;
 		}
-		
+
 		$life = $life > 0 ? $this->time + $life : ($life < 0 ? $this->time - 31536000 : 0);
 		$path = $httponly && PHP_VERSION < '5.2.0' ? UC_COOKIEPATH."; HttpOnly" : UC_COOKIEPATH;
 		$secure = $_SERVER['SERVER_PORT'] == 443 ? 1 : 0;
@@ -444,7 +452,7 @@ class base {
 	}
 
 	function note_exists() {
-		$noteexists = $this->db->fetch_first("SELECT value FROM ".UC_DBTABLEPRE."vars WHERE name='noteexists'");
+		$noteexists = $this->db->result_first("SELECT value FROM ".UC_DBTABLEPRE."vars WHERE name='noteexists'");
 		if(empty($noteexists)) {
 			return FALSE;
 		} else {
@@ -453,7 +461,7 @@ class base {
 	}
 
 	function mail_exists() {
-		$mailexists = $this->db->fetch_first("SELECT value FROM ".UC_DBTABLEPRE."vars WHERE name='mailexists'");
+		$mailexists = $this->db->result_first("SELECT value FROM ".UC_DBTABLEPRE."vars WHERE name='mailexists'");
 		if(empty($mailexists)) {
 			return FALSE;
 		} else {

@@ -4,7 +4,7 @@
 	[UCenter] (C)2001-2099 Comsenz Inc.
 	This is NOT a freeware, use is subject to license terms
 
-	$Id: template.class.php 1098 2011-05-19 01:28:17Z svn_project_zhangjie $
+	$Id: template.class.php 1167 2014-11-03 03:06:21Z hypowang $
 */
 
 class template {
@@ -153,7 +153,6 @@ class template {
 
 	function __destruct() {
 		if($_COOKIE['sid']) {
-			return;
 		}
 		$sid = rawurlencode($this->sid);
 		$searcharray = array(
@@ -170,16 +169,3 @@ class template {
 	}
 
 }
-
-/*
-
-Usage:
-require_once 'lib/template.class.php';
-$this->view = new template();
-$this->view->assign('page', $page);
-$this->view->assign('userlist', $userlist);
-$this->view->display("user_ls");
-
-*/
-
-?>

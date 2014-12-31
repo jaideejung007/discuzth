@@ -20,7 +20,7 @@ $lang = array(
 	'pm_send_chatpmthreadlimit_error' => 'การใช้กลุ่มแชทเกินกว่ากำหนดใน 24 ชั่วโมง',
 	'pm_clear_processing' => 'เริ่มต้นการดำเนินงานจาก current ไป next',
 	'pm_clear_succeed' => 'การดำเนินงานจะประสบความสำเร็จ ',
-	'pm_delete_noselect' => 'Please select the message processing',
+	'pm_delete_noselect' => 'กรุณาเลือกข้อความเพื่อดำเนินการ',
 
 	'db_export_filename_invalid' => 'คุณไม่ได้ใส่ชื่อไฟล์สำรองข้อมูลหรือนามสกุลไฟล์，กรุณากลับไปแก้ไข.',
 	'db_export_file_invalid' => 'ไม่สามารถบันทึกไฟล์ข้อมูลไปยังเซิร์ฟเวอร์，โปรดตรวจสอบคุณสมบัติไดเรกทอรี.',

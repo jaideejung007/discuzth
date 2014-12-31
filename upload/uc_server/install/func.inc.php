@@ -58,12 +58,14 @@ function show_msg($error_no, $error_msg = 'ok', $success = 1, $quit = TRUE) {
 }
 
 function check_db($dbhost, $dbuser, $dbpw, $dbname, $tablepre) {
-	if(!function_exists('mysql_connect')) {
+	if(!function_exists('mysql_connect') && !function_exists('mysqli_connect')) {
 		show_msg('undefine_func', 'mysql_connect', 0);
 	}
-	if(!@mysql_connect($dbhost, $dbuser, $dbpw)) {
-		$errno = mysql_errno();
-		$error = mysql_error();
+	$mysqlmode = function_exists('mysql_connect') ? 'mysql' : 'mysqli';
+	$link = ($mysqlmode == 'mysql') ? @mysql_connect($dbhost, $dbuser, $dbpw) : new mysqli($dbhost, $dbuser, $dbpw);
+	if(!$link) {
+		$errno = ($mysqlmode == 'mysql') ? mysql_errno() : mysqli_errno();
+		$error = ($mysqlmode == 'mysql') ? mysql_error() : mysqli_error();
 		if($errno == 1045) {
 			show_msg('database_errno_1045', $error, 0);
 		} elseif($errno == 2003) {
@@ -72,8 +74,11 @@ function check_db($dbhost, $dbuser, $dbpw, $dbname, $tablepre) {
 			show_msg('database_connect_error', $error, 0);
 		}
 	} else {
-		if($query = mysql_query("SHOW TABLES FROM $dbname")) {
-			while($row = mysql_fetch_row($query)) {
+		if($query = (($mysqlmode == 'mysql') ? @mysql_query("SHOW TABLES FROM $dbname") : $link->query("SHOW TABLES FROM $dbname"))) {
+			if(!$query) {
+				return false;
+			}
+			while($row = (($mysqlmode == 'mysql') ? mysql_fetch_row($query) : $query->fetch_row())) {
 				if(preg_match("/^$tablepre/", $row[0])) {
 					return false;
 				}
@@ -576,10 +581,7 @@ function config_edit() {
 
 function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
 
-	$ckey_length = 4;	// 随机密钥长度 取值 0-32;
-				// 加入随机密钥，可以令密文无任何规律，即便是原文和密钥完全相同，加密结果也会每次不同，增大破解难度。
-				// 取值越大，密文变动规律越大，密文变化 = 16 的 $ckey_length 次方
-				// 当此值为 0 时，则不产生随机密钥
+	$ckey_length = 4;
 
 	$key = md5($key ? $key : UC_KEY);
 	$keya = md5(substr($key, 0, 16));
@@ -706,7 +708,6 @@ function insertconfig($s, $find, $replace) {
 	if(preg_match($find, $s)) {
 		$s = preg_replace($find, $replace, $s);
 	} else {
-		// 插入到最后一行
 		$s .= "\r\n".$replace;
 	}
 	return $s;
@@ -728,43 +729,62 @@ function var_to_hidden($k, $v) {
 	return "<input type=\"hidden\" name=\"$k\" value=\"$v\" />\n";
 }
 
+function fsocketopen($hostname, $port = 80, &$errno, &$errstr, $timeout = 15) {
+	$fp = '';
+	if(function_exists('fsockopen')) {
+		$fp = @fsockopen($hostname, $port, $errno, $errstr, $timeout);
+	} elseif(function_exists('pfsockopen')) {
+		$fp = @pfsockopen($hostname, $port, $errno, $errstr, $timeout);
+	} elseif(function_exists('stream_socket_client')) {
+		$fp = @stream_socket_client($hostname.':'.$port, $errno, $errstr, $timeout);
+	}
+	return $fp;
+}
+
 function dfopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE, $ip = '', $timeout = 15, $block = TRUE) {
 	$return = '';
 	$matches = parse_url($url);
+	$scheme = $matches['scheme'];
 	$host = $matches['host'];
 	$path = $matches['path'] ? $matches['path'].(isset($matches['query']) && $matches['query'] ? '?'.$matches['query'] : '') : '/';
 	$port = !empty($matches['port']) ? $matches['port'] : 80;
 
 	if($post) {
 		$out = "POST $path HTTP/1.0\r\n";
-		$out .= "Accept: */*\r\n";
-		//$out .= "Referer: $boardurl\r\n";
-		$out .= "Accept-Language: zh-cn\r\n";
-		$out .= "Content-Type: application/x-www-form-urlencoded\r\n";
-		$out .= "User-Agent: $_SERVER[HTTP_USER_AGENT]\r\n";
-		$out .= "Host: $host\r\n";
-		$out .= 'Content-Length: '.strlen($post)."\r\n";
-		$out .= "Connection: Close\r\n";
-		$out .= "Cache-Control: no-cache\r\n";
-		$out .= "Cookie: $cookie\r\n\r\n";
-		$out .= $post;
+		$header = "Accept: */*\r\n";
+		$header .= "Accept-Language: zh-cn\r\n";
+		$header .= "Content-Type: application/x-www-form-urlencoded\r\n";
+		$header .= "User-Agent: $_SERVER[HTTP_USER_AGENT]\r\n";
+		$header .= "Host: $host\r\n";
+		$header .= 'Content-Length: '.strlen($post)."\r\n";
+		$header .= "Connection: Close\r\n";
+		$header .= "Cache-Control: no-cache\r\n";
+		$header .= "Cookie: $cookie\r\n\r\n";
+		$out .= $header.$post;
 	} else {
 		$out = "GET $path HTTP/1.0\r\n";
-		$out .= "Accept: */*\r\n";
-		//$out .= "Referer: $boardurl\r\n";
-		$out .= "Accept-Language: zh-cn\r\n";
-		$out .= "User-Agent: $_SERVER[HTTP_USER_AGENT]\r\n";
-		$out .= "Host: $host\r\n";
-		$out .= "Connection: Close\r\n";
-		$out .= "Cookie: $cookie\r\n\r\n";
+		$header = "Accept: */*\r\n";
+		$header .= "Accept-Language: zh-cn\r\n";
+		$header .= "User-Agent: $_SERVER[HTTP_USER_AGENT]\r\n";
+		$header .= "Host: $host\r\n";
+		$header .= "Connection: Close\r\n";
+		$header .= "Cookie: $cookie\r\n\r\n";
+		$out .= $header;
 	}
 
-	if(function_exists('fsockopen')) {
-		$fp = @fsockopen(($ip ? $ip : $host), $port, $errno, $errstr, $timeout);
-	} elseif (function_exists('pfsockopen')) {
-		$fp = @pfsockopen(($ip ? $ip : $host), $port, $errno, $errstr, $timeout);
-	} else {
-		$fp = false;
+	$fpflag = 0;
+	if(!$fp = @fsocketopen(($ip ? $ip : $host), $port, $errno, $errstr, $timeout)) {
+		$context = array(
+			'http' => array(
+				'method' => $post ? 'POST' : 'GET',
+				'header' => $header,
+				'content' => $post,
+				'timeout' => $timeout,
+			),
+		);
+		$context = stream_context_create($context);
+		$fp = @fopen($scheme.'://'.($ip ? $ip : $host).':'.$port.$path, 'b', false, $context);
+		$fpflag = 1;
 	}
 
 	if(!$fp) {
@@ -775,7 +795,7 @@ function dfopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE, $
 		@fwrite($fp, $out);
 		$status = stream_get_meta_data($fp);
 		if(!$status['timed_out']) {
-			while (!feof($fp)) {
+			while (!feof($fp) && !$fpflag) {
 				if(($header = @fgets($fp)) && ($header == "\r\n" ||  $header == "\n")) {
 					break;
 				}
@@ -905,7 +925,7 @@ function show_setting($setname, $varname = '', $value = '', $type = 'text|passwo
 
 	echo "\n".'<tr><th class="tbopt'.($error ? ' red' : '').'">&nbsp;'.(empty($setname) ? '' : lang($setname).':')."</th>\n<td>";
 	if($type == 'text' || $type == 'password') {
-		$value = htmlspecialchars($value);
+		$value = dhtmlspecialchars($value);
 		echo "<input type=\"$type\" name=\"$varname\" value=\"$value\" size=\"35\" class=\"txt\">";
 	} elseif($type == 'submit') {
 		$value = empty($value) ? 'next_step' : $value;
@@ -972,15 +992,6 @@ function check_adminuser($username, $password, $email) {
 	include ROOT_PATH.'./uc_client/client.php';
 	$error = '';
 	$uid = uc_user_register($username, $password, $email);
-	/*
-	-1 : 用户名不合法
-	-2 : 包含不允许注册的词语
-	-3 : 用户名已经存在
-	-4 : email 格式有误
-	-5 : email 不允许注册
-	-6 : 该 email 已经被注册
-	>1 : 表示成功，数值为 UID
-	*/
 	if($uid == -1 || $uid == -2) {
 		$error = 'admin_username_invalid';
 	} elseif($uid == -4 || $uid == -5 || $uid == -6) {
@@ -1040,4 +1051,31 @@ function save_uc_config($config, $file) {
 	}
 
 	return $success;
+}
+
+function dhtmlspecialchars($string, $flags = null) {
+	if(is_array($string)) {
+		foreach($string as $key => $val) {
+			$string[$key] = dhtmlspecialchars($val, $flags);
+		}
+	} else {
+		if($flags === null) {
+			$string = str_replace(array('&', '"', '<', '>'), array('&amp;', '&quot;', '&lt;', '&gt;'), $string);
+			if(strpos($string, '&amp;#') !== false) {
+				$string = preg_replace('/&amp;((#(\d{3,5}|x[a-fA-F0-9]{4}));)/', '&\\1', $string);
+			}
+		} else {
+			if(PHP_VERSION < '5.4.0') {
+				$string = htmlspecialchars($string, $flags);
+			} else {
+				if(strtolower(CHARSET) == 'utf-8') {
+					$charset = 'UTF-8';
+				} else {
+					$charset = 'ISO-8859-1';
+				}
+				$string = htmlspecialchars($string, $flags, $charset);
+			}
+		}
+	}
+	return $string;
 }

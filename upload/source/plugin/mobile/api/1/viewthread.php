@@ -6,7 +6,6 @@
  *
  *      $Id: viewthread.php 34314 2014-02-20 01:04:24Z nemohou $
  */
-//note 版块forum >> viewthread(看帖页面) @ Discuz! X2.5
 
 if(!defined('IN_MOBILE_API')) {
 	exit('Access Denied');
@@ -17,11 +16,9 @@ include_once 'forum.php';
 
 class mobile_api {
 
-	//note 程序模块执行前需要运行的代码
 	function common() {
 	}
 
-	//note 程序模板输出前运行的代码
 	function output() {
 		global $_G, $thread;
 		if($GLOBALS['hiddenreplies']) {
@@ -80,8 +77,11 @@ class mobile_api {
 				$variable['postlist'][$k]['message'] = $message;
 			}
 			if($post['anonymous'] && !$_G['forum']['ismoderator']) {
-				$variable['postlist'][$k]['username'] = $variable['postlist'][$k]['author'] = '';
+				$variable['postlist'][$k]['username'] = $variable['postlist'][$k]['author'] = $_G['setting']['anonymoustext'];
 				$variable['postlist'][$k]['adminid'] = $variable['postlist'][$k]['groupid'] = $variable['postlist'][$k]['authorid'] = 0;
+				if($post['first']) {
+					$variable['thread']['authorid'] = 0;
+				}
 			}
 			if(strpos($variable['postlist'][$k]['message'], '[/tthread]') !== FALSE) {
 				$matches = array();
