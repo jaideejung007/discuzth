@@ -30,6 +30,7 @@ if($_GET['uid'] && $_GET['id'] && $_GET['sign'] === make_getpws_sign($_GET['uid'
 	if(!submitcheck('getpwsubmit') || $_GET['newpasswd1'] != $_GET['newpasswd2']) {
 		$hashid = $_GET['id'];
 		$uid = $_GET['uid'];
+		$sign = $_GET['sign']; /*jaideejung007*/
 		include template('member/getpasswd');
 	} else {
 		if($_GET['newpasswd1'] != addslashes($_GET['newpasswd1'])) {
