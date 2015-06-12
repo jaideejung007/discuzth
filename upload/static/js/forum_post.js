@@ -75,8 +75,8 @@ function validate(theform) {
 	if(($('postsubmit').name != 'replysubmit' && !($('postsubmit').name == 'editsubmit' && !isfirstpost) && theform.subject.value == "") || !sortid && !special && trim(message) == "") {
 		showError('ขออภัย! คุณยังไม่ได้ใส่ชื่อกระทู้หรือเนื้อหาใดๆ เลย');
 		return false;
-/*jaideejung007*/	} else if(theform.subject.value.length > 255) {
-/*jaideejung007*/		showError('ชื่อกระทู้จะต้องไม่ยาวเกิน 255 ตัวอักษร');
+	} else if(theform.subject.value.length > 255) {
+		showError('ชื่อกระทู้จะต้องไม่ยาวเกิน 255 ตัวอักษร');
 		return false;
 	}
 	if(in_array($('postsubmit').name, ['topicsubmit', 'editsubmit'])) {
