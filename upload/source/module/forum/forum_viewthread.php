@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: forum_viewthread.php 34125 2013-10-15 09:24:41Z jeffjzhang $
+ *      $Id: forum_viewthread.php 35233 2015-03-11 03:35:43Z nemohou $
  */
 
 if(!defined('IN_DISCUZ')) {
@@ -581,6 +581,9 @@ if(!$maxposition && empty($postarr)) {
 		} else {
 			$post = C::t('forum_post')->fetch('tid:'.$_G['tid'], $_GET['viewpid']);
 		}
+		if($post['tid'] != $_G['tid']) {
+			$post = array();
+		}
 
 		if($post) {
 			if($visibleallflag || (!$visibleallflag && !$post['invisible'])) {
@@ -657,7 +660,7 @@ foreach($postarr as $post) {
 				continue;
 			}
 			$_G['forum_firstpid'] = $post['pid'];
-			if(IS_ROBOT || $_G['adminid'] == 1) $summary = str_replace(array("\r", "\n"), '', messagecutstr(strip_tags($post['message']), 160));
+			if(!$_G['forum_thread']['price'] && (IS_ROBOT || $_G['adminid'] == 1)) $summary = str_replace(array("\r", "\n"), '', messagecutstr(strip_tags($post['message']), 160));
 			$tagarray_all = $posttag_array = array();
 			$tagarray_all = explode("\t", $post['tags']);
 			if($tagarray_all) {

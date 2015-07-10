@@ -1097,7 +1097,7 @@ function showEditorMenu(tag, params) {
 				menutype = 'win';
 				break;
 			case 'index':
-				stitle = 'สร้างไดเรกทอรีโพสต์';
+				stitle = 'สร้างสารบัญโพสต์';
 				str = '<p class="pbn">[index]<br />\n\
 					[#<span class="xi1">หมายเลขหน้า</span>]<span class="xi1">ชื่อเรื่อง</span> &nbsp;&nbsp;<span class="xg1">จะข้ามไปยังหน้าที่ระบุ</span><br />\n\
 					<span class="xi1">*</span>[#<span class="xi1">tid,pid</span>]<span class="xi1">ชื่อเรื่อง</span> &nbsp;&nbsp;<span class="xg1">จะข้ามไปยังโพสต์ระบุ</span><br />\n\

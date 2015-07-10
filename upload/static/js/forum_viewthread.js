@@ -2,7 +2,7 @@
 	[Discuz!] (C)2001-2099 Comsenz Inc.
 	This is NOT a freeware, use is subject to license terms
 
-	$Id: forum_viewthread.js 33862 2013-08-22 09:19:30Z nemohou $
+	$Id: forum_viewthread.js 35220 2015-02-27 08:23:59Z nemohou $
 */
 
 var replyreload = '', attachimgST = new Array(), zoomgroup = new Array(), zoomgroupinit = new Array();
@@ -169,7 +169,7 @@ function parsetag(pid) {
 }
 
 function setanswer(pid, from){
-	if(confirm('คุณแน่ใจหรือว่าต้องการตอบกลับ “ควรเลือกคำตอบที่ดีที่สุด”')){
+	if(confirm('คุณแน่ใจหรือว่าความคิดเห็นที่คุณเลือกนี้เป็น “คำตอบที่ดีที่สุด”')){
 		if(BROWSER.ie) {
 			doane(event);
 		}
@@ -233,14 +233,14 @@ function succeedhandle_fastpost(locationhref, message, param) {
 		ajaxget('forum.php?mod=viewthread&tid=' + tid + '&viewpid=' + pid + '&from=' + from, 'post_new', 'ajaxwaitid', '', null, 'fastpostappendreply()');
 		if(replyreload) {
 			var reloadpids = replyreload.split(',');
-			for(i = 1;i < reloadpids.length;i++) {
+			for(var i = 1;i < reloadpids.length;i++) {
 				ajaxget('forum.php?mod=viewthread&tid=' + tid + '&viewpid=' + reloadpids[i] + '&from=' + from, 'post_' + reloadpids[i], 'ajaxwaitid');
 			}
 		}
 		$('fastpostreturn').className = '';
 	} else {
 		if(!message) {
-			message = 'โพสต์ของคุณจะต้องผ่านการตรวจสอบจากผู้ดูแลระบบก่อน โปรดอดทนรอ';
+			message = 'โพสต์ของคุณต้องรอการตรวจสอบจากผู้ดูแลระบบก่อน ถึงจะแสดงผลได้';
 		}
 		$('post_new').style.display = $('fastpostmessage').value = $('fastpostreturn').className = '';
 		$('fastpostreturn').innerHTML = message;
@@ -385,7 +385,7 @@ function toggleRatelogCollapse(tarId, ctrlObj) {
 
 function copyThreadUrl(obj, bbname) {
 	bbname = bbname || SITEURL;
-	setCopy($('thread_subject').innerHTML.replace(/&amp;/g, '&') + '\n' + obj.href + '\n' + '(ที่มาของเนื้อหา: '+bbname+')' + '\n', 'ที่อยู่กระทู้ถูกคัดลอกไปยังคลิปบอร์ดแล้ว');
+	setCopy($('thread_subject').innerHTML.replace(/&amp;/g, '&') + '\n' + obj.href + '\n' + '(ที่มา: '+bbname+')' + '\n', 'ที่อยู่กระทู้ถูกคัดลอกไปยังคลิปบอร์ดแล้ว');
 	return false;
 }
 
@@ -395,11 +395,11 @@ function replyNotice() {
 	var status = replynotice.getAttribute("status");
 	if(status == 1) {
 		replynotice.href = newurl + 'receive';
-		replynotice.innerHTML = 'รับการแจ้งเตือน';
+		replynotice.innerHTML = 'เปิดแจ้งเตือนความเห็น';
 		replynotice.setAttribute("status", 0);
 	} else {
 		replynotice.href = newurl + 'ignore';
-		replynotice.innerHTML = 'หยุดรับการแจ้งเตือน';
+		replynotice.innerHTML = 'ปิดแจ้งเตือนความเห็น';
 		replynotice.setAttribute("status", 1);
 	}
 }
@@ -441,7 +441,7 @@ function connect_show_dialog(title, html, type) {
 function connect_get_thread() {
 	connect_thread_info.subject = $('connect_thread_title').value;
 	if ($('postmessage_' + connect_thread_info.post_id)) {
-		connect_thread_info.html_content = preg_replace(["'"], ['%27'], encodeURIComponent(preg_replace(['แก้ไขครั้งสุดท้าย .*? โดย .*? ','&nbsp;','<em onclick="copycode\\(\\$\\(\'code0\'\\)\\);">คัดลอกโค้ด</em>'], ['',' ', ''], $('postmessage_' + connect_thread_info.post_id).innerHTML)));
+		connect_thread_info.html_content = preg_replace(["'"], ['%27'], encodeURIComponent(preg_replace(['แก้ไขครั้งสุดท้ายโดย .*? เมื่อ .*? ','&nbsp;','<em onclick="copycode\\(\\$\\(\'code0\'\\)\\);">คัดลอกโค้ด</em>'], ['',' ', ''], $('postmessage_' + connect_thread_info.post_id).innerHTML)));
 	}
 	return connect_thread_info;
 }
@@ -564,7 +564,7 @@ function show_threadpage(pid, current, maxpage, ispreview) {
 var show_threadindex_data = '';
 function show_threadindex(pid, ispreview) {
 	if(!show_threadindex_data) {
-		var s = '<div class="tindex"><h3>ไดเรกทอรี</h3><ul>';
+		var s = '<div class="tindex"><h3>สารบัญ</h3><ul>';
 		for(i in $('threadindex').childNodes) {
 			o = $('threadindex').childNodes[i];
 			if(o.tagName == 'A') {
@@ -789,7 +789,7 @@ function succeedhandle_vfastpost(url, message, param) {
 }
 
 function vmessage() {
-	var vf_tips = '#แสดงความคิดเห็นกระทู้นี้#';
+	var vf_tips = '#ตอบกลับด่วนกระทู้นี้#';
 	$('vmessage').value = vf_tips;
 	$('vmessage').style.color = '#CDCDCD';
 	$('vmessage').onclick = function() {

@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: forum_misc.php 33825 2013-08-19 08:32:40Z nemohou $
+ *      $Id: forum_misc.php 35222 2015-03-02 02:16:20Z nemohou $
  */
 
 if(!defined('IN_DISCUZ')) {
@@ -605,6 +605,9 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 
 } elseif($_GET['action'] == 'rate' && $_GET['pid']) {
 
+	$_GET['tid'] = dintval($_GET['tid']);
+	$_GET['pid'] = dintval($_GET['pid']);
+
 	if($_GET['showratetip']) {
 		include template('forum/rate');
 		exit();
@@ -709,7 +712,7 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 		require_once libfile('function/discuzcode');
 		$sqlvalues = $comma = '';
 		$sqlreason = censor(trim($_GET['reason']));
-		$sqlreason = cutstr(dhtmlspecialchars($sqlreason), 80, '.');
+		$sqlreason = cutstr(dhtmlspecialchars($sqlreason), 40, '.');
 		foreach($creditsarray as $id => $addcredits) {
 			$insertarr = array(
 				'pid' => $_GET['pid'],

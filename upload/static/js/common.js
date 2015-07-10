@@ -532,7 +532,7 @@ function showPreview(val, id) {
 
 function showloading(display, waiting) {
 	var display = display ? display : 'block';
-	var waiting = waiting ? waiting : 'กรุณารอสักครู่...';
+	var waiting = waiting ? waiting : 'กรุณารอ...';
 	$('ajaxwaitid').innerHTML = waiting;
 	$('ajaxwaitid').style.display = display;
 }
@@ -1094,7 +1094,7 @@ function showDialog(msg, mode, t, func, cover, funccancel, leftmsg, confirmtxt, 
 	}
 	locationtime = isUndefined(locationtime) ? '' : locationtime;
 	if(locationtime) {
-		leftmsg = locationtime + ' วินาทีจะรีเฟรชหน้าเว็บ';
+		leftmsg = locationtime + ' วินาทีจะไปยังหน้าเว็บใหม่';
 		showDialogST = setTimeout(closefunc, locationtime * 1000);
 		showconfirm = 0;
 	}
@@ -1112,7 +1112,7 @@ function showDialog(msg, mode, t, func, cover, funccancel, leftmsg, confirmtxt, 
 		hidedom = '<style type="text/css">object{visibility:hidden;}</style>';
 	}
 	var s = hidedom + '<table cellpadding="0" cellspacing="0" class="fwin"><tr><td class="t_l"></td><td class="t_c"></td><td class="t_r"></td></tr><tr><td class="m_l">&nbsp;&nbsp;</td><td class="m_c"><h3 class="flb"><em>';
-	s += t ? t : 'คำแนะนำ';
+	s += t ? t : 'เคล็ดลับ';
 	s += '</em><span><a href="javascript:;" id="fwin_dialog_close" class="flbc" onclick="hideMenu(\'' + menuid + '\', \'dialog\')" title="ปิด">ปิด</a></span></h3>';
 	if(mode == 'info') {
 		s += msg ? msg : '';
@@ -1778,7 +1778,7 @@ function noticeTitle() {
 
 function noticeTitleFlash() {
 	if(NOTICETITLE.flashNumber < 5 || NOTICETITLE.flashNumber > 4 && !NOTICETITLE['State']) {
-		document.title = (NOTICETITLE['State'] ? '' : '(แจ้งเตือนใหม่)') + NOTICETITLE['oldTitle'];
+		document.title = (NOTICETITLE['State'] ? '' : '(ใหม่)') + NOTICETITLE['oldTitle'];
 		NOTICETITLE['State'] = !NOTICETITLE['State'];
 	}
 	NOTICETITLE.flashNumber = NOTICETITLE.flashNumber < NOTICETITLE.sleep ? ++NOTICETITLE.flashNumber : 0;
