@@ -1003,7 +1003,7 @@ function showEditorMenu(tag, params) {
 
 	selection = sel ? (wysiwyg ? sel.htmlText : sel.text) : getSel();
 
-	if(BROWSER.rv) {
+/*jaideejung007*/	if(BROWSER.ie) {
 		selection = editdoc.getSelection();
 		sel = selection.getRangeAt(0);
 		selection = readNodes(sel.cloneContents(), false);
