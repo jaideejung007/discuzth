@@ -1,11 +1,19 @@
 +======================================+
+   Discuz! X3.2 Release 20151208
++======================================+
+Fix security issues, stable version
++======================================+
+   Discuz! X3.2 Release 20150609
++======================================+
+Fix security issues, stable version
++======================================+
    Discuz! X3.2 Release 20141225
 +======================================+
-Fixed some security problems, stable version
+Fix some of the issues, stable version
 +======================================+
    Discuz! X3.2 Release 20140618
 +======================================+
-Fixed some problems, the stable version
+Fix some of the issues, stable version
 
 +======================================+
    Discuz! X3.2 Release 20140603
@@ -14,7 +22,6 @@ Optimized: Improve efficiency of the page sections
 Improvement: Plug-in mechanism provide more interfaces 
 New: Log on with micro-channel, Support micro-communities
 Fix: Fixed known issues and security risks from the previous versions
-
 
 +--------------------------------------+
 往日版本( Old Version )
