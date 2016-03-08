@@ -2319,7 +2319,7 @@ d41d8cd98f00b204e9800998ecf8427e *data/log/index.htm
 d41d8cd98f00b204e9800998ecf8427e *data/plugindata/index.htm
 d41d8cd98f00b204e9800998ecf8427e *data/template/index.htm
 d41d8cd98f00b204e9800998ecf8427e *data/threadcache/index.htm
-68f1b663b5624e0eb7f62d6b33d27101 *source/discuz_version.php
+623ee7b9f984ff5f8a5798884c089fad *source/discuz_version.php
 7215ee9c7d9dc229d2921a40e899ec5f *source/index.htm
 0a7896849dd83bbf64a31ccf11e58a17 *source/admincp/admincp_admingroup.php
 8896d084661345e3de22cb445536f2cb *source/admincp/admincp_adv.php
@@ -3074,7 +3074,7 @@ f2b8c400c962dbe7297211326ecaa9dc *source/function/function_search.php
 719e9c2553895bdcbbbdb484a0b0d57c *source/function/function_space.php
 21ccb368d87398e099a1758e925ca295 *source/function/function_spacecp.php
 8b8fc621a0f24e3fab045d20d6c23dcb *source/function/function_stat.php
-566a2ce394a4d4adbe65f0e3c40252da *source/function/function_threadsort.php
+f318b7cc59f9188f2b479ccc791c80d6 *source/function/function_threadsort.php
 226fcf7e29ac52e0a2ca7a069a01f3ff *source/function/function_trade.php
 62b7399a4a4247c4fdd9aed0487b0b3f *source/function/function_upload.php
 2a321dd3a395780c8a5fa37562fabb72 *source/function/function_userapp.php
