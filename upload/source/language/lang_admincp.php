@@ -447,7 +447,7 @@ $lang = array
 	'nav_add_follow' => 'เพิ่มการติดตามที่แนะนำ',
 	'nav_add_defaultuser' => 'เพิ่มเพื่อนแนะนำ',
 
-	'nav_repeat' => 'คัดลอก',
+	'nav_repeat' => 'ไอพีซ้ำ',
 
 	'nav_misc_onlinelist' => 'ไอคอนรายชื่อออนไลน์',
 	'nav_misc_links' => 'ตั้งค่าเว็บลิงก์',
@@ -3706,7 +3706,7 @@ $lang = array
 	'members_access_add_postattach' => 'สิทธิ์ในการอัปโหลดไฟล์',
 	'members_access_add_postimage' => 'สิทธิ์ในการอัปโหลดรูปภาพ',
 
-	'members_repeat' => 'คัดลอก',
+	'members_repeat' => 'ไอพีซ้ำ',
 
 	'members_ipban' => 'แบน IP',
 	'members_ipban_tips' => '<li>IP Ban management needs to enable the relevant permissions.</li><li>If you are the site administrator, you can use "*" as a wildcard for add IP addresses.</li><li>If you are not the site administrator, you can not use the "*", and can add only full items and edit or delete records added by yourself.</li>',
@@ -3958,7 +3958,7 @@ $lang = array
 	'founder_perm_members_credit' => 'เครดิตสมาชิก',
 	'founder_perm_members_medal' => 'เหรียญสมาชิก',
 	'founder_perm_members_confermedal' => 'Medal awarded',
-	'founder_perm_members_repeat' => 'คัดลอกสมาชิก',
+	'founder_perm_members_repeat' => 'ไอพีซ้ำสมาชิก',
 	'founder_perm_members_clean' => 'ล้างข้อมูลสมาชิก',
 	'founder_perm_members_edit' => 'แก้ไขสมาชิก',
 	'founder_perm_group_editgroup' => 'แก้ไขกลุ่ม',
