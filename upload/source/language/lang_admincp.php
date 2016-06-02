@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: lang_admincp.php 35170 2014-12-25 02:42:41Z nemohou $
+ *      $Id: lang_admincp.php 35926 2016-05-11 02:21:11Z nemohou $
  */
 
 if(!defined('IN_DISCUZ')) {
@@ -2305,7 +2305,7 @@ $lang = array
 	'setting_attach_image_thumb_preview_btn' => '<input type="button" class="btn" onclick="var oldaction = $(\'cpform\').action;var oldoperation = $(\'cpform\').operation.value;$(\'cpform\').operation.value = \'imagepreview\';$(\'cpform\').action=\''.ADMINSCRIPT.'?action=checktools&operation=imagepreview&previewthumb=yes&frame=no\';$(\'cpform\').target=\'_blank\';$(\'cpform\').submit();$(\'cpform\').action=oldaction;$(\'cpform\').operation.value=oldoperation;$(\'cpform\').target=\'\';return false;" value="แสดงตัวอย่างของรูปภาพขนาดย่อ" style="vertical-align: middle">',
 	'setting_attach_remote_preview_btn' => '<input type="button" class="btn" onclick="var oldaction = $(\'cpform\').action;var oldoperation = $(\'cpform\').operation.value;$(\'cpform\').operation.value = \'ftpcheck\';$(\'cpform\').action=\''.ADMINSCRIPT.'?action=checktools&operation=ftpcheck&frame=no\';this.form.target=\'ftpcheckiframe\';this.form.submit();$(\'cpform\').action=oldaction;$(\'cpform\').operation.value=oldoperation;$(\'cpform\').target=\'\';return false;" value="ทดสอบไฟล์แนบจากระยะไกล" style="vertical-align: middle"><iframe name="ftpcheckiframe" style="display: none"></iframe>',
 	'setting_attach_image_lib' => 'รูปแบบไลบรารีการประมวลผลรูปภาพ',
-	'setting_attach_image_lib_comment' => 'เลือกการจัดการไลบรารีการประมวลผล รูปภาพ รูปขนาดย่อ และลายน้ำให้กับ Discuz!  GD เป็นระบบที่ใช้กันอย่างแพร่หลายในการจัดการไลบรารีการประมวลผลรูปภาพ แต่ใช้ทรัพยากรค่อนข้างสูง ImageMagick รวดเร็วขึ้นและใช้ทรัพยากรค่อนข้างน้อย อย่างไรก็ตามเซิร์ฟเวอร์ต้องได้รับอนุญาตให้รันคำสั่ง หากเซิร์ฟเวอร์ของคุณมีคุณสมบัติในการติดตั้งโปรแกรม สามารถดาวน์โหลดโปรแกรมได้ที่: <a href="http://www.imagemagick.org" target="_blank">http://www.imagemagick.org</a>  หลังจากการติดตั้งจะต้องตั้งค่าพาธ',
+	'setting_attach_image_lib_comment' => 'เลือกการจัดการไลบรารีการประมวลผล รูปภาพ รูปขนาดย่อ และลายน้ำให้กับ Discuz!  GD เป็นระบบที่ใช้กันอย่างแพร่หลายในการจัดการไลบรารีการประมวลผลรูปภาพ แต่ใช้ทรัพยากรค่อนข้างสูง ซึ่ง ImageMagick จะช่วยให้การจัดการรวดเร็วขึ้นและใช้ทรัพยากรค่อนข้างน้อย อย่างไรก็ตามเซิร์ฟเวอร์ต้องได้รับอนุญาตให้รันคำสั่ง หากเซิร์ฟเวอร์ของคุณมีคุณสมบัติในการติดตั้งโปรแกรม สามารถดาวน์โหลดโปรแกรมได้ที่: <a href="http://www.imagemagick.org" target="_blank">http://www.imagemagick.org</a>',
 	'setting_attach_image_watermarktype_GD' => 'GD',
 	'setting_attach_image_watermarktype_IM' => 'ImageMagick',
 	'setting_attach_image_impath' => 'พาธการติดตั้ง ImageMagick',

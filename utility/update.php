@@ -950,13 +950,13 @@ if($_GET['step'] == 'start') {
 	} elseif($_GET['op'] == 'updatemagic') {
 		$nextop = 'updatereport';
 		if(DB::result_first("SELECT name FROM ".DB::table('common_magic')." WHERE identifier='highlight'")) {
-			DB::query("UPDATE ".DB::table('common_magic')." SET name='Color card', description='The post or blog title highlight, color changing' WHERE identifier='highlight'");
+			DB::query("UPDATE ".DB::table('common_magic')." SET name='การ์ดสีสัน, description='เน้นสีบล็อกหรือกระทู้ของคุณให้มีสีสันกันเถอะ' WHERE identifier='highlight'");
 		}
 		if(DB::result_first("SELECT name FROM ".DB::table('common_magic')." WHERE identifier='namepost'")) {
-			DB::query("UPDATE ".DB::table('common_magic')." SET name='Ghost card', description='You can view an anonymous user identity.' WHERE identifier='namepost'");
+			DB::query("UPDATE ".DB::table('common_magic')." SET name='การ์ดล่องหน', description='เข้าอ่านกระทู้โหมดบุคคลนิรนาม' WHERE identifier='namepost'");
 		}
 		if(DB::result_first("SELECT name FROM ".DB::table('common_magic')." WHERE identifier='anonymouspost'")) {
-			DB::query("UPDATE ".DB::table('common_magic')." SET name='Anonymous card', description='At the designated place, let his name appears as anonymous.' WHERE identifier='anonymouspost'");
+			DB::query("UPDATE ".DB::table('common_magic')." SET name='การ์ดนิรนาม', description='ซ่อนชื่อเป็นบุคคลนิรนาม' WHERE identifier='anonymouspost'");
 		}
 
 		show_msg("อัปเดตไอเท็มเสร็จเรียบร้อยแล้ว", "$theurl?step=data&op=$nextop");

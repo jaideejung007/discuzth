@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: admincp_forums.php 34181 2013-10-29 08:23:15Z nemohou $
+ *      $Id: admincp_forums.php 35877 2016-04-20 01:53:57Z nemohou $
  */
 
 if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
@@ -1672,7 +1672,6 @@ EOT;
 							'expiration' => $threadsortsnew['expiration'],
 							'description' => $threadsortsnew['description'],
 							'defaultshow' => $threadsortsnew['default'] ? $threadsortsnew['defaultshow'] : '',
-							'templatelist' => $threadsortsnew['templatelist'],
 							)) : '';
 					} else {
 						$threadsortsnew = '';

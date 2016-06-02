@@ -21,6 +21,7 @@ Disallow: /connect.php
 Disallow: /forum.php?mod=redirect*
 Disallow: /forum.php?mod=post*
 Disallow: /home.php?mod=spacecp*
+Disallow: /home.php?mod=space*
 Disallow: /userapp.php?mod=app&*
 Disallow: /*?mod=misc*
 Disallow: /*?mod=attachment*
