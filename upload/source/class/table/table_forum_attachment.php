@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: table_forum_attachment.php 29217 2012-03-29 08:30:37Z chenmengshu $
+ *      $Id: table_forum_attachment.php 36278 2016-12-09 07:52:35Z nemohou $
  */
 
 if(!defined('IN_DISCUZ')) {
@@ -19,11 +19,14 @@ class table_forum_attachment extends discuz_table
 
 		$this->_table = 'forum_attachment';
 		$this->_pk    = 'aid';
+		$this->_pre_cache_key = 'forum_attachment_';
+		$this->_cache_ttl = 0;
 
 		parent::__construct();
 	}
 
 	public function update_download($aid, $count = 1) {
+		$this->clear_cache($aid);
 		return DB::query("UPDATE %t SET downloads=downloads+%d WHERE aid IN (%n)", array($this->_table, $count, (array)$aid), false, true);
 	}
 

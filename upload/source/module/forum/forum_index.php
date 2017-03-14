@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: forum_index.php 34291 2013-12-17 03:47:28Z hypowang $
+ *      $Id: forum_index.php 36265 2016-11-04 07:10:47Z nemohou $
  */
 
 if(!defined('IN_DISCUZ')) {
@@ -204,7 +204,7 @@ if($_G['setting']['grid']['showgrid']) {
 				$grids['slide'][$ithread['tid']] = array(
 						'image' => $imageurl,
 						'url' => 'forum.php?mod=viewthread&tid='.$ithread['tid'],
-						'subject' => $ithread['subject']
+						'subject' => addslashes($ithread['subject'])
 					);
 			}
 		}
@@ -290,7 +290,6 @@ if(!$gid && (!defined('FORUM_INDEX_PAGE_MEMORY') || !FORUM_INDEX_PAGE_MEMORY)) {
 					$catlist[$catid]['endrows'] .= '<td width="'.$catlist[$catid]['forumcolwidth'].'">&nbsp;</td>';
 					$colspan ++;
 				}
-				$catlist[$catid]['endrows'] .= '</tr>';
 			}
 		} elseif(empty($category['forumscount'])) {
 			unset($catlist[$catid]);
@@ -467,6 +466,7 @@ function get_index_page_guest_cache() {
 				$('debuginfo').innerHTML = '. This page is cached  at $updatetime $gzip .';
 			}
 			</script>";
+		echo '</body></html>';
 		exit();
 	}
 }

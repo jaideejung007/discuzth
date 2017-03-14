@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: lang_template.php 33872 2013-08-23 08:54:40Z nemohou $
+ *      $Id: lang_template.php 36334 2017-01-03 01:32:35Z nemohou $
  *
  *      This file is automatically generate
  */
@@ -949,6 +949,9 @@ $lang = array (
   'topicadmin_warn_delete' => 'ลบการเตือน',
   'topicadmin_warn_nums' => 'สมาชิก $warningauthor ได้รับการเตือน $authorwarnings ครั้ง',
   'topicadmin_warn_prompt' => '{$_G[setting][warningexpiration]} วัน เมื่อถูกเตือนครบ {$_G[setting][warninglimit]} ครั้ง, จะถูกแบนโพสต์โดยอัตโนมัติเป็นเวลา {$_G[setting][warningexpiration]} วัน',
+  'topicadmin_useropt' => 'จัดการผู้ใช้',
+  'topicadmin_banuser' => 'แบน',
+  'topicadmin_userdelpost' => 'ลบโพสต์',
   'admin_ban_this_ip' => 'แบน IP นี้',
   'admin_user_this_ip' => 'IP ผู้ใช้นี้',
   'admin_bump_down' => 'เลือน',

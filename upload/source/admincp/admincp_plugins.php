@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms'
  *
- *      $Id: admincp_plugins.php 34498 2014-05-12 02:51:02Z nemohou $
+ *      $Id: admincp_plugins.php 36186 2016-10-09 03:22:47Z nemohou $
  */
 
 if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
@@ -52,7 +52,7 @@ if(!$operation) {
 			}
 			$checkresult = dunserialize(cloudaddons_upgradecheck($addonids));
 			savecache('addoncheck_plugin', $checkresult);
-			dsetcookie('addoncheck_plugin', 1, 3600);
+			dsetcookie('addoncheck_plugin', 1, 43200);
 		} else {
 			loadcache('addoncheck_plugin');
 			$checkresult = $_G['cache']['addoncheck_plugin'];
@@ -629,8 +629,6 @@ if(!$operation) {
 	} else {
 		$pluginid = $plugin['pluginid'];
 	}
-
-	cloudaddons_validator($plugin['identifier'].'.plugin');
 
 	$plugin['modules'] = dunserialize($plugin['modules']);
 

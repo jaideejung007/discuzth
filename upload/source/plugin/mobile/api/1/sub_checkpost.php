@@ -6,7 +6,6 @@
  *
  *      $Id: sub_checkpost.php 32489 2013-01-29 03:57:16Z monkey $
  */
-//note checkpost.sub @ Discuz! X2.5
 
 if(!defined('IN_MOBILE_API')) {
 	exit('Access Denied');
@@ -14,7 +13,7 @@ if(!defined('IN_MOBILE_API')) {
 
 class mobile_api_sub {
 
-	function getvariable() {
+	public static function getvariable() {
 		global $_G;
 		if(empty($_G['forum'])) {
 			$allowpost = 0;

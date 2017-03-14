@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: discuz_application.php 34608 2014-06-11 02:07:39Z nemohou $
+ *      $Id: discuz_application.php 36342 2017-01-09 01:15:30Z nemohou $
  */
 
 if(!defined('IN_DISCUZ')) {
@@ -185,7 +185,8 @@ class discuz_application extends discuz_base{
 			$sitepath = preg_replace("/\/archiver/i", '', $sitepath);
 		}
 		$_G['isHTTPS'] = ($_SERVER['HTTPS'] && strtolower($_SERVER['HTTPS']) != 'off') ? true : false;
-		$_G['siteurl'] = dhtmlspecialchars('http'.($_G['isHTTPS'] ? 's' : '').'://'.$_SERVER['HTTP_HOST'].$sitepath.'/');
+		$_G['scheme'] = 'http'.($_G['isHTTPS'] ? 's' : '');
+		$_G['siteurl'] = dhtmlspecialchars($_G['scheme'].'://'.$_SERVER['HTTP_HOST'].$sitepath.'/');
 
 		$url = parse_url($_G['siteurl']);
 		$_G['siteroot'] = isset($url['path']) ? $url['path'] : '';
@@ -699,11 +700,12 @@ class discuz_application extends discuz_base{
 			}
 		} else {
 			$styleid = !empty($this->var['cookie']['styleid']) ? $this->var['cookie']['styleid'] : 0;
-		}
-		if(intval(!empty($this->var['forum']['styleid']))) {
-			$this->var['cache']['style_default']['styleid'] = $styleid = $this->var['forum']['styleid'];
-		} elseif(intval(!empty($this->var['category']['styleid']))) {
-			$this->var['cache']['style_default']['styleid'] = $styleid = $this->var['category']['styleid'];
+
+			if(intval(!empty($this->var['forum']['styleid']))) {
+				$this->var['cache']['style_default']['styleid'] = $styleid = $this->var['forum']['styleid'];
+			} elseif(intval(!empty($this->var['category']['styleid']))) {
+				$this->var['cache']['style_default']['styleid'] = $styleid = $this->var['category']['styleid'];
+			}
 		}
 
 		$styleid = intval($styleid);
@@ -732,6 +734,9 @@ class discuz_application extends discuz_base{
 			$unallowmobile = true;
 		}
 
+		if(getgpc('forcemobile')) {
+			dsetcookie('dismobilemessage', '1', 3600);
+		}
 
 		$mobile = getgpc('mobile');
 		$mobileflag = isset($this->var['mobiletpl'][$mobile]);
@@ -788,9 +793,11 @@ class discuz_application extends discuz_base{
 			$arr[] = '&mobile='.$mobiletype;
 			$arr[] = 'mobile='.$mobiletype;
 		}
-		$arr = array_merge(array(strstr($_SERVER['QUERY_STRING'], '&simpletype'), strstr($_SERVER['QUERY_STRING'], 'simpletype')), $arr);
-		$query_sting_tmp = str_replace($arr, '', $_SERVER['QUERY_STRING']);
-		$this->var['setting']['mobile']['nomobileurl'] = ($this->var['setting']['domain']['app']['forum'] ? 'http://'.$this->var['setting']['domain']['app']['forum'].'/' : $this->var['siteurl']).$this->var['basefilename'].($query_sting_tmp ? '?'.$query_sting_tmp.'&' : '?').'mobile=no';
+                parse_str($_SERVER['QUERY_STRING'], $query);
+                $query['mobile'] = 'no';
+                unset($query['simpletype']);
+                $query_sting_tmp = http_build_query($query);
+                $this->var['setting']['mobile']['nomobileurl'] = ($this->var['setting']['domain']['app']['forum'] ? 'http://'.$this->var['setting']['domain']['app']['forum'].'/' : $this->var['siteurl']).$this->var['basefilename'].'?'.$query_sting_tmp;
 
 		$this->var['setting']['lazyload'] = 0;
 

@@ -6,7 +6,6 @@
  *
  *      $Id: hotthread.php 34314 2014-02-20 01:04:24Z nemohou $
  */
-//note 帖子thread >> hotthread(热门主题) @ Discuz! X2.5
 
 if(!defined('IN_MOBILE_API')) {
 	exit('Access Denied');
@@ -18,14 +17,12 @@ include_once 'forum.php';
 
 class mobile_api {
 
-	//note 程序模块执行前需要运行的代码
 	function common() {
 	}
 
-	//note 程序模板输出前运行的代码
 	function output() {
 		global $_G;
-		
+
 		foreach($GLOBALS['data']['hot']['threadlist'] as $tid=>$thread) {
 			$GLOBALS['data']['hot']['threadlist'][$tid]['avatar'] = avatar($thread['authorid'], 'big', true);
 		}

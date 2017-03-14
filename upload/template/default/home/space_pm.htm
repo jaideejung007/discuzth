@@ -290,7 +290,7 @@
 											<!--{subtemplate common/seditor}-->
 										</div>
 										<div class="area">
-<!--jaideejung007-->											<textarea rows="8" cols="40" name="message" class="pt" id="replymessage" onkeydown="ctrlEnter(event, 'pmsubmit');"></textarea>
+<!--jaideejung007-->											<textarea rows="5" cols="40" name="message" class="pt" id="replymessage" onkeydown="ctrlEnter(event, 'pmsubmit');"></textarea>
 										</div>
 									</div>
 									<p class="mtn">
@@ -363,7 +363,7 @@
 						<tr>
 							<th>{lang ignore_list}</th>
 							<td>
-								<textarea id="ignorelist" name="ignorelist" cols="40" rows="3" class="pt" onkeydown="ctrlEnter(event, 'ignoresubmit');">$ignorelist</textarea>
+								<textarea id="ignorelist" name="ignorelist" cols="40" rows="3" class="pt" onkeydown="ctrlEnter(event, 'ignoresubmit');">{echo htmlspecialchars($ignorelist)}</textarea>
 								<div class="d">{lang ignore_member_pm_message}</div>
 							</td>
 						</tr>

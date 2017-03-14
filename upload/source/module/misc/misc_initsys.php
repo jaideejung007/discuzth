@@ -4,10 +4,14 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: misc_initsys.php 34546 2014-05-26 07:35:56Z nemohou $
+ *      $Id: misc_initsys.php 36334 2017-01-03 01:32:35Z nemohou $
  */
 
 if(!defined('IN_DISCUZ')) {
+	exit('Access Denied');
+}
+
+if(file_exists(DISCUZ_ROOT.'./data/install.lock')) {
 	exit('Access Denied');
 }
 
@@ -25,11 +29,11 @@ if($_G['config']['output']['tplrefresh']) {
 	cleartemplatecache();
 }
 
-$plugins = array('qqconnect', 'cloudstat', 'soso_smilies', 'cloudsearch', 'security', 'xf_storage', 'mobile', 'pcmgr_url_safeguard', 'manyou', 'cloudunion', 'cloudcaptcha', 'wechat');
+$plugins = array('qqconnect', 'cloudstat', 'soso_smilies', 'security', 'mobile', 'pcmgr_url_safeguard', 'manyou', 'cloudcaptcha', 'wechat');
 $opens = array('mobile', 'pcmgr_url_safeguard', 'security', 'cloudcaptcha');
 $checkcloses = array('cloudcaptcha');
 
-$cloudapps = array('qqconnect' => 'connect', 'cloudstat' => 'stats', 'soso_smilies' => 'smilies', 'cloudsearch' => 'search', 'security' => 'security', 'manyou' => 'manyou', 'cloudunion' => 'union', 'cloudcaptcha' => 'captcha');
+$cloudapps = array('qqconnect' => 'connect', 'cloudstat' => 'stats', 'soso_smilies' => 'smilies', 'security' => 'security', 'manyou' => 'manyou', 'cloudcaptcha' => 'captcha');
 
 $apps = C::t('common_setting')->fetch('cloud_apps', true);
 if (!$apps) {

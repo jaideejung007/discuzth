@@ -9,7 +9,10 @@
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 @set_time_limit(1000);
-@set_magic_quotes_runtime(0);
+
+if(function_exists('set_magic_quotes_runtime')) {
+	@set_magic_quotes_runtime(0);
+}
 
 define('IN_DISCUZ', TRUE);
 define('IN_COMSENZ', TRUE);
@@ -33,6 +36,8 @@ $allow_method = array('show_license', 'env_check', 'app_reg', 'db_init', 'ext_in
 
 $step = intval(getgpc('step', 'R')) ? intval(getgpc('step', 'R')) : 0;
 $method = getgpc('method');
+
+header('Content-Type: text/html; charset='.CHARSET);
 
 if(empty($method) || !in_array($method, $allow_method)) {
 	$method = isset($allow_method[$step]) ? $allow_method[$step] : '';
@@ -453,7 +458,6 @@ if($method == 'show_license') {
 		$data = addslashes(serialize($userstats));
 		$db->query("REPLACE INTO {$tablepre}common_syscache (cname, ctype, dateline, data) VALUES ('userstats', '$ctype', '".time()."', '$data')");
 
-		touch($lockfile);
 		VIEW_OFF && show_msg('initdbresult_succ');
 
 		if(!VIEW_OFF) {

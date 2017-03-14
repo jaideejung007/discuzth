@@ -4,13 +4,13 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: uc.php 35199 2015-02-04 03:48:10Z hypowang $
+ *      $Id: uc.php 36358 2017-01-20 02:05:50Z nemohou $
  */
 
 error_reporting(0);
 
 define('UC_CLIENT_VERSION', '1.6.0');
-define('UC_CLIENT_RELEASE', '20110501');
+define('UC_CLIENT_RELEASE', '20170101');
 
 define('API_DELETEUSER', 1);
 define('API_RENAMEUSER', 1);
@@ -60,7 +60,7 @@ if(!defined('IN_UC')) {
 
 	if(in_array($get['action'], array('test', 'deleteuser', 'renameuser', 'gettag', 'synlogin', 'synlogout', 'updatepw', 'updatebadwords', 'updatehosts', 'updateapps', 'updateclient', 'updatecredit', 'getcredit', 'getcreditsettings', 'updatecreditsettings', 'addfeed'))) {
 		$uc_note = new uc_note();
-		echo $uc_note->$get['action']($get, $post);
+		echo call_user_func(array($uc_note, $get['action']), $get, $post);
 		exit();
 	} else {
 		exit(API_RETURN_FAILED);
@@ -83,8 +83,7 @@ class uc_note {
 		return xml_serialize($arr, $htmlon);
 	}
 
-	function uc_note() {
-
+	function _construct() {
 	}
 
 	function test($get, $post) {

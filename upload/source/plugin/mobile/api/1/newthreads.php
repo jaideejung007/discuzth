@@ -6,7 +6,6 @@
  *
  *      $Id: newthreads.php 34314 2014-02-20 01:04:24Z nemohou $
  */
-//note 版块forum >> newthread(新帖) @ Discuz! X3
 
 if(!defined('IN_MOBILE_API')) {
 	exit('Access Denied');
@@ -16,7 +15,6 @@ include_once 'forum.php';
 
 class mobile_api {
 
-	//note 程序模块执行前需要运行的代码
 	function common() {
 		global $_G;
 		$start = !empty($_GET['start']) ? $_GET['start'] : 0;
@@ -33,7 +31,6 @@ class mobile_api {
 		mobile_core::result(mobile_core::variable($variable));
 	}
 
-	//note 程序模板输出前运行的代码
 	function output() {}
 
 }

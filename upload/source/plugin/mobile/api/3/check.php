@@ -6,7 +6,6 @@
  *
  *      $Id: check.php 34236 2013-11-21 01:13:12Z nemohou $
  */
-//note °æ¿éforum >> forumnav(°æ¿éÁÐ±í) @ Discuz! X3.x
 
 if(!defined('IN_MOBILE_API')) {
 	exit('Access Denied');

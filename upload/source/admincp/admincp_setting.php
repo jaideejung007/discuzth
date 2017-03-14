@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: admincp_setting.php 35933 2016-05-13 05:56:41Z nemohou $
+ *      $Id: admincp_setting.php 36362 2017-02-04 02:02:03Z nemohou $
  */
 if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 	exit('Access Denied');
@@ -2211,44 +2211,26 @@ EOT;
 		$cache_config = C::memory()->config;
 		$cache_type = C::memory()->type;
 
-		$redis = array('Redis',
-			$cache_extension['redis'] ? cplang('setting_memory_php_enable') : cplang('setting_memory_php_disable'),
-			$cache_config['redis']['server'] ? cplang('open') : cplang('closed'),
-			$cache_type == 'redis' ? $do_clear_link : '--'
-			);
+		$dir = DISCUZ_ROOT.'./source/class/memory';
+		$qaadir = dir($dir);
+		$cachelist = array();
+		while($entry = $qaadir->read()) {
+			if(!in_array($entry, array('.', '..')) && preg_match("/^memory\_driver\_[\w\.]+$/", $entry) && substr($entry, -4) == '.php' && strlen($entry) < 30 && is_file($dir.'/'.$entry)) {
+				$cache = str_replace(array('.php', 'memory_driver_'), '', $entry);
+				$class_name = 'memory_driver_'.$cache;
+				$memory = new $class_name();
+				$available = is_array($cache_config[$cache]) ? !empty($cache_config[$cache]['server']) : !empty($cache_config[$cache]);
+				$cachelist[] = array($memory->cacheName,
+					$memory->env($config) ? cplang('setting_memory_php_enable') : cplang('setting_memory_php_disable'),
+					$available ? cplang('open') : cplang('closed'),
+					$cache_type == $memory->cacheName ? $do_clear_link : '--'
+				);
+			}
+		}
 
-		$memcache = array('memcache',
-			$cache_extension['memcache'] ? cplang('setting_memory_php_enable') : cplang('setting_memory_php_disable'),
-			$cache_config['memcache']['server'] ? cplang('open') : cplang('closed'),
-			$cache_type == 'memcache' ? $do_clear_link : '--'
-			);
-		$apc = array('APC',
-			$cache_extension['apc'] ? cplang('setting_memory_php_enable') : cplang('setting_memory_php_disable'),
-			$cache_config['apc'] ? cplang('open') : cplang('closed'),
-			$cache_type == 'apc' ? $do_clear_link : '--'
-			);
-		$xcache = array('Xcache',
-			$cache_extension['xcache'] ? cplang('setting_memory_php_enable') : cplang('setting_memory_php_disable'),
-			$cache_config['xcache'] ? cplang('open') : cplang('closed'),
-			$cache_type == 'xcache' ? $do_clear_link : '--'
-			);
-		$ea = array('eAccelerator',
-			$cache_extension['eaccelerator'] ? cplang('setting_memory_php_enable') : cplang('setting_memory_php_disable'),
-			$cache_config['eaccelerator'] ? cplang('open') : cplang('closed'),
-			$cache_type == 'eaccelerator' ? $do_clear_link : '--'
-			);
-		$wincache = array('wincache',
-			$cache_extension['wincache'] ? cplang('setting_memory_php_enable') : cplang('setting_memory_php_disable'),
-			$cache_config['wincache'] ? cplang('open') : cplang('closed'),
-			$cache_type == 'wincache' ? $do_clear_link : '--'
-			);
-
-		showtablerow('', array('width="100"', 'width="120"', 'width="120"'), $redis);
-		showtablerow('', '', $memcache);
-		showtablerow('', '', $apc);
-		showtablerow('', '', $xcache);
-		showtablerow('', '', $ea);
-		showtablerow('', '', $wincache);
+		foreach($cachelist as $cache) {
+			showtablerow('', array('width="100"', 'width="120"', 'width="120"'), $cache);
+		}
 		showtablefooter();
 
 		if(!isset($setting['memory'])) {
@@ -2289,6 +2271,7 @@ EOT;
 						C::t('common_member_profile')->clear_cache($uid);
 						C::t('common_member_field_home')->clear_cache($uid);
 						C::t('common_member_field_forum')->clear_cache($uid);
+						C::t('common_member_verify')->clear_cache($uid);
 					} elseif($k == 'forum_thread_forumdisplay') {
 						memory('rm', $id, 'forumdisplay_');
 					} elseif($k == 'forumindex') {
@@ -3403,6 +3386,9 @@ EOT;
 	$updatecache = FALSE;
 	$settings = array();
 	foreach($settingnew as $key => $val) {
+		if(in_array($key, array('siteuniqueid', 'my_sitekey', 'my_siteid')))  {
+			continue;
+		}
 		if($setting[$key] != $val) {
 			$updatecache = TRUE;
 			if(in_array($key, array('newbiespan', 'topicperpage', 'postperpage', 'hottopic', 'starthreshold', 'delayviewcount', 'attachexpire',
@@ -3577,7 +3563,7 @@ function showdetial(&$forum, $varname, $type = '', $last = '', $toggle = false) 
 }
 
 function getmemorycachekeys() {
-	return array('common_member', 'forum_thread', 'forum_thread_forumdisplay','forum_postcache',
+	return array('common_member', 'forum_forum', 'forum_thread', 'forum_thread_forumdisplay','forum_postcache',
 				'forum_collectionrelated', 'forum_collection', 'home_follow', 'forumindex', 'diyblock', 'diyblockoutput');
 }
 

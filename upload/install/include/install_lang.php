@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: install_lang.php 33770 2013-08-12 05:57:10Z nemohou $
+ *      $Id: install_lang.php 36287 2016-12-12 03:59:05Z nemohou $
  */
 
 if(!defined('IN_COMSENZ')) {
@@ -24,6 +24,8 @@ $lang = array(
 	'agreement_yes' => 'ยอมรับข้อตกลง',
 	'agreement_no' => 'ปฏิเสธข้อตกลง',
 	'notset' => 'ไม่จำกัด',
+	'enable' => 'เปิด',
+	'disable' => 'ปิด',
 
 	'message_title' => 'คำชี้แจง',
 	'error_message' => 'ข้อความผิดพลาด',
@@ -199,10 +201,10 @@ $lang = array(
 	'init_group_9' => 'Daemon',
 	'init_group_10' => 'Newbie',
 	'init_group_11' => 'Member',
-	'init_group_12' => 'Conqueror',
+	'init_group_12' => 'Full Member',
 	'init_group_13' => 'Senior Member',
 	'init_group_14' => 'Gold Member',
-	'init_group_15' => 'Forum Legend',
+	'init_group_15' => 'Veteran',
 
 	'init_rank_1' => 'ผู้เริ่มต้น',
 	'init_rank_2' => 'โพสต์มือใหม่',
@@ -233,14 +235,14 @@ $lang = array(
 	'init_qihoo_searchboxtxt' =>'ใส่คำที่ต้องการค้นหา สำหรับค้นหาอย่างรวดเร็วในเว็บไซต์นี้',
 	'init_threadsticky' =>'ปักหมุด เห็นทุกเว็บบอร์ด,ปักหมุด เห็นเฉพาะหมวดหมู่นี้,ปักหมุด เห็นเฉพาะห้องนี้',
 
-	'init_default_style' => 'Discuz! X Series',
-	'init_default_forum' => 'Discuz! X3.2',
+	'init_default_style' => 'สไตล์มาตรฐาน',
+	'init_default_forum' => 'เว็บบอร์ดตัวอย่าง',
 	'init_default_template' => 'เทมเพลทมาตรฐาน',
 	'init_default_template_copyright' => 'Beijing Hong Sing New Technology Co., Ltd.',
 
 	'init_dataformat' => 'Y-n-j',
-	'init_modreasons' => 'โพสต์โฆษณา\r\nสแปมโพสต์\r\nโพสต์ไม่เข้ากับเนื้อหา\r\nโพสต์ผิดห้อง\r\n\r\nถูกใจ\r\nขำกลิ้ง\r\nหลงรัก\r\nซึ้ง\r\nสยอง\r\nทึ่ง',
-	'init_userreasons' => 'ถูกใจ\r\nขำกลิ้ง\r\nหลงรัก\r\nซึ้ง\r\nสยอง\r\nทึ่ง',
+	'init_modreasons' => 'โพสต์โฆษณา\r\nสแปมโพสต์\r\nโพสต์ไม่เข้ากับเนื้อหา\r\nโพสต์ผิดห้อง\r\n\r\nถูกใจ\r\nรักเลย\r\nฮ่าๆ\r\nว้าว\r\nเศร้า\r\nโกรธ',
+	'init_userreasons' => 'ถูกใจ\r\nรักเลย\r\nฮ่าๆ\r\nว้าว\r\nเศร้า\r\nโกรธ',
 	'init_link' => 'Discuz! Official Forum',
 	'init_link_note' => 'ติดตามความเคลื่อนไหวข่าวสารดิสคัส! รวมไปถึงการดาวน์โหลดและแลกเปลี่ยนข้อมูลทางวิชาการ',
 
@@ -250,7 +252,7 @@ $lang = array(
 
 	'license' => '<div class="license"><h1>เวอร์ชั่นภาษาอังกฤษ (อย่างไม่เป็นทางการ) เป็นข้อตกลงใบอนุญาตสำหรับผู้ใช้ที่ไม่ใช้ภาษาจีน</h1>
 
-<p>Copyright (c) 2001-2013, Beijing Kang Sheng Science & Technology Co. Ltd. all rights reserved.</p>
+<p>Copyright (c) 2001-2017, Beijing Kang Sheng Science & Technology Co. Ltd. all rights reserved.</p>
 
 <p>Thank you for choosing Kang Sheng products. I hope our efforts can provide a fast and efficient, powerful site solution for you, and strong community forum solution. Kang Sheng company web site for the http://www.comsenz.com, the official forum for http://www.discuz.net products.</p>
 
@@ -320,6 +322,8 @@ $lang = array(
 	'allow' => 'อนุญาต',
 	'unix' => 'คลาส Unix',
 	'diskspace' => 'พื้นที่ดิสก์',
+	'opcache' => 'OPcache',
+	'curl' => 'ไลบรารี cURL',
 	'priv_check' => 'ตรวจสอบสิทธิ์ไดเร็กทอรี',
 	'func_depend' => 'ตรวจสอบฟังก์ชัน',
 	'func_name' => 'ชื่อฟังก์ชัน',
@@ -353,7 +357,7 @@ $lang = array(
 	'database_nonexistence' => 'ไม่พบฐานข้อมูลที่ต้องการ',
 	'skip_current' => 'ข้ามขั้นตอนนี้',
 	'topic' => 'หัวข้อ',
-	'install_finish' => 'Discuz! ของคุณได้ถูกติดตั้งเรียบร้อยแล้ว คลิกที่นี่เพื่อเข้าชม',
+	'install_finish' => 'Discuz! ติดตั้งเรียบร้อยแล้ว คลิกที่นี่เพื่อเข้าชม',
 
 );
 

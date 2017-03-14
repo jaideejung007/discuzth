@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: spacecp_profile.php 34668 2014-06-23 08:11:09Z hypowang $
+ *      $Id: spacecp_profile.php 36284 2016-12-12 00:47:50Z nemohou $
  */
 
 if(!defined('IN_DISCUZ')) {
@@ -505,7 +505,7 @@ if($operation == 'password') {
 
 include template("home/spacecp_profile");
 
-function profile_showerror($key, $extrainfo) {
+function profile_showerror($key, $extrainfo = '') {
 	echo '<script>';
 	echo 'parent.show_error("'.$key.'", "'.$extrainfo.'");';
 	echo '</script>';

@@ -5,7 +5,6 @@
 *
 *      $Id: mynotelist.php 34236 2013-11-21 01:13:12Z nemohou $
 */
-//note 提醒列表接口 @ Discuz! X3
 
 if(!defined('IN_MOBILE_API')) {
 	exit('Access Denied');

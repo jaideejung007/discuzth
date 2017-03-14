@@ -4,12 +4,15 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: restore.php 33357 2013-05-31 07:27:45Z kamichen $
+ *      $Id: restore.php 36278 2016-12-09 07:52:35Z nemohou $
  */
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 @set_time_limit(1000);
-@set_magic_quotes_runtime(0);
+
+if(function_exists('set_magic_quotes_runtime')) {
+	@set_magic_quotes_runtime(0);
+}
 
 define('IN_DISCUZ', TRUE);
 define('ROOT_PATH', dirname(__FILE__).'/../');
@@ -486,7 +489,7 @@ function show_msg($message, $url_forward = '', $type = 'message', $success = 0) 
 		echo '<span'.($success ? '' : ' class="red"').'>'.$message.'</span>';
 	} elseif($type == 'redirect') {
 		echo "$message ...";
-		echo "<br /><br /><br /><a href=\"$url_forward\">Browser will automatically jump page, without human intervention. Unless a long time when your browser does not support frames, please click here</a>";
+		echo "<br /><br /><br /><a href=\"$url_forward\">The browser will automatically jump to the page without human intervention. Please click here if your browser does not automatically jump for a long time</a>";
 		echo "<script>setTimeout(\"redirect('$url_forward');\", 1250);</script>";
 	} elseif($type == 'confirm') {
 		echo "$message";

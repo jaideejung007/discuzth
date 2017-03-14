@@ -2,7 +2,7 @@
 	[Discuz!] (C)2001-2099 Comsenz Inc.
 	This is NOT a freeware, use is subject to license terms
 
-	$Id: common.js 34611 2014-06-11 10:28:49Z nemohou $
+	$Id: common.js 36359 2017-01-20 05:06:45Z nemohou $
 */
 
 function $(id) {
@@ -1112,7 +1112,7 @@ function showDialog(msg, mode, t, func, cover, funccancel, leftmsg, confirmtxt, 
 		hidedom = '<style type="text/css">object{visibility:hidden;}</style>';
 	}
 	var s = hidedom + '<table cellpadding="0" cellspacing="0" class="fwin"><tr><td class="t_l"></td><td class="t_c"></td><td class="t_r"></td></tr><tr><td class="m_l">&nbsp;&nbsp;</td><td class="m_c"><h3 class="flb"><em>';
-	s += t ? t : 'เคล็ดลับ';
+	s += t ? t : 'ข้อแนะนำ';
 	s += '</em><span><a href="javascript:;" id="fwin_dialog_close" class="flbc" onclick="hideMenu(\'' + menuid + '\', \'dialog\')" title="ปิด">ปิด</a></span></h3>';
 	if(mode == 'info') {
 		s += msg ? msg : '';

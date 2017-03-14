@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: function_profile.php 33491 2013-06-24 07:13:17Z kamichen $
+ *      $Id: function_profile.php 36354 2017-01-17 07:52:44Z nemohou $
  */
 
 if(!defined('IN_DISCUZ')) {
@@ -326,7 +326,7 @@ function profile_show($fieldid, $space=array(), $getalone = false) {
 	} elseif($fieldid == 'position') {
 		return nl2br($space['office'] ? $space['office'] : $space['position']);
 	} elseif($fieldid == 'qq') {
-		return '<a href="http://wpa.qq.com/msgrd?V=3&Uin='.$space[$fieldid].'&Site='.$_G['setting']['bbname'].'&Menu=yes&from=discuz" target="_blank" title="'.lang('spacecp', 'qq_dialog').'"><img src="'.STATICURL.'/image/common/qq.gif" alt="QQ" style="margin:0px;"/></a>';
+		return '<a href="http://wpa.qq.com/msgrd?v=3&uin='.$space[$fieldid].'&site='.$_G['setting']['bbname'].'&menu=yes&from=discuz" target="_blank" title="'.lang('spacecp', 'qq_dialog').'"><img src="'.STATICURL.'/image/common/qq.gif" alt="QQ" style="margin:0px;"/></a>';
 	} elseif($fieldid == 'qqnumber') {
 		return $space['qq'];
 	} else {

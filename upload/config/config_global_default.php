@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: config_global_default.php 34020 2013-09-22 05:48:16Z nemohou $
+ *      $Id: config_global_default.php 36362 2017-02-04 02:02:03Z nemohou $
  */
 
 $_config = array();
@@ -111,10 +111,13 @@ $_config['memory']['memcache']['port'] = 11211;			// memcache 服务器端口
 $_config['memory']['memcache']['pconnect'] = 1;			// memcache 是否长久连接
 $_config['memory']['memcache']['timeout'] = 1;			// memcache 服务器连接超时
 
-$_config['memory']['apc'] = 1;							// 启动对 apc 的支持
-$_config['memory']['xcache'] = 1;						// 启动对 xcache 的支持
-$_config['memory']['eaccelerator'] = 1;					// 启动对 eaccelerator 的支持
-$_config['memory']['wincache'] = 1;						// 启动对 wincache 的支持
+$_config['memory']['apc'] = 0;							// 启动对 APC 的支持
+$_config['memory']['apcu'] = 0;							// 启动对 APCu 的支持
+$_config['memory']['xcache'] = 0;						// 启动对 xcache 的支持
+$_config['memory']['eaccelerator'] = 0;					// 启动对 eaccelerator 的支持
+$_config['memory']['wincache'] = 0;						// 启动对 wincache 的支持
+$_config['memory']['yac'] = 0;     						//启动对 YAC 的支持
+$_config['memory']['file']['server'] = 'data/cache/filecache';				// 启动对 File 缓存的支持
 // 服务器相关设置
 $_config['server']['id']		= 1;			// 服务器编号，多webserver的时候，用于标识当前服务器的ID
 
@@ -183,5 +186,17 @@ $_config['remote']['cron'] = 0;
 
 // $_GET|$_POST的兼容处理，0为关闭，1为开启；开启后即可使用$_G['gp_xx'](xx为变量名，$_GET和$_POST集合的所有变量名)，值为已经addslashes()处理过
 $_config['input']['compatible'] = 1;
+
+// Addon Setting
+//$_config['addonsource'] = 'xx1';
+//$_config['addon'] = array(
+//    'xx1' => array(
+//	'website_url' => 'http://127.0.0.1/AppCenter',
+//	'download_url' => 'http://127.0.0.1/AppCenter/index.php',
+//	'download_ip' => '',
+//	'check_url' => 'http://127.0.0.1/AppCenter/?ac=check&file=',
+//	'check_ip' => ''
+//    )
+//);
 
 ?>

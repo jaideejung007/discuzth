@@ -30,7 +30,7 @@ $lang = array
 	'security_question_6' => 'อาหารจานโปรดของฉัน',
 	'security_question_7' => 'เลขบัตรประชาชน',
 
-	'login_tips' => 'Discuz! เป็นผลิตภัณฑ์หลักของ <a href="http://www.comsenz.com" target="_blank">Comsenz</a> ในเครือของ <a href="http://www.tencent.com" target="_blank">Tencent</a>, สำหรับชุดภาษาไทยแปลโดยทีมงาน <a href="http://www.discuzthai.com" target="_blank">DiscuzThai</a> ภายใต้การกำกับดูแลภาษาไทยคือ acaz\'s, <a href="http://thzaa.com" target="_blank">Jaideejung007\'s</a>, i~Designs\'s และทีมงานดิสคัสไทยทุกท่าน ได้ปล่อยตัวแพลตฟอร์มระบบเว็บบอร์ดแบบครบวงจร (One-stop Service) สำหรับนำไปใช้งานในเว็บไซต์ของคุณ',
+	'login_tips' => 'Discuz! ใช้ภาษา PHP และ MySQL รวมไปถึงโซลูชันอื่นๆ ในการพัฒนา เพื่อให้ระบบคอมมูนิวตี้ของคุณทรงประสิทธิภาพ พร้อมเป็นตัวเลือกอันดับแรกในการสร้างแบรนด์ให้กับเว็บไซต์ของคุณได้',
 	'login_nosecques' => 'คุณยังไม่ได้ตั้งค่าคำถามความปลอดภัยในการลงชื่อเข้าใช้ คุณสามารถตั้งค่าคำถามความปลอดภัยได้ที่ข้อมูลส่วนตัวหรือเมนูสมาชิก หรือ <a href="forum.php?mod=memcp&action=profile&typeid=1" target="_blank">คลิกที่นี่เพื่อ</a> เพื่อตั้งค่าคำถามความปลอดภัยของคุณ',
 
 	'login_cplock' => 'การลงชื่อเข้าใช้การจัดการของคุณถูกล็อก! <br>กรุณารอ อีก<b> {ltime} </b>วินาที แล้วค่อยลองใหม่อีกครั้ง',

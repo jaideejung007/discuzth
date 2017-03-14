@@ -2043,8 +2043,8 @@ EOF;
 					$fieldarr[$key] = '';
 				}
 			}
-
 		}
+
 		if($_FILES) {
 			$upload = new discuz_upload();
 

@@ -6,24 +6,25 @@
  *
  *      $Id: memory_driver_apc.php 27635 2012-02-08 06:38:31Z zhangguosheng $
  */
-
-if(!defined('IN_DISCUZ')) {
+if (!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-class memory_driver_apc
-{
+class memory_driver_apc {
+
+	public $cacheName = 'APC';
+	public $enable;
+
+	public function env() {
+		return function_exists('apc_cache_info') && @apc_cache_info();
+	}
 
 	public function init($config) {
-
+		$this->enable = $this->env();
 	}
 
 	public function get($key) {
 		return apc_fetch($key);
-	}
-
-	public function getMulti($keys) {
-		return apc_fetch($keys);
 	}
 
 	public function set($key, $value, $ttl = 0) {

@@ -6,7 +6,6 @@
  *
  *      $Id: sublist.php 34398 2014-04-14 07:11:22Z nemohou $
  */
-//note °æ¿éforum >> sublist(×Ó°æ) @ Discuz! X2.5
 
 if (!defined('IN_MOBILE_API')) {
 	exit('Access Denied');

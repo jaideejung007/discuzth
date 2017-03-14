@@ -1776,6 +1776,6 @@ DIY图片幻灯片未加载时隐藏,模块标识隐藏
 		
 /* 大分页按钮 by theo */
 .pgbtn { margin: 5px 0 10px; }
-	.pgbtn a { display: block; height: 40px; line-height: 40px; text-align: center; border: 1px solid #DCDCDC; font-size: 14px; outline: none; border-radius: 5px; box-shadow: 0 1px 0 #F5F5F5; }
+	.pgbtn a { display: block; height: 40px; line-height: 40px; letter-spacing: 5px; text-align: center; border: 1px solid #DCDCDC; font-size: 14px; outline: none; border-radius: 5px; box-shadow: 0 1px 0 #F5F5F5; }
 		.pgbtn a:hover { border-color: #BABABA; text-decoration: none; }
 		.pgbtn a:active { background: #EEE; border-color: #D0D0D0; box-shadow: none; }

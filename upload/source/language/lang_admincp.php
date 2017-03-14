@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: lang_admincp.php 35926 2016-05-11 02:21:11Z nemohou $
+ *      $Id: lang_admincp.php 36362 2017-02-04 02:02:03Z nemohou $
  */
 
 if(!defined('IN_DISCUZ')) {
@@ -137,7 +137,7 @@ $lang = array
 	'rmb' => 'บาท',
 	'rmb_yuan' => '฿',
 	'posts' => 'โพสต์',
-	'blogid' =>'日志 ID',
+	'blogid' =>'บล็อก ID',
 	'view' => 'ดู',
 	'reply' => 'ตอบกลับ',
 	'hot' => 'ความนิยม',
@@ -271,6 +271,8 @@ $lang = array
 
 	'admincp_maptext' => 'แผนผังการจัดการ (กด ESC เพื่อยกเลิก)',
 	'admincp_maptitle' => 'แผนผังการจัดการ',
+
+	'tiny_bbcode_support' => '<em>(รองรับแท็ก [color][b][u][i][s])</em>',
 
 	'nav_newwin' => 'เปิดหน้าต่างใหม่',
 	'nav_index' => 'หน้าแรก',
@@ -1009,8 +1011,8 @@ $lang = array
 	'setting_styles_forumdisplay_stick_comment' => 'กำหนดข้อความ/ระดับของการปักหมุด ปกติจะเป็น "ปักหมุด III, ปักหมุด II, ปักหมุด I',
 	'setting_styles_forumdisplay_visitedforums' => 'จำนวนหน้าของบอร์ดที่เคยเข้ามาแล้ว',
 	'setting_styles_forumdisplay_visitedforums_comment' => 'กำหนดจำนวนการหน้าที่เคยเข้ามาแล้วสูงสุด 30 ไม่ต้องการให้แสดงใส่ 0 จะแสดงในปุ่มกลับไปหน้าแรก เช่นเมื่อใส่ 5 ตอนนี้กำลังชมบอร์ดอยู่หน้าที่ 10 รายชื่อหน้าข้างบนจะมี เพียง 5 - 15 เท่านั้น',
-	'setting_styles_forumdisplay_fastpost' => 'โพสต์ด่วน',
-	'setting_styles_forumdisplay_fastpost_comment' => 'แสดงกล่องเครื่องมือโพสต์ด่วนที่ด้านล่างในหน้าบอร์ดและหน้ากระทู้',
+	'setting_styles_forumdisplay_fastpost' => 'โพสต์ด่วน/ตอบกลับ',
+	'setting_styles_forumdisplay_fastpost_comment' => 'แสดงกล่องเครื่องมือโพสต์ด่วนและตอบกลับที่ด้านล่างในหน้าบอร์ดและหน้ากระทู้',
 	'setting_styles_forumdisplay_fastsmilies' => 'แสดงอีโมชันแนะนำ',
 	'setting_styles_forumdisplay_fastsmilies_comment' => 'แสดงอีโมติคอมแนะนำที่ด้านข้างกล่องเครื่องมือโพสต์ด่วน เลือกอีโมชันที่ต้องการแนะนำได้ใน[การจัดการอีโมชัน]',
 	'setting_styles_forumdisplay_forumpicstyle_thumbwidth' => 'ความกว้างของภาพปกกระทู้',
@@ -1535,7 +1537,7 @@ $lang = array
 	'setting_cachethread_coefficient_forum_comment' => 'จะเขียนทับค่าสัมประสิทธิ์แคชก่อนหน้านี้ กดปุ่ม CTRL ที่คีบอร์ดค้างไว้ เพื่อเลือกตัวเลือกเพิ่มเติม',
 
 	'setting_memory' => 'หน่วยความจำ',
-	'setting_memory_tips' => '<li>โปรแกรมเพิ่มประสิทธิภาพหน่วยความจำจะช่วยเพิ่มประสิทธิภาพและลดภาระให้กับเซิร์ฟเวอร์ คุณลักษณะการเพิ่มประสิทธิภาพหน่วยความจำต้องใช้ระบบเซิร์ฟเวอร์และสนับสนุนโมดูลนามสกุล PHP</li><li>จะต้องสนับสนุนอินเทอร์เฟซการเพิ่มประสิทธิภาพของหน่วยความจำ Memcache, eAccelerator, Alternative PHP Cache(APC), Xcache, Redis เลือกอินเทอร์เฟสเพิ่มประสิทธิภาพของระบบจะอิงตามสภาพแวดล้อมเซิร์ฟเวอร์ในปัจจุบัน</li><li>อินเตอร์เฟซหน่วยความจำในการตั้งค่าที่สำคัญในไฟล์ config_global.php คุณสามารถทำการตั้งค่าขั้นสูงโดยการแก้ไขไฟล์ config_global.php</li>',
+	'setting_memory_tips' => '<li>โปรแกรมเพิ่มประสิทธิภาพหน่วยความจำจะช่วยเพิ่มประสิทธิภาพและลดภาระให้กับเซิร์ฟเวอร์ คุณลักษณะการเพิ่มประสิทธิภาพหน่วยความจำต้องใช้ระบบเซิร์ฟเวอร์และสนับสนุนโมดูลนามสกุล PHP</li><li>จะต้องสนับสนุนอินเทอร์เฟซการเพิ่มประสิทธิภาพของหน่วยความจำ Memcache, eAccelerator, Alternative PHP Cache(APC), Xcache, Redis, YAC, APCu เลือกอินเทอร์เฟสเพิ่มประสิทธิภาพของระบบจะอิงตามสภาพแวดล้อมเซิร์ฟเวอร์ในปัจจุบัน</li><li>อินเตอร์เฟซหน่วยความจำในการตั้งค่าที่สำคัญในไฟล์ config_global.php คุณสามารถทำการตั้งค่าขั้นสูงโดยการแก้ไขไฟล์ config_global.php</li>',
 	'setting_memory_status' => 'สถานะหน่วยความจำปัจจุบัน',
 	'setting_memory_php_enable' => 'สนับสนุน',
 	'setting_memory_php_disable' => 'ไม่สนับสนุน',
@@ -1556,6 +1558,8 @@ $lang = array
 	'setting_memory_func_diyblockoutput_comment' => '<span class="vtop tips2">Recommended to enable, The time is set to 30 seconds, The module ID for the unit, Data is not updated within the cache time</span>',
 	'setting_memory_func_common_member' => 'User data',
 	'setting_memory_func_common_member_comment' => '<span class="vtop tips2">Recommended to enable, Set to 0 for never expired. UID as a unit, If the data Table is updated then the cached data will be updated synchronously</span>',
+	'setting_memory_func_forum_forum' => 'Forum data',
+	'setting_memory_func_forum_forum_comment' => '<span class="vtop tips2">Recommended to enable, Set time to 0 for never expired. FID as a unit. When the table data is updated, the cached data is updated synchronously</span>',
 	'setting_memory_func_forum_thread' => 'Threads',
 	'setting_memory_func_forum_thread_comment' => '<span class="vtop tips2">Recommended to enable, The time is set to 172800 seconds (2 days). TID as a unit, If the data Table is updated then the cached data will be updated synchronously</span>',
 	'setting_memory_func_forum_thread_forumdisplay' => 'Forum list',
@@ -1575,6 +1579,7 @@ $lang = array
 	'setting_memory_data_diyblock_comment' => '<span class="vtop tips2">Block BID</span>',
 	'setting_memory_data_diyblockoutput_comment' => '<span class="vtop tips2">Block BID</span>',
 	'setting_memory_data_common_member_comment' => '<span class="vtop tips2">User UID</span>',
+	'setting_memory_data_forum_forum_comment' => '<span class="vtop tips2">Forum FID</span>',
 	'setting_memory_data_forum_post_comment' => '<span class="vtop tips2">Thread TID</span>',
 	'setting_memory_data_forum_thread_comment' => '<span class="vtop tips2">Thread TID</span>',
 	'setting_memory_data_forum_thread_forumdisplay_comment' => '<span class="vtop tips2">Forum FID</span>',
@@ -5914,6 +5919,9 @@ $lang = array
 	'filecheck_doubt' => 'ไฟล์ที่อัพเดตในสัปดาห์นี้',
 	'filecheck_check_ok' => 'ถูกต้อง',
 	'filecheck_status' => 'สถานะ',
+	'filecheck_check_now' => 'Check now',
+	'filecheck_view_list' => 'View the file list',
+	'filecheck_last_homecheck' => 'Last check time',
 
 	'hookcheck_start' => 'เริ่ม',
 	'hookcheck_verifying' => 'Hook check in progress, please wait...',
@@ -7042,7 +7050,7 @@ $lang = array
 # เปิดโหมด RewriteEngine
 RewriteEngine On
 
-# ถ้าไฟล์ดิสคัสไม่ได้เก็บไว้ในซับโฟลเดอร์ กรุณาลบ /discuz ถ้าไฟล์ดิสคัสถูกเก็บไว้ในซับโฟลเดอร์ กรุณาแก้ไข /discuz เป็นชื่อโฟลเดอร์ที่เก็บไฟล์ดิสคัส และหากดิสคัสถูกต้องตั้งใน Root ให้เปลี่ยนค่าเป็น "/"
+# ถ้าไฟล์ดิสคัสไม่ได้เก็บไว้ในซับโฟลเดอร์ กรุณาลบ /discuz แต่ถ้าไฟล์ดิสคัสถูกเก็บไว้ในซับโฟลเดอร์ ให้แก้ไขค่า /discuz เป็นชื่อโฟลเดอร์ที่เก็บไฟล์ดิสคัส และหากดิสคัสถูกต้องตั้งใน Root ให้เปลี่ยนค่าเป็น "/"
 RewriteBase /discuz
 
 # เงื่อนไข Rewrite ไม่ควรแก้ไขค่าระบบ

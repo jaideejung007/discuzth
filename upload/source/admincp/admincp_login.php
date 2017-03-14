@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: admincp_login.php 32459 2013-01-22 02:01:02Z monkey $
+ *      $Id: admincp_login.php 36284 2016-12-12 00:47:50Z nemohou $
  */
 
 if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
@@ -51,7 +51,7 @@ function html_login_header($form = true) {
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=$charset" />
 <title>$title</title>
-<link rel="stylesheet" href="static/image/admincp/admincp.css" type="text/css" media="all" />
+<link rel="stylesheet" href="static/image/admincp/admincp.css?{$_G[style][verhash]}" type="text/css" media="all" />
 <meta content="Comsenz Inc." name="Copyright" />
 </head>
 <body>
@@ -88,7 +88,7 @@ function html_login_footer($halt = true) {
 	<td colspan="2" class="footer">
 		<div class="copyright">
 			<p>Powered by <a href="http://www.discuz.net/" target="_blank">Discuz!</a> $version </p>
-			<p>&copy; 2001-2013, <a href="http://www.comsenz.com/" target="_blank">Comsenz</a> Inc.</p>
+			<p>&copy; 2001-2017, <a href="http://www.comsenz.com/" target="_blank">Comsenz</a> Inc.</p>
 		</div>
 	</td>
 </tr>

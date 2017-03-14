@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: install_function.php 33326 2013-05-28 08:52:45Z kamichen $
+ *      $Id: install_function.php 36362 2017-02-04 02:02:03Z nemohou $
  */
 
 if(!defined('IN_COMSENZ')) {
@@ -127,6 +127,7 @@ function dirfile_check(&$dirfile_items) {
 }
 
 function env_check(&$env_items) {
+	global $lang;
 	foreach($env_items as $key => $item) {
 		if($key == 'php') {
 			$env_items[$key]['current'] = PHP_VERSION;
@@ -138,12 +139,22 @@ function env_check(&$env_items) {
 			unset($tmp);
 		} elseif($key == 'diskspace') {
 			if(function_exists('disk_free_space')) {
-				$env_items[$key]['current'] = floor(disk_free_space(ROOT_PATH) / (1024*1024)).'M';
+				$env_items[$key]['current'] = disk_free_space(ROOT_PATH);
 			} else {
 				$env_items[$key]['current'] = 'unknow';
 			}
 		} elseif(isset($item['c'])) {
 			$env_items[$key]['current'] = constant($item['c']);
+		} elseif($key == 'opcache') {
+			$opcache_data = function_exists('opcache_get_configuration') ? opcache_get_configuration() : array();
+			$env_items[$key]['current'] = !empty($opcache_data['directives']['opcache.enable']) ? $lang['enable'] : $lang['disable'];
+		} elseif($key == 'curl') {
+			if(function_exists('curl_init') && function_exists('curl_version')){
+				$v = curl_version();
+				$env_items[$key]['current'] = $lang['enable'].' '.$v['version'];
+			}else{
+				$env_items[$key]['current'] = $lang['disable'];
+			}
 		}
 
 		$env_items[$key]['status'] = 1;
@@ -159,6 +170,23 @@ function function_check(&$func_items) {
 	}
 }
 
+function dintval($int, $allowarray = false) {
+	$ret = floatval($int);
+	if($int == $ret || !$allowarray && is_array($int)) return $ret;
+	if($allowarray && is_array($int)) {
+		foreach($int as &$v) {
+			$v = dintval($v, true);
+		}
+		return $int;
+	} elseif($int <= 0xffffffff) {
+		$l = strlen($int);
+		$m = substr($int, 0, 1) == '-' ? 1 : 0;
+		if(($l - $m) === strspn($int,'0987654321', $m)) {
+			return $int;
+		}
+	}
+	return $ret;
+}
 function show_env_result(&$env_items, &$dirfile_items, &$func_items, &$filesock_items) {
 
 	$env_str = $file_str = $dir_str = $func_str = '';
@@ -170,8 +198,8 @@ function show_env_result(&$env_items, &$dirfile_items, &$func_items, &$filesock_
 		}
 		$status = 1;
 		if($item['r'] != 'notset') {
-			if(intval($item['current']) && intval($item['r'])) {
-				if(intval($item['current']) < intval($item['r'])) {
+			if(dintval($item['current']) && dintval($item['r'])) {
+				if(dintval($item['current']) < dintval($item['r'])) {
 					$status = 0;
 					$error_code = ENV_CHECK_ERROR;
 				}
@@ -181,6 +209,10 @@ function show_env_result(&$env_items, &$dirfile_items, &$func_items, &$filesock_
 					$error_code = ENV_CHECK_ERROR;
 				}
 			}
+		}
+		if($key == 'diskspace') {
+			$item['current'] = format_space($item['current']);
+			$item['r'] = format_space($item['r']);
 		}
 		if(VIEW_OFF) {
 			$env_str .= "\t\t<runCondition name=\"$key\" status=\"$status\" Require=\"$item[r]\" Best=\"$item[b]\" Current=\"$item[current]\"/>\n";
@@ -538,7 +570,7 @@ EOT;
 function show_footer($quit = true) {
 
 	echo <<<EOT
-		<div class="footer">&copy;2001 - 2013 <a href="http://www.comsenz.com/">Comsenz</a> Inc.</div>
+		<div class="footer">&copy;2001 - 2017 <a href="http://www.comsenz.com/">Comsenz</a> Inc.</div>
 	</div>
 </div>
 </body>
@@ -684,7 +716,7 @@ function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
 function generate_key() {
 	$random = random(32);
 	$info = md5($_SERVER['SERVER_SOFTWARE'].$_SERVER['SERVER_NAME'].$_SERVER['SERVER_ADDR'].$_SERVER['SERVER_PORT'].$_SERVER['HTTP_USER_AGENT'].time());
-	$return = '';
+	$return = array();
 	for($i=0; $i<64; $i++) {
 		$p = intval($i/2);
 		$return[$i] = $i % 2 ? $random[$p] : $info[$p];
@@ -835,7 +867,7 @@ function dfopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE, $
 	$scheme = $matches['scheme'];
 	$host = $matches['host'];
 	$path = $matches['path'] ? $matches['path'].($matches['query'] ? '?'.$matches['query'] : '') : '/';
-	$port = !empty($matches['port']) ? $matches['port'] : 80;
+	$port = !empty($matches['port']) ? $matches['port'] : ($matches['scheme'] == 'https' ? 443 : 80);
 
 	if(function_exists('curl_init') && $allowcurl) {
 		$ch = curl_init();
@@ -891,7 +923,7 @@ function dfopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE, $
 	}
 
 	$fpflag = 0;
-	if(!$fp = @fsocketopen(($ip ? $ip : $host), $port, $errno, $errstr, $timeout)) {
+	if(!$fp = @fsocketopen(($scheme == 'https' ? 'ssl' : $scheme).'://'.($scheme == 'https' ? $host : ($ip ? $ip : $host)), $port, $errno, $errstr, $timeout)) {
 		$context = array(
 			'http' => array(
 				'method' => $post ? 'POST' : 'GET',
@@ -901,7 +933,7 @@ function dfopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE, $
 			),
 		);
 		$context = stream_context_create($context);
-		$fp = @fopen($scheme.'://'.($ip ? $ip : $host).':'.$port.$path, 'b', false, $context);
+		$fp = @fopen($scheme.'://'.($scheme == 'https' ? $host : ($ip ? $ip : $host)).':'.$port.$path, 'b', false, $context);
 		$fpflag = 1;
 	}
 
@@ -1718,4 +1750,14 @@ function install_extra_setting() {
 	foreach($settings as $key => $val) {
 		$db->query("REPLACE INTO {$tablepre}common_setting SET skey='$key', svalue='".addslashes(serialize($val))."'");
 	}
+}
+function format_space($space) {
+    if($space > 1048576) {
+		if($space > 1073741824) {
+			return floor($space / 1073741824).'GB';
+		} else {
+			return floor($space / 1048576).'MB';
+		}
+	}
+	return $space;
 }

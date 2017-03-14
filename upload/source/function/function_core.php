@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: function_core.php 35335 2015-06-17 01:57:38Z hypowang $
+ *      $Id: function_core.php 36342 2017-01-09 01:15:30Z nemohou $
  */
 
 if(!defined('IN_DISCUZ')) {
@@ -519,6 +519,14 @@ function checktplrefresh($maintpl, $subtpl, $timecompare, $templateid, $cachefil
 function template($file, $templateid = 0, $tpldir = '', $gettplfile = 0, $primaltpl='') {
 	global $_G;
 
+	if($_G['setting']['plugins']['func'][HOOKTYPE]['template']) {
+		$param = func_get_args();
+		$hookreturn = hookscript('template', 'global', 'funcs', array('param' => $param, 'caller' => 'template'), 'template');
+		if($hookreturn) {
+			return $hookreturn;
+		}
+	}
+
 	static $_init_style = false;
 	if($_init_style === false) {
 		C::app()->_init_style();
@@ -615,7 +623,7 @@ function template($file, $templateid = 0, $tpldir = '', $gettplfile = 0, $primal
 		if(strpos($tpldir, 'plugin') && (file_exists(DISCUZ_ROOT.$mobiletplfile) || file_exists(substr(DISCUZ_ROOT.$mobiletplfile, 0, -4).'.php'))) {
 			$tplfile = $mobiletplfile;
 		} elseif(!file_exists(DISCUZ_ROOT.TPLDIR.'/'.$mobiletplfile) && !file_exists(substr(DISCUZ_ROOT.TPLDIR.'/'.$mobiletplfile, 0, -4).'.php')) {
-			$mobiletplfile = './template/default/'.$mobiletplfile;
+			$mobiletplfile = './template/default/'.$file.'.htm';
 			if(!file_exists(DISCUZ_ROOT.$mobiletplfile) && !$_G['forcemobilemessage']) {
 				$tplfile = str_replace($_G['mobiletpl'][IN_MOBILE].'/', '', $tplfile);
 				$file = str_replace($_G['mobiletpl'][IN_MOBILE].'/', '', $file);
@@ -839,7 +847,6 @@ function dstrlen($str) {
 //jaideejung007	    	}
 //jaideejung007    		$count++;
 //jaideejung007	}
-
 /*jaideejung007*/	return mb_strlen($str,'utf-8');
 }
 
@@ -1087,7 +1094,9 @@ function output_replace($content) {
 			$_G['setting']['output']['preg']['replace'] = str_replace('{CURHOST}', $_G['siteurl'], $_G['setting']['output']['preg']['replace']);
 		}
 
-		$content = preg_replace($_G['setting']['output']['preg']['search'], $_G['setting']['output']['preg']['replace'], $content);
+		foreach($_G['setting']['output']['preg']['search'] as $key => $value) {
+			$content = preg_replace_callback($value, create_function('$matches', 'return '.$_G['setting']['output']['preg']['replace'][$key].';'), $content);
+		}
 	}
 
 	return $content;
@@ -1165,7 +1174,7 @@ function hookscript($script, $hscript, $type = 'funcs', $param = array(), $func 
 					if(!method_exists($pluginclasses[$classkey], $hookfunc[1])) {
 						continue;
 					}
-					$return = $pluginclasses[$classkey]->$hookfunc[1]($param);
+					$return = call_user_func(array($pluginclasses[$classkey], $hookfunc[1]), $param);
 
 					if(substr($hookkey, -7) == '_extend' && !empty($_G['setting']['pluginhooks'][$hookkey])) {
 						continue;
@@ -1203,11 +1212,11 @@ function hookscriptoutput($tplfile) {
 		return;
 	}
 	hookscript('global', 'global');
+	$_G['hookscriptoutput'] = true;
 	if(defined('CURMODULE')) {
 		$param = array('template' => $tplfile, 'message' => $_G['hookscriptmessage'], 'values' => $_G['hookscriptvalues']);
 		hookscript(CURMODULE, $_G['basescript'], 'outputfuncs', $param);
 	}
-	$_G['hookscriptoutput'] = true;
 }
 
 function pluginmodule($pluginid, $type) {
@@ -1984,7 +1993,7 @@ function userappprompt() {
 }
 
 function dintval($int, $allowarray = false) {
-	$ret = intval($int);
+	$ret = floatval($int);
 	if($int == $ret || !$allowarray && is_array($int)) return $ret;
 	if($allowarray && is_array($int)) {
 		foreach($int as &$v) {
@@ -2092,6 +2101,17 @@ function currentlang() {
 		return '';
 	}
 }
+if(PHP_VERSION < '7.0.0') {
+	function dpreg_replace($pattern, $replacement, $subject, $limit = -1, &$count) {
+		return preg_replace($pattern, $replacement, $subject, $limit, $count);
+	}
+} else {
+	function dpreg_replace($pattern, $replacement, $subject, $limit = -1, &$count) {
+		require_once libfile('function/preg');
+		return _dpreg_replace($pattern, $replacement, $subject, $limit, $count);
+	}
+}
+
 
 
 ?>

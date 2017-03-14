@@ -6,7 +6,6 @@
  *
  *      $Id: smiley.php 34398 2014-04-14 07:11:22Z nemohou $
  */
-//note ฑํว้ @ Discuz! X3
 
 if (!defined('IN_MOBILE_API')) {
 	exit('Access Denied');

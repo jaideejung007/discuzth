@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: update.php 33990 2013-09-13 10:20:02Z nemohou $
+ *      $Id: update.php 36348 2017-01-13 06:36:44Z nemohou $
  */
 
 include_once('../source/class/class_core.php');
@@ -63,7 +63,7 @@ $devmode = file_exists(DISCUZ_ROOT.'./install/data/install_dev.sql');
 $sqlfile = DISCUZ_ROOT.($devmode ? './install/data/install_dev.sql' : './install/data/install.sql');
 
 if(!file_exists($sqlfile)) {
-	show_msg('ไฟล์ SQL '.$sqlfile.' ไม่มีอยู่');
+	show_msg('ไม่พบไฟล์ SQL '.$sqlfile.'');
 }
 $first_to_2_5 = !C::t('common_setting')->skey_exists('strongpw');
 $first_to_3_0 = !C::t('common_setting')->skey_exists('antitheft');
@@ -89,7 +89,7 @@ if($_POST['delsubmit']) {
 		}
 	}
 
-	show_msg('ดำเนินการลบตารางและเขตข้อมูลเสร็จเรียบร้อยแล้ว', $theurl.'?step=style');
+	show_msg('ดำเนินการลบตารางและฟิลด์เสร็จเรียบร้อยแล้ว', $theurl.'?step=style');
 }
 
 function waitingdb($curstep, $sqlarray) {
@@ -114,7 +114,7 @@ if($_GET['step'] == 'start') {
 		show_msg('กรุณาอย่าปิดหน้าเว็บนี้ จนกว่าจะดำเนินการเสร็จสิ้น...', $theurl.'?step=start', 5000);
 	}
 	if(version_compare($version, '1.5.2') <= 0) {
-		show_msg('กรุณาอัปเดต UCenter ให้เป็นเวอร์ชัน 1.6.0 หรือใหม่กว่า <br>ถ้าคุณใช้ Discuz! X ที่มาพร้อมกับ UCenter กรุณาดาวน์โหลด UCenter 1.6.0, ในไดเรกทอรี utilities จะมีไฟล์สำหรับอัปเดต คัดลอกหรืออัปโหลดไปยังไดเรกทอรี uc_server ของ Discuz! X แล้วเรียกใช้การอัปเดต');
+		show_msg('กรุณาอัปเดต UCenter ให้เป็นเวอร์ชัน 1.6.0 หรือใหม่กว่า <br>ถ้าคุณใช้ Discuz! X ที่มาพร้อมกับ UCenter กรุณาดาวน์โหลด UCenter 1.6.0, ในโฟลเดอร์ utilities จะมีไฟล์สำหรับอัปเดต คัดลอกหรืออัปโหลดไปยังโฟลเดอร์ uc_server ของ Discuz! X แล้วเรียกใช้การอัปเดต');
 	} else {
 		show_msg('คำอธิบาย: <br>การอัปเดตนี้ จะเป็นการนำเข้าข้อมูลที่เกี่ยวข้องจากไฟล์ SQL เพื่อทำการซิงโครไนส์ฐานข้อมูลปัจจุบันของคุณ<br>
 			โปรดตรวจสอบให้แน่ใจว่าโฟลเดอร์นี้มีไฟล์ ./data/install.sql ล่าสุดสำหรับดิสคัสเวอร์ชันนี้แล้ว<br><br>
@@ -398,7 +398,7 @@ if($_GET['step'] == 'start') {
 		$profile = DB::fetch_first('SELECT * FROM '.DB::table('common_member_profile_setting')." WHERE fieldid = 'birthday'");
 		if($profile['title'] == 'วันเกิด') {
 			DB::query("UPDATE ".DB::table('common_member_profile_setting')." SET title='วันเกิด' WHERE fieldid = 'birthday'");
-			DB::query("UPDATE ".DB::table('common_member_profile_setting')." SET title='ประเภทของการ์ด' WHERE fieldid = 'idcardtype'");
+			DB::query("UPDATE ".DB::table('common_member_profile_setting')." SET title='ประเภทการ์ด' WHERE fieldid = 'idcardtype'");
 			DB::query("UPDATE ".DB::table('common_member_profile_setting')." SET title='AliPay' WHERE fieldid = 'alipay'");
 			DB::query("UPDATE ".DB::table('common_member_profile_setting')." SET title='ICQ' WHERE fieldid = 'icq'");
 			DB::query("UPDATE ".DB::table('common_member_profile_setting')." SET title='QQ' WHERE fieldid = 'qq'");
@@ -741,7 +741,7 @@ if($_GET['step'] == 'start') {
 			DB::query("INSERT INTO ".DB::table('common_word_type')." VALUES('1', 'การเมือง'),('2', 'โฆษณา')");
 		}
 		if(!isset($settings['userreasons'])) {
-			$newsettings['userreasons'] = 'ถูกใจ\r\nขำกลิ้ง\r\nหลงรัก\r\nซึ้ง\r\nสยอง\r\nทึ่ง';
+			$newsettings['userreasons'] = 'ถูกใจ\r\nรักเลย\r\nฮ่าๆ\r\nว้าว\r\nเศร้า\r\nโกรธ';
 		}
 		if(!$forum_typevar_search = C::t('forum_typevar')->count_by_search(2)) {
 			C::t('forum_typevar')->update_by_search(1, array('search' => 3));
@@ -832,7 +832,7 @@ if($_GET['step'] == 'start') {
 		}
 
 		$group_userperm = dunserialize($settings['group_userperm']);
-		if(!isset($$group_userperm['allowlivethread'])) {
+		if(!isset($group_userperm['allowlivethread'])) {
 			$group_userperm['allowlivethread'] = '1';
 			$newsettings['group_userperm'] = serialize($group_userperm);
 		}
@@ -1135,7 +1135,7 @@ if($_GET['step'] == 'start') {
 			DB::query("REPLACE INTO ".DB::table('common_smiley')." (typeid, displayorder, type, code, url) VALUES ('0','18','stamplist','รับรองการแก้ไข','010.small.gif')");
 		}
 		if(!DB::result_first("SELECT COUNT(*) FROM ".DB::table('common_smiley')." WHERE url='011.small.gif'")) {
-			DB::query("REPLACE INTO ".DB::table('common_smiley')." (typeid, displayorder, type, code, url) VALUES ('0','20','stamplist','มาใหม่ในรอบวัน','011.small.gif')");
+			DB::query("REPLACE INTO ".DB::table('common_smiley')." (typeid, displayorder, type, code, url) VALUES ('0','20','stamplist','โพสต์ใหม่','011.small.gif')");
 			$setnewbie = true;
 		}
 		require_once libfile('function/cache');
@@ -1243,8 +1243,8 @@ if($_GET['step'] == 'start') {
 				$sql = implode("\r\n", $data);
 				runquery($sql);
 			}
-			DB::query("UPDATE ".DB::table('common_block_style')." SET name = replace(`name`, 'X1.5', 'ภายใน')");
-			DB::query("UPDATE ".DB::table('common_block_style')." SET name = replace(`name`, 'X2.0', 'ภายใน')");
+			DB::query("UPDATE ".DB::table('common_block_style')." SET name = replace(`name`, 'X1.5', 'บิวท์อิน')");
+			DB::query("UPDATE ".DB::table('common_block_style')." SET name = replace(`name`, 'X2.0', 'บิวท์อิน')");
 		}
 		show_msg("อัปเดตเทมเพลทโมดูลเสร็จเรียบร้อยแล้ว", "$theurl?step=data&op=$nextop");
 	} elseif($_GET['op'] == 'block_script') {
@@ -1388,7 +1388,7 @@ if($_GET['step'] == 'start') {
 		$updateverify = $_GET['updateverify'] ? true : false;
 		if(!isset($verifys[6])) {
 			$verifys[6] = array(
-					'title' => 'ตรวจสอบชื่อจริง',
+					'title' => 'ยืนยันตัวตน',
 					'available' => $settings['realname'],
 					'showicon' => 0,
 					'viewrealname' => 0,
@@ -1396,7 +1396,7 @@ if($_GET['step'] == 'start') {
 					'icon' => ''
 				);
 			$verifys[7] = array(
-					'title' => 'ตรวจสอบวิดีโอ',
+					'title' => 'ยืนยันรูปถ่ายวิดีโอ',
 					'available' => $settings['videophoto'],
 					'showicon' => 0,
 					'viewvideophoto' => $settings['video_allowviewspace'],
@@ -1673,7 +1673,7 @@ if($_GET['step'] == 'start') {
 		if(!DB::result_first("SELECT COUNT(*) FROM ".DB::table("forum_threadprofile")." WHERE global=1")) {
 			DB::query("INSERT INTO ".DB::table("forum_threadprofile")." (`id`, `name`, `template`, `global`) VALUES
 				  (1, 'โปรไฟล์มาตรฐาน', 'a:2:{s:4:\"left\";s:399:\"{numbercard}\r\n{groupicon}<p>{*}</p>{/groupicon}\r\n{authortitle}<p><em>{*}</em></p>{/authortitle}\r\n{customstatus}<p class=\"xg1\">{*}</p>{/customstatus}\r\n{star}<p>{*}</p>{/star}\r\n{upgradeprogress}<p>{*}</p>{/upgradeprogress}\r\n<dl class=\"pil cl\">\r\n\t<dt>{baseinfo=credits,1}</dt><dd>{baseinfo=credits,0}</dd>\r\n</dl>\r\n{medal}<p class=\"md_ctrl\">{*}</p>{/medal}\r\n<dl class=\"pil cl\">{baseinfo=field_qq,0}</dl>\";s:3:\"top\";s:82:\"<dl class=\"cl\">\r\n<dt>{baseinfo=credits,1}</dt><dd>{baseinfo=credits,0}</dd>\r\n</dl>\";}', 1);");
-			DB::query("REPLACE INTO ".DB::table("forum_bbcode")." VALUES ('2','2','qq','bb_qq.gif','<a href=\"http://wpa.qq.com/msgrd?V=3&Uin={1}&amp;Site=[Discuz!]&amp;from=discuz&amp;Menu=yes\" target=\"_blank\"><img src=\"static/image/common/qq_big.gif\" border=\"0\"></a>','[qq]688888[/qq]','แสดงสถานะ QQ ออนไลน์，คลิกที่ไอคอนของเขา(เธอ)เพื่อสนทนา','1','กรุณาใส่หมายเลข QQ:<a href=\"\" class=\"xi2\" onclick=\"this.href=\'http://wp.qq.com/set.html?from=discuz&uin=\'+$(\'e_cst1_qq_param_1\').value\" target=\"_blank\" style=\"float:right;\">เพื่อแสดงสถานะออนไลน์&nbsp;&nbsp;</a>','1','21','1	2	3	10	11	12	13	14	15	16	17	18	19');");
+			DB::query("REPLACE INTO ".DB::table("forum_bbcode")." VALUES ('2','2','qq','bb_qq.gif','<a href=\"http://wpa.qq.com/msgrd?v=3&uin={1}&amp;site=[Discuz!]&amp;from=discuz&amp;menu=yes\" target=\"_blank\"><img src=\"static/image/common/qq_big.gif\" border=\"0\"></a>','[qq]688888[/qq]','แสดงสถานะ QQ ออนไลน์，คลิกที่ไอคอนของเขา(เธอ)เพื่อสนทนา','1','กรุณาใส่หมายเลข QQ:<a href=\"\" class=\"xi2\" onclick=\"this.href=\'http://wp.qq.com/set.html?from=discuz&uin=\'+$(\'e_cst1_qq_param_1\').value\" target=\"_blank\" style=\"float:right;\">เพื่อแสดงสถานะออนไลน์&nbsp;&nbsp;</a>','1','21','1	2	3	10	11	12	13	14	15	16	17	18	19');");
 		}
 
 		show_msg("อัปเดตข้อมูลโปรไฟล์เรียบร้อยแล้ว", "$theurl?step=data&op=$nextop");
@@ -1857,19 +1857,19 @@ if($_GET['step'] == 'start') {
 						$delcolumnhtml .= "<tr><td><input type=\"checkbox\" name=\"delcols[$tablename][$coltype][$index]\" value=\"1\"></td><td>{$config['tablepre']}$tablename</td><td>ดัชนี($coltype) $index $indexvalue</td></tr>";
 					}
 				} else {
-					$delcolumnhtml .= "<tr><td><input type=\"checkbox\" name=\"delcols[$tablename][$col]\" value=\"1\"></td><td>{$config['tablepre']}$tablename</td><td>เขตข้อมูล $col</td></tr>";
+					$delcolumnhtml .= "<tr><td><input type=\"checkbox\" name=\"delcols[$tablename][$col]\" value=\"1\"></td><td>{$config['tablepre']}$tablename</td><td>ฟิลด์ $col</td></tr>";
 				}
 			}
 		}
 		$delcolumnhtml .= '</table>';
 
-		echo "<p><strong>เขตข้อมูล</strong> ต่อไปนี้ เมื่อเปรียบเทียบกับฐานข้อมูลมาตรฐานพบว่า มีข้อมูลที่ซ้ำซ้อนกัน:<br>คุณสามารถเลือกที่จะลบหรือไม่ลบก็ได้</p>$delcolumnhtml";
+		echo "<p><strong>ฟิลด์</strong> ต่อไปนี้ เมื่อเปรียบเทียบกับฐานข้อมูลมาตรฐานพบว่า มีข้อมูลที่ซ้ำซ้อนกัน:<br>คุณสามารถเลือกที่จะลบหรือไม่ลบก็ได้</p>$delcolumnhtml";
 	}
 
 	if(empty($deltables) && empty($delcolumns)) {
-		echo "<p>เมื่อเปรียบเทียบกับฐานข้อมูลมาตรฐาน พบว่า ไม่จำเป็นต้องลบข้อมูลตารางและเขตข้อมูล</p><a href=\"$theurl?step=style".($_GET['from'] ? '&from='.rawurlencode($_GET['from']).'&frommd5='.rawurlencode($_GET['frommd5']) : '')."\">กรุณาคลิกที่นี่เพื่อไปยังขั้นตอนต่อไป</a></p>";
+		echo "<p>เมื่อเปรียบเทียบกับฐานข้อมูลมาตรฐาน พบว่า ไม่จำเป็นต้องลบข้อมูลตารางและฟิลด์</p><a href=\"$theurl?step=style".($_GET['from'] ? '&from='.rawurlencode($_GET['from']).'&frommd5='.rawurlencode($_GET['frommd5']) : '')."\">กรุณาคลิกที่นี่เพื่อไปยังขั้นตอนต่อไป</a></p>";
 	} else {
-		echo "<p><input type=\"submit\" name=\"delsubmit\" value=\"ลบ\"></p><p>คุณสามารถละเว้นการเพิ่มตารางและเขตข้อมูลได้<br><a href=\"$theurl?step=style".($_GET['from'] ? '&from='.rawurlencode($_GET['from']).'&frommd5='.rawurlencode($_GET['frommd5']) : '')."\">ไปยังขั้นตอนต่อไป</a></p>";
+		echo "<p><input type=\"submit\" name=\"delsubmit\" value=\"ลบ\"></p><p>คุณสามารถละเว้นการเพิ่มตารางและฟิลด์ได้<br><a href=\"$theurl?step=style".($_GET['from'] ? '&from='.rawurlencode($_GET['from']).'&frommd5='.rawurlencode($_GET['frommd5']) : '')."\">ไปยังขั้นตอนต่อไป</a></p>";
 	}
 	echo '</form>';
 
@@ -2055,14 +2055,14 @@ function show_header() {
 	</head>
 	<body>
 	<div class="bodydiv">
-	<h1>เครื่องมือช่วยอัปเดตฐานข้อมูลของ Discuz!</h1>
+	<h1>เครื่องมืออัปเกรดฐานข้อมูล</h1>
 	<div style="width:90%;margin:0 auto;">
 	<table id="menu">
 	<tr>
-	<td{$nowarr[start]}>เริ่มต้นอัปเดต</td>
-	<td{$nowarr[sql]}>เพิ่มและอัปเดตโครงสร้าง DB</td>
+	<td{$nowarr[start]}>เริ่มต้นการอัปเกรด</td>
+	<td{$nowarr[sql]}>เพิ่มและอัปเดตโครงสร้างฐานข้อมูล</td>
 	<td{$nowarr[data]}>อัปเดตข้อมูล</td>
-	<td{$nowarr[delete]}>ลบโครงสร้าง DB</td>
+	<td{$nowarr[delete]}>ลบโครงสร้างฐานข้อมูล</td>
 	<td{$nowarr[cache]}>อัปเดตเสร็จสมบูรณ์</td>
 	</tr>
 	</table>
@@ -2073,7 +2073,7 @@ END;
 function show_footer() {
 	print<<<END
 	</div>
-	<div id="footer">&copy; Comsenz Inc. 2001-2013 http://www.comsenz.com</div>
+	<div id="footer">&copy; Comsenz Inc. 2001-2017 http://www.comsenz.com</div>
 	</div>
 	<br>
 	</body>
@@ -2186,7 +2186,7 @@ EOT;
 	return 1;
 }
 
-function setdefault($var, $default, $deletevar) {
+function setdefault($var, $default, $deletevar = array()) {
 	foreach ($default as $k => $v) {
 		if(!isset($var[$k])) {
 			$var[$k] = $default[$k];

@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: function_forum.php 33660 2013-07-29 07:51:05Z nemohou $
+ *      $Id: function_forum.php 36345 2017-01-12 01:55:04Z nemohou $
  */
 
 if(!defined('IN_DISCUZ')) {
@@ -94,7 +94,7 @@ function formulaperm($formula) {
 		foreach($a[1] as $field) {
 			switch($field) {
 				case 'regdate':
-					$formula = preg_replace("/\{(\d{4})\-(\d{1,2})\-(\d{1,2})\}/e", "'\'\\1-'.sprintf('%02d', '\\2').'-'.sprintf('%02d', '\\3').'\''", $formula);
+					$formula = preg_replace_callback("/\{(\d{4})\-(\d{1,2})\-(\d{1,2})\}/", 'formulaperm_callback_123', $formula);
 				case 'regday':
 					break;
 				case 'regip':
@@ -170,6 +170,10 @@ function formulaperm($formula) {
 	return TRUE;
 }
 
+function formulaperm_callback_123($matches) {
+	return '\''.$matches[1].'-'.sprintf('%02d', $matches[2]).'-'.sprintf('%02d', $matches[3]).'\'';
+}
+
 function medalformulaperm($formula, $type) {
 	global $_G;
 
@@ -197,7 +201,7 @@ function medalformulaperm($formula, $type) {
 		foreach($a[1] as $field) {
 			switch($field) {
 				case 'regdate':
-					$formula = preg_replace("/\{(\d{4})\-(\d{1,2})\-(\d{1,2})\}/e", "'\'\\1-'.sprintf('%02d', '\\2').'-'.sprintf('%02d', '\\3').'\''", $formula);
+					$formula = preg_replace_callback("/\{(\d{4})\-(\d{1,2})\-(\d{1,2})\}/", 'medalformulaperm_callback_123', $formula);
 				case 'regday':
 					break;
 				case 'regip':
@@ -269,6 +273,10 @@ function medalformulaperm($formula, $type) {
 		return FALSE;
 	}
 	return TRUE;
+}
+
+function medalformulaperm_callback_123($matches) {
+	return '\''.$matches[1].'-'.sprintf('%02d', $matches[2]).'-'.sprintf('%02d', $matches[3]).'\'';
 }
 
 function groupexpiry($terms) {
@@ -515,6 +523,16 @@ function loadforum($fid = null, $tid = null) {
 				if(!is_array($forum[$key])) {
 					$forum[$key] = array();
 				}
+			}
+
+			if($forum['threadtypes']['types']) {
+				safefilter($forum['threadtypes']['types']);
+			}
+			if($forum['threadtypes']['options']['name']) {
+				safefilter($forum['threadtypes']['options']['name']);
+			}
+			if($forum['threadsorts']['types']) {
+				safefilter($forum['threadsorts']['types']);
 			}
 
 			if($forum['status'] == 3) {
@@ -1122,6 +1140,26 @@ function getreplybg($replybg = '') {
 		}
 	}
 	return $style;
+}
+
+function safefilter(&$data) {
+	if(is_array($data)) {
+		foreach($data as $k => $v) {
+			safefilter($data[$k]);
+		}
+	} else {
+		$data = str_replace(array(
+			'[/color]', '[b]', '[/b]', '[s]', '[/s]', '[i]', '[/i]', '[u]', '[/u]',
+			), array(
+			'</font>', '<b>', '</b>', '<strike>', '</strike>', '<i>', '</i>', '<u>', '</u>'
+			), preg_replace(array(
+			"/\[color=([#\w]+?)\]/i",
+			"/\[color=((rgb|rgba)\([\d\s,]+?\))\]/i",
+			), array(
+			"<font color=\"\\1\">",
+			"<font style=\"color:\\1\">",
+			), strip_tags($data)));
+	}
 }
 
 ?>

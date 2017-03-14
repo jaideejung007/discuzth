@@ -702,16 +702,16 @@ var geo = {
 		geo.errmsg = 'error';
 		switch(error.code) {
 			case error.TIMEOUT:
-				geo.errmsg = "Get location timeouts, please try again";
+				geo.errmsg = "หมดเวลารับตำแหน่งที่ตั้ง กรุณาลองใหม่";
 				break;
 			case error.POSITION_UNAVAILABLE:
-				geo.errmsg = 'Can not detect your current location';
+				geo.errmsg = 'ไม่สามารถค้นหาตำแหน่งที่ตั้งปัจจุบันได้';
 			    break;
 		    case error.PERMISSION_DENIED:
-		        geo.errmsg = 'Please allow normal access to your current location';
+		        geo.errmsg = 'กรุณาอนุญาตให้มีการเข้าถึงตำแหน่งที่ตั้งปัจจุบันของคุณ';
 		        break;
 		    case error.UNKNOWN_ERROR:
-		        geo.errmsg = 'An unknown error occurred';
+		        geo.errmsg = 'เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ';
 		        break;
 		}
 	},
@@ -721,7 +721,7 @@ var geo = {
 		geo.errmsg = '';
 		$.ajax({
 			type:'POST',
-			url:'http://maps.google.com/maps/api/geocode/json?latlng=' + geo.latitude + ',' + geo.longitude + '&language=th-TH&sensor=true',
+			url:'https://maps.google.com/maps/api/geocode/json?latlng=' + geo.latitude + ',' + geo.longitude + '&language=th-TH&sensor=true',
 			dataType:'json'
 		})
 		.success(function(s) {
@@ -763,7 +763,7 @@ var pullrefresh = {
 				contentobj = document.createElement('div');
 				contentobj = $(contentobj);
 				contentobj.css({'position':'absolute', 'height':'30px', 'top': '-30px', 'left':'50%'});
-				contentobj.html('<img src="'+ STATICURL + 'image/mobile/images/icon_arrow.gif" style="vertical-align:middle;margin-right:5px;-moz-transform:rotate(180deg);-webkit-transform:rotate(180deg);-o-transform:rotate(180deg);transform:rotate(180deg);"><span id="refreshtxt">Tab to refresh</span>');
+				contentobj.html('<img src="'+ STATICURL + 'image/mobile/images/icon_arrow.gif" style="vertical-align:middle;margin-right:5px;-moz-transform:rotate(180deg);-webkit-transform:rotate(180deg);-o-transform:rotate(180deg);transform:rotate(180deg);"><span id="refreshtxt">แตะเพื่อรีเฟรช</span>');
 				contentobj.find('img').css({'-webkit-transition':'all 0.5s ease-in-out'});
 				divobj.prepend(contentobj);
 				pos.topx = pos.curposx;

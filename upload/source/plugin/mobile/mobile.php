@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: mobile.php 35127 2014-12-02 08:17:18Z nemohou $
+ *      $Id: mobile.php 35114 2014-11-27 01:07:53Z nemohou $
  */
 
 define('IN_MOBILE_API', 1);
@@ -30,7 +30,7 @@ $defaultversions = array(
 	'wechat' => 4,
 );
 
-if(!in_array($_GET['module'], $modules)) {
+if(!isset($_GET['module']) || !in_array($_GET['module'], $modules)) {
 	mobile_core::result(array('error' => 'module_not_exists'));
 }
 $_GET['version'] = !empty($_GET['version']) ? intval($_GET['version']) : (!$defaultversions[$_GET['module']] ? 1 : $defaultversions[$_GET['module']]);

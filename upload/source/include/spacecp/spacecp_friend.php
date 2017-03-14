@@ -4,7 +4,7 @@
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
- *      $Id: spacecp_friend.php 33696 2013-08-03 04:53:42Z nemohou $
+ *      $Id: spacecp_friend.php 36272 2016-11-23 06:35:37Z nemohou $
  */
 
 if(!defined('IN_DISCUZ')) {
@@ -15,6 +15,7 @@ require_once libfile('function/friend');
 
 $op = empty($_GET['op'])?'':$_GET['op'];
 $uid = empty($_GET['uid'])?0:intval($_GET['uid']);
+$_GET['from'] = preg_match('/^\w+$/', $_GET['from']) ? $_GET['from'] : '';
 
 $space['key'] = space_key($space['uid']);
 

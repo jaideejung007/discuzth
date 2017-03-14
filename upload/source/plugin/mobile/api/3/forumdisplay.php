@@ -6,7 +6,6 @@
  *
  *      $Id: forumdisplay.php 34236 2013-11-21 01:13:12Z nemohou $
  */
-//note 版块forum >> forumdisplay(查看版块) @ Discuz! X2.5
 
 if(!defined('IN_MOBILE_API')) {
 	exit('Access Denied');
@@ -19,7 +18,6 @@ include_once 'forum.php';
 
 class mobile_api {
 
-	//note 程序模块执行前需要运行的代码
 	function common() {
 		global $_G;
 		if(!empty($_GET['pw'])) {
@@ -28,7 +26,6 @@ class mobile_api {
 		$_G['forum']['allowglobalstick'] = false;
 	}
 
-	//note 程序模板输出前运行的代码
 	function output() {
 		global $_G;
 		foreach($_G['forum_threadlist'] as $k => $thread) {
