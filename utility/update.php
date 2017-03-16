@@ -950,7 +950,7 @@ if($_GET['step'] == 'start') {
 	} elseif($_GET['op'] == 'updatemagic') {
 		$nextop = 'updatereport';
 		if(DB::result_first("SELECT name FROM ".DB::table('common_magic')." WHERE identifier='highlight'")) {
-			DB::query("UPDATE ".DB::table('common_magic')." SET name='การ์ดสีสัน, description='เน้นสีบล็อกหรือกระทู้ของคุณให้มีสีสันกันเถอะ' WHERE identifier='highlight'");
+			DB::query("UPDATE ".DB::table('common_magic')." SET name='การ์ดสีสัน', description='เน้นสีบล็อกหรือกระทู้ของคุณให้มีสีสันกันเถอะ' WHERE identifier='highlight'");
 		}
 		if(DB::result_first("SELECT name FROM ".DB::table('common_magic')." WHERE identifier='namepost'")) {
 			DB::query("UPDATE ".DB::table('common_magic')." SET name='การ์ดล่องหน', description='เข้าอ่านกระทู้โหมดบุคคลนิรนาม' WHERE identifier='namepost'");
