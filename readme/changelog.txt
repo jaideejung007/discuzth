@@ -1,5 +1,5 @@
 +======================================+
-   Discuz! X3.3 Release 20170301
+   Discuz! X3.3 Release 20170401
 +======================================+
 Compatible with PHP7
 Optimized SQL queries
