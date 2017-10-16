@@ -81,7 +81,6 @@ class logging_ctl {
 			$loginhash = !empty($_GET['loginhash']) && preg_match('/^\w+$/', $_GET['loginhash']) ? $_GET['loginhash'] : '';
 
 			if(!($_G['member_loginperm'] = logincheck($_GET['username']))) {
-				captcha::report($_G['clientip']);
 				showmessage('login_strike');
 			}
 			if($_GET['fastloginfield']) {
@@ -991,7 +990,7 @@ class crime_action_ctl {
 		return C::t('common_member_crime')->count_by_uid_action($uid, $key);
 	}
 
-	function search($action, $username, $operator, $startime, $endtime, $reason, $start, $limit) {
+	function search($action, $username, $operator, $starttime, $endtime, $reason, $start, $limit) {
 		$action = intval($action);
 		$operator = daddslashes(trim($operator));
 		$starttime = $starttime ? strtotime($starttime) : 0;

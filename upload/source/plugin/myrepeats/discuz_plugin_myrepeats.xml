@@ -5,7 +5,7 @@
 		<item id="plugin">
 			<item id="available"><![CDATA[1]]></item>
 			<item id="adminid"><![CDATA[1]]></item>
-			<item id="name"><![CDATA[My alias]]></item>
+			<item id="name"><![CDATA[我的马甲]]></item>
 			<item id="identifier"><![CDATA[myrepeats]]></item>
 			<item id="description"><![CDATA[]]></item>
 			<item id="datatables"><![CDATA[]]></item>
@@ -15,7 +15,7 @@
 			<item id="__modules">
 				<item id="0">
 					<item id="name"><![CDATA[memcp]]></item>
-					<item id="menu"><![CDATA[My alias]]></item>
+					<item id="menu"><![CDATA[我的马甲]]></item>
 					<item id="url"><![CDATA[]]></item>
 					<item id="type"><![CDATA[7]]></item>
 					<item id="adminid"><![CDATA[0]]></item>
@@ -31,7 +31,7 @@
 				</item>
 				<item id="2">
 					<item id="name"><![CDATA[admincp]]></item>
-					<item id="menu"><![CDATA[Manage]]></item>
+					<item id="menu"><![CDATA[管理]]></item>
 					<item id="url"><![CDATA[]]></item>
 					<item id="type"><![CDATA[3]]></item>
 					<item id="adminid"><![CDATA[1]]></item>
@@ -39,75 +39,75 @@
 				</item>
 			</item>
 		</item>
-		<item id="version"><![CDATA[X3.2]]></item>
+		<item id="version"><![CDATA[X3.2,X3.3,X3.4]]></item>
 		<item id="var">
 			<item id="0">
 				<item id="displayorder"><![CDATA[0]]></item>
-				<item id="title"><![CDATA[Allow to use Alias]]></item>
-				<item id="description"><![CDATA[Set which user group can use the account switching function]]></item>
+				<item id="title"><![CDATA[允许使用马甲]]></item>
+				<item id="description"><![CDATA[设置哪些用户组可以使用马甲切换功能]]></item>
 				<item id="variable"><![CDATA[usergroups]]></item>
 				<item id="type"><![CDATA[groups]]></item>
 				<item id="extra"><![CDATA[]]></item>
 			</item>
 		</item>
-		<item id="intro"><![CDATA[This plug-in enable users to quick and free switching between multiple accounts]]></item>
+		<item id="intro"><![CDATA[本插件方便用户快速的在自己的多个账户间自由切换]]></item>
 		<item id="installfile"><![CDATA[install.php]]></item>
 		<item id="uninstallfile"><![CDATA[uninstall.php]]></item>
 		<item id="language">
 			<item id="scriptlang">
-				<item id="login_strike"><![CDATA[Wrong password too many times, reset the alias account information and try to switch after 15 minutes.]]></item>
-				<item id="login_succeed"><![CDATA[You have switched to the {user} {comment} account, Now redirecting to the previous page.]]></item>
-				<item id="login_succeed_rsnonexistence"><![CDATA[You have switched to the  {user} {comment} account, but this account has not been set {olduser} for the alias.<br /><a href="home.php?mod=spacecp&ac=plugin&id=myrepeats:memcp&username={olduserenc}" target="_blank">[Set up the {olduser} account for the aliast ]</a><br /><a href="{referer}">[ Redirect to previous page ]</a>]]></item>
-				<item id="login_activation"><![CDATA[{user} account is not activated in this forum. Will redirect to previous page.]]></item>
-				<item id="login_invalid"><![CDATA[Account switch failed, reset the account information, you can also try yet {loginperm} times.]]></item>
-				<item id="login_password_invalid"><![CDATA[Account switch failed, reset the account information.]]></item>
-				<item id="login_question_empty"><![CDATA[Please reset the account security question and the correct answer.]]></item>
-				<item id="login_question_invalid"><![CDATA[Security Question Select error, please reset.]]></item>
-				<item id="user_nonexistence"><![CDATA[Alias account information invalid, please re-set.]]></item>
-				<item id="user_locked"><![CDATA[This Alias account has been locked by the administrator, you can not switch to {user}, Please contact your administrator.]]></item>
-				<item id="switch"><![CDATA[Alias]]></item>
-				<item id="memcp"><![CDATA[Set the Alias]]></item>
-				<item id="usergroup_disabled"><![CDATA[Your user group unable to use this feature]]></item>
-				<item id="normal"><![CDATA[Normal]]></item>
-				<item id="lock"><![CDATA[Locked]]></item>
-				<item id="username"><![CDATA[User name]]></item>
-				<item id="repeat"><![CDATA[Alias]]></item>
-				<item id="lastswitch"><![CDATA[Last switching time]]></item>
-				<item id="status"><![CDATA[Status]]></item>
-				<item id="search"><![CDATA[Search]]></item>
-				<item id="repeats"><![CDATA[Swith to what the account alias]]></item>
-				<item id="repeatusers"><![CDATA[Aliases]]></item>
-				<item id="statuss"><![CDATA[Status records]]></item>
-				<item id="viewall"><![CDATA[View All]]></item>
-				<item id="deleted"><![CDATA[- Deleted -]]></item>
-				<item id="adduser_succeed"><![CDATA[Alias account {usernamenew} successfully added.]]></item>
-				<item id="updateuser_succeed"><![CDATA[Alias account information has been updated successfully.]]></item>
+				<item id="login_strike"><![CDATA[密码错误次数过多，请重新设置马甲账号信息并在 15 分钟后再尝试切换。]]></item>
+				<item id="login_succeed"><![CDATA[您已切换到 {user} {comment}帐号，现在将转入切换前页面。]]></item>
+				<item id="login_succeed_rsnonexistence"><![CDATA[您已切换到 {user} {comment}帐号，但是此账号尚未设置 {olduser} 为马甲。<br /><a href="home.php?mod=spacecp&ac=plugin&id=myrepeats:memcp&username={olduserenc}" target="_blank">[ 设置 {olduser} 为本账号的马甲 ]</a><br /><a href="{referer}">[ 转入切换前页面 ]</a>]]></item>
+				<item id="login_activation"><![CDATA[{user} 账号未在本论坛激活，现在将转入帐号激活页面。]]></item>
+				<item id="login_invalid"><![CDATA[账号切换失败，请重新设置帐号信息，您还可以尝试 {loginperm} 次。]]></item>
+				<item id="login_password_invalid"><![CDATA[账号切换失败，请重新设置帐号信息。]]></item>
+				<item id="login_question_empty"><![CDATA[请重新设置账号的安全提问以及正确的答案。]]></item>
+				<item id="login_question_invalid"><![CDATA[安全提问选择错误，请重新设置。]]></item>
+				<item id="user_nonexistence"><![CDATA[无效的马甲账号信息，请重新设置。]]></item>
+				<item id="user_locked"><![CDATA[此马甲账号被管理员锁定，您无法切换到 {user}，请与管理员联系。]]></item>
+				<item id="switch"><![CDATA[马甲]]></item>
+				<item id="memcp"><![CDATA[设置马甲]]></item>
+				<item id="usergroup_disabled"><![CDATA[您所在用户组无法使用本功能]]></item>
+				<item id="normal"><![CDATA[正常]]></item>
+				<item id="lock"><![CDATA[锁定]]></item>
+				<item id="username"><![CDATA[用户名]]></item>
+				<item id="repeat"><![CDATA[马甲]]></item>
+				<item id="lastswitch"><![CDATA[最后切换时间]]></item>
+				<item id="status"><![CDATA[状态]]></item>
+				<item id="search"><![CDATA[搜索]]></item>
+				<item id="repeats"><![CDATA[被哪些账号马甲]]></item>
+				<item id="repeatusers"><![CDATA[的马甲]]></item>
+				<item id="statuss"><![CDATA[状态的记录]]></item>
+				<item id="viewall"><![CDATA[查看全部]]></item>
+				<item id="deleted"><![CDATA[- 已删除 -]]></item>
+				<item id="adduser_succeed"><![CDATA[马甲账号 {usernamenew} 已成功添加。]]></item>
+				<item id="updateuser_succeed"><![CDATA[马甲帐号信息已成功更新。]]></item>
 			</item>
 			<item id="templatelang">
-				<item id="myrepeats"><![CDATA[My Aliases]]></item>
-				<item id="adduser"><![CDATA[Add na Alias account]]></item>
-				<item id="add"><![CDATA[Add]]></item>
-				<item id="lastswitch"><![CDATA[Last switching time]]></item>
-				<item id="nouse"><![CDATA[Yet not used]]></item>
-				<item id="locked"><![CDATA[Locked by Administrator]]></item>
-				<item id="comment"><![CDATA[Remark]]></item>
-				<item id="commentrow"><![CDATA[Remark]]></item>
-				<item id="username"><![CDATA[User name]]></item>
-				<item id="password"><![CDATA[Password]]></item>
-				<item id="security_question"><![CDATA[Security question]]></item>
-				<item id="security_question_1"><![CDATA[Your Mother\'s Name]]></item>
-				<item id="security_question_2"><![CDATA[Your Grandpa\'s name]]></item>
-				<item id="security_question_3"><![CDATA[Your Futher\'s Birth Place]]></item>
-				<item id="security_question_4"><![CDATA[Your first teacher\'s name]]></item>
-				<item id="security_question_5"><![CDATA[Your personal computer model]]></item>
-				<item id="security_question_6"><![CDATA[Your favorite restaurant]]></item>
-				<item id="security_question_7"><![CDATA[Last four digits of your driver\'s license]]></item>
-				<item id="security_answer"><![CDATA[Answer]]></item>
-				<item id="delete_check"><![CDATA[Delete?]]></item>
-				<item id="switch_title"><![CDATA[Please enter a password]]></item>
-				<item id="switch_tips"><![CDATA[When you you switch to this account at the first time, you have to enter your password]]></item>
-				<item id="confirm"><![CDATA[OK]]></item>
-				<item id="select_rrepeats"><![CDATA[Select Alias]]></item>				
+				<item id="myrepeats"><![CDATA[我的马甲]]></item>
+				<item id="adduser"><![CDATA[添加马甲账号]]></item>
+				<item id="add"><![CDATA[添加]]></item>
+				<item id="lastswitch"><![CDATA[最后切换时间]]></item>
+				<item id="nouse"><![CDATA[尚未使用]]></item>
+				<item id="locked"><![CDATA[被管理员锁定]]></item>
+				<item id="comment"><![CDATA[备　注]]></item>
+				<item id="commentrow"><![CDATA[备注]]></item>
+				<item id="username"><![CDATA[用户名]]></item>
+				<item id="password"><![CDATA[密码]]></item>
+				<item id="security_question"><![CDATA[安全提问]]></item>
+				<item id="security_question_1"><![CDATA[母亲的名字]]></item>
+				<item id="security_question_2"><![CDATA[爷爷的名字]]></item>
+				<item id="security_question_3"><![CDATA[父亲出生的城市]]></item>
+				<item id="security_question_4"><![CDATA[您其中一位老师的名字]]></item>
+				<item id="security_question_5"><![CDATA[您个人计算机的型号]]></item>
+				<item id="security_question_6"><![CDATA[您最喜欢的餐馆名称]]></item>
+				<item id="security_question_7"><![CDATA[驾驶执照的最后四位数字]]></item>
+				<item id="security_answer"><![CDATA[回答]]></item>
+				<item id="delete_check"><![CDATA[删?]]></item>
+				<item id="switch_title"><![CDATA[请输入密码]]></item>
+				<item id="switch_tips"><![CDATA[你是首次切换到此帐号，请输入密码]]></item>
+				<item id="confirm"><![CDATA[确定]]></item>
+				<item id="select_rrepeats"><![CDATA[选择马甲]]></item>				
 			</item>
 		</item>
 	</item>

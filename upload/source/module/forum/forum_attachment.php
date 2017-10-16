@@ -166,8 +166,6 @@ if(empty($_GET['nothumb']) && $attach['isimage'] && $attach['thumb']) {
 
 $filename = $_G['setting']['attachdir'].'/forum/'.$attach['attachment'];
 if(!$attach['remote'] && !is_readable($filename)) {
-	$storageService = Cloud::loadClass('Service_Storage');
-	$storageService->checkAttachment($attach);
 	if(!$requestmode) {
 		showmessage('attachment_nonexistence');
 	} else {

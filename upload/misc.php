@@ -53,7 +53,7 @@ $discuz = C::app();
 
 $discuz->reject_robot();
 $modarray = array('seccode', 'secqaa', 'initsys', 'invite', 'faq', 'report',
-				'swfupload', 'manyou', 'stat', 'ranklist', 'buyinvitecode',
+				'swfupload', 'stat', 'ranklist', 'buyinvitecode',
 				'tag', 'diyhelp', 'mobile', 'patch', 'getatuser', 'imgcropper',
 				'userstatus', 'signin');
 
@@ -77,7 +77,6 @@ $discuz->cachelist = $cachelist;
 
 switch ($mod) {
 	case 'secqaa':
-	case 'manyou':
 	case 'userstatus':
 	case 'seccode':
 		$discuz->init_cron = false;

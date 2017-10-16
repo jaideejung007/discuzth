@@ -23,6 +23,7 @@ $lang = array (
   'related_blog' => 'บล็อกที่เกี่ยวข้อง',
   'related_thread' => 'โพสต์ที่เกี่ยวข้อง',
   'replies' => 'ตอบ/ดู',
+  'price' => 'ราคา',
 );
 
 ?>

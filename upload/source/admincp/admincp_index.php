@@ -280,7 +280,7 @@ showtablefooter();
 showtableheader('home_dev', 'fixpadding');
 showtablerow('', array('class="vtop td24 lineheight"'), array(
 	cplang('home_dev_copyright'),
-/*jaideejung007*/	'<span class="bold"><a href="http://www.comsenz.com" class="lightlink2" target="_blank">Beijing ups Technology Co., Ltd. Hong Sing Company</a></span>'
+/*jaideejung007*/	'<span class="bold"><a href="http://www.comsenz.com" class="lightlink2" target="_blank">Sing-ups Beijing Science and Technology Co., Ltd.</a></span>'
 ));
 showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight smallfont team"'), array(
 	cplang('home_dev_manager'),
@@ -342,6 +342,7 @@ showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight"'), ar
 	<a href="http://www.discuz.net/redirect.php?service" class="lightlink2" target="_blank">Comsenz service</a>,
 	<a href="http://www.discuz.net/" class="lightlink2" target="_blank">Forum</a>,
 	<a href="'.ADMINSCRIPT.'?action=cloudaddons" class="lightlink2" target="_blank">Discuz! Cloud Addons</a>,
+	<a href="https://gitee.com/ComsenzDiscuz/DiscuzX" class="lightlink2" target="_blank">Discuz! X Git</a>,
 	<a href="http://jaideejung007.ml/" class="lightlink2" target="_blank">jaideejung007\'s</a>
 '));
 showtablefooter();

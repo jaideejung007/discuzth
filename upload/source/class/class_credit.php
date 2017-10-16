@@ -235,11 +235,29 @@ class credit {
 		}
 	}
 
+	function frequencycheck($uids) {
+		global $_G;
+		if(empty($_G['config']['security']['creditsafe']['second']) || empty($_G['config']['security']['creditsafe']['times'])) {
+			return true;
+		}
+		foreach($uids as $uid) {
+			$key = 'credit_fc'.$uid;
+			$v = intval(memory('get', $key));
+			memory('set', $key, ++$v, $_G['config']['security']['creditsafe']['second']);
+			if($v > $_G['config']['security']['creditsafe']['times']) {
+				system_error('credit frequency limit', true);
+				return false;
+			}
+		}
+		return true;
+	}
+
 	function updatemembercount($creditarr, $uids = 0, $checkgroup = true, $ruletxt = '') {
 		global $_G;
 
 		if(!$uids) $uids = intval($_G['uid']);
 		$uids = is_array($uids) ? $uids : array($uids);
+		$this->frequencycheck($uids);
 		if($uids && ($creditarr || $this->extrasql)) {
 			if($this->extrasql) $creditarr = array_merge($creditarr, $this->extrasql);
 			$sql = array();

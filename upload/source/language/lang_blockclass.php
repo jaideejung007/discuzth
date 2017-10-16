@@ -65,6 +65,7 @@ $lang = array(
 	'blockclass_thread_field_sorturl' => 'URL ประเภทข้อมูล',
 	'blockclass_thread_field_posts' => 'จำนวนโพสต์',
 	'blockclass_thread_field_todayposts' => 'จำนวนที่โพสต์วันนี้',
+	'blockclass_thread_field_lastposter' => 'ผู้โพสต์ล่าสุด',
 	'blockclass_thread_field_lastpost' => 'โพสต์ล่าสุด',
 	'blockclass_thread_field_dateline' => 'เวลาที่โพสต์',
 	'blockclass_thread_field_replies' => 'ตอบกลับ',

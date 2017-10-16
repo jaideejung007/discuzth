@@ -1284,7 +1284,6 @@ var rowtypedata = [
 		array('forum', cplang('misc_focus_position_forum')),
 		array('group', cplang('misc_focus_position_group')),
 		array('search', cplang('misc_focus_position_search')),
-		array('userapp', cplang('misc_focus_position_userapp')),
 	);
 
 	if(!$do) {

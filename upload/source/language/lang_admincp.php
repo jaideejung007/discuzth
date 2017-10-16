@@ -6857,7 +6857,7 @@ $lang = array
 	'postsplit_move_threads_per_time_1000' => '1000 (recommended for dedicated servers, can improve processing speed)',
 	'postsplit_manage_submit' => 'Confirm the table operation',
 
-	'optimizer_security_tips' => '<li>Physical examination can help you to discover the site problems and eliminate security risks.</li><li>Set of safety testing</li><li>Testing for the engine new versions and security patches.</li><li>Installed plugins safety and update detection.</li>',
+	'optimizer_security_tips' => '<li>Physical examination can help you to discover the site problems and eliminate security risks.</li><li>Set of safety testing</li><li>Installed plugins safety and update detection.</li>',
 	'optimizer_check_unit_optimizer_plugin' => 'Check if the plugin have a new update',
 	'optimizer_check_unit_optimizer_upgrade' => 'Check if a new product version is released',
 	'optimizer_check_unit_optimizer_patch' => 'Check if a new vulnerability patch is released',

@@ -36,6 +36,7 @@ $modcachelist = array(
 			'domainwhitelist', 'albumcategory'),
 	'space'		=> array('fields_required', 'fields_optional', 'custominfo'),
 	'group'		=> array('grouptype', 'diytemplatenamegroup'),
+	'topicadmin'	=> array('usergroups'),
 );
 
 $mod = !in_array(C::app()->var['mod'], $modarray) ? 'index' : C::app()->var['mod'];

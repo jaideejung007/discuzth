@@ -39,6 +39,7 @@ $lang = array
 	'threadlist_sortids' => 'หมวดหมู่ข้อมูล',
 	'threadlist_sortids_comment' => 'กำหนดหมวดหมู่ข้อมูล หมายเหตุ: เลือกทั้งหมดหรือเลือกที่จะไม่มีตัวกรองใดๆ',
 	'threadlist_sortids_all' => 'หมวดหมู่ข้อมูลทั้งหมด',
+	'threadlist_reply' => 'Not replied Filter',
 	'threadlist_digest' => 'กรองกระทู้สำคัญ',
 	'threadlist_digest_comment' => 'ตั้งค่าให้กรองเฉพาะกระทู้สำคัญ หมายเหตุ: เลือกทั้งหมดหรือเลือกที่จะไม่มีตัวกรองใดๆ',
 	'threadlist_digest_0' => 'กระทู้ทั่วไป',

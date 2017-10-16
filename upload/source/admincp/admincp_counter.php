@@ -178,8 +178,6 @@ if(submitcheck('forumsubmit', 1)) {
 			$updateclosed[] = $thread['tid'];
 		} elseif($thread['threadexists']) {
 			$tids[] = $thread['tid'];
-			$log_handler = Cloud::loadClass('Cloud_Service_SearchHelper');
-			$log_handler->myThreadLog('delete', array('tid' => $thread['tid']));
 		}
 	}
 

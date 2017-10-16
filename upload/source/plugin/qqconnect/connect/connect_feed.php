@@ -94,7 +94,8 @@ if ($op == 'new') {
 			$t_params['remote'] = $attach_image['remote'];
 		}
 
-		$connectOAuthClient = Cloud::loadClass('Service_Client_ConnectOAuth');
+		require_once DISCUZ_ROOT.'/source/plugin/qqconnect/lib/ConnectOAuth.php';
+		$connectOAuthClient = new Cloud_Service_Client_ConnectOAuth();
 		$feed_succ = $weibo_succ = false;
 		if(getstatus($f_type, 1)) {
 			try {
@@ -241,7 +242,8 @@ if ($op == 'new') {
 			$t_params['remote'] = $attach_image['remote'];
 		}
 
-		$connectOAuthClient = Cloud::loadClass('Service_Client_ConnectOAuth');
+		require_once DISCUZ_ROOT.'/source/plugin/qqconnect/lib/ConnectOAuth.php';
+		$connectOAuthClient = new Cloud_Service_Client_ConnectOAuth();
 		$weibo_succ = false;
 
 		try {

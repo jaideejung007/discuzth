@@ -117,7 +117,7 @@ $_config['memory']['xcache'] = 0;						// 启动对 xcache 的支持
 $_config['memory']['eaccelerator'] = 0;					// 启动对 eaccelerator 的支持
 $_config['memory']['wincache'] = 0;						// 启动对 wincache 的支持
 $_config['memory']['yac'] = 0;     						//启动对 YAC 的支持
-$_config['memory']['file']['server'] = 'data/cache/filecache';				// 启动对 File 缓存的支持
+$_config['memory']['file']['server'] = '';				// File 缓存存放目录，如设置为 data/cache/filecache ，设置后启动 File 缓存
 // 服务器相关设置
 $_config['server']['id']		= 1;			// 服务器编号，多webserver的时候，用于标识当前服务器的ID
 
@@ -159,6 +159,9 @@ $_config['security']['querysafe']['daction']	= array('@','intooutfile','intodump
 $_config['security']['querysafe']['dnote']	= array('/*','*/','#','--','"');
 $_config['security']['querysafe']['dlikehex']	= 1;
 $_config['security']['querysafe']['afullnote']	= 0;
+
+$_config['security']['creditsafe']['second'] 	= 0;		// 开启用户积分信息安全，可防止并发刷分，满足 times(次数)/second(秒) 的操作无法提交
+$_config['security']['creditsafe']['times'] 	= 10;
 
 $_config['admincp']['founder']			= '1';		// 站点创始人：拥有站点管理后台的最高权限，每个站点可以设置 1名或多名创始人
 								// 可以使用uid，也可以使用用户名；多个创始人之间请使用逗号“,”分开;
