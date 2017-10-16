@@ -36,7 +36,7 @@ if($op == 'init') {
 		}
 	}
 
-	$callback = $_G['connect']['callback_url'] . '&referer=' . urlencode($_GET['referer']) . (!empty($_GET['isqqshow']) ? '&isqqshow=yes' : '');
+	$callback = $_G['connect']['callback_url'] . '&referer=' . urlencode($_GET['referer']);
 
 	try {
 		dsetcookie('con_request_uri', $callback);
@@ -55,13 +55,13 @@ if($op == 'init') {
 
 	$params = $_GET;
 
-	if(!isset($params['receive'])) {
+	if(!isset($params['receive'])) {		
 		require_once DISCUZ_ROOT.'/source/plugin/qqconnect/lib/Util.php';
 		$utilService = new Cloud_Service_Util();
 		echo '<script type="text/javascript">setTimeout("window.location.href=\'connect.php?receive=yes&'.str_replace("'", "\'", $utilService->httpBuildQuery($_GET, '', '&')).'\'", 1)</script>';
 		exit;
 	}
-
+	
 	if($_GET['state'] != md5(FORMHASH)){
 		showmessage('qqconnect:connect_get_access_token_failed', $referer);
 	}
@@ -141,7 +141,7 @@ if($op == 'init') {
 			showmessage('qqconnect:connect_register_bind_uin_already', $referer, array('username' => $_G['member']['username']));
 		}
 
-		$isqqshow = !empty($_GET['isqqshow']) ? 1 : 0;
+		$isqqshow = 0;
 
 		$current_connect_member = C::t('#qqconnect#common_member_connect')->fetch($_G['uid']);
 		if($_G['member']['conisbind'] && $current_connect_member['conopenid']) {
@@ -244,10 +244,10 @@ if($op == 'init') {
 			$connectGuest = C::t('#qqconnect#common_connect_guest')->fetch($conopenid);
 			if ($connectGuest['conqqnick']) {
 				$insert_arr['conqqnick'] = $connectGuest['conqqnick'];
-			} else {
+			} else {				
 				try {
 					require_once DISCUZ_ROOT.'/source/plugin/qqconnect/lib/ConnectOAuth.php';
-					$connectOAuthClient = new Cloud_Service_Client_ConnectOAuth();
+					$connectOAuthClient = new Cloud_Service_Client_ConnectOAuth();					
 					$connectUserInfo = $connectOAuthClient->connectGetUserInfo_V2($conopenid, $conuintoken);
 					if ($connectUserInfo['nickname']) {
 						$connectUserInfo['nickname'] = strip_tags($connectUserInfo['nickname']);
@@ -285,7 +285,7 @@ if($op == 'init') {
 
 } elseif($op == 'change') {
 	$callback = $_G['connect']['callback_url'] . '&referer=' . urlencode($_GET['referer']);
-
+	
 	try {
 		dsetcookie('con_request_uri', $callback);
 		$redirect = $connectOAuthClient->getOAuthAuthorizeURL_V2($callback);

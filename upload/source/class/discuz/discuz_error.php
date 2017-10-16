@@ -273,10 +273,6 @@ EOT;
 
 
 		$helplink = '';
-		if($type == 'db') {
-			$helplink = "http://faq.comsenz.com/?type=mysql&dberrno=".rawurlencode(DB::errno())."&dberror=".rawurlencode(str_replace(DB::object()->tablepre, '', DB::error()));
-			$helplink = "<a href=\"$helplink\" target=\"_blank\"><span class=\"red\">Need Help?</span></a>";
-		}
 
 		$endmsg = lang('error', 'error_end_message', array('host'=>$host));
 		echo <<<EOT

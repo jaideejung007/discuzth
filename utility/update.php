@@ -55,6 +55,11 @@ if($_GET['from']) {
 }
 
 $lockfile = DISCUZ_ROOT.'./data/update.lock';
+if($_GET['lock']){
+    @touch($lockfile);
+    @unlink(DISCUZ_ROOT.'./install/update.php');
+    show_msg('<span id="finalmsg">ขอแสดงความยินดี โครงสร้างฐานข้อมูลของคุณได้ถูกอัปเกรดเสร็จเรียบร้อยแล้ว</span>');
+}
 if(file_exists($lockfile) && !$_GET['from']) {
 	show_msg('เกิดข้อผิดพลาด ไม่สามารถเริ่มการอัปเดตได้ กรุณาลบไฟล์ ./data/update.lock แล้วเรียกใช้งานไฟล์นี้อีกครั้ง');
 }
@@ -425,8 +430,8 @@ if($_GET['step'] == 'start') {
 		}
 
 		if(isset($settings['thumbsource']) && !$settings['sourcewidth'] && !$settings['sourceheight']) {
-			$newsettings['sourcewidth'] = $setting['thumbwidth'];
-			$newsettings['sourceheight'] = $setting['thumbheight'];
+			$newsettings['sourcewidth'] = $settings['thumbwidth'];
+			$newsettings['sourceheight'] = $settings['thumbheight'];
 		}
 
 		if(empty($settings['my_siteid']) && !empty($settings['connectsiteid'])) {
@@ -752,7 +757,7 @@ if($_GET['step'] == 'start') {
 				$newsettings['seccodestatus'] = $seccodecheck;
 			}
 		}
-		$seccodedata = dunserialize($setting['seccodedata']);
+		$seccodedata = dunserialize($settings['seccodedata']);
 		if(!$seccodedata['rule']) {
 			$seccodestatuss = sprintf('%05b', $seccodecheck);
 			$seccodedata['rule']['register']['allow'] = $seccodestatuss{4};
@@ -760,6 +765,7 @@ if($_GET['step'] == 'start') {
 			$seccodedata['rule']['post']['allow'] = $seccodestatuss{2};
 			$seccodedata['rule']['password']['allow'] = $seccodestatuss{1};
 			$seccodedata['rule']['card']['allow'] = $seccodestatuss{0};
+			$seccodedata['seccodedata']['type'] = intval($seccodedata['seccodedata']['type']);
 			$newsettings['seccodedata'] = serialize($seccodedata);
 		}
 		if(!isset($settings['collectionteamworkernum'])) {
@@ -1891,28 +1897,6 @@ if($_GET['step'] == 'start') {
 	show_msg("อัปเดตการคืนค่าสกินหลักเรียบร้อยแล้ว ไปยังขั้นตอนต่อไป", "$theurl?step=cache");
 
 } elseif ($_GET['step'] == 'cache') {
-	$appService = Cloud::loadClass('Service_App');
-	try {
-		$cloudstatus = $appService->checkCloudStatus();
-	} catch (Exception $e) {
-	}
-	$result = false;
-	if($cloudstatus == 'cloud' && !$appService->getCloudAppStatus('search')) {
-		try{
-			$cloudAppService = Cloud::loadClass('Service_Client_Cloud');
-			$result = $cloudAppService->appOpen();
-		} catch(Exception $e) {
-		}
-	}
-
-
-	if($result == true) {
-		$opensoso = '<br><br>คำแนะนำ:<br>เพื่อช่วยให้ระบบค้นหาภายในเว็บไซต์ทำงานได้ดีและมีประสิทธิภาพมากยิ่งขึ้น ในการอัปเดทครั้งนี้เรามีบริการการค้นหาจากทางเว็บไซต์ของเรา<br>คุณสามารถจัดการได้ที่ <a href=\\\'../admin.php?frames=yes&action=cloud&operation=search\\\' target=\\\'_blank\\\'>เมนูผู้ดูแลระบบ-&gt;กลุ่มเมฆ-&gt;ระบบค้นหาด้วยกลุ่มเมฆ</a>';
-	}
-	if(!$devmode && @$fp = fopen($lockfile, 'w')) {
-		fwrite($fp, ' ');
-		fclose($fp);
-	}
 
 	dir_clear(ROOT_PATH.'./data/template');
 	dir_clear(ROOT_PATH.'./data/cache');
@@ -1921,11 +1905,7 @@ if($_GET['step'] == 'start') {
 	dir_clear(ROOT_PATH.'./uc_client/data/cache');
 	savecache('setting', '');
 
-	if($_GET['from']) {
-		show_msg('<span id="finalmsg">กำลังอัปเดตไฟล์แคช กรุณารอสักครู่ ...</span><iframe src="../misc.php?mod=initsys" style="display:none;" onload="window.location.href=\''.$_GET['from'].'\'"></iframe>');
-	} else {
-		show_msg('<span id="finalmsg">กำลังอัปเดตไฟล์แคช กรุณารอสักครู่ ...</span><iframe src="../misc.php?mod=initsys" style="display:none;" onload="document.getElementById(\'finalmsg\').innerHTML = \'ขอแสดงความยินดี การอัปเดตโครงสร้างฐานข้อมูลของคุณเรียบร้อยแล้ว! เพื่อความปลอดภัยของข้อมูล กรุณาลบไฟล์ update.php ทันที'.$opensoso.'\'"></iframe>');
-	}
+	show_msg('<span id="finalmsg">กำลังอัปเดตไฟล์แคช กรุณารอสักครู่ ...</span><iframe src="../misc.php?mod=initsys" style="display:none;" onload="window.location.href=\''.$theurl.'?lock=true\'"></iframe>');
 
 }
 

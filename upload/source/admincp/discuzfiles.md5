@@ -65,7 +65,7 @@ e4c3bfe695710c5610cf51723b3bdae2 *./robots.txt
 1a7aa4c84c5d7dd922e4066e57e227e4 *./search.php
 08066574cc9c9cfa186b8e1a7ba35b5c *./source
 0a7896849dd83bbf64a31ccf11e58a17 *source/admincp/admincp_admingroup.php
-ecea7aad46d3b05164ea8c9b7d4c12bc *source/admincp/admincp_adv.php
+110de6cfd7adf7e45d9233a36810abce *source/admincp/admincp_adv.php
 b3d8f1df09c1490a9859d83c2d2385be *source/admincp/admincp_album.php
 ef610689497ab25a07c3d74737e8dccb *source/admincp/admincp_albumcategory.php
 b278f4425dc0d78eccf80cd8fcecd91c *source/admincp/admincp_announce.php
@@ -140,7 +140,7 @@ f2338cf2c849a7e7ab3a7390f987f258 *source/admincp/admincp_tools.php
 d44745dad9ecd4a464394605476ad4f2 *source/admincp/admincp_tradelog.php
 9af8dd9ead43f4d9deda57729ffd2e02 *source/admincp/admincp_usergroups.php
 fbf03d461e9ba987c58da873bf8ba7ba *source/admincp/admincp_usertag.php
-59f3306d7726800e2baeed694108850b *source/admincp/admincp_verify.php
+09093ca5fb7347045c1edd24f8024a5d *source/admincp/admincp_verify.php
 6b669f9aae2c0f1b89812482fa36d645 *source/admincp/discuzdb.md5
 de7c14ada87a2cd40f6c349a8ebfb69d *source/admincp/discuzhook.dat
 7215ee9c7d9dc229d2921a40e899ec5f *source/admincp/index.htm
@@ -314,7 +314,7 @@ e4b42ae2732c2dba007cd29c0a139de4 *source/class/discuz/discuz_container.php
 2afe7f21611c1ddb08750c68e29426ca *source/class/discuz/discuz_core.php
 4beda424464c4de67cedaba60b306124 *source/class/discuz/discuz_cron.php
 5147a4b0bb73b4fe3ef7132fdb71c765 *source/class/discuz/discuz_database.php
-b721ba38da89bc826149bdfbf77725f5 *source/class/discuz/discuz_error.php
+268b14dbc2ed75f445b5953e5767800a *source/class/discuz/discuz_error.php
 770b5620f235ec9e7bbd0950f524e3d9 *source/class/discuz/discuz_extend.php
 d2343fb3bea0e16b574a1ea601a9f871 *source/class/discuz/discuz_ftp.php
 977fe6c468bba17c85886c3198e9553f *source/class/discuz/discuz_memory.php
@@ -687,7 +687,7 @@ a2b22213eed01cc4f5fe8db89944ec4d *source/class/task/task_member.php
 d7a4bcad63d5d32061c4d7db49db5c79 *source/class/task/task_post.php
 f9fabd8329b3a8a91c7a8996bd0bc4cc *source/class/task/task_profile.php
 163b0fa720322c66fa18e0232af5e6a8 *source/class/task/task_promotion.php
-cee43c520f71f2d48ed2938f54084d8a *source/discuz_version.php
+cd35c74919e8ee803581534c0350a6cb *source/discuz_version.php
 8d583a87b95d0226538632a5eae66429 *source/function/cache/cache_admingroups.php
 50b0811c23739eef7c549d94569b6a32 *source/function/cache/cache_advs.php
 c2ed12ab185274b06d67e7ec03867f1e *source/function/cache/cache_albumcategory.php
@@ -747,7 +747,7 @@ fe617c17728d90c0b60d9a7346af4191 *source/function/cache/cache_threadsorts.php
 1afccc6a7e13889e3e8ac245498304b5 *source/function/cache/cache_usergroups.php
 8dffc3b7045a96be9bee7e6915769e59 *source/function/cache/cache_userstats.php
 d41d8cd98f00b204e9800998ecf8427e *source/function/cache/index.htm
-f3421c9bbe63d0372aacc0c28464f85b *source/function/function_admincp.php
+c1b16cf52c50b9e416acbe2acc7fa97f *source/function/function_admincp.php
 9d5abc171193da52e2cebcf12f17500a *source/function/function_attachment.php
 d92c261612a6b18fa0f32c5832420258 *source/function/function_block.php
 20670fad2cc50a872f47a29d39d4fa7d *source/function/function_blog.php
@@ -775,7 +775,7 @@ abe3f94e960d66f15bb08ec6195c029f *source/function/function_grouplog.php
 55b57ec5873e397ffb7a7cc4f5fdf5ce *source/function/function_importdata.php
 9f5d7bb25602f6dce197ade22f6614ee *source/function/function_magic.php
 b74cbfbee4f378cf3f0ea3e3982edfec *source/function/function_mail.php
-a8b65a863dae506260135db3866d76d1 *source/function/function_member.php
+a0b1f0616ab4c4cd0ae4f4f38d4206cc *source/function/function_member.php
 40ee75482ffa0542df601d1e6184e940 *source/function/function_message.php
 ae05f28aeec09c5f150369b25754a0dc *source/function/function_misc.php
 1e10e5f31d9b8d537d4d82087ba23258 *source/function/function_plugin.php
@@ -920,7 +920,7 @@ ad92c93d91c645e4f7651b70b3a7e7d0 *source/include/spacecp/spacecp_index.php
 d088b32256081f1bbb1bfe3ce21c3b94 *source/include/spacecp/spacecp_invite.php
 55e9eb2515f9c2de66657f612a6ece79 *source/include/spacecp/spacecp_magic.php
 3237cef7fb24b80104ed107e47a0aa2c *source/include/spacecp/spacecp_plugin.php
-b48dc982748a71f0fe784ca45ac01154 *source/include/spacecp/spacecp_pm.php
+0145ad8801fde23d440876dc4462efbb *source/include/spacecp/spacecp_pm.php
 5f5e62ec69db8d5f072e5b5724eef3ab *source/include/spacecp/spacecp_poke.php
 46701abd4b809377109044820dadbaac *source/include/spacecp/spacecp_privacy.php
 fcc413f5cbb5c3149a77678ac96fdefd *source/include/spacecp/spacecp_profile.php
@@ -1032,10 +1032,10 @@ d41d8cd98f00b204e9800998ecf8427e *source/language/group/index.htm
 7215ee9c7d9dc229d2921a40e899ec5f *source/language/home/index.htm
 9151c9c0bb7a932917e2b54f48ad5ca7 *source/language/home/lang_editor.php
 055a94b0432d01c4aed0370da1ff4e02 *source/language/home/lang_magic.php
-0c1bf373697378452adebeae4f6846dd *source/language/home/lang_template.php
+4cabd607cd083c9fe30fdda7b4b575d8 *source/language/home/lang_template.php
 d41d8cd98f00b204e9800998ecf8427e *source/language/index.htm
 c912d218c2e9bb4c313190fc0f4a7339 *source/language/lang_action.php
-4a7b90decf55b2908f27ae7c4b94a998 *source/language/lang_admincp.php
+50dd6ef2094e09c4f57353df07ff5a57 *source/language/lang_admincp.php
 bb079def9d0446b4938108c706c529dd *source/language/lang_admincp_login.php
 4725e4681401f58765c81f47d9347c0b *source/language/lang_admincp_menu.php
 c1b0f56515c0c368e63a17d82ec1626f *source/language/lang_admincp_msg.php
@@ -1138,7 +1138,7 @@ d41d8cd98f00b204e9800998ecf8427e *source/module/forum/index.htm
 d41d8cd98f00b204e9800998ecf8427e *source/module/group/index.htm
 f2968429502566df71423fa8e651abcc *source/module/home/home_editor.php
 56069915db343c4c9f89b31801805d58 *source/module/home/home_follow.php
-8169d321540c5e4e26fa9a8bef766513 *source/module/home/home_invite.php
+1811ea7448bf729dfa139e217360aa8f *source/module/home/home_invite.php
 9e74f7ab456d32c5e87698544a2e76ed *source/module/home/home_magic.php
 833b20dca51f50b527bd7094f38449df *source/module/home/home_medal.php
 b7d3d05c415f65d5d649f0bee7d4e2ff *source/module/home/home_misc.php
@@ -1151,8 +1151,8 @@ d41d8cd98f00b204e9800998ecf8427e *source/module/index.htm
 d41d8cd98f00b204e9800998ecf8427e *source/module/member/index.htm
 a053fa86402b06f0a404b3503642940a *source/module/member/member_activate.php
 71dd95cd33f1ad4f152c7fee0612fb18 *source/module/member/member_connect.php
-138e7f45146d53411bee9db29bd3de68 *source/module/member/member_connect_logging.php
-06c7a1cff930640852b0c0bfe48a6035 *source/module/member/member_connect_register.php
+59e0ba82c6ad9650f61f39ade4455700 *source/module/member/member_connect_logging.php
+100dbcaa0e6751d812eca26e42a1a859 *source/module/member/member_connect_register.php
 94b0856a301b21d37051a47e9eb129dc *source/module/member/member_emailverify.php
 b50178653e1617f6eddeae13f0dac36c *source/module/member/member_getpasswd.php
 4d0493b135a09ca80bef9e1bcff70175 *source/module/member/member_logging.php
@@ -2861,7 +2861,7 @@ de720f9649909092eb56db83e94ee0b0 *template/default/home/spacecp_ec_explain.htm
 f2fa729a8849559ee54c3f5c0b0bddda *template/default/home/spacecp_favorite.htm
 cb490cd229da8808a98136211b0d1182 *template/default/home/spacecp_feed.htm
 ddfc2ae18b1392cbb8ede04f3542c0f5 *template/default/home/spacecp_follow.htm
-b4a56807c27b83d7dfe4c68b087af19b *template/default/home/spacecp_footer.htm
+74fc3c89cbb6ac76d126eba2134fa946 *template/default/home/spacecp_footer.htm
 9f7e2861cb2283cb52470353862c8b2f *template/default/home/spacecp_friend.htm
 3368d5fbfc40368c95e75c747b162f5f *template/default/home/spacecp_header.htm
 f45eaa003176a8b27deb98448512865d *template/default/home/spacecp_header_name.htm
@@ -3244,7 +3244,7 @@ f293062e41c34699258e088bec2b98b4 *uc_server/control/admin/plugin.php
 9b0a32b21c13acbccdf36087e5dad5bc *uc_server/control/admin/pm.php
 0e9c93d9204b5f232eea6617ca594979 *uc_server/control/admin/seccode.php
 7b0c934c0459c0da11ec37b07a4fa568 *uc_server/control/admin/setting.php
-5e279fdb069d895106d6cf6ee4738616 *uc_server/control/admin/ucfiles.md5
+21bde7c3ff7391ea33708c6126937e96 *uc_server/control/admin/ucfiles.md5
 5095f0b1c85b06e09db49cb4b02ca68a *uc_server/control/admin/user.php
 eb97f93ba800073cdb5ab9aae4dc8087 *uc_server/control/app.php
 81ffcc49fe313577c966d5c64759992b *uc_server/control/credit.php
@@ -3373,7 +3373,7 @@ dd8f21e6948c6c12ae073a59fcea5895 *uc_server/lib/xml.class.php
 8f57519b49823172f3cfdaa1ea8b019f *uc_server/model/admin.php
 4a0b4c85f1e53dd995b9785f8811846a *uc_server/model/app.php
 5cbfa5b5ff6bf0bfd4aee2419bdc72c4 *uc_server/model/badword.php
-987e8ebb30d8135db37d57cb4e929644 *uc_server/model/base.php
+9217b187bc1e44a0466cad983202455d *uc_server/model/base.php
 f715376b3450807e6a9382c1314107c1 *uc_server/model/cache.php
 d4fde3d32ba28d296f8b7b069bff016c *uc_server/model/cron.php
 74b4e3c17a429bfba12edee20d4e13ba *uc_server/model/domain.php

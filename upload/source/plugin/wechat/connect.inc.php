@@ -20,7 +20,7 @@ $_G['connect']['callback_url'] = $_G['siteurl'].'plugin.php?id=wechat:connect&op
 parse_str(substr($_GET['referer'], 1), $refererarray);
 $referer = 'http://wsq.discuz.com/'.$_GET['referer'];
 
-try {
+try {	
 	require_once DISCUZ_ROOT.'/source/plugin/qqconnect/lib/ConnectOAuth.php';
 	$connectOAuthClient = new Cloud_Service_Client_ConnectOAuth();
 } catch(Exception $e) {
@@ -36,7 +36,7 @@ if($op == 'init') {
 		}
 	}
 
-	$callback = $_G['connect']['callback_url'] . '&referer=' . urlencode($_GET['referer']) . (!empty($_GET['isqqshow']) ? '&isqqshow=yes' : '');
+	$callback = $_G['connect']['callback_url'] . '&referer=' . urlencode($_GET['referer']);
 
 	if(!$_G['setting']['connect']['oauth2']) {
 		dsetcookie('con_request_token');
@@ -75,7 +75,7 @@ if($op == 'init') {
 
 	$params = $_GET;
 
-	if(!isset($params['receive'])) {
+	if(!isset($params['receive'])) {		
 		require_once DISCUZ_ROOT.'/source/plugin/qqconnect/lib/Util.php';
 		$utilService = new Cloud_Service_Util();
 		echo '<script type="text/javascript">setTimeout("window.location.href=\'plugin.php?receive=yes&'.str_replace("'", "\'", $utilService->httpBuildQuery($_GET, '', '&')).'\'", 1)</script>';

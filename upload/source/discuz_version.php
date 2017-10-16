@@ -13,9 +13,9 @@ if(!defined('IN_DISCUZ')) {
 
 if(!defined('DISCUZ_VERSION')) {
 	define('DISCUZ_VERSION', 'X3.4');
-	define('DISCUZ_RELEASE', '20170801');
+	define('DISCUZ_RELEASE', '20170820');
 	define('DISCUZ_FIXBUG', '34000000');
-	define('DISCUZ_TH_REVISION', '55'); /*jaideejung007*/
+	define('DISCUZ_TH_REVISION', '56'); /*jaideejung007*/
 }
 
 ?>
