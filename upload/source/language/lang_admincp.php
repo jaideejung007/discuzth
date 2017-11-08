@@ -2582,6 +2582,8 @@ $lang = array
 	'setting_mobile_allowmobile_comment' => 'ถ้าเปิดฟังก์ชั่นนี้ ผู้ใช้งานหรือสมาชิกที่เข้าชมเว็บไซต์ผ่านทางอุปกรณ์พกพาเมื่อ ระบบจะข้ามไปยังการแสดงผลบนอุปกรณ์พกพาโดยอัตโนมัติ<br />กำหนดค่าโดเมนสำหรับการเข้าชมบนอุปกรณ์พกพาได้ที่: <a href="?action=domain&operation=app">ทั่วไป - ตั้งค่าโดเมน - ชื่อโดเมนแอพลิเคชัน</a><br />ตั้งค่าเมนู/ลิงก์ ด้านล่างสำหรับการเข้าชมบนอุปกรณ์พกพาได้ที่: <a href="?action=nav&operation=footernav">รูปแบบ - จัดการเมนูหลัก - เมนูด้านล่าง</a>',
 	'setting_mobile_mobileforward' => 'แสดงผลบนอุปกรณ์พกพาโดยอัตโนมัติเมื่อเข้าใช้งาน',
 	'setting_mobile_mobileforward_comment' => 'เมื่อผู้ใช้งานเข้าชมเว็บผ่านทางอุปกรณ์พกพาระบบจะแสดงผลรูปแบบอุปกรณ์พกพาให้โดยอัตโนมัติ',
+	'setting_mobile_allowmnew' => 'เปิดโหมดอุปกรณ์พกพาแบบใหม่',
+	'setting_mobile_allowmnew_comment' => 'การเปิดโหมดอุปกรณ์พกพาแบบใหม่ จะได้ URL เป็น “' . $_G['siteurl'] . 'm/”',
 	'setting_mobile_preview' => 'แสดงตัวอย่างการเข้าชมผ่านอุปกรณ์พกพา บนคอมพิวเตอร์',
 	'setting_mobile_preview_comment' => 'When a user accessed the standard computer version by mobile browser, guide the user to preview a mobile phone login page, users can preview in the PC version of Mobile Home',
 	'setting_mobile_register' => 'อนุญาตให้ลงทะเบียนบนอุปกรณ์พกพา',

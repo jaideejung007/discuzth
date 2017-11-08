@@ -1665,7 +1665,7 @@ EOF;
 		showtips('setting_sec_code_tips', 'seccode_tips', $_GET['anchor'] == 'seccode');
 
 		showtableheader('', '', 'id="seccode"'.($_GET['anchor'] != 'seccode' ? ' style="display: none"' : ''));
-		showtitle('setting_sec_seccode_rule_setting');
+		showtitle('setting_sec_seccode_rule_setting');		
 		showsetting('setting_sec_seccode_rule_register', array('settingnew[seccodedata][rule][register][allow]', array(
 			array(2, cplang('setting_sec_seccode_rule_register_auto'), array('secrule_register' => '')),
 			array(1, cplang('setting_sec_seccode_rule_register_on'), array('secrule_register' => 'none')),
@@ -2060,7 +2060,7 @@ EOT;
 		showtableheader();
 	} elseif($operation == 'search') {
 
-		$setting['search'] = dunserialize($setting['search']);
+		$setting['search'] = dunserialize($setting['search']);		
 		showtableheader('setting_search_status', 'fixpadding');
 		showsubtitle(array('setting_search_onoff', 'search_item_name', 'setting_serveropti_searchctrl', 'setting_serveropti_maxspm', 'setting_serveropti_maxsearchresults'));
 		if(helper_access::check_module('portal')) {
@@ -2071,7 +2071,7 @@ EOT;
 				'<input type="text" class="txt" name="settingnew[search][portal][maxspm]" value="'.$setting['search']['portal']['maxspm'].'" />',
 				'<input type="text" class="txt" name="settingnew[search][portal][maxsearchresults]" value="'.$setting['search']['portal']['maxsearchresults'].'" />',
 			);
-		}
+		}		
 		$search_forum = array(
 			$setting['search']['forum']['status'] ? '<input type="checkbox" class="checkbox" name="settingnew[search][forum][status]" value="1" checked="checked" />' : '<input type="checkbox" class="checkbox" name="settingnew[search][forum][status]" value="1" />',
 			cplang('setting_search_status_forum'),
@@ -2079,7 +2079,7 @@ EOT;
 			'<input type="text" class="txt" name="settingnew[search][forum][maxspm]" value="'.$setting['search']['forum']['maxspm'].'" />',
 			'<input type="text" class="txt" name="settingnew[search][forum][maxsearchresults]" value="'.$setting['search']['forum']['maxsearchresults'].'" />',
 		);
-
+		
 		if(helper_access::check_module('blog')) {
 			$search_blog = array(
 				$setting['search']['blog']['status'] ? '<input type="checkbox" class="checkbox" name="settingnew[search][blog][status]" value="1" checked="checked" />' : '<input type="checkbox" class="checkbox" name="settingnew[search][blog][status]" value="1" />',
@@ -2123,7 +2123,7 @@ EOT;
 		showtablerow('', '', $search_group);
 		showtablerow('', '', $search_collection);
 		showtablefooter();
-
+		
 		showtableheader('setting_search_srchhotkeywords');
 		showsetting('setting_search_srchhotkeywords', 'settingnew[srchhotkeywords]', $setting['srchhotkeywords'], 'textarea');
 
@@ -2145,7 +2145,7 @@ EOT;
 		}
 		$selectspxrank .='</select>';
 		showsetting('settings_sphinx_sphinxrank', '', '', $selectspxrank);
-		showtablefooter();
+		showtablefooter();	
 		showtableheader();
 
 	} elseif($operation == 'uc' && $isfounder) {
@@ -2361,6 +2361,7 @@ EOT;
 				array(0, $lang['no'], array('mobileext' => 'none'))
 			), TRUE), $setting['mobile']['allowmobile'] ? $setting['mobile']['allowmobile'] : 0, 'mradio');
 		showtagheader('tbody', 'mobileext', $setting['mobile']['allowmobile'], 'sub');
+		showsetting('setting_mobile_allowmnew', 'settingnew[mobile][allowmnew]', $setting['mobile']['allowmnew'], 'radio');
 		showsetting('setting_mobile_mobileforward', 'settingnew[mobile][mobileforward]', $setting['mobile']['mobileforward'], 'radio');
 		showsetting('setting_mobile_register', 'settingnew[mobile][mobileregister]', $setting['mobile']['mobileregister'], 'radio');
 		showsetting('setting_mobile_hotthread', 'settingnew[mobile][mobilehotthread]', $setting['mobile']['mobilehotthread'], 'radio');
@@ -3200,7 +3201,7 @@ EOT;
 		unset($settingnew['allowfloatwin']);
 	}
 
-	if($operation == 'search') {
+	if($operation == 'search') {		
 		foreach($settingnew['search'] as $key => $val) {
 			foreach($val as $k => $v) {
 				$settingnew['search'][$key][$k] = max(0, intval($v));
@@ -3221,6 +3222,7 @@ EOT;
 
 	if($operation == 'mobile') {
 		$settingnew['mobile_arr']['allowmobile'] = intval($settingnew['mobile']['allowmobile']);
+		$settingnew['mobile_arr']['allowmnew'] = intval($settingnew['mobile']['allowmnew']);
 		$settingnew['mobile_arr']['mobileforward'] = intval($settingnew['mobile']['mobileforward']);
 		$settingnew['mobile_arr']['mobileregister'] = intval($settingnew['mobile']['mobileregister']);
 		$settingnew['mobile_arr']['mobileseccode'] = intval($settingnew['mobile']['mobileseccode']);
