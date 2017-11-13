@@ -20,7 +20,7 @@ require './source/function/function_forum.php';
 
 $modarray = array('ajax','announcement','attachment','forumdisplay',
 	'group','image','index','medal','misc','modcp','notice','post','redirect',
-	'relatekw','relatethread','rss','topicadmin','trade','viewthread','tag','collection','guide'
+	'rss','topicadmin','trade','viewthread','tag','collection','guide'
 );
 
 $modcachelist = array(
@@ -56,16 +56,11 @@ if(C::app()->var['mod'] == 'group') {
 C::app()->cachelist = $cachelist;
 C::app()->init();
 
-
 loadforum();
-
 
 set_rssauth();
 
-
 runhooks();
-
-
 
 $navtitle = str_replace('{bbname}', $_G['setting']['bbname'], $_G['setting']['seotitle']['forum']);
 $_G['setting']['threadhidethreshold'] = 1;

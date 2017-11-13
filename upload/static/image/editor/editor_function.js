@@ -27,19 +27,6 @@ function edit_save() {
 	backupContent($('uchome-ttHtmlEditor').value);
 }
 
-function relatekw() {
-	edit_save();
-	var subject = cnCode($('subject').value);
-	var message = cnCode($('uchome-ttHtmlEditor').value);
-	if(message) {
-		message = message.substr(0, 500);
-	}
-	var x = new Ajax();
-	x.get('home.php?mod=spacecp&ac=relatekw&inajax=1&subjectenc=' + subject + '&messageenc=' + message, function(s){
-		$('tag').value = s;
-	});
-}
-
 function downRemoteFile() {
 	edit_save();
 	var formObj = $("articleform");
@@ -86,7 +73,7 @@ function edit_insert(html) {
 	var obj = p.window.frames['HtmlEditor'];
 	var status = p.document.getElementById('uchome-editstatus').value;
 	if(status != 'html') {
-		alert('การกระทำนี้มีเฉพาะในโหมดมัลติมีเดีย');
+		alert('การดำเนินการนี้ใช้ได้เฉพาะในโหมดการแก้ไขมัลติมีเดียเท่านั้น');
 		return;
 	}
 	obj.focus();

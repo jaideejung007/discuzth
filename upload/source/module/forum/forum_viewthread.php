@@ -100,7 +100,7 @@ $_G['forum_threadindex'] = '';
 $skipaids = $aimgs = $_G['forum_posthtml'] = array();
 
 $thread['subjectenc'] = rawurlencode($_G['forum_thread']['subject']);
-/*jaideejung007*/$thread['short_subject'] = cutstr($_G['forum_thread']['subject'], 80);
+$thread['short_subject'] = cutstr($_G['forum_thread']['subject'], 52);
 
 $navigation = '';
 if($_GET['from'] == 'portal') {
@@ -875,7 +875,7 @@ if($_G['forum_cachepid']) {
 	foreach(C::t('forum_postcache')->fetch_all($_G['forum_cachepid']) as $postcache) {
 		if($postcache['rate']) {
 			$postcache['rate'] = dunserialize($postcache['rate']);
-			$postlist[$postcache['pid']]['ratelog'] = $postcache['rate']['ratelogs'];
+			$postlist[$postcache['pid']]['ratelog'] = dhtmlspecialchars($postcache['rate']['ratelogs']);
 			$postlist[$postcache['pid']]['ratelogextcredits'] = $postcache['rate']['extcredits'];
 			$postlist[$postcache['pid']]['totalrate'] = $postcache['rate']['totalrate'];
 		}

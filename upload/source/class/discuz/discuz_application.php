@@ -712,6 +712,10 @@ class discuz_application extends discuz_base{
 				$this->var['cache']['style_default']['styleid'] = $styleid = $this->var['category']['styleid'];
 			}
 		}
+		
+		if(defined('IN_NEWMOBILE') && $this->var['setting']['mobile']['allowmnew'] && $this->var['setting']['styleid2']) {
+			$styleid = $this->var['setting']['styleid2'];
+		}
 
 		$styleid = intval($styleid);
 
@@ -787,7 +791,13 @@ class discuz_application extends discuz_base{
 			}
 			dheader("location:$mobileurl");
 		}
-		if($this->var['setting']['mobile']['allowmnew'] && !defined('IN_MOBILE_API')) {
+		if($this->var['setting']['mobile']['allowmnew'] && !defined('IN_MOBILE_API') && !defined('NOT_IN_MOBILE_API')) {
+			$modid = $this->var['basescript'].'::'.CURMODULE;
+			if(($modid == 'forum::viewthread' || $modid == 'group::viewthread') && !empty($_GET['tid'])) {
+				dheader('location: '.$this->var['siteurl'].'m/?a=viewthread&tid='.$_GET['tid']);
+			} elseif(($modid == 'forum::forumdisplay' || $modid == 'group::forumdisplay') && !empty($_GET['fid'])) {
+				dheader('location: '.$this->var['siteurl'].'m/?a=index&fid='.$_GET['fid']);
+			}			
 			dheader("location:".$this->var['siteurl'].'m/');
 		}
 		if($mobile === '3' && empty($this->var['setting']['mobile']['wml'])) {
