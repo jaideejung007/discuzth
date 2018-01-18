@@ -240,9 +240,9 @@ var dataLoaded = function (json, isInit) {
 		threadContent = '我参加了#' + SITE_INFO.siteName + '#举办的晒图活动，快来帮我点赞吧';
 
 		if (postItem.authorid == member_uid) {
-			$('.tipBor').html('หวังว่าผู้คนจะชื่นชอบรูปภาพของคุณมากยิ่งขึ้น โดยคลิกที่มุมขวาบนไอคอนแบ่งปัน<span class="arrLeft"></span>');
+			$('.tipBor').html('หวังว่าผู้คนจะชื่นชอบรูปภาพของคุณมากยิ่งขึ้น โดยคลิกที่มุมขวาบนไอคอนแชร์<span class="arrLeft"></span>');
 		} else {
-			$('.tipBor').html('ถ้าคุณชื่นชอบรูปภาพของฉัน กรุณาคลิกที่ไอคอนมุมขวาบนเพื่อแบ่งปัน<span class="arrLeft"></span>');
+			$('.tipBor').html('ถ้าคุณชื่นชอบรูปภาพของฉัน กรุณาคลิกที่ไอคอนมุมขวาบนเพื่อแชร์<span class="arrLeft"></span>');
 		}
 
 		var imgUrl = SITE_INFO.siteLogo;

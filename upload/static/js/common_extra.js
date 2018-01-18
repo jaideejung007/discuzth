@@ -182,26 +182,7 @@ function _copycode(obj) {
 		rng.moveToElementText(obj);
 		rng.select();
 	}
-	setCopy(BROWSER.ie ? obj.innerText.replace(/\r\n\r\n/g, '\r\n') : obj.textContent, 'ข้อความถูกคัดลอกไปยังคลิปบอร์ดเรียบร้อยแล้ว');
-}
-
-function _setCopy(text, msg){
-	if(BROWSER.ie) {
-		var r = clipboardData.setData('Text', text);
-		if(r) {
-			if(msg) {
-				showPrompt(null, null, '<span>' + msg + '</span>', 1500);
-			}
-		} else {
-			showDialog('<div class="c"><div style="width: 200px; text-align: center;">การคัดลอกล้มเหลว! กรุณาเลือก [อนุญาตให้เข้าถึง]</div></div>', 'alert');
-		}
-	} else {
-		var msg = '<div class="c"><div style="width: 200px; text-align: center; text-decoration:underline;">คัดลอกข้อความที่นี่</div>' +
-		AC_FL_RunContent('id', 'clipboardswf', 'name', 'clipboardswf', 'devicefont', 'false', 'width', '200', 'height', '40', 'src', STATICURL + 'image/common/clipboard.swf', 'menu', 'false',  'allowScriptAccess', 'sameDomain', 'swLiveConnect', 'true', 'wmode', 'transparent', 'style' , 'margin-top:-20px') + '</div>';
-		showDialog(msg, 'info');
-		text = text.replace(/[\xA0]/g, ' ');
-		CLIPBOARDSWFDATA = text;
-	}
+	setCopy(BROWSER.ie ? obj.innerText.replace(/\r\n\r\n/g, '\r\n') : obj.textContent, 'ข้อความถูกคัดลอกไปยังคลิปบอร์ดแล้ว');
 }
 
 function _showselect(obj, inpid, t, rettype) {

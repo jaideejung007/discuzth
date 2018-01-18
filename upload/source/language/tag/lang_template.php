@@ -22,7 +22,7 @@ $lang = array (
   'personal_category' => 'ประเภทส่วนตัว',
   'related_blog' => 'บล็อกที่เกี่ยวข้อง',
   'related_thread' => 'โพสต์ที่เกี่ยวข้อง',
-  'replies' => 'ตอบ/ดู',
+  'replies' => 'ตอบ',
   'price' => 'ราคา',
 );
 

@@ -1,16 +1,23 @@
 +======================================+
-   Discuz! X3.4 Release 20170801
+   Discuz! X3.4 Release 20180101
 +======================================+
-Optimize the removal of the cloud platform
+ADD HTML5 version of the avatar upload mechanism
+IMPROVE Media into an expanded form
+
++======================================+
+   Discuz! X3.4 Release 20171001
++======================================+
+IMPROVE Remove the cloud platform
+ADD New touch screen version (localized micro community front end)
 
 +======================================+
    Discuz! X3.3 Release 20170401
 +======================================+
-Compatible with PHP7
-Optimized SQL queries
-Fixed security issues
-Optimized the cache mechanism, it can be expanded freely
-New cache drivers: APCu, Yac, File. File cache is set by default
+COMPATIBLE PHP7
+IMPROVE SQL queries
+FIX Security issues
+IMPROVE Optimized the cache mechanism, it can be expanded freely
+ADD New cache drivers: APCu, Yac, File. File cache is set by default
 
 +--------------------------------------+
 Old Versions

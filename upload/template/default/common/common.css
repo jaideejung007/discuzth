@@ -1429,7 +1429,7 @@ CSS 写作注意事项：
 	.jump_bdl .a a, .jump_bdl .a a:hover { background-color: {SPECIALBG}; }
 
 /* 可用道具列表 by lushnis */
-	.mgcmn { width: 100px; }
+	.mgcmn { width: 150px; } /*jaideejung007*/
 		.mgcmn a { padding-left: 25px; line-height: 16px !important; }
 			.mgcmn img { position: absolute; margin-left: -20px; }
 

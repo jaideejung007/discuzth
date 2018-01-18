@@ -412,7 +412,7 @@ function connect_share(connect_share_url, connect_uin) {
 		if(connect_uin) {
 			setTimeout(function () {
 				if(!connect_share_loaded) {
-					showDialog('การเชื่อมต่อล้มเหลว ไม่สามารถแบ่งปันได้ กรุณาลองอีกครั้งในภายหลัง', 'notice');
+					showDialog('การเชื่อมต่อล้มเหลว ไม่สามารถแชร์ได้ กรุณาลองอีกครั้งในภายหลัง', 'notice');
 					$('append_parent').removeChild($('connect_load_js'));
 				}
 			}, 5000);
