@@ -152,6 +152,7 @@ $_config['cookie']['cookiepath'] 		= '/'; 		// COOKIE作用路径
 $_config['security']['authkey']			= 'asdfasfas';	// 站点加密密钥
 $_config['security']['urlxssdefend']		= true;		// 自身 URL XSS 防御
 $_config['security']['attackevasive']		= 0;		// CC 攻击防御 1|2|4|8
+$_config['security']['onlyremoteaddr']		= 0;		// 用户IP地址获取方式 0=信任HTTP_CLIENT_IP、HTTP_X_FORWARDED_FOR 1=只信任 REMOTE_ADDR
 
 $_config['security']['querysafe']['status']	= 1;		// 是否开启SQL安全检测，可自动预防SQL注入攻击
 $_config['security']['querysafe']['dfunction']	= array('load_file','hex','substring','if','ord','char');
@@ -162,6 +163,8 @@ $_config['security']['querysafe']['afullnote']	= 0;
 
 $_config['security']['creditsafe']['second'] 	= 0;		// 开启用户积分信息安全，可防止并发刷分，满足 times(次数)/second(秒) 的操作无法提交
 $_config['security']['creditsafe']['times'] 	= 10;
+
+$_config['security']['fsockopensafe']['port']	= array(80);	//fsockopen 有效的端口
 
 $_config['admincp']['founder']			= '1';		// 站点创始人：拥有站点管理后台的最高权限，每个站点可以设置 1名或多名创始人
 								// 可以使用uid，也可以使用用户名；多个创始人之间请使用逗号“,”分开;

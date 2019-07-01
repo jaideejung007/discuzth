@@ -11,11 +11,69 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
+function _isLocalip($ip) {
+	$iplong = ip2long($ip);
+	return ($iplong >= 167772160 && $iplong <= 184549375) ||
+		($iplong >= 2886729728 && $iplong <= 2887778303) ||
+		($iplong >= 1681915904 && $iplong <= 1686110207) ||
+		($iplong >= 3232235520 && $iplong <= 3232301055) ||
+		($iplong >= 150994944 && $iplong <= 167772159);
+}
+
+function _parse_url($url) {
+	global $_G;
+	$tmp = parse_url($url);
+	if(!$tmp || empty($tmp['host'])) return false;
+	if(isset($tmp['user']) || isset($tmp['pass'])) return false;
+	if(strpbrk($tmp['host'], ':#?[]' ) !== false) return false;
+	if(!in_array(strtolower($tmp['scheme']), array('http', 'https'))) {
+		return false;
+	}
+	$config = $_G['config']['security']['fsockopensafe'];
+
+	$ip = gethostbyname($tmp['host']);
+	if($ip == $tmp['host']) {
+		return false;
+	}
+	if(filter_var($tmp['host'], FILTER_VALIDATE_IP) && _isLocalip($tmp['host'])) {
+		return false;
+	}
+
+	if(!empty($config['port']) && isset($tmp['port'])) {
+		if(isset($_SERVER['SERVER_PORT']) && !in_array($_SERVER['SERVER_PORT'], $config['port'])) {
+			$config['port'][] = $_SERVER['SERVER_PORT'];
+		}
+		if(!in_array($tmp['port'], $config['port'])) {
+			return false;
+		}
+	}
+
+	if(!isset($tmp['port'])) {
+		$tmp['port'] = strtolower($tmp['scheme']) == 'https' ? 443 : 80;
+	}
+
+	if($ip) {
+		if(!_isLocalip($ip)) {
+			$tmp['ip'] = $ip;
+			return $tmp;
+		}
+	} else {
+		return $tmp;
+	}
+}
+
 function _dfsockopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE, $ip = '', $timeout = 15, $block = TRUE, $encodetype  = 'URLENCODE', $allowcurl = TRUE, $position = 0, $files = array()) {
 	$return = '';
-	$matches = parse_url($url);
+	$matches = _parse_url($url);
+	if(!$matches) {
+		return '';
+	}
+	$ip = isset($matches['ip']) ? $matches['ip'] : $ip;
 	$scheme = $matches['scheme'];
 	$host = $matches['host'];
+	if($ip && _isLocalip($ip)) {
+		return '';
+	}
 	$path = $matches['path'] ? $matches['path'].($matches['query'] ? '?'.$matches['query'] : '') : '/';
 	$port = !empty($matches['port']) ? $matches['port'] : ($scheme == 'http' ? '80' : '');
 	$boundary = $encodetype == 'URLENCODE' ? '' : random(40);
@@ -33,6 +91,7 @@ function _dfsockopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FAL
 		if($ip) {
 			$httpheader[] = "Host: ".$host;
 		}
+		$httpheader[] = "User-Agent: ".$_SERVER['HTTP_USER_AGENT'];
 		if($httpheader) {
 			curl_setopt($ch, CURLOPT_HTTPHEADER, $httpheader);
 		}
@@ -40,7 +99,6 @@ function _dfsockopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FAL
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($ch, CURLOPT_HEADER, 1);
 		if($post) {
 			curl_setopt($ch, CURLOPT_POST, 1);

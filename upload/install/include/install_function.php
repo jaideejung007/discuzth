@@ -536,7 +536,6 @@ function show_header() {
 	define('SHOW_HEADER', TRUE);
 	global $step;
 	$version = DISCUZ_VERSION;
-	$release = DISCUZ_RELEASE;
 	$install_lang = lang(INSTALL_LANG);
 	$title = lang('title_install');
 	$charset = CHARSET;
@@ -561,7 +560,7 @@ function show_header() {
 <div class="container">
 	<div class="header">
 		<h1>$title</h1>
-		<span>Discuz!$version $install_lang $release</span>
+		<span>Discuz!$version $install_lang</span>
 EOT;
 
 	$step > 0 && show_step($step);
@@ -570,7 +569,7 @@ EOT;
 function show_footer($quit = true) {
 
 	echo <<<EOT
-		<div class="footer">&copy;2001 - 2017 <a href="http://www.comsenz.com/">Comsenz</a> Inc.</div>
+		<div class="footer">&copy;2001 - 2019 <a href="http://www.comsenz.com/">Comsenz</a> Inc.</div>
 	</div>
 </div>
 </body>

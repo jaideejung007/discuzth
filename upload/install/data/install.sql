@@ -123,7 +123,7 @@ CREATE TABLE pre_common_admingroup (
 DROP TABLE IF EXISTS pre_common_adminnote;
 CREATE TABLE pre_common_adminnote (
   id mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  admin varchar(15) NOT NULL DEFAULT '',
+  `admin` varchar(15) NOT NULL DEFAULT '',
   access tinyint(3) NOT NULL DEFAULT '0',
   adminid tinyint(3) NOT NULL DEFAULT '0',
   dateline int(10) unsigned NOT NULL DEFAULT '0',
@@ -162,7 +162,7 @@ CREATE TABLE pre_common_banned (
   ip2 smallint(3) NOT NULL DEFAULT '0',
   ip3 smallint(3) NOT NULL DEFAULT '0',
   ip4 smallint(3) NOT NULL DEFAULT '0',
-  admin varchar(15) NOT NULL DEFAULT '',
+  `admin` varchar(15) NOT NULL DEFAULT '',
   dateline int(10) unsigned NOT NULL DEFAULT '0',
   expiration int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (id)
@@ -762,7 +762,7 @@ CREATE TABLE pre_common_member_field_forum (
   sightml text NOT NULL,
   groupterms text NOT NULL,
   authstr varchar(20) NOT NULL DEFAULT '',
-  groups mediumtext NOT NULL,
+  `groups` mediumtext NOT NULL,
   attentiongroup varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (uid)
 ) TYPE=MyISAM;
@@ -976,7 +976,7 @@ CREATE TABLE pre_common_member_validate (
   uid mediumint(8) unsigned NOT NULL DEFAULT '0',
   submitdate int(10) unsigned NOT NULL DEFAULT '0',
   moddate int(10) unsigned NOT NULL DEFAULT '0',
-  admin varchar(15) NOT NULL DEFAULT '',
+  `admin` varchar(15) NOT NULL DEFAULT '',
   submittimes tinyint(3) unsigned NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   message text NOT NULL,
@@ -1466,7 +1466,7 @@ CREATE TABLE pre_common_usergroup (
   groupid smallint(6) unsigned NOT NULL AUTO_INCREMENT,
   radminid tinyint(3) NOT NULL DEFAULT '0',
   `type` enum('system','special','member') NOT NULL DEFAULT 'member',
-  system varchar(255) NOT NULL DEFAULT 'private',
+  `system` varchar(255) NOT NULL DEFAULT 'private',
   grouptitle varchar(255) NOT NULL DEFAULT '',
   creditshigher int(10) NOT NULL DEFAULT '0',
   creditslower int(10) NOT NULL DEFAULT '0',
@@ -1610,7 +1610,7 @@ CREATE TABLE pre_common_visit (
 DROP TABLE IF EXISTS pre_common_word;
 CREATE TABLE pre_common_word (
   id smallint(6) unsigned NOT NULL AUTO_INCREMENT,
-  admin varchar(15) NOT NULL DEFAULT '',
+  `admin` varchar(15) NOT NULL DEFAULT '',
   `type` smallint(6) NOT NULL DEFAULT '1',
   find varchar(255) NOT NULL DEFAULT '',
   replacement varchar(255) NOT NULL DEFAULT '',
@@ -1763,7 +1763,7 @@ CREATE TABLE pre_forum_announcement (
   starttime int(10) unsigned NOT NULL DEFAULT '0',
   endtime int(10) unsigned NOT NULL DEFAULT '0',
   message text NOT NULL,
-  groups text NOT NULL,
+  `groups` text NOT NULL,
   PRIMARY KEY (id),
   KEY timespan (starttime,endtime)
 ) TYPE=MyISAM;
@@ -2248,7 +2248,7 @@ CREATE TABLE pre_forum_forum (
   posts mediumint(8) unsigned NOT NULL DEFAULT '0',
   todayposts mediumint(8) unsigned NOT NULL DEFAULT '0',
   yesterdayposts mediumint(8) unsigned NOT NULL DEFAULT '0',
-  rank smallint(6) unsigned NOT NULL DEFAULT '0',
+  `rank` smallint(6) unsigned NOT NULL DEFAULT '0',
   oldrank smallint(6) unsigned NOT NULL DEFAULT '0',
   lastpost char(110) NOT NULL DEFAULT '',
   domain char(15) NOT NULL DEFAULT '',
@@ -2552,7 +2552,7 @@ CREATE TABLE pre_forum_order (
   orderid char(32) NOT NULL DEFAULT '',
   `status` char(3) NOT NULL DEFAULT '',
   buyer char(50) NOT NULL DEFAULT '',
-  admin char(15) NOT NULL DEFAULT '',
+  `admin` char(15) NOT NULL DEFAULT '',
   uid mediumint(8) unsigned NOT NULL DEFAULT '0',
   amount int(10) unsigned NOT NULL DEFAULT '0',
   price float(7,2) unsigned NOT NULL DEFAULT '0.00',

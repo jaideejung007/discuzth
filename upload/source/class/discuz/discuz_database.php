@@ -83,8 +83,10 @@ class discuz_database {
 		return self::$db->insert_id();
 	}
 
-	public static function fetch($resourceid, $type = MYSQL_ASSOC) {
-		if(self::$db->drivertype == 'mysqli') $type = MYSQLI_ASSOC;
+	public static function fetch($resourceid, $type = null) {
+		if (!isset($type)) {
+			$type = self::$db->drivertype == 'mysqli' ? MYSQLI_ASSOC : MYSQL_ASSOC;
+		}
 		return self::$db->fetch_array($resourceid, $type);
 	}
 
@@ -368,7 +370,7 @@ class discuz_database_safecheck {
 	private static function _do_query_safe($sql) {
 		$sql = str_replace(array('\\\\', '\\\'', '\\"', '\'\''), '', $sql);
 		$mark = $clean = '';
-		if (strpos($sql, '/') === false && strpos($sql, '#') === false && strpos($sql, '-- ') === false && strpos($sql, '@') === false && strpos($sql, '`') === false) {
+		if (strpos($sql, '/') === false && strpos($sql, '#') === false && strpos($sql, '-- ') === false && strpos($sql, '@') === false && strpos($sql, '`') === false && strpos($sql, '"') === false) {
 			$clean = preg_replace("/'(.+?)'/s", '', $sql);
 		} else {
 			$len = strlen($sql);

@@ -1358,7 +1358,7 @@ $lang = array
 	'setting_profile_time_zone' => 'Time Zone',
 	'setting_profile_tips'=> '<li>Must enable at least part of users groups. If not enabled, the default is all enabled</li>',
 
-	'setting_threadprofile_tpl_tpls' => '<li>{<b>Tag</b>} Excluding Parameter Posted within User Information Tag called.</li><li>{<b>tag</b>=<b>parameter</b>} Paste parameters, user information tag called. Separate Multiple parameters with a comma &quot;,&quot;.</li><li>{<b>tag</b>} <b>HTML</b> {<b>*</b>} <b>HTML</b> {/<b>tag</b>} When call the content value {*} Before and after HTML content</li><li>&quot;<b>plugin:plugin_ID</b>&quot; format <b>tag</b> paste plugin adds user information tag call. For plugin developers: Read the &laquo;<a href="http://open.discuz.net/?!devdoc" target="_blank">Discuz Technical Document!</a>&raquo; carefully before designing a new paste user information tag.</li>',
+	'setting_threadprofile_tpl_tpls' => '<li>{<b>Tag</b>} Excluding Parameter Posted within User Information Tag called.</li><li>{<b>tag</b>=<b>parameter</b>} Paste parameters, user information tag called. Separate Multiple parameters with a comma &quot;,&quot;.</li><li>{<b>tag</b>} <b>HTML</b> {<b>*</b>} <b>HTML</b> {/<b>tag</b>} When call the content value {*} Before and after HTML content</li><li>&quot;<b>plugin:plugin_ID</b>&quot; format <b>tag</b> paste plugin adds user information tag call. For plugin developers: Read the &laquo;<a href="https://open.dismall.com/?!devdoc" target="_blank">Discuz Technical Document!</a>&raquo; carefully before designing a new paste user information tag.</li>',
 
 	'setting_numbercard' => 'User attributes buiseness card',
 	'setting_numbercard_row' => 'First {i} rows',
@@ -2010,8 +2010,8 @@ $lang = array
 	'setting_credits_trans11_comment' => 'Minimum number of points for participate in grab floor post',
 	'setting_credits_trans12' => 'Consume Credits for group creation',
 	'setting_credits_trans12_comment' => 'How many credits decreased when a group created',
-	'setting_credits_tax' => 'Transaction tax',
-	'setting_credits_tax_comment' => 'Set the value of transaction tax (decrease points) for each user points transfer, exchange, buying and selling. The value must be of floating point format, and in a range between 0 and 1. For example, if the value is 0.2, then a user will loss 20% (20 points from each 100 points). Set to 0 for disable the tax.',
+	'setting_credits_tax' => 'ภาษีการทำธุรกรรม',
+	'setting_credits_tax_comment' => 'เมื่อมีการกำหนดค่านี้ ทุก ๆ การขายหรือแลกเปลี่ยนเครดิตจะถูกหักจากจำนวนที่ระบุไว้ ให้กำหนดค่าในลักษณะจุดทศนิยมระหว่าง 0 ถึง 1 ยกตัวอย่าง ถ้ากำหนด 0.2 หมายความว่า เมื่อมีการขายในเว็บ จะถูกหักภาษีจำนวน 20% เช่น กำหนดราคาไฟล์ 30 Money (กรณีตั้งชื่อเครดิตเป็น Money) คนขายจะได้ Money แค่ 24 Money เท่านั้น เพราะถูกหักภาษีไป 20% นั่นเอง ถ้ากำหนดค่าเป็น 0 จะหมายถึงปิดการใช้งาน (คนขายได้ราคาเต็ม)',
 	'setting_credits_mintransfer' => 'Minimum transfer summ',
 	'setting_credits_mintransfer_comment' => 'Requires a user to have this minimum balance value (points) after comleting a transfer. Using this feature, you can set restrict users to make transactions if a balance is less than this value. Also you can set a negative balance limit, so transfers within this limit can be overdrawn (credited).',
 	'setting_credits_minexchange' => 'Minimum exchange balance',
@@ -2066,7 +2066,7 @@ $lang = array
 	'setting_seccheck' => 'ตั้งค่าการยืนยัน',
 	'setting_accountguard' => 'Account bodyguard',
 	'setting_sec_code_tips' => '<li>If an image used as verification code, the image must contain only this 24 characters: "2346789BCEFGHJKMPQRTVWXY", and must be a GIF format image with a transparent background, and a black as a first indexed color. Image size is not restricted, but the recommended width must be not more than 1/4 of the text verification code width. The height must be not grater than a height of verification code. After new images completed, create a new directory with any name under the static/image/seccode/gif/ directory, and upload 24 new GIF images into this subdirectory.</li><li>For using another background image for verification code, upload JPG images to the static/image/seccode/background/ directory. The site will randomly choose an image from this directory as a background for the verification code.</li><li>For use another TTF fonts in verification code, upload the English TTF font files to static/image/seccode/font/en/directory, the site will randomly use fonts from this directory in a verification code.</li><li>Before using of Chinese fonts in verification code, you need to upload full Chinese characters TTF font to the static/image/seccode/font/ch/ directory, the site will randomly use fonts from this directory for generating a verification code.</li><li>System verification code placed in source/class/seccode directory, verification code Plug-in is located in source/plugin/seccode/ directory.</li>',
-	'setting_sec_qaa_tips' => '<li>Validation questions should be concise, without any ambiguity, so normal people are able to answer the question correctly. Please verify that the questions and answers updated frequently in order to prevent guess and speculations!</li><li>To install a new validation Q & A script, upload it to the source/class/secqaa/ directory. Plugin for validate questions is placed in the source/plugin/secqaa/ directory.</li><li>Before programming a new Questions &amp; Answers  validation plug-in, you have to read the &laquo;<a href="http://open.discuz.net/?!devdoc" target="_blank">Discuz! Technical Document!</a>&raquo;.</li>',
+	'setting_sec_qaa_tips' => '<li>Validation questions should be concise, without any ambiguity, so normal people are able to answer the question correctly. Please verify that the questions and answers updated frequently in order to prevent guess and speculations!</li><li>To install a new validation Q & A script, upload it to the source/class/secqaa/ directory. Plugin for validate questions is placed in the source/plugin/secqaa/ directory.</li><li>Before programming a new Questions &amp; Answers  validation plug-in, you have to read the &laquo;<a href="https://open.dismall.com/?!devdoc" target="_blank">Discuz! Technical Document!</a>&raquo;.</li>',
 
 	'setting_sec_seclevel' => 'โหมดการตรวจสอบการรักษาความปลอดภัย',
 	'setting_sec_seclevel_comment' => 'ภายใต้สถานการณ์ปกติ ขอแนะนำให้ใช้โหมดการตรวจสอบขั้นสูง หากพบว่าเว็บไซต์ที่มีผู้ใช้มากขึ้นและรหัสการตรวจสอบไม่สามารถทำงานได้ หรือทำงานได้ไม่เต็มที่ สามารถเปลี่ยนใช้โหมดการตรวจสอบแบบปกติ',
@@ -3659,7 +3659,7 @@ $lang = array
 	'members_newsletter_posttype' => 'Message type mode',
 	'members_newsletter_posttype_text' => 'Text mode',
 	'members_newsletter_posttype_html' => 'HTML Mode',
-	'members_newsletter_mobile_tips' => '<li>You can use this feature to send a notification to the mobile client user, for a better user touch up proposals and to promote the mobile client.</li><li>To use this function you have to open the cloud platform service and Mobile client plug-in</li><li><strong>Please pay attention to update the "<a href="http://addon.discuz.com/?@mobile.plugin">Mobile client</a>" in the application center. When enabled, the plug-in detailed description will be shown</strong></li>',
+	'members_newsletter_mobile_tips' => '<li>You can use this feature to send a notification to the mobile client user, for a better user touch up proposals and to promote the mobile client.</li><li>To use this function you have to open the cloud platform service and Mobile client plug-in</li><li><strong>Please pay attention to update the "<a href="https://addon.dismall.com/?@mobile.plugin">Mobile client</a>" in the application center. When enabled, the plug-in detailed description will be shown</strong></li>',
 
 	'members_grouppmlist' => 'บันทึกการส่งข้อความ',
 	'members_grouppmlist_newsletter' => 'ส่งการแจ้งเตือน',
@@ -5018,7 +5018,7 @@ $lang = array
 	'misc_bbcode_edit_tag' => 'แท็ก',
 	'misc_bbcode_edit_tag_comment' => 'รูปแบบของรหัสในวงเล็บ, อย่างเช่นแท็ก [tag] "tag" (โดยไม่มีเครื่องหมายคำพูด)',
 	'misc_bbcode_edit_replacement' => 'โค้ด/เนื้อหาที่ต้องการ ',
-	'misc_bbcode_edit_replacement_comment' => 'แท็กจะถูกแทนที่ด้วยเนื้อหาโค้ด HTML, สนับสนุนได้ถึง 3 ตัวแปร<br />{1} สำหรับตัวแปรตัวที่ 1<br />{2} สำหรับตัวแปรตัวที่ 2<br />{3} สำหรับตัวแปรตัวที่ 3<br /><br />{MD5} สำหรับตัวแปรที่ถูกเข้ารหัส MD5, ตัวแปรตัวแรกถูกใช้สำหรับการเข้ารหัสลับ<br />{RANDOM} สำหรับตัวแปรที่มีการสุ่ม, สำหรับข้อมูลเฉพาะ',
+	'misc_bbcode_edit_replacement_comment' => 'แท็กจะถูกแทนที่ด้วยเนื้อหาโค้ด HTML, สนับสนุนได้ถึง 3 ตัวแปร<br />{1} สำหรับตัวแปรตัวที่ 1<br />{2} สำหรับตัวแปรตัวที่ 2<br />{3} สำหรับตัวแปรตัวที่ 3',
 	'misc_bbcode_edit_example' => 'ตัวอย่าง',
 	'misc_bbcode_edit_example_comment' => 'ตัวอย่างของลักษณะพิเศษของโค้ดนี้',
 	'misc_bbcode_edit_explanation' => 'รายละเอียด',
@@ -5211,7 +5211,7 @@ $lang = array
 	'plugins_vars_variable' => 'กำหนดตัวแปร(ต้องระบุ)',
 	'plugins_vars_type' => 'ชนิดตัวแปร',
 	'plugins_add' => 'เพิ่มปลั๊กอิน',
-	'plugins_add_tips' => '<li><b>ฟังก์ชันนี้มีไว้ให้สำหรับนักพัฒนาปลั๊กอินเท่านั้น </b></li><li>นักพัฒนาปลั๊กอินที่ต้องการใช้งานฟังก์ชันนี้โปรดอ่าน《คู่มือผู้ใช้》ในส่วนของการออกแบบปลั๊กอินอย่างรอบคอบก่อน</li><li>คำเตือน: การออกแบบปลั๊กอินหรือการติดตั้งที่ไม่ถูกต้อง อาจจะมีผลกับการใช้งานปกติของทั้งเว็บไซต์ </li>',
+	'plugins_add_tips' => '<li><b>คุณลักษณะนี้มีให้สำหรับนักพัฒนาปลั๊กอินเท่านั้น</b></li><li>ผู้พัฒนาปลั๊กอินต้องอ่านอย่างถี่ถ้วนก่อนใช้คุณสมบัตินี้《<a href="https://open.dismall.com/?!devdoc" target="_blank">เอกสารทางเทคนิค Discuz!</a>》</li><li>คำเตือน: การออกแบบหรือติดตั้งปลั๊กอินที่ไม่ถูกต้อง อาจส่งผลกระทบต่อการใช้งานปกติของทั้งไซต์ได้</li>',
 	'plugins_import' => 'นำเข้าข้อมูลปลั๊กอิน',
 	'plugins_import_ignore_version' => 'อนุญาตให้นำเข้าปลั๊กอิน(ตัวเสริม) ของ Discuz  เวอร์ชันที่ต่ำกว่า(อาจจะเกิดความผิดพลาดได้ง่าย!!)',
 	'plugins_update_to' => 'อัปเกรดเป็น',
@@ -5226,7 +5226,7 @@ $lang = array
 	'plugins_config_uninstallplugin' => 'ถอนการติดตั้งปลั๊กอิน',
 	'plugins_edit' => 'ออกแบบปลั๊กอิน',
 	'plugins_edit_available' => ' (เปิดใช้งานปลั๊กอิน)',
-	'plugins_edit_tips' => '<li><b>This feature is only for use by plug-in developers. if you only install or use the plug-in, do not modify this settings.</b></li><li>Before use of this feature for plug-in developers, please be sure to carefully read the <a href="http://open.discuz.net/?!devdoc" target="_blank">Discuz! Technical Document</a>.</li><li>Warning: Incorrect designed or installed plug-in may endanger the normal use of the site.</li><li>After creating a plugin place it in the <a href="http://addon.discuz.com" target="_blank">Discuz! Application Center</a></li>',
+	'plugins_edit_tips' => '<li><b>This feature is only for use by plug-in developers. if you only install or use the plug-in, do not modify this settings.</b></li><li>Before use of this feature for plug-in developers, please be sure to carefully read the <a href="https://open.dismall.com/?!devdoc" target="_blank">Discuz! Technical Document</a>.</li><li>Warning: Incorrect designed or installed plug-in may endanger the normal use of the site.</li><li>After creating a plugin place it in the <a href="https://addon.dismall.com" target="_blank">Discuz! Application Center</a></li>',
 	'plugins_edit_name' => 'ชื่อปลั๊กอิน (name)',
 	'plugins_edit_name_comment' => 'ชื่อของปลั๊กอินนี้ จะต้องเป็นภาษาอังกฤษ สูงสุด 40 ไบต์',
 	'plugins_edit_version' => 'เวอร์ชันของปลั๊กอิน (version)',
@@ -5440,7 +5440,7 @@ $lang = array
 
 
 	'magics' => 'ตั้งค่าไอเท็ม',
-	'magics_tips' => '<li>For install a new magic, upload the magic script to the source/class/magic/ directory, and then you can use the magic in the following list</li><li>The plug-in development before the design of new props, be sure to read "<a href="http://open.discuz.net/?!devdoc" target="_blank">Discuz! Technical Document</a>" Content.</li>',
+	'magics_tips' => '<li>For install a new magic, upload the magic script to the source/class/magic/ directory, and then you can use the magic in the following list</li><li>The plug-in development before the design of new props, be sure to read "<a href="https://open.dismall.com/?!devdoc" target="_blank">Discuz! Technical Document</a>" Content.</li>',
 
 	'magics_config' => 'ตั้งค่าพื้นฐานไอเท็ม',
 	'magics_config_open' => 'Enable Magic center',
@@ -5514,7 +5514,7 @@ $lang = array
 	'tasks_tips_edit' => '<li>Members can access and apply tasks only marked as "available".</li><li>Set the start time, and when you start a task can be scheduled. If not set, then the task is started by default.</li>',
 	'tasks_tips_add_member' => '<li>Member class tasks include three types: add friends, add favorites and use magic. Such tasks can guide the members to use the forum functions for activate the forum atmosphere.</li><li>By setting different task conditions, you can create tsks suitable for your forum.</li>',
 	'tasks_tips_add_post' => '<li>Post class tasks now includes three types: fat, Add thread, Add reply, Add thread/reply.</li><li>When set a post class task, then pay attention for the user group and Forum permission settings! Withot such permissions some users can not be able to complete the task, perhaps because no rights to posting in the Forum.</li><li>You can specify a particular author or thread to reply for the task , but please note that the thread must exists, otherwise a user can not complete the task.</li>',
-	'tasks_tips_add_type' => '<li>The system tasks located in the source/class/task/ folder. Plugin tasks located in the source/plugin/your_plugin_name/task/ folder.</li><li>Before creating a new task, you have to read carefully the <a href="http://open.discuz.net/?!devdoc" target="_blank">Discuz! Technical Document</a></li>',
+	'tasks_tips_add_type' => '<li>The system tasks located in the source/class/task/ folder. Plugin tasks located in the source/plugin/your_plugin_name/task/ folder.</li><li>Before creating a new task, you have to read carefully the <a href="https://open.dismall.com/?!devdoc" target="_blank">Discuz! Technical Document</a></li>',
 	'tasks_edit' => 'แก้ไขกิจกรรม',
 	'tasks_list' => 'รายการกิจกรรม',
 	'tasks_edit_basic' => 'แก้ไขการตั้งค่ากิจกรรม',
@@ -6225,7 +6225,7 @@ $lang = array
 	'adv_custom_edit' => 'แก้ไขโฆษณาแบบกำหนดเอง',
 	'adv_custom_delete' => 'คุณแน่ใจหรือว่าต้องการลบโฆษณาที่กำหนดเอง?',
 	'adv_customnamenew' => 'กรุณาใส่ชื่อของโฆษณาแบบกำหนดเอง:',
-	'adv_list_tip' => '<li>You can use the "custom advertising" anywhere in the page</li><li>System advertising placed in the source/class/adv/ folder. Plugin advertising placed in the source/plugin/your_folder_name/adv/ folder.</li><li></li>Before creating a new magic, you have to read carefully the <a href="http://open.discuz.net/?!devdoc" target="_blank">Discuz! Technical Document</a></li>',
+	'adv_list_tip' => '<li>You can use the "custom advertising" anywhere in the page</li><li>System advertising placed in the source/class/adv/ folder. Plugin advertising placed in the source/plugin/your_folder_name/adv/ folder.</li><li></li>Before creating a new magic, you have to read carefully the <a href="https://open.dismall.com/?!devdoc" target="_blank">Discuz! Technical Document</a></li>',
 	'adv_custom_target' => 'ตำแหน่งที่กำหนดเอง ใส่ชื่อไฟล์ในโฟลเดอร์หลักของเว็บไซต์(ไม่มีนามสกุล) ถ้ามีหลายไฟล์ให้ใช้เครื่องหมายคอมม่าเป็นตัวคั่นระหว่างไฟล์',
 
 	'adv_edit' => 'แก้ไขโฆษณา',
@@ -6703,7 +6703,7 @@ $lang = array
 	'blockstyle_add_parity' => 'ข้อมูลปัจจุบันอยู่ในแถวคี่',
 
 	'blockxml' => 'โมดูลเพิ่มเติม',
-	'blockxml_tips' => '<li>Plug-in developers before design a new third-party block must read the <a href="http://open.discuz.net/?!devdoc" target="_blank">Discuz! Technical Document</a> Content.</li>',
+	'blockxml_tips' => '<li>Plug-in developers before design a new third-party block must read the <a href="https://open.dismall.com/?!devdoc" target="_blank">Discuz! Technical Document</a> Content.</li>',
 	'blockxml_list' => 'รายการโมดูลเพิ่มเติม',
 	'blockxml_name' => 'ชื่อโมดูล',
 	'blockxml_signtype_no' => 'No Signature',

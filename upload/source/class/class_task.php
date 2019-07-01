@@ -100,7 +100,7 @@ class task {
 				$task['allowapply'] = $task['allowapply'] > 0 ? 1 : 0;
 			}
 			$task['icon'] = $task['icon'] ? $task['icon'] : 'task.gif';
-			if(strtolower(substr($task['icon'], 0, 7)) != 'http://') {
+			if(!preg_match('/^https?:\/\//is', $task['icon'])) {
 				$escript = explode(':', $task['scriptname']);
 				if(count($escript) > 1 && file_exists(DISCUZ_ROOT.'./source/plugin/'.$escript[0].'/task/task_'.$escript[1].'.gif')) {
 					$task['icon'] = 'source/plugin/'.$escript[0].'/task/task_'.$escript[1].'.gif';
@@ -161,7 +161,7 @@ class task {
 				break;
 		}
 		$this->task['icon'] = $this->task['icon'] ? $this->task['icon'] : 'task.gif';
-		if(strtolower(substr($this->task['icon'], 0, 7)) != 'http://') {
+		if(!preg_match('/^https?:\/\//is', $this->task['icon'])) {
 			$escript = explode(':', $this->task['scriptname']);
 			if(count($escript) > 1 && file_exists(DISCUZ_ROOT.'./source/plugin/'.$escript[0].'/task/task_'.$escript[1].'.gif')) {
 				$this->task['icon'] = 'source/plugin/'.$escript[0].'/task/task_'.$escript[1].'.gif';
@@ -589,19 +589,19 @@ class task {
 		global $_G;
 
 		$exists = FALSE;
-		if($_G['forum_extgroupids']) {
-			$_G['forum_extgroupids'] = explode("\t", $_G['forum_extgroupids']);
-			if(in_array($gid, $_G['forum_extgroupids'])) {
+		if($_G['member']['extgroupids']) {
+			$_G['member']['extgroupids'] = explode("\t", $_G['member']['extgroupids']);
+			if(in_array($gid, $_G['member']['extgroupids'])) {
 				$exists = TRUE;
 			} else {
-				$_G['forum_extgroupids'][] = $gid;
+				$_G['member']['extgroupids'][] = $gid;
 			}
-			$_G['forum_extgroupids'] = implode("\t", $_G['forum_extgroupids']);
+			$_G['member']['extgroupids'] = implode("\t", $_G['member']['extgroupids']);
 		} else {
-			$_G['forum_extgroupids'] = $gid;
+			$_G['member']['extgroupids'] = $gid;
 		}
 
-		C::t('common_member')->update($_G['uid'], array('extgroupids' => $_G['forum_extgroupids']), 'UNBUFFERED');
+		C::t('common_member')->update($_G['uid'], array('extgroupids' => $_G['member']['extgroupids']), 'UNBUFFERED');
 
 		if($day) {
 			$memberfieldforum = C::t('common_member_field_forum')->fetch($_G['uid']);

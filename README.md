@@ -6,7 +6,7 @@
 * แล้วเลือก "Download repository" เพื่อรับไฟล์ Discuz! ภาษาไทยล่าสุด ณ ขณะนั้น
 
 ## ทีมพัฒนา (ภาษาไทย) 
-* [jaideejung007](http://jaideejung007.ml)
+* [jaideejung007](https://jaideejung007.ml)
 * [acaz](https://discuzthai.com)
 
 ## ข้อตกลงในการใช้งาน
@@ -15,4 +15,4 @@
 
 ## เว็บไซต์ที่เกี่ยวข้อง 
 * เว็บไซต์ดิสคัส! ภาษาไทยอย่างเป็นทางการ: https://discuzthai.com/
-* เว็บไซต์ดิสคัส! ภาษาไทยสำหรับทดสอบ: http://discuz.in.th/
+* เว็บไซต์ดิสคัส! ภาษาไทยสำหรับทดสอบ: https://beta.discuzthai.com/

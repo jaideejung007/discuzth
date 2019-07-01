@@ -60,9 +60,9 @@ INSERT INTO pre_common_cron VALUES ('19','1','system','อัปเดตกร�
 INSERT INTO pre_common_cron VALUES ('20','1','system','อัปเดตระบบโพสต์ล่าสุด(รวมไปถึง Waterproof wall)','cron_security_cleanup_lastpost.php','1269746623','1269792000','-1','-1','7','0');
 
 INSERT INTO pre_common_friendlink VALUES ('1','0','Discuz! Official Forum','http://www.discuz.net','ติดตามความเคลื่อนไหวข่าวสารดิสคัส! รวมไปถึงการดาวน์โหลดและแลกเปลี่ยนข้อมูลทางวิชาการ','static/image/common/logo_88_31.gif','2');
-INSERT INTO pre_common_friendlink VALUES ('2','1','DiscuzThai!','http://www.discuzthai.com/','','','2');
-INSERT INTO pre_common_friendlink VALUES ('3','2','Discuz.IN.TH','http://discuz.in.th/','','','2');
-INSERT INTO pre_common_friendlink VALUES ('4','3','jaideejung007 Blog','http://jaideejung007.ml','','','2');
+INSERT INTO pre_common_friendlink VALUES ('2','1','DiscuzThai!','https://www.discuzthai.com/','','','2');
+INSERT INTO pre_common_friendlink VALUES ('3','2','DiscuzThai! Beta','https://beta.discuzthai.com/','','','2');
+INSERT INTO pre_common_friendlink VALUES ('4','3','jaideejung007 Blog','https://jaideejung007.ml','','','2');
 INSERT INTO pre_common_friendlink VALUES ('5','4','Comsenz','http://www.comsenz.com','','','2');
 
 
