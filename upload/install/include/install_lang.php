@@ -167,7 +167,7 @@ $lang = array(
 	'tagtemplates_uid' => 'ID ผู้ใช้',
 	'tagtemplates_username' => 'โพสต์โดย',
 	'tagtemplates_dateline' => 'วันที่',
-	'tagtemplates_url' => 'ที่อยู่หัวข้อ',
+	'tagtemplates_url' => 'ที่อยู่หัวเรื่อง',
 
 	'uc_version_incorrect' => 'UCenter เซิร์ฟเวอร์ ของคุณเวอร์ชันต่ำเกินไป กรุณาอัปเกรด UCenter ของคุณให้เป็นเวอร์ชันล่าสุด ดาวน์โหลดเวอร์ชันล่าสุดได้ที่: http://www.comsenz.com/',
 	'config_unwriteable' => 'ตัวช่วยการติดตั้งไม่สามารถเขียนไฟล์ config.inc.php ให้กำหนดสิทธิ์ไฟล์นี้เป็น (777)',
@@ -238,7 +238,7 @@ $lang = array(
 	'init_default_style' => 'สไตล์มาตรฐาน',
 	'init_default_forum' => 'เว็บบอร์ดตัวอย่าง',
 	'init_default_template' => 'เทมเพลทมาตรฐาน',
-	'init_default_template_copyright' => 'Beijing Hong Sing New Technology Co., Ltd.',
+	'init_default_template_copyright' => 'Tencent Cloud Computing (Beijing) Co., Ltd.',
 
 	'init_dataformat' => 'Y-n-j',
 	'init_modreasons' => 'โพสต์โฆษณา\r\nสแปมโพสต์\r\nโพสต์ไม่เข้ากับเนื้อหา\r\nโพสต์ผิดห้อง\r\n\r\nถูกใจ\r\nรักเลย\r\nฮ่าๆ\r\nว้าว\r\nเศร้า\r\nโกรธ',
@@ -250,33 +250,35 @@ $lang = array(
 	'init_gift_task' => 'กิจกรรมกล่องของขวัญ',
 	'init_avatar_task' => 'กิจกรรมเปลี่ยนรูปโปรไฟล์',
 
-	'license' => '<div class="license"><h1>เวอร์ชั่นภาษาอังกฤษ (อย่างไม่เป็นทางการ) เป็นข้อตกลงใบอนุญาตสำหรับผู้ใช้ที่ไม่ใช้ภาษาจีน</h1>
+	'license' => '<div class="license"><h1>เวอร์ชันภาษาอังกฤษ (อย่างไม่เป็นทางการ) เป็นข้อตกลงใบอนุญาตสำหรับผู้ใช้ที่ไม่ใช้ภาษาจีน</h1>
 
-<p>Copyright (c) 2001-2017, Beijing Kang Sheng Science & Technology Co. Ltd. all rights reserved.</p>
+<p>Copyright (c) 2001-2020, Tencent Cloud Computing (Beijing) Co., Ltd. (formerly Beijing Kangsheng Xinchuang Technology Co., Ltd.) All rights reserved.</p>
 
-<p>Thank you for choosing Kang Sheng products. I hope our efforts can provide a fast and efficient, powerful site solution for you, and strong community forum solution. Kang Sheng company web site for the http://www.comsenz.com, the official forum for http://www.discuz.net products.</p>
+<p>Thank you for choosing Kangsheng products. We hope that our efforts can provide you with an efficient, fast, powerful site solution, and a powerful community forum solution. The website of Kangsheng Company is http://www.comsenz.com, and the official discussion website of the product is http://www.discuz.net.</p>
 
-<p>Notice to user: this agreement is a legal agreement on a variety of software products and services you use Kang Sheng\'s between you and Kang Sheng company. No matter how you individual or organization, profit or not, use (include to study and research for the purpose), are required to read this Agreement carefully, including the exemption clause in the exclusion or restriction of Kang Sheng responsibility and on your right. Please review and accept or not accept the terms of service. If you agree to the terms of service and / or Kang Sheng to the revision, you should not use or cancelled Kang Sheng\'s Kang Sheng products actively. Otherwise, any container related services and products of Kang registration, landing, you download, view such behavior will be regarded as you on the terms of service all fully accepted, including any modification of the terms of service at any time, Kang Sheng do.
-<p>The terms of service once changed, Kang Sheng will be released to modify content in Webpage. The terms of service revised once published in site management background is the original instead of the terms of service. You can login Kangsheng official forum access the latest version of the terms of service. If you choose to accept these terms, you are agreeing to accept the agreement of all conditions. If you do not agree to the terms of service, it cannot be obtained using the service. If you are in violation of the provisions, Kang Sheng company has the right to suspend or terminate your and retain responsibility for related liability of Kang Sheng products use qualification at any time.</p>
-<p>In the understanding, agreed to all the terms and conditions, and to comply with this agreement after, can begin to use Kang Sheng products. A written agreement signed another Kangsheng company directly you might, to supplement or replace all or any part of this agreement.</p></p>
+<p>Note to users: This agreement is a legal agreement between you and Kangsheng about your use of various software products and services provided by Kangsheng. Regardless of whether you are an individual or an organization, profitable or not, and for whatever purpose (including for the purpose of learning and research), you need to read this agreement carefully, including the exemption clauses that exempt or limit Kang Sheng\'s liability and restrictions on your rights. Please review and accept or not accept these Terms of Service. If you do not agree to these Terms of Service and/or any changes to them by Kang Sheng at any time, you should not use or actively cancel Kang Sheng products provided by Kang Sheng. Otherwise, any of your use of registration, login, download, and viewing of related services in Kangsheng products will be deemed to be your full acceptance of these Terms of Service, including any amendments made by Kangsheng to the Terms of Service at any time.
+<p>Once these Terms of Service are changed, Kang Sheng will post the changes on the website. Once the revised terms of service are published on the website management background, they will effectively replace the original terms of service. You can check the latest version of the terms of service at the official forum of Kangsheng at any time. If you choose to accept these terms, you agree to be bound by the terms of the agreement. If you do not agree to these Terms of Service, you will not be granted the right to use the Service. If you violate the provisions of this clause, Kangsheng Company has the right to suspend or terminate your qualification to use Kangsheng products at any time and reserves the right to pursue relevant legal responsibilities.</p>
+<p>After understanding, agreeing, and complying with all the terms of this agreement, you can start using Kangsheng products. You may enter into another written agreement directly with Kangsheng to supplement or replace all or any part of this agreement.</p></p>
 
 <p>All intellectual property Kang Sheng has the software. This software is only for the license, not for sale. Kang Sheng only allows you to copy, in accordance with the terms of this agreement, download installation, use or otherwise benefit from the functions of the software or intellectual property rights.</p>
 
-<h3>I. Licensing agreement rights</h3>
+<h3>I. Licensed Rights</h3>
 <ol>
 <li>You can fully comply with the end user license agreement, based on the software used in this non-commercial use, without having to pay for software copyright licensing fees.</li>
 <li>Agreement you can within the constraints and limitations modify Discuz! source code (if provided) or interface styles to suit your site requirements.</li>
 <li>You have to use this software to build the forum all the membership information, articles and related information of ownership, and is independent of commitment and legal obligations related to the article content.</li>
 <li>A commercial license, you can use this software for commercial applications, while according to the type of license purchased to determine the period of technical support, technical support, technical support form and content, from the moment of purchase, within the period of technical support have a way to get through the specified designated areas of technical support services. Business authorized users have the power to reflect and comment, relevant comments will be a primary consideration, but not necessarily be accepted promise or guarantee.</li>
+<li>You can download the application that suits your website from the application center service provided by Kangsheng, but you should pay the application developer / owner accordingly.</li>
 </ol>
 
-<h3>II. Agreement constraints and limitations</h3>
+<h3>II. Constraints and restrictions stipulated in the agreement</h3>
 <ol>
-<li>Business license has not been before, may not use this software for commercial purposes (including but not limited to business sites, business operations, for commercial purpose or profit web site). Purchase of commercial license, please visit http://www.discuz.com reference instructions, call 8610-51657885 for more details.</li>
+<li>The software may not be used for commercial purposes (including, but not limited to, corporate websites, operational websites, profit-oriented websites, or profitable websites) without written commercial authorization from Kangsheng. For commercial license purchase, please visit http://www.discuz.com for reference, or call 8610-51282255 for details.</li>
 <li>May not associated with the software or business license for rental, sale, mortgage or grant sub-licenses.</li>
 <li>In any case, that no matter how used, whether modified or landscaping, changes to what extent, just use Discuz! the whole or any part, without the written permission of the Forum page footer Department Discuz! name and Sing Imagination (Beijing) Technology Co., Ltd. affiliated website (http://www.comsenz.com, http://www.discuz.com or http://www.discuz.net) the link must be retained, not removed or modified .</li>
 <li>Prohibited Discuz! the whole or any part of the basis for the development of any derivative version, modified version or third-party version for redistribution.</li>
-<li>If you failed to comply with the terms of this Agreement, your license will be terminated, the licensee rights will be recovered, and bear the corresponding legal responsibility.</li>
+<li>The applications you download from the Application Center must not be reverse engineered, decompiled, decompiled, etc. without the written permission of the application developer/owner, Publishing, publishing, developing related derivative products, works, etc.</li>
+<li>If you fail to comply with the terms of this agreement, your authorization will be terminated, your licensed rights will be revoked, and you will be held legally responsible.
 </ol>
 
 <h3>III. Limited Warranty and Disclaimer</h3>
@@ -285,8 +287,7 @@ $lang = array(
 <li>User voluntary use of this software, you must understand the risks of using this software, technical services in the not to buy products before, we do not promise to provide any form of technical support, use of guarantees, nor liable for any use of this software issues related to liability arising.</li>
 <li>Hong Sing Company does not use the software to build a website or forum post or liable for the information, you assume full responsibility.</li>
 <li>Hong Sing company provides software and services in a timely manner, security, accuracy is not guaranteed, due to force majeure, Hong Sing factors beyond the control of the company (including hacker attacks, stopping power, etc.) caused by software and services Suspension or termination, and give your losses, you agree to Sing corporate responsibility waiver of all rights.</li>
-<li>Hong Sing Company specifically draw your attention to Hong Sing Company in order to protect business development and adjustment of autonomy, Hong Sing Company has at any time with or without prior notice to modify the service content, suspend or terminate some or all of the rights of software and services , changes will be posted on the relevant pages of Sing website, including without notice. Hong Sing Company to modify or discontinue the exercise, termination of some or all of the rights of software and services resulting from the loss, without Hong Sing Company to you or any third party.
-</li>
+<li>Hong Sing Company specifically draw your attention to Hong Sing Company in order to protect business development and adjustment of autonomy, Hong Sing Company has at any time with or without prior notice to modify the service content, suspend or terminate some or all of the rights of software and services , changes will be posted on the relevant pages of Sing website, including without notice. Hong Sing Company to modify or discontinue the exercise, termination of some or all of the rights of software and services resulting from the loss, without Hong Sing Company to you or any third party.</li>
 </ol>
 
 <p>Hong Sing products on the end user license agreement, business license and technical services to the details provided by the Hong Sing exclusive. Sing the company has without prior notice, modify the license agreement and services price list right to the modified agreement or price list from the change of the date of the new authorized user to take effect.</p>
@@ -297,9 +298,9 @@ $lang = array(
 
 <p>Between Hong Sing if you and any dispute or controversy, should first be settled through friendly consultations, the consultation fails, you hereby agree to submit the dispute or controversy Sing Haidian District People\'s Court where jurisdiction. Hong Sing Company has the right to interpret the above terms and discretion.</p>
 
-<p>(End)</p>
+<p>(End of text)</p>
 
-<p align="right">Kang Sheng company</p>
+<p align="right">Kang Sheng</p>
 
 </div>',
 
@@ -329,7 +330,7 @@ $lang = array(
 	'func_name' => 'ชื่อฟังก์ชัน',
 	'check_result' => 'ทดสอบผลลัพธ์',
 	'suggestion' => 'คำแนะนำ',
-	'advice_mysql' => 'ตรวจสอบว่าโมดูล MySQL โหลดอย่างถูกต้อง',
+	'advice_mysql' => 'ตรวจสอบว่าโมดูล mysql โหลดอย่างถูกต้อง',
 	'advice_fopen' => 'ตรวจสอบ allow_url_fopen ใน php.ini ว่าเปิดใช้งานอยู่หรือไม่ โปรดติดต่อผู้ให้บริการโฮสต์เพื่อตรวจสอบการเปิดคุณลักษณะนี้',
 	'advice_file_get_contents' => 'ตรวจสอบ allow_url_fopen ใน php.ini ว่าเปิดใช้งานอยู่หรือไม่ โปรดติดต่อผู้ให้บริการโฮสต์เพื่อตรวจสอบการเปิดคุณลักษณะนี้',
 	'advice_xml' => 'ตรวจสอบดูว่าสนับสนุน PHP สำหรับ XML หรือไม่ โปรดติดต่อผู้ให้บริการโฮสต์เพื่อตรวจสอบการเปิดคุณลักษณะนี้',
@@ -357,7 +358,7 @@ $lang = array(
 	'database_nonexistence' => 'ไม่พบฐานข้อมูลที่ต้องการ',
 	'skip_current' => 'ข้ามขั้นตอนนี้',
 	'topic' => 'หัวข้อ',
-	'install_finish' => 'Discuz! ติดตั้งเรียบร้อยแล้ว คลิกที่นี่เพื่อเข้าชม',
+	'install_finish' => 'ติดตั้ง Discuz! เรียบร้อยแล้ว คลิกที่นี่เพื่อเข้าชม',
 
 );
 

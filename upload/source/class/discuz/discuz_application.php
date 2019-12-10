@@ -281,7 +281,7 @@ class discuz_application extends discuz_base{
 		@include DISCUZ_ROOT.'./config/config_global.php';
 		if(empty($_config)) {
 			if(!file_exists(DISCUZ_ROOT.'./data/install.lock')) {
-				header('location: install');
+				header('location: install/');
 				exit;
 			} else {
 				system_error('config_notfound');
@@ -584,12 +584,14 @@ class discuz_application extends discuz_base{
 			if($this->var['group'] && isset($this->var['group']['allowvisit']) && !$this->var['group']['allowvisit']) {
 				if($this->var['uid'] && !$allowvisitflag) {
 					if(!defined('IN_MOBILE_API')) {
-						showmessage('user_banned');
+						($this->var['member']['groupexpiry'] > 0) ? showmessage('user_banned_has_expiry') : showmessage('user_banned');
 					} else {
-						mobile_core::result(array('error' => 'user_banned'));
+						($this->var['member']['groupexpiry'] > 0) ? mobile_core::result(array('error' => 'user_banned_has_expiry')) : mobile_core::result(array('error' => 'user_banned'));
 					}
 				} elseif((!defined('ALLOWGUEST') || !ALLOWGUEST) && !in_array(CURSCRIPT, array('member', 'api')) && !$this->var['inajax']) {
-					if(!defined('IN_MOBILE_API')) {
+					if(defined('IN_ARCHIVER')) {
+						dheader('location: ../member.php?mod=logging&action=login&referer='.rawurlencode($this->var['siteurl']."archiver/".$this->var['basefilename'].($_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING'] : '')));
+					} else if(!defined('IN_MOBILE_API')) {
 						dheader('location: member.php?mod=logging&action=login&referer='.rawurlencode($this->var['siteurl'].$this->var['basefilename'].($_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING'] : '')));
 					} else {
 						mobile_core::result(array('error' => 'to_login'));
@@ -738,7 +740,7 @@ class discuz_application extends discuz_base{
 			return false;
 		}
 
-		if(!$this->var['setting'] || !$this->var['setting']['mobile']['allowmobile'] || !is_array($this->var['setting']['mobile']) || IS_ROBOT) {
+		if(!$this->var['setting'] || !$this->var['setting']['mobile']['allowmobile'] || !is_array($this->var['setting']['mobile'])) {
 			$nomobile = true;
 			$unallowmobile = true;
 		}
@@ -789,7 +791,9 @@ class discuz_application extends discuz_base{
 					$mobileurl = $this->var['siteurl'].'forum.php?mobile=yes';
 				}
 			}
-			dheader("location:$mobileurl");
+			if(!$this->var['setting']['mobile']['otherindex']){
+				dheader("location:$mobileurl");
+			}
 		}
 		if($this->var['setting']['mobile']['allowmnew'] && !defined('IN_MOBILE_API') && !defined('NOT_IN_MOBILE_API')) {
 			$modid = $this->var['basescript'].'::'.CURMODULE;

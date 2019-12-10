@@ -155,7 +155,7 @@ function savedataTime() {
 		var m = d.getMinutes();
 		h = h < 10 ? '0' + h : h;
 		m = m < 10 ? '0' + m : m;
-		setEditorTip('เนื้อหาถูกบันทึกล่าสุดเมื่อ ' + h + ':' + m + ' น.');
+		setEditorTip('บันทึกล่าสุดเมื่อ ' + h + ':' + m + ' น.');
 	}
 	$(editorid + '_svdsecond').innerHTML = '<a title="คลิกที่นี่ เพื่อปิดการบันทึกเนื้อหาแบบร่างโดยอัตโนมัติ" href="javascript:;" onclick="setAutosave()">บันทึกเมื่อ ' + savedatac + ' วินาทีที่แล้ว</a> ';
 	savedatac -= 10;
@@ -163,7 +163,7 @@ function savedataTime() {
 
 function setAutosave() {
 	autosave = !autosave;
-	setEditorTip(autosave ? 'เปิดการบันทึกเนื้อหาอัตโนมัติ' : 'ปิดการบันทึกเนื้อหาอัตโนมัติ');
+	setEditorTip(autosave ? 'เปิดบันทึกอัตโนมัติ' : 'ปิดบันทึกอัตโนมัติ');
 	setcookie('editorautosave_' + editorid, autosave ? 1 : -1, 2592000);
 	savedataTime();
 }
@@ -849,7 +849,7 @@ function discuzcode(cmd, arg) {
 			clearContent();
 		}
 	} else if(cmd == 'downremoteimg') {
-		showDialog('<div id="remotedowninfo"><p class="mbn">ดาวน์โหลดไฟล์แนบจากระยะไกล กรุณารอสักครู่……</p><p><img src="' + STATICURL + 'image/common/uploading.gif" alt="" /></p></div>', 'notice', '', null, 1);
+		showDialog('<div id="remotedowninfo"><p class="mbn">กำลังดาวน์โหลดไฟล์แนบระยะไกล กรุณารอสักครู่……</p><p><img src="' + STATICURL + 'image/common/uploading.gif" alt="" /></p></div>', 'notice', '', null, 1);
 		var message = wysiwyg ? html2bbcode(getEditorContents()) : (!editorform.parseurloff.checked ? parseurl(editorform.message.value) : editorform.message.value);
 		var oldValidate = editorform.onsubmit;
 		var oldAction = editorform.action;
@@ -1667,14 +1667,18 @@ function loadimgsize(imgurl, editor, p) {
 	var editor = !editor ? editorid : editor;
 	var s = new Object();
 	var p = !p ? '_image' : p;
+	$(editor + p + '_param_2').value = '';
+	$(editor + p + '_param_3').value = '';
 	s.img = new Image();
 	s.img.src = imgurl;
 	s.loadCheck = function () {
-		if(s.img.complete) {
-			$(editor + p + '_param_2').value = s.img.width ? s.img.width : '';
-			$(editor + p + '_param_3').value = s.img.height ? s.img.height : '';
-		} else {
-			setTimeout(function () {s.loadCheck();}, 100);
+		if($(editor + p + '_param_1').value == imgurl) {
+			if(s.img.complete) {
+				$(editor + p + '_param_2').value = s.img.width ? s.img.width : '';
+				$(editor + p + '_param_3').value = s.img.height ? s.img.height : '';
+			} else {
+				setTimeout(function () {s.loadCheck();}, 100);
+			}
 		}
 	};
 	s.loadCheck();

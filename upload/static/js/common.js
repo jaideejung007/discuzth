@@ -532,7 +532,7 @@ function showPreview(val, id) {
 
 function showloading(display, waiting) {
 	var display = display ? display : 'block';
-	var waiting = waiting ? waiting : 'กรุณารอ...';
+	var waiting = waiting ? waiting : 'รอสักครู่...';
 	$('ajaxwaitid').innerHTML = waiting;
 	$('ajaxwaitid').style.display = display;
 }
@@ -1582,6 +1582,7 @@ function setCopy(text, msg) {
 	var yPosition = window.pageYOffset || document.documentElement.scrollTop;
 	cp.style.top = yPosition + 'px';
 	cp.setAttribute('readonly', '');
+	text = text.replace(/[\xA0]/g, ' ');
 	cp.value = text;
 	$('append_parent').appendChild(cp);
 	cp.select();
@@ -1610,7 +1611,6 @@ function setCopy(text, msg) {
 		var msg = '<div class="c"><div style="width: 200px; text-align: center; text-decoration:underline;">คลิกที่นี่เพื่อคัดลอกไปยังคลิปบอร์ด</div>' +
 		AC_FL_RunContent('id', 'clipboardswf', 'name', 'clipboardswf', 'devicefont', 'false', 'width', '200', 'height', '40', 'src', STATICURL + 'image/common/clipboard.swf', 'menu', 'false',  'allowScriptAccess', 'sameDomain', 'swLiveConnect', 'true', 'wmode', 'transparent', 'style' , 'margin-top:-20px') + '</div>';
 		showDialog(msg, 'info');
-		text = text.replace(/[\xA0]/g, ' ');
 		CLIPBOARDSWFDATA = text;
 	}
 }
@@ -1787,7 +1787,6 @@ function strLenCalc(obj, checklen, maxlen) {
 		obj.value = obj.value.substr(v, maxlen);
 	}
 }
-
 
 function pluginNotice() {
 	if($('plugin_notice')) {

@@ -23,7 +23,7 @@ $lang = array (
   'blogcategory_move_category_failed' => 'บล็อกไม่สามารถย้ายมายังหมวดหมู่ดังกล่าวได้',
   'blogcategory_delete_succeed' => 'ลบหมวดหมู่บล็อกสำเร็จ ',
   'filecheck_nofound_md5file' => 'ไม่พบไฟล์ในการตรวจสอบ ไม่สามารถดำเนินการได้ {upgradeurl}',
-  'cloudaddons_download_error' => 'ดาวน์โหลดข้อมูลผิดพลาด ({ErrorCode})',
+  'cloudaddons_download_error' => 'ดาวน์โหลดข้อมูลผิดพลาด ({ErrorCode}), <a href="https://www.dismall.com/thread-101-1-1.html" target="_blank">คลิกที่นี่เพื่อดูวิธีแก้ไขปัญหา</a>',
   'cloudaddons_downloading' => 'กำลังดาวน์โหลด {addonid} โปรดรอสักครู่ ......',
   'collection_admin_updated' => 'จัดการดำเนินการคลังกระทู้เรียบร้อยแล้ว',
   'counter_member_succeed' => 'จำนวนโพสต์ของสมาชิกถูกสร้างขึ้นใหม่แล้ว',
@@ -450,6 +450,7 @@ $lang = array (
   'setting_extcredits_must_available' => 'You need open at least one extended points. Please return to modify.',
   'uc_database_connect_error' => 'Connect to database server failed. Go back to check the settings.',
   'uc_config_write_error' => 'UC configuration file write failed. Return to check the settings.',
+  'uc_config_load_data_local_infile_error' => 'The server has enabled the MySQL LOAD DATA LOCAL IN FILE function. To avoid possible security threats, it is not allowed to edit the UCenter database server address online. If you need to modify it, edit the UC_DBHOST constant in config/config_ucenter.php',
   'setting_ipaccess_invalid' => 'Operation Error! You must allow your own IP to access the site. Please return to modify.',
   'setting_adminipaccess_invalid' => 'Operation Error! You must allow your own IP to access the site backend. Please go back and edit.',
   'setting_creditsformula_invalid' => 'Points formula contains an invalid variable or operator. Please return to modify.',
@@ -629,6 +630,7 @@ $lang = array (
 
   'cloudaddons_check_url_fopen_error' => 'เซิร์ฟเวอร์ของคุณไม่สามารถเข้าถึงคลังแอพลิเคชัน กรุณาติดต่อผู้ให้บริการโฮสต์ของคุณหรือทีมงานฝ่ายเทคนิค เพื่อให้สามารถเข้าถึง addon.dismall.com ได้',
   'cloudaddons_check_gzuncompress_error' => 'ฟังก์ชันการทำงานของ Zlib ไม่ได้ถูกติดตั้งลง กรุณาติดต่อผู้ให้บริการหรือทีมงานฝ่ายเทคนิคในเว็บไซต์ของคุณ',
+  'cloudaddons_check_curl_error' => 'เซิร์ฟเวอร์ของคุณไม่รองรับคุณสมบัติ CURL ซึ่งจะป้องกันไม่ให้มีการติดแอปจาก App Store กรุณาติดต่อผู้ให้บริการหรือฝ่ายเทคนิคเว็บไซต์ของคุณ',
   'cloudaddons_genuine_message' => 'ขออภัย แอพลิเคชันที่คุณกำลังติดตั้งนี้ ไม่ผ่านการตรวจสอบของแท้ ไม่สามารถดำเนินการติดตั้งต่อไปได้<br /><br /><a href="admin.php?action=cloudaddons&id={addonid}">คลิกที่นี่ เพื่อติดตั้งแอพลิเคชันที่เป็นของแท้</a>',
 
   'admincp_makehtml_cleanhtml_error' => 'Sorry, Enable to generate static HTML file, you can not clean up the HTML file.',

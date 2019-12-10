@@ -60,7 +60,8 @@ $uchidden = getgpc('uchidden');
 if(in_array($method, array('app_reg', 'ext_info'))) {
 	$isHTTPS = ($_SERVER['HTTPS'] && strtolower($_SERVER['HTTPS']) != 'off') ? true : false;
 	$PHP_SELF = $_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_NAME'];
-	$bbserver = 'http'.($isHTTPS ? 's' : '').'://'.preg_replace("/\:\d+/", '', $_SERVER['HTTP_HOST']).($_SERVER['SERVER_PORT'] && $_SERVER['SERVER_PORT'] != 80 && $_SERVER['SERVER_PORT'] != 443 ? ':'.$_SERVER['SERVER_PORT'] : '');
+	# The port used by $bbserver cannot come from SERVER_PORT, because the server port of dz is not necessarily the port accessed by the user (for example, behind load balancing)
+	$bbserver = 'http'.($isHTTPS ? 's' : '').'://'.$_SERVER['HTTP_HOST'];
 	$default_ucapi = $bbserver.'/ucenter';
 	$default_appurl = $bbserver.substr($PHP_SELF, 0, strrpos($PHP_SELF, '/') - 8);
 }
@@ -136,7 +137,7 @@ if($method == 'show_license') {
 		'apptagtemplates[fields][url]='.urlencode($lang['tagtemplates_url']);
 
 		$ucapi = preg_replace("/\/$/", '', trim($ucapi));
-		if(empty($ucapi) || !preg_match("/^(http:\/\/)/i", $ucapi)) {
+		if(empty($ucapi) || !preg_match("/^(https?:\/\/)/i", $ucapi)) {
 			show_msg('uc_url_invalid', $ucapi, 0);
 		} else {
 			if(!$ucip) {

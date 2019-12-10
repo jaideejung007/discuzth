@@ -536,6 +536,7 @@ function show_header() {
 	define('SHOW_HEADER', TRUE);
 	global $step;
 	$version = DISCUZ_VERSION;
+	$release = DISCUZ_RELEASE;
 	$install_lang = lang(INSTALL_LANG);
 	$title = lang('title_install');
 	$charset = CHARSET;
@@ -560,7 +561,7 @@ function show_header() {
 <div class="container">
 	<div class="header">
 		<h1>$title</h1>
-		<span>Discuz!$version $install_lang</span>
+		<span>Discuz!$version $install_lang $release</span>
 EOT;
 
 	$step > 0 && show_step($step);
@@ -569,7 +570,7 @@ EOT;
 function show_footer($quit = true) {
 
 	echo <<<EOT
-		<div class="footer">&copy;2001 - 2019 <a href="http://www.comsenz.com/">Comsenz</a> Inc.</div>
+		<div class="footer">Copyright &copy;2001-2020, Tencent Cloud.</div>
 	</div>
 </div>
 </body>
@@ -872,6 +873,8 @@ function dfopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE, $
 		$ch = curl_init();
 		$ip && curl_setopt($ch, CURLOPT_HTTPHEADER, array("Host: ".$host));
 		curl_setopt($ch, CURLOPT_URL, $scheme.'://'.($ip ? $ip : $host).':'.$port.$path);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		if($post) {
 			curl_setopt($ch, CURLOPT_POST, 1);

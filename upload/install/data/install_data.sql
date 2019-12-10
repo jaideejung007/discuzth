@@ -59,11 +59,10 @@ INSERT INTO pre_common_cron VALUES ('18','0','system','อัปเดตกา�
 INSERT INTO pre_common_cron VALUES ('19','1','system','อัปเดตกระทู้ยอดนิยมประจำวัน','cron_todayheats_daily.php','1269746623','1269792000','-1','-1','0','0');
 INSERT INTO pre_common_cron VALUES ('20','1','system','อัปเดตระบบโพสต์ล่าสุด(รวมไปถึง Waterproof wall)','cron_security_cleanup_lastpost.php','1269746623','1269792000','-1','-1','7','0');
 
-INSERT INTO pre_common_friendlink VALUES ('1','0','Discuz! Official Forum','http://www.discuz.net','ติดตามความเคลื่อนไหวข่าวสารดิสคัส! รวมไปถึงการดาวน์โหลดและแลกเปลี่ยนข้อมูลทางวิชาการ','static/image/common/logo_88_31.gif','2');
+INSERT INTO pre_common_friendlink VALUES ('1','0','Discuz! Official Forum','https://www.discuz.net','ติดตามความเคลื่อนไหวข่าวสารดิสคัส! รวมไปถึงการดาวน์โหลดและแลกเปลี่ยนข้อมูลทางวิชาการ','static/image/common/logo_88_31.gif','2');
 INSERT INTO pre_common_friendlink VALUES ('2','1','DiscuzThai!','https://www.discuzthai.com/','','','2');
-INSERT INTO pre_common_friendlink VALUES ('3','2','DiscuzThai! Beta','https://beta.discuzthai.com/','','','2');
+INSERT INTO pre_common_friendlink VALUES ('3','2','App Store','https://addon.dismall.com/','','','2');
 INSERT INTO pre_common_friendlink VALUES ('4','3','jaideejung007 Blog','https://jaideejung007.ml','','','2');
-INSERT INTO pre_common_friendlink VALUES ('5','4','Comsenz','http://www.comsenz.com','','','2');
 
 
 
@@ -465,15 +464,15 @@ INSERT INTO pre_common_setting VALUES ('showsettings','7');
 INSERT INTO pre_common_setting VALUES ('showsignatures','1');
 INSERT INTO pre_common_setting VALUES ('sigviewcond','0');
 INSERT INTO pre_common_setting VALUES ('sitemessage','a:5:{s:4:\"time\";s:1:\"3\";s:8:\"register\";s:0:\"\";s:5:\"login\";s:0:\"\";s:9:\"newthread\";s:0:\"\";s:5:\"reply\";s:0:\"\";}');
-INSERT INTO pre_common_setting VALUES ('sitename','Comsenz Inc.');
+INSERT INTO pre_common_setting VALUES ('sitename','DiscuzX');
 INSERT INTO pre_common_setting VALUES ('siteuniqueid','KD1Q6Vbd03ALJ34u');
-INSERT INTO pre_common_setting VALUES ('siteurl','http://www.comsenz.com/');
+INSERT INTO pre_common_setting VALUES ('siteurl','https://www.discuz.net/');
 INSERT INTO pre_common_setting VALUES ('smcols','8');
 INSERT INTO pre_common_setting VALUES ('smrows','5');
 INSERT INTO pre_common_setting VALUES ('smthumb','20');
 INSERT INTO pre_common_setting VALUES ('spacedata','a:11:{s:9:\"cachelife\";s:3:\"900\";s:14:\"limitmythreads\";s:1:\"5\";s:14:\"limitmyreplies\";s:1:\"5\";s:14:\"limitmyrewards\";s:1:\"5\";s:13:\"limitmytrades\";s:1:\"5\";s:13:\"limitmyvideos\";s:1:\"0\";s:12:\"limitmyblogs\";s:1:\"8\";s:14:\"limitmyfriends\";s:1:\"0\";s:16:\"limitmyfavforums\";s:1:\"5\";s:17:\"limitmyfavthreads\";s:1:\"0\";s:10:\"textlength\";s:3:\"300\";}');
 INSERT INTO pre_common_setting VALUES ('spacestatus','1');
-INSERT INTO pre_common_setting VALUES ('srchhotkeywords','');
+INSERT INTO pre_common_setting VALUES ('srchhotkeywords','กิจกรรม\r\nหาเพื่อน\r\ndiscuz');
 INSERT INTO pre_common_setting VALUES ('starthreshold','2');
 INSERT INTO pre_common_setting VALUES ('statcode','');
 INSERT INTO pre_common_setting VALUES ('statscachelife','180');
@@ -743,7 +742,7 @@ INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (
 
 
 
-INSERT INTO pre_common_template VALUES ('1','เทมเพลทมาตรฐาน','./template/default','Beijing Hong Sing New Technology Co., Ltd.');
+INSERT INTO pre_common_template VALUES ('1','เทมเพลทมาตรฐาน','./template/default','Tencent Cloud Computing (Beijing) Co., Ltd.');
 
 
 

@@ -73,7 +73,7 @@ function edit_insert(html) {
 	var obj = p.window.frames['HtmlEditor'];
 	var status = p.document.getElementById('uchome-editstatus').value;
 	if(status != 'html') {
-		alert('การดำเนินการนี้ใช้ได้เฉพาะในโหมดการแก้ไขมัลติมีเดียเท่านั้น');
+		alert('การทำงานนี้จะมีผลเฉพาะในโหมดแก้ไขมัลติมีเดียเท่านั้น');
 		return;
 	}
 	obj.focus();
@@ -193,4 +193,25 @@ function showInnerNav(){
 	if(pagetitle && pagetitle.style.display == 'none') {
 		pagetitle.style.display = '';
 	}
+}
+
+function loadimgsize(imgurl, editor, p) {
+	var editor = !editor ? 'icoImg' : editor;
+	var s = new Object();
+	var p = !p ? '_image' : p;
+	$(editor + p + '_param_2').value = '';
+	$(editor + p + '_param_3').value = '';
+	s.img = new Image();
+	s.img.src = imgurl;
+	s.loadCheck = function () {
+		if($(editor + p + '_param_1').value == imgurl) {
+			if(s.img.complete) {
+				$(editor + p + '_param_2').value = s.img.width ? s.img.width : '';
+				$(editor + p + '_param_3').value = s.img.height ? s.img.height : '';
+			} else {
+				setTimeout(function () {s.loadCheck();}, 100);
+			}
+		}
+	};
+	s.loadCheck();
 }

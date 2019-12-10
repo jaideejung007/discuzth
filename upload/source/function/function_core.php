@@ -409,7 +409,8 @@ function avatar($uid, $size = 'middle', $returnsrc = FALSE, $real = FALSE, $stat
 	$size = in_array($size, array('big', 'middle', 'small')) ? $size : 'middle';
 	$uid = abs(intval($uid));
 	if(!$staticavatar && !$static) {
-		return $returnsrc ? $ucenterurl.'/avatar.php?uid='.$uid.'&size='.$size.($real ? '&type=real' : '') : '<img src="'.$ucenterurl.'/avatar.php?uid='.$uid.'&size='.$size.($real ? '&type=real' : '').'" />';
+		$timestamp = $uid == $_G['uid'] ? "&ts=1" : "";
+		return $returnsrc ? $ucenterurl.'/avatar.php?uid='.$uid.'&size='.$size.($real ? '&type=real' : '').$timestamp : '<img src="'.$ucenterurl.'/avatar.php?uid='.$uid.'&size='.$size.($real ? '&type=real' : '').$timestamp.'" />';
 	} else {
 		$uid = sprintf("%09d", $uid);
 		$dir1 = substr($uid, 0, 3);
@@ -494,6 +495,9 @@ function checktplrefresh($maintpl, $subtpl, $timecompare, $templateid, $cachefil
 	}
 
 	if(empty($timecompare) || $tplrefresh == 1 || ($tplrefresh > 1 && !($timestamp % $tplrefresh))) {
+		if(!file_exists(DISCUZ_ROOT.$subtpl)){
+			$subtpl = substr($subtpl, 0, -4).'.php';
+		}
 		if(empty($timecompare) || @filemtime(DISCUZ_ROOT.$subtpl) > $timecompare) {
 			require_once DISCUZ_ROOT.'/source/class/class_template.php';
 			$template = new template();
@@ -1060,6 +1064,9 @@ function output() {
 		if(diskfreespace(DISCUZ_ROOT.'./'.$_G['setting']['cachethreaddir']) > 1000000) {
 			if($fp = @fopen(CACHE_FILE, 'w')) {
 				flock($fp, LOCK_EX);
+				$content = empty($content) ? ob_get_contents() : $content;
+				$temp_formhash = substr(md5(substr($_G['timestamp'], 0, -3).substr($_G['config']['security']['authkey'], 3, -3)), 8, 8);
+				$content = preg_replace('/(name=[\'|\"]formhash[\'|\"] value=[\'\"]|formhash=)('.constant("FORMHASH").')/ismU', '${1}'.$temp_formhash, $content);
 				fwrite($fp, empty($content) ? ob_get_contents() : $content);
 			}
 			@fclose($fp);
@@ -1512,7 +1519,10 @@ function dreferer($default = '') {
 		$_G['referer'] = '';
 	}
 
-	if(!empty($reurl['host']) && !in_array($reurl['host'], array($_SERVER['HTTP_HOST'], 'www.'.$_SERVER['HTTP_HOST'])) && !in_array($_SERVER['HTTP_HOST'], array($reurl['host'], 'www.'.$reurl['host']))) {
+	// There may be a port number in the HTTP_HOST variable
+	list($http_host,)=explode(':', $_SERVER['HTTP_HOST']);
+
+	if(!empty($reurl['host']) && !in_array($reurl['host'], array($http_host, 'www.'.$http_host)) && !in_array($http_host, array($reurl['host'], 'www.'.$reurl['host']))) {
 		if(!in_array($reurl['host'], $_G['setting']['domain']['app']) && !isset($_G['setting']['domain']['list'][$reurl['host']])) {
 			$domainroot = substr($reurl['host'], strpos($reurl['host'], '.')+1);
 			if(empty($_G['setting']['domain']['root']) || (is_array($_G['setting']['domain']['root']) && !in_array($domainroot, $_G['setting']['domain']['root']))) {
@@ -1760,13 +1770,16 @@ function sysmessage($message) {
 
 function forumperm($permstr, $groupid = 0) {
 	global $_G;
-
 	$groupidarray = array($_G['groupid']);
 	if($groupid) {
 		return preg_match("/(^|\t)(".$groupid.")(\t|$)/", $permstr);
 	}
+	$groupterms = dunserialize(getuserprofile('groupterms'));
 	foreach(explode("\t", $_G['member']['extgroupids']) as $extgroupid) {
 		if($extgroupid = intval(trim($extgroupid))) {
+			if($groupterms['ext'][$extgroupid] && $groupterms['ext'][$extgroupid] < TIMESTAMP){
+				continue;
+			}
 			$groupidarray[] = $extgroupid;
 		}
 	}
@@ -1889,14 +1902,16 @@ function getexpiration() {
 }
 
 function return_bytes($val) {
-    $val = trim($val);
-    $last = strtolower($val{strlen($val)-1});
-    switch($last) {
-        case 'g': $val *= 1024;
-        case 'm': $val *= 1024;
-        case 'k': $val *= 1024;
-    }
-    return $val;
+	$last = strtolower($val{strlen($val)-1});
+	if (!is_numeric($val)) {
+		$val = substr(trim($val), 0, -1);
+	}
+	switch($last) {
+		case 'g': $val *= 1024;
+		case 'm': $val *= 1024;
+		case 'k': $val *= 1024;
+	}
+	return $val;
 }
 
 function iswhitelist($host) {

@@ -130,7 +130,7 @@ if($_GET['step'] == 'start') {
 	$query = DB::fetch_all("SHOW FULL PROCESSLIST");
 	foreach($query as $row) {
 		if(in_array(md5($row['Info']), $_GET['sql'])) {
-			$list .= '[ความยาว]:'.$row['Time'].'[สถานะ]:<b>'.$row['State'].'</b>[ข้อมูล]:'.$row['Info'].'<br><br>';
+			$list .= '[ระยะเวลา]:'.$row['Time'].'[สถานะ]:<b>'.$row['State'].'</b>[ข้อมูล]:'.$row['Info'].'<br><br>';
 		}
 	}
 	if(empty($list) && empty($_GET['sendsql'])) {
@@ -2053,7 +2053,7 @@ END;
 function show_footer() {
 	print<<<END
 	</div>
-	<div id="footer">&copy; Comsenz Inc. 2001-2017 http://www.comsenz.com</div>
+	<div id="footer">Copyright &copy; 2001-2020, Tencent Cloud.</div>
 	</div>
 	<br>
 	</body>

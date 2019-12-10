@@ -361,7 +361,7 @@ if($_GET['action'] == 'checkusername') {
 	}
 	$_GET['message'] = str_replace(array("\r", "\n"), array($_GET['wysiwyg'] ? '<br />' : '', "\\n"), $_GET['message']);
 	preg_match_all("/\[img\]\s*([^\[\<\r\n]+?)\s*\[\/img\]|\[img=\d{1,4}[x|\,]\d{1,4}\]\s*([^\[\<\r\n]+?)\s*\[\/img\]/is", $_GET['message'], $image1, PREG_SET_ORDER);
-	preg_match_all("/\<img.+src=('|\"|)?(.*)(\\1)([\s].*)?\>/ismUe", $_GET['message'], $image2, PREG_SET_ORDER);
+	preg_match_all("/\<img.+\bsrc\b\s*=('|\"|)(.*)('|\"|)([\s].*)?\>/ismU", $_GET['message'], $image2, PREG_SET_ORDER);
 	$temp = $aids = $existentimg = array();
 	if(is_array($image1) && !empty($image1)) {
 		foreach($image1 as $value) {
@@ -396,7 +396,7 @@ if($_GET['action'] == 'checkusername') {
 						continue;
 					}
 					$content = '';
-					if(preg_match('/^(http:\/\/|\.)/i', $imageurl)) {
+					if(preg_match('/^(http(s?):\/\/|\.)/i', $imageurl)) {
 						$content = dfsockopen($imageurl);
 					} elseif(preg_match('/^('.preg_quote(getglobal('setting/attachurl'), '/').')/i', $imageurl)) {
 						$imagereplace['newimageurl'][] = $value[0];
