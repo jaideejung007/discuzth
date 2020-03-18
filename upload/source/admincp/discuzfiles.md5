@@ -752,7 +752,7 @@ d41d8cd98f00b204e9800998ecf8427e *api/trade/index.htm
 a014963f4ea09d3a9389b9100f9512e8 *api/trade/notify_trade.php
 2948997e2cc956dfa4cc7b8ac0bb6da9 *api/uc.php
 c95f2ed21859a62850f1bf8df6de049a *m/index.php
-8be79b358f0baf6ddac46d36914436a8 *source/discuz_version.php
+0089110159c9233c08feb03410fe7e49 *source/discuz_version.php
 7215ee9c7d9dc229d2921a40e899ec5f *source/index.htm
 0a7896849dd83bbf64a31ccf11e58a17 *source/admincp/admincp_admingroup.php
 110de6cfd7adf7e45d9233a36810abce *source/admincp/admincp_adv.php
@@ -1763,7 +1763,7 @@ d41d8cd98f00b204e9800998ecf8427e *source/language/group/index.htm
 7215ee9c7d9dc229d2921a40e899ec5f *source/language/home/index.htm
 9151c9c0bb7a932917e2b54f48ad5ca7 *source/language/home/lang_editor.php
 055a94b0432d01c4aed0370da1ff4e02 *source/language/home/lang_magic.php
-983d7974f3c84a4fd22d9063203f4330 *source/language/home/lang_template.php
+e80e64c324c92fdabab2a7dd53f74e43 *source/language/home/lang_template.php
 d41d8cd98f00b204e9800998ecf8427e *source/language/index.htm
 c912d218c2e9bb4c313190fc0f4a7339 *source/language/lang_action.php
 580763447af980fdd4e8b7b5fbfdb10f *source/language/lang_admincp.php
