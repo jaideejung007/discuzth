@@ -89,7 +89,7 @@ $lang = array(
 	'step_app_reg_title' => 'ตั้งค่าระบบ',
 	'step_app_reg_desc' => 'ทดสอบระบบเซิร์ฟเวอร์, และตั้งค่า UCenter',
 	'tips_ucenter' => 'กรุณากรอกข้อมูลของ UCenter ที่กำหนดไว้',
-	'tips_ucenter_comment' => 'UCenter เป็นผลิตภัณฑ์หลักของบริษัทฯ Comsenz ซึ่ง Discuz! Board ต้องติดตั้งและพึ่งพาการทำงานของโปรแกรมนี้. หากคุณติดตั้ง UCenter ไว้แล้ว กรุณากรอกข้อมูลด้านล่าง หากคุณยังไม่มีและยังไม่ได้ติดตั้ง UCenter กรุณาไปที่ <a href="http://www.discuzthai.com/" target="blank">DiscuzThai</a> เพื่อดาวน์โหลด UCenter เวอร์ชันภาษาไทย แล้วทำการติดตั้งเพื่อดำเนินการต่อไป',
+	'tips_ucenter_comment' => 'UCenter เป็นผลิตภัณฑ์หลักของบริษัทฯ Comsenz ซึ่ง Discuz! Board ต้องติดตั้งและพึ่งพาการทำงานของโปรแกรมนี้. หากคุณติดตั้ง UCenter ไว้แล้ว กรุณากรอกข้อมูลด้านล่าง หากคุณยังไม่มีและยังไม่ได้ติดตั้ง UCenter กรุณาไปที่ <a href="#" target="blank">DiscuzThai</a> เพื่อดาวน์โหลด UCenter เวอร์ชันภาษาไทย แล้วทำการติดตั้งเพื่อดำเนินการต่อไป',
 
 	'advice_mysql_connect' => 'กรุณาตรวจสอบว่า MySQL มีการเชื่อมต่ออย่างถูกต้อง',
 	'advice_gethostbyname' => 'ค่า gethostbyname.ใน PHP ถูกปิดใช้งาน   โปรดติดต่อผู้ให้บริการโฮสเพื่อตรวจสอบการเปิดคุณลักษณะนี้',
