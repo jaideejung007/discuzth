@@ -269,7 +269,7 @@ class table_common_member extends discuz_table_archive
 		return false;
 	}
 
-	public function insert($uid, $username, $password, $email, $ip, $groupid, $extdata, $adminid = 0) {
+	public function insert($uid, $username, $password, $email, $ip, $groupid, $extdata, $adminid = 0, $port = 0) {
 		if(($uid = dintval($uid))) {
 			$credits = isset($extdata['credits']) ? $extdata['credits'] : array();
 			$profile = isset($extdata['profile']) ? $extdata['profile'] : array();
@@ -290,6 +290,8 @@ class table_common_member extends discuz_table_archive
 				'uid' => $uid,
 				'regip' => (string)$ip,
 				'lastip' => (string)$ip,
+				'port' => (string)$port,
+				'regport' => (string)$port,
 				'lastvisit' => TIMESTAMP,
 				'lastactivity' => TIMESTAMP,
 				'lastpost' => 0,
@@ -333,7 +335,7 @@ class table_common_member extends discuz_table_archive
 	}
 
 	public function count_zombie() {
-		$dateline = TIMESTAMP - 7776000;//60*60*24*90
+		$dateline = TIMESTAMP - 31536000;
 		return DB::result_first('SELECT count(*) FROM %t mc, %t ms WHERE mc.posts<5 AND ms.lastvisit<%d AND ms.uid=mc.uid', array('common_member_count', 'common_member_status', $dateline));
 	}
 
@@ -341,23 +343,25 @@ class table_common_member extends discuz_table_archive
 		loadcache('membersplitdata');
 		@set_time_limit(0);
 		discuz_database_safecheck::setconfigstatus(0);
-		$dateline = TIMESTAMP - 7776000;//60*60*24*90
+		$dateline = TIMESTAMP - 31536000;
 		$temptablename = DB::table('common_member_temp___');
 		if(!DB::fetch_first("SHOW TABLES LIKE '$temptablename'")) {
-			DB::query("CREATE TABLE $temptablename (`uid` int(10) NOT NULL DEFAULT 0,PRIMARY KEY (`uid`)) ENGINE=MYISAM;");
+			$engine = getglobal("config/db/common/engine") !== 'innodb' ? 'MyISAM' : 'InnoDB';
+			DB::query("CREATE TABLE $temptablename (`uid` int(10) NOT NULL DEFAULT 0,PRIMARY KEY (`uid`)) ENGINE=" . $engine . ";");
 		}
-		$splitnum = max(1, intval($splitnum));
+		$splitnum = max(0, intval($splitnum));
 		if(!DB::result_first('SELECT COUNT(*) FROM '.$temptablename)) {
-			DB::query('INSERT INTO '.$temptablename.' (`uid`) SELECT ms.uid AS uid FROM %t mc, %t ms WHERE mc.posts<5 AND ms.lastvisit<%d AND mc.uid=ms.uid ORDER BY ms.lastvisit LIMIT %d', array('common_member_count', 'common_member_status', $dateline, $splitnum));
+			DB::query('INSERT INTO '.$temptablename.' (`uid`) SELECT ms.uid AS uid FROM %t mc, %t ms WHERE mc.posts<5 AND ms.lastvisit<%d AND mc.uid=ms.uid ORDER BY ms.uid DESC LIMIT %d', array('common_member_count', 'common_member_status', $dateline, $splitnum));
 		}
 
-		if(DB::result_first('SELECT COUNT(*) FROM '.$temptablename)) {
+		if(DB::result_first('SELECT COUNT(*) FROM '.$temptablename) > 1) {
 
 
 			if(!$iscron && getglobal('setting/memberspliting') === null) {
 				$this->switch_keys('disable');
 			}
-			$uidlist = DB::fetch_all('SELECT uid FROM '.$temptablename, null, 'uid');
+			$uidlist = DB::fetch_all('SELECT uid FROM '.$temptablename.' ORDER BY uid DESC', null, 'uid');
+			unset($uidlist[key($uidlist)]);
 			$uids = dimplode(array_keys($uidlist));
 			$movesql = 'REPLACE INTO %t SELECT * FROM %t WHERE uid IN ('.$uids.')';
 			$deletesql = 'DELETE FROM %t WHERE uid IN ('.$uids.')';

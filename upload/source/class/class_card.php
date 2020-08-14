@@ -28,7 +28,7 @@ class card{
 	var $failrate = '0.1';
 
 
-	function card() {
+	function __construct() {
 		$this->init();
 	}
 
@@ -70,9 +70,7 @@ class card{
 					} else {
 						$num = $i - 1;
 					}
-				}/* else {
-					DB::halt($sqlerror, $sql);
-				}*/
+				}
 			} else {
 				$this->succeed += intval(DB::affected_rows());
 				$this->cardlist[] = $card;

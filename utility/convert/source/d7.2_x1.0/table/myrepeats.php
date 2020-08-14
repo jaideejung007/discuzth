@@ -1,10 +1,6 @@
 <?php
 
-/**
- * DiscuzX Convert
- *
- * $Id: myrepeats.php 10740 2010-05-14 07:02:45Z monkey $
- */
+
 
 $curprg = basename(__FILE__);
 

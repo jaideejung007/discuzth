@@ -63,7 +63,7 @@ class discuz_table_archive extends discuz_table
 
 	public function split_check($wheresql) {
 		$status = helper_dbtool::gettablestatus(DB::table($this->_table), false);
-		if($status && $status['Data_length'] > 100 * 1048576) {//400 * 1048576
+		if($status && $status['Data_length'] > 100 * 1048576) {
 			if($moverows = DB::result_first('SELECT COUNT(*) FROM %t WHERE '.$wheresql, array($this->_table))) {
 				$status['Move_rows'] = $moverows;
 				$this->tablestatus = $status;

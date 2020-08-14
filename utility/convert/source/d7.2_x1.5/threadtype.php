@@ -1,10 +1,6 @@
 <?php
 
-/**
- * DiscuzX Convert
- *
- * $Id: threadtype.php 18152 2010-11-15 09:52:23Z monkey $
- */
+
 
 $curprg = basename(__FILE__);
 

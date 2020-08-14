@@ -18,6 +18,8 @@ $languages = array(
 	'to' => 'ถึง',
 	'menu' => 'เมนู',
 
+	'copyright' => 'Copyright &copy; 2001-'.date('Y').' Tencent Cloud.',
+
 	'founder'=>'ผู้ก่อตั้ง UCenter',
 	'login_username'=>'ชื่อสมาชิก',
 	'login_password'=>'รหัสผ่าน',
@@ -187,7 +189,7 @@ $languages = array(
 	'app_api_filename_comment' => 'ชื่อไฟล์ API ของผลิตภัณท์ ค่ามาตรฐานจะเป็น uc.php',
 	'app_code' => 'ข้อมูลการตั้งค่าของ UCenter',
 	'app_code_comment' => 'หากไฟล์การตั้งค่าของ UCenter สูญหายหรือไม่มีอยู่ คุณสามารถคัดลอกโค้ดด้านล่างนี้นำไปทับไฟล์ตัวที่ไม่มีหรือเสียหายได้',
-
+	'app_not_add_tips' => '不能通过 URL 添加应用的可能原因：1. 通过 URL 添加应用开关被关闭；2. 连续多次错误输入 UCenter 创始人密码',
 
 	'tag_tips'		=> 'Set the current application to obtain other applications as well as tag data on the proportion of the expansion of the data template. Template: "&#123;xxx&#125;" express the index of tag, representing the corresponding data',
 	'tag_global_template'	=> 'Global Template',
@@ -300,6 +302,10 @@ $languages = array(
 	'setting_chatpmmemberlimit_comment'	=> 'Limit the number of PM recipients that the user can send group chat short messages within 24 hours. We recommend to use a value in range of 30 - 100. Se to 0 for no restrictions. Used for limit the quantities of possible spam through the server',
 	'setting_pmfloodctrl'			=> 'PM Flood Prevention',
 	'setting_pmfloodctrl_comment'		=> 'Interval between two PM, in seconds, 0 for unlimited, this is to prevent the Ads robots',
+	'setting_addappbyurl' => '启用通过 URL 添加应用功能',
+	'setting_addappbyurl_comment' => '是否启用通过 URL 添加应用功能，建议只有必须通过 URL 添加应用时开启',
+	'setting_insecureuserdelete' => '启用不安全的删除用户接口',
+	'setting_insecureuserdelete_comment' => '是否启用不安全的删除用户接口，建议只有必须使用此接口且无法改造应用时开启',
 
 	'setting_user_failedtime' => 'อนุญาตให้เข้าสู่ระบบผิดได้ไม่เกินกี่ครั้ง',
 	'setting_user_failedtime_comment' => 'เมื่อผู้ใช้งานเข้าสู่ระบบผิดเกินจำนวนครั้งที่กำหนด จะไม่สามารถเข้าสู่ระบบได้ใน 15 นาที ถ้ากำหนด 0 หมายถึง ไม่จำกัด',

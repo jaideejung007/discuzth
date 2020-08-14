@@ -90,72 +90,7 @@ var bindEvent = function () {
 	});
 };
 
-/*var initWXShare = function (opts) {
-	WeixinJSBridge.on('menu:share:timeline', function (argv) {
-		var url = window.location.href + '&source=pyq&siteid=' + SITE_ID;
-		if (member_uid) {
-			url += '&fromuid=' + member_uid;
-		}
-		setTimeout(
-			function () {
-				WeixinJSBridge.invoke('shareTimeline', {
-					'img_url': opts.img,
-					'img_width': '120',
-					'img_height': '120',
-					'link': url,
-					'desc': opts.desc,
-					'title': opts.title
-				}, function (res) {
-					$('.tipInfo').hide();
-					$('.maskLayer').hide();
-				});
-			}
-		, 300
-			);
-	});
-	WeixinJSBridge.on('menu:share:appmessage', function (argv) {
-		var url = window.location.href + '&source=wxhy&siteid=' + SITE_ID;
-		setTimeout(
-			function () {
-				WeixinJSBridge.invoke('sendAppMessage', {
-					'appid': 'wx9324b266aa4818d0',
-					'img_url': opts.img,
-					'img_width': '120',
-					'img_height': '120',
-					'link': url,
-					'desc': opts.desc,
-					'title': opts.title
-				}, function (res) {
-					$('.tipInfo').hide();
-					$('.maskLayer').hide();
-				});
-			}
-		, 300
-			);
-	});
 
-	WeixinJSBridge.on('menu:share:weibo', function (argv) {
-		var url = window.location.href + '&source=wb&siteid=' + SITE_ID;
-		setTimeout(
-			function () {
-				WeixinJSBridge.invoke('shareWeibo', {
-					'img_url': opts.img,
-					'img_width': '120',
-					'img_height': '120',
-					'link': url,
-					'desc': opts.desc,
-					'title': opts.title,
-					'url': url,
-					'content': opts.desc
-				}, function (res) {
-					$('.tipInfo').hide();
-					$('.maskLayer').hide();
-				});
-			}
-		, 300
-			);
-	});
-};*/
 
 var dataLoaded = function (json, isInit) {
 	var postList = json.Variables.postlist;
@@ -224,8 +159,8 @@ var dataLoaded = function (json, isInit) {
 			}
 		});
 
-		threadTitle = json.Variables.thread.subject ? json.Variables.thread.subject : '快来看看这个晒图';
-		threadContent = '我参加了#' + SITE_INFO.siteName + '#举办的晒图活动，快来帮我点赞吧';
+		threadTitle = json.Variables.thread.subject ? json.Variables.thread.subject : 'ลองดูภาพถ่ายนี้';
+		threadContent = 'ฉันเข้าร่วมในกิจกรรมภาพถ่ายที่จัดโดย #' + SITE_INFO.siteName + '# ช่วยฉันด้วยนะ';
 
 		if (postItem.authorid == member_uid) {
 			$('.tipBor').html('หวังว่าผู้คนจะชื่นชอบรูปภาพของคุณมากยิ่งขึ้น โดยคลิกที่มุมขวาบนไอคอนแชร์ <span class="arrLeft"></span>');

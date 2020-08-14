@@ -12,7 +12,7 @@ var index = {
 	lastPage: 1,
 	isLastPage: false,
 	hasPopReplyFromPtlogin: false,
-	member_uid: 0, //member_uid
+	member_uid: 0, 
 	member_username: '',
 	member_avatar: '',
 	pluginversion: '',
@@ -409,11 +409,11 @@ var index = {
 		});
 
 		$(pageId + ' .incoRBtn').on('click', function (event) {
-			//if (data.Variables.member_uid != "0") {
-			//	replyComment(data.Variables.formhash, $(this).attr("tid"));
-			//} else {
-			//	FUNCS.replyCommentPage($(this).attr("tid"), 'index');
-			//}
+			
+			
+			
+			
+			
 			replyComment(data.Variables.formhash, $(this).attr("tid"));
 			event.stopPropagation();
 		});

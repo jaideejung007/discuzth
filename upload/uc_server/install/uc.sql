@@ -5,7 +5,7 @@ CREATE TABLE uc_applications (
   `name` varchar(20) NOT NULL default '',
   url varchar(255) NOT NULL default '',
   authkey varchar(255) NOT NULL default '',
-  ip varchar(15) NOT NULL default '',
+  ip varchar(45) NOT NULL default '',
   viewprourl varchar(255) NOT NULL,
   apifilename varchar( 30 ) NOT NULL DEFAULT 'uc.php',
   charset varchar(8) NOT NULL default '',
@@ -16,7 +16,7 @@ CREATE TABLE uc_applications (
   tagtemplates text NOT NULL,
   allowips text NOT NULL,
   PRIMARY KEY  (appid)
-) TYPE=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_members;
 CREATE TABLE uc_members (
@@ -26,7 +26,7 @@ CREATE TABLE uc_members (
   email char(32) NOT NULL DEFAULT '',
   myid char(30)  NOT NULL DEFAULT '',
   myidkey char(16) NOT NULL DEFAULT '',
-  regip char(15) NOT NULL DEFAULT '',
+  regip varchar(45) NOT NULL DEFAULT '',
   regdate int(10) unsigned NOT NULL DEFAULT '0',
   lastloginip int(10) NOT NULL DEFAULT '0',
   lastlogintime int(10) unsigned NOT NULL DEFAULT '0',
@@ -35,20 +35,29 @@ CREATE TABLE uc_members (
   PRIMARY KEY(uid),
   UNIQUE KEY username(username),
   KEY email(email)
-) TYPE=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_memberfields;
 CREATE TABLE uc_memberfields (
   uid mediumint(8) unsigned NOT NULL,
   blacklist text NOT NULL,
   PRIMARY KEY(uid)
-) TYPE=MyISAM;
+) ENGINE=InnoDB;
+
+DROP TABLE IF EXISTS uc_memberlogs;
+CREATE TABLE uc_memberlogs (
+  lid int(10) unsigned NOT NULL AUTO_INCREMENT,
+  uid mediumint(8) unsigned NOT NULL,
+  action varchar(32) NOT NULL DEFAULT '',
+  extra varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY(lid)
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_newpm;
 CREATE TABLE uc_newpm (
   uid mediumint(8) unsigned NOT NULL,
   PRIMARY KEY  (uid)
-) TYPE=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_friends;
 CREATE TABLE uc_friends (
@@ -61,7 +70,7 @@ CREATE TABLE uc_friends (
   PRIMARY KEY(version),
   KEY uid(uid),
   KEY friendid(friendid)
-) TYPE=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_tags;
 CREATE TABLE uc_tags (
@@ -70,7 +79,7 @@ CREATE TABLE uc_tags (
   data mediumtext,
   expiration int(10) unsigned NOT NULL,
   KEY tagname (tagname,appid)
-) TYPE=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_sqlcache;
 CREATE TABLE uc_sqlcache (
@@ -79,14 +88,14 @@ CREATE TABLE uc_sqlcache (
   expiry int(10) unsigned NOT NULL,
   PRIMARY KEY  (sqlid),
   KEY(expiry)
-) Type=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_settings;
 CREATE TABLE uc_settings (
   `k` varchar(32) NOT NULL default '',
   `v` text NOT NULL,
   PRIMARY KEY  (k)
-) Type=MyISAM;
+) ENGINE=InnoDB;
 
 REPLACE INTO uc_settings(k, v) VALUES ('accessemail','');
 REPLACE INTO uc_settings(k, v) VALUES ('censoremail','');
@@ -102,6 +111,8 @@ REPLACE INTO uc_settings(k, v) VALUES ('pmfloodctrl','15');
 REPLACE INTO uc_settings(k, v) VALUES ('pmcenter','1');
 REPLACE INTO uc_settings(k, v) VALUES ('sendpmseccode','1');
 REPLACE INTO uc_settings(k, v) VALUES ('pmsendregdays','0');
+REPLACE INTO uc_settings(k, v) VALUES ('addappbyurl','0');
+REPLACE INTO uc_settings(k, v) VALUES ('insecureuserdelete','0');
 REPLACE INTO uc_settings(k, v) VALUES ('maildefault', 'username@21cn.com');
 REPLACE INTO uc_settings(k, v) VALUES ('mailsend', '1');
 REPLACE INTO uc_settings(k, v) VALUES ('mailserver', 'smtp.21cn.com');
@@ -124,8 +135,8 @@ CREATE TABLE uc_badwords (
   replacement varchar(255) NOT NULL default '',
   findpattern varchar(255) NOT NULL default '',
   PRIMARY KEY  (id),
-  UNIQUE KEY `find` (`find`)
-) Type=MyISAM;
+  UNIQUE KEY `find` (`find`(100))
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_notelist;
 CREATE TABLE uc_notelist (
@@ -141,15 +152,15 @@ CREATE TABLE uc_notelist (
   PRIMARY KEY  (noteid),
   KEY closed (closed,pri,noteid),
   KEY dateline (dateline)
-) Type=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_domains;
 CREATE TABLE uc_domains (
   id int(10) unsigned NOT NULL auto_increment,
   domain char(40) NOT NULL default '',
-  ip char(15) NOT NULL default '',
+  ip varchar(45) NOT NULL default '',
   PRIMARY KEY  (id)
-) Type=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_feeds;
 CREATE TABLE uc_feeds (
@@ -177,7 +188,7 @@ CREATE TABLE uc_feeds (
   target_ids varchar(255) NOT NULL default '',
   PRIMARY KEY  (feedid),
   KEY uid (uid,dateline)
-) Type=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_admins;
 CREATE TABLE uc_admins (
@@ -197,15 +208,15 @@ CREATE TABLE uc_admins (
   allowadminlog tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (uid),
   UNIQUE KEY username (username)
-) Type=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_failedlogins;
 CREATE TABLE uc_failedlogins (
-  ip char(15) NOT NULL default '',
+  ip varchar(45) NOT NULL default '',
   count tinyint(1) unsigned NOT NULL default '0',
   lastupdate int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (ip)
-) Type=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_protectedmembers;
 CREATE TABLE uc_protectedmembers (
@@ -215,21 +226,21 @@ CREATE TABLE uc_protectedmembers (
   dateline int(10) unsigned NOT NULL default '0',
   `admin` char(15) NOT NULL default '0',
   UNIQUE KEY(username, appid)
-) Type=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_mergemembers;
 CREATE TABLE uc_mergemembers (
   appid smallint(6) unsigned NOT NULL,
   username char(15) NOT NULL,
   PRIMARY KEY  (appid,username)
-) Type=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_vars;
 CREATE TABLE uc_vars (
   name char(32) NOT NULL default '',
   value char(255) NOT NULL default '',
   PRIMARY KEY(name)
-) Type=HEAP;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_mailqueue;
 CREATE TABLE uc_mailqueue (
@@ -248,7 +259,7 @@ CREATE TABLE uc_mailqueue (
   PRIMARY KEY  (mailid),
   KEY appid (appid),
   KEY level (level,failures)
-) TYPE=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_pm_members;
 CREATE TABLE uc_pm_members (
@@ -262,7 +273,7 @@ CREATE TABLE uc_pm_members (
   KEY isnew (isnew),
   KEY lastdateline (uid,lastdateline),
   KEY lastupdate (uid,lastupdate)
-) TYPE=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_pm_lists;
 CREATE TABLE uc_pm_lists (
@@ -278,7 +289,7 @@ CREATE TABLE uc_pm_lists (
   KEY pmtype (pmtype),
   KEY min_max (min_max),
   KEY authorid (authorid,dateline)
-) TYPE=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_pm_indexes;
 CREATE TABLE uc_pm_indexes (
@@ -286,7 +297,7 @@ CREATE TABLE uc_pm_indexes (
   plid mediumint(8) unsigned NOT NULL default '0',
   PRIMARY KEY  (pmid),
   KEY plid (plid)
-) TYPE=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_pm_messages_0;
 CREATE TABLE uc_pm_messages_0 (
@@ -299,7 +310,7 @@ CREATE TABLE uc_pm_messages_0 (
   PRIMARY KEY  (pmid),
   KEY plid (plid,delstatus,dateline),
   KEY dateline (plid,dateline)
-) TYPE=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_pm_messages_1;
 CREATE TABLE uc_pm_messages_1 (
@@ -312,7 +323,7 @@ CREATE TABLE uc_pm_messages_1 (
   PRIMARY KEY  (pmid),
   KEY plid (plid,delstatus,dateline),
   KEY dateline (plid,dateline)
-) TYPE=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_pm_messages_2;
 CREATE TABLE uc_pm_messages_2 (
@@ -325,7 +336,7 @@ CREATE TABLE uc_pm_messages_2 (
   PRIMARY KEY  (pmid),
   KEY plid (plid,delstatus,dateline),
   KEY dateline (plid,dateline)
-) TYPE=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_pm_messages_3;
 CREATE TABLE uc_pm_messages_3 (
@@ -338,7 +349,7 @@ CREATE TABLE uc_pm_messages_3 (
   PRIMARY KEY  (pmid),
   KEY plid (plid,delstatus,dateline),
   KEY dateline (plid,dateline)
-) TYPE=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_pm_messages_4;
 CREATE TABLE uc_pm_messages_4 (
@@ -351,7 +362,7 @@ CREATE TABLE uc_pm_messages_4 (
   PRIMARY KEY  (pmid),
   KEY plid (plid,delstatus,dateline),
   KEY dateline (plid,dateline)
-) TYPE=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_pm_messages_5;
 CREATE TABLE uc_pm_messages_5 (
@@ -364,7 +375,7 @@ CREATE TABLE uc_pm_messages_5 (
   PRIMARY KEY  (pmid),
   KEY plid (plid,delstatus,dateline),
   KEY dateline (plid,dateline)
-) TYPE=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_pm_messages_6;
 CREATE TABLE uc_pm_messages_6 (
@@ -377,7 +388,7 @@ CREATE TABLE uc_pm_messages_6 (
   PRIMARY KEY  (pmid),
   KEY plid (plid,delstatus,dateline),
   KEY dateline (plid,dateline)
-) TYPE=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_pm_messages_7;
 CREATE TABLE uc_pm_messages_7 (
@@ -390,7 +401,7 @@ CREATE TABLE uc_pm_messages_7 (
   PRIMARY KEY  (pmid),
   KEY plid (plid,delstatus,dateline),
   KEY dateline (plid,dateline)
-) TYPE=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_pm_messages_8;
 CREATE TABLE uc_pm_messages_8 (
@@ -403,7 +414,7 @@ CREATE TABLE uc_pm_messages_8 (
   PRIMARY KEY  (pmid),
   KEY plid (plid,delstatus,dateline),
   KEY dateline (plid,dateline)
-) TYPE=MyISAM;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_pm_messages_9;
 CREATE TABLE uc_pm_messages_9 (
@@ -416,4 +427,4 @@ CREATE TABLE uc_pm_messages_9 (
   PRIMARY KEY  (pmid),
   KEY plid (plid,delstatus,dateline),
   KEY dateline (plid,dateline)
-) TYPE=MyISAM;
+) ENGINE=InnoDB;

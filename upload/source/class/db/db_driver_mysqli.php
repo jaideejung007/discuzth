@@ -78,12 +78,13 @@ class db_driver_mysqli
 	}
 
 	function _dbconnect($dbhost, $dbuser, $dbpw, $dbcharset, $dbname, $pconnect, $halt = true) {
-
+		if (intval($pconnect) === 1) $dbhost = 'p:' . $dbhost; 
 		$link = new mysqli();
 		if(!$link->real_connect($dbhost, $dbuser, $dbpw, $dbname, null, null, MYSQLI_CLIENT_COMPRESS)) {
 			$halt && $this->halt('notconnect', $this->errno());
 		} else {
 			$this->curlink = $link;
+			$link->options(MYSQLI_OPT_LOCAL_INFILE, false);
 			if($this->version() > '4.1') {
 				$link->set_charset($dbcharset ? $dbcharset : $this->config[1]['dbcharset']);
 				$serverset = $this->version() > '5.0.1' ? 'sql_mode=\'\',' : '';
@@ -220,6 +221,29 @@ class db_driver_mysqli
 
 	function halt($message = '', $code = 0, $sql = '') {
 		throw new DbException($message, $code, $sql);
+	}
+
+	function begin_transaction() {
+		if (PHP_VERSION < '5.5') {
+			return $this->curlink->autocommit(false);
+		}
+		return $this->curlink->begin_transaction();
+	}
+
+	function commit() {
+		$cr = $this->curlink->commit();
+		if (PHP_VERSION < '5.5') {
+			$this->curlink->autocommit(true);
+		}
+		return $cr;
+	}
+
+	function rollback() {
+		$rr = $this->curlink->rollback();
+		if (PHP_VERSION < '5.5') {
+			$this->curlink->autocommit(true);
+		}
+		return $rr;
 	}
 
 }

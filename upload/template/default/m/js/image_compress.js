@@ -29,7 +29,7 @@ var ImageCompresser = {
 		ctx.drawImage(img, 1 - Math.ceil(Math.random() * w), 0);
 		data = ctx.getImageData(0, 0, 1, h).data;
 		while (py > sy) {
-			var alpha = data[(py - 1) * 4 + 3];//Notice:如果原图自带透明度，这里可能会失效
+			var alpha = data[(py - 1) * 4 + 3];
 			if (alpha === 0) {
 				ey = py;
 			} else {
@@ -74,7 +74,7 @@ var ImageCompresser = {
 			var tmpCanvas = document.createElement('canvas'),
 				tmpCtx = tmpCanvas.getContext('2d'),
 				d = 1024,
-				vertSquashRatio = ImageCompresser.getIosImageRatio(img, _w, _h), //ios平台大尺寸图片压缩比
+				vertSquashRatio = ImageCompresser.getIosImageRatio(img, _w, _h), 
 				sx, sy, sw, sh, dx, dy, dw, dh;
 			tmpCanvas.width = tmpCanvas.height = d;
 			sy = 0;

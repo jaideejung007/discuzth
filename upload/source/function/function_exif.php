@@ -98,7 +98,7 @@ function getexif($img) {
 		exif_lang('ExposureProgram')		=>	$ExposureProgram[$exif[EXIF][ExposureProgram]],
 		exif_lang('ExposureBiasValue')		=>	$exif[EXIF][ExposureBiasValue]."EV",
 		exif_lang('ISOSpeedRatings')		=>	$exif[EXIF][ISOSpeedRatings],
-		exif_lang('ComponentsConfiguration')		=>	(bin2hex($exif[EXIF][ComponentsConfiguration])=="01020300"?"YCbCr":"RGB"),//'0x04,0x05,0x06,0x00'="RGB" '0x01,0x02,0x03,0x00'="YCbCr"
+		exif_lang('ComponentsConfiguration')		=>	(bin2hex($exif[EXIF][ComponentsConfiguration])=="01020300"?"YCbCr":"RGB"),
 		exif_lang('CompressedBitsPerPixel')		=>	$exif[EXIF][CompressedBitsPerPixel]."Bits/Pixel",
 		exif_lang('FocusDistance')		=>	$exif[COMPUTED][FocusDistance]."m",
 		exif_lang('FocalLength')			=>	$exif[EXIF][FocalLength]."mm",

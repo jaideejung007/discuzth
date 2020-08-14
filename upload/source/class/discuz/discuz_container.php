@@ -107,9 +107,7 @@ class discuz_container extends discuz_base
 								$p[] = $this;
 								$ret = call_user_func_array($extend, $p);
 							}
-						}/* else {
-							throw new Exception('Class "'.get_class($extend[0]).'" does not have a method named "'.$extend[1].'".');
-						}*/
+						}
 					} else {
 						$p[] = $this->_obj;
 						$ret = call_user_func_array($extend, $p);

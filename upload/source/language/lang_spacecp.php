@@ -308,6 +308,8 @@ $lang = array(
 	'invite_you_to_visit' => '{user} เชิญชวนคุณให้เข้าชม {bbname}',
 
 	'portal' => 'พอร์ทัล',
+	'forum' => '论坛',
+	'friend' => '好友',
 	'group' => 'กลุ่ม',
 	'follow' => 'ติดตาม',
 	'collection' => 'คลังกระทู้',
@@ -318,6 +320,10 @@ $lang = array(
 	'wall' => 'ข้อความ',
 	'homepage' => 'หน้าแรก',
 	'ranklist' => 'รายการจัดอันดับ',
+	'medal' => '勋章',
+	'task' => '任务',
+	'magic' => '道具',
+	'favorite' => '收藏',
 	'select_the_navigation_position' => 'เลือกประเภท {type} เมนูนำทาง',
 	'close_module' => 'ปิดประเภทโมดูล {type}',
 

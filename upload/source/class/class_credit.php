@@ -17,7 +17,7 @@ class credit {
 	var $coef = 1;
 	var $extrasql = array();
 
-	function credit() {}
+	function __construct() {}
 
 	function &instance() {
 		static $object;
@@ -234,12 +234,12 @@ class credit {
 			$this->updatemembercount($creditarr, $uids, is_array($uids) ? false : true, $this->coef > 0 ? urldecode($rule['rulenameuni']) : '');
 		}
 	}
-
+	
 	function frequencycheck($uids) {
 		global $_G;
 		if(empty($_G['config']['security']['creditsafe']['second']) || empty($_G['config']['security']['creditsafe']['times'])) {
 			return true;
-		}
+		}		
 		foreach($uids as $uid) {
 			$key = 'credit_fc'.$uid;
 			$v = intval(memory('get', $key));
@@ -292,7 +292,7 @@ class credit {
 			}
 			if($sql) {
 				C::t('common_member_count')->increase($uids, $sql);
-			}
+			}			
 			if($checkgroup && count($uids) == 1) $this->checkusergroup($uids[0]);
 			$this->extrasql = array();
 		}

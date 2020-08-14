@@ -51,7 +51,7 @@ if($operation == 'delete') {
 		showmessage('attachment_nonexistence');
 	}
 
-	$readmod = 2;//read local file's function: 1=fread 2=readfile 3=fpassthru 4=fpassthru+multiple
+	$readmod = 2;
 	$range = 0;
 	if($readmod == 4 && !empty($_SERVER['HTTP_RANGE'])) {
 		list($range) = explode('-',(str_replace('bytes=', '', $_SERVER['HTTP_RANGE'])));

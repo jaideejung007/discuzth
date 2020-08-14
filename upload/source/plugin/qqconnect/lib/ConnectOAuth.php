@@ -14,6 +14,8 @@ if(!defined('IN_DISCUZ')) {
 require_once DISCUZ_ROOT.'/source/plugin/qqconnect/lib/OAuth.php';
 
 
+
+
 class Cloud_Service_Client_ConnectOAuth extends Cloud_Service_Client_OAuth {
 
 	private $_requestTokenURL = 'http://openapi.qzone.qq.com/oauth/qzoneoauth_request_token';

@@ -36,9 +36,6 @@ $lang = array(
 	'nodir' => 'ไม่มีโฟลเดอร์',
 	'redirect' => 'เบราเซอร์จะไปยังหน้าต่อไปโดยอัตโนมัติ, โดยไม่ต้องกระทำการใดๆ...<br>หากเบราว์เซอร์ของคุณไม่ไปยังหน้าต่อไปโดยอัตโนมัติโปรดคลิกที่นี่',
 	'auto_redirect' => 'เบราเซอร์จะข้ามไปยังหน้าต่อไปโดยอัตโนมัติ',
-	'database_errno_2003' => 'ไม่สามารถเชื่อมต่อกับฐานข้อมูล โปรดตรวจสอบฐานข้อมูลว่าเชื่อมต่ออยู่เซิร์ฟเวอร์ฐานข้อมูลถูกต้องหรือไม่',
-	'database_errno_1044' => 'ไม่สามารถสร้างฐานข้อมูลใหม่โปรดตรวจสอบชื่อฐานข้อมูลที่กรอกให้ถูกต้อง',
-	'database_errno_1045' => 'ไม่สามารถเชื่อมต่อกับฐานข้อมูลโปรดตรวจสอบชื่อผู้ใช้ฐานข้อมูลและรหัสผ่านให้ถูกต้อง',
 	'database_errno_1064' => 'SQL เกิดข้อผิดพลาด',
 
 	'dbpriv_createtable' => 'ในการติดตั้งนี้ ไม่อนุญาตให้ CREATE TABLE ไม่สามารถดำเนินการต่อให้สมบูรณ์ได้',
@@ -56,10 +53,10 @@ $lang = array(
 	'old_step' => 'ขั้นตอนก่อนหน้า',
 	'new_step' => 'ขั้นตอนถัดไป',
 
-	'database_errno_2003' => 'ไม่สามารถเชื่อมต่อกับฐานข้อมูล โปรดตรวจสอบฐานข้อมูลว่าเชื่อมต่ออยู่เซิร์ฟเวอร์ฐานข้อมูลถูกต้องหรือไม่',
-	'database_errno_1044' => 'ไม่สามารถสร้างฐานข้อมูลใหม่โปรดตรวจสอบชื่อฐานข้อมูลที่กรอกให้ถูกต้อง',
-	'database_errno_1045' => 'ไม่สามารถเชื่อมต่อกับฐานข้อมูลโปรดตรวจสอบชื่อผู้ใช้ฐานข้อมูลและรหัสผ่านให้ถูกต้อง',
-	'database_connect_error' => 'การเชื่อมต่อฐานข้อมูลผิดพลาด',
+	'database_errno_2003' => '无法连接数据库，请检查数据库是否启动，数据库服务器地址是否正确',
+	'database_errno_1044' => '无法创建新的数据库，请检查数据库名称填写是否正确',
+	'database_errno_1045' => '无法连接数据库，请检查数据库用户名或者密码是否正确',
+	'database_connect_error' => '数据库连接错误',
 
 	'step_title_1' => 'การตรวจสอบก่อนติดตั้ง',
 	'step_title_2' => 'กำหนดข้อมูลระบบ',
@@ -119,12 +116,14 @@ $lang = array(
 	'dbhost_comment' => 'ทั่วไปจะเป็น localhost',
 	'tablepre_comment' => 'ถ้าติดตั้งในฐานข้อมูลเดียวกันกรุณาแก้ไขคำนำหน้า',
 	'forceinstall_check_label' => 'ฉันต้องการลบข้อมูลที่ติดตั้ง!!!',
+	'initdbresult_succ' => '数据库安装完成',
+	'initsys' => '正在系统初始化',
 
 	'uc_url_empty' => 'คุณไม่ได้กรอก URL ของ UCenter กรุณากลับไปกรอก',
 	'uc_url_invalid' => 'รูปแบบของ URL ผิดพลาด',
 	'uc_url_unreachable' => 'ที่อยู่ URL ของ UCenter อาจกรอกข้อผิดกรุณากลับไปตรวจสอบ',
 	'uc_ip_invalid' => 'ไม่สามารถใส่ชื่อโดเมนโปรดกรอก IP ของเว็บไซต์',
-	'uc_admin_invalid' => 'รหัสผ่านของ UCenter ผิดพลาดกรุณากรอกใหม่',
+	'uc_admin_invalid' => 'The password verification of the founder of UCenter failed, the possible reasons are:<br />1. UCenter founder password is incorrect<br />2. Multiple incorrect input passwords cause the founder user and IP address to be locked<br />3. "Add function via URL" in UCenter background is not enabled',
 	'uc_data_invalid' => 'การเชื่อมต่อล้มเหลว กรุณาตรวจสอบที่อยู่ URL ของ UCenter ให้ถูกต้อง',
 	'uc_dbcharset_incorrect' => 'ข้อมูล UCenter และไม่ตรงกับปัจจุบัน',
 	'uc_api_add_app_error' => 'เพิ่มโปรแกรมไปยัง UCenter ผิดพลาด',
@@ -250,57 +249,59 @@ $lang = array(
 	'init_gift_task' => 'กิจกรรมกล่องของขวัญ',
 	'init_avatar_task' => 'กิจกรรมเปลี่ยนรูปโปรไฟล์',
 
-	'license' => '<div class="license"><h1>เวอร์ชันภาษาอังกฤษ (อย่างไม่เป็นทางการ) เป็นข้อตกลงใบอนุญาตสำหรับผู้ใช้ที่ไม่ใช้ภาษาจีน</h1>
+	'copyright' => 'Copyright &copy; 2001-'.date('Y').' Tencent Cloud.',
 
-<p>Copyright (c) 2001-2020, Tencent Cloud Computing (Beijing) Co., Ltd. (formerly Beijing Kangsheng Xinchuang Technology Co., Ltd.) All rights reserved.</p>
+	'license' => '<div class="license"><h1>ข้อตกลงใบอนุญาตเวอร์ชันภาษาจีนสำหรับผู้ใช้ภาษาจีน</h1>
 
-<p>Thank you for choosing Kangsheng products. We hope that our efforts can provide you with an efficient, fast, powerful site solution, and a powerful community forum solution. The website of Kangsheng Company is http://www.comsenz.com, and the official discussion website of the product is http://www.discuz.net.</p>
+<p>版权所有 (c) 2001-'.date('Y').'，腾讯云计算（北京）有限责任公司(原北京康盛新创科技有限责任公司)保留所有权利。</p>
 
-<p>Note to users: This agreement is a legal agreement between you and Kangsheng about your use of various software products and services provided by Kangsheng. Regardless of whether you are an individual or an organization, profitable or not, and for whatever purpose (including for the purpose of learning and research), you need to read this agreement carefully, including the exemption clauses that exempt or limit Kang Sheng\'s liability and restrictions on your rights. Please review and accept or not accept these Terms of Service. If you do not agree to these Terms of Service and/or any changes to them by Kang Sheng at any time, you should not use or actively cancel Kang Sheng products provided by Kang Sheng. Otherwise, any of your use of registration, login, download, and viewing of related services in Kangsheng products will be deemed to be your full acceptance of these Terms of Service, including any amendments made by Kangsheng to the Terms of Service at any time.
-<p>Once these Terms of Service are changed, Kang Sheng will post the changes on the website. Once the revised terms of service are published on the website management background, they will effectively replace the original terms of service. You can check the latest version of the terms of service at the official forum of Kangsheng at any time. If you choose to accept these terms, you agree to be bound by the terms of the agreement. If you do not agree to these Terms of Service, you will not be granted the right to use the Service. If you violate the provisions of this clause, Kangsheng Company has the right to suspend or terminate your qualification to use Kangsheng products at any time and reserves the right to pursue relevant legal responsibilities.</p>
-<p>After understanding, agreeing, and complying with all the terms of this agreement, you can start using Kangsheng products. You may enter into another written agreement directly with Kangsheng to supplement or replace all or any part of this agreement.</p></p>
+<p>感谢您选择康盛产品。希望我们的努力能为您提供一个高效快速、强大的站点解决方案，和强大的社区论坛解决方案。康盛公司网址为 http://www.comsenz.com，产品官方讨论区网址为 http://www.discuz.net。</p>
 
-<p>All intellectual property Kang Sheng has the software. This software is only for the license, not for sale. Kang Sheng only allows you to copy, in accordance with the terms of this agreement, download installation, use or otherwise benefit from the functions of the software or intellectual property rights.</p>
+<p>用户须知：本协议是您与康盛公司之间关于您使用康盛公司提供的各种软件产品及服务的法律协议。无论您是个人或组织、盈利与否、用途如何（包括以学习和研究为目的），均需仔细阅读本协议，包括免除或者限制康盛责任的免责条款及对您的权利限制。请您审阅并接受或不接受本服务条款。如您不同意本服务条款及/或康盛随时对其的修改，您应不使用或主动取消康盛公司提供的康盛产品。否则，您的任何对康盛产品中的相关服务的注册、登陆、下载、查看等使用行为将被视为您对本服务条款全部的完全接受，包括接受康盛对服务条款随时所做的任何修改。
+<p>本服务条款一旦发生变更, 康盛将在网页上公布修改内容。修改后的服务条款一旦在网站管理后台上公布即有效代替原来的服务条款。您可随时登陆康盛官方论坛查阅最新版服务条款。如果您选择接受本条款，即表示您同意接受协议各项条件的约束。如果您不同意本服务条款，则不能获得使用本服务的权利。您若有违反本条款规定，康盛公司有权随时中止或终止您对康盛产品的使用资格并保留追究相关法律责任的权利。</p>
+<p>在理解、同意、并遵守本协议的全部条款后，方可开始使用康盛产品。您可能与康盛公司直接签订另一书面协议，以补充或者取代本协议的全部或者任何部分。</p></p>
 
-<h3>I. Licensed Rights</h3>
+<p>康盛拥有本软件的全部知识产权。本软件只供许可协议，并非出售。康盛只允许您在遵守本协议各项条款的情况下复制、下载、安装、使用或者以其他方式受益于本软件的功能或者知识产权。</p>
+
+<h3>I. 协议许可的权利</h3>
 <ol>
-<li>You can fully comply with the end user license agreement, based on the software used in this non-commercial use, without having to pay for software copyright licensing fees.</li>
-<li>Agreement you can within the constraints and limitations modify Discuz! source code (if provided) or interface styles to suit your site requirements.</li>
-<li>You have to use this software to build the forum all the membership information, articles and related information of ownership, and is independent of commitment and legal obligations related to the article content.</li>
-<li>A commercial license, you can use this software for commercial applications, while according to the type of license purchased to determine the period of technical support, technical support, technical support form and content, from the moment of purchase, within the period of technical support have a way to get through the specified designated areas of technical support services. Business authorized users have the power to reflect and comment, relevant comments will be a primary consideration, but not necessarily be accepted promise or guarantee.</li>
-<li>You can download the application that suits your website from the application center service provided by Kangsheng, but you should pay the application developer / owner accordingly.</li>
+   <li>您可以在完全遵守本许可协议的基础上，将本软件应用于非商业用途，而不必支付软件版权许可费用。</li>
+   <li>您可以在协议规定的约束和限制范围内修改康盛产品源代码(如果被提供的话)或界面风格以适应您的网站要求。</li>
+   <li>您拥有使用本软件构建的网站中全部会员资料、文章及相关信息的所有权，并独立承担与使用本软件构建的网站内容的审核、注意义务，确保其不侵犯任何人的合法权益，独立承担因使用康盛软件和服务带来的全部责任，若造成康盛公司或用户损失的，您应予以全部赔偿。</li>
+   <li>若您需将康盛软件或服务用户商业用途，必须另行获得康盛的书面许可，您在获得商业授权之后，您可以将本软件应用于商业用途，同时依据所购买的授权类型中确定的技术支持期限、技术支持方式和技术支持内容，自购买时刻起，在技术支持期限内拥有通过指定的方式获得指定范围内的技术支持服务。商业授权用户享有反映和提出意见的权力，相关意见将被作为首要考虑，但没有一定被采纳的承诺或保证。</li>
+   <li>您可以从康盛提供的应用中心服务中下载适合您网站的应用程序，但应向应用程序开发者/所有者支付相应的费用。</li>
 </ol>
 
-<h3>II. Constraints and restrictions stipulated in the agreement</h3>
+<h3>II. 协议规定的约束和限制</h3>
 <ol>
-<li>The software may not be used for commercial purposes (including, but not limited to, corporate websites, operational websites, profit-oriented websites, or profitable websites) without written commercial authorization from Kangsheng. For commercial license purchase, please visit http://www.discuz.com for reference, or call 8610-51282255 for details.</li>
-<li>May not associated with the software or business license for rental, sale, mortgage or grant sub-licenses.</li>
-<li>In any case, that no matter how used, whether modified or landscaping, changes to what extent, just use Discuz! the whole or any part, without the written permission of the Forum page footer Department Discuz! name and Sing Imagination (Beijing) Technology Co., Ltd. affiliated website (http://www.comsenz.com, http://www.discuz.com or http://www.discuz.net) the link must be retained, not removed or modified .</li>
-<li>Prohibited Discuz! the whole or any part of the basis for the development of any derivative version, modified version or third-party version for redistribution.</li>
-<li>The applications you download from the Application Center must not be reverse engineered, decompiled, decompiled, etc. without the written permission of the application developer/owner, Publishing, publishing, developing related derivative products, works, etc.</li>
-<li>If you fail to comply with the terms of this agreement, your authorization will be terminated, your licensed rights will be revoked, and you will be held legally responsible.
+   <li>未获康盛公司书面商业授权之前，不得将本软件用于商业用途（包括但不限于企业网站、经营性网站、以营利为目或实现盈利的网站）。购买商业授权请登陆http://www.discuz.com参考相关说明，也可以致电8610-51282255了解详情。</li>
+   <li>不得对本软件或与之关联的商业授权进行出租、出售、抵押或发放子许可证。</li>
+   <li>无论如何，即无论用途如何、是否经过修改或美化、修改程度如何，只要使用康盛产品的整体或任何部分，未经书面许可，页面页脚处的康盛产品名称和康盛公司下属网站（http://www.comsenz.com、或 http://www.discuz.net） 的链接都必须保留，而不能清除或修改。</li>
+   <li>禁止在康盛产品的整体或任何部分基础上以发展任何派生版本、修改版本或第三方版本用于重新分发。</li>
+   <li>您从应用中心下载的应用程序，未经应用程序开发者/所有者的书面许可，不得对其进行反向工程、反向汇编、反向编译等，不得擅自复制、修改、链接、转载、汇编、发表、出版、发展与之有关的衍生产品、作品等。</li>
+   <li>如果您未能遵守本协议的条款，您的授权将被终止，所许可的权利将被收回，同时您应承担相应法律责任。</li>
 </ol>
 
-<h3>III. Limited Warranty and Disclaimer</h3>
+<h3>III. 有限担保和免责声明</h3>
 <ol>
-<li>The software and the accompanying documents as not to provide any express or implied, or guarantee in the form of compensation provided.</li>
-<li>User voluntary use of this software, you must understand the risks of using this software, technical services in the not to buy products before, we do not promise to provide any form of technical support, use of guarantees, nor liable for any use of this software issues related to liability arising.</li>
-<li>Hong Sing Company does not use the software to build a website or forum post or liable for the information, you assume full responsibility.</li>
-<li>Hong Sing company provides software and services in a timely manner, security, accuracy is not guaranteed, due to force majeure, Hong Sing factors beyond the control of the company (including hacker attacks, stopping power, etc.) caused by software and services Suspension or termination, and give your losses, you agree to Sing corporate responsibility waiver of all rights.</li>
-<li>Hong Sing Company specifically draw your attention to Hong Sing Company in order to protect business development and adjustment of autonomy, Hong Sing Company has at any time with or without prior notice to modify the service content, suspend or terminate some or all of the rights of software and services , changes will be posted on the relevant pages of Sing website, including without notice. Hong Sing Company to modify or discontinue the exercise, termination of some or all of the rights of software and services resulting from the loss, without Hong Sing Company to you or any third party.</li>
+   <li>本软件及所附带的文件是作为不提供任何明确的或隐含的赔偿或担保的形式提供的。</li>
+   <li>用户出于自愿而使用本软件，您必须了解使用本软件的风险，在尚未购买产品技术服务之前，我们不承诺提供任何形式的技术支持、使用担保，也不承担任何因使用本软件而产生问题的相关责任。</li>
+   <li>康盛公司不对使用本软件构建的网站中或者论坛中的文章或信息承担责任，全部责任由您自行承担。</li>
+   <li>康盛公司无法全面监控由第三方上传至应用中心的应用程序，因此不保证应用程序的合法性、安全性、完整性、真实性或品质等；您从应用中心下载应用程序时，同意自行判断并承担所有风险，而不依赖于康盛公司。但在任何情况下，康盛公司有权依法停止应用中心服务并采取相应行动，包括但不限于对于相关应用程序进行卸载，暂停服务的全部或部分，保存有关记录，并向有关机关报告。由此对您及第三人可能造成的损失，康盛公司不承担任何直接、间接或者连带的责任。</li>
+   <li>康盛公司对康盛提供的软件和服务之及时性、安全性、准确性不作担保，由于不可抗力因素、康盛公司无法控制的因素（包括黑客攻击、停断电等）等造成软件使用和服务中止或终止，而给您造成损失的，您同意放弃追究康盛公司责任的全部权利。   6.康盛公司特别提请您注意，康盛公司为了保障公司业务发展和调整的自主权，康盛公司拥有随时经或未经事先通知而修改服务内容、中止或终止部分或全部软件使用和服务的权利，修改会公布于康盛公司网站相关页面上，一经公布视为通知。 康盛公司行使修改或中止、终止部分或全部软件使用和服务的权利而造成损失的，康盛公司不需对您或任何第三方负责。</li>
 </ol>
 
-<p>Hong Sing products on the end user license agreement, business license and technical services to the details provided by the Hong Sing exclusive. Sing the company has without prior notice, modify the license agreement and services price list right to the modified agreement or price list from the change of the date of the new authorized user to take effect.</p>
+<p>有关康盛产品最终用户授权协议、商业授权与技术服务的详细内容，均由康盛公司独家提供。康盛公司拥有在不事先通知的情况下，修改授权协议和服务价目表的权利，修改后的协议或价目表对自改变之日起的新授权用户生效。</p>
 
-<p>Once you start the installation Hong Sing products, shall be deemed to fully understand and accept the terms of this Agreement, the terms in the enjoyment of the rights granted at the same time, by the relevant constraints and restrictions. Licensing agreement outside the scope of acts would be a direct violation of this License Agreement and constitute an infringement, we have the right to terminate the authorization, shall be ordered to stop the damage, and retain the power to investigate related responsibilities.</p>
+<p>一旦您开始安装康盛产品，即被视为完全理解并接受本协议的各项条款，在享有上述条款授予的权利的同时，受到相关的约束和限制。协议许可范围以外的行为，将直接违反本授权协议并构成侵权，我们有权随时终止授权，责令停止损害，并保留追究相关责任的权力。</p>
 
-<p>The interpretation of the terms of the license agreement, validity, and dispute resolution, applicable to the mainland People\'s Republic of law.</p>
+<p>本许可协议条款的解释，效力及纠纷的解决，适用于中华人民共和国大陆法律。</p>
 
-<p>Between Hong Sing if you and any dispute or controversy, should first be settled through friendly consultations, the consultation fails, you hereby agree to submit the dispute or controversy Sing Haidian District People\'s Court where jurisdiction. Hong Sing Company has the right to interpret the above terms and discretion.</p>
+<p>若您和康盛之间发生任何纠纷或争议，首先应友好协商解决，协商不成的，您在此完全同意将纠纷或争议提交康盛所在地北京市海淀区人民法院管辖。康盛公司拥有对以上各项条款内容的解释权及修改权。</p>
 
-<p>(End of text)</p>
+<p>（正文完）</p>
 
-<p align="right">Kang Sheng</p>
+<p align="right">康盛公司</p>
 
 </div>',
 
@@ -332,7 +333,6 @@ $lang = array(
 	'suggestion' => 'คำแนะนำ',
 	'advice_mysql' => 'ตรวจสอบว่าโมดูล mysql โหลดอย่างถูกต้อง',
 	'advice_fopen' => 'ตรวจสอบ allow_url_fopen ใน php.ini ว่าเปิดใช้งานอยู่หรือไม่ โปรดติดต่อผู้ให้บริการโฮสต์เพื่อตรวจสอบการเปิดคุณลักษณะนี้',
-	'advice_file_get_contents' => 'ตรวจสอบ allow_url_fopen ใน php.ini ว่าเปิดใช้งานอยู่หรือไม่ โปรดติดต่อผู้ให้บริการโฮสต์เพื่อตรวจสอบการเปิดคุณลักษณะนี้',
 	'advice_xml' => 'ตรวจสอบดูว่าสนับสนุน PHP สำหรับ XML หรือไม่ โปรดติดต่อผู้ให้บริการโฮสต์เพื่อตรวจสอบการเปิดคุณลักษณะนี้',
 	'none' => 'ไม่มี',
 
@@ -350,6 +350,7 @@ $lang = array(
 	'select_db' => 'เลือกฐานข้อมูล',
 	'create_table' => 'สร้างตารางข้อมูล',
 	'succeed' => 'สำเร็จ',
+	'failed' => '失败',
 
 	'install_data' => 'กำลังติดตั้งข้อมูล',
 	'install_test_data' => 'กำลังติดตั้งข้อมูลเพิ่มเติม',

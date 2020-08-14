@@ -227,12 +227,12 @@ function uploadSuccess(file, serverData) {
 					preObj.innerHTML = "";
 					preObj.style.display = '';
 					var img = new Image();
-					img.src = IMGDIR + '/attachimg_2.png';//data.smallimg;
+					img.src = IMGDIR + '/attachimg_2.png';
 					var imgObj = document.createElement("img");
 					imgObj.src = img.src;
 					imgObj.className = "cur1";
-					imgObj.onmouseout = function(){hideMenu('poll_img_preview_'+data.aid+'_menu');};//"hideMenu('poll_img_preview_"+data.aid+"_menu');";
-					imgObj.onmouseover = function(){showMenu({'menuid':'poll_img_preview_'+data.aid+'_menu','ctrlclass':'a','duration':2,'timeout':0,'pos':'34'});};//"showMenu({'menuid':'poll_img_preview_"+data.aid+"_menu','ctrlclass':'a','duration':2,'timeout':0,'pos':'34'});";
+					imgObj.onmouseout = function(){hideMenu('poll_img_preview_'+data.aid+'_menu');};
+					imgObj.onmouseover = function(){showMenu({'menuid':'poll_img_preview_'+data.aid+'_menu','ctrlclass':'a','duration':2,'timeout':0,'pos':'34'});};
 					preObj.appendChild(imgObj);
 					var inputObj = document.createElement("input");
 					inputObj.type = 'hidden';

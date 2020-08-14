@@ -1,10 +1,6 @@
 <?php
 
-/**
- * DiscuzX Convert
- *
- * $Id: global.func.php 20661 2011-03-01 08:08:07Z shanzongjun $
- */
+
 
 function remaintime($time) {
 	$seconds 	= $time % 60;
@@ -73,7 +69,7 @@ function cutstr($string, $length, $dot = '') {
 	return $strcut.$dot;
 }
 
-function parseqqicq($qqicq, $minlen = 5, $maxlen = 12) {// qq 转换
+function parseqqicq($qqicq, $minlen = 5, $maxlen = 12) {
 	return $qqicq ? (preg_match("/^([0-9]+)$/", $qqicq) && strlen($qqicq) >= $minlen && strlen($qqicq) <= $maxlen ? $qqicq : '') : '';
 }
 
@@ -133,7 +129,7 @@ function parsesign($sign) {
 	return daddslashes(str_replace($searcharray, $replacearray, preg_replace($pregfind, $pregreplace, $sign)));
 }
 
-function bbcodeurl($url, $tags) {//url 转换
+function bbcodeurl($url, $tags) {
 	if(!preg_match("/<.+?>/s", $url)) {
 		if(!in_array(strtolower(substr($url, 0, 6)), array('http:/', 'ftp://', 'rtsp:/', 'mms://'))) {
 			$url = 'http://'.$url;

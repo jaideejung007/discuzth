@@ -101,7 +101,7 @@ class control extends adminbase {
 	function _format_notlist(&$notelist) {
 		if(is_array($notelist)) {
 			foreach($notelist AS $key => $note) {
-				$notelist[$key]['operation'] = $this->lang['note_'.$note['operation']];//$this->operations[$note['operation']][0];
+				$notelist[$key]['operation'] = $this->lang['note_'.$note['operation']];
 				foreach($this->apps AS $appid => $app) {
 					$notelist[$key]['status'][$appid] = $this->_note_status($note['app'.$appid], $appid, $note['noteid'], $note['args'], $note['operation']);
 				}

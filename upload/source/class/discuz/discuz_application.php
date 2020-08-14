@@ -54,6 +54,7 @@ class discuz_application extends discuz_base{
 	}
 
 	public function __construct() {
+		$this->_init_cnf();
 		$this->_init_env();
 		$this->_init_config();
 		$this->_init_input();
@@ -76,11 +77,17 @@ class discuz_application extends discuz_base{
 	private function _init_env() {
 
 		error_reporting(E_ERROR);
+
 		if(PHP_VERSION < '5.3.0') {
 			set_magic_quotes_runtime(0);
 		}
 
-		define('MAGIC_QUOTES_GPC', function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc());
+		if (PHP_VERSION < '5.4.0') {
+			define('MAGIC_QUOTES_GPC', function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc());
+		} else {
+			define('MAGIC_QUOTES_GPC', FALSE);
+		}
+
 		define('ICONV_ENABLE', function_exists('iconv'));
 		define('MB_ENABLE', function_exists('mb_convert_encoding'));
 		define('EXT_OBGZIP', function_exists('ob_gzhandler'));
@@ -135,7 +142,7 @@ class discuz_application extends discuz_base{
 
 			'pluginrunlist' => !defined('PLUGINRUNLIST') ? array() : explode(',', PLUGINRUNLIST),
 
-			'config' => array(),
+			'config' => & $this->config,
 			'setting' => array(),
 			'member' => array(),
 			'group' => array(),
@@ -187,7 +194,7 @@ class discuz_application extends discuz_base{
 		if(defined('IN_NEWMOBILE')) {
 			$sitepath = preg_replace("/\/m/i", '', $sitepath);
 		}
-		$_G['isHTTPS'] = ($_SERVER['HTTPS'] && strtolower($_SERVER['HTTPS']) != 'off') ? true : false;
+		$_G['isHTTPS'] = $this->_is_https();
 		$_G['scheme'] = 'http'.($_G['isHTTPS'] ? 's' : '');
 		$_G['siteurl'] = dhtmlspecialchars($_G['scheme'].'://'.$_SERVER['HTTP_HOST'].$sitepath.'/');
 
@@ -275,7 +282,7 @@ class discuz_application extends discuz_base{
 
 	}
 
-	private function _init_config() {
+	private function _init_cnf() {
 
 		$_config = array();
 		@include DISCUZ_ROOT.'./config/config_global.php';
@@ -288,30 +295,33 @@ class discuz_application extends discuz_base{
 			}
 		}
 
-		if(empty($_config['security']['authkey'])) {
-			$_config['security']['authkey'] = md5($_config['cookie']['cookiepre'].$_config['db'][1]['dbname']);
+		$this->config = & $_config;
+
+	}
+
+	private function _init_config() {
+
+		if(empty($this->var['config']['security']['authkey'])) {
+			$this->var['config']['security']['authkey'] = md5($this->var['config']['cookie']['cookiepre'].$this->var['config']['db'][1]['dbname']);
 		}
 
-		if(empty($_config['debug']) || !file_exists(libfile('function/debug'))) {
+		if(empty($this->var['config']['debug']) || !file_exists(libfile('function/debug'))) {
 			define('DISCUZ_DEBUG', false);
 			error_reporting(0);
-		} elseif($_config['debug'] === 1 || $_config['debug'] === 2 || !empty($_REQUEST['debug']) && $_REQUEST['debug'] === $_config['debug']) {
+		} elseif($this->var['config']['debug'] === 1 || $this->var['config']['debug'] === 2 || !empty($_REQUEST['debug']) && $_REQUEST['debug'] === $this->var['config']['debug']) {
 			define('DISCUZ_DEBUG', true);
 			error_reporting(E_ERROR);
-			if($_config['debug'] === 2) {
+			if($this->var['config']['debug'] === 2) {
 				error_reporting(E_ALL);
 			}
 		} else {
 			define('DISCUZ_DEBUG', false);
 			error_reporting(0);
 		}
-		define('STATICURL', !empty($_config['output']['staticurl']) ? $_config['output']['staticurl'] : 'static/');
+		define('STATICURL', !empty($this->var['config']['output']['staticurl']) ? $this->var['config']['output']['staticurl'] : 'static/');
 		$this->var['staticurl'] = STATICURL;
 
-		$this->config = & $_config;
-		$this->var['config'] = & $_config;
-
-		if(substr($_config['cookie']['cookiepath'], 0, 1) != '/') {
+		if(substr($this->var['config']['cookie']['cookiepath'], 0, 1) != '/') {
 			$this->var['config']['cookie']['cookiepath'] = '/'.$this->var['config']['cookie']['cookiepath'];
 		}
 		$this->var['config']['cookie']['cookiepre'] = $this->var['config']['cookie']['cookiepre'].substr(md5($this->var['config']['cookie']['cookiepath'].'|'.$this->var['config']['cookie']['cookiedomain']), 0, 4).'_';
@@ -343,6 +353,10 @@ class discuz_application extends discuz_base{
 			@header('Content-Type: text/html; charset='.CHARSET);
 		}
 
+		if($this->var['isHTTPS'] && ($this->config['output']['upgradeinsecure'] || !isset($this->config['output']['upgradeinsecure']))) {
+			@header('Content-Security-Policy: upgrade-insecure-requests');
+		}
+
 	}
 
 	public function reject_robot() {
@@ -356,7 +370,13 @@ class discuz_application extends discuz_base{
 		static $check = array('"', '>', '<', '\'', '(', ')', 'CONTENT-TRANSFER-ENCODING');
 
 		if(isset($_GET['formhash']) && $_GET['formhash'] !== formhash()) {
-			system_error('request_tainting');
+			if(constant('CURMODULE') == 'logging' && isset($_GET['action']) && $_GET['action'] == 'logout') {
+				header("HTTP/1.1 302 Found");
+				header("Location: index.php");
+				exit();
+			} else {
+				system_error('request_tainting');
+			}
 		}
 
 		if($_SERVER['REQUEST_METHOD'] == 'GET' ) {
@@ -379,28 +399,52 @@ class discuz_application extends discuz_base{
 		return true;
 	}
 
+	private function _is_https() {
+		if (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) != "off") {
+			return true;
+		}
+		if (isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && strtolower($_SERVER["HTTP_X_FORWARDED_PROTO"]) == "https") {
+			return true;
+		}
+		if (isset($_SERVER["HTTP_SCHEME"]) && strtolower($_SERVER["HTTP_SCHEME"]) == "https") {
+			return true;
+		}
+		if (isset($_SERVER["HTTP_FROM_HTTPS"]) && strtolower($_SERVER["HTTP_FROM_HTTPS"]) != "off") {
+			return true;
+		}
+		if (isset($_SERVER["SERVER_PORT"]) && $_SERVER["SERVER_PORT"] == 443) {
+			return true;
+		}
+		return false;
+	}
+
 	private function _get_client_ip() {
 		$ip = $_SERVER['REMOTE_ADDR'];
-		if (!$this->config['security']['onlyremoteaddr']) {
-			if (isset($_SERVER['HTTP_CLIENT_IP']) && preg_match('/^([0-9]{1,3}\.){3}[0-9]{1,3}$/', $_SERVER['HTTP_CLIENT_IP'])) {
+		if (!array_key_exists('security', $this->config) || !$this->config['security']['onlyremoteaddr']) {
+			if (array_key_exists('ipgetter', $this->config) && !empty($this->config['ipgetter']['setting'])) {
+				$s = empty($this->config['ipgetter'][$this->config['ipgetter']['setting']]) ? array() : $this->config['ipgetter'][$this->config['ipgetter']['setting']];
+				$c = 'ip_getter_'.$this->config['ipgetter']['setting'];
+				$r = $c::get($s);
+				$ip = ip::validate_ip($r) ? $r : $ip;
+			} elseif (isset($_SERVER['HTTP_CLIENT_IP']) && ip::validate_ip($_SERVER['HTTP_CLIENT_IP'])) {
 				$ip = $_SERVER['HTTP_CLIENT_IP'];
-			} elseif(isset($_SERVER['HTTP_X_FORWARDED_FOR']) AND preg_match_all('#\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}#s', $_SERVER['HTTP_X_FORWARDED_FOR'], $matches)) {
-				foreach ($matches[0] AS $xip) {
-					if (!preg_match('#^(10|172\.16|192\.168)\.#', $xip)) {
-						$ip = $xip;
-						break;
-					}
+			} elseif(isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+				if (strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ",") > 0) {
+					$exp = explode(",", $_SERVER['HTTP_X_FORWARDED_FOR']);
+					$ip = ip::validate_ip(trim($exp[0])) ? $exp[0] : $ip;
+				} else {
+					$ip = ip::validate_ip($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $ip;
 				}
 			}
 		}
-		return $ip == '::1' ? '127.0.0.1' : $ip;
+		return $ip;
 	}
 
 	private function _init_db() {
 		if($this->init_db) {
-			$driver = function_exists('mysql_connect') ? 'db_driver_mysql' : 'db_driver_mysqli';
+			$driver = 'db_driver_mysqli';
 			if(getglobal('config/db/slave')) {
-				$driver = function_exists('mysql_connect') ? 'db_driver_mysql_slave' : 'db_driver_mysqli_slave';
+				$driver = 'db_driver_mysqli_slave';
 			}
 			DB::init($driver, $this->config['db']);
 		}
@@ -420,10 +464,8 @@ class discuz_application extends discuz_base{
 				dsetcookie('sid', $this->var['sid'], 86400);
 			}
 
-			if($this->session->isnew) {
-				if(ipbanned($this->var['clientip'])) {
-					$this->session->set('groupid', 6);
-				}
+			if(ip::checkbanned($this->var['clientip'])) {
+				$this->session->set('groupid', 6);
 			}
 
 			if($this->session->get('groupid') == 6) {
@@ -473,9 +515,14 @@ class discuz_application extends discuz_base{
 				$memberfieldforum = C::t('common_member_field_forum')->fetch($discuz_uid);
 				$groupterms = dunserialize($memberfieldforum['groupterms']);
 				if(!empty($groupterms['main'])) {
-					C::t("common_member")->update($user['uid'], array('groupexpiry'=> 0, 'groupid' => $groupterms['main']['groupid'], 'adminid' => $groupterms['main']['adminid']));
-					$user['groupid'] = $groupterms['main']['groupid'];
+					if($groupterms['main']['groupid']) {
+						$user['groupid'] = $groupterms['main']['groupid'];
+					} else {
+						$groupnew = C::t('common_usergroup')->fetch_by_credits($user['credits']);
+						$user['groupid'] = $groupnew['groupid'];
+					}
 					$user['adminid'] = $groupterms['main']['adminid'];
+					C::t("common_member")->update($user['uid'], array('groupexpiry'=> 0, 'groupid' => $user['groupid'], 'adminid' => $user['adminid']));
 					unset($groupterms['main'], $groupterms['ext'][$this->var['member']['groupid']]);
 					$this->var['member'] = $user;
 					C::t('common_member_field_forum')->update($discuz_uid, array('groupterms' => serialize($groupterms)));
@@ -693,7 +740,7 @@ class discuz_application extends discuz_base{
 
 		!empty($this->cachelist) && loadcache($this->cachelist);
 
-		if(!is_array($this->var['setting'])) {
+		if(!is_array($this->var['setting']) && !is_a($this->var['setting'], 'memory_setting_array')) {
 			$this->var['setting'] = array();
 		}
 

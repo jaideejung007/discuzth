@@ -1541,9 +1541,13 @@ $lang = array (
   'connect_fill_profile_to_comment' => 'คุณจำเป็นต้อง <a href="member.php?mod=connect" class="xi2">เชื่อมต่อบัญชีผู้ใช้</a> หรือ <a href="member.php?mod=connect&ac=bind" class="xi2">ผูกบัญชีผู้ใช้งาน</a> ก่อนที่จะดำเนินการใดๆ',
   'save_to_album' => 'บันทึกลงในอัลบั้ม',
   'usergroup_expired' => 'กลุ่มผู้ใช้งานของคุณได้หมดอายุแล้ว กรุณาเลือกตำแหน่งสำหรับต่ออายุหรือสลับไปยังกลุ่มผู้ใช้งานอื่น',
-  'freeze_pw_tips' => 'บัญชีของคุณถูกตั้งสถานะเป็น Freeze เนื่องจากมีความเสี่ยงในด้านความปลอดภัย กรุณาเปลี่ยนรหัสผ่านของคุณใหม่ทันที สถานะดังกล่าวจึงจะถูกยกเลิก',
-  'freeze_email_tips' => 'บัญชีของคุณถูกตั้งสถานะเป็น Freeze เนื่องจากไม่ได้เข้าสู่ระบบเว็บไซต์นานเกินไป <a href="home.php?mod=spacecp&ac=profile&op=password&resend=1" class="xi2">กรุณาคลิกที่นี่</a> เพื่อรับอีเมลสำหรับยืนยันว่าคุณยังมีตัวตนอยู่จริง สถานะดังกล่าวจึงจะถูกยกเลิก',
+  'freeze_pw_tips' => '您当前的帐号已经被冻结，请修改密码解除冻结状态',
+  'freeze_email_tips' => '您当前的帐号已经被冻结，必须验证邮箱后才能解除冻结状态 <a href="home.php?mod=spacecp&ac=profile&op=password&resend=1" class="xi2">重新接收验证邮件</a>',
+  'freeze_admincp_tips' => '您当前的帐号已经被冻结，必须在本页面填写申诉理由，并经管理中心审核通过后才能解除冻结状态',
   'freeze_reason' => 'ระบุเหตุผลการอุทธรณ์',
   'freeze_reason_comment' => 'หากไม่สามารถยืนยันตัวบุคคลผ่านอีเมลได้ กรุณากรอกข้อมูลสำหรับการอุทธรณ์ได้ที่นี่',
+  'freeze_reason_admincp_comment' => '如果您认为您的账号不应被冻结，请填写申诉理由',
+  'freeze_remark' => '审核结果',
+  'freeze_remark_comment' => '您已提交 $space[freezemodsubmittimes] 次审核，最后一次审核操作由 $space[freezemodadmin] 于 $space[freezemoddate] 做出',
 );
 ?>

@@ -338,7 +338,7 @@ function checkmobile() {
 	}
 	if(($v = dstrpos($useragent, $wmlbrowser_list))) {
 		$_G['mobile'] = $v;
-		return '3'; //wml版
+		return '3'; 
 	}
 	$brower = array('mozilla', 'chrome', 'safari', 'opera', 'm3gate', 'winwap', 'openwave', 'myop');
 	if(dstrpos($useragent, $brower)) return false;
@@ -381,7 +381,7 @@ function random($length, $numeric = 0) {
 	}
 	$max = strlen($seed) - 1;
 	for($i = 0; $i < $length; $i++) {
-		$hash .= $seed{mt_rand(0, $max)};
+		$hash .= $seed[mt_rand(0, $max)];
 	}
 	return $hash;
 }
@@ -543,7 +543,7 @@ function template($file, $templateid = 0, $tpldir = '', $gettplfile = 0, $primal
 			$indiy = false;
 			$_G['style']['tpldirectory'] = $tpldir ? $tpldir : (defined('TPLDIR') ? TPLDIR : '');
 			$_G['style']['prefile'] = '';
-			$diypath = DISCUZ_ROOT.'./data/diy/'.$_G['style']['tpldirectory'].'/'; //DIY模板文件目录
+			$diypath = DISCUZ_ROOT.'./data/diy/'.$_G['style']['tpldirectory'].'/'; 
 			$preend = '_diy_preview';
 			$_GET['preview'] = !empty($_GET['preview']) ? $_GET['preview'] : '';
 			$curtplname = $oldfile;
@@ -561,7 +561,7 @@ function template($file, $templateid = 0, $tpldir = '', $gettplfile = 0, $primal
 				$tpldir = 'data/diy/'.$_G['style']['tpldirectory'].'/';
 				!$gettplfile && $_G['style']['tplsavemod'] = $tplsavemod;
 				$curtplname = $file;
-				if(isset($_GET['diy']) && $_GET['diy'] == 'yes' || isset($_GET['diy']) && $_GET['preview'] == 'yes') { //DIY模式或预览模式下做以下判断
+				if(isset($_GET['diy']) && $_GET['diy'] == 'yes' || isset($_GET['diy']) && $_GET['preview'] == 'yes') { 
 					$flag = file_exists($diypath.$file.$preend.'.htm');
 					if($_GET['preview'] == 'yes') {
 						$file .= $flag ? $preend : '';
@@ -1347,12 +1347,12 @@ function getfocus_rand($module) {
 	return $focusid;
 }
 
-function check_seccode($value, $idhash, $fromjs = 0, $modid = '') {
-	return helper_seccheck::check_seccode($value, $idhash, $fromjs, $modid);
+function check_seccode($value, $idhash, $fromjs = 0, $modid = '', $verifyonly = false) {
+	return helper_seccheck::check_seccode($value, $idhash, $fromjs, $modid, $verifyonly);
 }
 
-function check_secqaa($value, $idhash) {
-	return helper_seccheck::check_secqaa($value, $idhash);
+function check_secqaa($value, $idhash, $verifyonly = false) {
+	return helper_seccheck::check_secqaa($value, $idhash, $verifyonly);
 }
 
 function seccheck($rule, $param = array()) {
@@ -1461,7 +1461,7 @@ function space_merge(&$values, $tablename, $isarchive = false) {
 			if(($_G[$var] = C::t('common_member_'.$tablename.$ext)->fetch($uid)) !== false) {
 				if($tablename == 'field_home') {
 					$_G['setting']['privacy'] = empty($_G['setting']['privacy']) ? array() : (is_array($_G['setting']['privacy']) ? $_G['setting']['privacy'] : dunserialize($_G['setting']['privacy']));
-					$_G[$var]['privacy'] = empty($_G[$var]['privacy'])? array() : is_array($_G[$var]['privacy']) ? $_G[$var]['privacy'] : dunserialize($_G[$var]['privacy']);
+					$_G[$var]['privacy'] = empty($_G[$var]['privacy']) ? array() : (is_array($_G[$var]['privacy']) ? $_G[$var]['privacy'] : dunserialize($_G[$var]['privacy']));
 					foreach (array('feed','view','profile') as $pkey) {
 						if(empty($_G[$var]['privacy'][$pkey]) && !isset($_G[$var]['privacy'][$pkey])) {
 							$_G[$var]['privacy'][$pkey] = isset($_G['setting']['privacy'][$pkey]) ? $_G['setting']['privacy'][$pkey] : array();
@@ -1514,22 +1514,20 @@ function dreferer($default = '') {
 	}
 
 	$reurl = parse_url($_G['referer']);
+	$hostwithport = $reurl['host'] . (isset($reurl['port']) ? ':' . $reurl['port'] : '');
 
 	if(!$reurl || (isset($reurl['scheme']) && !in_array(strtolower($reurl['scheme']), array('http', 'https')))) {
 		$_G['referer'] = '';
 	}
 
-	// There may be a port number in the HTTP_HOST variable
-	list($http_host,)=explode(':', $_SERVER['HTTP_HOST']);
-
-	if(!empty($reurl['host']) && !in_array($reurl['host'], array($http_host, 'www.'.$http_host)) && !in_array($http_host, array($reurl['host'], 'www.'.$reurl['host']))) {
-		if(!in_array($reurl['host'], $_G['setting']['domain']['app']) && !isset($_G['setting']['domain']['list'][$reurl['host']])) {
-			$domainroot = substr($reurl['host'], strpos($reurl['host'], '.')+1);
+	if(!empty($hostwithport) && !in_array($hostwithport, array($_SERVER['HTTP_HOST'], 'www.'.$_SERVER['HTTP_HOST'])) && !in_array($_SERVER['HTTP_HOST'], array($hostwithport, 'www.'.$hostwithport))) {
+		if(!in_array($hostwithport, $_G['setting']['domain']['app']) && !isset($_G['setting']['domain']['list'][$hostwithport])) {
+			$domainroot = substr($hostwithport, strpos($hostwithport, '.')+1);
 			if(empty($_G['setting']['domain']['root']) || (is_array($_G['setting']['domain']['root']) && !in_array($domainroot, $_G['setting']['domain']['root']))) {
 				$_G['referer'] = $_G['setting']['domain']['defaultindex'] ? $_G['setting']['domain']['defaultindex'] : 'index.php';
 			}
 		}
-	} elseif(empty($reurl['host'])) {
+	} elseif(empty($hostwithport)) {
 		$_G['referer'] = $_G['siteurl'].'./'.$_G['referer'];
 	}
 
@@ -1669,7 +1667,7 @@ function g_icon($groupid, $return = 0) {
 	if(empty($_G['cache']['usergroups'][$groupid]['icon'])) {
 		$s =  '';
 	} else {
-		if(substr($_G['cache']['usergroups'][$groupid]['icon'], 0, 5) == 'http:') {
+		if(preg_match('/^https?:\/\//is', $_G['cache']['usergroups'][$groupid]['icon'])) {
 			$s = '<img src="'.$_G['cache']['usergroups'][$groupid]['icon'].'" alt="" class="vm" />';
 		} else {
 			$s = '<img src="'.$_G['setting']['attachurl'].'common/'.$_G['cache']['usergroups'][$groupid]['icon'].'" alt="" class="vm" />';
@@ -1705,51 +1703,73 @@ function getposttable($tableid = 0, $prefix = false) {
 	return table_forum_post::getposttable($tableid, $prefix);
 }
 
+
 function memory($cmd, $key='', $value='', $ttl = 0, $prefix = '') {
+	static $supported_command = array(
+		'set', 'get', 'rm', 'inc', 'dec', 'exists',
+		'sadd', 'srem', 'scard', 'smembers', 'sismember',
+		'hmset', 'hgetall', 'hexists', 'hget',
+		'eval', 
+		'zadd', 'zcard', 'zrem', 'zscore', 'zrevrange', 'zincrby', 'zrevrangewithscore' ,
+		'pipeline', 'commit', 'discard'
+	);
+
 	if($cmd == 'check') {
 		return  C::memory()->enable ? C::memory()->type : '';
-	} elseif(C::memory()->enable && in_array($cmd, array('set', 'get', 'rm', 'inc', 'dec'))) {
+	} elseif(C::memory()->enable && in_array($cmd, $supported_command)) {
 		if(defined('DISCUZ_DEBUG') && DISCUZ_DEBUG) {
 			if(is_array($key)) {
 				foreach($key as $k) {
 					C::memory()->debug[$cmd][] = ($cmd == 'get' || $cmd == 'rm' ? $value : '').$prefix.$k;
 				}
 			} else {
-				C::memory()->debug[$cmd][] = ($cmd == 'get' || $cmd == 'rm' ? $value : '').$prefix.$key;
+				if ($cmd === 'hget') {
+					C::memory()->debug[$cmd][] = $prefix . $key . "->" . $value;
+				} elseif ($cmd === 'eval') {
+					C::memory()->debug[$cmd][] = $key . "->" . $ttl;
+				} else {
+					C::memory()->debug[$cmd][] = ($cmd == 'get' || $cmd == 'rm' ? $value : '').$prefix.$key;
+				}
 			}
 		}
 		switch ($cmd) {
 			case 'set': return C::memory()->set($key, $value, $ttl, $prefix); break;
 			case 'get': return C::memory()->get($key, $value); break;
 			case 'rm': return C::memory()->rm($key, $value); break;
-			case 'inc': return C::memory()->inc($key, $value ? $value : 1); break;
-			case 'dec': return C::memory()->dec($key, $value ? $value : -1); break;
+			case 'exists': return C::memory()->exists($key, $value); break;
+			case 'inc': return C::memory()->inc($key, $value ? $value : 1, $prefix); break;
+			case 'dec': return C::memory()->dec($key, $value ? $value : -1, $prefix); break;
+			case 'sadd': return C::memory()->sadd($key, $value, $prefix); break;
+			case 'srem': return C::memory()->srem($key, $value, $prefix); break;
+			case 'scard': return C::memory()->scard($key, $value); break;
+			case 'smembers': return C::memory()->smembers($key, $value); break;
+			case 'sismember': return C::memory()->sismember($key, $value, $prefix); break;
+			case 'hmset': return C::memory()->hmset($key, $value, $prefix); break;
+			case 'hgetall': return C::memory()->hgetall($key, $value); break;
+			case 'hexists': return C::memory()->hexists($key, $value, $prefix); break;
+			case 'hget': return C::memory()->hget($key, $value, $prefix); break;
+			case 'eval': return C::memory()->evalscript($key, $value, $ttl, $prefix); break;
+			case 'zadd': return C::memory()->zadd($key, $value, $ttl, $prefix); break;
+			case 'zrem': return C::memory()->zrem($key, $value, $prefix); break;
+			case 'zscore': return C::memory()->zscore($key, $value, $prefix); break;
+			case 'zcard': return C::memory()->zcard($key, $value); break;
+			case 'zrevrange': return C::memory()->zrevrange($key, $value, $ttl, $prefix); break;
+			case 'zrevrangewithscore': return C::memory()->zrevrange($key, $value, $ttl, $prefix, true); break;
+			case 'zincrby': return C::memory()->zincrby($key, $value, $ttl ? $ttl : 1, $prefix); break;
+			case 'pipeline': return C::memory()->pipeline(); break;
+			case 'commit': return C::memory()->commit(); break;
+			case 'discard': return C::memory()->discard(); break;
 		}
 	}
 	return null;
 }
 
 function ipaccess($ip, $accesslist) {
-	return preg_match("/^(".str_replace(array("\r\n", ' '), array('|', ''), preg_quote($accesslist, '/')).")/", $ip);
+	return ip::checkaccess($ip, $accesslist);
 }
 
-function ipbanned($onlineip) {
-	global $_G;
-
-	if($_G['setting']['ipaccess'] && !ipaccess($onlineip, $_G['setting']['ipaccess'])) {
-		return TRUE;
-	}
-
-	loadcache('ipbanned');
-	if(empty($_G['cache']['ipbanned'])) {
-		return FALSE;
-	} else {
-		if($_G['cache']['ipbanned']['expiration'] < TIMESTAMP) {
-			require_once libfile('function/cache');
-			updatecache('ipbanned');
-		}
-		return preg_match("/^(".$_G['cache']['ipbanned']['regexp'].")$/", $onlineip);
-	}
+function ipbanned($ip) {
+	return ip::checkbanned($ip);
 }
 
 function getcount($tablename, $condition) {
@@ -1902,7 +1922,7 @@ function getexpiration() {
 }
 
 function return_bytes($val) {
-	$last = strtolower($val{strlen($val)-1});
+	$last = strtolower($val[strlen($val)-1]);
 	if (!is_numeric($val)) {
 		$val = substr(trim($val), 0, -1);
 	}
@@ -1950,7 +1970,7 @@ function getattachtablebyaid($aid) {
 
 function getattachtableid($tid) {
 	$tid = (string)$tid;
-	return intval($tid{strlen($tid)-1});
+	return intval($tid[strlen($tid)-1]);
 }
 
 function getattachtablebytid($tid) {
@@ -1991,7 +2011,7 @@ function userappprompt() {
 }
 
 function dintval($int, $allowarray = false) {
-	$ret = floatval($int);
+	$ret = intval($int);
 	if($int == $ret || !$allowarray && is_array($int)) return $ret;
 	if($allowarray && is_array($int)) {
 		foreach($int as &$v) {
@@ -2099,17 +2119,14 @@ function currentlang() {
 		return '';
 	}
 }
-if(PHP_VERSION < '7.0.0') {
-	function dpreg_replace($pattern, $replacement, $subject, $limit = -1, &$count) {
+
+function dpreg_replace($pattern, $replacement, $subject, $limit = -1, &$count) {
+	if(PHP_VERSION < '7.0.0') {
 		return preg_replace($pattern, $replacement, $subject, $limit, $count);
-	}
-} else {
-	function dpreg_replace($pattern, $replacement, $subject, $limit = -1, &$count) {
+	} else {
 		require_once libfile('function/preg');
 		return _dpreg_replace($pattern, $replacement, $subject, $limit, $count);
 	}
 }
-
-
 
 ?>

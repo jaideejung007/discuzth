@@ -34,6 +34,7 @@ $topmenu = array (
 $menu['index'] = array(
 	array('menu_home', 'index'),
 	array('menu_custommenu_manage', 'misc_custommenu'),
+	$isfounder ? array('menu_setting_runtests', 'runtests') : null,
 );
 
 $custommenu = get_custommenu();
@@ -166,7 +167,7 @@ $menu['group'] = array(
 );
 
 $menu['safe'] = array(
-	array('menu_safe_setting', 'setting_sec'),
+	array('menu_safe_setting', 'setting_sec'),	
 	array('menu_safe_seccheck', 'setting_seccheck'),
 	array('menu_security', 'optimizer_security'),
 	array('menu_safe_accountguard', 'setting_accountguard'),
@@ -241,7 +242,7 @@ if($isfounder) {
 
 	$menu['founder'] = array(
 		array('menu_founder_perm', 'founder_perm'),
-		array('menu_setting_mail', 'setting_mail'),
+		array('menu_setting_mail', 'setting_mail'),		
 		array('menu_setting_uc', 'setting_uc'),
 		array('menu_db', 'db_export'),
 		array('menu_membersplit', 'membersplit_check'),

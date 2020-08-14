@@ -19,6 +19,7 @@ function show_msg($error_no, $error_msg = 'ok', $success = 1, $quit = TRUE) {
 		$str = "<root>\n";
 		$str .= "\t<error errorCode=\"$error_code\" errorMessage=\"$error_msg\" />\n";
 		$str .= "</root>";
+		send_mime_type_header();
 		echo $str;
 		exit;
 	} else {
@@ -58,14 +59,14 @@ function show_msg($error_no, $error_msg = 'ok', $success = 1, $quit = TRUE) {
 }
 
 function check_db($dbhost, $dbuser, $dbpw, $dbname, $tablepre) {
-	if(!function_exists('mysql_connect') && !function_exists('mysqli_connect')) {
+	if(!function_exists('mysqli_connect')) {
 		show_msg('undefine_func', 'mysql_connect', 0);
 	}
-	$mysqlmode = function_exists('mysql_connect') ? 'mysql' : 'mysqli';
-	$link = ($mysqlmode == 'mysql') ? @mysql_connect($dbhost, $dbuser, $dbpw) : new mysqli($dbhost, $dbuser, $dbpw);
-	if(!$link) {
-		$errno = ($mysqlmode == 'mysql') ? mysql_errno() : mysqli_errno();
-		$error = ($mysqlmode == 'mysql') ? mysql_error() : mysqli_error();
+	if (strpos($dbhost, ":") === FALSE) $dbhost .= ":3306";
+	$link = new mysqli($dbhost, $dbuser, $dbpw);
+	if($link->connect_errno) {
+		$errno = $link->errno;
+		$error = $link->error;
 		if($errno == 1045) {
 			show_msg('database_errno_1045', $error, 0);
 		} elseif($errno == 2003) {
@@ -74,11 +75,11 @@ function check_db($dbhost, $dbuser, $dbpw, $dbname, $tablepre) {
 			show_msg('database_connect_error', $error, 0);
 		}
 	} else {
-		if($query = (($mysqlmode == 'mysql') ? @mysql_query("SHOW TABLES FROM $dbname") : $link->query("SHOW TABLES FROM $dbname"))) {
+		if($query = $link->query("SHOW TABLES FROM $dbname")) {
 			if(!$query) {
 				return false;
 			}
-			while($row = (($mysqlmode == 'mysql') ? mysql_fetch_row($query) : $query->fetch_row())) {
+			while($row = $query->fetch_row()) {
 				if(preg_match("/^$tablepre/", $row[0])) {
 					return false;
 				}
@@ -127,7 +128,6 @@ function dirfile_check(&$dirfile_items) {
 }
 
 function env_check(&$env_items) {
-	global $lang;
 	foreach($env_items as $key => $item) {
 		if($key == 'php') {
 			$env_items[$key]['current'] = PHP_VERSION;
@@ -147,14 +147,16 @@ function env_check(&$env_items) {
 			$env_items[$key]['current'] = constant($item['c']);
 		} elseif($key == 'opcache') {
 			$opcache_data = function_exists('opcache_get_configuration') ? opcache_get_configuration() : array();
-			$env_items[$key]['current'] = !empty($opcache_data['directives']['opcache.enable']) ? $lang['enable'] : $lang['disable'];
+			$env_items[$key]['current'] = !empty($opcache_data['directives']['opcache.enable']) ? 'enable' : 'disable';
 		} elseif($key == 'curl') {
 			if(function_exists('curl_init') && function_exists('curl_version')){
 				$v = curl_version();
-				$env_items[$key]['current'] = $lang['enable'].' '.$v['version'];
+				$env_items[$key]['current'] = 'enable'.' '.$v['version'];
 			}else{
-				$env_items[$key]['current'] = $lang['disable'];
+				$env_items[$key]['current'] = 'disable';
 			}
+		} elseif(isset($item['f'])) {
+			$env_items[$key]['current'] = function_exists($item['f']) ? 'enable' : 'disable';
 		}
 
 		$env_items[$key]['status'] = 1;
@@ -170,12 +172,12 @@ function function_check(&$func_items) {
 	}
 }
 
-function dintval($int, $allowarray = false) {
+function dfloatval($int, $allowarray = false) {
 	$ret = floatval($int);
 	if($int == $ret || !$allowarray && is_array($int)) return $ret;
 	if($allowarray && is_array($int)) {
 		foreach($int as &$v) {
-			$v = dintval($v, true);
+			$v = dfloatval($v, true);
 		}
 		return $int;
 	} elseif($int <= 0xffffffff) {
@@ -198,8 +200,8 @@ function show_env_result(&$env_items, &$dirfile_items, &$func_items, &$filesock_
 		}
 		$status = 1;
 		if($item['r'] != 'notset') {
-			if(dintval($item['current']) && dintval($item['r'])) {
-				if(dintval($item['current']) < dintval($item['r'])) {
+			if(dfloatval($item['current']) && dfloatval($item['r'])) {
+				if(dfloatval($item['current']) < dfloatval($item['r'])) {
 					$status = 0;
 					$error_code = ENV_CHECK_ERROR;
 				}
@@ -221,7 +223,7 @@ function show_env_result(&$env_items, &$dirfile_items, &$func_items, &$filesock_
 			$env_str .= "<td>".lang($key)."</td>\n";
 			$env_str .= "<td class=\"padleft\">".lang($item['r'])."</td>\n";
 			$env_str .= "<td class=\"padleft\">".lang($item['b'])."</td>\n";
-			$env_str .= ($status ? "<td class=\"w pdleft1\">" : "<td class=\"nw pdleft1\">").$item['current']."</td>\n";
+			$env_str .= ($status ? "<td class=\"w pdleft1\">" : "<td class=\"nw pdleft1\">").lang($item['current'])."</td>\n";
 			$env_str .= "</tr>\n";
 		}
 	}
@@ -267,6 +269,7 @@ function show_env_result(&$env_items, &$dirfile_items, &$func_items, &$filesock_
 		$str .= "\t</FileDirs>\n";
 		$str .= "\t<error errorCode=\"$error_code\" errorMessage=\"\" />\n";
 		$str .= "</root>";
+		send_mime_type_header();
 		echo $str;
 		exit;
 
@@ -348,6 +351,16 @@ function show_env_result(&$env_items, &$dirfile_items, &$func_items, &$filesock_
 
 function show_next_step($step, $error_code) {
 	global $uchidden;
+
+	if(!empty($uchidden)) {
+		$uc_info_transfer = unserialize(urldecode($uchidden));
+		if(!isset($uc_info_transfer['ucapi']) && !isset($uc_info_transfer['ucfounderpw'])){
+			$uchidden = '';
+		} else {
+			$uchidden = dhtmlspecialchars($uchidden);
+		}
+	}
+
 	echo "<form action=\"index.php\" method=\"post\">\n";
 	echo "<input type=\"hidden\" name=\"step\" value=\"$step\" />";
 	if(isset($GLOBALS['hidden'])) {
@@ -493,11 +506,12 @@ if(!function_exists('file_put_contents')) {
 }
 
 function createtable($sql, $dbver) {
-
 	$type = strtoupper(preg_replace("/^\s*CREATE TABLE\s+.+\s+\(.+?\).*(ENGINE|TYPE)\s*=\s*([a-z]+?).*$/isU", "\\2", $sql));
-	$type = in_array($type, array('MYISAM', 'HEAP', 'MEMORY')) ? $type : 'MYISAM';
-	return preg_replace("/^\s*(CREATE TABLE\s+.+\s+\(.+?\)).*$/isU", "\\1", $sql).
-	($dbver > '4.1' ? " ENGINE=$type DEFAULT CHARSET=".DBCHARSET : " TYPE=$type");
+	$type = in_array($type, array('INNODB', 'MYISAM', 'HEAP', 'MEMORY')) ? $type : 'INNODB';
+	return 
+		preg_replace("/^\s*(CREATE TABLE\s+.+\s+\(.+?\)).*$/isU", "\\1", $sql) .
+		" ENGINE=$type DEFAULT CHARSET=" . DBCHARSET .
+		(DBCHARSET === 'utf8mb4' ? " COLLATE=utf8mb4_unicode_ci" : "");
 }
 
 function dir_writeable($dir) {
@@ -519,7 +533,7 @@ function dir_writeable($dir) {
 
 function dir_clear($dir) {
 	global $lang;
-	showjsmessage($lang['clear_dir'].' '.str_replace(ROOT_PATH, '', $dir));
+	showjsmessage($lang['clear_dir'] . ' ' . str_replace(ROOT_PATH, '', $dir) . "\n");
 	if($directory = @dir($dir)) {
 		while($entry = $directory->read()) {
 			$filename = $dir.'/'.$entry;
@@ -541,10 +555,12 @@ function show_header() {
 	$title = lang('title_install');
 	$charset = CHARSET;
 	echo <<<EOT
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=$charset" />
+<meta charset="$charset" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title>$title</title>
 <link rel="stylesheet" href="images/style.css" type="text/css" media="all" />
 <script type="text/javascript">
@@ -565,12 +581,17 @@ function show_header() {
 EOT;
 
 	$step > 0 && show_step($step);
+    echo str_repeat('  ', 1024 * 4);
+	flush();
+	ob_flush();
 }
 
 function show_footer($quit = true) {
 
+	$copy = lang('copyright');
+
 	echo <<<EOT
-		<div class="footer">Copyright &copy;2001-2020, Tencent Cloud.</div>
+		<div class="footer">$copy</div>
 	</div>
 </div>
 </body>
@@ -581,7 +602,7 @@ EOT;
 
 function loginit($logfile) {
 	global $lang;
-	showjsmessage($lang['init_log'].' '.$logfile);
+	showjsmessage($lang['init_log'].' '.$logfile . "\n");
 	if($fp = @fopen('./forumdata/logs/'.$logfile.'.php', 'w')) {
 		fwrite($fp, '<'.'?PHP exit(); ?'.">\n");
 		fclose($fp);
@@ -590,7 +611,8 @@ function loginit($logfile) {
 
 function showjsmessage($message) {
 	if(VIEW_OFF) return;
-	echo '<script type="text/javascript">showmessage(\''.addslashes($message).' \');</script>'."\r\n";
+	append_to_install_log_file($message);
+	echo ' ';
 	flush();
 	ob_flush();
 }
@@ -616,16 +638,21 @@ function redirect($url) {
 
 }
 
+function validate_ip($ip) {
+	return filter_var($ip, FILTER_VALIDATE_IP) !== false;
+}
+
 function get_onlineip() {
-	$onlineip = '';
-	if(getenv('HTTP_CLIENT_IP') && strcasecmp(getenv('HTTP_CLIENT_IP'), 'unknown')) {
-		$onlineip = getenv('HTTP_CLIENT_IP');
-	} elseif(getenv('HTTP_X_FORWARDED_FOR') && strcasecmp(getenv('HTTP_X_FORWARDED_FOR'), 'unknown')) {
-		$onlineip = getenv('HTTP_X_FORWARDED_FOR');
-	} elseif(getenv('REMOTE_ADDR') && strcasecmp(getenv('REMOTE_ADDR'), 'unknown')) {
-		$onlineip = getenv('REMOTE_ADDR');
-	} elseif(isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], 'unknown')) {
-		$onlineip = $_SERVER['REMOTE_ADDR'];
+	$onlineip = $_SERVER['REMOTE_ADDR'];
+	if (isset($_SERVER['HTTP_CLIENT_IP']) && validate_ip($_SERVER['HTTP_CLIENT_IP'])) {
+		$onlineip = $_SERVER['HTTP_CLIENT_IP'];
+	} elseif(isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+		if (strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ",") > 0) {
+			$exp = explode(",", $_SERVER['HTTP_X_FORWARDED_FOR']);
+			$onlineip = validate_ip(trim($exp[0])) ? $exp[0] : $onlineip;
+		} else {
+			$onlineip = validate_ip($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $onlineip;
+		}
 	}
 	return $onlineip;
 }
@@ -724,16 +751,86 @@ function generate_key() {
 	return implode('', $return);
 }
 
-function show_install() {
+function show_db_install() {
 	if(VIEW_OFF) return;
+	global $dbhost, $dbuser, $dbpw, $dbname, $tablepre, $username, $password, $email;
+	$dzucfull = DZUCFULL;
+	$allinfo = base64_encode(serialize(compact('dbhost', 'dbuser', 'dbpw', 'dbname', 'tablepre', 'username', 'password', 'email', 'dzucfull')));
+	init_install_log_file();
 ?>
 <script type="text/javascript">
-function showmessage(message) {
-	document.getElementById('notice').innerHTML += message + '<br />';
-	document.getElementById('notice').scrollTop = 100000000;
+var ajax = {};
+ajax.x = function () {
+    if (typeof XMLHttpRequest !== 'undefined') {return new XMLHttpRequest();}
+    var versions = ["MSXML2.XmlHttp.6.0", "MSXML2.XmlHttp.5.0", "MSXML2.XmlHttp.4.0", "MSXML2.XmlHttp.3.0", "MSXML2.XmlHttp.2.0", "Microsoft.XmlHttp"];
+    var xhr;for (var i = 0; i < versions.length; i++) {try {xhr = new ActiveXObject(versions[i]);break;} catch (e) {}}return xhr;
+};
+
+ajax.send = function (url, callback, method, data, async) {
+    if (async === undefined) {async = true;}
+    var x = ajax.x();x.open(method, url, async);x.onreadystatechange = function () {if ((x.readyState == 4) && (typeof callback == 'function')) {callback(x.responseText)}};if (method == 'POST') {x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');}
+    x.send(data);
+};
+
+ajax.get = function (url, callback) {
+    ajax.send(url, callback, 'GET', null, true);
+};
+
+function request_do_db_init() {
+    ajax.get('index.php?method=do_db_init&allinfo=<?= $allinfo ?>', function() {
+            append_notice("<?= lang('initsys') ?> ... ");
+
+            ajax.get("../misc.php?mod=initsys", function() {
+                append_notice("<?= lang('succeed') ?><br/>");
+                document.getElementById("laststep").value = '<?= lang("initdbresult_succ") ?>';
+                document.getElementById("laststep").disabled = false;
+                window.setTimeout(function() {
+                    window.location='index.php?method=ext_info';
+                }, 2000);
+            });
+    });
 }
-function initinput() {
-	window.location='index.php?method=ext_info';
+
+function set_notice(str) {
+    document.getElementById('notice').innerHTML = str;
+    document.getElementById('notice').scrollTop = 100000000;
+}
+
+function append_notice(str) {
+    document.getElementById('notice').innerHTML += str;
+    document.getElementById('notice').scrollTop = 100000000;
+}
+
+var old_log_data = '';
+function request_log() {
+    ajax.get('index.php?method=check_db_init_progress', function (data) {
+        if(data === old_log_data){
+            setTimeout(request_log, 1000);
+            return;
+        }
+        old_log_data = data;
+        set_notice(
+		data.split("\n").map(function(l) {
+			if (l.indexOf('<?= lang("failed") ?>') !== -1) {
+				return '<font color="red">' + l + '</font><br/>';
+			} else {
+				return l + '<br/>';
+			}
+		}). join('')
+	);
+	if (data.indexOf('<?= lang("failed") ?>') !== -1) {
+                append_notice("<?= lang('error_quit_msg') ?><br/>");
+		return;
+	}
+        if (data.indexOf('<?= lang("initdbresult_succ") ?>') === -1) {
+            setTimeout(request_log, 200);
+        }
+    });
+}
+
+window.onload = function() {
+    request_do_db_init();
+    setTimeout(request_log, 500);
 }
 </script>
 		<div id="notice"></div>
@@ -762,21 +859,39 @@ function runquery($sql) {
 	}
 	unset($sql);
 
+	$oldtablename = "";
 	foreach($ret as $query) {
 		$query = trim($query);
 		if($query) {
-
 			if(substr($query, 0, 12) == 'CREATE TABLE') {
 				$name = preg_replace("/CREATE TABLE ([a-z0-9_]+) .*/is", "\\1", $query);
-				showjsmessage(lang('create_table').' '.$name.' ... '.lang('succeed'));
-				$db->query(createtable($query, $db->version()));
-			} else {
-				$db->query($query);
+				if ($db->query(createtable($query, $db->version()))) {
+					showjsmessage(lang('init_table_data').' '.$name.'  ... '.lang('succeed') . "\n");
+				} else {
+					showjsmessage(lang('init_table_data').' '.$name.'  ... '.lang('failed') . "\n");
+					return false;
+				}
+			} elseif(substr($query, 0, 6) == 'INSERT') {
+				$name = preg_replace("/INSERT\s+INTO\s+[\`]?([a-z0-9_]+)[\`]? .*/is", "\\1", $query);
+				if ($db->query($query)) {
+					if($oldtablename != $name) {
+						showjsmessage(lang('init_table_data').' '.$name.'  ... '.lang('succeed') . "\n");
+						$oldtablename = $name;
+					}
+				} else {
+					showjsmessage(lang('init_table_data').' '.$name.'  ... '.lang('failed') . "\n");
+					return false;
+				}
+			}else{
+				if (!$db->query($query)) {
+					showjsmessage(lang('failed') . "\n");
+					return false;
+				}
 			}
 
 		}
 	}
-
+	return true;
 }
 
 function runucquery($sql, $tablepre) {
@@ -803,8 +918,9 @@ function runucquery($sql, $tablepre) {
 
 			if(substr($query, 0, 12) == 'CREATE TABLE') {
 				$name = preg_replace("/CREATE TABLE ([a-z0-9_]+) .*/is", "\\1", $query);
-				showjsmessage(lang('create_table').' '.$name.' ... '.lang('succeed'));
+				showjsmessage(lang('create_table').' '.$name.' ... ');
 				$db->query(createtable($query, $db->version()));
+				showjsmessage(lang('succeed') . "\n");
 			} else {
 				$db->query($query);
 			}
@@ -869,9 +985,10 @@ function dfopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE, $
 	$path = $matches['path'] ? $matches['path'].($matches['query'] ? '?'.$matches['query'] : '') : '/';
 	$port = !empty($matches['port']) ? $matches['port'] : ($matches['scheme'] == 'https' ? 443 : 80);
 
-	if(function_exists('curl_init') && $allowcurl) {
+	if(function_exists('curl_init') && function_exists('curl_exec') && $allowcurl) {
 		$ch = curl_init();
 		$ip && curl_setopt($ch, CURLOPT_HTTPHEADER, array("Host: ".$host));
+		curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
 		curl_setopt($ch, CURLOPT_URL, $scheme.'://'.($ip ? $ip : $host).':'.$port.$path);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
@@ -925,7 +1042,7 @@ function dfopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE, $
 	}
 
 	$fpflag = 0;
-	if(!$fp = @fsocketopen(($scheme == 'https' ? 'ssl' : $scheme).'://'.($scheme == 'https' ? $host : ($ip ? $ip : $host)), $port, $errno, $errstr, $timeout)) {
+	if(!$fp = @fsocketopen(($scheme == 'https' ? 'ssl://' : '').($scheme == 'https' ? $host : ($ip ? $ip : $host)), $port, $errno, $errstr, $timeout)) {
 		$context = array(
 			'http' => array(
 				'method' => $post ? 'POST' : 'GET',
@@ -1279,8 +1396,8 @@ function install_uc_server() {
 
 	$pathinfo = pathinfo($_SERVER['PHP_SELF']);
 	$pathinfo['dirname'] = substr($pathinfo['dirname'], 0, -8);
-	$isHTTPS = ($_SERVER['HTTPS'] && strtolower($_SERVER['HTTPS']) != 'off') ? true : false;
-	$appurl = 'http'.($isHTTPS ? 's' : '').'://'.preg_replace("/\:\d+/", '', $_SERVER['HTTP_HOST']).($_SERVER['SERVER_PORT'] && $_SERVER['SERVER_PORT'] != 80 && $_SERVER['SERVER_PORT'] != 443 ? ':'.$_SERVER['SERVER_PORT'] : '').$pathinfo['dirname'];
+	$isHTTPS = is_https();
+	$appurl = 'http'.($isHTTPS ? 's' : '').'://'. $_SERVER['HTTP_HOST'].$pathinfo['dirname'];
 	$ucapi = $appurl.'/uc_server';
 	$ucip = '';
 	$app_tagtemplates = 'apptagtemplates[template]='.urlencode('<a href="{url}" target="_blank">{subject}</a>').'&'.
@@ -1331,7 +1448,7 @@ function install_uc_server() {
 
 function install_data($username, $uid) {
 	global $_G, $db, $tablepre;
-	showjsmessage(lang('install_data')." ... ".lang('succeed'));
+	showjsmessage(lang('install_data')." ... ");
 
 	$_G = array('db'=>$db,'tablepre'=>$tablepre, 'uid'=>$uid, 'username'=>$username);
 
@@ -1341,11 +1458,14 @@ function install_data($username, $uid) {
 	foreach ($arr as $v) {
 		import_diy($v['importfile'], $v['primaltplname'], $v['targettplname']);
 	}
+
+	showjsmessage(lang('succeed') . "\n");
 }
+
 function install_testdata($username, $uid) {
 	global $_G, $db, $tablepre;
-	showjsmessage(lang('install_test_data')." ... ".lang('succeed'));
 
+	showjsmessage(lang('install_test_data')." :  \n");
 	$sqlfile = ROOT_PATH.'./install/data/common_district_{#id}.sql';
 	for($i = 1; $i < 4; $i++) {
 		$sqlfileid = str_replace('{#id}', $i, $sqlfile);
@@ -1762,4 +1882,56 @@ function format_space($space) {
 		}
 	}
 	return $space;
+}
+
+function init_install_log_file() {
+	static $file = __DIR__ . '/install.log';
+	if (file_exists($file)) {
+		append_to_install_log_file("", true);
+		unlink($file);
+	}
+}
+
+function append_to_install_log_file($message, $close = false) {
+	static $file = __DIR__ . '/install.log';
+	static $fh = false;
+	if (!$fh) {
+		$fh = fopen($file, "a+");
+	} 
+	if ($fh) {
+		fwrite($fh, $message);
+		if ($close) {
+			fclose($fh);
+		}
+	}
+}
+
+function read_install_log_file() {
+	$file = __DIR__ . '/install.log';
+	if (file_exists($file)) {
+		readfile($file);
+	}
+}
+
+function send_mime_type_header($type = 'application/xml') {
+	header("Content-Type: ".$type);
+}
+
+function is_https() {
+	if (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) != "off") {
+		return true;
+	}
+	if (isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && strtolower($_SERVER["HTTP_X_FORWARDED_PROTO"]) == "https") {
+		return true;
+	}
+	if (isset($_SERVER["HTTP_SCHEME"]) && strtolower($_SERVER["HTTP_SCHEME"]) == "https") {
+		return true;
+	}
+	if (isset($_SERVER["HTTP_FROM_HTTPS"]) && strtolower($_SERVER["HTTP_FROM_HTTPS"]) != "off") {
+		return true;
+	}
+	if (isset($_SERVER["SERVER_PORT"]) && $_SERVER["SERVER_PORT"] == 443) {
+		return true;
+	}
+	return false;
 }

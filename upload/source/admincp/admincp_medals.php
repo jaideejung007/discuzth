@@ -22,7 +22,9 @@ if(!$operation) {
 			array('nav_medals_confer', 'members&operation=confermedal', 0),
 			array('nav_medals_mod', 'medals&operation=mod', 0)
 		));
+		
 		showtips('medals_tips');
+		
 		showformheader('medals');
 		showtableheader('medals_list', 'fixpadding');
 		showsubtitle(array('', 'display_order', 'available', 'name', 'description', 'medals_image', 'medals_type', ''));

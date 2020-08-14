@@ -12,10 +12,10 @@ if(!defined('IN_DISCUZ')) {
 }
 
 if(!defined('DISCUZ_VERSION')) {
-	define('DISCUZ_VERSION', 'X3.4');
-	define('DISCUZ_RELEASE', '20191201');
+	define('DISCUZ_VERSION', 'X3.5');
+	define('DISCUZ_RELEASE', 'v3.5-202004230500-b87a5ea4');
 	define('DISCUZ_FIXBUG', '34000000');
-	define('DISCUZ_TH_REVISION', '62 Beta 2'); /*jaideejung007*/
+	define('DISCUZ_TH_REVISION', '1'); /*jaideejung007*/
 }
 
 ?>

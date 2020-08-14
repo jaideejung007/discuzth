@@ -177,7 +177,7 @@ if(submitcheck('forumsubmit', 1)) {
 		if($thread['isgroup'] && $thread['status'] == 3) {
 			$updateclosed[] = $thread['tid'];
 		} elseif($thread['threadexists']) {
-			$tids[] = $thread['tid'];
+			$tids[] = $thread['tid'];			
 		}
 	}
 
@@ -462,7 +462,9 @@ if(submitcheck('forumsubmit', 1)) {
 
 	shownav('tools', 'nav_updatecounters');
 	showsubmenu('nav_updatecounters');
+	
 	showtips('counter_tips');
+	
 	showformheader('counter');
 	showtableheader();
 	showsubtitle(array('', 'counter_amount'));

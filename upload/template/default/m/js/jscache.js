@@ -1,4 +1,3 @@
-
 var OPEN_JS_T = {
 	FastClick: "",
 	Template: "",

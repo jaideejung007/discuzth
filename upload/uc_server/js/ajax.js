@@ -17,7 +17,7 @@ function Ajax(waitId) {
 				try {
 					request = new ActiveXObject(versions[i]);
 					if(request) return request;
-				} catch(e) {/*alert(e.message);*/}
+				} catch(e) {}
 			}
 		}
 		return request;

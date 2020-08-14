@@ -30,6 +30,8 @@ if(!$member) {
 
 $member['iplocation'] = convertip($member['useip']);
 
+$member['useip'] = ip::to_display($member['useip']);
+
 include template('forum/topicadmin_getip');
 
 ?>

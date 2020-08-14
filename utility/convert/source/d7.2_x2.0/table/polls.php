@@ -1,10 +1,6 @@
 <?php
 
-/**
- * DiscuzX Convert
- *
- * $Id: polls.php 18097 2010-11-12 00:44:54Z monkey $
- */
+
 
 $curprg = basename(__FILE__);
 

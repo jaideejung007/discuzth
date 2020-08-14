@@ -27,6 +27,8 @@ class memory_driver_memcached
 		}
 		if(!empty($config['server'])) {
 			$this->obj = new Memcached;
+			$this->obj->setOption(Memcached::OPT_BINARY_PROTOCOL, true);
+			$this->obj->setOption(Memcached::OPT_TCP_NODELAY, true);
 			$this->obj->addServer($config['server'], $config['port']);
 			$connect=$this->obj->set('connect', '1');
 			$this->enable = $connect ? true : false;
@@ -40,6 +42,7 @@ class memory_driver_memcached
 	public function getMulti($keys) {
 		return $this->obj->getMulti($keys);
 	}
+
 	public function set($key, $value, $ttl = 0) {
 		return $this->obj->set($key, $value, $ttl);
 	}
@@ -53,11 +56,16 @@ class memory_driver_memcached
 	}
 
 	public function inc($key, $step = 1) {
-		return $this->obj->increment($key, $step);
+		return $this->obj->increment($key, $step, 1);
 	}
 
 	public function dec($key, $step = 1) {
 		return $this->obj->decrement($key, $step);
+	}
+
+	public function exists($key) {
+		$this->obj->get($key);
+		return \Memcached::RES_NOTFOUND !== $this->obj->getResultCode();
 	}
 
 }

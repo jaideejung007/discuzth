@@ -419,7 +419,7 @@ function loadforum($fid = null, $tid = null) {
 	if(isset($_G['forum']['fid']) && $_G['forum']['fid'] == $fid || isset($_G['thread']['tid']) && $_G['thread']['tid'] == $tid){
 		return null;
 	}
-	if(!empty($_GET['archiver'])) {//X1.5的Archiver兼容
+	if(!empty($_GET['archiver'])) {
 		if($fid) {
 			dheader('location: archiver/?fid-'.$fid.'.html');
 		} elseif($tid) {
@@ -1002,7 +1002,7 @@ function set_atlist_cookie($uids) {
 
 function viewthread_is_search_referer() {
 	$regex = "((http|https)\:\/\/)?";
-	$regex .= "([a-z]*.)?(ask.com|yahoo.com|cn.yahoo.com|bing.com|baidu.com|soso.com|google.com|google.cn)(.[a-z]{2,3})?\/";
+	$regex .= "([a-z]*.)?(toutiao.com|m.sm.cn|www.so.com|sogou.com|bing.com|baidu.com|google.com|google.cn|google.com.hk)(.[a-z]{2,3})?\/";
 	if(preg_match("/^$regex/", $_SERVER['HTTP_REFERER'])) {
 		return true;
 	}

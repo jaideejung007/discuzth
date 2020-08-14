@@ -28,44 +28,33 @@ class helper_antitheft {
 
 	protected static function check_allow($id, $idtype) {
 		global $_G;
-		$ip = ip2long($_G['clientip']);
-		if(!$ip || $ip == -1) return false;
-		if($ip < 0) {
-			$ip = sprintf('%u', $ip);
-		}
 		loadcache('antitheft');
-		$antitheft = $_G['cache']['antitheft'];
-
-		if(isset($antitheft['white'])){
-			if(in_array($ip, (array)$antitheft['white']['single'], true)) {
-				return true;
-			}
-			foreach($antitheft['white']['range'] as $_ip) {
-				if($ip > $_ip['min'] && $ip < $_ip['max']) return true;
+		if($_G['cache']['antitheft']['white']) {
+			foreach(explode("\n", trim($_G['cache']['antitheft']['white'])) as $ctrlip) {
+				if(preg_match("/^(".preg_quote(($ctrlip = trim($ctrlip)), '/').")/", $_G['clientip'])) {
+					return true;
+				}
 			}
 		}
-
-		if(isset($antitheft['black'])){
-			if(in_array($ip, (array)$antitheft['black']['single'], true)) {
-				return false;
-			}
-			foreach($antitheft['black']['range'] as $_ip) {
-				if($ip > $_ip['min'] && $ip < $_ip['max']) return false;
+		if($_G['cache']['antitheft']['black']) {
+			foreach(explode("\n",trim($_G['cache']['antitheft']['black'])) as $ctrlip) {
+				if(preg_match("/^(".preg_quote(($ctrlip = trim($ctrlip)), '/').")/", $_G['clientip'])) {
+					return false;
+				}
 			}
 		}
-		if(!($log = C::t('common_visit')->fetch($ip))) {
+		if(!($log = C::t('common_visit')->fetch($_G['clientip']))) {
 			C::t('common_visit')->insert(array(
-				'ip' => $ip,
+				'ip' => $_G['clientip'],
 				'view' => 1,
 			));
 			return true;
 		} elseif($log['view'] >= $_G['setting']['antitheft']['max']) {
 			return false;
 		} else {
-			C::t('common_visit')->inc($ip);
+			C::t('common_visit')->inc($_G['clientip']);
 			return true;
 		}
-
 	}
 
 	protected static function make_content($id, $idtype, $dsign) {
@@ -92,7 +81,7 @@ class helper_antitheft {
 		$codes[$replace] = "$replace = 'replace';";
 		$codes[$assign] = "$assign = 'assign';";
 		$codes['getname'] = 'function getName(){var caller=getName.caller;if(caller.name){return caller.name} var str=caller.toString().replace(/[\s]*/g,"");var name=str.match(/^function([^\(]+?)\(/);if(name && name[1]){return name[1];} else {return \'\';}}';
-		$jskeywords = array('for' => '', 'case' => '', 'if' => '', 'else' => '', 'try'  => '', 'new' => '', 'eval' => '', 'var' => ''); //js关键字
+		$jskeywords = array('for' => '', 'case' => '', 'if' => '', 'else' => '', 'try'  => '', 'new' => '', 'eval' => '', 'var' => ''); 
 		$methods = array(1,2,3,4,5,6,7);
 		$lenths = array(2,2,3,4);
 		for($i = 0, $l = strlen($url); $i < $l; $i++) {

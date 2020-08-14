@@ -88,7 +88,7 @@ function getstatvars($type) {
 		case 'modworks':
 		case 'memberlist':
 		case 'forumstat':
-			$statvars = call_user_func('getstatvars_'.$type, ($type == 'forumstat' ? $_GET['fid'] : ''));//getstatvars_forumstat($_GET['fid']);
+			$statvars = call_user_func('getstatvars_'.$type, ($type == 'forumstat' ? $_GET['fid'] : ''));
 			break;
 	}
 	return $statvars;

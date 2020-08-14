@@ -64,6 +64,7 @@ $lang = array
 	'menu_setting_mobile' => 'อุปกรณ์พกพา',
 	'menu_setting_tag' => 'จัดการแท็ก',
 	'menu_setting_antitheft' => 'ตั้งค่าป้องกันเนื้อหา',
+	'menu_setting_runtests' => '测试用例',
 
 	'menu_forums' => 'จัดการบอร์ด',
 	'menu_forums_merge' => 'จัดการรวมบอร์ด',
@@ -142,7 +143,6 @@ $lang = array
 	'menu_magics' => 'ตั้งค่าไอเท็ม',
 	'menu_medals' => 'ตั้งค่าเหรียญ',
 	'menu_misc_help' => 'ตั้งค่าคู่มือการใช้งาน',
-	'menu_google' => 'ค้นหาด้วย Google',
 	'menu_ec' => 'ตั้งค่าอีคอมเมิร์ซ',
 	'menu_card' => 'ตั้งค่าการ์ดพิเศษ',
 
@@ -174,7 +174,7 @@ $lang = array
 	'menu_db' => 'จัดการฐานข้อมูล',
 	'menu_postsplit' => 'จัดการแยกโพสต์',
 	'menu_threadsplit' => 'จัดการแยกกระทู้',
-	'menu_membersplit' => 'จัดการแยกผู้ใช้',
+	'menu_membersplit' => '用户分表',
 	'menu_logs' => 'บันทึกของระบบ',
 	'menu_custommenu_manage' => 'การดำเนินการทั่วไป',
 	'menu_misc_cron' => 'แผนงานระบบ',

@@ -54,7 +54,9 @@ if($operation == 'set') {
 	if(!submitcheck('cardsubmit')) {
 		showformheader('card&operation=set&');
 		showtableheader();
+		
 		showsetting('card_config_open', 'card_config_open', ($card_setting['open'] ? $card_setting['open'] : 0), 'radio');
+		
 		showsubmit('cardsubmit');
 		showtablefooter();
 		showformfooter();
@@ -92,7 +94,9 @@ if($operation == 'set') {
 	$perpage = max(20, empty($_GET['perpage']) ? 20 : intval($_GET['perpage']));
 	echo '<script type="text/javascript" src="static/js/calendar.js"></script>';
 
+	
 	showtips('card_manage_tips');
+	
 	$card_type_option = '';
 	foreach(C::t('common_card_type')->range(0, 0, 'ASC') as $result) {
 		$card_type[$result['id']] = $result;
@@ -146,7 +150,7 @@ if($operation == 'set') {
 
 	showformheader('card&operation=manage&');
 	showtableheader('card_manage_title');
-	showsubtitle(array('', cplang('card_number'), cplang('card_log_price'), cplang('card_extcreditsval'), cplang('card_type'), cplang('card_status'), cplang('card_log_used_user'), cplang('card_used_dateline'), cplang('card_make_cleardateline')/*, cplang('card_maketype')*/, cplang('card_maketime'), cplang('card_log_maker')));
+	showsubtitle(array('', cplang('card_number'), cplang('card_log_price'), cplang('card_extcreditsval'), cplang('card_type'), cplang('card_status'), cplang('card_log_used_user'), cplang('card_used_dateline'), cplang('card_make_cleardateline'), cplang('card_maketime'), cplang('card_log_maker')));
 
 
 	$start_limit = ($page - 1) * $perpage;
@@ -207,7 +211,9 @@ if($operation == 'set') {
 			}
 		}
 	}
+	
 	showtips('card_type_tips');
+	
 	showformheader('card&operation=type&');
 	showtableheader();
 	showtablerow('class="header"', array('', ''), array(
@@ -248,6 +254,7 @@ EOT;
 
 		echo '<script type="text/javascript" src="static/js/calendar.js"></script>';
 		showformheader('card&operation=make&');
+		
 		showtips('card_make_tips');
 		showtableheader();
 
@@ -274,6 +281,7 @@ EOT;
 		showsetting('card_make_cleardateline', 'cleardateline', date("Y-m-d", $_G['timestamp']+31536000), 'calendar', '', 0, '');
 
 		showsetting('card_make_description', 'description', $card_log['description'] , 'text');
+		
 		showsubmit('cardsubmit');
 		showtablefooter();
 		showformfooter();

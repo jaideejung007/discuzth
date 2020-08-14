@@ -1,10 +1,6 @@
 <?php
 
-/**
- * DiscuzX Convert
- *
- * $Id: usergroup.php 17485 2010-10-19 09:52:20Z monkey $
- */
+
 
 $curprg = basename(__FILE__);
 

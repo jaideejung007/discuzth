@@ -1,10 +1,6 @@
 <?php
 
-/**
- * DiscuzX Convert
- *
- * $Id: warnings.php 15815 2010-08-27 02:56:14Z monkey $
- */
+
 
 $curprg = basename(__FILE__);
 

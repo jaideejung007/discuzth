@@ -115,7 +115,9 @@ EOT;
 			array('usergroups_special', 'specialgroups', $_GET['type'] == 'special'),
 			array('usergroups_system', 'systemgroups', $_GET['type'] == 'system')
 		));
+		
 		showtips('usergroups_tips');
+		
 
 		showformheader('usergroups&type=member');
 		showtableheader('usergroups_member', 'fixpadding', 'id="membergroups"'.($_GET['type'] && $_GET['type'] != 'member' ? ' style="display: none"' : ''));
@@ -526,6 +528,7 @@ EOT;
 		$mgids[] = $gid;
 
 		if(!$multiset && $group['type'] == 'special' && $group['radminid'] < 1) {
+			
 			showtagheader('div', 'system', $anchor == 'system');
 			showtableheader();
 			if($group['system'] == 'private') {
@@ -539,8 +542,10 @@ EOT;
 			showsetting('usergroups_edit_system_minspan', 'system_minspannew', $system['minspan'], 'text');
 			showtablefooter();
 			showtagfooter('div');
+			
 		}
 
+		
 		showmultititle();
 		showtagheader('div', 'basic', $anchor == 'basic');
 		showtableheader();
@@ -623,7 +628,9 @@ EOT;
 		showsetting('usergroups_edit_basic_close_ad', 'closeadnew', $group['closead'], 'radio');
 		showtablefooter();
 		showtagfooter('div');
+		
 
+		
 		showtagheader('div', 'special', $anchor == 'special');
 		showtableheader();
 		showtitle('usergroups_edit_special');
@@ -648,7 +655,9 @@ EOT;
 		}
 		showtablefooter();
 		showtagfooter('div');
+		
 
+		
 		showtagheader('div', 'post', $anchor == 'post');
 		showtableheader();
 		showtitle('usergroups_edit_post');
@@ -683,6 +692,9 @@ EOT;
 		showsetting('usergroups_edit_post_allowcommentreply', 'allowcommentreplynew', $group['allowcommentreply'], 'radio', !in_array(2, $_G['setting']['allowpostcomment']));
 		showsetting('usergroups_edit_post_allowcommentitem', 'allowcommentitemnew', $group['allowcommentitem'], 'radio', !in_array(1, $_G['setting']['allowpostcomment']));
 		showsetting('usergroups_edit_post_allowat', 'allowatnew', $group['allowat'], 'text');
+		showsetting('usergroups_edit_post_allowsave', 'allowsavenew', $group['allowsave'], 'radio');
+		showsetting('usergroups_edit_post_allowsavereply', 'allowsavereplynew', $group['allowsavereply'], 'radio');
+		showsetting('usergroups_edit_post_allowsavenum', 'allowsavenumnew', $group['allowsavenum'], 'text');
 		showsetting('usergroups_edit_post_allowsetpublishdate', 'allowsetpublishdatenew', $group['allowsetpublishdate'], 'radio');
 		showsetting('usergroups_edit_post_allowcommentcollection', 'allowcommentcollectionnew', $group['allowcommentcollection'], 'radio');
 		showsetting('usergroups_edit_post_allowimgcontent', 'allowimgcontentnew', $group['allowimgcontent'], 'radio');
@@ -707,7 +719,9 @@ EOT;
 		showsetting('usergroups_edit_attach_ext', 'attachextensionsnew', $group['attachextensions'], 'text');
 		showtablefooter();
 		showtagfooter('div');
+		
 
+		
 		showtagheader('div', 'magic', $anchor == 'magic');
 		showtableheader();
 		showtitle('usergroups_edit_magic');
@@ -720,7 +734,9 @@ EOT;
 		showsetting('usergroups_edit_magic_max', 'maxmagicsweightnew', $group['maxmagicsweight'], 'text');
 		showtablefooter();
 		showtagfooter('div');
+		
 
+		
 		showtagheader('div', 'invite', $anchor == 'invite');
 		showtableheader();
 		showtitle('usergroups_edit_invite');
@@ -731,6 +747,7 @@ EOT;
 		showsetting('usergroups_edit_invite_maxinviteday', 'maxinvitedaynew', $group['maxinviteday'], 'text');
 		showtablefooter();
 		showtagfooter('div');
+		
 
 		$raterangearray = array();
 		foreach(explode("\n", $group['raterange']) as $range) {
@@ -765,6 +782,7 @@ EOT;
 			showtablefooter();
 			showtagfooter('div');
 		} else {
+			
 			showtagheader('div', 'credit', $anchor == 'credit');
 			showtableheader();
 			showtitle('usergroups_edit_credit');
@@ -822,8 +840,10 @@ EOT;
 			echo '<tr><td class="lineheight" colspan="9">'.$lang['usergroups_edit_credit_rate_tips'].'</td></tr>';
 			showtablefooter();
 			showtagfooter('div');
+			
 		}
 
+		
 		showtagheader('div', 'home', $anchor == 'home');
 		showtableheader();
 		showtitle('usergroups_edit_home');
@@ -853,7 +873,9 @@ EOT;
 		showsetting('usergroups_edit_home_allow_space_diy_imgcode', 'allowspacediyimgcodenew', $group['allowspacediyimgcode'], 'radio');
 		showtablefooter();
 		showtagfooter('div');
+		
 
+		
 		showtagheader('div', 'group', $anchor == 'group');
 		showtableheader();
 		showtitle('usergroups_edit_group');
@@ -873,7 +895,9 @@ EOT;
 		)), $group['allowgroupposturl'], 'mradio');
 		showtablefooter();
 		showtagfooter('div');
+		
 
+		
 		showtagheader('div', 'portal', $anchor == 'portal');
 		showtableheader();
 		showtitle('usergroups_edit_portal');
@@ -883,6 +907,7 @@ EOT;
 		showsetting('usergroups_edit_portal_allow_post_article_moderate', 'allowpostarticlemodnew', $group['allowpostarticlemod'], 'radio');
 		showtablefooter();
 		showtagfooter('div');
+		
 
 		if($pluginsetting) {
 			showtagheader('div', 'plugin', $anchor == 'plugin');
@@ -1135,6 +1160,9 @@ EOT;
 			'allowdownremoteimg' => intval($_GET['allowdownremoteimgnew']),
 			'allowcommentitem' => intval($_GET['allowcommentitemnew']),
 			'allowat' => intval($_GET['allowatnew']),
+			'allowsave' => intval($_GET['allowsavenew']),
+			'allowsavereply' => intval($_GET['allowsavereplynew']),
+			'allowsavenum' => intval($_GET['allowsavenumnew']),
 			'allowreplycredit' => intval($_GET['allowreplycreditnew']),
 			'allowsetpublishdate' => intval($_GET['allowsetpublishdatenew']),
 			'allowcommentcollection' => intval($_GET['allowcommentcollectionnew']),

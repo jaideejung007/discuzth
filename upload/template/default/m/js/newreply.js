@@ -95,7 +95,7 @@ var newReply = {
 						return false;
 					}
 
-					newReply.uploadInfo[id].file = uploadBase64;//e.target.result;
+					newReply.uploadInfo[id].file = uploadBase64;
 					newReply.uploadInfo[id].filename = file.name;
 					jq('#li' + id).find('img').attr('src', uploadBase64);
 					newReply.uploadQueue.push(id);
@@ -108,7 +108,7 @@ var newReply = {
 					jq('#li' + id).remove();
 					return false;
 				}
-				newReply.uploadInfo[id].file = uploadBase64;//e.target.result;
+				newReply.uploadInfo[id].file = uploadBase64;
 				newReply.uploadInfo[id].filename = file.name;
 				jq('#li' + id).find('img').attr('src', uploadBase64);
 				newReply.uploadQueue.push(id);
@@ -117,7 +117,7 @@ var newReply = {
 		};
 		reader.readAsBinaryString(newReply.uploadInfo[id].file);
 	},
-	_keys: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=', /*用于BASE64转码*/
+	_keys: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=', 
 
 	base64decode: function (input) {
 		var output = '';
@@ -289,9 +289,9 @@ var newReply = {
 			jq('#message').focus();
 		} else {
 			jq('#addPic').on('click', function () {
-				TOOLS.dialog({content: 'ฟอรั่มนี้ไม่สนับสนุนการอัปโหลดรูปภาพ', autoClose: true});
+				TOOLS.dialog({content: 'เว็บบอร์ดนี้ไม่สนับสนุนการอัปโหลดรูปภาพ', autoClose: true});
 			});
-			jq('#uploadnotice').html('ฟอรั่มนี้ไม่สนับสนุนการอัปโหลดรูปภาพ');
+			jq('#uploadnotice').html('เว็บบอร์ดนี้ไม่สนับสนุนการอัปโหลดรูปภาพ');
 		}
 
 		jq('.popLayer').on('change', '#uploadFile', function (e) {
@@ -521,7 +521,7 @@ var newReply = {
 
 		timer = setInterval(function () {
 
-			if (TOOLS.mb_strlen(jq('textarea[name="message"]').val()) > 140 * 2) {//140个汉字
+			if (TOOLS.mb_strlen(jq('textarea[name="message"]').val()) > 140 * 2) {
 				jq('textarea[name="message"]').val(jq('textarea[name="message"]').val().substring(0, 140 * 2));
 			}
 

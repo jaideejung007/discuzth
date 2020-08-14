@@ -16,7 +16,7 @@ class discuz_session {
 	public $sid = null;
 	public $var;
 	public $isnew = false;
-	private $newguest = array('sid' => 0, 'ip1' => 0, 'ip2' => 0, 'ip3' => 0, 'ip4' => 0,
+	private $newguest = array('sid' => 0, 'ip' => '',
 		'uid' => 0, 'username' => '', 'groupid' => 7, 'invisible' => 0, 'action' => 0,
 		'lastactivity' => 0, 'fid' => 0, 'tid' => 0, 'lastolupdate' => 0);
 
@@ -28,7 +28,13 @@ class discuz_session {
 		$this->old = array('sid' =>  $sid, 'ip' =>  $ip, 'uid' =>  $uid);
 		$this->var = $this->newguest;
 
-		$this->table = C::t('common_session');
+		$enable_mem = !C::memory()->gotcluster && C::memory()->gotset &&
+			C::memory()->gothash && C::memory()->goteval && C::memory()->gotsortedset;
+		if ($enable_mem) {
+			$this->table = new memory_common_session();
+		} else {
+			$this->table = C::t('common_session');
+		}
 
 		if(!empty($ip)) {
 			$this->init($sid, $ip, $uid);
@@ -38,20 +44,12 @@ class discuz_session {
 	public function set($key, $value) {
 		if(isset($this->newguest[$key])) {
 			$this->var[$key] = $value;
-		} elseif ($key == 'ip') {
-			$ips = explode('.', $value);
-			$this->set('ip1', $ips[0]);
-			$this->set('ip2', $ips[1]);
-			$this->set('ip3', $ips[2]);
-			$this->set('ip4', $ips[3]);
 		}
 	}
 
 	public function get($key) {
 		if(isset($this->newguest[$key])) {
 			return $this->var[$key];
-		} elseif ($key == 'ip') {
-			return $this->get('ip1').'.'.$this->get('ip2').'.'.$this->get('ip3').'.'.$this->get('ip4');
 		}
 	}
 
@@ -114,10 +112,6 @@ class discuz_session {
 
 	public function count_invisible($type = 1) {
 		return $this->table->count_invisible($type);
-	}
-
-	public function update_by_ipban($ip1, $ip2, $ip3, $ip4) {
-		return $this->table->update_by_ipban($ip1, $ip2, $ip3, $ip4);
 	}
 
 	public function update_max_rows($max_rows) {

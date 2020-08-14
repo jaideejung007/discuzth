@@ -26,8 +26,8 @@ $_G['setting']['search']['collection']['searchctrl'] = intval($_G['setting']['se
 
 $srchmod = 7;
 
-$cachelife_time = 300;		// Life span for cache of searching in specified range of time
-$cachelife_text = 3600;		// Life span for cache of text searching
+$cachelife_time = 300;		
+$cachelife_text = 3600;		
 
 $srchtype = empty($_GET['srchtype']) ? '' : trim($_GET['srchtype']);
 $searchid = isset($_GET['searchid']) ? intval($_GET['searchid']) : 0;

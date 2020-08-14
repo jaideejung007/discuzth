@@ -146,10 +146,6 @@ $lang = array
 
 	'eccredit_explain' => 'คำอธิบาย',
 
-	'google_site_0' => 'ค้นหาเว็บ',
-	'google_site_1' => 'ค้นหาเว็บไซต์',
-	'google_sa' => 'ค้นหา',
-
 	'modcp_logs_action_home' => 'หน้าแรก',
 	'modcp_logs_action_moderate' => 'ตรวจสอบ',
 	'modcp_logs_action_member' => 'จัดการสมาชิก',

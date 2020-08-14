@@ -30,7 +30,7 @@ $sqlfile = ROOT_PATH.'./install/uc.sql';
 $lockfile = ROOT_PATH.'./data/install.lock';
 
 define('CHARSET', 'utf-8');
-define('DBCHARSET', 'utf8');
+define('DBCHARSET', 'utf8mb4');
 
 define('ORIG_TABLEPRE', 'uc_');
 
@@ -69,7 +69,7 @@ define('UNDEFINE_FUNC', 32);
 define('MISSING_PARAMETER', 33);
 define('LOCK_FILE_NOT_TOUCH', 34);
 
-$func_items = array('mysql_connect', 'gethostbyname', 'file_get_contents', 'xml_parser_create');
+$func_items = array('mysqli_connect', 'gethostbyname', 'file_get_contents', 'xml_parser_create');
 
 $env_items = array
 (

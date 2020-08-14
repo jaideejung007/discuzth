@@ -74,7 +74,7 @@ class control extends adminbase {
 	function _format_maillist(&$maillist) {
 		if(is_array($maillist)) {
 			foreach($maillist AS $key => $note) {
-				$maillist[$key]['operation'] = $this->lang['note_'.$note['operation']];//$this->operations[$note['operation']][0];
+				$maillist[$key]['operation'] = $this->lang['note_'.$note['operation']];
 				foreach($this->apps AS $appid => $app) {
 					$maillist[$key]['status'][$appid] = $this->_note_status($note['app'.$appid], $appid, $note['noteid'], $note['args'], $note['operation']);
 				}

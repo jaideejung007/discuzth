@@ -32,11 +32,11 @@ class zipfile {
 			$timearray['hours']   = 0;
 			$timearray['minutes'] = 0;
 			$timearray['seconds'] = 0;
-		} // end if
+		} 
 
 		return (($timearray['year'] - 1980) << 25) | ($timearray['mon'] << 21) | ($timearray['mday'] << 16) |
 				($timearray['hours'] << 11) | ($timearray['minutes'] << 5) | ($timearray['seconds'] >> 1);
-	} // end of the 'unix2DosTime()' method
+	} 
 
 
 	function addFile($data, $name, $time = 0) {
@@ -50,21 +50,21 @@ class zipfile {
 		eval('$hexdtime = "' . $hexdtime . '";');
 
 		$fr   = "\x50\x4b\x03\x04";
-		$fr   .= "\x14\x00";            // ver needed to extract
-		$fr   .= "\x00\x00";            // gen purpose bit flag
-		$fr   .= "\x08\x00";            // compression method
-		$fr   .= $hexdtime;             // last mod time and date
+		$fr   .= "\x14\x00";            
+		$fr   .= "\x00\x00";            
+		$fr   .= "\x08\x00";            
+		$fr   .= $hexdtime;             
 
 		$unc_len = strlen($data);
 		$crc     = crc32($data);
 		$zdata   = gzcompress($data);
-		$zdata   = substr(substr($zdata, 0, strlen($zdata) - 4), 2); // fix crc bug
+		$zdata   = substr(substr($zdata, 0, strlen($zdata) - 4), 2); 
 		$c_len   = strlen($zdata);
-		$fr      .= pack('V', $crc);             // crc32
-		$fr      .= pack('V', $c_len);           // compressed filesize
-		$fr      .= pack('V', $unc_len);         // uncompressed filesize
-		$fr      .= pack('v', strlen($name));    // length of filename
-		$fr      .= pack('v', 0);                // extra field length
+		$fr      .= pack('V', $crc);             
+		$fr      .= pack('V', $c_len);           
+		$fr      .= pack('V', $unc_len);         
+		$fr      .= pack('v', strlen($name));    
+		$fr      .= pack('v', 0);                
 		$fr      .= $name;
 
 		$fr .= $zdata;
@@ -73,28 +73,28 @@ class zipfile {
 		$this -> datasec[] = $fr;
 
 		$cdrec = "\x50\x4b\x01\x02";
-		$cdrec .= "\x00\x00";                // version made by
-		$cdrec .= "\x14\x00";                // version needed to extract
-		$cdrec .= "\x00\x00";                // gen purpose bit flag
-		$cdrec .= "\x08\x00";                // compression method
-		$cdrec .= $hexdtime;                 // last mod time & date
-		$cdrec .= pack('V', $crc);           // crc32
-		$cdrec .= pack('V', $c_len);         // compressed filesize
-		$cdrec .= pack('V', $unc_len);       // uncompressed filesize
-		$cdrec .= pack('v', strlen($name) ); // length of filename
-		$cdrec .= pack('v', 0 );             // extra field length
-		$cdrec .= pack('v', 0 );             // file comment length
-		$cdrec .= pack('v', 0 );             // disk number start
-		$cdrec .= pack('v', 0 );             // internal file attributes
-		$cdrec .= pack('V', 32 );            // external file attributes - 'archive' bit set
+		$cdrec .= "\x00\x00";                
+		$cdrec .= "\x14\x00";                
+		$cdrec .= "\x00\x00";                
+		$cdrec .= "\x08\x00";                
+		$cdrec .= $hexdtime;                 
+		$cdrec .= pack('V', $crc);           
+		$cdrec .= pack('V', $c_len);         
+		$cdrec .= pack('V', $unc_len);       
+		$cdrec .= pack('v', strlen($name) ); 
+		$cdrec .= pack('v', 0 );             
+		$cdrec .= pack('v', 0 );             
+		$cdrec .= pack('v', 0 );             
+		$cdrec .= pack('v', 0 );             
+		$cdrec .= pack('V', 32 );            
 
-		$cdrec .= pack('V', $this -> old_offset ); // relative offset of local header
+		$cdrec .= pack('V', $this -> old_offset ); 
 		$this -> old_offset += strlen($fr);
 
 		$cdrec .= $name;
 
 		$this -> ctrl_dir[] = $cdrec;
-	} // end of the 'addFile()' method
+	} 
 
 
 	function file() {
@@ -105,14 +105,14 @@ class zipfile {
 			$data .
 			$ctrldir .
 			$this -> eof_ctrl_dir .
-			pack('v', sizeof($this -> ctrl_dir)) .  // total # of entries "on this disk"
-			pack('v', sizeof($this -> ctrl_dir)) .  // total # of entries overall
-			pack('V', strlen($ctrldir)) .           // size of central dir
-			pack('V', strlen($data)) .              // offset to start of central dir
-			"\x00\x00";                             // .zip file comment length
-	} // end of the 'file()' method
+			pack('v', sizeof($this -> ctrl_dir)) .  
+			pack('v', sizeof($this -> ctrl_dir)) .  
+			pack('V', strlen($ctrldir)) .           
+			pack('V', strlen($data)) .              
+			"\x00\x00";                             
+	} 
 
-} // end of the 'zipfile' class
+} 
 
 
 class SimpleUnzip {
@@ -126,43 +126,43 @@ class SimpleUnzip {
 
 		var $Time = 0;
 
-		function SimpleUnzip($in_FileName = '') {
+		function __construct($in_FileName = '') {
 			if($in_FileName !== '') {
 				SimpleUnzip::ReadFile($in_FileName);
 			}
-		} // end of the 'SimpleUnzip' constructor
+		} 
 
 		function Count() {
 			return count($this->Entries);
-		} // end of the 'Count()' method
+		} 
 
 		function GetData($in_Index) {
 			return $this->Entries[$in_Index]->Data;
-		} // end of the 'GetData()' method
+		} 
 
 		function GetEntry($in_Index) {
 			return $this->Entries[$in_Index];
-		} // end of the 'GetEntry()' method
+		} 
 
 		function GetError($in_Index) {
 			return $this->Entries[$in_Index]->Error;
-		} // end of the 'GetError()' method
+		} 
 
 		function GetErrorMsg($in_Index) {
 			return $this->Entries[$in_Index]->ErrorMsg;
-		} // end of the 'GetErrorMsg()' method
+		} 
 
 		function GetName($in_Index) {
 			return $this->Entries[$in_Index]->Name;
-		} // end of the 'GetName()' method
+		} 
 
 		function GetPath($in_Index) {
 			return $this->Entries[$in_Index]->Path;
-		} // end of the 'GetPath()' method
+		} 
 
 		function GetTime($in_Index) {
 			return $this->Entries[$in_Index]->Time;
-		} // end of the 'GetTime()' method
+		} 
 
 		function ReadFile($in_FileName) {
 			$this->Entries = array();
@@ -227,14 +227,14 @@ class SimpleUnzip {
 						$aI['EM'] = 'File is encrypted, which is not supported from this class.';
 					} else {
 						switch($aP['CM']) {
-							case 0: // Stored
+							case 0: 
 								break;
 
-							case 8: // Deflated
+							case 8: 
 								$vZ = gzinflate($vZ);
 								break;
 
-							case 12: // BZIP2
+							case 12: 
 								if(! extension_loaded('bz2')) {
 								    if(strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
 								      @dl('php_bz2.dll');
@@ -286,11 +286,11 @@ class SimpleUnzip {
 								  (($aP['FD'] & 0xfe00) >>  9) + 1980);
 
 				$this->Entries[] = new SimpleUnzipEntry($aI);
-			} // end for each entries
+			} 
 
 			return $this->Entries;
-	} // end of the 'ReadFile()' method
-} // end of the 'SimpleUnzip' class
+	} 
+} 
 
 class SimpleUnzipEntry {
 		var $Data = '';
@@ -305,14 +305,14 @@ class SimpleUnzipEntry {
 
 		var $Time = 0;
 
-		function SimpleUnzipEntry($in_Entry) {
+		function __construct($in_Entry) {
 		$this->Data     = $in_Entry['D'];
 		$this->Error    = $in_Entry['E'];
 		$this->ErrorMsg = $in_Entry['EM'];
 		$this->Name     = $in_Entry['N'];
 		$this->Path     = $in_Entry['P'];
 		$this->Time     = $in_Entry['T'];
-		} // end of the 'SimpleUnzipEntry' constructor
-} // end of the 'SimpleUnzipEntry' class
+		} 
+} 
 
 ?>

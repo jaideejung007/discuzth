@@ -86,9 +86,9 @@ class helper_makehtml {
 				$article['htmlname'] = $article['htmlname'].$page;
 			}
 			if($article['contents'] > $page) {
-				self::$returndata['nexturl'] = "portal.php?mod=view&aid={$article[aid]}&page=".(++$page);//'url'
-				self::$returndata['current'] = $page;//'cur'
-				self::$returndata['count'] = $article['contents'];//'count'
+				self::$returndata['nexturl'] = "portal.php?mod=view&aid={$article[aid]}&page=".(++$page);
+				self::$returndata['current'] = $page;
+				self::$returndata['count'] = $article['contents'];
 			}
 
 			if(!empty($cat['topid'])) {

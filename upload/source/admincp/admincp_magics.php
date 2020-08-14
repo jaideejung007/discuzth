@@ -23,14 +23,15 @@ if($operation == 'admin') {
 			array('admin', 'magics&operation=admin', 1),
 			array('nav_magics_confer', 'members&operation=confermagic', 0)
 		));
+		
 		showtips('magics_tips');
 
-		$settings = C::t('common_setting')->fetch_all(array('magicstatus', 'magicdiscount'));
+		$settings = C::t('common_setting')->fetch_all(array('magicdiscount'));
 		showformheader('magics&operation=admin');
 		showtableheader();
-		showsetting('magics_config_open', 'settingsnew[magicstatus]', $settings['magicstatus'], 'radio');
 		showsetting('magics_config_discount', 'settingsnew[magicdiscount]', $settings['magicdiscount'], 'text');
 		showtablefooter();
+		
 
 		showtableheader('magics_list', 'fixpadding');
 		$newmagics = getmagics();
@@ -89,7 +90,7 @@ if($operation == 'admin') {
 
 	} else {
 		if(is_array($_GET['settingsnew'])) {
-			C::t('common_setting')->update_batch(array('magicstatus'=> $_GET['settingsnew']['magicstatus'], 'magicdiscount' => $_GET['settingsnew']['magicdiscount']));
+			C::t('common_setting')->update_batch(array('magicdiscount' => $_GET['settingsnew']['magicdiscount']));
 		}
 
 		if($ids = dimplode($_GET['delete'])) {

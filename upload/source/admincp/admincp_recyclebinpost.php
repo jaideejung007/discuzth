@@ -60,12 +60,16 @@ if(!$operation) {
 	showtagheader('div', 'postlist', 1);
 	showformheader('recyclebinpost', '', 'rbform');
 	showhiddenfields(array('posttableid' => $posttableid));
-	showtableheader('recyclebinpost');
+	$checklpp = array();
+	$checklpp[$lpp] = 'selected="selected"';
+	showtableheader($lang['recyclebinpost_list'].
+				'&nbsp<select onchange="if(this.options[this.selectedIndex].value != \'\') {window.location=\''.ADMINSCRIPT.'?action=recyclebinpost&lpp=\'+this.options[this.selectedIndex].value }">
+				<option value="20" '.$checklpp[20].'> '.$lang[perpage_20].' </option><option value="50" '.$checklpp[50].'>'.$lang[perpage_50].'</option><option value="100" '.$checklpp[100].'>'.$lang[perpage_100].'</option></select>');
 
 	$postlistcount = C::t('forum_post')->count_by_invisible($posttableid, '-5');
 
 	if($postlistcount && recyclebinpostshowpostlist(null, null, null, null, null, $start_limit, $lpp)) {
-		$multi = multi($postlistcount, $lpp, $page, ADMINSCRIPT."?action=recyclebinpost");
+		$multi = multi($postlistcount, $lpp, $page, ADMINSCRIPT."?action=recyclebinpost&lpp=$lpp");
 	}
 	showsubmit('rbsubmit', 'submit', '', '<a href="#rb" onclick="checkAll(\'option\', $(\'rbform\'), \'delete\')">'.cplang('recyclebin_all_delete').'</a> &nbsp;<a href="#rb" onclick="checkAll(\'option\', $(\'rbform\'), \'undelete\')">'.cplang('recyclebin_all_undelete').'</a> &nbsp;<a href="#rb" onclick="checkAll(\'option\', $(\'rbform\'), \'ignore\')">'.cplang('recyclebin_all_ignore').'</a> &nbsp;', $multi);
 	showtablefooter();
@@ -80,8 +84,8 @@ if(!$operation) {
 	$keywords = $_GET['keywords'];
 	$pstarttime = $_GET['pstarttime'];
 	$pendtime = $_GET['pendtime'];
-
-	$secStatus = false;
+	
+	$secStatus = false;	
 
 	$searchsubmit = $_GET['searchsubmit'];
 
@@ -100,6 +104,7 @@ if(!$operation) {
 		array('search', 'recyclebinpost&operation=search', 1),
 		array('clean', 'recyclebinpost&operation=clean', 0)
 	));
+	
 	echo <<<EOT
 <script type="text/javascript" src="static/js/calendar.js"></script>
 <script type="text/JavaScript">
@@ -125,6 +130,7 @@ EOT;
 	showtablefooter();
 	showformfooter();
 	showtagfooter('div');
+	
 
 	if(submitcheck('searchsubmit')) {
 
@@ -162,12 +168,14 @@ EOT;
 			array('search', 'recyclebinpost&operation=search', 0),
 			array('clean', 'recyclebinpost&operation=clean', 1)
 		));
+		
 		showformheader('recyclebinpost&operation=clean');
 		showtableheader('recyclebinpost_clean');
 		showsetting('recyclebinpost_clean_days', 'days', '30', 'text');
 		showsubmit('cleanrbsubmit');
 		showtablefooter();
 		showformfooter();
+		
 
 	} else {
 

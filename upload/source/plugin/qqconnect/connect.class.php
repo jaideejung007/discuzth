@@ -1,11 +1,6 @@
 <?php
 
-/**
- *		[Discuz! X] (C)2001-2099 Comsenz Inc.
- *		This is NOT a freeware, use is subject to license terms
- *
- *		$Id: connect.class.php 34497 2014-05-09 09:05:09Z nemohou $
- */
+
 
 if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
@@ -80,7 +75,7 @@ class plugin_qqconnect extends plugin_qqconnect_base {
 
 	var $allow = false;
 
-	function plugin_qqconnect() {
+	function __construct() {
 		$this->init();
 	}
 
@@ -138,7 +133,7 @@ class plugin_qqconnect extends plugin_qqconnect_base {
 	function _viewthread_share_method_output() {
 		global $_G;
 		$_G['connect']['qq_share_url'] = $_G['siteurl'] . 'home.php?mod=spacecp&ac=plugin&id=qqconnect:spacecp&pluginop=share&sh_type=4&thread_id=' . $_G['tid'];
-		return tpl_viewthread_share_method($jsurl);
+		return tpl_viewthread_share_method($jsurl);		
 	}
 
 }
@@ -263,7 +258,7 @@ class mobileplugin_qqconnect extends plugin_qqconnect_base {
 
 	var $allow = false;
 
-	function mobileplugin_qqconnect() {
+	function __construct() {
 		global $_G;
 		if(!$_G['setting']['connect']['allow'] || $_G['setting']['bbclosed']) {
 			return;

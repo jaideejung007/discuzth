@@ -11,6 +11,10 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
+if (!$_G['setting']['doingstatus']) {
+	showmessage('doing_status_off');
+}
+
 $doid = empty($_GET['doid'])?0:intval($_GET['doid']);
 $id = empty($_GET['id'])?0:intval($_GET['id']);
 if(helper_access::check_module('doing')) {
@@ -150,6 +154,7 @@ if(helper_access::check_module('doing')) {
 			'dateline' => $_G['timestamp'],
 			'message' => $message,
 			'ip' => $_G['clientip'],
+			'port' => $_G['remoteport'],
 			'grade' => $updo['grade']+1
 		);
 
@@ -211,6 +216,9 @@ if($_GET['op'] == 'delete') {
 
 	if(empty($_GET['close'])) {
 		foreach(C::t('home_docomment')->fetch_all_by_doid($doid) as $value) {
+			if(!empty($value['ip'])) {
+				$value['ip'] = ip::to_display($value['ip']);
+			}
 			$tree->setNode($value['id'], $value['upid'], $value);
 			$count++;
 			if($value['authorid'] == $space['uid']) $highlight = $value['id'];

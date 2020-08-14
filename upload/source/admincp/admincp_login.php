@@ -46,10 +46,12 @@ function html_login_header($form = true) {
 	$title = lang('admincp_login', 'login_title');
 	$tips = lang('admincp_login', 'login_tips');
 	echo <<<EOT
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=$charset" />
+<meta charset="$charset" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title>$title</title>
 <link rel="stylesheet" href="static/image/admincp/admincp.css?{$_G[style][verhash]}" type="text/css" media="all" />
 <meta content="Comsenz Inc." name="Copyright" />
@@ -78,6 +80,7 @@ EOT;
 
 function html_login_footer($halt = true) {
 	$version = getglobal('setting/version');
+	$copy = lang('admincp_login', 'copyright');
 	echo <<<EOT
 
 	</td>
@@ -88,7 +91,7 @@ function html_login_footer($halt = true) {
 	<td colspan="2" class="footer">
 		<div class="copyright">
 			<p>Powered by <a href="http://www.discuz.net/" target="_blank">Discuz!</a> $version </p>
-			<p>Copyright &copy; 2001-2020, Tencent Cloud.</p>
+			<p>$copy</p>
 		</div>
 	</td>
 </tr>

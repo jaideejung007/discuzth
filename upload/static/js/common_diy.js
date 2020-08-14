@@ -1224,7 +1224,7 @@ var Util = {
 		setClose : function () {
 			if (!this.isChange) {
 				window.onbeforeunload = function() {
-					return 'ข้อมูลมีการแก้ไข หากคุณออกจากการทำงานนี้ ระบบจะไม่บันทึกการเปลี่ยนแปลงใดๆ ทั้งสิ้น';
+					return 'ข้อมูลมีการแก้ไข หากคุณออกจากการทำงานนี้ ระบบจะไม่บันทึกการเปลี่ยนแปลงใด ๆ ทั้งสิ้น';
 				};
 			}
 			this.isChange = true;

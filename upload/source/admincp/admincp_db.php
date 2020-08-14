@@ -81,7 +81,7 @@ if($operation == 'export') {
 			array('nav_db_optimize', 'db&operation=optimize', 0),
 			array('nav_db_dbcheck', 'db&operation=dbcheck', 0)
 		));
-		/*search={"nav_db":"action=db&operation=export","nav_db_export":"action=db&operation=export"}*/
+		
 		showtips($db_export_tips);
 		showformheader('db&operation=export&setup=1');
 		showtableheader();
@@ -123,7 +123,7 @@ if($operation == 'export') {
 		showsubmit('exportsubmit', 'submit', '', 'more_options');
 		showtablefooter();
 		showformfooter();
-		/*search}*/
+		
 
 	} else {
 
@@ -414,11 +414,11 @@ if($operation == 'export') {
 			array('nav_db_optimize', 'db&operation=optimize', 0),
 			array('nav_db_dbcheck', 'db&operation=dbcheck', 0)
 		));
-		/*search={"nav_db":"action=db&operation=export","nav_db_import":"action=db&operation=import"}*/
+		
 		showtips('db_import_tips');
 		showtableheader('db_import');
 		showtablerow('', array('colspan="9" class="tipsblock"'), array(cplang('do_import_option', array('restore_url' => $restore_url))));
-		/*search*/
+		
 
 		showformheader('db&operation=import');
 		showtitle('db_export_file');
@@ -545,7 +545,7 @@ if($operation == 'export') {
 			array('nav_db_optimize', 'db&operation=optimize', 0),
 			array('nav_db_dbcheck', 'db&operation=dbcheck', 0)
 		));
-		/*search={"nav_db":"action=db&operation=export","nav_db_runquery":"action=db&operation=runquery"}*/
+		
 		showtips('db_runquery_tips');
 		showtableheader();
 		showformheader('db&operation=runquery&option=simple');
@@ -563,7 +563,7 @@ if($operation == 'export') {
 		}
 
 		showtablefooter();
-		/*search*/
+		
 
 	} else {
 		$queries = $_GET['queries'];
@@ -606,9 +606,9 @@ if($operation == 'export') {
 		array('nav_db_optimize', 'db&operation=optimize', 1),
 		array('nav_db_dbcheck', 'db&operation=dbcheck', 0)
 	));
-	/*search={"nav_db":"action=db&operation=export","nav_db_optimize":"action=db&operation=optimize"}*/
+	
 	showtips('db_optimize_tips');
-	/*search*/
+	
 	showformheader('db&operation=optimize');
 	showtableheader('db_optimize_tables');
 	showsubtitle(array('', 'db_optimize_table_name', 'type', 'db_optimize_rows', 'db_optimize_data', 'db_optimize_index', 'db_optimize_frag'));
@@ -1011,7 +1011,7 @@ EOT;
 
 function createtable($sql, $dbcharset) {
 	$type = strtoupper(preg_replace("/^\s*CREATE TABLE\s+.+\s+\(.+?\).*(ENGINE|TYPE)\s*=\s*([a-z]+?).*$/isU", "\\2", $sql));
-	$type = in_array($type, array('MYISAM', 'HEAP', 'MEMORY')) ? $type : 'MYISAM';
+	$type = in_array($type, array('INNODB', 'MYISAM', 'HEAP', 'MEMORY')) ? $type : 'INNODB';
 	return preg_replace("/^\s*(CREATE TABLE\s+.+\s+\(.+?\)).*$/isU", "\\1", $sql).
 		(DB::$db->version() > '4.1' ? " ENGINE=$type DEFAULT CHARSET=$dbcharset" : " TYPE=$type");
 }

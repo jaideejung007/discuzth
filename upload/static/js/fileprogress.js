@@ -1,9 +1,3 @@
-/*
-	A simple class for displaying file information and progress
-	Note: This is a demonstration only and not part of SWFUpload.
-	Note: Some have had problems adapting this class in IE7. It may not be suitable for your application.
-*/
-
 function FileProgress(file, targetID) {
 	this.fileProgressID = file.id;
 
@@ -151,7 +145,7 @@ FileProgress.prototype.disappear = function () {
 
 	var reduceOpacityBy = 15;
 	var reduceHeightBy = 4;
-	var rate = 30;	// 15 fps
+	var rate = 30;	
 
 	if (this.opacity > 0) {
 		this.opacity -= reduceOpacityBy;

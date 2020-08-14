@@ -96,7 +96,6 @@ class control extends adminbase {
 
 					if($errorcode == 0) {
 						$this->setcookie('sid', $this->view->sid, 86400);
-						$pwlen = strlen($password);
 						$this->user['admin'] = 1;
 						$this->writelog('login', 'succeed');
 						if($iframe) {
@@ -107,6 +106,7 @@ class control extends adminbase {
 							exit;
 						}
 					} else {
+						$pwlen = strlen($password);
 						$this->writelog('login', 'error: user='.$this->user['username'].'; password='.($pwlen > 2 ? preg_replace("/^(.{".round($pwlen / 4)."})(.+?)(.{".round($pwlen / 6)."})$/s", "\\1***\\3", $password) : $password));
 						$_ENV['user']->loginfailed($username, $this->onlineip);
 					}
@@ -265,6 +265,7 @@ class control extends adminbase {
 					$this->message('admin_user_exists');
 				}
 				$sqladd .= "username='$newusername', ";
+				$_ENV['user']->user_log($uid, 'renameuser', 'uid='.$uid.'&oldusername='.urlencode($username).'&newusername='.urlencode($newusername));
 				$this->load('note');
 				$_ENV['note']->add('renameuser', 'uid='.$uid.'&oldusername='.urlencode($username).'&newusername='.urlencode($newusername));
 			}
@@ -295,6 +296,18 @@ class control extends adminbase {
 		$this->view->display('admin_user');
 	}
 
+	function onlogls() {
+		$page = getgpc('page');
+
+		$num = $_ENV['user']->user_log_total_num();
+		$userlog = $_ENV['user']->user_log_list($page, UC_PPP, $num);
+		$multipage = $this->page($num, UC_PPP, $page, 'admin.php?m=user&a=logls');
+
+		$this->view->assign('userlog', $userlog);
+		$this->view->assign('multipage', $multipage);
+
+		$this->view->display('admin_user_log');
+	}
 
 	function _check_username($username) {
 		$username = addslashes(trim(stripslashes($username)));

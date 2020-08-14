@@ -103,7 +103,7 @@ if ($_GET['anchor'] == 'setting') {
 			'connectappid' => $_GET['connectappidnew'],
 			'connectappkey' => $_GET['connectappkeynew'],
 		));
-
+		
 		if(!is_array($res)) {
 			$res = array('status' => false, 'msg' => 'qqgroup_msg_remote_error');
 		}

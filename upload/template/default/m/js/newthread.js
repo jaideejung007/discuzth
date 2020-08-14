@@ -106,7 +106,7 @@ var newThread = {
 						return false;
 					}
 
-					newThread.uploadInfo[id].file = uploadBase64;//e.target.result;
+					newThread.uploadInfo[id].file = uploadBase64;
 					newThread.uploadInfo[id].filename = file.name;
 					jq('#li' + id).find('img').attr('src', uploadBase64);
 					newThread.uploadQueue.push(id);
@@ -119,7 +119,7 @@ var newThread = {
 					jq('#li' + id).remove();
 					return false;
 				}
-				newThread.uploadInfo[id].file = uploadBase64;//e.target.result;
+				newThread.uploadInfo[id].file = uploadBase64;
 				newThread.uploadInfo[id].filename = file.name;
 				jq('#li' + id).find('img').attr('src', uploadBase64);
 				newThread.uploadQueue.push(id);
@@ -128,7 +128,7 @@ var newThread = {
 		};
 		reader.readAsBinaryString(newThread.uploadInfo[id].file);
 	},
-	_keys: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=', /*用于BASE64转码*/
+	_keys: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=', 
 
 	base64decode: function (input) {
 		var output = '';
@@ -299,9 +299,9 @@ var newThread = {
 			});
 		} else {
 			jq('#addPic').on('click', function () {
-				TOOLS.dialog({content: 'ฟอรั่มนี้ไม่สนับสนุนการอัปโหลดรูปภาพ', autoClose: true});
+				TOOLS.dialog({content: 'เว็บบอร์ดนี้ไม่สนับสนุนการอัปโหลดรูปภาพ', autoClose: true});
 			});
-			jq('#uploadnotice').html('ฟอรั่มนี้ไม่สนับสนุนการอัปโหลดรูปภาพ');
+			jq('#uploadnotice').html('เว็บบอร์ดนี้ไม่สนับสนุนการอัปโหลดรูปภาพ');
 		}
 
 		jq('.warp').on('change', '#uploadFile', function (e) {
@@ -422,7 +422,7 @@ var newThread = {
 									if (parseInt(res.Variables.forums[i].fid) == parseInt(fid)) {
 										threadtypes = res.Variables.forums[i].threadtypes;
 										forumname = res.Variables.forums[i].name;
-										jq('#forumname').html('ชื่อฟอรั่ม: ' + (forumname ? forumname : ''));
+										jq('#forumname').html('ชื่อเว็บบอร์ด: ' + (forumname ? forumname : ''));
 										break;
 									}
 								}
@@ -583,7 +583,7 @@ var newThread = {
 		jq('#subject').val(localStorage.getItem(newThread.storageSubjectKey));
 		timer = setInterval(function () {
 
-			if (TOOLS.mb_strlen(jq('textarea[name="message"]').val()) > 500 * 2) {//500个汉字
+			if (TOOLS.mb_strlen(jq('textarea[name="message"]').val()) > 500 * 2) {
 				jq('textarea[name="message"]').val(jq('textarea[name="message"]').val().substring(0, 500 * 2));
 			}
 

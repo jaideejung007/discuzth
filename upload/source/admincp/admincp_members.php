@@ -30,13 +30,16 @@ foreach($search_condition as $k => $v) {
 	if(in_array($k, array('action', 'operation', 'formhash', 'confirmed', 'submit', 'page', 'deletestart', 'allnum', 'includeuc','includepost','current','pertask','lastprocess','deleteitem')) || $v === '') {
 		unset($search_condition[$k]);
 	}
+	if($k === 'regip') {
+		$search_condition[$k] = ip::to_ip($search_condition[$k]);
+	}
 }
 $search_condition = searchcondition($search_condition);
 $tmpsearch_condition = $search_condition;
 unset($tmpsearch_condition['tablename']);
 $member = array();
 $tableext = '';
-if(in_array($operation, array('ban', 'edit', 'group', 'credit', 'medal', 'access'), true)) {
+if(in_array($operation, array('ban', 'edit', 'group', 'credit', 'medal', 'access', 'chgusername'), true)) {
 	if(empty($_GET['uid']) && empty($_GET['username'])) {
 		cpmsg('members_nonexistence', 'action=members&operation='.$operation.(!empty($_GET['highlight']) ? "&highlight={$_GET['highlight']}" : ''), 'form', array(), '<input type="text" name="username" value="" class="txt" />');
 	}
@@ -113,7 +116,8 @@ EOF;
 						"<a href=\"".ADMINSCRIPT."?action=members&operation=medal&uid=$member[uid]\" class=\"act\">$lang[medals]</a>".
 						"<a href=\"".ADMINSCRIPT."?action=members&operation=repeat&uid=$member[uid]\" class=\"act\">$lang[members_repeat]</a>".
 						"<a href=\"".ADMINSCRIPT."?action=members&operation=edit&uid=$member[uid]\" class=\"act\">$lang[detail]</a>".
-						"<a href=\"".ADMINSCRIPT."?action=members&operation=ban&uid=$member[uid]\" class=\"act\">$lang[members_ban]</a>"
+						"<a href=\"".ADMINSCRIPT."?action=members&operation=ban&uid=$member[uid]\" class=\"act\">$lang[members_ban]</a>".
+						"<a href=\"".ADMINSCRIPT."?action=members&operation=chgusername&uid=$member[uid]\" class=\"act\">$lang[members_chgusername]</a>"
 					), TRUE);
 				}
 			}
@@ -146,10 +150,125 @@ EOF;
 			showsubtitle(array('', 'username', 'credits', 'posts', 'admingroup', 'usergroup', ''));
 			echo $members;
 			$condition_str = str_replace('&tablename=master', '', $condition_str);
-			showsubmit('deletesubmit', cplang('delete'), ($tmpsearch_condition ? '<input type="checkbox" name="chkall" onclick="checkAll(\'prefix\', this.form, \'uidarray\');if(this.checked){$(\'deleteallinput\').style.display=\'\';}else{$(\'deleteall\').checked = false;$(\'deleteallinput\').style.display=\'none\';}" class="checkbox">'.cplang('select_all') : ''), ' &nbsp;&nbsp;&nbsp;<span id="deleteallinput" style="display:none"><input id="deleteall" type="checkbox" name="deleteall" class="checkbox">'.cplang('members_search_deleteall', array('membernum' => $membernum)).'</span>', $multipage);
+			$unarchive = isset($_GET['tablename']) && $_GET['tablename'] == 'archive' ? '<input type="submit" class="btn" id="submit_unarchivesubmit" name="unarchivesubmit" onclick="document.cpform.action=\'admin.php?action=members&operation=unarchive'.$condition_str.'\';document.cpform.submit();" value="'.cplang('unarchive').'">' : '';
+			showsubmit('deletesubmit', cplang('delete'), ($tmpsearch_condition ? '<input type="checkbox" name="chkall" onclick="checkAll(\'prefix\', this.form, \'uidarray\');if(this.checked){$(\'deleteallinput\').style.display=\'\';}else{$(\'deleteall\').checked = false;$(\'deleteallinput\').style.display=\'none\';}" class="checkbox">'.cplang('select_all') : ''), $unarchive.' &nbsp;&nbsp;&nbsp;<span id="deleteallinput" style="display:none"><input id="deleteall" type="checkbox" name="deleteall" class="checkbox">'.cplang('members_search_deleteall', array('membernum' => $membernum)).'</span>', $multipage);
 		}
 		showtablefooter();
 		showformfooter();
+
+	}
+
+} elseif($operation == 'unarchive') {
+
+	if(!submitcheck('unarchivesubmit', 1) && !submitcheck('confirmed', 1)) {
+
+		cpmsg('members_no_find_unarchiveuser', '', 'error');
+
+	} else {
+
+		if(submitcheck('unarchivesubmit', 1) && empty($_GET['uidarray'])) {
+			cpmsg('members_no_find_unarchiveuser', '', 'error');
+		}
+
+		if(!empty($_GET['deleteall'])) {
+			unset($search_condition['uidarray']);
+			$_GET['uidarray'] = '';
+		}
+
+		$uids = 0;
+		$extra = '';
+		$unarchivememberlimit = 300;
+		$unarchivestart = intval($_GET['unarchivestart']);
+
+		if(!empty($_GET['uidarray'])) {
+			$uids = array();
+			$allmember = C::t('common_member')->fetch_all($_GET['uidarray']);
+			$count = count($allmember);
+			$membernum = 0;
+			foreach($allmember as $uid => $member) {
+				if($member['adminid'] !== 1 && $member['groupid'] !== 1) {
+					if($count < 2000 || !empty($_GET['uidarray'])) {
+						$extra .= '<input type="hidden" name="uidarray[]" value="'.$member['uid'].'" />';
+					}
+					$uids[] = $member['uid'];
+					$membernum ++;
+				}
+			}
+		} elseif($tmpsearch_condition) {
+			$membernum = countmembers($search_condition, $urladd);
+			$uids = searchmembers($search_condition, $unarchivememberlimit, 0);
+		}
+
+		$allnum = intval($_GET['allnum']);
+		$conditions = $uids ? 'm.uid IN ('.dimplode($uids).')' : '0';
+
+		if((empty($membernum) || empty($uids))) {
+			if($unarchivestart) {
+				cpmsg('members_unarchive_succeed', '', 'succeed', array('numunarchived' => $allnum));
+			}
+			cpmsg('members_no_find_unarchiveuser', '', 'error');
+		}
+
+		if(!submitcheck('confirmed')) {
+
+			cpmsg('members_unarchive_confirm', "action=members&operation=unarchive&submit=yes&confirmed=yes".$urladd, 'form', array('membernum' => $membernum), $extra, '');
+
+		} else {
+
+			$numunarchived = $numunarchived ? $numunarchived : count($uids);
+
+			foreach ($uids as $uid) {
+				C::t('common_member_archive')->move_to_master($uid);
+			}
+
+			if($_GET['uidarray']) {
+				cpmsg('members_unarchive_succeed', '', 'succeed', array('numunarchived' => $numunarchived));
+			} else {
+				$allnum += $membernum < $unarchivememberlimit ? $membernum : $unarchivememberlimit;
+				$nextlink = "action=members&operation=unarchive&confirmed=yes&submit=yes&allnum=$allnum&unarchivestart=".($unarchivestart+$unarchivememberlimit).$urladd;
+				cpmsg(cplang('members_delete_user_processing_next', array('deletestart' => $unarchivestart, 'nextdeletestart' => $unarchivestart+$unarchivememberlimit)), $nextlink, 'loadingform', array());
+			}
+
+		}
+	}
+
+} elseif($operation == 'chgusername') {
+
+	if(!submitcheck('chgusernamesubmit')) {
+
+		shownav('user', 'members_chgusername');
+		showsubmenu($lang['members_chgusername'].($member['username'] ? ' - '.$member['username'] : ''));
+		showtips('members_chgusername_tips');
+		showformheader('members&operation=chgusername&uid='.$member['uid']);
+		showtableheader();
+		showsetting('members_chgusername_oldusername', '', '', $member['username']);
+		showsetting('members_chgusername_newusername', 'newusername', $member['username'], 'text', null, null, '');
+		showsubmit('chgusernamesubmit');
+		showtablefooter();
+		showformfooter();
+
+	} else {
+
+		if(empty($member)) {
+			cpmsg('members_edit_nonexistence');
+		}
+
+		loaducenter();
+		$ucresult = uc_user_chgusername(intval($_GET['uid']), addslashes(trim($_GET['newusername'])));
+
+		if($ucresult < 0) {
+			if($ucresult == -1) {
+				cpmsg('members_chgusername_check_failed', '', 'error');
+			} elseif($ucresult == -2) {
+				cpmsg('members_chgusername_name_badword', '', 'error');
+			} elseif($ucresult == -3) {
+				cpmsg('members_chgusername_name_exists', '', 'error');
+			} else {
+				cpmsg('members_chgusername_change_failed', '', 'error');
+			}
+		}
+
+		cpmsg('members_chgusername_change_success', 'action=members&operation=search', 'succeed');
 
 	}
 
@@ -205,7 +324,7 @@ EOF;
 
 	if(empty($_GET['uid']) && empty($_GET['username']) && empty($_GET['ip'])) {
 
-		/*search={"nav_repeat":"action=members&operation=repeat"}*/
+		
 		shownav('user', 'nav_members');
 		showsubmenu('nav_members', array(
 			array('search', 'members&operation=search', 0),
@@ -221,7 +340,7 @@ EOF;
 		showsubmit('submit', 'submit');
 		showtablefooter();
 		showformfooter();
-		/*search*/
+		
 
 	} else {
 
@@ -921,7 +1040,7 @@ EOF;
 			($groupselect['special'] ? '<optgroup label="'.$lang['usergroups_special'].'">'.$groupselect['special'].'</optgroup>' : '').
 			($groupselect['specialadmin'] ? '<optgroup label="'.$lang['usergroups_specialadmin'].'">'.$groupselect['specialadmin'].'</optgroup>' : '').
 			'<optgroup label="'.$lang['usergroups_system'].'">'.$groupselect['system'].'</optgroup>';
-		/*search={"nav_members_add":"action=members&operation=add"}*/
+		
 		shownav('user', 'nav_members_add');
 		showsubmenu('members_add');
 		showformheader('members&operation=add');
@@ -934,7 +1053,7 @@ EOF;
 		showsubmit('addsubmit');
 		showtablefooter();
 		showformfooter();
-		/*search*/
+		
 
 	} else {
 
@@ -1065,7 +1184,7 @@ EOF;
 			$groups['member'] = '<option value="'.$group['groupid'].'" gtype="member">'.$group['grouptitle'].'</option>';
 		}
 
-		/*search={"members_group":"action=members&operation=group"}*/
+		
 		shownav('user', 'members_group');
 		showsubmenu('members_group_member', array(), '', array('username' => $member['username']));
 		echo '<script src="static/js/calendar.js" type="text/javascript"></script>';
@@ -1092,7 +1211,7 @@ EOF;
 		showtablefooter();
 
 		showformfooter();
-		/*search*/
+		
 
 	} else {
 
@@ -1235,7 +1354,7 @@ EOF;
 EOT;
 		shownav('user', 'members_credit');
 		showsubmenu('members_credit');
-		/*search={"members_credit":"action=members&operation=credit"}*/
+		
 		showtips('members_credit_tips');
 		showformheader("members&operation=credit&uid={$_GET['uid']}");
 		showtableheader('<em class="right"><a href="'.ADMINSCRIPT.'?action=logs&operation=credit&srch_uid='.$_GET['uid'].'&frame=yes" target="_blank">'.cplang('members_credit_logs').'</a></em>'.cplang('members_credit').' - '.$member['username'].'('.$member['grouptitle'].')', 'nobottom');
@@ -1248,7 +1367,7 @@ EOT;
 		showsubmit('creditsubmit');
 		showtablefooter();
 		showformfooter();
-		/*search*/
+		
 
 	} else {
 
@@ -1770,7 +1889,7 @@ EOF;
 
 		shownav('user', 'members_access_edit');
 		showsubmenu('members_access_edit');
-		/*search={"members_access_edit":"action=members&operation=access"}*/
+		
 		showtips('members_access_tips');
 		showtableheader(cplang('members_access_now').' - '.$member['username'], 'nobottom fixpadding');
 		showsubtitle(array('forum', 'members_access_view', 'members_access_post', 'members_access_reply', 'members_access_getattach', 'members_access_getimage', 'members_access_postattach', 'members_access_postimage', 'members_access_adminuser', 'members_access_dateline'));
@@ -1824,7 +1943,7 @@ EOF;
 		showsubmit('accesssubmit', 'submit');
 		showtablefooter();
 		showformfooter();
-		/*search*/
+		
 
 	} else {
 
@@ -1944,7 +2063,7 @@ EOF;
 		$member['signature'] = html2bbcode($member['sightml']);
 
 		shownav('user', 'members_edit');
-		/*search={"members_edit":"action=members&operation=edit"}*/
+		
 		showsubmenu("$lang[members_edit] - $member[username]", array(
 			array('connect_member_info', 'members&operation=edit&uid='.$uid,  1),
 			!empty($_G['setting']['connect']['allow']) ? array('connect_member_bindlog', 'members&operation=edit&do=bindlog&uid='.$uid,  0) : array(),
@@ -1952,6 +2071,7 @@ EOF;
 		showformheader("members&operation=edit&uid=$uid", 'enctype');
 		showtableheader();
 		$status = array($member['status'] => ' checked');
+		$freeze = array($member['freeze'] => ' checked');
 		showsetting('members_edit_username', '', '', ($_G['setting']['connect']['allow'] && $member['conisbind'] ? ' <img class="vmiddle" src="static/image/common/connect_qq.gif" />' : '').' '.$member['username']);
 		showsetting('members_edit_avatar', '', '', ' <img src="'.avatar($uid, 'middle', true, false, true).'?random='.random(2).'" onerror="this.onerror=null;this.src=\''.$_G['setting']['ucenterurl'].'/images/noavatar_middle.gif\'" /><br /><br /><input name="clearavatar" class="checkbox" type="checkbox" value="1" /> '.$lang['members_edit_avatar_clear']);
 		$hrefext = "&detail=1&users=$member[username]&searchsubmit=1&perpage=50&fromumanage=1";
@@ -1969,14 +2089,21 @@ EOF;
 		}
 		showsetting('members_edit_clearquestion', 'clearquestion', 0, 'radio');
 		showsetting('members_edit_status', 'statusnew', $member['status'], 'radio');
+		showsetting('members_edit_freeze', array('freezenew', array(
+			array(0, $lang['members_edit_freeze_false']),
+			array(1, $lang['members_edit_freeze_password']),
+			array(-1, $lang['members_edit_freeze_admincp']),
+			array(2, $lang['members_edit_freeze_email']))), $member['freeze'], 'mradio');
 		showsetting('members_edit_email', 'emailnew', $member['email'], 'text');
 		showsetting('members_edit_email_emailstatus', 'emailstatusnew', $member['emailstatus'], 'radio');
 		showsetting('members_edit_posts', 'postsnew', $member['posts'], 'text');
 		showsetting('members_edit_digestposts', 'digestpostsnew', $member['digestposts'], 'text');
 		showsetting('members_edit_regip', 'regipnew', $member['regip'], 'text');
+		showsetting('members_edit_regport', 'regportnew', $member['regport'], 'text');
 		showsetting('members_edit_regdate', 'regdatenew', $member['regdate'], 'text');
 		showsetting('members_edit_lastvisit', 'lastvisitnew', $member['lastvisit'], 'text');
 		showsetting('members_edit_lastip', 'lastipnew', $member['lastip'], 'text');
+		showsetting('members_edit_port', 'portnew', $member['port'], 'text');
 		showsetting('members_edit_addsize', 'addsizenew', $member['addsize'], 'text');
 		showsetting('members_edit_addfriend', 'addfriendnew', $member['addfriend'], 'text');
 
@@ -2001,7 +2128,7 @@ EOF;
 		showsubmit('editsubmit');
 		showtablefooter();
 		showformfooter();
-		/*search*/
+		
 
 	} else {
 
@@ -2088,6 +2215,7 @@ EOF;
 		$addsize = intval($_GET['addsizenew']);
 		$addfriend = intval($_GET['addfriendnew']);
 		$status = intval($_GET['statusnew']) ? -1 : 0;
+		$freeze = in_array($_GET['freezenew'], array(-1, 0, 1, 2)) ? $_GET['freezenew'] : 0;
 		$emailstatusnew = intval($_GET['emailstatusnew']);
 		if(!empty($_G['setting']['connect']['allow'])) {
 			if($member['uinblack'] && empty($_GET['uinblack'])) {
@@ -2102,11 +2230,11 @@ EOF;
 				connectunbind($member);
 			}
 		}
-		$memberupdate = array_merge($memberupdate, array('regdate'=>$regdatenew, 'emailstatus'=>$emailstatusnew, 'status'=>$status, 'timeoffset'=>$_GET['timeoffsetnew']));
+		$memberupdate = array_merge($memberupdate, array('regdate'=>$regdatenew, 'emailstatus'=>$emailstatusnew, 'status'=>$status, 'freeze'=>$freeze, 'timeoffset'=>$_GET['timeoffsetnew']));
 		C::t('common_member'.$tableext)->update($uid, $memberupdate);
 		C::t('common_member_field_home'.$tableext)->update($uid, array('addsize' => $addsize, 'addfriend' => $addfriend));
 		C::t('common_member_count'.$tableext)->update($uid, array('posts' => $_GET['postsnew'], 'digestposts' => $_GET['digestpostsnew']));
-		C::t('common_member_status'.$tableext)->update($uid, array('regip' => $_GET['regipnew'], 'lastvisit' => $lastvisitnew, 'lastip' => $_GET['lastipnew'], 'invisible' => $_GET['invisiblenew']));
+		C::t('common_member_status'.$tableext)->update($uid, array('regip' => $_GET['regipnew'], 'regport' => $_GET['regportnew'], 'lastvisit' => $lastvisitnew, 'lastip' => $_GET['lastipnew'], 'port' => $_GET['portnew'], 'invisible' => $_GET['invisiblenew']));
 		C::t('common_member_field_forum'.$tableext)->update($uid, array('customstatus' => $_GET['cstatusnew'], 'sightml' => $sightmlnew));
 		if(!empty($fieldarr)) {
 			C::t('common_member_profile'.$tableext)->update($uid, $fieldarr);
@@ -2120,28 +2248,27 @@ EOF;
 
 } elseif($operation == 'ipban') {
 
+	if (array_key_exists('security', $_G['config']) && array_key_exists('useipban', $_G['config']['security']) && $_G['config']['security']['useipban'] == 0) {
+		cpmsg('members_ipban_closed', '', 'error');
+	}
+
 	if(!$_GET['ipact']) {
 		if(!submitcheck('ipbansubmit')) {
 
 			require_once libfile('function/misc');
 
-			$iptoban = explode('.', getgpc('ip'));
+			$iptoban = getgpc('ip');
 
 			$ipbanned = '';
 			foreach(C::t('common_banned')->fetch_all_order_dateline() as $banned) {
-				for($i = 1; $i <= 4; $i++) {
-					if($banned["ip$i"] == -1) {
-						$banned["ip$i"] = '*';
-					}
-				}
 				$disabled = $_G['adminid'] != 1 && $banned['admin'] != $_G['member']['username'] ? 'disabled' : '';
 				$banned['dateline'] = dgmdate($banned['dateline'], 'Y-m-d');
 				$banned['expiration'] = dgmdate($banned['expiration'], 'Y-m-d');
-				$theip = "$banned[ip1].$banned[ip2].$banned[ip3].$banned[ip4]";
+				$theip = "$banned[ip]";
 				$ipbanned .= showtablerow('', array('class="td25"'), array(
 					"<input class=\"checkbox\" type=\"checkbox\" name=\"delete[$banned[id]]\" value=\"$banned[id]\" $disabled />",
 					$theip,
-					convertip($theip, "./"),
+					convertip($theip),
 					$banned[admin],
 					$banned[dateline],
 					"<input type=\"text\" class=\"txt\" size=\"10\" name=\"expirationnew[$banned[id]]\" value=\"$banned[expiration]\" $disabled />"
@@ -2159,7 +2286,7 @@ EOF;
 			echo $ipbanned;
 			showtablerow('', array('', 'class="td28" colspan="3"', 'class="td28" colspan="2"'), array(
 				$lang['add_new'],
-				'<input type="text" class="txt" name="ip1new" value="'.$iptoban[0].'" size="3" maxlength="3">.<input type="text" class="txt" name="ip2new" value="'.$iptoban[1].'" size="3" maxlength="3">.<input type="text" class="txt" name="ip3new" value="'.$iptoban[2].'" size="3" maxlength="3">.<input type="text" class="txt" name="ip4new" value="'.$iptoban[3].'" size="3" maxlength="3">',
+				'<input type="text" class="txt" name="ipnew" value="'.$iptoban.'" style="width: 200px;">',
 				$lang['validity'].': <input type="text" class="txt" name="validitynew" value="30" size="3"> '.$lang['days']
 			));
 			showsubmit('ipbansubmit', 'submit', 'del');
@@ -2172,48 +2299,33 @@ EOF;
 				C::t('common_banned')->delete_by_id($_GET['delete'], $_G['adminid'], $_G['username']);
 			}
 
-			if($_GET['ip1new'] != '' && $_GET['ip2new'] != '' && $_GET['ip3new'] != '' && $_GET['ip4new'] != '') {
-				$own = 0;
-				$ip = explode('.', $_G['clientip']);
-				for($i = 1; $i <= 4; $i++) {
-					if(!is_numeric($_GET['ip'.$i.'new']) || $_GET['ip'.$i.'new'] < 0) {
-						if($_G['adminid'] != 1) {
-							cpmsg('members_ipban_nopermission', '', 'error');
-						}
-						$_GET['ip'.$i.'new'] = -1;
-						$own++;
-					} elseif($_GET['ip'.$i.'new'] == $ip[$i - 1]) {
-						$own++;
-					}
-					$_GET['ip'.$i.'new'] = intval($_GET['ip'.$i.'new']);
+			if($_GET['ipnew'] != '') {
+				$ipnew = ip::to_ip($_GET['ipnew']);
+				$is_cidr = ip::validate_cidr($ipnew, $ipnew);
+				if (!ip::validate_ip($ipnew) && !$is_cidr) {
+					cpmsg('members_ipban_formaterror', '', 'error');
 				}
 
-				if($own == 4) {
+				if($_G['adminid'] != 1 && $is_cidr) {
+					cpmsg('members_ipban_nopermission', '', 'error');
+				}
+
+				if(ip::check_ip($_G['clientip'], $ipnew)) {
 					cpmsg('members_ipban_illegal', '', 'error');
 				}
 
-				foreach(C::t('common_banned')->fetch_all_order_dateline() as $banned) {
-					$exists = 0;
-					for($i = 1; $i <= 4; $i++) {
-						if($banned["ip$i"] == -1) {
-							$exists++;
-						} elseif($banned["ip$i"] == ${"ip".$i."new"}) {
-							$exists++;
-						}
-					}
-					if($exists == 4) {
-						cpmsg('members_ipban_invalid', '', 'error');
-					}
+				if($banned = C::t('common_banned')->fetch_by_ip($ipnew)) {
+					cpmsg('members_ipban_invalid', '', 'error');
 				}
 
 				$expiration = TIMESTAMP + $_GET['validitynew'] * 86400;
 
-				C::app()->session->update_by_ipban($_GET['ip1new'], $_GET['ip2new'], $_GET['ip3new'], $_GET['ip4new']);
+				list($lower, $upper) = ip::calc_cidr_range($ipnew, true);
+
 				$data = array(
-					'ip1' => $_GET['ip1new'],
-					'ip2' => $_GET['ip2new'],
-					'ip3' => $_GET['ip3new'],
-					'ip4' => $_GET['ip4new'],
+					'ip' => $ipnew,
+					'lowerip' => $lower,
+					'upperip' => $upper,
 					'admin' => $_G['username'],
 					'dateline' => $_G['timestamp'],
 					'expiration' => $expiration,
@@ -2251,6 +2363,7 @@ EOF;
 		} else {
 			$iplist = explode("\n", $_GET['inputipbanlist']);
 			foreach($iplist as $banip) {
+				
 				if(strpos($banip, ',') !== false) {
 					list($banipaddr, $expiration) = explode(',', $banip);
 					$expiration = strtotime($expiration);
@@ -2262,25 +2375,16 @@ EOF;
 					continue;
 				}
 
-				$ipnew = explode('.', $banipaddr);
-				for($i = 0; $i < 4; $i++) {
-					if(strpos($ipnew[$i], '*') !== false) {
-						$ipnew[$i] = -1;
-					} else {
-						$ipnew[$i] = intval($ipnew[$i]);
-					}
-				}
-				$checkexists = C::t('common_banned')->fetch_by_ip($ipnew[0], $ipnew[1], $ipnew[2], $ipnew[3]);
+				$checkexists = C::t('common_banned')->fetch_by_ip($banipaddr);
 				if($checkexists) {
 					continue;
 				}
+				list($lower, $upper) = ip::calc_cidr_range($banipaddr, true);
 
-				C::app()->session->update_by_ipban($ipnew[0], $ipnew[1], $ipnew[2], $ipnew[3]);
 				$data = array(
-					'ip1' => $ipnew[0],
-					'ip2' => $ipnew[1],
-					'ip3' => $ipnew[2],
-					'ip4' => $ipnew[3],
+					'ip' => $banipaddr,
+					'lowerip' => $lower,
+					'upperip' => $upper,
 					'admin' => $_G['username'],
 					'dateline' => $_G['timestamp'],
 					'expiration' => $expiration,
@@ -2299,11 +2403,8 @@ EOF;
 		dheader('Content-Disposition: attachment; filename=IPBan.csv');
 		dheader('Content-Type: text/plain');
 		foreach(C::t('common_banned')->fetch_all_order_dateline() as $banned) {
-			for($i = 1; $i <= 4; $i++) {
-				$banned['ip'.$i] = $banned['ip'.$i] < 0 ? '*' : $banned['ip'.$i];
-			}
 			$banned['expiration'] = dgmdate($banned['expiration']);
-			echo "$banned[ip1].$banned[ip2].$banned[ip3].$banned[ip4],$banned[expiration]\n";
+			echo "$banned[ip],$banned[expiration]\n";
 		}
 		define('FOOTERDISABLED' , 1);
 		exit();
@@ -2775,7 +2876,7 @@ function showsearchform($operation = '') {
 		$usertagselect .= "<option value=\"$row[tagid]\" ".(in_array($row['tagid'], $tagid) ? 'selected' : '').">$row[tagname]</option>\n";
 	}
 
-	/*search={"nav_members":"action=members&operation=search"}*/
+	
 	showtagheader('div', 'searchmembers', !$_GET['submit']);
 	echo '<script src="static/js/calendar.js" type="text/javascript"></script>';
 	echo '<style type="text/css">#residedistrictbox select, #birthdistrictbox select{width: auto;}</style>';
@@ -2930,7 +3031,7 @@ function showsearchform($operation = '') {
 	showtablefooter();
 	showformfooter();
 	showtagfooter('div');
-	/*search*/
+	
 }
 
 function searchcondition($condition) {

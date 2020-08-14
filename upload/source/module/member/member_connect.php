@@ -17,7 +17,7 @@ if(!$_G['setting']['connect']['allow']) {
 	showmessage('qqconnect:qqconnect_closed');
 }
 
-if($_GET['action'] == 'login') { // debug 已有账号，绑定我的账号走此分支
+if($_GET['action'] == 'login') { 
 
 	$ctl_obj = new logging_ctl();
 	$_G['setting']['seccodestatus'] = 0;
@@ -28,7 +28,7 @@ if($_GET['action'] == 'login') { // debug 已有账号，绑定我的账号走�
 	$ctl_obj->template = 'member/login';
 	$ctl_obj->on_login();
 
-} else { // debug 完善我的资料，即添加个新的论坛账号走此分支
+} else { 
 
 	$_G['qc']['connect_auth_hash'] = $_GET['con_auth_hash'];
 	if(!$_G['qc']['connect_auth_hash']) {

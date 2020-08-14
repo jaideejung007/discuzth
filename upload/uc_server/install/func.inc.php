@@ -19,6 +19,7 @@ function show_msg($error_no, $error_msg = 'ok', $success = 1, $quit = TRUE) {
 		$str = "<root>\n";
 		$str .= "\t<error errorCode=\"$error_code\" errorMessage=\"$error_msg\" />\n";
 		$str .= "</root>";
+		send_mime_type_header();
 		echo $str;
 		exit;
 	} else {
@@ -235,6 +236,7 @@ function show_env_result(&$env_items, &$dirfile_items, &$func_items) {
 		$str .= "\t</FileDirs>\n";
 		$str .= "\t<error errorCode=\"$error_code\" errorMessage=\"\" />\n";
 		$str .= "</root>";
+		send_mime_type_header();
 		echo $str;
 		exit;
 
@@ -414,9 +416,9 @@ if(!function_exists('file_put_contents')) {
 
 function createtable($sql) {
 	$type = strtoupper(preg_replace("/^\s*CREATE TABLE\s+.+\s+\(.+?\).*(ENGINE|TYPE)\s*=\s*([a-z]+?).*$/isU", "\\2", $sql));
-	$type = in_array($type, array('MYISAM', 'HEAP')) ? $type : 'MYISAM';
+	$type = in_array($type, array('INNODB', 'MYISAM', 'HEAP', 'MEMORY')) ? $type : 'INNODB';
 	return preg_replace("/^\s*(CREATE TABLE\s+.+\s+\(.+?\)).*$/isU", "\\1", $sql).
-	(mysql_get_server_info() > '4.1' ? " ENGINE=$type DEFAULT CHARSET=".DBCHARSET : " TYPE=$type");
+	(" ENGINE=$type DEFAULT CHARSET=".DBCHARSET);
 }
 
 function dir_writeable($dir) {
@@ -459,10 +461,12 @@ function show_header() {
 	$title = lang('title_install');
 	$charset = CHARSET;
 	echo <<<EOT
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=$charset" />
+<meta charset="$charset" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title>$title</title>
 <link rel="stylesheet" href="style.css" type="text/css" media="all" />
 <script type="text/javascript">
@@ -487,8 +491,10 @@ EOT;
 
 function show_footer($quit = true) {
 
+	$copy = lang('copyright');
+
 	echo <<<EOT
-		<div class="footer">Copyright &copy; 2001-2020, Tencent Cloud.</div>
+		<div class="footer">$copy</div>
 	</div>
 </div>
 </body>
@@ -534,16 +540,21 @@ function redirect($url) {
 
 }
 
+function validate_ip($ip) {
+	return filter_var($ip, FILTER_VALIDATE_IP) !== false;
+}
+
 function get_onlineip() {
-	$onlineip = '';
-	if(getenv('HTTP_CLIENT_IP') && strcasecmp(getenv('HTTP_CLIENT_IP'), 'unknown')) {
-		$onlineip = getenv('HTTP_CLIENT_IP');
-	} elseif(getenv('HTTP_X_FORWARDED_FOR') && strcasecmp(getenv('HTTP_X_FORWARDED_FOR'), 'unknown')) {
-		$onlineip = getenv('HTTP_X_FORWARDED_FOR');
-	} elseif(getenv('REMOTE_ADDR') && strcasecmp(getenv('REMOTE_ADDR'), 'unknown')) {
-		$onlineip = getenv('REMOTE_ADDR');
-	} elseif(isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], 'unknown')) {
-		$onlineip = $_SERVER['REMOTE_ADDR'];
+	$onlineip = $_SERVER['REMOTE_ADDR'];
+	if (isset($_SERVER['HTTP_CLIENT_IP']) && validate_ip($_SERVER['HTTP_CLIENT_IP'])) {
+		$onlineip = $_SERVER['HTTP_CLIENT_IP'];
+	} elseif(isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+		if (strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ",") > 0) {
+			$exp = explode(",", $_SERVER['HTTP_X_FORWARDED_FOR']);
+			$onlineip = validate_ip(trim($exp[0])) ? $exp[0] : $onlineip;
+		} else {
+			$onlineip = validate_ip($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $onlineip;
+		}
 	}
 	return $onlineip;
 }
@@ -633,7 +644,7 @@ function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
 function generate_key() {
 	$random = random(32);
 	$info = md5($_SERVER['SERVER_SOFTWARE'].$_SERVER['SERVER_NAME'].$_SERVER['SERVER_ADDR'].$_SERVER['SERVER_PORT'].$_SERVER['HTTP_USER_AGENT'].time());
-	$return = '';
+	$return = array();
 	for($i=0; $i<64; $i++) {
 		$p = intval($i/2);
 		$return[$i] = $i % 2 ? $random[$p] : $info[$p];
@@ -741,13 +752,45 @@ function fsocketopen($hostname, $port = 80, &$errno, &$errstr, $timeout = 15) {
 	return $fp;
 }
 
-function dfopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE, $ip = '', $timeout = 15, $block = TRUE) {
+function dfopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE, $ip = '', $timeout = 15, $block = TRUE, $encodetype  = 'URLENCODE', $allowcurl = TRUE) {
 	$return = '';
 	$matches = parse_url($url);
 	$scheme = $matches['scheme'];
 	$host = $matches['host'];
 	$path = $matches['path'] ? $matches['path'].(isset($matches['query']) && $matches['query'] ? '?'.$matches['query'] : '') : '/';
 	$port = !empty($matches['port']) ? $matches['port'] : ($matches['scheme'] == 'https' ? 443 : 80);
+
+	if(function_exists('curl_init') && function_exists('curl_exec') && $allowcurl) {
+		$ch = curl_init();
+		$ip && curl_setopt($ch, CURLOPT_HTTPHEADER, array("Host: ".$host));
+		curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+		curl_setopt($ch, CURLOPT_URL, $scheme.'://'.($ip ? $ip : $host).':'.$port.$path);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		if($post) {
+			curl_setopt($ch, CURLOPT_POST, 1);
+			if($encodetype == 'URLENCODE') {
+				curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+			} else {
+				parse_str($post, $postarray);
+				curl_setopt($ch, CURLOPT_POSTFIELDS, $postarray);
+			}
+		}
+		if($cookie) {
+			curl_setopt($ch, CURLOPT_COOKIE, $cookie);
+		}
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+		$data = curl_exec($ch);
+		$status = curl_getinfo($ch);
+		$errno = curl_errno($ch);
+		curl_close($ch);
+		if($errno || $status['http_code'] != 200) {
+			return;
+		} else {
+			return !$limit ? $data : substr($data, 0, $limit);
+		}
+	}
 
 	if($post) {
 		$out = "POST $path HTTP/1.0\r\n";
@@ -773,7 +816,7 @@ function dfopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE, $
 	}
 
 	$fpflag = 0;
-	if(!$fp = @fsocketopen(($scheme == 'https' ? 'ssl' : $scheme).'://'.($scheme == 'https' ? $host : ($ip ? $ip : $host)), $port, $errno, $errstr, $timeout)) {
+	if(!$fp = @fsocketopen(($scheme == 'https' ? 'ssl://' : '').($scheme == 'https' ? $host : ($ip ? $ip : $host)), $port, $errno, $errstr, $timeout)) {
 		$context = array(
 			'http' => array(
 				'method' => $post ? 'POST' : 'GET',
@@ -1078,4 +1121,8 @@ function dhtmlspecialchars($string, $flags = null) {
 		}
 	}
 	return $string;
+}
+
+function send_mime_type_header($type = 'application/xml') {
+	header("Content-Type: ".$type);
 }

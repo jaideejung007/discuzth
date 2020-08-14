@@ -1,10 +1,6 @@
 <?php
 
-/**
- * DiscuzX Convert
- *
- * $Id: magics.php 9636 2010-04-30 08:19:12Z monkey $
- */
+
 
 $curprg = basename(__FILE__);
 

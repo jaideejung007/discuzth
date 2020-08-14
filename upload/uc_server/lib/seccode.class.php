@@ -9,8 +9,8 @@
 
 class seccode {
 
-	var $code;			//100000-999999 范围内随机
-	var $type 	= 0;		//0 英文图片验证码  1 中文图片验证码  2 Flash 验证码  3 语音验证码
+	var $code;			
+	var $type 	= 0;		
 	var $width 	= 0;
 	var $height 	= 0;
 	var $background	= 1;
@@ -20,8 +20,8 @@ class seccode {
 	var $color 	= 1;
 	var $size 	= 0;
 	var $shadow 	= 1;
-	var $animator 	= 0;		//GIF 动画
-	var $fontpath	= '';		//TTF 字库目录
+	var $animator 	= 0;		
+	var $fontpath	= '';		
 	var $datapath	= '';
 	var $includepath= '';
 

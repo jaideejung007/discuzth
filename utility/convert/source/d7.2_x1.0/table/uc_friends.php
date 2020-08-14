@@ -1,9 +1,5 @@
 <?php
-/**
- * DiscuzX Convert
- *
- * $Id: uc_friends.php 10469 2010-05-11 09:12:14Z monkey $
- */
+
 
 $curprg = basename(__FILE__);
 

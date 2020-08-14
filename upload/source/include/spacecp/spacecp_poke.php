@@ -11,6 +11,10 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
+if (!$_G['setting']['friendstatus']) {
+	showmessage('friend_status_off');
+}
+
 $uid = empty($_GET['uid'])?0:intval($_GET['uid']);
 
 if($uid == $_G['uid']) {
@@ -47,7 +51,7 @@ if($op == 'send' || $op == 'reply') {
 			'pokeuid' => $uid+$_G['uid'],
 			'uid' => $uid,
 			'fromuid' => $_G['uid'],
-			'note' => $notetext, //need to do
+			'note' => $notetext, 
 			'dateline' => $_G['timestamp'],
 			'iconid' => intval($_POST['iconid'])
 		);

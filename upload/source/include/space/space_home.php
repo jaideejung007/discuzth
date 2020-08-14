@@ -37,9 +37,8 @@ if(empty($_GET['view'])) {
 } elseif(!in_array($_GET['view'], array('we', 'me', 'all', 'app'))) {
 	$_GET['view'] = 'all';
 }
-if(empty($_GET['order'])) {
-	$_GET['order'] = 'dateline';
-}
+
+$_GET['order'] = in_array($_GET['order'], array('hot', 'dateline')) ? $_GET['order'] : 'dateline';
 
 $perpage = $_G['setting']['feedmaxnum']<20?20:$_G['setting']['feedmaxnum'];
 $perpage = mob_perpage($perpage);
@@ -412,7 +411,7 @@ if($space['self'] && empty($start)) {
 } elseif(empty($_G['uid'])) {
 	$defaultusers = C::t('home_specialuser')->fetch_all_by_status(1, 12);
 
-	$query = C::t('home_show')->fetch_all_by_credit(0, 12); //DB::query("SELECT * FROM ".DB::table('home_show')." ORDER BY credit DESC LIMIT 0,12");
+	$query = C::t('home_show')->fetch_all_by_credit(0, 12); 
 	foreach($query as $value) {
 		$showusers[] = $value;
 	}

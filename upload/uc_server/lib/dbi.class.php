@@ -12,6 +12,7 @@ class ucserver_db {
 	var $querynum = 0;
 	var $link;
 	var $histories;
+	var $stmtcache = array();
 
 	var $dbhost;
 	var $dbuser;
@@ -24,6 +25,7 @@ class ucserver_db {
 	var $goneaway = 5;
 
 	function connect($dbhost, $dbuser, $dbpw, $dbname = '', $dbcharset = '', $pconnect = 0, $tablepre='', $time = 0) {
+		if (intval($pconnect) === 1) $dbhost = 'p:' . $dbhost; 
 		$this->dbhost = $dbhost;
 		$this->dbuser = $dbuser;
 		$this->dbpw = $dbpw;
@@ -36,6 +38,8 @@ class ucserver_db {
 		if(!$this->link = new mysqli($dbhost, $dbuser, $dbpw, $dbname)) {
 			$this->halt('Can not connect to MySQL server');
 		}
+
+		$this->link->options(MYSQLI_OPT_LOCAL_INFILE, false);
 
 		if($this->version() > '4.1') {
 			if($dbcharset) {
@@ -71,6 +75,25 @@ class ucserver_db {
 		return $arr;
 	}
 
+	function result_first_stmt($sql, $key = array(), $value = array()) {
+		$query = $this->query_stmt($sql, $key, $value);
+		return $this->result($query, 0);
+	}
+
+	function fetch_first_stmt($sql, $key = array(), $value = array()) {
+		$query = $this->query_stmt($sql, $key, $value);
+		return $this->fetch_array($query);
+	}
+
+	function fetch_all_stmt($sql, $key = array(), $value = array(), $id = '') {
+		$arr = array();
+		$query = $this->query_stmt($sql, $key, $value);
+		while($data = $this->fetch_array($query)) {
+			$id ? $arr[$data[$id]] = $data : $arr[] = $data;
+		}
+		return $arr;
+	}
+
 	function cache_gc() {
 		$this->query("DELETE FROM {$this->tablepre}sqlcaches WHERE expiry<$this->time");
 	}
@@ -82,6 +105,23 @@ class ucserver_db {
 		}
 		$this->querynum++;
 		$this->histories[] = $sql;
+		return $query;
+	}
+
+	function query_stmt($sql, $key = array(), $value = array(), $type = '', $saveprep = FALSE, $cachetime = FALSE) {
+		$parse = $this->parse_query($sql, $key, $value);
+		if ($saveprep && array_key_exists(hash("sha256", $parse[0]), $this->stmtcache)) {
+			$stmt = & $this->stmtcache[hash("sha256", $parse[0])];
+		} else {
+			$stmt = $this->link->prepare($parse[0]);
+			$saveprep && $this->stmtcache[hash("sha256", $parse[0])] = & $stmt;
+		}
+		$stmt->bind_param(...$parse[1]);
+		if(!($query = $stmt->execute()) && $type != 'SILENT') {
+			$this->halt('MySQL Query Error', $parse[0]);
+		}
+		$this->querynum++;
+		$this->histories[] = $parse[0];
 		return $query;
 	}
 
@@ -142,6 +182,29 @@ class ucserver_db {
 
 	function close() {
 		return $this->link->close();
+	}
+
+	function parse_query($sql, $key = array(), $value = array()) {
+		$list = '';
+		$array = array();
+		if(strpos($sql, '?')) {
+			foreach ($key as $k => $v) {
+				if(in_array($v, array('i', 'd', 's', 'b'))) {
+					$list .= $v;
+					$array = array_merge($array, (array)$value[$k]);
+				}
+			}
+		} else {
+			preg_match_all("/:([A-Za-z0-9]*?)( |$)/", $sql, $matches);
+			foreach ($matches[1] as $match) {
+				if(in_array($key[$match], array('i', 'd', 's', 'b'))) {
+					$list .= $key[$match];
+					$array = array_merge($array, (array)$value[$match]);
+					$sql = str_replace(":".$match, "?", $sql);
+				}
+			}
+		}
+		return array($sql, array_merge((array)$list, $array));
 	}
 
 	function halt($message = '', $sql = '') {

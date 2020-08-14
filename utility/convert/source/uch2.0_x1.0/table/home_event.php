@@ -1,10 +1,6 @@
 <?php
 
-/**
- * DiscuzX Convert
- *
- * $Id: home_event.php 10469 2010-05-11 09:12:14Z monkey $
- */
+
 
 $curprg = basename(__FILE__);
 
@@ -113,7 +109,7 @@ while ($event = $db_source->fetch_array($event_query)) {
 		'place' => '['.$event['province'].$event['city'].'] '.$event['location'],
 		'class' => $eventclass[$event['classid']],
 		'number' => $event['limitnum'],
-		'applynumber' => $event['membernum'] - 1,// Home 里的活动成员包括创建者
+		'applynumber' => $event['membernum'] - 1,
 		'expiration' => $event['deadline']
 	);
 	$db_target->insert('forum_activity', daddslashes($activityarr));

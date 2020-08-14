@@ -16,7 +16,7 @@ if (SWFUpload == undefined) {
 
 SWFUpload.prototype.initSWFUpload = function (userSettings) {
 	try {
-		this.customSettings = {};	// A container where developers can place their own settings associated with this instance.
+		this.customSettings = {};	
 		this.settings = {};
 		this.eventQueue = [];
 		this.movieName = "SWFUpload_" + SWFUpload.movieCount++;
@@ -76,7 +76,7 @@ SWFUpload.BUTTON_ACTION = {
 	SELECT_FILE             : -100,
 	SELECT_FILES            : -110,
 	START_UPLOAD            : -120,
-	JAVASCRIPT              : -130,	// DEPRECATED
+	JAVASCRIPT              : -130,	
 	NONE                    : -130
 };
 SWFUpload.CURSOR = {
@@ -139,7 +139,7 @@ SWFUpload.prototype.initSettings = function (userSettings) {
 
 	this.ensureDefault("file_types", "*.*");
 	this.ensureDefault("file_types_description", "All Files");
-	this.ensureDefault("file_size_limit", 0);	// Default zero means "unlimited"
+	this.ensureDefault("file_size_limit", 0);	
 	this.ensureDefault("file_upload_limit", 0);
 	this.ensureDefault("file_queue_limit", 0);
 
@@ -162,7 +162,7 @@ SWFUpload.prototype.initSettings = function (userSettings) {
 	this.ensureDefault("button_window_mode", SWFUpload.WINDOW_MODE.WINDOW);
 
 	this.ensureDefault("debug", false);
-	this.settings.debug_enabled = this.settings.debug;	// Here to maintain v2 API
+	this.settings.debug_enabled = this.settings.debug;	
 
 	this.settings.return_upload_start_handler = this.returnUploadStart;
 	this.ensureDefault("swfupload_preload_handler", null);
@@ -240,7 +240,7 @@ SWFUpload.prototype.loadFlash = function () {
 	flashHTML = this.getFlashHTML();
 
 	try {
-		tempParent.innerHTML = flashHTML;	// Using innerHTML is non-standard but the only sensible way to dynamically add Flash in IE (and maybe other browsers)
+		tempParent.innerHTML = flashHTML;	
 	} catch (ex) {
 		this.support.loading = false;
 		this.queueEvent("swfupload_load_failed_handler", ["Exception loading Flash HTML into placeholder"]);
@@ -753,7 +753,7 @@ SWFUpload.prototype.cleanUp = function () {
 	var key, movieElement = this.getMovieElement();
 
 	try {
-		if (movieElement && typeof(movieElement.CallFunction) === "unknown") { // We only want to do this in IE
+		if (movieElement && typeof(movieElement.CallFunction) === "unknown") { 
 			this.debug("Removing Flash functions hooks (this should only run in IE and should prevent memory leaks)");
 			for (key in movieElement) {
 				try {
@@ -1216,7 +1216,7 @@ function uploadProgress(file, bytesLoaded, bytesTotal) {
 		var percent = Math.ceil((bytesLoaded / bytesTotal) * 100);
 
 		var progress = new FileProgress(file, this.customSettings.progressTarget);
-		progress.setStatus("กำลังอัปโหลด("+percent+"%)...");
+		progress.setStatus("กำลังอัปโหลด ("+percent+"%)...");
 
 	} catch (ex) {
 		this.debug(ex);
@@ -1234,12 +1234,12 @@ function uploadSuccess(file, serverData) {
 					preObj.innerHTML = "";
 					preObj.style.display = '';
 					var img = new Image();
-					img.src = IMGDIR + '/attachimg_2.png';//data.smallimg;
+					img.src = IMGDIR + '/attachimg_2.png';
 					var imgObj = document.createElement("img");
 					imgObj.src = img.src;
 					imgObj.className = "cur1";
-					imgObj.onmouseout = function(){hideMenu('poll_img_preview_'+data.aid+'_menu');};//"hideMenu('poll_img_preview_"+data.aid+"_menu');";
-					imgObj.onmouseover = function(){showMenu({'menuid':'poll_img_preview_'+data.aid+'_menu','ctrlclass':'a','duration':2,'timeout':0,'pos':'34'});};//"showMenu({'menuid':'poll_img_preview_"+data.aid+"_menu','ctrlclass':'a','duration':2,'timeout':0,'pos':'34'});";
+					imgObj.onmouseout = function(){hideMenu('poll_img_preview_'+data.aid+'_menu');};
+					imgObj.onmouseover = function(){showMenu({'menuid':'poll_img_preview_'+data.aid+'_menu','ctrlclass':'a','duration':2,'timeout':0,'pos':'34'});};
 					preObj.appendChild(imgObj);
 					var inputObj = document.createElement("input");
 					inputObj.type = 'hidden';
@@ -1273,7 +1273,7 @@ function uploadSuccess(file, serverData) {
 						progress.setStatus(STATUSMSG[aid]);
 						showDialog(STATUSMSG[aid], 'notice', null, null, 0, null, null, null, null, sdCloseTime);
 					} else {
-						progress.setStatus("ยกเลิกการอัปโหลด");
+						progress.setStatus("ยกเลิกอัปโหลด");
 					}
 					this.cancelUpload(file.id);
 					progress.setCancelled();
@@ -1625,7 +1625,7 @@ FileProgress.prototype.disappear = function () {
 
 	var reduceOpacityBy = 15;
 	var reduceHeightBy = 4;
-	var rate = 30;	// 15 fps
+	var rate = 30;	
 
 	if (this.opacity > 0) {
 		this.opacity -= reduceOpacityBy;

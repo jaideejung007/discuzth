@@ -1,10 +1,6 @@
 <?php
 
-/**
- * DiscuzX Convert
- *
- * $Id: orders.php 9138 2010-04-27 05:47:51Z liulanbo $
- */
+
 
 $curprg = basename(__FILE__);
 

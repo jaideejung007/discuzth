@@ -1,10 +1,6 @@
 <?php
 
-/**
- * DiscuzX Convert
- *
- * $Id: spacecomments.php 15777 2010-08-26 04:00:58Z zhengqingpeng $
- */
+
 
 $curprg = basename(__FILE__);
 

@@ -74,21 +74,21 @@ var bindEvent = function () {
 			dom = $("#aut_" + $(this).attr("pid"));
 			author = dom[0].innerHTML;
 		}
-		//if (member_uid != "0") {
-		//	replyComment(formhash, $(this).attr("tid"), pId, author, '', 0, isshow ? 7 : 0, 0);
-		//} else {
-		//	FUNCS.replyCommentPage(tId, 'viewthread', pId, author);
-		//}
+		
+		
+		
+		
+		
 		replyComment(formhash, $(this).attr("tid"), pId, author, '', 0, isshow ? 7 : 0, 0);
 	});
 
 	if (!$("a.replyBtn").attr('bind')) {
 		$("a.replyBtn").click(function () {
-			//if (member_uid !== "0") {
-			//	replyComment(formhash, tId, 0, '', '', 0, isshow ? 7 : 0, 0);
-			//} else {
-			//	FUNCS.replyCommentPage(tId, 'viewthread');
-			//}
+			
+			
+			
+			
+			
 			replyComment(formhash, tId, 0, '', '', 0, isshow ? 7 : 0, 0);
 		});
 		$("a.replyBtn").attr('bind', 1);
@@ -704,7 +704,7 @@ var viewThreadGetMore = function () {
 
 var recommend = function (obj) {
 	if (member_uid == "0") {
-		//FUNCS.jumpToLoginPage('a=viewthread&tid=' + tId);
+		
 		TOOLS.showTips('คุณไม่ได้เข้าสู่ระบบ ไม่สามารถกดถูกใจได้', true);
 		TOOLS.openLoginPage(location.href, 1000);
 		return;

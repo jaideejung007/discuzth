@@ -1,9 +1,5 @@
 <?php
-/**
- * DiscuzX Convert
- *
- * $Id: home_group.php 13173 2010-07-22 06:03:26Z zhengqingpeng $
- */
+
 
 $curprg = basename(__FILE__);
 

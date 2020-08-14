@@ -23,7 +23,7 @@ function build_cache_setting() {
 		'infosidestatus', 'uc', 'indexhot', 'relatedtag', 'sitemessage', 'uchome', 'heatthread', 'recommendthread',
 		'disallowfloat', 'allowviewuserthread', 'advtype', 'click', 'card', 'rewritestatus', 'rewriterule', 'privacy', 'focus',
 		'forumkeys', 'article_tags', 'verify', 'seotitle', 'seodescription', 'seokeywords', 'domain', 'ranklist', 'my_search_data',
-		'seccodedata', 'inviteconfig', 'advexpiration', 'allowpostcomment', /*(IN_MOBILE)*/ 'mobile', 'connect', 'upgrade', 'patch', 'strongpw',
+		'seccodedata', 'inviteconfig', 'advexpiration', 'allowpostcomment',  'mobile', 'connect', 'upgrade', 'patch', 'strongpw',
 		'posttable_info', 'threadtable_info', 'profilegroup', 'antitheft', 'makehtml', 'guestviewthumb', 'grid', 'guesttipsinthread', 'accountguard',
 		'security_usergroups_white_list', 'security_forums_white_list',
 		);
@@ -323,7 +323,6 @@ function build_cache_setting() {
 	}
 
 	$data['tradeopen'] = C::t('common_usergroup_field')->count_by_field('allowposttrade', 1) ? 1 : 0;
-	$data['medalstatus'] = intval(C::t('forum_medal')->count_by_available());
 
 	$focus = array();
 	if($data['focus']['data']) {
@@ -418,7 +417,7 @@ function build_cache_setting() {
 	}
 
 	$defaultcurhost = empty($_G['setting']['domain']['app']['default']) ? '{CURHOST}' : $_G['setting']['domain']['app']['default'];
-	$output = array('str'=>array(), 'preg' => array()); //str为二级域名的查找和替换，preg为rewrite和默认域名的查找和替换
+	$output = array('str'=>array(), 'preg' => array()); 
 	$_G['domain'] = array();
 	if(is_array($_G['setting']['domain']['app'])) {
 		$apps = $_G['setting']['domain']['app'];
@@ -480,6 +479,8 @@ function build_cache_setting() {
 	$data['connect'] = in_array('qqconnect', $data['plugins']['available']) ? $data['connect'] : array();
 	
 	$data['parseflv'] = get_cachedata_discuzcode_parseflv();
+
+	$data['mpsid'] = preg_replace('/[^0-9]+/', '', $data['mps']);
 
 	savecache('setting', $data);
 	$_G['setting'] = $data;

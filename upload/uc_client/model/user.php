@@ -39,7 +39,25 @@ class usermodel {
 	}
 
 	function check_username($username) {
-		$guestexp = '\xA1\xA1|\xAC\xA3|^Guest|^\xD3\xCE\xBF\xCD|\xB9\x43\xAB\xC8';
+		$charset = strtolower(UC_CHARSET);
+		if ($charset === 'utf-8') {
+			
+			
+			
+			$guestexp = '\xE3\x80\x80|\xE6\xB8\xB8\xE5\xAE\xA2|\xE9\x81\x8A\xE5\xAE\xA2';
+		} elseif ($charset === 'gbk') {
+			
+			
+			$guestexp = '\xA1\xA1|\xD3\xCE\xBF\xCD';
+		} elseif ($charset === 'big5') {
+			
+			
+			$guestexp = '\xA1\x40|\xB9\x43\xAB\xC8';
+		} else {
+			return FALSE;
+		}
+		$guestexp .= '|^Guest';
+
 		$len = $this->dstrlen($username);
 		if($len > 15 || $len < 3 || preg_match("/\s+|^c:\\con\\con|[%,\*\"\s\<\>\&]|$guestexp/is", $username)) {
 			return FALSE;
@@ -90,7 +108,7 @@ class usermodel {
 	}
 
 	function check_emailformat($email) {
-		return strlen($email) > 6 && strlen($email) <= 32 && preg_match("/^([a-z0-9\-_.+]+)@([a-z0-9\-]+[.][a-z0-9\-.]+)$/", $email);
+		return strlen($email) > 6 && strlen($email) <= 32 && preg_match("/^([A-Za-z0-9\-_.+]+)@([A-Za-z0-9\-]+[.][A-Za-z0-9\-.]+)$/", $email);
 	}
 
 	function check_emailaccess($email) {
@@ -193,6 +211,10 @@ class usermodel {
 		}
 	}
 
+	function chgusername($uid, $newusername) {
+		return $this->db->query_stmt("UPDATE ".UC_DBTABLEPRE."members SET username=? WHERE uid=?", array('s', 'i'), array($newusername, $uid));
+	}
+
 	function get_total_num($sqladd = '') {
 		$data = $this->db->result_first("SELECT COUNT(*) FROM ".UC_DBTABLEPRE."members $sqladd");
 		return $data;
@@ -275,6 +297,13 @@ class usermodel {
 			$ip = $this->base->onlineip;
 		}
 		$this->db->query("UPDATE ".UC_DBTABLEPRE."failedlogins SET count=count+1, lastupdate='".$this->base->time."' WHERE ip='".$ip."' OR ip='$username'");
+	}
+
+	function user_log($uid, $action, $extra = '') {
+		$uid = intval($uid);
+		$action = addslashes($action);
+		$extra = addslashes($extra);
+		$this->db->query_stmt("INSERT INTO ".UC_DBTABLEPRE."memberlogs SET uid=?, action=?, extra=?", array('i', 's', 's'), array($uid, $action, $extra));
 	}
 
 }

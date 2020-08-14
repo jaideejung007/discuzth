@@ -72,7 +72,7 @@ var baseInit = function () {
 
 	if (SITE_INFO) {
 		DOMAIN = SITE_INFO.siteUrl;
-		API_URL = DOMAIN + "api/mobile/index.php?";//api url 可根据domain去拼接
+		API_URL = DOMAIN + "api/mobile/index.php?";
 	}
 
 	if (TOOLS.getQuery('sid')) {

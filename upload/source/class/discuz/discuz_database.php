@@ -176,7 +176,7 @@ class discuz_database {
 
 	public static function quote($str, $noarray = false) {
 
-		if (is_string($str))
+		if (is_string($str)) 
 			return '\'' . self::$db->escape_string($str) . '\'';
 
 		if (is_int($str) or is_float($str))
@@ -255,6 +255,7 @@ class discuz_database {
 			case '|':
 			case '&':
 			case '^':
+			case '&~':
 				return $field . '=' . $field . $glue . self::quote($val);
 				break;
 			case '>':
@@ -306,8 +307,8 @@ class discuz_database {
 		$i = $find = 0;
 		$ret = '';
 		while ($i <= $len && $find < $count) {
-			if ($sql{$i} == '%') {
-				$next = $sql{$i + 1};
+			if ($sql[$i] == '%') {
+				$next = $sql[$i + 1];
 				if ($next == 't') {
 					$ret .= self::table($arg[$find]);
 				} elseif ($next == 's') {
@@ -330,7 +331,7 @@ class discuz_database {
 				$i++;
 				$find++;
 			} else {
-				$ret .= $sql{$i};
+				$ret .= $sql[$i];
 			}
 			$i++;
 		}
@@ -338,6 +339,18 @@ class discuz_database {
 			$ret .= substr($sql, $i);
 		}
 		return $ret;
+	}
+
+	public static function begin_transaction() {
+		return self::$db->begin_transaction();
+	}
+	
+	public static function commit() {
+		return self::$db->commit();
+	}
+
+	public static function rollback() {
+		return self::$db->rollback();
 	}
 
 }

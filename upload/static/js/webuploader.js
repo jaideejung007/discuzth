@@ -1,4 +1,3 @@
-
 jQuery.noConflict();
 	
 var getBasePath = function() {
@@ -118,7 +117,7 @@ SWFUpload.EXT_MIME_MAP = {
 
 SWFUpload.prototype.initSWFUpload = function(userSettings) {
 	try {
-		this.customSettings = {};	// A container where developers can place their own settings associated with this instance.
+		this.customSettings = {};	
 		this.settings = {};
 		this.eventQueue = [];
 		this.initSettings(userSettings);
@@ -143,7 +142,7 @@ SWFUpload.prototype.initSettings = function (userSettings) {
 
 	this.ensureDefault("file_types", "*.*");
 	this.ensureDefault("file_types_description", "All Files");
-	this.ensureDefault("file_size_limit", 0);	// Default zero means "unlimited"
+	this.ensureDefault("file_size_limit", 0);	
 	this.ensureDefault("file_upload_limit", 0);
 	this.ensureDefault("file_queue_limit", 0);
 
@@ -316,6 +315,10 @@ SWFUpload.prototype.initSettings = function (userSettings) {
 
 };
 
+SWFUpload.prototype.setUploadURL = function (url) {
+	this.uploader.options.server = url.toString();
+};
+
 SWFUpload.prototype.addPostParam = function (name, value) {
 	this.uploader.options.formData[name] = value;
 };
@@ -434,7 +437,7 @@ function fileQueued(file) {
 				}
 			}
 			if(createQueue && this.customSettings.filterType != undefined) {
-				var fileSize = this.customSettings.filterType[file.type.substr(1).toLowerCase()];
+				var fileSize = this.customSettings.filterType[file.source.ext.toLowerCase()];
 				if(fileSize != undefined && fileSize && file.size > fileSize) {
 					this.customSettings.alertType = 5;
 					createQueue = false;
@@ -469,7 +472,7 @@ function fileQueueError(errorCode) {
 			err = 'สามารถอัปโหลดได้สูงสุดไม่เกิน ' + this.settings.fileNumLimit + ' ไฟล์';
 			break;
 		case 'Q_EXCEED_SIZE_LIMIT':
-			err = 'ขนาดไฟล์อัพโหลดทั้งหมดเกิน ' + WebUploader.Base.formatSize(this.uploader.option('fileSizeLimit')) + '';
+			err = 'ขนาดไฟล์อัปโหลดทั้งหมดเกิน ' + WebUploader.Base.formatSize(this.uploader.option('fileSizeLimit')) + '';
 			break;
 		case 'Q_TYPE_DENIED':
 			err = 'รูปแบบไฟล์ไม่ถูกต้อง กรุณาอัปโหลดไฟล์ใหม่';
@@ -495,10 +498,10 @@ function fileDialogComplete() {
 					switchAttachbutton('attachlist');
 				}
 				try {
-					//if(this.uploader.getStats().queueNum) {
+					
 						$('attach_tblheader').style.display = '';
 						$('attach_notice').style.display = '';
-					//}
+					
 				} catch (ex) {}
 			} else if(this.customSettings.uploadType == 'image') {
 				if(typeof switchImagebutton == "function") {
@@ -558,19 +561,19 @@ function uploadSuccess(file, serverData) {
 		var progress = new FileProgress(file, this.customSettings.progressTarget);
 		if(this.customSettings.uploadSource == 'forum') {
 			if(this.customSettings.uploadType == 'poll') {
-				//var data = eval('('+serverData+')');
+				
 				var data = serverData;
 				if(parseInt(data.aid)) {
 					var preObj = $(this.customSettings.progressTarget);
 					preObj.innerHTML = "";
 					preObj.style.display = '';
 					var img = new Image();
-					img.src = IMGDIR + '/attachimg_2.png';//data.smallimg;
+					img.src = IMGDIR + '/attachimg_2.png';
 					var imgObj = document.createElement("img");
 					imgObj.src = img.src;
 					imgObj.className = "cur1";
-					imgObj.onmouseout = function(){hideMenu('poll_img_preview_'+data.aid+'_menu');};//"hideMenu('poll_img_preview_"+data.aid+"_menu');";
-					imgObj.onmouseover = function(){showMenu({'menuid':'poll_img_preview_'+data.aid+'_menu','ctrlclass':'a','duration':2,'timeout':0,'pos':'34'});};//"showMenu({'menuid':'poll_img_preview_"+data.aid+"_menu','ctrlclass':'a','duration':2,'timeout':0,'pos':'34'});";
+					imgObj.onmouseout = function(){hideMenu('poll_img_preview_'+data.aid+'_menu');};
+					imgObj.onmouseover = function(){showMenu({'menuid':'poll_img_preview_'+data.aid+'_menu','ctrlclass':'a','duration':2,'timeout':0,'pos':'34'});};
 					preObj.appendChild(imgObj);
 					var inputObj = document.createElement("input");
 					inputObj.type = 'hidden';
@@ -609,13 +612,13 @@ function uploadSuccess(file, serverData) {
 					this.uploader.cancelFile(file);
 					progress.setCancelled();
 					progress.toggleCancel(true, this.uploader);
-					//var stats = this.uploader.getStats();
-					//var obj = {'successNum':--stats.successNum, 'cancelNum':++stats.cancelNum};
-					//this.setStats(obj);
+					
+					
+					
 				}
 			}
 		} else if(this.customSettings.uploadType == 'album') {
-			//var data = eval('('+serverData+')');
+			
 			var data = serverData;
 			if(parseInt(data.picid)) {
 				var newTr = document.createElement("TR");
@@ -640,7 +643,7 @@ function uploadSuccess(file, serverData) {
 			}
 			$(file.id).style.display = 'none';
 		} else if(this.customSettings.uploadType == 'blog') {
-			//var data = eval('('+serverData+')');
+			
 			var data = serverData;
 			if(parseInt(data.picid)) {
 				var tdObj = getInsertTdId(this.customSettings.imgBoxObj, 'image_td_'+data.picid);
@@ -661,7 +664,7 @@ function uploadSuccess(file, serverData) {
 			}
 			$(file.id).style.display = 'none';
 		} else if(this.customSettings.uploadSource == 'portal') {
-			//var data = eval('('+serverData+')');
+			
 			var data = serverData;
 			if(data.aid) {
 				if(this.customSettings.uploadType == 'attach') {
@@ -907,7 +910,7 @@ FileProgress.prototype.disappear = function() {
 
 	var reduceOpacityBy = 15;
 	var reduceHeightBy = 4;
-	var rate = 30; // 15 fps
+	var rate = 30; 
 	if (this.opacity > 0) {
 		this.opacity -= reduceOpacityBy;
 		if (this.opacity < 0) {

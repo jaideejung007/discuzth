@@ -1,11 +1,6 @@
 <?php
 
-/**
- *	  [Discuz! X] (C)2001-2099 Comsenz Inc.
- *	  This is NOT a freeware, use is subject to license terms
- *
- *	  $Id: spacecp.inc.php 33645 2013-07-25 01:32:20Z nemohou $
- */
+
 
 if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
@@ -145,7 +140,7 @@ if ($pluginop == 'config') {
 			$code = $errorCode;
 			if($errorCode == 41001) {
 				$message = lang('plugin/qqconnect', 'connect_user_unauthorized', array('login_url' => $_G['connect']['login_url'].'&reauthorize=yes&formhash='.FORMHASH));
-			} elseif($errorCode == 41003 || $errorCode == 40006) { // access token失效或非法
+			} elseif($errorCode == 41003 || $errorCode == 40006) { 
 				$message = lang('plugin/qqconnect', 'connect_share_token_outofdate', array('login_url' => $_G['connect']['login_url']));
 			} elseif ($errorCode == 3021) {
 				$message = lang('plugin/qqconnect', 'connect_qzone_share_same_url');
@@ -197,7 +192,7 @@ if ($pluginop == 'config') {
 			$code = $errorCode;
 			if($errorCode == 41001) {
 				$message = lang('plugin/qqconnect', 'connect_user_unauthorized', array('login_url' => $_G['connect']['login_url'].'&reauthorize=yes&formhash='.FORMHASH));
-			} elseif($errorCode == 41003 || $errorCode == 40006) { // access token失效或非法
+			} elseif($errorCode == 41003 || $errorCode == 40006) { 
 				$message = lang('plugin/qqconnect', 'connect_share_token_outofdate', array('login_url' => $_G['connect']['login_url']));
 			} elseif ($errorCode == 3013) {
 				$message = lang('plugin/qqconnect', 'connect_qzone_weibo_same_content');

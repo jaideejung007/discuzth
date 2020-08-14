@@ -81,72 +81,7 @@ var bindEvent = function () {
 
 };
 
-/*var initWXShare = function (opts) {
-	WeixinJSBridge.on('menu:share:timeline', function (argv) {
-		var url = window.location.href + '&source=pyq&siteid=' + SITE_ID;
-		if (member_uid) {
-			url += '&fromuid=' + member_uid;
-		}
-		setTimeout(
-			function () {
-				WeixinJSBridge.invoke('shareTimeline', {
-					'img_url': opts.img,
-					'img_width': '120',
-					'img_height': '120',
-					'link': url,
-					'desc': opts.desc,
-					'title': opts.title
-				}, function (res) {
-					$('.tipInfo').hide();
-					$('.maskLayer').hide();
-				});
-			}
-		, 300
-			);
-	});
-	WeixinJSBridge.on('menu:share:appmessage', function (argv) {
-		var url = window.location.href + '&source=wxhy&siteid=' + SITE_ID;
-		setTimeout(
-			function () {
-				WeixinJSBridge.invoke('sendAppMessage', {
-					'appid': 'wx9324b266aa4818d0',
-					'img_url': opts.img,
-					'img_width': '120',
-					'img_height': '120',
-					'link': url,
-					'desc': opts.desc,
-					'title': opts.title
-				}, function (res) {
-					$('.tipInfo').hide();
-					$('.maskLayer').hide();
-				});
-			}
-		, 300
-			);
-	});
 
-	WeixinJSBridge.on('menu:share:weibo', function (argv) {
-		var url = window.location.href + '&source=wb&siteid=' + SITE_ID;
-		setTimeout(
-			function () {
-				WeixinJSBridge.invoke('shareWeibo', {
-					'img_url': opts.img,
-					'img_width': '120',
-					'img_height': '120',
-					'link': url,
-					'desc': opts.desc,
-					'title': opts.title,
-					'url': url,
-					'content': opts.desc
-				}, function (res) {
-					$('.tipInfo').hide();
-					$('.maskLayer').hide();
-				});
-			}
-		, 300
-			);
-	});
-};*/
 
 var imageListInit = function (post) {
 	var ret = '';

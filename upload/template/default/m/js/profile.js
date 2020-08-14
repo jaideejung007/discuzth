@@ -79,7 +79,7 @@ var dataLoaded = function (data) {
 };
 
 var bindEvent = function (data) {
-	$("#forumlist").append('ฟอรั่ม');
+	$("#forumlist").append('หมวดหมู่');
 	if (data.Variables.member_uid == data.Variables.space.uid) {
 		$('#switchMember').on('click', function () {
 			TOOLS.dget(API_URL + "module=login&mlogout=yes&version=4&hash=" + data.Variables.formhash, null, function() {
