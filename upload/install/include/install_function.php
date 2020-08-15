@@ -777,7 +777,7 @@ ajax.get = function (url, callback) {
 };
 
 function request_do_db_init() {
-    ajax.get('index.php?method=do_db_init&allinfo=<?= $allinfo ?>', function() {
+    ajax.get('index.php?<?= http_build_query(array('method'=>'do_db_init','allinfo'=>$allinfo)) ?>', function() {
             append_notice("<?= lang('initsys') ?> ... ");
 
             ajax.get("../misc.php?mod=initsys", function() {
@@ -1049,6 +1049,10 @@ function dfopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE, $
 				'header' => $header,
 				'content' => $post,
 				'timeout' => $timeout,
+			),
+			'ssl' => array(
+				'verify_peer' => false,
+				'verify_peer_name' => false,
 			),
 		);
 		$context = stream_context_create($context);

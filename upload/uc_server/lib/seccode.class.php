@@ -9,8 +9,8 @@
 
 class seccode {
 
-	var $code;			
-	var $type 	= 0;		
+	var $code;			//100000-999999 范围内随机
+	var $type 	= 0;		//0 英文图片验证码  1 中文图片验证码  2 Flash 验证码  3 语音验证码
 	var $width 	= 0;
 	var $height 	= 0;
 	var $background	= 1;
@@ -20,8 +20,8 @@ class seccode {
 	var $color 	= 1;
 	var $size 	= 0;
 	var $shadow 	= 1;
-	var $animator 	= 0;		
-	var $fontpath	= '';		
+	var $animator 	= 0;		//GIF 动画
+	var $fontpath	= '';		//TTF 字库目录
 	var $datapath	= '';
 	var $includepath= '';
 
@@ -41,7 +41,7 @@ class seccode {
 		$seccodeunits = 'CEFHKLMNOPQRSTUVWXYZ';
 		$seccode = '';
 		for($i = 0; $i < 4; $i++) {
-			$unit = ord($s{$i});
+			$unit = ord($s[$i]);
 			$seccode .= ($unit >= 0x30 && $unit <= 0x39) ? $seccodeunits[$unit - 0x30] : $seccodeunits[$unit - 0x57];
 		}
 	}

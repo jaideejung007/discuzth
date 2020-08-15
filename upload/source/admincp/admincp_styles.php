@@ -89,6 +89,7 @@ $predefinedvars = array('available' => array(), 'boardimg' => array(), 'imgdir' 
 
 	'menubgcolor' => array(0, $lang['styles_edit_type_menu']),
 	'menutext' => array(0),
+	'menucurbgcolor' => array(0),
 	'menuhoverbgcolor' => array(0),
 	'menuhovertext' => array(0),
 
@@ -221,9 +222,9 @@ if($operation == 'admin') {
 			array('import', 'styles&operation=import', '0'),
 			array('cloudaddons_style_link', 'cloudaddons')
 		), '<a href="'.ADMINSCRIPT.'?action=styles&operation=upgradecheck" class="bold" style="float:right;padding-right:40px;">'.$lang['plugins_validator'].'</a>');
-		
+		/*search={"styles_admin":"action=styles"}*/
 		showtips('styles_admin_tips');
-		
+		/*search*/
 		showformheader('styles');
 		showhiddenfields(array('updatecsscache' => 0));
 		showtableheader();
@@ -329,7 +330,7 @@ if($operation == 'admin') {
 				$styleidnew = C::t('common_style')->insert(array('name' => $_GET['newname'], 'templateid' => 1), true);
 				foreach(array_keys($predefinedvars) as $variable) {
 					$substitute = isset($predefinedvars[$variable][2]) ? $predefinedvars[$variable][2] : '';
-					C::t('common_stylevar')->insert(array('styleid' => $styleidnew, 'variable' => $_GET['variable'], 'substitute' => $substitute));
+					C::t('common_stylevar')->insert(array('styleid' => $styleidnew, 'variable' => $variable, 'substitute' => $substitute));
 				}
 			}
 

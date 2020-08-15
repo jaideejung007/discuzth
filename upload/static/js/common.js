@@ -242,7 +242,7 @@ function Ajax(recvType, waitId) {
 	aj.showLoading = function() {
 		if(aj.waitId && (aj.XMLHttpRequest.readyState != 4 || aj.XMLHttpRequest.status != 200)) {
 			aj.waitId.style.display = '';
-			aj.waitId.innerHTML = '<span><img src="' + IMGDIR + '/loading.gif" class="vm"> ' + aj.loading + '</span>';
+			aj.waitId.innerHTML = '<span><div class="loadicon vm"></div> ' + aj.loading + '</span>';
 		}
 	};
 	aj.processHandle = function() {
@@ -1173,7 +1173,7 @@ function showWindow(k, url, mode, cache, menuv) {
 			ajaxpost(url, 'fwin_content_' + k, '', '', '', function() {initMenu();show();});
 		}
 		if(parseInt(BROWSER.ie) != 6) {
-			loadingst = setTimeout(function() {showDialog('', 'info', '<img src="' + IMGDIR + '/loading.gif"> กำลังโหลด..')}, 500);
+			loadingst = setTimeout(function() {showDialog('', 'info', '<div class="loadicon"></div> กำลังโหลด...')}, 500);
 		}
 	};
 	var initMenu = function() {
@@ -2089,7 +2089,7 @@ function html5APlayer(randomid, ext, src, width, height) {
 			audio: [{
 				name: ' ',
 				artist: ' ',
-				url: src,
+				url: src
 			}]
 		});
 	} else {
@@ -2112,7 +2112,7 @@ function html5DPlayer(randomid, ext, src, width, height) {
 			mutex: true,
 			listFolded: true,
 			video: {
-				url: src,
+				url: src
 			}
 		});
 	} else {
@@ -2124,16 +2124,16 @@ function html5DPlayer(randomid, ext, src, width, height) {
 
 var BROWSER = {};
 var USERAGENT = navigator.userAgent.toLowerCase();
-browserVersion({'ie':'msie','firefox':'','chrome':'','opera':'','safari':'','mozilla':'','webkit':'','maxthon':'','qq':'qqbrowser','rv':'rv'});
+browserVersion({'ie':'msie','trident':'','firefox':'','chrome':'','opera':'','safari':'','mozilla':'','webkit':'','maxthon':'','qq':'qqbrowser','rv':'rv'});
 if(BROWSER.safari || BROWSER.rv) {
 	BROWSER.firefox = true;
 }
 BROWSER.opera = BROWSER.opera ? opera.version() : 0;
 
 HTMLNODE = document.getElementsByTagName('head')[0].parentNode;
-if(BROWSER.ie) {
+if(BROWSER.ie || BROWSER.trident) {
 	BROWSER.iemode = parseInt(typeof document.documentMode != 'undefined' ? document.documentMode : BROWSER.ie);
-	HTMLNODE.className = 'ie_all ie' + BROWSER.iemode;
+	HTMLNODE.className = (BROWSER.iemode<9?'ie_all ':'') +'ie' + BROWSER.iemode;
 }
 
 var CSSLOADED = [];

@@ -28,8 +28,9 @@ if (empty($_GET['op'])) {
 			<script type="text/javascript" src="static/js/home.js"></script>
 			<script language="javascript" src="static/image/editor/editor_base.js"></script>
 			<style type="text/css">
+				html, body { height: 100%; }
 				body{margin:0;padding:0;}
-				body, td, input, button, select, textarea {font: 12px/1.5em Tahoma, Arial, Helvetica, snas-serif;}
+				body, td, input, button, select, textarea {font: 12px/1.5em Tahoma, Arial, Helvetica, sans-serif;}
 				textarea { resize: none; font-size: 14px; line-height: 1.8em; }
 				.submit { padding: 0 10px; height: 22px; border: 1px solid; border-color: #DDD #264F6E #264F6E #DDD; background: #2782D6; color: #FFF; line-height: 20px; letter-spacing: 1px; cursor: pointer; }
 				a.dm{text-decoration:none}
@@ -140,11 +141,9 @@ if (empty($_GET['op'])) {
 			</script>
 		</head>
 		<body style="overflow-y:hidden">
-			<div >
+			<div style="height:100%">
 
-				<table cellpadding="0" cellspacing="0" width="100%" height="100%">
-					<tr>
-						<td height="31">
+						<div style="position: absolute;width: 100%;height: 31px;">
 							<table width="100%" border="0" cellpadding="0" cellspacing="0" class="edTb">
 								<tr>
 									<td height="31" style="padding-left:3px">
@@ -275,8 +274,8 @@ if (empty($_GET['op'])) {
 								<input type="text" id="pageTitle" name="pageTitle" value="" class="t_input" style="width: 190px;" /> <input type="button" onclick="pageBreak();" name="createURL" value="<?php echo lang('home/editor', 'editor_ok'); ?>" class="submit" /> <a href="javascript:;" onclick="fHide($('createPage'));return false;"><?php echo lang('home/editor', 'editor_cancel'); ?></a>
 							</div>
 
-						</td></tr>
-					<tr><td>
+						</div>
+						<div style="height: 100%;padding-top: 31px;box-sizing: border-box;">
 							<textarea id="dvtext" style="overflow-y:auto; margin-top: 0; padding:0px 4px 4px;width:100%;height:100%;word-wrap:break-word;border:0;display:none;"></textarea>
 							<div id="dvhtml" style="height:100%;width:100%;overflow:hidden">
 								<SCRIPT LANGUAGE="JavaScript">
@@ -296,9 +295,7 @@ if (empty($_GET['op'])) {
 								</SCRIPT>
 								<textarea id="sourceEditor" style="overflow-y:auto;padding-left:4px;width:100%;height:100%;word-wrap:break-word;display:none;border:0;"></textarea>
 							</div>
-						</td>
-					</tr>
-				</table>
+						</div>
 			</div>
 			<input type="hidden" name="uchome-editstatus" id="uchome-editstatus" value="html">
 		</body>

@@ -282,7 +282,7 @@ class discuz_application extends discuz_base{
 
 	}
 
-	private function _init_cnf() {
+	private function _init_cnf() {// 新增本方法用于预先加载配置文件，便于在初始化环境时通过$this->config使用配置文件内选项控制初始化流程
 
 		$_config = array();
 		@include DISCUZ_ROOT.'./config/config_global.php';
@@ -299,7 +299,7 @@ class discuz_application extends discuz_base{
 
 	}
 
-	private function _init_config() {
+	private function _init_config() {// 原有的基于配置文件设置站点的方法保留原方法名，改为使用$this->var['config']对config进行读写
 
 		if(empty($this->var['config']['security']['authkey'])) {
 			$this->var['config']['security']['authkey'] = md5($this->var['config']['cookie']['cookiepre'].$this->var['config']['db'][1]['dbname']);
@@ -353,7 +353,7 @@ class discuz_application extends discuz_base{
 			@header('Content-Type: text/html; charset='.CHARSET);
 		}
 
-		if($this->var['isHTTPS'] && ($this->config['output']['upgradeinsecure'] || !isset($this->config['output']['upgradeinsecure']))) {
+		if($this->var['isHTTPS'] && isset($this->config['output']['upgradeinsecure']) && $this->config['output']['upgradeinsecure']) {
 			@header('Content-Security-Policy: upgrade-insecure-requests');
 		}
 
@@ -371,7 +371,7 @@ class discuz_application extends discuz_base{
 
 		if(isset($_GET['formhash']) && $_GET['formhash'] !== formhash()) {
 			if(constant('CURMODULE') == 'logging' && isset($_GET['action']) && $_GET['action'] == 'logout') {
-				header("HTTP/1.1 302 Found");
+				header("HTTP/1.1 302 Found");// 修复多次点击退出时偶发“您当前的访问请求当中含有非法字符，已经被系统拒绝”的Bug
 				header("Location: index.php");
 				exit();
 			} else {
@@ -460,7 +460,7 @@ class discuz_application extends discuz_base{
 			$this->var['sid'] = $this->session->sid;
 			$this->var['session'] = $this->session->var;
 
-			if(!empty($this->var['sid']) && $this->var['sid'] != $this->var['cookie']['sid']) {
+			if(isset($this->var['sid']) && $this->var['sid'] !== $this->var['cookie']['sid']) {
 				dsetcookie('sid', $this->var['sid'], 86400);
 			}
 

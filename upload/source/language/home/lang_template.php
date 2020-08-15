@@ -9,6 +9,10 @@
  *      This file is automatically generate
  */
 
+if(!defined('IN_DISCUZ')) {
+	exit('Access Denied');
+}
+
 $lang = array (
   'cancel' => 'ยกเลิก',
   'close' => 'ปิด',
@@ -856,6 +860,7 @@ $lang = array (
   'task_reapply_now' => 'สมัครใหม่เดี๋ยวนี้',
   'task_relatedtask' => 'คุณต้องทำกิจกรรมนี้ให้เสร็จก่อน',
   'task_reward' => 'รับรางวัล',
+  'task_reward_get' => 'รับรางวัล',
   'unlimited' => 'ไม่จำกัด',
   'task_applies' => 'ความนิยม',
   'task_nodoing' => 'ไม่มีกิจกรรมที่กำลังดำเนินการอยู่ กรุณาไปเข้าร่วมกิจกรรมใหม่',
@@ -1360,7 +1365,7 @@ $lang = array (
   'check_date_item' => 'กรุณาตรวจสอบรายการข้อมูล',
   'current_time' => 'เวลาปัจจุบัน',
   'email' => 'อีเมล',
-  'email_been_active' => '<img src="{IMGDIR}/mail_active.png" alt="ผ่านการตรวจสอบและยืนยันเรียบร้อย" class="vm" /> <span class="xi1">อีเมลของคุณผ่านการตรวจสอบและยืนยันเรียบร้อย</span>',
+  'email_been_active' => '<i class="fico-email vm fc-v" title="ผ่านการตรวจสอบเรียบร้อย"></i><span class="xi1 vm">อีเมลของคุณผ่านการตรวจสอบและยืนยันเรียบร้อย</span>',
   'memcp_profile_email_comment' => '!การเปลี่ยนแปลงอีเมล ระบบจะเปลี่ยนรหัสผ่านและยืนยันอีกครั้ง โปรดใช้ความระมัดระวัง',
   'memcp_profile_passwd_comment' => 'ถ้าคุณไม่จำเป็นต้องเปลี่ยนรหัสผ่าน โปรดเว้นว่างไว้',
   'memcp_profile_security_answer_comment' => 'ถ้าคุณตั้งคำถามรักษาความปลอดภัยใหม่ กรุณาใส่คำตอบสำหรับคำถามความปลอดภัย',
@@ -1541,13 +1546,13 @@ $lang = array (
   'connect_fill_profile_to_comment' => 'คุณจำเป็นต้อง <a href="member.php?mod=connect" class="xi2">เชื่อมต่อบัญชีผู้ใช้</a> หรือ <a href="member.php?mod=connect&ac=bind" class="xi2">ผูกบัญชีผู้ใช้งาน</a> ก่อนที่จะดำเนินการใดๆ',
   'save_to_album' => 'บันทึกลงในอัลบั้ม',
   'usergroup_expired' => 'กลุ่มผู้ใช้งานของคุณได้หมดอายุแล้ว กรุณาเลือกตำแหน่งสำหรับต่ออายุหรือสลับไปยังกลุ่มผู้ใช้งานอื่น',
-  'freeze_pw_tips' => '您当前的帐号已经被冻结，请修改密码解除冻结状态',
-  'freeze_email_tips' => '您当前的帐号已经被冻结，必须验证邮箱后才能解除冻结状态 <a href="home.php?mod=spacecp&ac=profile&op=password&resend=1" class="xi2">重新接收验证邮件</a>',
-  'freeze_admincp_tips' => '您当前的帐号已经被冻结，必须在本页面填写申诉理由，并经管理中心审核通过后才能解除冻结状态',
+  'freeze_pw_tips' => 'บัญชีปัจจุบันของคุณถูกระงับการใช้งานชั่วคราว กรุณาเปลี่ยนรหัสผ่านเพื่อปลดล็อก',
+  'freeze_email_tips' => 'บัญชีปัจจุบันของคุณถูกระงับการใช้งานชั่วคราว คุณต้องยืนยันอีเมลของคุณก่อนจึงจะสามารถใช้งานได้ <a href="home.php?mod=spacecp&ac=profile&op=password&resend=1" class="xi2">ยืนยันอีเมลอีกครั้ง</a>',
+  'freeze_admincp_tips' => 'บัญชีปัจจุบันของคุณถูกระงับการใช้งานชั่วคราว คุณต้องกรอกเหตุผลการอุทธรณ์ในหน้านี้และจะสามารถยกเลิกได้หลังจากผู้ดูแลระบบได้อนุมัติแล้ว',
   'freeze_reason' => 'ระบุเหตุผลการอุทธรณ์',
   'freeze_reason_comment' => 'หากไม่สามารถยืนยันตัวบุคคลผ่านอีเมลได้ กรุณากรอกข้อมูลสำหรับการอุทธรณ์ได้ที่นี่',
-  'freeze_reason_admincp_comment' => '如果您认为您的账号不应被冻结，请填写申诉理由',
-  'freeze_remark' => '审核结果',
-  'freeze_remark_comment' => '您已提交 $space[freezemodsubmittimes] 次审核，最后一次审核操作由 $space[freezemodadmin] 于 $space[freezemoddate] 做出',
+  'freeze_reason_admincp_comment' => 'หากคุณคิดว่าบัญชีของคุณไม่ควรถูกระงับการใช้งานชั่วคราว กรุณากรอกเหตุผลในการอุทธรณ์',
+  'freeze_remark' => 'ผลการตรวจสอบ',
+  'freeze_remark_comment' => 'You have submitted $space[freezemodsubmittimes] reviews, the last review was made by $space[freezemodadmin] on $space[freezemoddate]',
 );
 ?>

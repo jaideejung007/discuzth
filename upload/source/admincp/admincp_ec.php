@@ -63,7 +63,7 @@ if($operation == 'alipay') {
 	}
 
 	list($ec_contract, $ec_securitycode, $ec_partner, $ec_creditdirectpay) = explode("\t", authcode($settings['ec_contract'], 'DECODE', $_G['config']['security']['authkey']));
-	$ec_securitycodemask = $ec_securitycode ? $ec_securitycode{0}.'********'.substr($ec_securitycode, -4) : '';
+	$ec_securitycodemask = $ec_securitycode ? $ec_securitycode[0].'********'.substr($ec_securitycode, -4) : '';
 
 	if(!submitcheck('alipaysubmit')) {
 
@@ -78,7 +78,7 @@ if($operation == 'alipay') {
 			array('nav_ec_inviteorders', 'ec&operation=inviteorders', 0)
 		));
 
-		
+		/*search={"nav_ec":"action=setting&operation=ec","nav_ec_alipay":"action=ec&operation=alipay"}*/
 		showtips('ec_alipay_tips');
 		showformheader('ec&operation=alipay');
 
@@ -93,7 +93,7 @@ if($operation == 'alipay') {
 		showsetting('ec_alipay_partner', 'settingsnew[ec_partner]', $ec_partner, 'text');
 		showsetting('ec_alipay_securitycode', 'settingsnew[ec_securitycode]', $ec_securitycodemask, 'text');
 		showtablefooter();
-		
+		/*search*/
 
 		showtableheader('', 'notop');
 		showsubmit('alipaysubmit');
@@ -126,7 +126,7 @@ EOT;
 		$settingsnew['ec_account'] = trim($settingsnew['ec_account']);
 		$settingsnew['ec_securitycode'] = trim($settingsnew['ec_securitycode']);
 		C::t('common_setting')->update('ec_account', $settingsnew['ec_account']);
-		$ec_securitycodemasknew = $settingsnew['ec_securitycode'] ? $settingsnew['ec_securitycode']{0}.'********'.substr($settingsnew['ec_securitycode'], -4) : '';
+		$ec_securitycodemasknew = $settingsnew['ec_securitycode'] ? $settingsnew['ec_securitycode'][0].'********'.substr($settingsnew['ec_securitycode'], -4) : '';
 		$settingsnew['ec_securitycode'] = $ec_securitycodemasknew == $ec_securitycodemask ? $ec_securitycode : $settingsnew['ec_securitycode'];
 		$ec_contract = addslashes(authcode($settingsnew['ec_contract']."\t".$settingsnew['ec_securitycode']."\t".$settingsnew['ec_partner']."\t".$settingsnew['ec_creditdirectpay'], 'ENCODE', $_G['config']['security']['authkey']));
 		C::t('common_setting')->update('ec_contract', $ec_contract);
@@ -193,7 +193,7 @@ EOT;
 			array('nav_ec_inviteorders', 'ec&operation=inviteorders', 0)
 		));
 
-		
+		/*search={"nav_ec":"action=setting&operation=ec","nav_ec_tenpay":"action=ec&operation=tenpay"}*/
 		showtips('ec_tenpay_tips');
 		showformheader('ec&operation=tenpay');
 
@@ -202,13 +202,13 @@ EOT;
 
 		showtitle('ec_tenpay_opentrans');
 		showsetting('ec_tenpay_opentrans_chnid', 'settingsnew[ec_tenpay_opentrans_chnid]', $settings['ec_tenpay_opentrans_chnid'], 'text');
-		$tenpay_securitycodemask = $settings['ec_tenpay_opentrans_key'] ? $settings['ec_tenpay_opentrans_key']{0}.'********'.substr($settings['ec_tenpay_opentrans_key'], -4) : '';
+		$tenpay_securitycodemask = $settings['ec_tenpay_opentrans_key'] ? $settings['ec_tenpay_opentrans_key'][0].'********'.substr($settings['ec_tenpay_opentrans_key'], -4) : '';
 		showsetting('ec_tenpay_opentrans_key', 'settingsnew[ec_tenpay_opentrans_key]', $tenpay_securitycodemask, 'text');
 
 		showtitle('ec_tenpay');
 		showsetting('ec_tenpay_bargainor', 'settingsnew[ec_tenpay_bargainor]', $settings['ec_tenpay_bargainor'], 'text');
 
-		$tenpay_securitycodemask = $settings['ec_tenpay_key'] ? $settings['ec_tenpay_key']{0}.'********'.substr($settings['ec_tenpay_key'], -4) : '';
+		$tenpay_securitycodemask = $settings['ec_tenpay_key'] ? $settings['ec_tenpay_key'][0].'********'.substr($settings['ec_tenpay_key'], -4) : '';
 		showsetting('ec_tenpay_key', 'settingsnew[ec_tenpay_key]', $tenpay_securitycodemask, 'text');
 		showsetting('ec_tenpay_check', '', '',
 			'<a href="'.ADMINSCRIPT.'?action=ec&operation=tenpay&checktype=credit" target="_blank">'.$lang['ec_alipay_checklink_credit'].'</a><br />'.
@@ -216,7 +216,7 @@ EOT;
 			'<a href="'.ADMINSCRIPT.'?action=ec&operation=tenpay&checktype=goods" target="_blank">'.$lang['ec_alipay_checklink_goods'].'</a><br />'
 		);
 		showtablefooter();
-		
+		/*search*/
 
 		showtableheader('', 'notop');
 		showsubmit('tenpaysubmit');
@@ -227,11 +227,11 @@ EOT;
 		$settingsnew = $_GET['settingsnew'];
 		$settingsnew['ec_tenpay_bargainor'] = trim($settingsnew['ec_tenpay_bargainor']);
 		$settingsnew['ec_tenpay_key'] = trim($settingsnew['ec_tenpay_key']);
-		$tenpay_securitycodemask = $settings['ec_tenpay_key'] ? $settings['ec_tenpay_key']{0}.'********'.substr($settings['ec_tenpay_key'], -4) : '';
+		$tenpay_securitycodemask = $settings['ec_tenpay_key'] ? $settings['ec_tenpay_key'][0].'********'.substr($settings['ec_tenpay_key'], -4) : '';
 		$settingsnew['ec_tenpay_key'] = $tenpay_securitycodemask == $settingsnew['ec_tenpay_key'] ? $settings['ec_tenpay_key'] : $settingsnew['ec_tenpay_key'];
 
 		$settingsnew['ec_tenpay_opentrans_key'] = trim($settingsnew['ec_tenpay_opentrans_key']);
-		$tenpay_securitycodemask = $settings['ec_tenpay_opentrans_key'] ? $settings['ec_tenpay_opentrans_key']{0}.'********'.substr($settings['ec_tenpay_opentrans_key'], -4) : '';
+		$tenpay_securitycodemask = $settings['ec_tenpay_opentrans_key'] ? $settings['ec_tenpay_opentrans_key'][0].'********'.substr($settings['ec_tenpay_opentrans_key'], -4) : '';
 		$settingsnew['ec_tenpay_opentrans_key'] = $tenpay_securitycodemask == $settingsnew['ec_tenpay_opentrans_key'] ? $settings['ec_tenpay_opentrans_key'] : $settingsnew['ec_tenpay_opentrans_key'];
 		if($settingsnew['ec_tenpay_direct'] && (!empty($settingsnew['ec_tenpay_bargainor']) && !preg_match('/^\d{10}$/', $settingsnew['ec_tenpay_bargainor']))) {
 			cpmsg('tenpay_bargainor_invalid', 'action=ec&operation=tenpay', 'error');
@@ -275,7 +275,7 @@ EOT;
 			array('nav_ec_tradelog', 'tradelog', 0),
 			array('nav_ec_inviteorders', 'ec&operation=inviteorders', 0)
 		));
-		
+		/*search={"nav_ec":"action=setting&operation=ec","nav_ec_orders":"action=ec&operation=orders"}*/
 		showtips('ec_orders_tips');
 		showtagheader('div', 'ordersearch', !submitcheck('searchsubmit', 1));
 		showformheader('ec&operation=orders');
@@ -296,7 +296,7 @@ EOT;
 		showtablefooter();
 		showformfooter();
 		showtagfooter('div');
-		
+		/*search*/
 
 		if(submitcheck('searchsubmit', 1)) {
 
@@ -410,13 +410,13 @@ EOT;
 			array('nav_ec_inviteorders', 'ec&operation=inviteorders', 0)
 		));
 
-		
+		/*search={"nav_ec":"action=setting&operation=ec","nav_ec_credit":"action=ec&operation=credit"}*/
 		showtips('ec_credit_tips');
 		showformheader('ec&operation=credit');
 		showtableheader('ec_credit', 'nobottom');
 		showsetting('ec_credit_maxcreditspermonth', 'ec_creditnew[maxcreditspermonth]', $ec_credit['maxcreditspermonth'], 'text');
 		showtablefooter('</tbody>');
-		
+		/*search*/
 
 		showtableheader('ec_credit_rank', 'notop fixpadding');
 		showsubtitle(array('ec_credit_rank', 'ec_credit_between', 'ec_credit_sellericon', 'ec_credit_buyericon'));

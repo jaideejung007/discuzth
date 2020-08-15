@@ -88,7 +88,7 @@ function atMenu(x, y) {
 	$('at_menu').style.left = x + 'px';
 	$('at_menu').style.top = y + 'px';
 	$('at_menu').style.display = '';
-	$('at_menu').innerHTML = '<img src="' + IMGDIR + '/loading.gif" class="vm"> กรุณารอสักครู่... ';
+	$('at_menu').innerHTML = '<div class="loadicon vm"></div> รอสักครู่... ';
 }
 
 function atSearch(kw, call) {

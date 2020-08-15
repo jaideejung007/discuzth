@@ -47,6 +47,10 @@ class memory_driver_memcached
 		return $this->obj->set($key, $value, $ttl);
 	}
 
+	public function add($key, $value, $ttl = 0) {
+		return $this->obj->add($key, $value, $ttl);
+	}
+
 	public function rm($key) {
 		return $this->obj->delete($key);
 	}
@@ -56,7 +60,11 @@ class memory_driver_memcached
 	}
 
 	public function inc($key, $step = 1) {
-		return $this->obj->increment($key, $step, 1);
+		return $this->obj->increment($key, $step, $step);
+	}
+
+	public function incex($key, $step = 1) {
+		return $this->obj->increment($key, $step);
 	}
 
 	public function dec($key, $step = 1) {

@@ -46,7 +46,7 @@ class model_forum_post extends discuz_model {
 
 	protected function _init_parameters($parameters) {
 		$varname = array(
-			'member', 'group', 'forum', 'thread', 'extramessage', 'special',
+			'member', 'group', 'forum', 'thread', 'extramessage', 'special',//'nauthorid' 'modnewreplies' 'tid'
 			'message','clientip', 'invisible', 'isanonymous', 'usesig',
 			'htmlon', 'bbcodeoff', 'smileyoff', 'parseurloff', 'pstatus',
 			'noticetrimstr', 'noticeauthor', 'from', 'sechash', 'geoloc',
@@ -373,7 +373,7 @@ class model_forum_post extends discuz_model {
 
 			$publishdate = null;
 			if ($this->group['allowsetpublishdate'] && $this->thread['displayorder'] == -4) {
-				$cron_publish_ids = dunserialize($this->cache('cronpublish'));
+				$cron_publish_ids = $this->cache('cronpublish');
 				if (!$this->param['cronpublish'] && in_array($this->thread['tid'], $cron_publish_ids) || $this->param['modnewthreads']) {
 					$this->param['threadupdatearr']['dateline'] = $publishdate = TIMESTAMP;
 					unset($cron_publish_ids[$this->thread['tid']]);
@@ -384,7 +384,6 @@ class model_forum_post extends discuz_model {
 					$this->param['save'] = 1;
 					if (!in_array($this->thread['tid'], $cron_publish_ids)) {
 						$cron_publish_ids[$this->thread['tid']] = $this->thread['tid'];
-						$cron_publish_ids = serialize($cron_publish_ids);
 						savecache('cronpublish', $cron_publish_ids);
 					}
 				}

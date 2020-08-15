@@ -154,9 +154,8 @@ class model_forum_thread extends discuz_model
 			C::t('forum_thread')->update($this->tid, array('icon' => $this->setting['newbie']));
 		}
 		if ($this->param['publishdate'] != TIMESTAMP) {
-			$cron_publish_ids = dunserialize($this->cache('cronpublish'));
+			$cron_publish_ids = $this->cache('cronpublish');
 			$cron_publish_ids[$this->tid] = $this->tid;
-			$cron_publish_ids = serialize($cron_publish_ids);
 			savecache('cronpublish', $cron_publish_ids);
 		}
 
@@ -291,7 +290,7 @@ class model_forum_thread extends discuz_model
 					'subject' => "<a href=\"forum.php?mod=viewthread&tid={$this->tid}\">{$this->param['subject']}</a>",
 					'message' => messagecutstr($message, 150)
 				);
-				if(getglobal('forum_attachexist')) {
+				if(getglobal('forum_attachexist')) {//					$firstaid = DB::result_first("SELECT aid FROM ".DB::table(getattachtablebytid($tid))." WHERE pid='$pid' AND dateline>'0' AND isimage='1' ORDER BY dateline LIMIT 1");
 					$imgattach = C::t('forum_attachment_n')->fetch_max_image('tid:'.$this->tid, 'pid', $this->pid);
 					$firstaid = $imgattach['aid'];
 					unset($imgattach);

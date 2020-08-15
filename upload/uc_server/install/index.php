@@ -16,7 +16,7 @@ define('ROOT_PATH', dirname(__FILE__).'/../');
 require ROOT_PATH.'./release/release.php';
 require ROOT_PATH.'./install/var.inc.php';
 require ROOT_PATH.'./install/lang.inc.php';
-require ROOT_PATH.'./install/dbi.class.php';
+require ROOT_PATH.'./install/dbi.class.php';// MySQLi Only, Git新增
 require ROOT_PATH.'./install/func.inc.php';
 
 file_exists(ROOT_PATH.'./install/extvar.inc.php') && require ROOT_PATH.'./install/extvar.inc.php';
@@ -111,7 +111,7 @@ if($method == 'show_license') {
 		if(empty($dbname)) {
 			show_msg('dbname_invalid', $dbname, 0);
 		} else {
-			if(!$link = @mysqli_connect($dbhost, $dbuser, $dbpw)) {
+			if(!$link = @mysqli_connect($dbhost, $dbuser, $dbpw)) {// MySQL全部改为MySQLi, 下同, Git新增
 				$errno = mysqli_errno($link);
 				$error = mysqli_error($link);
 				if($errno == 1045) {
@@ -134,7 +134,7 @@ if($method == 'show_license') {
 			mysqli_close($link);
 		}
 
-		if(strpos($tablepre, '.') !== false || intval($tablepre{0})) {
+		if(strpos($tablepre, '.') !== false || intval($tablepre[0])) {
 			show_msg('tablepre_invalid', $tablepre, 0);
 		}
 
@@ -186,7 +186,7 @@ if($method == 'show_license') {
 
 	}
 
-	@unlink(ROOT_PATH.'./install/index.php');
+	@unlink(ROOT_PATH.'./install/index.php');// 删除UCenter安装文件, Git新增
 
 } elseif($method == 'install_check') {
 

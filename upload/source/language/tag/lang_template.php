@@ -9,6 +9,10 @@
  *      This file is automatically generate
  */
 
+if(!defined('IN_DISCUZ')) {
+	exit('Access Denied');
+}
+
 $lang = array (
   'no_tag' => 'ไม่มีแท็ก',
   'tag' => 'แท็ก',
@@ -24,6 +28,9 @@ $lang = array (
   'related_thread' => 'โพสต์ที่เกี่ยวข้อง',
   'replies' => 'ตอบ',
   'price' => 'ราคา',
+  'attach_img' => 'ไฟล์รูปภาพ',
+  'attachment' => 'ไฟล์แนบ',
+  'thread_digest' => 'สำคัญ',
 );
 
 ?>

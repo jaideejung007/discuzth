@@ -308,8 +308,8 @@ $lang = array(
 	'invite_you_to_visit' => '{user} เชิญชวนคุณให้เข้าชม {bbname}',
 
 	'portal' => 'พอร์ทัล',
-	'forum' => '论坛',
-	'friend' => '好友',
+	'forum' => 'เว็บบอร์ด',
+	'friend' => 'เพื่อน',
 	'group' => 'กลุ่ม',
 	'follow' => 'ติดตาม',
 	'collection' => 'คลังกระทู้',
@@ -320,10 +320,10 @@ $lang = array(
 	'wall' => 'ข้อความ',
 	'homepage' => 'หน้าแรก',
 	'ranklist' => 'รายการจัดอันดับ',
-	'medal' => '勋章',
-	'task' => '任务',
-	'magic' => '道具',
-	'favorite' => '收藏',
+	'medal' => 'เหรียญ',
+	'task' => 'ภารกิจ',
+	'magic' => 'ไอเท็ม',
+	'favorite' => 'รายการโปรด',
 	'select_the_navigation_position' => 'เลือกประเภท {type} เมนูนำทาง',
 	'close_module' => 'ปิดประเภทโมดูล {type}',
 
@@ -336,7 +336,7 @@ $lang = array(
 
 	'spacecp_message_prompt' => '(สนับสนุนตั้งแต่ {msg} ตัวอักษร จนถึงสูงสุด 1000 ตัวอักษร)',
 	'card_update_doing' => ' <a class="xi2" href="###">[อัปเดตข้อความทักทาย]</a>',
-	'email_acitve_message' => '<img src="{imgdir}/mail_inactive.png" alt="ยังไม่ได้ยืนยัน" class="vm" /> <span class="xi1">อีเมล ({newemail}) ของคุณยังไม่ได้ยืนยัน...</span><br />
+	'email_acitve_message' => '<i class="fico-email vm fc-i" title="ยังไม่ได้ตรวจสอบ"></i><span class="xi1 vm">อีเมลใหม่ ({newemail}) ของคุณยังไม่ได้ยืนยัน...</span><br />
 								ระบบได้ส่งการยืนยันไปยังอีเมลที่คุณใช้ลงทะเบียนแล้ว โปรดตรวจสอบเพื่อยืนยันและเปิดใช้งาน<br>
 								ถ้าคุณไม่ได้รับ คุณสามารถเปลี่ยนอีเมลใหม่ หรือ<a href="home.php?mod=spacecp&ac=profile&op=password&resend=1" class="xi2">คลิกที่นี่เพื่อขอรับการยืนยันอีกครั้ง</a>',
 	'qq_set_status' => 'ฉันกำหนดค่าสถานะ QQ ของฉันเป็นออนไลน์',

@@ -19,6 +19,7 @@ class ip_tiny {
 	private $fd = NULL;
 	private $offset = array();
 	private $index = NULL;
+	private $length = 0;
 
 	private function __construct() {
 		$ipdatafile = constant("DISCUZ_ROOT").'./data/ipdata/tinyipdata.dat';
@@ -30,7 +31,7 @@ class ip_tiny {
 			throw new ip_tiny_init_exception();
 		}
 
-		$length = $this->offset['len'] - 1028;
+		$this->length = $this->offset['len'] - 1028;
 	}
 
 	function __destruct() {
@@ -63,9 +64,9 @@ class ip_tiny {
 
 		for ($start = $start['len'] * 8 + 1024; $start < $this->length; $start += 8) {
 
-			if ($this->index{$start} . $this->index{$start + 1} . $this->index{$start + 2} . $this->index{$start + 3} >= $ip) {
-				$index_offset = @unpack('Vlen', $this->index{$start + 4} . $this->index{$start + 5} . $this->index{$start + 6} . "\x0");
-				$index_length = @unpack('Clen', $this->index{$start + 7});
+			if ($this->index[$start] . $this->index[$start + 1] . $this->index[$start + 2] . $this->index[$start + 3] >= $ip) {
+				$index_offset = @unpack('Vlen', $this->index[$start + 4] . $this->index[$start + 5] . $this->index[$start + 6] . "\x0");
+				$index_length = @unpack('Clen', $this->index[$start + 7]);
 				break;
 			}
 		}

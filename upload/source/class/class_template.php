@@ -360,6 +360,9 @@ class template {
 			$scriptcss .= '<link rel="stylesheet" type="text/css" href="'.$_G['setting']['csspath'].$css.'.css?{VERHASH}" />';
 		}
 		$scriptcss .= '{if $_G[uid] && isset($_G[cookie][extstyle]) && strpos($_G[cookie][extstyle], TPLDIR) !== false}<link rel="stylesheet" id="css_extstyle" type="text/css" href="$_G[cookie][extstyle]/style.css" />{elseif $_G[style][defaultextstyle]}<link rel="stylesheet" id="css_extstyle" type="text/css" href="$_G[style][defaultextstyle]/style.css" />{/if}';
+		if(isset($_G['config']['output']['css4legacyie']) && $_G['config']['output']['css4legacyie']) {
+			$scriptcss .= '<!--[if IE]><link rel="stylesheet" type="text/css" href="'.$_G['setting']['csspath'].STYLEID.'_iefix'.'.css?{VERHASH}" /><![endif]-->';
+		}
 		return $scriptcss;
 	}
 
@@ -371,7 +374,7 @@ class template {
 		global $_G;
 		$modules = explode(',', $param);
 		foreach($modules as $module) {
-			$module .= '::'; 
+			$module .= '::'; //fix notice
 			list($b, $m) = explode('::', $module);
 			if($b && $b == $_G['basescript'] && (!$m || $m == CURMODULE)) {
 				$this->csscurmodules .= $content;

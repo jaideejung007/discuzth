@@ -425,7 +425,7 @@ showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight team"'
 ));
 /*jaideejung007*/ showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight"'), array(
 /*jaideejung007*/	'&#3648;&#3623;&#3629;&#3619;&#3660;&#3594;&#3633;&#3609;&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;',
-/*jaideejung007*/	'<a href="https://sourceforge.net/projects/discuzth/" class="lightlink2" target="_blank">&#3604;&#3636;&#3626;&#3588;&#3633;&#3626;&#3652;&#3607;&#3618;!</a>, Rev: '.DISCUZ_TH_REVISION
+/*jaideejung007*/	'<a href="https://github.com/jaideejung007/discuzth" class="lightlink2" target="_blank">Discuz! &#xE20;&#xE32;&#xE29;&#xE32;&#xE44;&#xE17;&#xE22;</a>, Rev: '.DISCUZ_TH_REVISION
 /*jaideejung007*/));
 showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight"'), array(
 	cplang('home_dev_links'),
@@ -435,7 +435,7 @@ showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight"'), ar
 	<a href="http://www.discuz.net/" class="lightlink2" target="_blank">&#x8BA8;&#x8BBA;&#x533A;</a>,
 	<a href="'.ADMINSCRIPT.'?action=cloudaddons" class="lightlink2" target="_blank">Discuz! App Store</a>,
 	<a href="https://gitee.com/ComsenzDiscuz/DiscuzX" class="lightlink2" target="_blank">Discuz! X Git</a>,
-<!--jaideejung007-->	<a href="https://sourceforge.net/projects/discuzth/" class="lightlink2" target="_blank">Discuz! Thai Official Repositories</a>
+<!--jaideejung007-->	<a href="https://github.com/jaideejung007/discuzth" class="lightlink2" target="_blank">Discuz! Thai Official Repositories</a>
 '));
 showtablefooter();
 

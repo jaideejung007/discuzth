@@ -267,7 +267,7 @@ function dsetcookie($var, $value = '', $life = 0, $prefix = 1, $httponly = false
 	$var = ($prefix ? $config['cookiepre'] : '').$var;
 	$_COOKIE[$var] = $value;
 
-	if($value == '' || $life < 0) {
+	if($value === '' || $life < 0) {
 		$value = '';
 		$life = -1;
 	}
@@ -279,7 +279,7 @@ function dsetcookie($var, $value = '', $life = 0, $prefix = 1, $httponly = false
 	$life = $life > 0 ? getglobal('timestamp') + $life : ($life < 0 ? getglobal('timestamp') - 31536000 : 0);
 	$path = $httponly && PHP_VERSION < '5.2.0' ? $config['cookiepath'].'; HttpOnly' : $config['cookiepath'];
 
-	$secure = $_SERVER['SERVER_PORT'] == 443 ? 1 : 0;
+	$secure = $_G['isHTTPS'];
 	if(PHP_VERSION < '5.2.0') {
 		setcookie($var, $value, $life, $path, $config['cookiedomain'], $secure);
 	} else {
@@ -338,7 +338,7 @@ function checkmobile() {
 	}
 	if(($v = dstrpos($useragent, $wmlbrowser_list))) {
 		$_G['mobile'] = $v;
-		return '3'; 
+		return '3'; //wml版
 	}
 	$brower = array('mozilla', 'chrome', 'safari', 'opera', 'm3gate', 'winwap', 'openwave', 'myop');
 	if(dstrpos($useragent, $brower)) return false;
@@ -417,7 +417,7 @@ function avatar($uid, $size = 'middle', $returnsrc = FALSE, $real = FALSE, $stat
 		$dir2 = substr($uid, 3, 2);
 		$dir3 = substr($uid, 5, 2);
 		$file = $ucenterurl.'/data/avatar/'.$dir1.'/'.$dir2.'/'.$dir3.'/'.substr($uid, -2).($real ? '_real' : '').'_avatar_'.$size.'.jpg';
-		return $returnsrc ? $file : '<img src="'.$file.'" onerror="this.onerror=null;this.src=\''.$ucenterurl.'/images/noavatar_'.$size.'.gif\'" />';
+		return $returnsrc ? $file : '<img src="'.$file.'" onerror="this.onerror=null;this.src=\''.$ucenterurl.'/images/noavatar.svg\'" />';
 	}
 }
 
@@ -543,7 +543,7 @@ function template($file, $templateid = 0, $tpldir = '', $gettplfile = 0, $primal
 			$indiy = false;
 			$_G['style']['tpldirectory'] = $tpldir ? $tpldir : (defined('TPLDIR') ? TPLDIR : '');
 			$_G['style']['prefile'] = '';
-			$diypath = DISCUZ_ROOT.'./data/diy/'.$_G['style']['tpldirectory'].'/'; 
+			$diypath = DISCUZ_ROOT.'./data/diy/'.$_G['style']['tpldirectory'].'/'; //DIY模板文件目录
 			$preend = '_diy_preview';
 			$_GET['preview'] = !empty($_GET['preview']) ? $_GET['preview'] : '';
 			$curtplname = $oldfile;
@@ -561,7 +561,7 @@ function template($file, $templateid = 0, $tpldir = '', $gettplfile = 0, $primal
 				$tpldir = 'data/diy/'.$_G['style']['tpldirectory'].'/';
 				!$gettplfile && $_G['style']['tplsavemod'] = $tplsavemod;
 				$curtplname = $file;
-				if(isset($_GET['diy']) && $_GET['diy'] == 'yes' || isset($_GET['diy']) && $_GET['preview'] == 'yes') { 
+				if(isset($_GET['diy']) && $_GET['diy'] == 'yes' || isset($_GET['diy']) && $_GET['preview'] == 'yes') { //DIY模式或预览模式下做以下判断
 					$flag = file_exists($diypath.$file.$preend.'.htm');
 					if($_GET['preview'] == 'yes') {
 						$file .= $flag ? $preend : '';
@@ -1703,14 +1703,28 @@ function getposttable($tableid = 0, $prefix = false) {
 	return table_forum_post::getposttable($tableid, $prefix);
 }
 
-
+/*
+ * 以下命令，$value传入的是prefix，其它命令prefix都是最后一个参数
+ * 		get, rm, scard, smembers, hgetall, zcard, exists
+ * eval 时，传入参数如下：
+ * 		$cmd = 'eval', $key = script, $value = argv, 
+ * 		$ttl = 用于存储script hash的key, $prefix 会自动成为脚本的第一个参数，其余参数序号顺延
+ * zadd 时，参数如下：
+ * 		$cmd = 'zadd', $key = key, $value = member, $ttl = score
+ * zincrby 时，参数如下：
+ * 		$cmd = 'zincrby', $key = key, $value = member, $ttl = value to increase
+ * zrevrange 和 zrevrangewithscore 时，参数如下；
+ * 		$cmd = 'zrevrange', $key = key, $value = start, $ttl = end
+ * inc, dec, incex 的 $ttl 无效
+ */
 function memory($cmd, $key='', $value='', $ttl = 0, $prefix = '') {
 	static $supported_command = array(
-		'set', 'get', 'rm', 'inc', 'dec', 'exists',
+		'set', 'add', 'get', 'rm', 'inc', 'dec', 'exists',
+		'incex', /* 存在时才inc */
 		'sadd', 'srem', 'scard', 'smembers', 'sismember',
 		'hmset', 'hgetall', 'hexists', 'hget',
 		'eval', 
-		'zadd', 'zcard', 'zrem', 'zscore', 'zrevrange', 'zincrby', 'zrevrangewithscore' ,
+		'zadd', 'zcard', 'zrem', 'zscore', 'zrevrange', 'zincrby', 'zrevrangewithscore' /* 带score返回 */,
 		'pipeline', 'commit', 'discard'
 	);
 
@@ -1720,7 +1734,7 @@ function memory($cmd, $key='', $value='', $ttl = 0, $prefix = '') {
 		if(defined('DISCUZ_DEBUG') && DISCUZ_DEBUG) {
 			if(is_array($key)) {
 				foreach($key as $k) {
-					C::memory()->debug[$cmd][] = ($cmd == 'get' || $cmd == 'rm' ? $value : '').$prefix.$k;
+					C::memory()->debug[$cmd][] = ($cmd == 'get' || $cmd == 'rm' || $cmd == 'add' ? $value : '').$prefix.$k;
 				}
 			} else {
 				if ($cmd === 'hget') {
@@ -1728,34 +1742,36 @@ function memory($cmd, $key='', $value='', $ttl = 0, $prefix = '') {
 				} elseif ($cmd === 'eval') {
 					C::memory()->debug[$cmd][] = $key . "->" . $ttl;
 				} else {
-					C::memory()->debug[$cmd][] = ($cmd == 'get' || $cmd == 'rm' ? $value : '').$prefix.$key;
+					C::memory()->debug[$cmd][] = ($cmd == 'get' || $cmd == 'rm' || $cmd == 'add' ? $value : '').$prefix.$key;
 				}
 			}
 		}
 		switch ($cmd) {
 			case 'set': return C::memory()->set($key, $value, $ttl, $prefix); break;
-			case 'get': return C::memory()->get($key, $value); break;
-			case 'rm': return C::memory()->rm($key, $value); break;
-			case 'exists': return C::memory()->exists($key, $value); break;
+			case 'add': return C::memory()->add($key, $value, $ttl, $prefix); break;
+			case 'get': return C::memory()->get($key, $value/*prefix*/); break;
+			case 'rm': return C::memory()->rm($key, $value/*prefix*/); break;
+			case 'exists': return C::memory()->exists($key, $value/*prefix*/); break;
 			case 'inc': return C::memory()->inc($key, $value ? $value : 1, $prefix); break;
-			case 'dec': return C::memory()->dec($key, $value ? $value : -1, $prefix); break;
+			case 'incex': return C::memory()->incex($key, $value ? $value : 1, $prefix); break;
+			case 'dec': return C::memory()->dec($key, $value ? $value : 1, $prefix); break;
 			case 'sadd': return C::memory()->sadd($key, $value, $prefix); break;
 			case 'srem': return C::memory()->srem($key, $value, $prefix); break;
-			case 'scard': return C::memory()->scard($key, $value); break;
-			case 'smembers': return C::memory()->smembers($key, $value); break;
+			case 'scard': return C::memory()->scard($key, $value/*prefix*/); break;
+			case 'smembers': return C::memory()->smembers($key, $value/*prefix*/); break;
 			case 'sismember': return C::memory()->sismember($key, $value, $prefix); break;
 			case 'hmset': return C::memory()->hmset($key, $value, $prefix); break;
-			case 'hgetall': return C::memory()->hgetall($key, $value); break;
-			case 'hexists': return C::memory()->hexists($key, $value, $prefix); break;
-			case 'hget': return C::memory()->hget($key, $value, $prefix); break;
-			case 'eval': return C::memory()->evalscript($key, $value, $ttl, $prefix); break;
-			case 'zadd': return C::memory()->zadd($key, $value, $ttl, $prefix); break;
+			case 'hgetall': return C::memory()->hgetall($key, $value/*prefix*/); break;
+			case 'hexists': return C::memory()->hexists($key, $value/*field*/, $prefix); break;
+			case 'hget': return C::memory()->hget($key, $value/*field*/, $prefix); break;
+			case 'eval': return C::memory()->evalscript($key/*script*/, $value/*args*/, $ttl/*sha key*/, $prefix); break;
+			case 'zadd': return C::memory()->zadd($key, $value, $ttl/*score*/, $prefix); break;
 			case 'zrem': return C::memory()->zrem($key, $value, $prefix); break;
 			case 'zscore': return C::memory()->zscore($key, $value, $prefix); break;
-			case 'zcard': return C::memory()->zcard($key, $value); break;
-			case 'zrevrange': return C::memory()->zrevrange($key, $value, $ttl, $prefix); break;
-			case 'zrevrangewithscore': return C::memory()->zrevrange($key, $value, $ttl, $prefix, true); break;
-			case 'zincrby': return C::memory()->zincrby($key, $value, $ttl ? $ttl : 1, $prefix); break;
+			case 'zcard': return C::memory()->zcard($key, $value/*prefix*/); break;
+			case 'zrevrange': return C::memory()->zrevrange($key, $value/*start*/, $ttl/*end*/, $prefix); break;
+			case 'zrevrangewithscore': return C::memory()->zrevrange($key, $value/*start*/, $ttl/*end*/, $prefix, true); break;
+			case 'zincrby': return C::memory()->zincrby($key, $value/*member*/, $ttl ? $ttl : 1/*to increase*/, $prefix); break;
 			case 'pipeline': return C::memory()->pipeline(); break;
 			case 'commit': return C::memory()->commit(); break;
 			case 'discard': return C::memory()->discard(); break;

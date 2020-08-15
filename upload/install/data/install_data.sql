@@ -61,7 +61,7 @@ INSERT INTO pre_common_cron VALUES ('20','1','system','อัปเดตระ�
 
 INSERT INTO pre_common_friendlink VALUES ('1','0','เว็บบอร์ด Discuz! อย่างเป็นทางการ','https://www.discuz.net','ติดตามข่าวสารความเคลื่อนไหวของดิสคัส! รวมไปถึงการดาวน์โหลดและแลกเปลี่ยนข้อมูลทางเทคนิค','static/image/common/logo_88_31.gif','2');
 INSERT INTO pre_common_friendlink VALUES ('2','1','แอปสโตร์','https://addon.dismall.com/','','','2');
-INSERT INTO pre_common_friendlink VALUES ('3','2','Discuz! TH Official Repositories','https://sourceforge.net/projects/discuzth/','มาร่วมเป็นส่วนหนึ่งในการพัฒนา Discuz! TH ไปพร้อม ๆ กัน','static/image/common/logo_discuzth_repositories_88_31.gif','2');
+INSERT INTO pre_common_friendlink VALUES ('3','2','Discuz! TH Official Repositories','https://github.com/jaideejung007/discuzth','มาร่วมเป็นส่วนหนึ่งในการพัฒนา Discuz! TH ไปพร้อม ๆ กัน','static/image/common/logo_discuzth_repositories_88_31.gif','2');
 
 
 
@@ -694,7 +694,8 @@ INSERT INTO pre_common_statuser VALUES ('1','0','login');
 
 INSERT INTO pre_common_style VALUES ('1','สไตล์เริ่มต้น','1','1', 't1	t2	t3	t4	t5|');
 
-INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'menuhoverbgcolor', '#005AB4 nv_a.png no-repeat 50% -33px');
+INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'menuhoverbgcolor', '#004FA0');
+INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'menucurbgcolor', '#005AB4');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'lightlink', '#FFF');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'floatbgcolor', '#FFF');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'dropmenubgcolor', '#FEFEFE');
@@ -709,9 +710,9 @@ INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'inputborderdarkcolor', '#848484');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'headerbgcolor', '');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'headerborder', '0');
-INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'sidebgcolor', ' vlineb.png repeat-y 0 0');
+INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'sidebgcolor', '#E8F0F7');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'msgfontsize', '14px');
-INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'bgcolor', '#FFF background.png repeat-x 0 0');
+INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'bgcolor', '#FFF');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'noticetext', '#F26C4F');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'highlightlink', '#369');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'link', '#333');
@@ -719,19 +720,19 @@ INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'midtext', '#666');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'tabletext', '#444');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'smfontsize', '0.83em');
-INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'threadtitlefont', 'Tahoma,Helvetica,''SimSun'',sans-serif');
+INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'threadtitlefont', 'Tahoma,Helvetica,\'Microsoft Yahei\',sans-serif');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'threadtitlefontsize', '14px');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'smfont', 'Tahoma,Helvetica,sans-serif');
-INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'titlebgcolor', '#E5EDF2 titlebg.png repeat-x 0 0');
+INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'titlebgcolor', '#E5EDF2');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'fontsize', '12px/1.5');
-INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'font', 'Tahoma,Helvetica,\'SimSun\',sans-serif');
+INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'font', 'Tahoma,Helvetica,\'Microsoft Yahei\',sans-serif');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'styleimgdir', '');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'imgdir', '');
-INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'boardimg', 'logo.png');
+INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'boardimg', 'logo.svg');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'available', '');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'headertext', '#444');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'footertext', '#666');
-INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'menubgcolor', '#2B7ACD nv.png no-repeat 0 0');
+INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'menubgcolor', '#2B7ACD');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'menutext', '#FFF');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'menuhovertext', '#FFF');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'wrapbg', '#FFF');
@@ -792,7 +793,7 @@ INSERT INTO pre_common_word_type SET `id`='1', `typename`='แบ่งปัน
 INSERT INTO pre_common_word_type SET `id`='2', `typename`='ค้าขาย';
 
 INSERT INTO pre_forum_bbcode VALUES ('1','0','fly','bb_fly.gif','<marquee width=\"90%\" scrollamount=\"3\">{1}</marquee>','[fly]This is sample text[/fly]','แสดงเนื้หาเลื่อนตามแนวนอน การกระทำนี้จะคล้ายกับ HTML และ marquee คำค้น หมายเหตุ: การกระทำนี้มีผลกับเบราว์เซอร์ Internet Explorer เท่านั้น','1','กรุณาใส่ข้อความที่จะแสดง:','1','19','1	2	3	12	13	14	15	16	17	18	19');
-INSERT INTO pre_forum_bbcode VALUES ('2','0','qq','bb_qq.gif','<a href=\"http://wpa.qq.com/msgrd?v=3&uin={1}&amp;site=[Discuz!]&amp;from=discuz&amp;menu=yes\" target=\"_blank\"><img src=\"static/image/common/qq_big.gif\" border=\"0\"></a>','[qq]688888[/qq]','แสดงสถานะ QQ ออนไลน์，คลิกที่ไอคอนของเขา(เธอ)เพื่อสนทนา','1','กรุณาใส่หมายเลข QQ เพื่อแสดงสถานะออนไลน์:<a href=\"\" class=\"xi2\" onclick=\"this.href=\'http://wp.qq.com/set.html?from=discuz&uin=\'+$(\'e_cst1_qq_param_1\').value\" target=\"_blank\" style=\"float:right;\">ตั้งค่า QQ สถานะออนไลน์&nbsp;&nbsp;</a>','1','21','1	2	3	10	11	12	13	14	15	16	17	18	19');
+INSERT INTO pre_forum_bbcode VALUES ('2','0','qq','bb_qq.gif','<a href=\"https://wpa.qq.com/msgrd?v=3&uin={1}&amp;site=[Discuz!]&amp;from=discuz&amp;menu=yes\" target=\"_blank\"><img src=\"static/image/common/qq_big.gif\" border=\"0\"></a>','[qq]688888[/qq]','แสดงสถานะ QQ ออนไลน์，คลิกที่ไอคอนของเขา(เธอ)เพื่อสนทนา','1','กรุณาใส่หมายเลข QQ เพื่อแสดงสถานะออนไลน์:<a href=\"\" class=\"xi2\" onclick=\"this.href=\'http://wp.qq.com/set.html?from=discuz&uin=\'+$(\'e_cst1_qq_param_1\').value\" target=\"_blank\" style=\"float:right;\">ตั้งค่า QQ สถานะออนไลน์&nbsp;&nbsp;</a>','1','21','1	2	3	10	11	12	13	14	15	16	17	18	19');
 INSERT INTO pre_forum_bbcode VALUES ('3','0','sup','bb_sup.gif','<sup>{1}</sup>','X[sup]2[/sup]','แสดงตัวอักษรลักษณะยกกำลัง','1','ใส่ข้อความที่นี่: ','1','22','1	2	3	12	13	14	15	16	17	18	19');
 INSERT INTO pre_forum_bbcode VALUES ('4','0','sub','bb_sub.gif','<sub>{1}</sub>','X[sub]2[/sub]','แสดงตัวอักษรลักษณะตัวห้อย','1','ใส่ข้อความที่นี่: ','1','23','1	2	3	12	13	14	15	16	17	18	19');
 INSERT INTO pre_forum_bbcode VALUES ('5', '2', 'spoil', 'bb_spoil.png', '<div style="display: inline;"><div style="display: inline;"><span onClick="if (this.parentNode.parentNode.getElementsByTagName(''div'')[1].getElementsByTagName(''div'')[0].style.display != '''') {  this.parentNode.parentNode.getElementsByTagName(''div'')[1].getElementsByTagName(''div'')[0].style.display = ''''; this.innerHTML = ''<a href=\\''javascript:void(0);\\'' onClick=\\''return false;\\'' style=\\''color: #FF0000;\\''>[Spoil] คลิกเพื่อซ่อนข้อความ</a>''; } else { this.parentNode.parentNode.getElementsByTagName(''div'')[1].getElementsByTagName(''div'')[0].style.display = ''none''; this.innerHTML = ''<a href=\\''javascript:void(0);\\'' onClick=\\''return false;\\'' style=\\''color: #FF0000;\\''>[Spoil] คลิกเพื่อดูข้อความที่ซ่อนไว้</a>''; }" /><a href="javascript:void(0);" onClick="return false;" style="color: #FF0000;">[Spoil] คลิกเพื่อดูข้อความที่ซ่อนไว้</a></span></div><div style="display: inline;"><div style="border: dashed 1px #FF0000;padding: 10px 0px 10px 20px;margin: 10px 0px;display: none;">{1}</div></div></div>', '', 'สปอยล์', '1', 'กรอกข้อความที่คุณต้องการสปอยล์', '1', '24', '10	11	12	13	14	15	20	16	17	18	19	1	2	3');

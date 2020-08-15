@@ -115,9 +115,9 @@ EOT;
 			array('usergroups_special', 'specialgroups', $_GET['type'] == 'special'),
 			array('usergroups_system', 'systemgroups', $_GET['type'] == 'system')
 		));
-		
+		/*search={"nav_usergroups":"action=usergroups"}*/
 		showtips('usergroups_tips');
-		
+		/*search*/
 
 		showformheader('usergroups&type=member');
 		showtableheader('usergroups_member', 'fixpadding', 'id="membergroups"'.($_GET['type'] && $_GET['type'] != 'member' ? ' style="display: none"' : ''));
@@ -528,7 +528,7 @@ EOT;
 		$mgids[] = $gid;
 
 		if(!$multiset && $group['type'] == 'special' && $group['radminid'] < 1) {
-			
+			/*search={"nav_usergroups":"action=usergroups","usergroups_edit_basic":"action=usergroups&operation=edit&anchor=system"}*/
 			showtagheader('div', 'system', $anchor == 'system');
 			showtableheader();
 			if($group['system'] == 'private') {
@@ -542,10 +542,10 @@ EOT;
 			showsetting('usergroups_edit_system_minspan', 'system_minspannew', $system['minspan'], 'text');
 			showtablefooter();
 			showtagfooter('div');
-			
+			/*search*/
 		}
 
-		
+		/*search={"nav_usergroups":"action=usergroups","usergroups_edit_basic":"action=usergroups&operation=edit&anchor=basic"}*/
 		showmultititle();
 		showtagheader('div', 'basic', $anchor == 'basic');
 		showtableheader();
@@ -628,9 +628,9 @@ EOT;
 		showsetting('usergroups_edit_basic_close_ad', 'closeadnew', $group['closead'], 'radio');
 		showtablefooter();
 		showtagfooter('div');
-		
+		/*search*/
 
-		
+		/*search={"nav_usergroups":"action=usergroups","usergroups_edit_special":"action=usergroups&operation=edit&anchor=special"}*/
 		showtagheader('div', 'special', $anchor == 'special');
 		showtableheader();
 		showtitle('usergroups_edit_special');
@@ -655,9 +655,9 @@ EOT;
 		}
 		showtablefooter();
 		showtagfooter('div');
-		
+		/*search*/
 
-		
+		/*search={"nav_usergroups":"action=usergroups","usergroups_edit_post":"action=usergroups&operation=edit&anchor=post"}*/
 		showtagheader('div', 'post', $anchor == 'post');
 		showtableheader();
 		showtitle('usergroups_edit_post');
@@ -719,9 +719,9 @@ EOT;
 		showsetting('usergroups_edit_attach_ext', 'attachextensionsnew', $group['attachextensions'], 'text');
 		showtablefooter();
 		showtagfooter('div');
-		
+		/*search*/
 
-		
+		/*search={"nav_usergroups":"action=usergroups","usergroups_edit_magic":"action=usergroups&operation=edit&anchor=magic"}*/
 		showtagheader('div', 'magic', $anchor == 'magic');
 		showtableheader();
 		showtitle('usergroups_edit_magic');
@@ -734,9 +734,9 @@ EOT;
 		showsetting('usergroups_edit_magic_max', 'maxmagicsweightnew', $group['maxmagicsweight'], 'text');
 		showtablefooter();
 		showtagfooter('div');
-		
+		/*search*/
 
-		
+		/*search={"nav_usergroups":"action=usergroups","usergroups_edit_invite":"action=usergroups&operation=edit&anchor=invite"}*/
 		showtagheader('div', 'invite', $anchor == 'invite');
 		showtableheader();
 		showtitle('usergroups_edit_invite');
@@ -747,7 +747,7 @@ EOT;
 		showsetting('usergroups_edit_invite_maxinviteday', 'maxinvitedaynew', $group['maxinviteday'], 'text');
 		showtablefooter();
 		showtagfooter('div');
-		
+		/*search*/
 
 		$raterangearray = array();
 		foreach(explode("\n", $group['raterange']) as $range) {
@@ -782,7 +782,7 @@ EOT;
 			showtablefooter();
 			showtagfooter('div');
 		} else {
-			
+			/*search={"nav_usergroups":"action=usergroups","usergroups_edit_credit":"action=usergroups&operation=edit&anchor=credit"}*/
 			showtagheader('div', 'credit', $anchor == 'credit');
 			showtableheader();
 			showtitle('usergroups_edit_credit');
@@ -840,10 +840,10 @@ EOT;
 			echo '<tr><td class="lineheight" colspan="9">'.$lang['usergroups_edit_credit_rate_tips'].'</td></tr>';
 			showtablefooter();
 			showtagfooter('div');
-			
+			/*search*/
 		}
 
-		
+		/*search={"nav_usergroups":"action=usergroups","usergroups_edit_home":"action=usergroups&operation=edit&anchor=home"}*/
 		showtagheader('div', 'home', $anchor == 'home');
 		showtableheader();
 		showtitle('usergroups_edit_home');
@@ -873,9 +873,9 @@ EOT;
 		showsetting('usergroups_edit_home_allow_space_diy_imgcode', 'allowspacediyimgcodenew', $group['allowspacediyimgcode'], 'radio');
 		showtablefooter();
 		showtagfooter('div');
-		
+		/*search*/
 
-		
+		/*search={"nav_usergroups":"action=usergroups","usergroups_edit_group":"action=usergroups&operation=edit&anchor=group"}*/
 		showtagheader('div', 'group', $anchor == 'group');
 		showtableheader();
 		showtitle('usergroups_edit_group');
@@ -895,9 +895,9 @@ EOT;
 		)), $group['allowgroupposturl'], 'mradio');
 		showtablefooter();
 		showtagfooter('div');
-		
+		/*search*/
 
-		
+		/*search={"nav_usergroups":"action=usergroups","usergroups_edit_portal":"action=usergroups&operation=edit&anchor=portal"}*/
 		showtagheader('div', 'portal', $anchor == 'portal');
 		showtableheader();
 		showtitle('usergroups_edit_portal');
@@ -907,7 +907,7 @@ EOT;
 		showsetting('usergroups_edit_portal_allow_post_article_moderate', 'allowpostarticlemodnew', $group['allowpostarticlemod'], 'radio');
 		showtablefooter();
 		showtagfooter('div');
-		
+		/*search*/
 
 		if($pluginsetting) {
 			showtagheader('div', 'plugin', $anchor == 'plugin');
@@ -1373,7 +1373,7 @@ EOT;
 function array_flip_keys($arr) {
 	$arr2 = array();
 	$arrkeys = @array_keys($arr);
-	list(, $first) = @each(array_slice($arr, 0, 1));
+	$first = current(array_slice($arr, 0, 1));
 	if($first) {
 		foreach($first as $k=>$v) {
 			foreach($arrkeys as $key) {
