@@ -9,6 +9,10 @@
  *      This file is automatically generate
  */
 
+if(!defined('IN_DISCUZ')) {
+	exit('Access Denied');
+}
+
 $lang = array (
   'search_nomatch' => 'ขออภัย! ไม่พบการค้นหาที่ตรงกัน',
   'search_result' => 'ผลลัพธ์: <em>ค้นหาหัวข้อที่เกี่ยวข้อง $index[num] หัวข้อ</em>',

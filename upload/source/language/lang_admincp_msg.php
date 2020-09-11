@@ -450,6 +450,7 @@ $lang = array (
   'setting_extcredits_must_available' => 'You need open at least one extended points. Please return to modify.',
   'uc_database_connect_error' => 'Connect to database server failed. Go back to check the settings.',
   'uc_config_write_error' => 'UC configuration file write failed. Return to check the settings.',
+  'uc_config_appid_error' => 'UCenter application ID must be a number, please check the settings',
   'uc_config_load_data_local_infile_error' => 'The server has enabled the MySQL LOAD DATA LOCAL IN FILE function. To avoid possible security threats, it is not allowed to edit the UCenter database server address online. If you need to modify it, edit the UC_DBHOST constant in config/config_ucenter.php',
   'setting_ipaccess_invalid' => 'Operation Error! You must allow your own IP to access the site. Please return to modify.',
   'setting_adminipaccess_invalid' => 'Operation Error! You must allow your own IP to access the site backend. Please go back and edit.',

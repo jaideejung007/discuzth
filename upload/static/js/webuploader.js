@@ -316,6 +316,10 @@ SWFUpload.prototype.initSettings = function (userSettings) {
 
 };
 
+SWFUpload.prototype.setUploadURL = function (url) {
+	this.uploader.options.server = url.toString();
+};
+
 SWFUpload.prototype.addPostParam = function (name, value) {
 	this.uploader.options.formData[name] = value;
 };
@@ -434,7 +438,7 @@ function fileQueued(file) {
 				}
 			}
 			if(createQueue && this.customSettings.filterType != undefined) {
-				var fileSize = this.customSettings.filterType[file.type.substr(1).toLowerCase()];
+				var fileSize = this.customSettings.filterType[file.source.ext.toLowerCase()];
 				if(fileSize != undefined && fileSize && file.size > fileSize) {
 					this.customSettings.alertType = 5;
 					createQueue = false;

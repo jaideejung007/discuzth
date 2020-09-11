@@ -26,6 +26,8 @@ $search = "/(href|src)\=(\"|')(?![fhtps]+\:)(.*?)\\2/i";
 $replace = "\\1=\\2$_G[siteurl]\\3\\2";
 $data = preg_replace($search, $replace, $data);
 
+dheader('Content-Type: application/javascript');
+
 echo 'document.write(\''.preg_replace("/\r\n|\n|\r/", '\n', addcslashes($data, "'\\")).'\');';
 
 ?>

@@ -187,7 +187,7 @@ $languages = array(
 	'app_api_filename_comment' => 'ชื่อไฟล์ API ของผลิตภัณท์ ค่ามาตรฐานจะเป็น uc.php',
 	'app_code' => 'ข้อมูลการตั้งค่าของ UCenter',
 	'app_code_comment' => 'หากไฟล์การตั้งค่าของ UCenter สูญหายหรือไม่มีอยู่ คุณสามารถคัดลอกโค้ดด้านล่างนี้นำไปทับไฟล์ตัวที่ไม่มีหรือเสียหายได้',
-
+	'app_not_add_tips' => 'Possible reasons for not being able to add an application via URL: 1. The switch to add an application via URL is turned off; 2. Entering the UCenter founder password incorrectly multiple times',
 
 	'tag_tips'		=> 'Set the current application to obtain other applications as well as tag data on the proportion of the expansion of the data template. Template: "&#123;xxx&#125;" express the index of tag, representing the corresponding data',
 	'tag_global_template'	=> 'Global Template',
@@ -300,6 +300,8 @@ $languages = array(
 	'setting_chatpmmemberlimit_comment'	=> 'Limit the number of PM recipients that the user can send group chat short messages within 24 hours. We recommend to use a value in range of 30 - 100. Se to 0 for no restrictions. Used for limit the quantities of possible spam through the server',
 	'setting_pmfloodctrl'			=> 'PM Flood Prevention',
 	'setting_pmfloodctrl_comment'		=> 'Interval between two PM, in seconds, 0 for unlimited, this is to prevent the Ads robots',
+	'setting_addappbyurl' => 'Enable the ability to add apps via URL',
+	'setting_addappbyurl_comment' => 'Whether to enable the function of adding applications via URL, it is recommended to enable it only when adding applications via URL',
 
 	'setting_user_failedtime' => 'อนุญาตให้เข้าสู่ระบบผิดได้ไม่เกินกี่ครั้ง',
 	'setting_user_failedtime_comment' => 'เมื่อผู้ใช้งานเข้าสู่ระบบผิดเกินจำนวนครั้งที่กำหนด จะไม่สามารถเข้าสู่ระบบได้ใน 15 นาที ถ้ากำหนด 0 หมายถึง ไม่จำกัด',
@@ -446,6 +448,7 @@ $languages = array(
 	'home_member_count' => 'จำนวนสมาชิก',
 	'home_app_count' => 'จำนวนโปรแกรม',
 	'home_env' => 'ข้อมูลระบบ',
+	'home_envstatus' => 'Operating environment detection',
 	'home_team' => 'ทีมพัฒนา UCenter',
 
 	'admin_add_succeed' => 'เพิ่ม $addname เป็นผู้ดูแลระบบสำเร็จ',
@@ -495,5 +498,10 @@ $languages = array(
 
 	'app_allowips' => 'IP ที่อนุญาต',
 	'app_allowips_comment' => 'จำกัดการเข้าถึงด้วย IP, ซึ่งจะเป็น IP ที่กำหนดไวใน Ucenter',
+
+	'envstatus_result' => 'Test results',
+	'envstatus_ver_too_low' => 'The version of $envstatus[req] ($envstatus[now_ver]) in your current system environment is too low, and the program cannot run normally as expected. We strongly recommend that you upgrade to the $envstatus[sug_ver] version. The minimum requirement for the program to run normally is the $envstatus[req_ver] version.',
+	'envstatus_not_found' => 'The $envstatus[req] module is not installed or enabled in your current system environment, and the program cannot run normally as expected. We strongly recommend that you install or enable this module to meet the minimum requirements for the normal operation of the program.',
+	'envstatus_ok' => 'Your current system environment is suitable for the current version of UCenter $envstatus[version].',
 
 );
