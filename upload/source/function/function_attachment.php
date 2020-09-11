@@ -40,7 +40,7 @@ function attachtype($type, $returnval = 'html') {
 			$typeid = 11;
 		} elseif(preg_match("/flash|^(swf|fla|flv|swi)\t/", $type)) {
 			$typeid = 10;
-		} elseif(preg_match("/audio|video|^(wav|mid|mp3|m3u|wma|asf|asx|vqf|mpg|mpeg|avi|wmv|mov|mp4|m4a|m4v|3gp|ogv|ogg|webm|weba|aac|flac)\t/", $type)) {
+		} elseif(preg_match("/audio|video|^(wav|mid|mp3|m3u|wma|asf|asx|vqf|mpg|mpeg|avi|wmv)\t/", $type)) {
 			$typeid = 9;
 		} elseif(preg_match("/real|^(ra|rm|rv)\t/", $type)) {
 			$typeid = 8;
@@ -86,7 +86,7 @@ function parseattach($attachpids, $attachtags, &$postlist, $skipaids = array()) 
 		$attached = 0;
 		$extension = strtolower(fileext($attach['filename']));
 		$attach['ext'] = $extension;
-		$attach['imgalt'] = $attach['isimage'] ? strip_tags(str_replace('"', '', $attach['description'] ? $attach['description'] : $attach['filename'])) : '';
+		$attach['imgalt'] = $attach['isimage'] ? strip_tags(str_replace('"', '\"', $attach['description'] ? $attach['description'] : $attach['filename'])) : '';
 		$attach['attachicon'] = attachtype($extension."\t".$attach['filetype']);
 		$attach['attachsize'] = sizecount($attach['filesize']);
 		if($attach['isimage'] && !$_G['setting']['attachimgpost']) {

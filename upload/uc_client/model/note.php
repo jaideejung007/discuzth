@@ -94,9 +94,6 @@ class notemodel {
 
 	function _send() {
 
-		if(!is_numeric(constant("UC_APPID"))) {
-			return NULL;
-		}
 
 		$note = $this->_get_note();
 		if(empty($note)) {
@@ -118,7 +115,7 @@ class notemodel {
 		}
 		$this->base->load('misc');
 		$apifilename = isset($app['apifilename']) && $app['apifilename'] ? $app['apifilename'] : 'uc.php';
-		if($app['extra']['apppath'] && $this->detectescape($app['extra']['apppath'].'./api/', $apifilename) && substr(strrchr($apifilename, '.'), 1, 10) == 'php' && @include $app['extra']['apppath'].'./api/'.$apifilename) {
+		if($app['extra']['apppath'] && substr(strrchr($apifilename, '.'), 1, 10) == 'php' && @include $app['extra']['apppath'].'./api/'.$apifilename) {
 			$uc_note = new uc_note();
 			$method = $note['operation'];
 			if(is_string($method) && !empty($method)) {
@@ -156,9 +153,6 @@ class notemodel {
 	}
 
 	function _get_note() {
-		if(!is_numeric(constant("UC_APPID"))) {
-			return NULL;
-		}
 		$app_field = 'app'.UC_APPID;
 		$data = $this->db->fetch_first("SELECT * FROM ".UC_DBTABLEPRE."notelist WHERE closed='0' AND $app_field<'1' AND $app_field>'-".UC_NOTE_REPEAT."' LIMIT 1");
 		return $data;

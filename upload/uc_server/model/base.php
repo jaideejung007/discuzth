@@ -279,8 +279,8 @@ class base {
 			$message = $lang[$message] ? str_replace(array_keys($vars), array_values($vars), $lang[$message]) : $message;
 		}
 		$this->view->assign('message', $message);
-		if($redirect != 'BACK' && !preg_match('/^https?:\/\//is', $redirect) && strpos($redirect, 'sid=') === FALSE) {
-			if(strpos($redirect, '?') === FALSE) {
+		if(!strpos($redirect, 'sid=') && (!strpos($redirect, 'ttp://'))) {
+			if(!strpos($redirect, '?')) {
 				$redirect .= '?sid='.$this->sid;
 			} else {
 				$redirect .= '&sid='.$this->sid;
@@ -367,7 +367,7 @@ class base {
 		    } elseif(!preg_match("/^[0-9]+$/", $this->input[$k])) {
 		        return NULL;
 		    }
-		}
+		}		
 		return isset($this->input[$k]) ? (is_array($this->input[$k]) ? $this->input[$k] : trim($this->input[$k])) : NULL;
 	}
 
@@ -447,14 +447,14 @@ class base {
 		(!defined('UC_COOKIEPATH')) && define('UC_COOKIEPATH', '/');
 		(!defined('UC_COOKIEDOMAIN')) && define('UC_COOKIEDOMAIN', '');
 
-		if($value === '' || $life < 0) {
+		if($value == '' || $life < 0) {
 			$value = '';
 			$life = -1;
 		}
 
 		$life = $life > 0 ? $this->time + $life : ($life < 0 ? $this->time - 31536000 : 0);
 		$path = $httponly && PHP_VERSION < '5.2.0' ? UC_COOKIEPATH."; HttpOnly" : UC_COOKIEPATH;
-		$secure = is_https();
+		$secure = $_SERVER['SERVER_PORT'] == 443 ? 1 : 0;
 		if(PHP_VERSION < '5.2.0') {
 			setcookie($key, $value, $life, $path, UC_COOKIEDOMAIN, $secure);
 		} else {
@@ -489,28 +489,6 @@ class base {
 			$string = stripslashes($string);
 		}
 		return $string;
-	}
-
-	function detectescape($basepath, $relativepath) {
-		if(!file_exists($basepath)) {
-			return FALSE;
-		}
-
-		if(!file_exists($basepath . $relativepath)) {
-			$relativepath = dirname($relativepath);
-			if(!file_exists($basepath . $relativepath)) {
-				return FALSE;
-			}
-		}
-
-		$real_base = realpath($basepath);
-		$real_target = realpath($basepath . $relativepath);
-
-		if(strcmp($real_target, $real_base) !== 0 && strpos($real_target, $real_base . DIRECTORY_SEPARATOR) !== 0) {
-			return FALSE;
-		}
-
-		return TRUE;
 	}
 
 }

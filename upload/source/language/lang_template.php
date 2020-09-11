@@ -132,7 +132,6 @@ $lang = array (
   'unselected' => 'ไม่เลือก',
   'imgcropper' => 'ครอบภาพ',
   'imgcropper_crop' => 'ครอบ',
-  'parse_av_tips' => 'หากคุณไม่สามารถเล่นได้ กรุณาคลิกที่นี่เพื่อเปิดในหน้าต่างใหม่',
   'preview_footertext' => 'ข้อมูลลิขสิทธิ์และส่วนท้าย',
   'preview_highlightlink' => 'เน้นสีลิงก์',
   'preview_lighttext' => 'ข้อความที่เป็นสีอ่อน',

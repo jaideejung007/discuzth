@@ -59,9 +59,9 @@ INSERT INTO pre_common_cron VALUES ('18','0','system','อัปเดตกา�
 INSERT INTO pre_common_cron VALUES ('19','1','system','อัปเดตกระทู้ยอดนิยมประจำวัน','cron_todayheats_daily.php','1269746623','1269792000','-1','-1','0','0');
 INSERT INTO pre_common_cron VALUES ('20','1','system','อัปเดตระบบโพสต์ล่าสุด(รวมไปถึง Waterproof wall)','cron_security_cleanup_lastpost.php','1269746623','1269792000','-1','-1','7','0');
 
-INSERT INTO pre_common_friendlink VALUES ('1','0','เว็บบอร์ด Discuz! อย่างเป็นทางการ','https://www.discuz.net','ติดตามข่าวสารความเคลื่อนไหวของดิสคัส! รวมไปถึงการดาวน์โหลดและแลกเปลี่ยนข้อมูลทางเทคนิค','static/image/common/logo_88_31.gif','2');
-INSERT INTO pre_common_friendlink VALUES ('2','1','แอปสโตร์','https://addon.dismall.com/','','','2');
-INSERT INTO pre_common_friendlink VALUES ('3','2','Discuz! TH Official Repositories','https://github.com/jaideejung007/discuzth','มาร่วมเป็นส่วนหนึ่งในการพัฒนา Discuz! TH ไปพร้อม ๆ กัน','static/image/common/logo_discuzth_repositories_88_31.gif','2');
+INSERT INTO pre_common_friendlink VALUES ('1','0','Discuz! Official Forum','https://www.discuz.net','ติดตามความเคลื่อนไหวข่าวสารดิสคัส! รวมไปถึงการดาวน์โหลดและแลกเปลี่ยนข้อมูลทางวิชาการ','static/image/common/logo_88_31.gif','2');
+INSERT INTO pre_common_friendlink VALUES ('2','1','App Store','https://addon.dismall.com/','','','2');
+INSERT INTO pre_common_friendlink VALUES ('3','2','jaideejung007 Blog','https://jaideejung007.ml','','','2');
 
 
 

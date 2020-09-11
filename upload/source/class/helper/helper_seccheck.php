@@ -15,24 +15,10 @@ class helper_seccheck {
 
 	private function _check($type) {
 		global $_G;
-		$secappend = '';
-		if(!defined('IN_MOBILE')) {
-			if(isset($_GET['idhash']) && $_GET['idhash']) {
-				$secappend = $_GET['idhash'];
-			} elseif($type == 'code') {
-				if(isset($_GET['seccodehash']) && $_GET['seccodehash']) {
-					$secappend = $_GET['seccodehash'];
-				}
-			} elseif($type == 'qaa') {
-				if(isset($_GET['secqaahash']) && $_GET['secqaahash']) {
-					$secappend = $_GET['secqaahash'];
-				}
-			}
-		}
-		if(!isset($_G['cookie']['sec'.$type.$secappend])) {
+		if(!isset($_G['cookie']['sec'.$type])) {
 			return false;
 		}
-		list($ssid, $sign) = explode('.', $_G['cookie']['sec'.$type.$secappend]);
+		list($ssid, $sign) = explode('.', $_G['cookie']['sec'.$type]);
 		if($sign != substr(md5($ssid.$_G['uid'].$_G['authkey']), 8, 18)) {
 			return false;
 		}
@@ -49,27 +35,13 @@ class helper_seccheck {
 
 	function _create($type, $code = '') {
 		global $_G;
-		$secappend = '';
-		if(!defined('IN_MOBILE')) {
-			if(isset($_GET['idhash']) && $_GET['idhash']) {
-				$secappend = $_GET['idhash'];
-			} elseif($type == 'code') {
-				if(isset($_GET['seccodehash']) && $_GET['seccodehash']) {
-					$secappend = $_GET['seccodehash'];
-				}
-			} elseif($type == 'qaa') {
-				if(isset($_GET['secqaahash']) && $_GET['secqaahash']) {
-					$secappend = $_GET['secqaahash'];
-				}
-			}
-		}
 		$ssid = C::t('common_seccheck')->insert(array(
 		    'dateline' => TIMESTAMP,
 		    'code' => $code,
 		    'succeed' => 0,
 		    'verified' => 0,
 		), true);
-		dsetcookie('sec'.$type.$secappend, $ssid.'.'.substr(md5($ssid.$_G['uid'].$_G['authkey']), 8, 18));
+		dsetcookie('sec'.$type, $ssid.'.'.substr(md5($ssid.$_G['uid'].$_G['authkey']), 8, 18));
 	}
 
 	public static function make_seccode($seccode = ''){
@@ -95,7 +67,7 @@ class helper_seccheck {
 			if($seccodeunits) {
 				$seccode = '';
 				for($i = 0; $i < 4; $i++) {
-					$unit = ord($s[$i]);
+					$unit = ord($s{$i});
 					$seccode .= ($unit >= 0x30 && $unit <= 0x39) ? $seccodeunits[$unit - 0x30] : $seccodeunits[$unit - 0x57];
 				}
 			}

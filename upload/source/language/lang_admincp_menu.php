@@ -142,6 +142,7 @@ $lang = array
 	'menu_magics' => 'ตั้งค่าไอเท็ม',
 	'menu_medals' => 'ตั้งค่าเหรียญ',
 	'menu_misc_help' => 'ตั้งค่าคู่มือการใช้งาน',
+	'menu_google' => 'ค้นหาด้วย Google',
 	'menu_ec' => 'ตั้งค่าอีคอมเมิร์ซ',
 	'menu_card' => 'ตั้งค่าการ์ดพิเศษ',
 

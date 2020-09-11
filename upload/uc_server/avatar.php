@@ -11,7 +11,7 @@
 error_reporting(0);
 
 _get_script_url();
-define('UC_API', strtolower((is_https() ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].substr($_SERVER['PHP_SELF'], 0, strrpos($_SERVER['PHP_SELF'], '/'))));
+define('UC_API', strtolower(($_SERVER['HTTPS'] == 'on' ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].substr($_SERVER['PHP_SELF'], 0, strrpos($_SERVER['PHP_SELF'], '/'))));
 
 $uid = isset($_GET['uid']) ? $_GET['uid'] : 0;
 $size = isset($_GET['size']) ? $_GET['size'] : '';
@@ -19,6 +19,7 @@ $random = isset($_GET['random']) ? $_GET['random'] : '';
 $type = isset($_GET['type']) ? $_GET['type'] : '';
 $check = isset($_GET['check_file_exists']) ? $_GET['check_file_exists'] : '';
 
+// ts=1，表示不用301回复，同时整个URL后面加上图像文件的最后修改时间
 $ts = isset($_GET['ts']) ? $_GET['ts'] : '';
 
 $avatar = './data/avatar/'.get_avatar($uid, $size, $type);
@@ -40,14 +41,14 @@ if(file_exists($avatar_file)) {
 }
 
 if(empty($random)) {
-	if (empty($ts)) {
+	if (empty($ts)) { // 如果不加随机数，也不加最后修改时间
 		header("HTTP/1.1 301 Moved Permanently");
 		header("Last-Modified:".date('r'));
-		header("Expires: ".date('r', time() + 86400));
-	} else {
+		header("Expires: ".date('r', time() + 86400));	
+	} else { // 如果不加随机数，加最后修改时间
 		$avatar_url .= '?ts='.filemtime($avatar_file);
 	}
-} else {
+} else { // 如果加随机数
 	$avatar_url .= '?random='.rand(1000, 9999);
 }
 
@@ -82,25 +83,6 @@ function _get_script_url() {
 		return false;
 	}
 	return $_SERVER['PHP_SELF'];
-}
-
-function is_https() {
-	if (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) != "off") {
-		return true;
-	}
-	if (isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && strtolower($_SERVER["HTTP_X_FORWARDED_PROTO"]) == "https") {
-		return true;
-	}
-	if (isset($_SERVER["HTTP_SCHEME"]) && strtolower($_SERVER["HTTP_SCHEME"]) == "https") {
-		return true;
-	}
-	if (isset($_SERVER["HTTP_FROM_HTTPS"]) && strtolower($_SERVER["HTTP_FROM_HTTPS"]) != "off") {
-		return true;
-	}
-	if (isset($_SERVER["SERVER_PORT"]) && $_SERVER["SERVER_PORT"] == 443) {
-		return true;
-	}
-	return false;
 }
 
 ?>

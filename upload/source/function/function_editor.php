@@ -13,7 +13,7 @@ if(!defined('IN_DISCUZ')) {
 
 function absoluteurl($url) {
 	global $_G;
-	if($url[0] == '/') {
+	if($url{0} == '/') {
 		return 'http://'.$_SERVER['HTTP_HOST'].$url;
 	} else {
 		return $_G['siteurl'].$url;
@@ -63,9 +63,9 @@ function divtag($divoptions, $text) {
 function fetchoptionvalue($option, $text) {
 	if(($position = strpos($text, $option)) !== false) {
 		$delimiter = $position + strlen($option);
-		if($text[$delimiter] == '"') {
+		if($text{$delimiter} == '"') {
 			$delimchar = '"';
-		} elseif($text[$delimiter] == '\'') {
+		} elseif($text{$delimiter} == '\'') {
 			$delimchar = '\'';
 		} else {
 			$delimchar = ' ';
@@ -125,8 +125,6 @@ function html2bbcode($text) {
 		"/<a\s+?name=.+?\".\">(.+?)<\/a>/is",
 		"/<br.*>/siU",
 		"/<span\s+?style=\"float:\s+(left|right);\">(.+?)<\/span>/is",
-		"/<font\s+?style=\"background-color:\s*([#\w]+?);?\">(.+?)<\/font>/is",
-		"/<font\s+?style=\"background-color:\s*((rgb|rgba)\([\d\s,]+?\));?\">(.+?)<\/font>/is",
 	);
 	$pregreplace = array(
 		'',
@@ -142,8 +140,6 @@ function html2bbcode($text) {
 		'\1',
 		"\n",
 		"[float=\\1]\\2[/float]",
-		"[backcolor=\\1]\\2[/backcolor]",
-		"[backcolor=\\1]\\2[/backcolor]",
 	);
 	$text = preg_replace($pregfind, $pregreplace, $text);
 	$text = preg_replace_callback("/<table([^>]*(width|background|background-color|bgcolor)[^>]*)>/siU", 'html2bbcode_callback_tabletag_1', $text);
@@ -313,7 +309,7 @@ function recursion($tagname, $text, $function, $extraargs = '') {
 		$found = FALSE;
 		$tagnameend = FALSE;
 		for($optionend = $tagbegin; $optionend <= $strlen; $optionend++) {
-			$char = $text[$optionend];
+			$char = $text{$optionend};
 			if(($char == '"' || $char == "'") && $inquote == '') {
 				$inquote = $char;
 			} elseif(($char == '"' || $char == "'") && $inquote == $char) {

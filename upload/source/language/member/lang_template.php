@@ -9,10 +9,6 @@
  *      This file is automatically generate
  */
 
-if(!defined('IN_DISCUZ')) {
-	exit('Access Denied');
-}
-
 $lang = array (
   'getpassword' => 'ลืมรหัสผ่าน',
   'login_guest' => 'ยังไม่ได้เป็นสมาชิก? <a href="member.php?mod={$_G[setting][regname]}">{$_G[setting][reglinkname]}</a>',

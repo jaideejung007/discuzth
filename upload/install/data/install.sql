@@ -2250,7 +2250,7 @@ CREATE TABLE pre_forum_forum (
   yesterdayposts mediumint(8) unsigned NOT NULL DEFAULT '0',
   `rank` smallint(6) unsigned NOT NULL DEFAULT '0',
   oldrank smallint(6) unsigned NOT NULL DEFAULT '0',
-  lastpost varchar(300) NOT NULL DEFAULT '',
+  lastpost char(110) NOT NULL DEFAULT '',
   domain char(15) NOT NULL DEFAULT '',
   allowsmilies tinyint(1) NOT NULL DEFAULT '0',
   allowhtml tinyint(1) NOT NULL DEFAULT '0',

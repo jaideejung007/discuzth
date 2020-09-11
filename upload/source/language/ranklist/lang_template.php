@@ -9,10 +9,6 @@
  *      This file is automatically generate
  */
 
-if(!defined('IN_DISCUZ')) {
-	exit('Access Denied');
-}
-
 $lang = array (
   'all' => 'ทั้งหมด',
   'have' => 'มี',

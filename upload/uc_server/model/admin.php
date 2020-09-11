@@ -20,8 +20,8 @@ class adminbase extends base {
 	function adminbase() {
 		parent::__construct();
 		$this->cookie_status = isset($_COOKIE['sid']) ? 1 : 0;
-		$sid = $this->cookie_status ? getgpc('sid', 'C') : rawurlencode(getgpc('sid', 'R'));
-		$this->sid = $this->view->sid = $this->sid_decode($sid) ? $sid : '';
+		$sid = $this->cookie_status ? getgpc('sid', 'C') : rawurlencode(getgpc('sid', 'R'));		
+		$this->sid = $this->view->sid = $this->sid_decode($sid) ? $sid : '';		
 		$this->view->assign('sid', $this->view->sid);
 		$this->view->assign('iframe', getgpc('iframe'));
 		$a = getgpc('a');
@@ -94,7 +94,7 @@ class adminbase extends base {
 	}
 
 	function _call($a, $arg) {
-		if(method_exists($this, $a) && $a[0] != '_') {
+		if(method_exists($this, $a) && $a{0} != '_') {
 			$this->$a();
 		} else {
 			exit('Method does not exists');

@@ -267,7 +267,7 @@ function dsetcookie($var, $value = '', $life = 0, $prefix = 1, $httponly = false
 	$var = ($prefix ? $config['cookiepre'] : '').$var;
 	$_COOKIE[$var] = $value;
 
-	if($value === '' || $life < 0) {
+	if($value == '' || $life < 0) {
 		$value = '';
 		$life = -1;
 	}
@@ -279,7 +279,7 @@ function dsetcookie($var, $value = '', $life = 0, $prefix = 1, $httponly = false
 	$life = $life > 0 ? getglobal('timestamp') + $life : ($life < 0 ? getglobal('timestamp') - 31536000 : 0);
 	$path = $httponly && PHP_VERSION < '5.2.0' ? $config['cookiepath'].'; HttpOnly' : $config['cookiepath'];
 
-	$secure = $_G['isHTTPS'];
+	$secure = $_SERVER['SERVER_PORT'] == 443 ? 1 : 0;
 	if(PHP_VERSION < '5.2.0') {
 		setcookie($var, $value, $life, $path, $config['cookiedomain'], $secure);
 	} else {
@@ -1519,6 +1519,7 @@ function dreferer($default = '') {
 		$_G['referer'] = '';
 	}
 
+	// There may be a port number in the HTTP_HOST variable
 	list($http_host,)=explode(':', $_SERVER['HTTP_HOST']);
 
 	if(!empty($reurl['host']) && !in_array($reurl['host'], array($http_host, 'www.'.$http_host)) && !in_array($http_host, array($reurl['host'], 'www.'.$reurl['host']))) {
@@ -1668,7 +1669,7 @@ function g_icon($groupid, $return = 0) {
 	if(empty($_G['cache']['usergroups'][$groupid]['icon'])) {
 		$s =  '';
 	} else {
-		if(preg_match('/^https?:\/\//is', $_G['cache']['usergroups'][$groupid]['icon'])) {
+		if(substr($_G['cache']['usergroups'][$groupid]['icon'], 0, 5) == 'http:') {
 			$s = '<img src="'.$_G['cache']['usergroups'][$groupid]['icon'].'" alt="" class="vm" />';
 		} else {
 			$s = '<img src="'.$_G['setting']['attachurl'].'common/'.$_G['cache']['usergroups'][$groupid]['icon'].'" alt="" class="vm" />';
@@ -1707,19 +1708,18 @@ function getposttable($tableid = 0, $prefix = false) {
 function memory($cmd, $key='', $value='', $ttl = 0, $prefix = '') {
 	if($cmd == 'check') {
 		return  C::memory()->enable ? C::memory()->type : '';
-	} elseif(C::memory()->enable && in_array($cmd, array('set', 'add', 'get', 'rm', 'inc', 'dec'))) {
+	} elseif(C::memory()->enable && in_array($cmd, array('set', 'get', 'rm', 'inc', 'dec'))) {
 		if(defined('DISCUZ_DEBUG') && DISCUZ_DEBUG) {
 			if(is_array($key)) {
 				foreach($key as $k) {
-					C::memory()->debug[$cmd][] = ($cmd == 'get' || $cmd == 'rm' || $cmd == 'add' ? $value : '').$prefix.$k;
+					C::memory()->debug[$cmd][] = ($cmd == 'get' || $cmd == 'rm' ? $value : '').$prefix.$k;
 				}
 			} else {
-				C::memory()->debug[$cmd][] = ($cmd == 'get' || $cmd == 'rm' || $cmd == 'add' ? $value : '').$prefix.$key;
+				C::memory()->debug[$cmd][] = ($cmd == 'get' || $cmd == 'rm' ? $value : '').$prefix.$key;
 			}
 		}
 		switch ($cmd) {
 			case 'set': return C::memory()->set($key, $value, $ttl, $prefix); break;
-			case 'add': return C::memory()->add($key, $value, $ttl, $prefix); break;
 			case 'get': return C::memory()->get($key, $value); break;
 			case 'rm': return C::memory()->rm($key, $value); break;
 			case 'inc': return C::memory()->inc($key, $value ? $value : 1); break;
@@ -1991,7 +1991,7 @@ function userappprompt() {
 }
 
 function dintval($int, $allowarray = false) {
-	$ret = intval($int);
+	$ret = floatval($int);
 	if($int == $ret || !$allowarray && is_array($int)) return $ret;
 	if($allowarray && is_array($int)) {
 		foreach($int as &$v) {

@@ -26,7 +26,7 @@ class mobile_api {
 		foreach ($GLOBALS['sublist'] as $k => $sublist) {
 			if ($sublist['icon']) {
 				$icon = preg_match('/src="(.+?)"/', $sublist['icon'], $r) ? $r[1] : '';
-				if (!preg_match('/^https?:\//', $icon)) {
+				if (!preg_match('/^http:\//', $icon)) {
 					$icon = $_G['siteurl'] . $icon;
 				}
 				$GLOBALS['sublist'][$k]['icon'] = $icon;

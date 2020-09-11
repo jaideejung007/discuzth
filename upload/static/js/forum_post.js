@@ -616,16 +616,13 @@ function addpolloption() {
 		addUploadEvent(imgid, proid)
 
 	} else {
-		$('polloption_new').innerHTML = 'โหวตได้จำนวนสูงสุดถึง ' + maxoptions;
+		$('polloption_new').outerHTML = '<span>โหวตได้จำนวนสูงสุดถึง '+maxoptions+'</span>';
 	}
 }
 
 function delpolloption(obj) {
 	obj.parentNode.parentNode.removeChild(obj.parentNode);
 	curoptions--;
-	if (curoptions < maxoptions) {
-		$('polloption_new').innerHTML = '';
-	}
 }
 
 function insertsave(pid) {

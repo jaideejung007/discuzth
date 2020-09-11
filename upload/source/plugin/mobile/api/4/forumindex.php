@@ -29,7 +29,7 @@ class mobile_api {
 			}
 			if ($GLOBALS['forumlist'][$forum['fid']]['icon']) {
 				$icon = preg_match('/src="(.+?)"/', $GLOBALS['forumlist'][$forum['fid']]['icon'], $r) ? $r[1] : '';
-				if (!preg_match('/^https?:\//', $icon)) {
+				if (!preg_match('/^http:\//', $icon)) {
 					$icon = $_G['siteurl'] . $icon;
 				}
 				$GLOBALS['forumlist'][$forum['fid']]['icon'] = $icon;

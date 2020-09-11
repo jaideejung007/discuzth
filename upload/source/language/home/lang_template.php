@@ -9,10 +9,6 @@
  *      This file is automatically generate
  */
 
-if(!defined('IN_DISCUZ')) {
-	exit('Access Denied');
-}
-
 $lang = array (
   'cancel' => 'ยกเลิก',
   'close' => 'ปิด',
@@ -1547,11 +1543,7 @@ $lang = array (
   'usergroup_expired' => 'กลุ่มผู้ใช้งานของคุณได้หมดอายุแล้ว กรุณาเลือกตำแหน่งสำหรับต่ออายุหรือสลับไปยังกลุ่มผู้ใช้งานอื่น',
   'freeze_pw_tips' => 'บัญชีของคุณถูกตั้งสถานะเป็น Freeze เนื่องจากมีความเสี่ยงในด้านความปลอดภัย กรุณาเปลี่ยนรหัสผ่านของคุณใหม่ทันที สถานะดังกล่าวจึงจะถูกยกเลิก',
   'freeze_email_tips' => 'บัญชีของคุณถูกตั้งสถานะเป็น Freeze เนื่องจากไม่ได้เข้าสู่ระบบเว็บไซต์นานเกินไป <a href="home.php?mod=spacecp&ac=profile&op=password&resend=1" class="xi2">กรุณาคลิกที่นี่</a> เพื่อรับอีเมลสำหรับยืนยันว่าคุณยังมีตัวตนอยู่จริง สถานะดังกล่าวจึงจะถูกยกเลิก',
-  'freeze_admincp_tips' => 'บัญชีปัจจุบันของคุณถูกระงับการใช้งานชั่วคราว คุณต้องกรอกเหตุผลการอุทธรณ์ในหน้านี้และจะสามารถยกเลิกได้หลังจากผู้ดูแลระบบได้อนุมัติแล้ว',
   'freeze_reason' => 'ระบุเหตุผลการอุทธรณ์',
   'freeze_reason_comment' => 'หากไม่สามารถยืนยันตัวบุคคลผ่านอีเมลได้ กรุณากรอกข้อมูลสำหรับการอุทธรณ์ได้ที่นี่',
-  'freeze_reason_admincp_comment' => 'หากคุณคิดว่าบัญชีของคุณไม่ควรถูกระงับการใช้งานชั่วคราว กรุณากรอกเหตุผลในการอุทธรณ์',
-  'freeze_remark' => 'ผลการตรวจสอบ',
-  'freeze_remark_comment' => 'You have submitted $space[freezemodsubmittimes] reviews, the last review was made by $space[freezemodadmin] on $space[freezemoddate]',
 );
 ?>

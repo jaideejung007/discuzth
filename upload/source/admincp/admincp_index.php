@@ -11,14 +11,10 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 	exit('Access Denied');
 }
 
-$sensitivedirs = array('./', './uc_server/', './ucenter/');
-
-foreach ($sensitivedirs as $sdir) {
-	if(@file_exists(DISCUZ_ROOT.$sdir.'install/index.php') && !DISCUZ_DEBUG) {
-		@unlink(DISCUZ_ROOT.$sdir.'install/index.php');
-		if(@file_exists(DISCUZ_ROOT.$sdir.'install/index.php')) {
-			dexit('Please delete '.$sdir.'install/index.php via FTP!');
-		}
+if(@file_exists(DISCUZ_ROOT.'./install/index.php') && !DISCUZ_DEBUG) {
+	@unlink(DISCUZ_ROOT.'./install/index.php');
+	if(@file_exists(DISCUZ_ROOT.'./install/index.php')) {
+		dexit('Please delete install/index.php via FTP!');
 	}
 }
 
@@ -230,35 +226,6 @@ if(isfounder()) {
 	}
 }
 
-showtableheader('&#xE15;&#xE23;&#xE27;&#xE08;&#xE2A;&#xE2D;&#xE1A;&#xE2A;&#xE20;&#xE32;&#xE1E;&#xE41;&#xE27;&#xE14;&#xE25;&#xE49;&#xE2D;&#xE21;&#xE01;&#xE32;&#xE23;&#xE17;&#xE33;&#xE07;&#xE32;&#xE19;', 'fixpadding');
-$env_ok = true;
-$now_ver_gd = function_exists('gd_info')? gd_info() : false;
-$now_ver = array('PHP' => constant('PHP_VERSION'), 'MySQL' => helper_dbtool::dbversion(), 'gethostbyname' => function_exists('gethostbyname'), 'file_get_contents' => function_exists('file_get_contents'), 'xml_parser_create' => function_exists('xml_parser_create'),
-'FileSock Function' => (function_exists('fsockopen') || function_exists('pfsockopen') || function_exists('stream_socket_client') || function_exists('curl_init')), 'GD' => ($now_ver_gd ? preg_replace('/[^0-9.]+/', '', $now_ver_gd['GD Version']) : false));
-$req_ver = array('PHP' => '5.3', 'MySQL' => '5.0', 'filter_var' => true, 'gethostbyname' => true, 'file_get_contents' => true, 'xml_parser_create' => true, 'FileSock Function' => true, 'GD' => '1.0');
-$sug_ver = array('PHP' => '7.1', 'MySQL' => '5.7', 'filter_var' => true, 'gethostbyname' => true, 'file_get_contents' => true, 'xml_parser_create' => true, 'FileSock Function' => true, 'GD' => '2.0');
-foreach ($now_ver as $key => $value) {
-	if($req_ver[$key] === true) {
-		if (!$value) {
-			showtablerow('', array('', 'class="td21" style="text-align:right;"'),
-				'<em class="unfixed">'.lang("admincp", "req_not_found", array('req' => $key)).'</em>'
-			);
-			$env_ok = false;
-		}
-	} else if (version_compare($value, $req_ver[$key], '<')) {
-		showtablerow('', array('', 'class="td21" style="text-align:right;"'),
-			'<em class="unfixed">'.lang("admincp", "req_ver_too_low", array('req' => $key, 'now_ver' => $value, 'sug_ver' => $sug_ver[$key], 'req_ver' => $req_ver[$key])).'</em>'
-		);
-		$env_ok = false;
-	}
-}
-if ($env_ok) {
-	showtablerow('', array('', 'class="td21" style="text-align:right;"'),
-		'<em class="fixed">'.lang("admincp", "req_ok", array('version' => constant("DISCUZ_VERSION").' R'.constant("DISCUZ_RELEASE").' '.strtoupper(constant("CHARSET")))).'</em>'
-	);
-}
-showtablefooter();
-
 showtableheader('home_onlines', 'nobottom fixpadding');
 echo '<tr><td>'.$onlines.'</td></tr>';
 showtablefooter();
@@ -317,7 +284,7 @@ showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight smallf
 	cplang('home_check_newversion'),
     ($newversion['newversion']['release'] ? ($newversion['newversion']['release'] != DISCUZ_RELEASE ? '<b style="color:red;">' : '').'Discuz! '.$newversion['newversion']['version'].' R'.$newversion['newversion']['release'].' '.strtoupper(CHARSET).' '.($newversion['newversion']['release'] != DISCUZ_RELEASE ? '</b>' : '') : '<a href="https://www.dismall.com/thread-73-1-1.html" target="_blank">&#xE40;&#xE0B;&#xE34;&#xE23;&#xE4C;&#xE1F;&#xE40;&#xE27;&#xE2D;&#xE23;&#xE4C;&#xE02;&#xE2D;&#xE07;&#xE04;&#xE38;&#xE13;&#xE15;&#xE23;&#xE27;&#xE08;&#xE44;&#xE21;&#xE48;&#xE1E;&#xE1A;&#xE40;&#xE27;&#xE2D;&#xE23;&#xE4C;&#xE0A;&#xE31;&#xE19;&#xE43;&#xE2B;&#xE21;&#xE48; &#xE01;&#xE23;&#xE38;&#xE13;&#xE32;&#xE04;&#xE25;&#xE34;&#xE01;&#xE17;&#xE35;&#xE48;&#xE19;&#xE35;&#xE48;&#xE40;&#xE1E;&#xE37;&#xE48;&#xE2D;&#xE14;&#xE39;&#xE40;&#xE27;&#xE2D;&#xE23;&#xE4C;&#xE0A;&#xE31;&#xE19;&#xE43;&#xE2B;&#xE21;&#xE48;</a>').
 	  ' <a href="'.ADMINSCRIPT.'?action=index&checknewversion&formhash='.$_G['formhash'].'">[ &#x5237;&#x65B0; ]</a>&nbsp;&nbsp;<br><br>'.
-    (!empty($downlist) ? implode('&#x3001;', $downlist).($newversion['newversion']['qqqun'] ? '<span class="bold">&nbsp;&nbsp;|&nbsp;&nbsp;&#3585;&#3621;&#3640;&#3656;&#3617; QQ:'.$newversion['newversion']['qqqun'].'</span>' : '') : '<span class="bold"><a href="https://gitee.com/3dming/DiscuzL/attach_files" target="_blank">&#3604;&#3634;&#3623;&#3609;&#3660;&#3650;&#3627;&#3621;&#3604;&#3652;&#3615;&#3621;&#3660;&#3621;&#3656;&#3634;&#3626;&#3640;&#3604; (&#3616;&#3634;&#3625;&#3634;&#3592;&#3637;&#3609;)</a> | <a href="https://github.com/jaideejung007/discuzth" class="lightlink2" target="_blank">&#3604;&#3634;&#3623;&#3609;&#3660;&#3650;&#3627;&#3621;&#3604;&#3652;&#3615;&#3621;&#3660;&#3621;&#3656;&#3634;&#3626;&#3640;&#3604; (&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;)</a> | &#3585;&#3621;&#3640;&#3656;&#3617; QQ:73'.'21'.'03'.'690</span>')
+    (!empty($downlist) ? implode('&#x3001;', $downlist).($newversion['newversion']['qqqun'] ? '<span class="bold">&nbsp;&nbsp;|&nbsp;&nbsp;&#3585;&#3621;&#3640;&#3656;&#3617; QQ:'.$newversion['newversion']['qqqun'].'</span>' : '') : '<span class="bold"><a href="https://gitee.com/3dming/DiscuzL/attach_files" target="_blank">&#3604;&#3634;&#3623;&#3609;&#3660;&#3650;&#3627;&#3621;&#3604;&#3652;&#3615;&#3621;&#3660;&#3621;&#3656;&#3634;&#3626;&#3640;&#3604; (&#3616;&#3634;&#3625;&#3634;&#3592;&#3637;&#3609;)</a> | <a href="#" class="lightlink2" target="_blank">&#3604;&#3634;&#3623;&#3609;&#3660;&#3650;&#3627;&#3621;&#3604;&#3652;&#3615;&#3621;&#3660;&#3621;&#3656;&#3634;&#3626;&#3640;&#3604; (&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;)</a> | &#3585;&#3621;&#3640;&#3656;&#3617; QQ:73'.'21'.'03'.'690</span>')
 ));
 
 showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight smallfont"'), array(
@@ -350,7 +317,7 @@ showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight smallf
 ));
 showtablefooter();
 
-showtableheader('&#xE02;&#xE48;&#xE32;&#xE27;&#xE2A;&#xE32;&#xE23; Discuz! &#xE25;&#xE48;&#xE32;&#xE2A;&#xE38;&#xE14;', 'fixpadding left" style="width : 48%; margin-left: 2%; clear: none;', '', '3');
+showtableheader('&#xE01;&#xE34;&#xE08;&#xE01;&#xE23;&#xE23;&#xE21;&#xE02;&#xE2D;&#xE07; Discuz! &#xE25;&#xE48;&#xE32;&#xE2A;&#xE38;&#xE14;', 'fixpadding left" style="width : 48%; margin-left: 2%; clear: none;', '', '3');
 if(!empty($newversion['news'])){
     $newversion['news'] = dhtmlspecialchars($newversion['news']);
     foreach ($newversion['news'] as $v){
@@ -430,7 +397,7 @@ showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight team"'
 ));
 /*jaideejung007*/ showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight"'), array(
 /*jaideejung007*/	'&#3648;&#3623;&#3629;&#3619;&#3660;&#3594;&#3633;&#3609;&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;',
-/*jaideejung007*/	'<a href="https://github.com/jaideejung007/discuzth" class="lightlink2" target="_blank">Discuz! &#xE20;&#xE32;&#xE29;&#xE32;&#xE44;&#xE17;&#xE22;</a>, Rev: '.DISCUZ_TH_REVISION
+/*jaideejung007*/	'<a href="#" class="lightlink2" target="_blank">&#3604;&#3636;&#3626;&#3588;&#3633;&#3626;&#3652;&#3607;&#3618;!</a>, Rev: '.DISCUZ_TH_REVISION
 /*jaideejung007*/));
 showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight"'), array(
 	cplang('home_dev_links'),
@@ -440,7 +407,7 @@ showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight"'), ar
 	<a href="http://www.discuz.net/" class="lightlink2" target="_blank">&#x8BA8;&#x8BBA;&#x533A;</a>,
 	<a href="'.ADMINSCRIPT.'?action=cloudaddons" class="lightlink2" target="_blank">Discuz! App Store</a>,
 	<a href="https://gitee.com/ComsenzDiscuz/DiscuzX" class="lightlink2" target="_blank">Discuz! X Git</a>,
-<!--jaideejung007-->	<a href="https://github.com/jaideejung007/discuzth" class="lightlink2" target="_blank">Discuz! Thai Official Repositories</a>
+<!--jaideejung007-->	<a href="https://jaideejung007.ml/" class="lightlink2" target="_blank">jaideejung007\'s</a>
 '));
 showtablefooter();
 

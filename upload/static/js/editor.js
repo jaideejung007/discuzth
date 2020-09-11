@@ -476,9 +476,9 @@ function checkFocus() {
 			return;
 		}
 		try {
-			editwin.document.body.focus();
-		} catch(e) {
 			editwin.focus();
+		} catch(e) {
+			editwin.document.body.focus();
 		}
 	} else {
 		textobj.focus();
@@ -760,7 +760,7 @@ function discuzcode(cmd, arg) {
 		return;
 	} else if(!wysiwyg && cmd == 'removeformat') {
 		var simplestrip = new Array('b', 'i', 'u');
-		var complexstrip = new Array('font', 'color', 'backcolor', 'size', 'align', 'float');
+		var complexstrip = new Array('font', 'color', 'backcolor', 'size');
 
 		var str = getSel();
 		if(str === false) {
@@ -998,16 +998,15 @@ function showEditorMenu(tag, params) {
 	var menutype = 'menu';
 
 	try {
-		sel = wysiwyg ? editdoc.selection.createRange() : document.selection.createRange();
-		selection = wysiwyg ? sel.htmlText : sel.text;
-	} catch(e) {
-		if (wysiwyg) {
-			var gSel = editdoc.getSelection();
-			if (gSel.rangeCount > 0) {
-				sel = gSel.getRangeAt(0);
-			}
-		}
-		selection = getSel();
+		sel = wysiwyg ? (editdoc.selection.createRange() ? editdoc.selection.createRange() : editdoc.getSelection().getRangeAt(0)) : document.selection.createRange();
+	} catch(e) {}
+
+	selection = sel ? (wysiwyg ? sel.htmlText : sel.text) : getSel();
+
+	if(BROWSER.ie) {
+		selection = editdoc.getSelection();
+		sel = selection.getRangeAt(0);
+		selection = readNodes(sel.cloneContents(), false);
 	}
 
 	if(menu) {
@@ -1291,7 +1290,7 @@ function showEditorMenu(tag, params) {
 				var posque = mediaUrl.lastIndexOf('?');
 				posque = posque === -1 ? mb_strlen(mediaUrl) : posque;
 				var ext = mediaUrl.lastIndexOf('.') === -1 ? '' : mediaUrl.substring(mediaUrl.lastIndexOf('.') + 1, posque).toLowerCase();
-				ext = in_array(ext, ['mp3', 'wav', 'wma', 'ra', 'rm', 'ram', 'mid', 'asx', 'wmv', 'avi', 'mpg', 'mpeg', 'rmvb', 'asf', 'mov', 'flv', 'swf', 'mp4', 'm4a', 'm4v', '3gp', 'ogv', 'ogg', 'webm', 'weba', 'aac', 'flac']) ? ext : 'x';
+				ext = in_array(ext, ['mp3', 'wma', 'ra', 'rm', 'ram', 'mid', 'asx', 'wmv', 'avi', 'mpg', 'mpeg', 'rmvb', 'asf', 'mov', 'flv', 'swf']) ? ext : 'x';
 				if(ext == 'x') {
 					if(/^mms:\/\//.test(mediaUrl)) {
 						ext = 'mms';
@@ -1442,9 +1441,6 @@ function insertText(text, movestart, moveend, select, sel) {
 			} catch(e) {
 				if(!sel) {
 					var sel = editdoc.getSelection();
-					if (sel.rangeCount == 0) {
-						sel.collapse(editdoc.body, 0);
-					}
 					var range = sel.getRangeAt(0);
 				} else {
 					var range = sel;

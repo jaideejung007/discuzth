@@ -205,6 +205,7 @@ EOF;
 
 	if(empty($_GET['uid']) && empty($_GET['username']) && empty($_GET['ip'])) {
 
+		/*search={"nav_repeat":"action=members&operation=repeat"}*/
 		shownav('user', 'nav_members');
 		showsubmenu('nav_members', array(
 			array('search', 'members&operation=search', 0),
@@ -220,6 +221,7 @@ EOF;
 		showsubmit('submit', 'submit');
 		showtablefooter();
 		showformfooter();
+		/*search*/
 
 	} else {
 
@@ -463,7 +465,7 @@ EOF;
 				if($deleteitem == 'doing') {
 					$doings = array();
 					$query = C::t('home_doing')->fetch_all_by_uid_doid($uids, '', '', 0, $pertask);
-					foreach ($query as $doing) {
+					foreach ($query as $doings) {
 						$doings[] = $doing['doid'];
 					}
 
@@ -919,6 +921,7 @@ EOF;
 			($groupselect['special'] ? '<optgroup label="'.$lang['usergroups_special'].'">'.$groupselect['special'].'</optgroup>' : '').
 			($groupselect['specialadmin'] ? '<optgroup label="'.$lang['usergroups_specialadmin'].'">'.$groupselect['specialadmin'].'</optgroup>' : '').
 			'<optgroup label="'.$lang['usergroups_system'].'">'.$groupselect['system'].'</optgroup>';
+		/*search={"nav_members_add":"action=members&operation=add"}*/
 		shownav('user', 'nav_members_add');
 		showsubmenu('members_add');
 		showformheader('members&operation=add');
@@ -931,6 +934,7 @@ EOF;
 		showsubmit('addsubmit');
 		showtablefooter();
 		showformfooter();
+		/*search*/
 
 	} else {
 
@@ -1061,6 +1065,7 @@ EOF;
 			$groups['member'] = '<option value="'.$group['groupid'].'" gtype="member">'.$group['grouptitle'].'</option>';
 		}
 
+		/*search={"members_group":"action=members&operation=group"}*/
 		shownav('user', 'members_group');
 		showsubmenu('members_group_member', array(), '', array('username' => $member['username']));
 		echo '<script src="static/js/calendar.js" type="text/javascript"></script>';
@@ -1087,6 +1092,7 @@ EOF;
 		showtablefooter();
 
 		showformfooter();
+		/*search*/
 
 	} else {
 
@@ -1177,7 +1183,7 @@ EOF;
 		}
 
 		if($_GET['groupidnew'] != $member['groupid'] && (in_array($_GET['groupidnew'], array(4, 5)) || in_array($member['groupid'], array(4, 5)))) {
-			$my_opt = in_array($_GET['groupidnew'], array(4, 5)) ? 'banuser' : 'unbanuser';
+			$my_opt = in_array($_GET['groupidnew'], array(4, 5)) ? 'banuser' : 'unbanuser';			
 			banlog($member['username'], $member['groupid'], $_GET['groupidnew'], $groupexpirynew, $_GET['reason']);
 		}
 
@@ -1229,6 +1235,7 @@ EOF;
 EOT;
 		shownav('user', 'members_credit');
 		showsubmenu('members_credit');
+		/*search={"members_credit":"action=members&operation=credit"}*/
 		showtips('members_credit_tips');
 		showformheader("members&operation=credit&uid={$_GET['uid']}");
 		showtableheader('<em class="right"><a href="'.ADMINSCRIPT.'?action=logs&operation=credit&srch_uid='.$_GET['uid'].'&frame=yes" target="_blank">'.cplang('members_credit_logs').'</a></em>'.cplang('members_credit').' - '.$member['username'].'('.$member['grouptitle'].')', 'nobottom');
@@ -1241,6 +1248,7 @@ EOT;
 		showsubmit('creditsubmit');
 		showtablefooter();
 		showformfooter();
+		/*search*/
 
 	} else {
 
@@ -1438,7 +1446,7 @@ EOT;
 			<tr>
 				<td colspan="2">
 					<ul class="dblist" onmouseover="altStyle(this);">
-						<li style="width: 100%;"><input type="checkbox" name="chkall" onclick="checkAll('prefix', this.form, 'clear', 'chkall', true)" class="checkbox">&nbsp;$lang[select_all]</li>
+						<li style="width: 100%;"><input type="checkbox" name="chkall" onclick="checkAll('prefix', this.form, 'clear')" class="checkbox">&nbsp;$lang[select_all]</li>
 						<li style="width: 8%;"><input type="checkbox" value="post" name="clear[post]" class="checkbox">&nbsp;$lang[members_ban_delpost]</li>
 						<li style="width: 8%;"><input type="checkbox" value="follow" name="clear[follow]" class="checkbox">&nbsp;$lang[members_ban_delfollow]</li>
 						<li style="width: 8%;"><input type="checkbox" value="postcomment" name="clear[postcomment]" class="checkbox">&nbsp;$lang[members_ban_postcomment]</li>
@@ -1448,8 +1456,7 @@ EOT;
 						<li style="width: 8%;"><input type="checkbox" value="share" name="clear[share]" class="checkbox">&nbsp;$lang[members_ban_delshare]</li>
 						<li style="width: 8%;"><input type="checkbox" value="avatar" name="clear[avatar]" class="checkbox">&nbsp;$lang[members_ban_delavatar]</li>
 						<li style="width: 8%;"><input type="checkbox" value="comment" name="clear[comment]" class="checkbox">&nbsp;$lang[members_ban_delcomment]</li>
-						<li style="width: 8%;"><input type="checkbox" value="follower" name="clear[follower]" class="checkbox">&nbsp;$lang[members_ban_delfollower]</li>
-						<li style="width: 8%;"><input type="checkbox" value="profile" name="clear[profile]" class="checkbox">&nbsp;$lang[members_ban_delprofile]</li>
+                        			<li style="width: 8%;"><input type="checkbox" value="profile" name="clear[profile]" class="checkbox">&nbsp;$lang[members_ban_delprofile]</li>
 					</ul>
 				</td>
 			</tr>
@@ -1734,19 +1741,14 @@ EOF;
 					C::t('forum_postcache')->delete($postcomment_cache_pid);
 				}
 			}
-
+            
 			if(in_array('profile', $_GET['clear'])) {
 				C::t('common_member_profile'.$tableext)->delete($member['uid']);
 				C::t('common_member_profile'.$tableext)->insert(array('uid' => $member['uid']));
-				C::t('common_member_field_forum'.$tableext)->update($member['uid'], array('customstatus' => '', 'sightml' => ''));
-				C::t('common_member_field_home'.$tableext)->update($member['uid'], array('spacename' => '', 'spacedescription' => ''));
+                		C::t('common_member_field_forum'.$tableext)->update($member['uid'], array('customstatus' => '', 'sightml' => ''));
+                		C::t('common_member_field_home'.$tableext)->update($member['uid'], array('spacename' => '', 'spacedescription' => ''));
 			}
-
-			if(in_array('follower', $_GET['clear'])) {
-				C::t('home_follow')->delete_by_uid($member['uid']);
-				C::t('home_follow')->delete_by_followuid($member['uid']);
-			}
-
+            
 			if($membercount) {
 				DB::update('common_member_count'.$tableext, $membercount, "uid='$member[uid]'");
 			}
@@ -1768,6 +1770,7 @@ EOF;
 
 		shownav('user', 'members_access_edit');
 		showsubmenu('members_access_edit');
+		/*search={"members_access_edit":"action=members&operation=access"}*/
 		showtips('members_access_tips');
 		showtableheader(cplang('members_access_now').' - '.$member['username'], 'nobottom fixpadding');
 		showsubtitle(array('forum', 'members_access_view', 'members_access_post', 'members_access_reply', 'members_access_getattach', 'members_access_getimage', 'members_access_postattach', 'members_access_postimage', 'members_access_adminuser', 'members_access_dateline'));
@@ -1821,6 +1824,7 @@ EOF;
 		showsubmit('accesssubmit', 'submit');
 		showtablefooter();
 		showformfooter();
+		/*search*/
 
 	} else {
 
@@ -1940,6 +1944,7 @@ EOF;
 		$member['signature'] = html2bbcode($member['sightml']);
 
 		shownav('user', 'members_edit');
+		/*search={"members_edit":"action=members&operation=edit"}*/
 		showsubmenu("$lang[members_edit] - $member[username]", array(
 			array('connect_member_info', 'members&operation=edit&uid='.$uid,  1),
 			!empty($_G['setting']['connect']['allow']) ? array('connect_member_bindlog', 'members&operation=edit&do=bindlog&uid='.$uid,  0) : array(),
@@ -1947,7 +1952,6 @@ EOF;
 		showformheader("members&operation=edit&uid=$uid", 'enctype');
 		showtableheader();
 		$status = array($member['status'] => ' checked');
-		$freeze = array($member['freeze'] => ' checked');
 		showsetting('members_edit_username', '', '', ($_G['setting']['connect']['allow'] && $member['conisbind'] ? ' <img class="vmiddle" src="static/image/common/connect_qq.gif" />' : '').' '.$member['username']);
 		showsetting('members_edit_avatar', '', '', ' <img src="'.avatar($uid, 'middle', true, false, true).'?random='.random(2).'" onerror="this.onerror=null;this.src=\''.$_G['setting']['ucenterurl'].'/images/noavatar_middle.gif\'" /><br /><br /><input name="clearavatar" class="checkbox" type="checkbox" value="1" /> '.$lang['members_edit_avatar_clear']);
 		$hrefext = "&detail=1&users=$member[username]&searchsubmit=1&perpage=50&fromumanage=1";
@@ -1965,11 +1969,6 @@ EOF;
 		}
 		showsetting('members_edit_clearquestion', 'clearquestion', 0, 'radio');
 		showsetting('members_edit_status', 'statusnew', $member['status'], 'radio');
-		showsetting('members_edit_freeze', array('freezenew', array(
-			array(0, $lang['members_edit_freeze_false']),
-			array(1, $lang['members_edit_freeze_password']),
-			array(-1, $lang['members_edit_freeze_admincp']),
-			array(2, $lang['members_edit_freeze_email']))), $member['freeze'], 'mradio');
 		showsetting('members_edit_email', 'emailnew', $member['email'], 'text');
 		showsetting('members_edit_email_emailstatus', 'emailstatusnew', $member['emailstatus'], 'radio');
 		showsetting('members_edit_posts', 'postsnew', $member['posts'], 'text');
@@ -2002,6 +2001,7 @@ EOF;
 		showsubmit('editsubmit');
 		showtablefooter();
 		showformfooter();
+		/*search*/
 
 	} else {
 
@@ -2088,7 +2088,6 @@ EOF;
 		$addsize = intval($_GET['addsizenew']);
 		$addfriend = intval($_GET['addfriendnew']);
 		$status = intval($_GET['statusnew']) ? -1 : 0;
-		$freeze = in_array($_GET['freezenew'], array(-1, 0, 1, 2)) ? $_GET['freezenew'] : 0;
 		$emailstatusnew = intval($_GET['emailstatusnew']);
 		if(!empty($_G['setting']['connect']['allow'])) {
 			if($member['uinblack'] && empty($_GET['uinblack'])) {
@@ -2103,7 +2102,7 @@ EOF;
 				connectunbind($member);
 			}
 		}
-		$memberupdate = array_merge($memberupdate, array('regdate'=>$regdatenew, 'emailstatus'=>$emailstatusnew, 'status'=>$status, 'freeze'=>$freeze, 'timeoffset'=>$_GET['timeoffsetnew']));
+		$memberupdate = array_merge($memberupdate, array('regdate'=>$regdatenew, 'emailstatus'=>$emailstatusnew, 'status'=>$status, 'timeoffset'=>$_GET['timeoffsetnew']));
 		C::t('common_member'.$tableext)->update($uid, $memberupdate);
 		C::t('common_member_field_home'.$tableext)->update($uid, array('addsize' => $addsize, 'addfriend' => $addfriend));
 		C::t('common_member_count'.$tableext)->update($uid, array('posts' => $_GET['postsnew'], 'digestposts' => $_GET['digestpostsnew']));
@@ -2219,7 +2218,7 @@ EOF;
 					'dateline' => $_G['timestamp'],
 					'expiration' => $expiration,
 				);
-				C::t('common_banned')->insert($data);
+				C::t('common_banned')->insert($data);				
 			}
 
 			if(is_array($_GET['expirationnew'])) {
@@ -2776,6 +2775,7 @@ function showsearchform($operation = '') {
 		$usertagselect .= "<option value=\"$row[tagid]\" ".(in_array($row['tagid'], $tagid) ? 'selected' : '').">$row[tagname]</option>\n";
 	}
 
+	/*search={"nav_members":"action=members&operation=search"}*/
 	showtagheader('div', 'searchmembers', !$_GET['submit']);
 	echo '<script src="static/js/calendar.js" type="text/javascript"></script>';
 	echo '<style type="text/css">#residedistrictbox select, #birthdistrictbox select{width: auto;}</style>';
@@ -2930,6 +2930,7 @@ function showsearchform($operation = '') {
 	showtablefooter();
 	showformfooter();
 	showtagfooter('div');
+	/*search*/
 }
 
 function searchcondition($condition) {
@@ -3306,7 +3307,7 @@ function notifymembers($operation, $variable) {
 
 function banlog($username, $origgroupid, $newgroupid, $expiration, $reason, $status = 0) {
 	global $_G, $_POST;
-	$cloud_apps = dunserialize($_G['setting']['cloud_apps']);
+	$cloud_apps = dunserialize($_G['setting']['cloud_apps']);	
 	writelog('banlog', dhtmlspecialchars("$_G[timestamp]\t{$_G[member][username]}\t$_G[groupid]\t$_G[clientip]\t$username\t$origgroupid\t$newgroupid\t$expiration\t$reason\t$status"));
 }
 

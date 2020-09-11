@@ -386,28 +386,8 @@ if(submitcheck('profilesubmit')) {
 		}
 		C::t('common_member')->update($_G['uid'], $setarr);
 	}
-	if($_G['member']['freeze'] == 2 || $_G['member']['freeze'] == -1) {
-		$status = C::t('common_member_validate')->fetch($_G['uid']);
-		if($status) {
-			C::t('common_member_validate')->update($_G['uid'], array(
-				'submitdate' => TIMESTAMP,
-				'submittimes' => $status['submittimes'] + 1,
-				'status' => 0,
-				'message' => dhtmlspecialchars(addslashes($_POST['freezereson'])),
-			));
-		} else {
-			C::t('common_member_validate')->insert(array(
-				'uid' => $_G['uid'],
-				'submitdate' => TIMESTAMP,
-				'moddate' => 0,
-				'admin' => '',
-				'submittimes' => 1,
-				'status' => 0,
-				'message' => dhtmlspecialchars(addslashes($_POST['freezereson'])),
-				'remark' => '',
-			), false, true);
-		}
-		manage_addnotify('verifyuser');
+	if($_G['member']['freeze'] == 2) {
+		C::t('common_member_validate')->update($_G['uid'], array('message' => dhtmlspecialchars($_G['gp_freezereson'])));
 	}
 
 	if($authstr) {
@@ -442,13 +422,9 @@ if($operation == 'password') {
 	}
 	$actives = array('password' =>' class="a"');
 	$navtitle = lang('core', 'title_password_security');
-	if($_G['member']['freeze'] == 2 || $_G['member']['freeze'] == -1) {
+	if($_G['member']['freeze'] == 2) {
 		$fzvalidate = C::t('common_member_validate')->fetch($space['uid']);
 		$space['freezereson'] = $fzvalidate['message'];
-		$space['freezemodremark'] = $fzvalidate['remark'];
-		$space['freezemoddate'] = dgmdate($fzvalidate['moddate'], 'Y-m-d H:i:s');
-		$space['freezemodadmin'] = $fzvalidate['admin'];
-		$space['freezemodsubmittimes'] = $fzvalidate['submittimes'];
 	}
 
 } else {
