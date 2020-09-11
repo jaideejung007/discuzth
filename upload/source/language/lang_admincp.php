@@ -15,6 +15,9 @@ if(!defined('IN_DISCUZ')) {
 $lang = array
 (
 
+	'req_ver_too_low' => '{req} เวอร์ชัน ({now_ver}) ในสภาพแวดล้อมระบบปัจจุบันของคุณเป็นเวอร์ชันต่ำเกินไป ระบบอาจไม่สามารถทำงานตามที่คาดไว้ได้ เราขอแนะนำให้คุณอัปเกรดเป็นเวอร์ชัน {sug_ver} โดยที่ข้อกำหนดขั้นต่ำสำหรับระบบเพื่อให้ทำงานได้ตามปกติคือเวอร์ชัน {req_ver}',
+	'req_not_found' => 'ไม่ได้ติดตั้งหรือเปิดใช้โมดูล {req} ในสภาพแวดล้อมระบบปัจจุบันของคุณ ระบบอาจไม่สามารถทำงานตามที่คาดไว้ได้ เราขอแนะนำให้คุณติดตั้งหรือเปิดใช้งานโมดูลนี้เพื่อให้เป็นไปตามข้อกำหนดขั้นต่ำของระบบเว็บบอร์ด',
+	'req_ok' => 'สภาพแวดล้อมระบบปัจจุบันของคุณเหมาะสำหรับใช้งาน Discuz! {version}',
 	'subscribe_comsenz_email' => 'กรอกที่อยู่อีเมลของคุณ เพื่อรับข่าวสารการพัฒนา คำแนะนำด้านความปลอดภัย และความเคลื่อนไหวต่างๆ ที่เกี่ยวกับดิสคัส!',
 	'scan_discuz_qrcode' => '<img src="source/plugin/wechat/image/discuz_qr.jpg" align="left" width="80" /><br />สแกน QR Code Discuz! Official micro-channel<br /><br />เพื่อติดตามข่าวสารจาก Discuz! อย่างเป็นทางการ',
 	'reglinkname_default' => 'ลงทะเบียน',
@@ -781,7 +784,7 @@ $lang = array
 	'setting_access_register_maildomain_white' => 'WhiteList mode',
 	'setting_access_register_maildomain_black' => 'BlackList mode',
 	'setting_access_register_maildomain_list' => 'Domain list',
-	'setting_access_register_maildomain_list_comment' => 'When a mail domain name is present in the list, it will be operated with the corresponding action. You can block entered emails from some domains. For example, if you want to block all mailboxes like xxx@site.com, just enter the site.com. One domain per line.',
+	'setting_access_register_maildomain_list_comment' => 'When a mail domain name is present in the list, it will be operated with the corresponding action. You can block entered emails from some domains. For example, if you want to block all mailboxes like xxx@site.com, just enter the @site.com. One domain per line.',
 	'setting_access_register_ctrl' => 'จำกัดช่วงเวลาที่ใช้ IP เดียวกันในการลงทะเบียน (ชั่วโมง)',
 	'setting_access_register_ctrl_comment' => 'หากมีการลงทะเบียนโดยใช้ไอพีเดียวกันจะทำการชะลอการลงทะเบียนจนกว่าจะถึงเวลาที่เรากำหนด  กำหนดเป็นชั่วโมง 0 หมายถึงไม่มีกำหนด',
 	'setting_access_register_floodctrl' => 'จำนวนสูงสุดของ IP เดียวกันที่ใช้ลงทะเบียนใน 24 ชั่วโมง',
@@ -1810,6 +1813,8 @@ $lang = array
 	'setting_functions_other_uidlogin_comment' => 'หากเลือก "ใช่" จะอนุญาตให้ลงชื่อเข้าใช้ผ่าน UID ได้',
 	'setting_functions_other_autoidselect' => 'เปิดใช้งานการเลือกบัญชีลงชื่อเข้าใช้อัตโนมัติ',
 	'setting_functions_other_autoidselect_comment' => 'เลือก"ใช่" ก่อนที่จะลงชื่อเข้าใช้ สมาชิกจะต้องใส่ UID ชื่อสมาชิก หรือ อีเมล โดยที่ไม่ต้องเลือกตัวเลือกก่อน ระบบจะตรวจสอบโดยอัตโนมัติ',
+	'setting_functions_other_submitlock' => '<span class="spectitle">เปิดใช้งานฟังก์ชันการป้องกันการส่งแบบฟอร์มพร้อม ๆ</span>',
+	'setting_functions_other_submitlock_comment' => 'ถ้าเลือก "ใช่" จะป้องกันไม่ให้ผู้ใช้ส่งแบบฟอร์มหลาย ๆ แบบพร้อมกันซึ่งจะสามารถป้องกันปัญหาการให้คะแนนที่อาจเกิดขึ้นได้อย่างมีประสิทธิภาพ หมายเหตุ: ในกรณีที่ไม่ใช้แคชหน่วยความจำ (Redis, Memcached) ฟังก์ชันนี้อาจเพิ่มภาระให้กับเซิร์ฟเวอร์ได้',
 	'setting_functions_other_rssstatus' => '<span class="spectitle">เปิดใช้งาน RSS</span>',
 	'setting_functions_other_rssstatus_comment' => 'Select "Yes" for allow users to use RSS client software to receive the latest Forum posts. Note: If a forum has many sub-forums, this feature may increase the server loading.',
 	'setting_functions_other_rssttl' => '<span class="spectitle">RSS TTL(นาที)</span>',
@@ -2035,7 +2040,7 @@ $lang = array
 	'setting_mail_setting_from' => 'Email sender address',
 	'setting_mail_setting_username' => 'SMTP Authentication User Name',
 	'setting_mail_setting_password' => 'SMTP authentication password',
-	'setting_mail_setting_delimiter' => 'Message header separator',
+	'setting_mail_setting_delimiter' => 'Message header separator (only valid for PHP sendmail)',
 	'setting_mail_setting_delimiter_comment' => 'Please set your mail server to additional parameters',
 	'setting_mail_setting_delimiter_crlf' => 'Use CRLF as a delimiter (usually in a Windows hosts)',
 	'setting_mail_setting_delimiter_lf' => 'Use LF as a delimiter (usually in Unix/Linux hosts)',
@@ -2277,7 +2282,7 @@ $lang = array
 	'setting_sec_accountguard_loginpwcheck_prompt' => 'Enable and prompt',
 	'setting_sec_accountguard_loginpwcheck_force' => 'Enable and force to modify the weak password',
 	'setting_sec_accountguard_loginoutofdate' => 'Abnormal log in detecting',
-	'setting_sec_accountguard_loginoutofdate_comment' => 'When a user was logged on/off more than 90 days since the last Log in, the account became the "unverified" status. A user can verify his mailbox or complaint the thaw account. QQ logged in users not affects this function <a href="'.ADMINSCRIPT.'?frames=yes&action=moderate&operation=members">Audit users</a>',
+	'setting_sec_accountguard_loginoutofdate_comment' => 'When a user was logged on/off more than 90 days since the last Log in, the account became the "unverified" status. A user can verify his mailbox or complaint the thaw account. QQ logged in users not affects this function <a href="'.ADMINSCRIPT.'?action=moderate&operation=members">Audit users</a>',
 
 
 	'setting_attach' => 'ตั้งค่าไฟล์แนบ',
@@ -2301,7 +2306,7 @@ $lang = array
 	'setting_attach_basic_multi' => 'อัปโหลดผ่านโปรแกรมแฟลช',
 	'setting_attach_basic_simple' => 'อัปโหลดแบบธรรมดา',
 	'setting_attach_basic_allowattachurl' => 'ที่อยู่ URL ไฟล์แนบ เล่นสื่อไฟล์แนบ',
-	'setting_attach_basic_allowattachurl_comment' => 'เลือก ใช่ หลังจากเปิดใช้งานที่อยู่ URL ไฟล์แนบ เมื่อโพสต์ไฟล์แนบ ลิงก์ที่อยู่ URL ของไฟล์แนบจะแสดงแบบเต็มๆ ระบบสามารถเล่นสื่อจากลิงก์ที่อยู่ URL ของไฟล์แนบโดยตรง เลือก ไม่ เมื่อโพสต์ไฟล์แนบ ลิงก์ที่อยู่ URL ของไฟล์แนบจะแสดงแบบ "attach://aid"',
+	'setting_attach_basic_allowattachurl_comment' => 'After opening the attachment URL address, the address of the uploaded attachment can be quoted in any post via "attach://aid" , and supports direct playback of media attachments. This setting needs to be set in <a href="'.ADMINSCRIPT.'?action=usergroups">User group</a> - The user group is allowed to use multimedia codes in the post related to take effect. This setting needs to select the attachment reading mode to support the Range header and the correct MIME type header for normal operation',
 	'setting_attach_basic_swfupload_comment' => 'การอัปโหลดผ่านโปรแกรมแฟลช Flash สามารถเลือกไฟล์และอัปโหลดพร้อมกันได้ครั้งละจำนวนมาก และยังแสดงความคืบหน้าของการอัปโหลด จะเปิดใช้งานทั้งสองอย่างเลยก็ได้ ถ้าเปิดใช้งานการอัปโหลดผ่านโปรแกรมแฟลชอย่างเดียว เบราเซอร์ของผู้ใช้งานบางคนอาจจะมีปัญหาโปรแกรมแฟลชอาจจะทำงานผิดพลาด จะได้ใช้การอัปโหลดแบบธรรมดาแทน',
 
 	'setting_attach_forumattach' => 'ไฟล์แนบของบอร์ด',
@@ -3426,6 +3431,11 @@ $lang = array
 	'members_edit_password_comment' => 'ปล่อยว่างไว้หากคุณไม่ต้องการเปลี่ยนรหัสผ่าน',
 	'members_edit_clearquestion' => 'เคลียร์คำถามเพื่อความปลอดภัยของสมาชิก',
 	'members_edit_status' => 'ล็อกผู้ใช้ปัจจุบัน',
+	'members_edit_freeze' => 'User freeze status',
+	'members_edit_freeze_false' => 'Not frozen',
+	'members_edit_freeze_password' => 'Need to reset password and unfreeze',
+	'members_edit_freeze_admincp' => 'Need to unfreeze after background review',
+	'members_edit_freeze_email' => 'Need to verify the mailbox or unfreeze after background review',
 	'members_edit_clearquestion_comment' => 'เลือก"ใช่"เพื่อลบคำถามความปลอดภัยของสมาชิก สมาชิกจะไม่ได้ตอบคำถามความปลอดภัยเมื่อลงชื่อเข้าใช้;เลือก"ไม่"จะไม่เปลี่ยนแปลงการตั้งค่าคำถามความปลอดภัยของสมาชิก',
 	'members_edit_nickname' => 'ชื่อเล่น',
 	'members_edit_gender' => 'เพศ',
@@ -3530,6 +3540,7 @@ $lang = array
 	'members_ban_validity_comment' => 'After the specified time period the banned user can automatically become a regular user.',
 	'members_ban_delpost' => 'Posts',
 	'members_ban_delfollow' => 'Follows',
+	'members_ban_delfollower' => 'Follower',
 	'members_ban_delblog' => 'Blogs',
 	'members_ban_delalbum' => 'Albums',
 	'members_ban_deldoing' => 'Doings',
@@ -5225,6 +5236,7 @@ $lang = array
 	'plugins_config_uninstall' => 'ลบ',
 	'plugins_config_upgrade' => 'อัปเกรดปลั๊กอิน',
 	'plugins_config_delete' => 'ถอนการติดตั้งปลั๊กอิน',
+	'plugins_config_uninstall_tips' => 'คุณแน่ใจหรือไม่ว่าต้องการถอนการติดตั้งปลั๊กอิน {pluginname} และลบข้อมูลทั้งหมดที่สร้างโดยปลั๊กอิน {pluginname} โดยที่ไม่สามารถย้อนกลับได้',
 	'plugins_config_upgrade_other' => 'คุณแน่ใจว่าต้องการอัปเกรดปลั๊กอิก {pluginname} จากเวอร์ชัน {version} ไปยังเวอร์ชันใหม่กว่านี้?',
 	'plugins_config_uninstallplugin' => 'ถอนการติดตั้งปลั๊กอิน',
 	'plugins_edit' => 'ออกแบบปลั๊กอิน',
@@ -6448,8 +6460,6 @@ $lang = array
 	'cplog_setting_ec' => 'ตั้งค่าพื้นฐานอีคอมเมิร์ซ',
 	'cplog_ecommerce_ec_credit' => 'ระบบการจัดอันดับเครดิต',
 	'cplog_tradelog' => 'บันทึกการซื้อขายสินค้า',
-
-	'cplog_google_config' => 'ตั้งค่าพื้นฐาน Google',
 
 	'cplog_database_export' => 'สำรองข้อมูล',
 	'cplog_database_import' => 'นำเข้าฐานข้อมูล',

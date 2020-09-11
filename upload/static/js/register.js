@@ -193,9 +193,8 @@ function emailMenuOp(op, e, id) {
 	} else if(op == 4) {
 	       	e = e ? e : window.event;
                 var obj = $(id);
-        	if(e.keyCode == 13) {
-                        var v = obj.value.indexOf('@') != -1 ? obj.value.substring(0, obj.value.indexOf('@')) : obj.value;
-                        obj.value = v + '@' + emaildomains[emailMenui];
+        	if(e.keyCode == 13 && obj.value.indexOf('@') == -1) {
+                        obj.value = obj.value + '@' + emaildomains[emailMenui];
                         doane(e);
         	}
 	} else if(op == 5) {
@@ -273,8 +272,8 @@ function checkusername(id) {
 	} else {
 		lastusername = username;
 	}
-	if(username.match(/<|"/ig)) {
-		errormessage(id, 'ชื่อที่คุณใช้มีตัวอักษรหรือคำที่ห้ามใช้');
+	if(username.match(/<|>|"|\(|\)|'/ig)) {
+		errormessage(id, 'ชื่อผู้ใช้มีตัวอักษรที่ไม่อนุญาตให้ใช้งาน');
 		return;
 	}
 	var unlen = username.replace(/[^\x00-\xff]/g, "**").length;

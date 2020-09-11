@@ -56,7 +56,7 @@
 		var url = nextpageurl + '&t=' + parseInt((+new Date()/1000)/(Math.random()*1000));
 		var x = new Ajax('HTML');
 		x.get(url, function (s) {
-			s = s.replace(/\n|\r/g, '');
+			s = s.replace(/\n|\r/g, ' ');
 			if(s.indexOf("id=\"autopbn\"") == -1) {
 				$("autopbn").style.display = "none";
 				window.onscroll = null;
@@ -92,10 +92,12 @@
 			nextpageurl = nextpageurl.replace(/&page=\d+/, '&page=' + (curpage + 1));
 
 			$('fd_page_bottom').innerHTML = pageinfo[1];
-			if(curpage + 1 > totalpage) {
-				autopbn.style.display = 'none';
-			} else {
+			autopbn.style.display = 'none';
+			if (curpage + 1 <= totalpage) {
 				autopbn.innerHTML = 'หน้าถัดไป &raquo;';
+				setTimeout(function () {
+					autopbn.style.display = 'block';
+				}, 100);
 			}
 			loadstatus = 0;
 		});

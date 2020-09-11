@@ -119,7 +119,7 @@ class control extends adminbase {
 		$appid = intval(getgpc('appid'));
 		$app = $_ENV['app']->get_app_by_appid($appid);
 		$status = '';
-		if($app['extra']['apppath'] && @include $app['extra']['apppath'].'./api/'.$app['apifilename']) {
+		if($app['extra']['apppath'] && $this->detectescape($app['extra']['apppath'].'./api/', $app['apifilename']) && substr(strrchr($app['apifilename'], '.'), 1, 10) == 'php' && @include $app['extra']['apppath'].'./api/'.$app['apifilename']) {
 			$uc_note = new uc_note();
 			$status = $uc_note->test($note['getdata'], $note['postdata']);
 		} else {
@@ -127,6 +127,7 @@ class control extends adminbase {
 			$url = $_ENV['note']->get_url_code('test', '', $appid);
 			$status = $_ENV['app']->test_api($url, $ip);
 		}
+		header("Content-Type: application/javascript");
 		if($status == '1') {
 			echo 'document.getElementById(\'status_'.$appid.'\').innerHTML = "<img src=\'images/correct.gif\' border=\'0\' class=\'statimg\' \/><span class=\'green\'>'.$this->lang['app_connent_ok'].'</span>";testlink();';
 		} else {

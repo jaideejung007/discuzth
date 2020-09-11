@@ -131,7 +131,7 @@
 								</item>
 								<item id="style"><![CDATA[]]></item>
 								<item id="first">
-									<item id="text"><![CDATA[第一屏右]]></item>
+									<item id="text"><![CDATA[กระทู้ล่าสุด]]></item>
 									<item id="href"><![CDATA[]]></item>
 									<item id="color"><![CDATA[]]></item>
 									<item id="float"><![CDATA[]]></item>
@@ -193,7 +193,7 @@
 										</item>
 										<item id="style"><![CDATA[]]></item>
 										<item id="first">
-											<item id="text"><![CDATA[更多]]></item>
+											<item id="text"><![CDATA[เพิ่มเติม]]></item>
 											<item id="href"><![CDATA[http:///]]></item>
 											<item id="color"><![CDATA[rgb(51, 102, 153)]]></item>
 											<item id="float"><![CDATA[right]]></item>
@@ -203,7 +203,7 @@
 											<item id="src"><![CDATA[]]></item>
 										</item>
 										<item id="0">
-											<item id="text"><![CDATA[第二屏左]]></item>
+											<item id="text"><![CDATA[วีดีโอ]]></item>
 											<item id="href"><![CDATA[]]></item>
 											<item id="color"><![CDATA[]]></item>
 											<item id="float"><![CDATA[]]></item>
@@ -246,7 +246,7 @@
 										</item>
 										<item id="style"><![CDATA[]]></item>
 										<item id="first">
-											<item id="text"><![CDATA[第三屏左]]></item>
+											<item id="text"><![CDATA[บล็อกและบทความ]]></item>
 											<item id="href"><![CDATA[]]></item>
 											<item id="color"><![CDATA[]]></item>
 											<item id="float"><![CDATA[]]></item>
@@ -295,7 +295,7 @@
 										</item>
 										<item id="style"><![CDATA[]]></item>
 										<item id="first">
-											<item id="text"><![CDATA[更多]]></item>
+											<item id="text"><![CDATA[เพิ่มเติม]]></item>
 											<item id="href"><![CDATA[http:///]]></item>
 											<item id="color"><![CDATA[rgb(51, 102, 153)]]></item>
 											<item id="float"><![CDATA[right]]></item>
@@ -305,7 +305,7 @@
 											<item id="src"><![CDATA[]]></item>
 										</item>
 										<item id="0">
-											<item id="text"><![CDATA[主区域模块一]]></item>
+											<item id="text"><![CDATA[หัวข้อกำหนดเอง 1]]></item>
 											<item id="href"><![CDATA[]]></item>
 											<item id="color"><![CDATA[]]></item>
 											<item id="float"><![CDATA[]]></item>
@@ -341,7 +341,7 @@
 										</item>
 										<item id="style"><![CDATA[]]></item>
 										<item id="first">
-											<item id="text"><![CDATA[更多]]></item>
+											<item id="text"><![CDATA[เพิ่มเติม]]></item>
 											<item id="href"><![CDATA[http:///]]></item>
 											<item id="color"><![CDATA[rgb(51, 102, 153)]]></item>
 											<item id="float"><![CDATA[right]]></item>
@@ -351,7 +351,7 @@
 											<item id="src"><![CDATA[]]></item>
 										</item>
 										<item id="0">
-											<item id="text"><![CDATA[主区域模块二]]></item>
+											<item id="text"><![CDATA[หัวข้อกำหนดเอง 2]]></item>
 											<item id="href"><![CDATA[]]></item>
 											<item id="color"><![CDATA[]]></item>
 											<item id="float"><![CDATA[]]></item>
@@ -387,7 +387,7 @@
 										</item>
 										<item id="style"><![CDATA[]]></item>
 										<item id="first">
-											<item id="text"><![CDATA[更多]]></item>
+											<item id="text"><![CDATA[เพิ่มเติม]]></item>
 											<item id="href"><![CDATA[http:///]]></item>
 											<item id="color"><![CDATA[rgb(51, 102, 153)]]></item>
 											<item id="float"><![CDATA[right]]></item>
@@ -397,7 +397,7 @@
 											<item id="src"><![CDATA[]]></item>
 										</item>
 										<item id="0">
-											<item id="text"><![CDATA[主区域模块三]]></item>
+											<item id="text"><![CDATA[หัวข้อกำหนดเอง 3]]></item>
 											<item id="href"><![CDATA[]]></item>
 											<item id="color"><![CDATA[]]></item>
 											<item id="float"><![CDATA[]]></item>
@@ -453,7 +453,7 @@
 										</item>
 										<item id="style"><![CDATA[]]></item>
 										<item id="first">
-											<item id="text"><![CDATA[第二屏右]]></item>
+											<item id="text"><![CDATA[กระทู้น่าสนใจ]]></item>
 											<item id="href"><![CDATA[]]></item>
 											<item id="color"><![CDATA[]]></item>
 											<item id="float"><![CDATA[]]></item>
@@ -496,7 +496,7 @@
 										</item>
 										<item id="style"><![CDATA[]]></item>
 										<item id="first">
-											<item id="text"><![CDATA[第三屏右]]></item>
+											<item id="text"><![CDATA[กระทู้ยอดนิยม]]></item>
 											<item id="href"><![CDATA[]]></item>
 											<item id="color"><![CDATA[]]></item>
 											<item id="float"><![CDATA[]]></item>
@@ -671,10 +671,10 @@
 				<item id="title"><![CDATA[]]></item>
 				<item id="classname"><![CDATA[]]></item>
 				<item id="summary"><![CDATA[<div class="t_nav">
-	<a href="#">专题导航</a><span class="pipe">|</span>
-	<a href="#">专题导航</a><span class="pipe">|</span>
-	<a href="#">专题导航</a><span class="pipe">|</span>
-	<a href="#">专题导航</a>
+	<a href="#">เมนู1</a><span class="pipe">|</span>
+	<a href="#">เมนู2</a><span class="pipe">|</span>
+	<a href="#">เมนู3</a><span class="pipe">|</span>
+	<a href="#">เมนู4</a>
 </div>]]></item>
 				<item id="uid"><![CDATA[1]]></item>
 				<item id="username"><![CDATA[admin]]></item>
@@ -685,10 +685,10 @@
 				<item id="script"><![CDATA[blank]]></item>
 				<item id="param">
 					<item id="content"><![CDATA[<div class=\"t_nav\">
-	<a href=\"#\">专题导航</a><span class=\"pipe\">|</span>
-	<a href=\"#\">专题导航</a><span class=\"pipe\">|</span>
-	<a href=\"#\">专题导航</a><span class=\"pipe\">|</span>
-	<a href=\"#\">专题导航</a>
+	<a href=\"#\">เมนู1</a><span class=\"pipe\">|</span>
+	<a href=\"#\">เมนู2</a><span class=\"pipe\">|</span>
+	<a href=\"#\">เมนู3</a><span class=\"pipe\">|</span>
+	<a href=\"#\">เมนู4</a>
 </div>]]></item>
 					<item id="items"><![CDATA[10]]></item>
 				</item>
