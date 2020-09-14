@@ -15,7 +15,7 @@ if(!defined('DISCUZ_VERSION')) {
 	define('DISCUZ_VERSION', 'X3.5');
 	define('DISCUZ_RELEASE', 'v3.5-202008140500-3fb5665c');
 	define('DISCUZ_FIXBUG', '34000000');
-	define('DISCUZ_TH_REVISION', '2'); /*jaideejung007*/
+	define('DISCUZ_TH_REVISION', '3'); /*jaideejung007*/
 }
 
 ?>

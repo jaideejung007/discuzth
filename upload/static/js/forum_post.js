@@ -417,7 +417,7 @@ function updateAttach(aid) {
 	obj = $('attach' + aid);
 	if(!objupdate.innerHTML) {
 		obj.style.display = 'none';
-		objupdate.innerHTML = '<input type="file" name="attachupdate[paid' + aid + ']"><a href="javascript:;" onclick="updateAttach(' + aid + ')">取消</a>';
+		objupdate.innerHTML = '<input type="file" name="attachupdate[paid' + aid + ']"><a href="javascript:;" onclick="updateAttach(' + aid + ')">ยกเลิก</a>';
 	} else {
 		obj.style.display = '';
 		objupdate.innerHTML = '';

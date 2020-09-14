@@ -33,8 +33,8 @@ $lang = array
 	'system_init_ok' => 'การเริ่มต้นระบบเว็บไซต์เสร็จสมบูรณ์ กรุณา<a href="index.php">คลิกที่นี่เพื่อเข้าสู่เว็บไซต์</a>',
 	'backtrace' => 'ข้อมูลการดำเนินการ',
 	'error_end_message' => '<a href="http://{host}">{host}</a> ข้อความแสดงข้อผิดพลาดนี้ได้ถูกบันทึกไว้ในรายละเอียด ขออภัยในความไม่สะดวกในการเข้าถึง',
-	'suggestion_plugin' => '如果您是站长，建议您尝试在管理中心关闭 <a href="admin.php?action=plugins&frames=yes" class="guess" target="_blank">{guess}</a> 插件并 <a href="admin.php?action=tools&operation=updatecache&frames=yes" class="guess" target="_blank">更新缓存</a> 。如关闭插件后问题解决，建议您联系插件供应方获得帮助',
-	'suggestion' => '如果您是站长，建议您尝试在管理中心 <a href="admin.php?action=tools&operation=updatecache&frames=yes" target="_blank">更新缓存</a> ，您也可通过 <a href="https://www.discuz.net/" target="_blank">Discuz! 官方站</a> 寻求帮助。如果您确定这是一个程序自身Bug，您也可以直接 <a href="https://gitee.com/ComsenzDiscuz/DiscuzX/issues" target="_blank">提交Issue</a> 给我们',
+	'suggestion_plugin' => 'หากคุณเป็นผู้ดูแลเว็บ ขอแนะนำให้คุณลองปิด<a href="admin.php?action=plugins&frames=yes" class="guess" target="_blank">{guess}</a> ปลั๊กอินและ<a href="admin.php?action=tools&operation=updatecache&frames=yes" class="guess" target="_blank">อัปเดตแคช</a>ใน AdminCP หากปัญหาได้รับการแก้ไขหลังจากปิดปลั๊กอินแล้ว ขอแนะนำให้คุณติดต่อผู้จัดหาปลั๊กอินเพื่อขอความช่วยเหลือดังกล่าว',
+	'suggestion' => 'หากคุณเป็นผู้ดูแลเว็บขอแนะนำให้คุณลอง<a href="admin.php?action=tools&operation=updatecache&frames=yes" target="_blank">อัปเดตแคช</a>ใน AdminCP หรือคุณสามารถใช้<a href="https://www.discuz.net/" target="_blank">เว็บไซต์อย่างเป็นทางการของ Discuz! </a> เพื่อขอความช่วยเหลือ หากคุณแน่ใจว่านี่เป็นข้อบกพร่องของโปรแกรม คุณสามารถ <a href="https://gitee.com/ComsenzDiscuz/DiscuzX/issues" target="_blank">ส่งรายการ Issue</a> ถึงเราได้โดยตรง',
 
 	'file_upload_error_-101' => 'อัปโหลดล้มเหลว! ไฟล์ที่จะอัปโหลดไม่อยู่ หรือไม่ถูกต้อง กรุณาย้อนกลับ',
 	'file_upload_error_-102' => 'อัปโหลดล้มเหลว! รูปแบบของไฟล์ไม่ถูกต้อง กรุณาย้อนกลับ',

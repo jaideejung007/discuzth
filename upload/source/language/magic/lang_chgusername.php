@@ -13,15 +13,15 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'chgusername_name' => '更名卡',
-	'chgusername_desc' => '可以修改当前用户的用户名',
-	'chgusername_newusername' => '请输入新用户名',
-	'chgusername_info_nonexistence' => '请输入新用户名后再提交',
-	'chgusername_check_failed' => '用户名合法性检测失败，请您更换后再试',
-	'chgusername_name_badword' => '用户名包含被系统屏蔽的字符，请您更换后再试',
-	'chgusername_name_exists' => '用户名已经存在，请您更换后再试',
-	'chgusername_change_failed' => '用户名修改操作提交失败，请联系管理员',
-	'chgusername_change_success' => '用户名修改操作提交成功，请几分钟后重新登录，如出现任何问题请联系管理员',
+	'chgusername_name' => 'การ์ดเปลี่ยนชื่อผู้ใช้',
+	'chgusername_desc' => 'การ์ดนี้จะช่วยให้คุณสามารถเปลี่ยนชื่อผู้ใช้ (username) ของคุณได้',
+	'chgusername_newusername' => 'กรุณากรอกชื่อผู้ใช้ใหม่',
+	'chgusername_info_nonexistence' => 'กรุณากรอกชื่อผู้ใช้ใหม่ก่อนกดส่ง',
+	'chgusername_check_failed' => 'การตรวจสอบความถูกต้องของชื่อผู้ใช้ไม่สำเร็จ กรุณาเปลี่ยนและลองใหม่อีกครั้ง',
+	'chgusername_name_badword' => 'ชื่อผู้ใช้มีอักขระที่ไม่อนุญาตให้ใช้งาน กรุณาเปลี่ยนและลองใหม่อีกครั้ง',
+	'chgusername_name_exists' => 'มีชื่อผู้ใช้อยู่แล้ว กรุณาเปลี่ยนและลองใหม่อีกครั้ง',
+	'chgusername_change_failed' => 'การส่งคำขอแก้ไขชื่อผู้ใช้ไม่สำเร็จ กรุณาติดต่อผู้ดูแลระบบ',
+	'chgusername_change_success' => 'ส่งคำขอแก้ไขชื่อผู้ใช้เรียบร้อยแล้ว กรุณาเข้าสู่ระบบอีกครั้งในอีกสักครู่ หากมีปัญหาใด ๆ กรุณาติดต่อผู้ดูแลระบบ',
 
 );
 

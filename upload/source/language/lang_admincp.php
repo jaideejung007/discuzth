@@ -2240,7 +2240,7 @@ $lang = array
 	'setting_datetime_timeoffset' => 'โซนเวลา',
 	'setting_datetime_timeoffset_comment' => 'หากคุณพบว่าเวลาที่แสดงอยู่ในปัจจุบันแตกต่างจากเวลาท้องถิ่นของคุณ คุณจะต้องเปลี่ยนการตั้งค่าโซนเวลาของคุณ',
 	'setting_datetime_timezone' => array(
-			'' => '选择公共时区',
+			'' => 'กรุณาเลือกโซนเวลา',
 			'-12' => '(GMT -12:00) เส้นแบ่งเขตวันสากลฝั่งตะวันตก',
 			'-11' => '(GMT -11:00) หมู่เกาะมิดเวย์, ซามัว',
 			'-10' => '(GMT -10:00) ฮาวาย',
@@ -4819,7 +4819,7 @@ $lang = array
 	'comment_article_delete' => 'Comment Deletes successfully.',
 	'comment_mod_range_illegal' => 'Specified time range is over the limit.',
 	'comment_post_nonexistence' => 'There is no comments matching the conditions.',
-	'comment_search_ip' =>'发布IP',
+	'comment_search_ip' =>'IP สาธารณะ',
 	'comment_search_ip_comment' => 'Wildcard "*" may be used, i.e. "127.0 .*.*" (without quotes), use with caution!!!',
 
 	'share_tips' => '<li>Share management used to bulk remove shares.</li><li>Reminder: click the <b>Delete</b> button  on the search results page will delete the relevant information directly!</li>',
@@ -5240,7 +5240,7 @@ $lang = array
 
 	'plugins' => 'กำหนดค่าปลั๊กอิน',
 	'plugins_home' => 'กรุณาดูคำแนะนำ',
-	'plugins_visit' => '评分',
+	'plugins_visit' => 'คะแนน',
 	'plugins_editlink' => 'แก้ไข',
 	'plugins_validator' => 'ตรวจสอบการอัปเดต',
 	'plugins_list' => 'รายการปลั๊กอิน',
