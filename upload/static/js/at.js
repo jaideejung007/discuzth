@@ -18,7 +18,7 @@ function extrafunc_atMenu() {
 	if(BROWSER.opera) {
 		return;
 	}
-	if(wysiwyg && EXTRAEVENT.shiftKey && EXTRAEVENT.keyCode == 50 && postaction && (postaction == 'newthread' || postaction == 'reply' || postaction == 'edit')) {
+	if(wysiwyg && EXTRAEVENT.key == '@' && postaction && (postaction == 'newthread' || postaction == 'reply' || postaction == 'edit')) {
 		keyMenu('@', atMenu);
 		ctlent_enable[13] = 0;
 		doane(EXTRAEVENT);
@@ -33,7 +33,7 @@ function extrafunc_atMenuKeyUp() {
 	if(BROWSER.opera) {
 		return;
 	}
-	if(wysiwyg && EXTRAEVENT.shiftKey && EXTRAEVENT.keyCode == 50 && postaction && (postaction == 'newthread' || postaction == 'reply' || postaction == 'edit') && !atkeypress) {
+	if(wysiwyg && EXTRAEVENT.key == '@' && postaction && (postaction == 'newthread' || postaction == 'reply' || postaction == 'edit') && !atkeypress) {
 		keyBackspace();
 		keyMenu('@', atMenu);
 		ctlent_enable[13] = 0;
