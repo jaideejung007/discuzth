@@ -544,7 +544,7 @@ if(!submitcheck('settingsubmit')) {
 			array(1, $lang['setting_styles_index_allowwidthauto_1']),
 			array(0, $lang['setting_styles_index_allowwidthauto_0']),
 		), 1), $setting['allowwidthauto'], 'mradio');
-		showtagheader('tbody', '', 1, 'sub');
+		showtagheader('tbody', '', 1);
 		showsetting('setting_styles_index_switchwidthauto', 'settingnew[switchwidthauto]', $setting['switchwidthauto'], 'radio');
 		showtagfooter('tbody');
 		showsetting('setting_styles_global_allowfloatwin', array('settingnew[allowfloatwin]', $floatwinarray), $setting['allowfloatwin'], 'mcheckbox');
