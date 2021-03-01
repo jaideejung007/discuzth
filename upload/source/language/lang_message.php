@@ -10,7 +10,6 @@
  */
 
 $lang = array (
-
   'undefined_action' => 'ไม่ได้กำหนดการดำเนินการ',
   'plugin_nonexistence' => 'ปลั๊กอินนี้ไม่มีอยู่ หรือถูกปิด',
   'profile_username_protect' => 'ชื่อนี้มีตัวอักษรที่ไม่อนุญาตให้ใช้งาน',
@@ -237,7 +236,7 @@ $lang = array (
   'task_not_found' => 'ไฟล์ระบบสำหรับกิจกรรมนี้ได้หายไป {taskclassname}',
   'task_not_underway' => 'ไม่ตอบสนองการทำงานใดๆ',
   'user_banned' => 'ขออภัย! IP ของคุณถูกแบน หรือบัญชีถูกปิดใช้งาน ไม่สามารถเข้าใช้งานเว็บไซต์ได้',
-  'user_banned_has_expiry' => 'ขออภัย บัญชีของคุณถูกปิดใช้งานและคุณไม่สามารถเข้าถึงเว็บไซต์นี้ได้ในขณะนี้<br />เวลาที่จะถูกยกเลิกการระงับบัญชีโดยประมาณ: '.dgmdate($_G['member']['groupexpiry'], 'Y-m-d H:i:s'),
+  'user_banned_has_expiry' => 'ขออภัย บัญชีของคุณถูกปิดใช้งานและคุณไม่สามารถเข้าถึงเว็บไซต์นี้ได้ในขณะนี้<br />เวลาที่จะถูกยกเลิกการระงับบัญชีโดยประมาณ: {expiry}',
   'submit_seccode_invalid' => 'คุณใส่รหัสไม่ถูกต้อง กรุณากลับไปแก้ไข',
   'submit_invalid' => 'ขออภัย! การร้องขอบางอย่างของคุณไม่ถูกต้อง หรือไม่สอดคล้องกับการตรวจสอบ ไม่สามารถส่งได้',
   'submit_islocked' => 'ขออภัย! คำขอปัจจุบันของคุณอยู่ระหว่างดำเนินการ กรุณาอย่าส่งซ้ำ',
@@ -311,6 +310,7 @@ $lang = array (
   'attachment_yetpay' => 'ขออภัย! คุณเคยจ่ายค่าไฟล์แนบนี้แล้ว ไม่จำเป็นต้องจ่ายซ้ำอีก',
   'attachment_buyall' => 'ได้ทำการสั่งซื้อทั้งหมดเรียบร้อยแล้ว ',
   'attachment_buy' => 'ซื้อเรียบร้อยแล้ว คุณสามารถดูหรือดาวน์โหลดไฟล์ [{filename}] นี้ได้',
+  'attachment_mobile_buy' => 'ซื้อเรียบร้อยแล้ว',
   'no_privilege_postimage' => 'ขออภัย! ตอนนี้คุณไม่มีสิทธิ์ในการอัปโหลดรูปภาพ <a href="home.php?mod=spacecp&ac=usergroup" target="_blank">คลิกที่นี่เพื่อดู</a>',
   'no_privilege_postattach' => 'ขออภัย! ตอนนี้คุณไม่มีสิทธิ์ในการอัปโหลดไฟล์แนบ <a href="home.php?mod=spacecp&ac=usergroup" target="_blank">คลิกที่นี่เพื่อดู</a>',
   'thread_closed' => 'โพสต์นี้ได้ถูกปิดแล้ว ไม่สามารถแสดงความเห็นเพิ่มเติม',
@@ -469,6 +469,7 @@ $lang = array (
   'lostpasswd_many_users_use_email' => 'ขออภัย! มีผู้ใช้อีเมลนี้มากกว่าหนึ่งแล้ว กรุณากรอกชื่อผู้ใช้เพื่อทำการกู้รหัสผ่านใหม่',
   'getpasswd_account_invalid' => 'ขออภัย! ผู้ดูแลระบบและผู้ดูแลพิเศษไม่สามารถใช้ฟังก์ชันการกู้คืนรหัสผ่านได้',
   'getpasswd_send_succeed' => 'ลิงก์สำหรับรีเซ็ตรหัสผ่านได้ถูกส่งไปยังอีเมลของคุณ<br />กรุณาเปลี่ยนรหัสผ่านของคุณภายใน 3 วัน',
+  'getpasswd_has_send' => 'วิธีการรีเซ็ตรหัสผ่านถูกส่งไปยังกล่องจดหมายของคุณทางอีเมลแล้ว หากคุณไม่ได้รับ กรุณารออีก 15 นาทีแล้วลองอีกครั้ง',
 
   'submit_verify_succeed' => 'ตรวจสอบการร้องขอเรียบร้อยแล้ว ระบบกำลังพาคุณไปหน้าแรกของเมนูข้อมูลส่วนตัว',
 
@@ -1020,7 +1021,7 @@ $lang = array (
   'location_login_succeed_mobile' => 'ยินดีต้อนรับ, {username} คลิกไปยังก่อนหน้านี้',
   'location_login_succeed' => '',
   'location_activation' => 'Your account is inactive, click to activate',
-  'login_succeed_inactive_member' => 'ยินดีต้อนรับ {username} บัญชีของคุณจะยังไม่ทำงานได้เต็มที่ ขณะนี้ระบบกำลังพาคุณไปยังหน้าเมนูสมาชิก',
+  'login_succeed_inactive_member' => 'ยินดีต้อนรับกลับมา {username} {usergroup} บัญชีของคุณอยู่ในสถานะไม่ใช้งาน และฟังก์ชันบางอย่างอาจทำงานไม่ถูกต้อง ตอนนี้คุณจะถูกนำไปที่หน้าความปลอดภัยของรหัสผ่าน',
   'login_succeed_password_change' => 'Your account is under the security risk. It is recommended to change your password immediately.',
   'login_question_empty' => 'กรุณาเลือกคำถาม และตอบคำถามให้ถูกต้อง',
   'login_question_invalid' => 'ขออภัย! ตอบคำถามไม่ถูกต้อง',

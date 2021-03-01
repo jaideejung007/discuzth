@@ -637,6 +637,7 @@ $lang = array (
   'admincp_makehtml_cleanhtml_error' => 'Sorry, Enable to generate static HTML file, you can not clean up the HTML file.',
   'admincp_makehtml_cleanhtml_succeed' => 'HTML file cleaned up successfully.',
   'admincp_makehtml_cleanhtml_choose_item' => 'Sorry, please select the HTML file need to be cleaned up.',
+  'attach_readmod_error' => 'ขออภัย โหมดการอ่านไฟล์สื่อภายในเว็บไซต์ปัจจุบันจะทำให้การเล่นวิดีโอผิดปกติในบางเบราว์เซอร์ หากคุณต้องการเปิดใช้งานการเล่นไฟล์สื่อประเภทที่ไฟล์แนบลงในเว็บนี้หรือไฟล์สื่อที่เป็น URL กรุณาแก้ไขโหมดการอ่านไฟล์ในเว็บของคุณเป็น 1 หรือ 4 ได้ที่ไฟล์ config_global.php จากนั้นลองอีกครั้ง',
 );
 
 ?>

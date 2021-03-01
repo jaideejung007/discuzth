@@ -617,6 +617,9 @@ function get_cachedata_setting_plugin($method = '') {
 									if($hscript == 'home' && in_array($curscript, array('space', 'spacecp'))) {
 										$curscript .= '_'.$v[1];
 									}
+									if(strpos($funcname, '__') !== false) {
+										$curscript = explode('__', $funcname)[0];
+									}
 									if(!@in_array($script, $data[$k][$hscript][$curscript]['module'])) {
 										$data[$k][$hscript][$curscript]['module'][$plugin['identifier']] = $script;
 										$data[$k][$hscript][$curscript]['adminid'][$plugin['identifier']] = $module['adminid'];

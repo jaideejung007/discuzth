@@ -26,7 +26,7 @@ var getRealPage = function (replies, ppp) {
 var bindCommentEvent = function () {
 	$('a.replyBtn').unbind("click").click(function () {
 		if (member_uid != "0") {
-			replyComment(formhash, tId, pId, '楼层', 'commentsubmit=yes&comment', 1, 0, 0);
+			replyComment(formhash, tId, pId, 'ความเห็น', 'commentsubmit=yes&comment', 1, 0, 0);
 		}
 	});
 };
@@ -41,7 +41,7 @@ var bindEvent = function () {
 	});
 
 	$('a.replyBtn').click(function () {
-		replyComment(formhash, tId, pId, '楼层', 'commentsubmit=yes&comment', 1, 0, 0);
+		replyComment(formhash, tId, pId, 'ความเห็น', 'commentsubmit=yes&comment', 1, 0, 0);
 	});
 
 	$('#recommendBtn').on('click', function () {

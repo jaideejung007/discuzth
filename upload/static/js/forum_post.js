@@ -813,6 +813,7 @@ function getreplycredit() {
 
 	var reply_credits_sum = Math.ceil(parseInt(credit_once * times));
 
+	$('replycredit_sum').innerHTML = reply_credits_sum > 0 ? reply_credits_sum : 0 ;
 	if(real_reply_credit > userextcredit) {
 		$('replycredit').innerHTML = '<b class="xi1">ระบุจำนวนเครดิตรางวัลของคำตอบเยอะเกินไป ('+real_reply_credit+')</b>';
 	} else {
@@ -821,7 +822,6 @@ function getreplycredit() {
 		} else {
 			$('replycredit').innerHTML = replycredit_result_lang + (real_reply_credit > 0 ? real_reply_credit : 0 );
 		}
-		$('replycredit_sum').innerHTML = reply_credits_sum > 0 ? reply_credits_sum : 0 ;
 	}
 }
 
@@ -832,7 +832,7 @@ function extraCheckall() {
 }
 
 function deleteThread() {
-	if(confirm('คุณแน่ใจว่าต้องการลบรายการนี้?') != 0){
+	if(confirm('คุณแน่ใจว่าต้องการลบรายการนี้หรือไม่') != 0){
 		$('delete').value = '1';
 		$('postform').submit();
 	}

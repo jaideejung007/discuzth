@@ -117,12 +117,12 @@ cpheader();
 shownav();
 
 require_once libfile('function/cloudaddons');
-$newversion = dunserialize($_G['setting']['cloudaddons_newversion']);
+$newversion = (CHARSET == 'utf-8') ? dunserialize($_G['setting']['cloudaddons_newversion']) : json_decode($_G['setting']['cloudaddons_newversion'],true);
 if(empty($newversion['newversion']) || !is_array($newversion['newversion']) || abs($_G['timestamp'] - $newversion['updatetime']) > 86400 || (isset($_GET['checknewversion']) && $_G['formhash'] == $_GET['formhash'])) {
 	$newversion = json_decode(cloudaddons_open('&mod=app&ac=upgrade'), true);
 	if(!empty($newversion['newversion'])){
 		$newversion['updatetime'] = $_G['timestamp'];
-		C::t('common_setting')->update('cloudaddons_newversion', $newversion);
+		C::t('common_setting')->update('cloudaddons_newversion', ((CHARSET == 'utf-8') ? $newversion : json_encode($newversion)));
 		updatecache('setting');
 	}else{
 		$newversion = array();
@@ -289,7 +289,7 @@ showformfooter();
 
 showtableheader('&#xE1C;&#xE39;&#xE49;&#xE2A;&#xE19;&#xE31;&#xE1A;&#xE2A;&#xE19;&#xE38;&#xE19;&#xE42;&#xE04;&#xE23;&#xE07;&#xE01;&#xE32;&#xE23; Discuz! &#xE42;&#xE2D;&#xE40;&#xE1E;&#xE19;&#xE0B;&#xE2D;&#xE23;&#xE4C;&#xE2A;', 'fixpadding');
 showtablerow('', array('', 'class="td21" style="text-align:right;"'),
-	'<a href="https://gitee.com/ComsenzDiscuz/DiscuzX/contributors?ref=master" class="lightlink2 smallfont" target="_blank">Click Here To See Them</a>'
+	'<a href="https://gitee.com/discuz/DiscuzX/contributors?ref=master" class="lightlink2 smallfont" target="_blank">Click Here To See Them</a>'
 );
 showtablefooter();
 
@@ -305,6 +305,11 @@ showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight smallf
 	cplang('home_discuz_version'),
 	'Discuz! '.DISCUZ_VERSION.' R'.DISCUZ_RELEASE.' '.strtoupper(CHARSET).''
 ));
+
+/*jaideejung007*/ showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight smallfont"'), array(
+/*jaideejung007*/	'&#3648;&#3623;&#3629;&#3619;&#3660;&#3594;&#3633;&#3609;&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;',
+/*jaideejung007*/	'<a href="https://github.com/jaideejung007/discuzth" class="lightlink2" target="_blank">Discuz! &#xE20;&#xE32;&#xE29;&#xE32;&#xE44;&#xE17;&#xE22;</a>, Rev: '.DISCUZ_TH_REVISION
+/*jaideejung007*/));
 
 $newversion['newversion'] = !empty($newversion['newversion']) ? $newversion['newversion'] : array();
 
@@ -428,10 +433,6 @@ showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight team"'
 	<a href="http://www.discuz.net/home.php?mod=space&uid=177" class="lightlink2 smallfont" target="_blank">Stoneage</a>
 	<a href="http://www.discuz.net/home.php?mod=space&uid=7155" class="lightlink2 smallfont" target="_blank">Gregry</a>'
 ));
-/*jaideejung007*/ showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight"'), array(
-/*jaideejung007*/	'&#3648;&#3623;&#3629;&#3619;&#3660;&#3594;&#3633;&#3609;&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;',
-/*jaideejung007*/	'<a href="https://github.com/jaideejung007/discuzth" class="lightlink2" target="_blank">Discuz! &#xE20;&#xE32;&#xE29;&#xE32;&#xE44;&#xE17;&#xE22;</a>, Rev: '.DISCUZ_TH_REVISION
-/*jaideejung007*/));
 showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight"'), array(
 	cplang('home_dev_links'),
 	'<a href="https://www.dismall.com/" class="lightlink2" target="_blank">&#xE40;&#xE27;&#xE47;&#xE1A;&#xE1A;&#xE2D;&#xE23;&#xE4C;&#xE14;&#xE41;&#xE2D;&#xE1B;&#xE1E;&#xE25;&#xE34;&#xE40;&#xE04;&#xE0A;&#xE31;&#xE19; Discuz!</a>,
@@ -439,7 +440,7 @@ showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight"'), ar
 	<a href="http://www.discuz.net/redirect.php?service" class="lightlink2" target="_blank">&#x8D2D;&#x4E70;&#x6388;&#x6743;</a>,
 	<a href="http://www.discuz.net/" class="lightlink2" target="_blank">&#x8BA8;&#x8BBA;&#x533A;</a>,
 	<a href="'.ADMINSCRIPT.'?action=cloudaddons" class="lightlink2" target="_blank">Discuz! App Store</a>,
-	<a href="https://gitee.com/ComsenzDiscuz/DiscuzX" class="lightlink2" target="_blank">Discuz! X Git</a>,
+	<a href="https://gitee.com/Discuz/DiscuzX" class="lightlink2" target="_blank">Discuz! X Git</a>,
 <!--jaideejung007-->	<a href="https://github.com/jaideejung007/discuzth" class="lightlink2" target="_blank">Discuz! Thai Official Repositories</a>
 '));
 showtablefooter();

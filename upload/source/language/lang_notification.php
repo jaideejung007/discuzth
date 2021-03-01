@@ -109,6 +109,8 @@ $lang = array
 
 	'modreplies_delete' => 'การโพสต์ตอบกลับของคุณไม่ผ่านการตรวจสอบ และได้ถูกลบออกไปแล้ว! <p class="summary">เนื้อหา: <span>{post}</span></p>',
 
+	'modreplies_delete_reason' => 'การโพสต์ตอบกลับของคุณไม่ผ่านการตรวจสอบ และได้ถูกลบออกไปแล้ว! <p class="summary">เนื้อหาที่ตอบกลับ: <span>{post}</span></p><div class="quote"><blockquote>{reason}</blockquote></div>',
+
 	'modreplies_validate' => 'การโพสต์ตอบกลับของคุณผ่านการตรวจสอบแล้ว! &nbsp; <a href="forum.php?mod=redirect&goto=findpost&pid={pid}&ptid={tid}" target="_blank" class="lit">ดูเนื้อหา &rsaquo;</a> <p class="summary">เนื้อหา: <span>{post}</span></p>',
 
 	'transfer' => 'คุณได้รับจากเครดิตจาก {actor} ผ่านการโอนเป็นจำนวน {credit} &nbsp; <a href="home.php?mod=spacecp&ac=credit&op=log&suboperation=creditslog" target="_blank" class="lit">ดูรายละเอียด &rsaquo;</a>

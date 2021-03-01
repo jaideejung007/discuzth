@@ -96,9 +96,7 @@ var rowtypedata = [
 
 		shownav('extended', 'misc_link');
 		showsubmenu('nav_misc_links');
-		/*search={"misc_link":"action=misc&operation=link"}*/
 		showtips('misc_link_tips');
-		/*search*/
 		showformheader('misc&operation=link');
 		showtableheader();
 		showsubtitle(array('', 'display_order', 'misc_link_edit_name', 'misc_link_edit_url', 'misc_link_edit_description', 'misc_link_edit_logo', 'misc_link_group1', 'misc_link_group2', 'misc_link_group3','misc_link_group4'));
@@ -194,9 +192,7 @@ var rowtypedata = [
 
 		shownav('extended', 'misc_relatedlink');
 		showsubmenu('nav_misc_relatedlink');
-		/*search={"misc_relatedlink":"action=misc&operation=relatedlink"}*/
 		showtips('misc_relatedlink_tips');
-		/*search*/
 		$tdstyle = array('width="50"', 'width="120"', 'width="330"', 'width="50"', 'width="80"', 'width="80"', '');
 		showformheader('misc&operation=relatedlink');
 		showtableheader();
@@ -276,7 +272,6 @@ var rowtypedata = [
 			array('setting_editor_code', 'misc&operation=bbcode', 1),
 		));
 
-		/*search={"setting_editor":"action=setting&operation=editor","setting_editor_code":"action=setting&operation=bbcode"}*/
 		showtips('misc_bbcode_edit_tips');
 		showformheader('misc&operation=bbcode');
 		showtableheader('', 'fixpadding');
@@ -306,7 +301,6 @@ var rowtypedata = [
 		showsubmit('bbcodessubmit', 'submit', 'del');
 		showtablefooter();
 		showformfooter();
-		/*search*/
 
 	} elseif(submitcheck('bbcodessubmit')) {
 
@@ -579,11 +573,9 @@ var rowtypedata = [
 			array('misc_censor_batch_add', 'import', $anchor == 'import'),
 			array('misc_censor_wordtype_edit', 'wordtype', $anchor == 'wordtype'),
 		));
-		/*search={"nav_posting_censor":"action=misc&operation=censor"}*/
 		showtips('misc_censor_tips', 'list_tips', $anchor == 'list');
 		showtips('misc_censor_batch_add_tips', 'import_tips', $anchor == 'import');
 		showtips('misc_censor_wordtype_tips', 'wordtype_tips', $anchor == 'wordtype');
-		/*search*/
 
 		showtagheader('div', 'list', $anchor == 'list');
 		showformheader("misc&operation=censor&page=$page", '', 'keywordsearch');
@@ -644,7 +636,7 @@ var rowtypedata = [
 	var rowtypedata = [
 		[
 			[1,''],
-			[1,'<input type="text" class="txt" size="30" name="newfind[]">'], [1, ' <select onchange="if(this.options[this.options.selectedIndex].value==\'{REPLACE}\'){this.nextSibling.style.display=\'\';}else{this.nextSibling.style.display=\'none\';}" name="newreplace[]" $disabled><option value="{BANNED}">$misc_censor_word_banned</option><option value="{MOD}">$misc_censor_word_moderated</option><option value="{REPLACE}">$misc_censor_word_replaced</option></select><input class="txt" type="text" size="15" name="newreplacecontent[]" style="display:none;">']
+			[1,'<input type="text" class="txt" size="30" name="newfind[]">'], [1, ' <select onchange="if(this.options[this.options.selectedIndex].value==\'{REPLACE}\'){this.nextSibling.style.display=\'\';}else{this.nextSibling.style.display=\'none\';}" name="newreplace[]" ><option value="{BANNED}">$misc_censor_word_banned</option><option value="{MOD}">$misc_censor_word_moderated</option><option value="{REPLACE}">$misc_censor_word_replaced</option></select><input class="txt" type="text" size="15" name="newreplacecontent[]" style="display:none;">']
 EOT;
 		if($word_type_option) {
 			echo ", [1,' <select onchange=\"if(this.options[this.options.selectedIndex].value==\'0\'){this.nextSibling.style.display=\'\';}else{this.nextSibling.style.display=\'none\';}\" name=\"newwordtype[]\" id=\"newwordtype[]\"><option value=\"0\" selected>{$misc_censor_word_default_typename}</option>{$word_type_option}</select><input class=\"txt\" type=\"text\" size=\"10\" name=\"newtypename[]\" >']";
@@ -688,7 +680,7 @@ EOT;
 		showsubtitle(array('', 'misc_censor_wordtype_name'));
 		if($wordtypecount = C::t('common_word_type')->count()) {
 			foreach(C::t('common_word_type')->fetch_all() as $result) {
-				showtablerow('', array('class="td25"', ''), array("<input class=\"checkbox\" type=\"checkbox\" name=\"delete[]\" value=\"{$result['id']}\" $disabled>", "<input type=\"text\" class=\"txt\" size=\"10\" name=\"typename[{$result['id']}]\" value=\"{$result['typename']}\">"));
+				showtablerow('', array('class="td25"', ''), array("<input class=\"checkbox\" type=\"checkbox\" name=\"delete[]\" value=\"{$result['id']}\" >", "<input type=\"text\" class=\"txt\" size=\"10\" name=\"typename[{$result['id']}]\" value=\"{$result['typename']}\">"));
 			}
 		}
 
@@ -782,9 +774,7 @@ EOT;
 		));
 
 		showtagheader('div', 'list', $anchor == 'list');
-		/*search={"nav_thread_stamp":"action=misc&operation=stamp","misc_stamp_thread":"action=misc&operation=stamp&anchor=list"}*/
 		showtips('misc_stamp_listtips');
-		/*search*/
 		showformheader('misc&operation=stamp');
 		showhiddenfields(array('anchor' => 'list'));
 		showtableheader();
@@ -831,9 +821,7 @@ EOT;
 		showtagfooter('div');
 
 		showtagheader('div', 'llist', $anchor == 'llist');
-		/*search={"nav_thread_stamp":"action=misc&operation=stamp","misc_stamp_list":"action=misc&operation=stamp&anchor=llist"}*/
 		showtips('misc_stamp_listtips');
-		/*search*/
 		showformheader('misc&operation=stamp&type=list');
 		showhiddenfields(array('anchor' => 'llist'));
 		showtableheader();
@@ -857,9 +845,7 @@ EOT;
 
 		showtagheader('div', 'add', $anchor == 'add');
 		showformheader('misc&operation=stamp');
-		/*search={"nav_thread_stamp":"action=misc&operation=stamp","add":"action=misc&operation=stamp&anchor=add"}*/
 		showtips('misc_stamp_addtips');
-		/*search*/
 		showtableheader();
 		showsubtitle(array('add', 'misc_stamp_type', 'misc_stamp_id', 'misc_stamp_imagename', 'smilies_edit_image', 'smilies_edit_filename'));
 
@@ -986,9 +972,7 @@ var rowtypedata = [
 
 		shownav('global', 'nav_posting_attachtype');
 		showsubmenu('nav_posting_attachtype');
-		/*search={"nav_posting_attachtype":"action=misc&operation=attachtype"}*/
 		showtips('misc_attachtype_tips');
-		/*search*/
 		showformheader('misc&operation=attachtype');
 		showtableheader();
 		showtablerow('class="partition"', array('class="td25"', 'class="td24"'), array('', cplang('misc_attachtype_ext'), cplang('misc_attachtype_maxsize')));
@@ -1041,9 +1025,7 @@ var rowtypedata = [
 
 			shownav('tools', 'misc_cron');
 			showsubmenu('nav_misc_cron');
-			/*search={"misc_cron":"action=misc&operation=cron"}*/
 			showtips('misc_cron_tips');
-			/*search*/
 			showformheader('misc&operation=cron');
 			showtableheader('', 'fixpadding');
 			showsubtitle(array('', 'name', 'available', 'type', 'time', 'misc_cron_last_run', 'misc_cron_next_run', ''));
@@ -1083,7 +1065,7 @@ var rowtypedata = [
 					$cron['run'] = 0;
 				}
 
-				showtablerow('', array('class="td25"', 'class="crons"', 'class="td25"', 'class="td25"', 'class="td23"', 'class="td23"', 'class="td23"', 'class="td25"'), array(
+				showtablerow('', array('class="td25"', 'class="crons"', 'class="td25"', 'class="td25"', 'class="td23"', 'class="td23"', 'class="td23"'.$cron['nextcolor'], 'class="td25"'), array(
 					"<input class=\"checkbox\" type=\"checkbox\" name=\"delete[]\" value=\"$cron[cronid]\" ".($cron['type'] == 'system' ? 'disabled' : '').">",
 					"<input type=\"text\" class=\"txt\" name=\"namenew[$cron[cronid]]\" size=\"20\" value=\"$cron[name]\"><br /><b>$cron[filename]</b>",
 					"<input class=\"checkbox\" type=\"checkbox\" name=\"availablenew[$cron[cronid]]\" value=\"1\" ".($cron['available'] ? 'checked' : '')." $disabled>",
@@ -1301,7 +1283,7 @@ var rowtypedata = [
 		array('member', cplang('misc_focus_position_member')),
 		array('forum', cplang('misc_focus_position_forum')),
 		array('group', cplang('misc_focus_position_group')),
-		array('search', cplang('misc_focus_position_search')),		
+		array('search', cplang('misc_focus_position_search')),
 	);
 
 	if(!$do) {
@@ -1314,7 +1296,6 @@ var rowtypedata = [
 				array('admin', 'misc&operation=focus', 1),
 				array('add', 'misc&operation=focus&do=add')
 			));
-			/*search={"misc_focus":"action=misc&operation=focus","admin":"action=misc&operation=focus"}*/
 			showtips('misc_focus_tips');
 			showformheader('misc&operation=focus');
 			showtableheader('admin', 'fixpadding');
@@ -1333,7 +1314,6 @@ var rowtypedata = [
 			showsubmit('focussubmit', 'submit', 'del');
 			showtablefooter();
 			showformfooter();
-			/*search*/
 
 		} else {
 
@@ -1370,7 +1350,6 @@ var rowtypedata = [
 				array('admin', 'misc&operation=focus', 0),
 				array('add', 'misc&operation=focus&do=add', 1)
 			));
-			/*search={"misc_focus":"action=misc&operation=focus","add":"action=misc&operation=focus&do=add"}*/
 			showformheader('misc&operation=focus&do=add');
 			showtableheader('misc_focus_handadd', 'fixpadding');
 			showsetting('misc_focus_handurl', 'focus_url', '', 'text');
@@ -1382,7 +1361,6 @@ var rowtypedata = [
 			showsubmit('addsubmit', 'submit', '', '');
 			showtablefooter();
 			showformfooter();
-			/*search*/
 
 		} else {
 
@@ -1479,7 +1457,6 @@ var rowtypedata = [
 				array('admin', 'misc&operation=focus', 0),
 				array('add', 'misc&operation=focus&do=add', 0)
 			));
-			/*search={"misc_focus":"action=misc&operation=focus","config":"action=misc&operation=focus&do=config"}*/
 			showformheader('misc&operation=focus&do=config');
 			showtableheader('config', 'fixpadding');
 			showsetting('misc_focus_area_title', 'focus_title', empty($focus['title']) ? cplang('misc_focus') : $focus['title'], 'text');
@@ -1487,7 +1464,6 @@ var rowtypedata = [
 			showsubmit('confsubmit', 'submit');
 			showtablefooter();
 			showformfooter();
-			/*search*/
 
 		} else {
 

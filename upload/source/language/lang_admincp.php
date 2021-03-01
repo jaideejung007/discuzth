@@ -1040,6 +1040,7 @@ $lang = array
 	'setting_styles_viewthread_maxsigrows' => 'ความสูงของลายเซ็น(px)',
 	'setting_styles_viewthread_maxsigrows_comment' => 'กำหนดขนาดความสูงของลายเซ็นที่ต้องการแสดง ปกติจะอยู่ที่ 100 หากใส่ "-1" จะแสดงลายเซ็นทั้งหมดโดยไม่จำกัดความสูง',
 	'setting_styles_viewthread_sigviewcond' => 'จำนวนตัวอักษรในลายเซ็น',
+	'setting_styles_viewthread_sigimgclick_on' => 'ยกเลิกฟังก์ชันการซูมลายเซ็นที่เป็นรูปภาพ',
 	'setting_styles_viewthread_sigviewcond_comment' => 'กำหนดจำนวนตัวอักษรเพื่อแสดงลายเซ็น ยกตัวอย่างเช่น เมื่อใส่ 10 เมื่อตอบกระทู้โดยพิมพ์คำว่า Thx ลายเซ็นจะไม่โชว์เพราะโพสต์แค่ 3 ตัวอักษรเท่านั้น  โดยมาตราตัวอักษรนั้น ตัวเลขและภาษาอังกฤษจะเทียบ 1 ตัวอักษร ต่อ 1 อักษรแสดงลายเซ็น แต่ภาษาไทยจะเท่ากับ 3 ตัวอักษร',
 	'setting_styles_viewthread_author_onleft' => 'กำหนดตำแหน่งแสดงชื่อเจ้าของกระทู้',
 	'setting_styles_viewthread_author_onleft_comment' => 'กำหนดการแสดงชื่อเจ้าของกระทู้ เมื่ออยู่ในหน้าเนื้อหากระทู้',
@@ -2222,7 +2223,7 @@ $lang = array
 	'setting_datetime_timeoffset' => 'โซนเวลา',
 	'setting_datetime_timeoffset_comment' => 'หากคุณพบว่าเวลาที่แสดงอยู่ในปัจจุบันแตกต่างจากเวลาท้องถิ่นของคุณ คุณจะต้องเปลี่ยนการตั้งค่าโซนเวลาของคุณ',
 	'setting_datetime_timezone' => array(
-			'' => '选择公共时区',
+			'' => 'กรุณาเลือกโซนเวลา',
 			'-12' => '(GMT -12:00) เส้นแบ่งเขตวันสากลฝั่งตะวันตก',
 			'-11' => '(GMT -11:00) หมู่เกาะมิดเวย์, ซามัว',
 			'-10' => '(GMT -10:00) ฮาวาย',
@@ -2306,7 +2307,7 @@ $lang = array
 	'setting_attach_basic_multi' => 'อัปโหลดผ่านโปรแกรมแฟลช',
 	'setting_attach_basic_simple' => 'อัปโหลดแบบธรรมดา',
 	'setting_attach_basic_allowattachurl' => 'ที่อยู่ URL ไฟล์แนบ เล่นสื่อไฟล์แนบ',
-	'setting_attach_basic_allowattachurl_comment' => 'After opening the attachment URL address, the address of the uploaded attachment can be quoted in any post via "attach://aid" , and supports direct playback of media attachments. This setting needs to be set in <a href="'.ADMINSCRIPT.'?action=usergroups">User group</a> - The user group is allowed to use multimedia codes in the post related to take effect. This setting needs to select the attachment reading mode to support the Range header and the correct MIME type header for normal operation',
+	'setting_attach_basic_allowattachurl_comment' => 'After opening the attachment URL address, the address of the uploaded attachment can be quoted in any post by means of "attach://aid", and supports direct playback of media attachments. This setting needs to be set in <a href="'.ADMINSCRIPT.'?action=usergroups">User Group</a> - The user group is allowed to use multimedia codes in the post, and ensure that the local file reading mode configured by config_global.php is 1 or 4 before it takes effect.',
 	'setting_attach_basic_swfupload_comment' => 'การอัปโหลดผ่านโปรแกรมแฟลช Flash สามารถเลือกไฟล์และอัปโหลดพร้อมกันได้ครั้งละจำนวนมาก และยังแสดงความคืบหน้าของการอัปโหลด จะเปิดใช้งานทั้งสองอย่างเลยก็ได้ ถ้าเปิดใช้งานการอัปโหลดผ่านโปรแกรมแฟลชอย่างเดียว เบราเซอร์ของผู้ใช้งานบางคนอาจจะมีปัญหาโปรแกรมแฟลชอาจจะทำงานผิดพลาด จะได้ใช้การอัปโหลดแบบธรรมดาแทน',
 
 	'setting_attach_forumattach' => 'ไฟล์แนบของบอร์ด',
@@ -2589,8 +2590,8 @@ $lang = array
 	'setting_mobile_mobileforward_comment' => 'เมื่อผู้ใช้งานเข้าชมเว็บผ่านทางอุปกรณ์พกพาระบบจะแสดงผลรูปแบบอุปกรณ์พกพาให้โดยอัตโนมัติ',
 	'setting_mobile_otherindex' => 'อนุญาตให้หน้า ที่ไม่ใช่ฟอรัมเป็นหน้าแรกได้',
 	'setting_mobile_otherindex_comment' => 'หลังจากเปิดใช้งานเวอร์ชันอุปกรณ์พกพา คุณสามารถตั้งค่าปลั๊กอิน, พอร์ทัลและหน้าอื่น ๆ เป็นโฮมเพจได้',
-	'setting_mobile_allowmnew' => 'เปิดโหมดอุปกรณ์พกพาแบบใหม่',
-	'setting_mobile_allowmnew_comment' => 'การเปิดโหมดอุปกรณ์พกพาแบบใหม่ จะได้ URL เป็น “' . $_G['siteurl'] . 'm/”',
+	'setting_mobile_allowmnew' => 'เปิดใช้งานโหมดหน้าเว็บสำหรับมือถือ',
+	'setting_mobile_allowmnew_comment' => 'การใช้งานโหมดหน้าเว็บสำหรับมือถือจะได้ URL เป็น “' . $_G['siteurl'] . 'm/” หลังจากเปิดระบบหน้าเว็บสำหรับมือถือนี้จะแทนที่ระบบเวอร์ชันมือถือเดิม แต่ไม่รองรับปลั๊กอินและเครื่องมือค้นหาของบุคคลที่สาม โปรดใช้ด้วยความระมัดระวัง',
 	'setting_mobile_preview' => 'แสดงตัวอย่างการเข้าชมผ่านอุปกรณ์พกพา บนคอมพิวเตอร์',
 	'setting_mobile_preview_comment' => 'When a user accessed the standard computer version by mobile browser, guide the user to preview a mobile phone login page, users can preview in the PC version of Mobile Home',
 	'setting_mobile_register' => 'อนุญาตให้ลงทะเบียนบนอุปกรณ์พกพา',
@@ -4787,7 +4788,7 @@ $lang = array
 	'comment_article_delete' => 'Comment Deletes successfully.',
 	'comment_mod_range_illegal' => 'Specified time range is over the limit.',
 	'comment_post_nonexistence' => 'There is no comments matching the conditions.',
-	'comment_search_ip' =>'发布IP',
+	'comment_search_ip' =>'IP สาธารณะ',
 	'comment_search_ip_comment' => 'Wildcard "*" may be used, i.e. "127.0 .*.*" (without quotes), use with caution!!!',
 
 	'share_tips' => '<li>Share management used to bulk remove shares.</li><li>Reminder: click the <b>Delete</b> button  on the search results page will delete the relevant information directly!</li>',
@@ -5208,7 +5209,7 @@ $lang = array
 
 	'plugins' => 'กำหนดค่าปลั๊กอิน',
 	'plugins_home' => 'กรุณาดูคำแนะนำ',
-	'plugins_visit' => '评分',
+	'plugins_visit' => 'คะแนน',
 	'plugins_editlink' => 'แก้ไข',
 	'plugins_validator' => 'ตรวจสอบการอัปเดต',
 	'plugins_list' => 'รายการปลั๊กอิน',
@@ -7053,14 +7054,14 @@ $lang = array
 	'plugins_validator_error' => 'ปลั๊กอินต่อนี้ไปนี้ ไม่ได้เป็นของแท้ คลิกที่นี่ เพื่อดูรายละเอียดเพิ่มเติม',
 
 
-	'rewrite_message' => '<h1>Apache Web Server(สำหรับผู้ใช้โฮสต์ VPS)</h1>
+	'rewrite_message' => '<h1>Apache Web Server (สำหรับผู้ใช้โฮสต์ VPS)</h1>
 <pre class="colorbox">
 &lt;IfModule mod_rewrite.c&gt;
 	RewriteEngine On
 {apache1}&lt;/IfModule&gt;
 </pre>
 
-<h1>Apache Web Server(สำหรับผู้ใช้โฮสต์ธรรมดาทั่วไป)</h1>
+<h1>Apache Web Server (สำหรับผู้ใช้โฮสต์ธรรมดาทั่วไป)</h1>
 <pre class="colorbox">
 # เปิดโหมด RewriteEngine
 RewriteEngine On
@@ -7072,7 +7073,7 @@ RewriteBase /discuz
 {apache2}
 </pre>
 
-<h1>IIS Web Server(สำหรับผู้ใช้โฮสต์ VPS)</h1>
+<h1>IIS Web Server (สำหรับผู้ใช้โฮสต์ VPS)</h1>
 <pre class="colorbox">
 [ISAPI_Rewrite]
 
@@ -7086,7 +7087,7 @@ RepeatLimit 32
 {iis}
 </pre>
 
-<h1>IIS7 Web Server(สำหรับผู้ใช้โฮสต์ VPS)</h1>
+<h1>IIS7 Web Server (สำหรับผู้ใช้โฮสต์ VPS)</h1>
 <pre class="colorbox">
 &lt;rewrite&gt;
 	&lt;rules&gt;
