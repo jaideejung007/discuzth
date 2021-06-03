@@ -124,7 +124,7 @@ function discuzcode($message, $smileyoff = false, $bbcodeoff = false, $htmlon = 
 
 	if(!$bbcodeoff && $allowbbcode) {
 		if(strpos($msglower, '[/url]') !== FALSE) {
-			$message = preg_replace_callback("/\[url(=((https?|ftp|gopher|news|telnet|rtsp|mms|callto|bctp|thunder|qqdl|synacast){1}:\/\/|www\.|mailto:)?([^\r\n\[\"']+?))?\](.+?)\[\/url\]/is", 'discuzcode_callback_parseurl_152', $message);
+			$message = preg_replace_callback("/\[url(=((https?|ftp|gopher|news|telnet|rtsp|mms|callto|bctp|thunder|qqdl|synacast){1}:\/\/|www\.|mailto:|tel:|magnet:)?([^\r\n\[\"']+?))?\](.+?)\[\/url\]/is", 'discuzcode_callback_parseurl_152', $message);
 		}
 		if(strpos($msglower, '[/email]') !== FALSE) {
 			$message = preg_replace_callback("/\[email(=([A-Za-z0-9\-_.+]+)@([A-Za-z0-9\-_]+[.][A-Za-z0-9\-_.]+))?\](.+?)\[\/email\]/is", 'discuzcode_callback_parseemail_14', $message);
@@ -517,11 +517,11 @@ function highlightword($text, $words, $prepend) {
 function parseflv($url, $width = 0, $height = 0) {
 	global $_G;
 	$lowerurl = strtolower($url);
-	$flv = $iframe = $imgurl = '';
+	$flv = $iframe = $imgurl = '';		
 	if(empty($_G['setting']['parseflv']) || !is_array($_G['setting']['parseflv'])) {
 		return FALSE;
 	}
-
+	
 	foreach($_G['setting']['parseflv'] as $script => $checkurl) {
 		$check = FALSE;
 		foreach($checkurl as $row) {
@@ -537,7 +537,7 @@ function parseflv($url, $width = 0, $height = 0) {
 			}
 			break;
 		}
-	}
+	}	    	
 	if($flv || $iframe) {
 		if(!$width && !$height) {
 			return array('flv' => $flv, 'iframe' => $iframe, 'imgurl' => $imgurl);
@@ -547,6 +547,7 @@ function parseflv($url, $width = 0, $height = 0) {
 			$flv = addslashes($flv);
 			$iframe = addslashes($iframe);
 			$randomid = 'flv_'.random(3);
+			// 允许media扩展只返回其中一种播放方式，如两种都返回，则根据浏览器是否支持HTML5进行自动选择
 			$player_iframe = $iframe ? "\"<iframe src='$iframe' border='0' scrolling='no' framespacing='0' allowfullscreen='true' style='max-width: 100%' width='$width' height='$height' frameborder='no'></iframe>\"" : '';
 			$player_flv = $flv ? "AC_FL_RunContent('width', '$width', 'height', '$height', 'allowNetworking', 'internal', 'allowScriptAccess', 'never', 'src', '$flv', 'quality', 'high', 'bgcolor', '#ffffff', 'wmode', 'transparent', 'allowfullscreen', 'true')" : '';
 			$player = (!empty($player_iframe) && !empty($player_flv)) ? "detectHtml5Support() ? $player_iframe : $player_flv" : (empty($player_iframe) ? $player_flv : $player_iframe);

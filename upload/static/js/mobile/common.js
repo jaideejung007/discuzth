@@ -638,8 +638,7 @@ var formdialog = {
 				evalscript(s.lastChild.firstChild.nodeValue);
 			})
 			.error(function() {
-				window.location.href = obj.attr('href');
-				popup.close();
+				popup.open('พบความผิดปกติจากการส่งข้อมูล ไม่สามารถดำเนินการตามคำขอของคุณได้', 'alert');
 			});
 			return false;
 		});

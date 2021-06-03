@@ -80,7 +80,7 @@ class logging_ctl {
 
 			$loginhash = !empty($_GET['loginhash']) && preg_match('/^\w+$/', $_GET['loginhash']) ? $_GET['loginhash'] : '';
 
-			if(!($_G['member_loginperm'] = logincheck($_GET['username']))) {
+			if(!($_G['member_loginperm'] = logincheck($_GET['username']))) {				
 				showmessage('login_strike');
 			}
 			if($_GET['fastloginfield']) {
@@ -374,9 +374,13 @@ class register_ctl {
 				}
 			} elseif(!$this->setting['regstatus']) {
 				if($this->setting['regconnect']) {
-					dheader('location:connect.php?mod=login&op=init&referer=forum.php&statfrom=login_simple');
+					//不是QQ互联登录则跳转到QQ互联，避免越权完成普通注册
+					if(CURMODULE != 'connect'){
+						dheader('location:connect.php?mod=login&op=init&referer=forum.php&statfrom=login_simple');
+					}
+				}else{
+					showmessage(!$this->setting['regclosemessage'] ? 'register_disable' : str_replace(array("\r", "\n"), '', $this->setting['regclosemessage']));
 				}
-				showmessage(!$this->setting['regclosemessage'] ? 'register_disable' : str_replace(array("\r", "\n"), '', $this->setting['regclosemessage']));
 			}
 		}
 
@@ -391,7 +395,7 @@ class register_ctl {
 		if($this->setting['regverify']) {
 			if($this->setting['areaverifywhite']) {
 				$location = $whitearea = '';
-				$location = trim(convertip($_G['clientip'], "./"));
+				$location = trim(convertip($_G['clientip']));
 				if($location) {
 					$whitearea = preg_quote(trim($this->setting['areaverifywhite']), '/');
 					$whitearea = str_replace(array("\\*"), array('.*'), $whitearea);
@@ -417,7 +421,7 @@ class register_ctl {
 		if($this->setting['regstatus'] == 2) {
 			if($this->setting['inviteconfig']['inviteareawhite']) {
 				$location = $whitearea = '';
-				$location = trim(convertip($_G['clientip'], "./"));
+				$location = trim(convertip($_G['clientip']));
 				if($location) {
 					$whitearea = preg_quote(trim($this->setting['inviteconfig']['inviteareawhite']), '/');
 					$whitearea = str_replace(array("\\*"), array('.*'), $whitearea);

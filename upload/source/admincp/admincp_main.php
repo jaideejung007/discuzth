@@ -108,8 +108,6 @@ foreach ($menu as $k => $v) {
 }
 unset($menu);
 
-$plugindefaultkey = $isfounder ? 1 : 0;
-
 echo <<<EOT
 
 </div>
@@ -124,7 +122,7 @@ echo <<<EOT
 </div>
 <div class="copyright">
 	<p>Powered by <a href="http://www.discuz.net/" target="_blank">Discuz!</a> {$_G['setting']['version']}</p>
-	<p>Copyright &copy; 2001-2020</p>
+	<p>Copyright &copy; 2001-2021</p>
 	<p>Tencent Cloud.</p>
 </div>
 
@@ -176,7 +174,7 @@ echo <<<EOT
 			parent.main.location = admincpfilename + '?action=' + url;
 			var hrefs = $('menu_' + key).getElementsByTagName('a');
 			for(var j = 0; j < hrefs.length; j++) {
-				hrefs[j].className = j == (key == 'plugin' ? $plugindefaultkey : 0) ? 'tabon' : '';
+				hrefs[j].className = j == 0 ? 'tabon' : '';
 			}
 		}
 		if(key == 'uc') {

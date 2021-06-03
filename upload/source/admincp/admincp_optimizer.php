@@ -37,18 +37,17 @@ $security_option = array(
 	'optimizer_usergroup4',
 	'optimizer_usergroup5',
 	'optimizer_usergroup6',
-	'optimizer_cloudsecurity',
 	'optimizer_attachexpire',
 	'optimizer_attachrefcheck',
 	'optimizer_filecheck',
 	'optimizer_plugin',
-	'optimizer_upgrade',
-	'optimizer_patch',
 	'optimizer_loginpwcheck',
 	'optimizer_loginoutofdate',
-	'optimizer_eviluser',
-	'optimizer_white_list',
-	'optimizer_security_daily',
+);
+
+$serversec_option = array(
+	'optimizer_dos8p3',
+	'optimizer_httphost'
 );
 
 if($_G['setting']['connect']['allow']) {
@@ -57,7 +56,7 @@ if($_G['setting']['connect']['allow']) {
 }
 
 $check_record_time_key = 'check_record_time';
-if(in_array($operation, array('security', 'performance'))) {
+if(in_array($operation, array('security', 'serversec', 'performance'))) {
 	$_GET['anchor'] = $operation;
 	$operation = '';
 }
@@ -66,6 +65,11 @@ if($_GET['anchor'] == 'security') {
 	$optimizer_option = $security_option;
 	$check_record_time_key = 'security_check_record_time';
 	showsubmenu('menu_security');
+} elseif($_GET['anchor'] == 'serversec') {
+	shownav('safe', 'menu_serversec');
+	$optimizer_option = $serversec_option;
+	$check_record_time_key = 'serversec_check_record_time';
+	showsubmenu('menu_serversec');
 } elseif($_GET['anchor'] == 'performance') {
 	shownav('founder', 'menu_optimizer');
 	showsubmenu('menu_optimizer');
@@ -81,10 +85,11 @@ if($operation) {
 	$optimizer = new optimizer($type);
 }
 
-$_GET['anchor'] = in_array($_GET['anchor'], array('security', 'performance')) ? $_GET['anchor'] : 'security';
+$_GET['anchor'] = in_array($_GET['anchor'], array('security', 'serversec', 'performance')) ? $_GET['anchor'] : 'security';
 $current = array($_GET['anchor'] => 1);
 showmenu('nav_founder_optimizer', array(
 	array('founder_optimizer_security', 'optimizer&anchor=security', $current['security']),
+	array('founder_optimizer_serversec', 'optimizer&anchor=serversec', $current['serversec']),
 	array('founder_optimizer_performance', 'optimizer&anchor=performance', $current['performance']),
 ));
 
@@ -146,8 +151,8 @@ if($operation == 'optimize_unit') {
 
 	$checkrecordtime = C::t('common_optimizer')->fetch($check_record_time_key);
 
-	if(!$_GET['checking'] && $_GET['anchor'] == 'security') {
-		showtips('optimizer_security_tips');
+	if(!$_GET['checking']) {
+		showtips('optimizer_'.$_GET['anchor'].'_tips');
 	}
 
 	showtableheader();

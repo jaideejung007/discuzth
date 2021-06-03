@@ -91,7 +91,7 @@ $lang = array(
 	'tips_ucenter' => 'กรุณากรอกข้อมูลของ UCenter ที่กำหนดไว้',
 	'tips_ucenter_comment' => 'UCenter เป็นผลิตภัณฑ์หลักของบริษัทฯ Comsenz ซึ่ง Discuz! Board ต้องติดตั้งและพึ่งพาการทำงานของโปรแกรมนี้. หากคุณติดตั้ง UCenter ไว้แล้ว กรุณากรอกข้อมูลด้านล่าง หากคุณยังไม่มีและยังไม่ได้ติดตั้ง UCenter กรุณาไปที่ <a href="#" target="blank">DiscuzThai</a> เพื่อดาวน์โหลด UCenter เวอร์ชันภาษาไทย แล้วทำการติดตั้งเพื่อดำเนินการต่อไป',
 
-	'advice_mysql_connect' => 'กรุณาตรวจสอบว่า MySQL มีการเชื่อมต่ออย่างถูกต้อง',
+	'advice_mysql_connect' => 'กรุณาตรวจสอบว่า mysql มีการเชื่อมต่ออย่างถูกต้อง',
 	'advice_gethostbyname' => 'ค่า gethostbyname.ใน PHP ถูกปิดใช้งาน   โปรดติดต่อผู้ให้บริการโฮสเพื่อตรวจสอบการเปิดคุณลักษณะนี้',
 	'advice_file_get_contents' => 'ตรวจสอบ allow_url_fopen ใน php.ini ว่าเปิดใช้งานอยู่รึเปล่า. โปรดติดต่อผู้ให้บริการโฮสเพื่อตรวจสอบการเปิดคุณลักษณะนี้',
 	'advice_xml_parser_create' => 'ต้องตรวจสอบดูว่าสนับสนุน PHP สำหรับ XML หรือไม่. โปรดติดต่อผู้ให้บริการโฮสเพื่อตรวจสอบการเปิดคุณลักษณะนี้',
@@ -252,7 +252,7 @@ $lang = array(
 
 	'license' => '<div class="license"><h1>เวอร์ชันภาษาอังกฤษ (อย่างไม่เป็นทางการ) เป็นข้อตกลงใบอนุญาตสำหรับผู้ใช้ที่ไม่ใช้ภาษาจีน</h1>
 
-<p>Copyright (c) 2001-2020, Tencent Cloud Computing (Beijing) Co., Ltd. (formerly Beijing Kangsheng Xinchuang Technology Co., Ltd.) All rights reserved.</p>
+<p>Copyright (c) 2001-2021, Tencent Cloud Computing (Beijing) Co., Ltd. (formerly Beijing Kangsheng Xinchuang Technology Co., Ltd.) All rights reserved.</p>
 
 <p>Thank you for choosing Kangsheng products. We hope that our efforts can provide you with an efficient, fast, powerful site solution, and a powerful community forum solution. The website of Kangsheng Company is http://www.comsenz.com, and the official discussion website of the product is http://www.discuz.net.</p>
 

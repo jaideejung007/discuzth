@@ -670,7 +670,7 @@ function getcurrentnav() {
 			$_GET['mod'] = 'follow';
 		}
 		foreach($_G['setting']['navmns'][$_G['basefilename']] as $navmn) {
-			if($navmn[0] == array_intersect_assoc($navmn[0], $_GET) || ($navmn[0]['mod'] == 'space' && $_GET['mod'] == 'spacecp' && ($navmn[0]['do'] == $_GET['ac'] || $navmn[0]['do'] == 'album' && $_GET['ac'] == 'upload'))) {
+			if($navmn[0] == array_intersect_assoc($navmn[0], $_GET) || (isset($_GET['gid']) && $navmn[0]['mod'] == 'forumdisplay' && $navmn[0]['fid'] == $_GET['gid'])  || ($navmn[0]['mod'] == 'space' && $_GET['mod'] == 'spacecp' && ($navmn[0]['do'] == $_GET['ac'] || $navmn[0]['do'] == 'album' && $_GET['ac'] == 'upload'))) {
 				$mnid = $navmn[1];
 			}
 		}
@@ -1065,8 +1065,12 @@ function output() {
 			if($fp = @fopen(CACHE_FILE, 'w')) {
 				flock($fp, LOCK_EX);
 				$content = empty($content) ? ob_get_contents() : $content;
-				$temp_formhash = substr(md5(substr($_G['timestamp'], 0, -3).substr($_G['config']['security']['authkey'], 3, -3)), 8, 8);
+				$temp_md5 = md5(substr($_G['timestamp'], 0, -3).substr($_G['config']['security']['authkey'], 3, -3));
+				$temp_formhash = substr($temp_md5, 8, 8);
 				$content = preg_replace('/(name=[\'|\"]formhash[\'|\"] value=[\'\"]|formhash=)('.constant("FORMHASH").')/ismU', '${1}'.$temp_formhash, $content);
+				//避免siteurl伪造被缓存
+				$temp_siteurl = 'siteurl_'.substr($temp_md5, 16, 8);
+				$content = preg_replace('/("|\')('.preg_quote($_G['siteurl'], '/').')/ismU', '${1}'.$temp_siteurl, $content);
 				fwrite($fp, empty($content) ? ob_get_contents() : $content);
 			}
 			@fclose($fp);
@@ -1519,6 +1523,7 @@ function dreferer($default = '') {
 		$_G['referer'] = '';
 	}
 
+	// HTTP_HOST变量中有可能有端口号
 	list($http_host,)=explode(':', $_SERVER['HTTP_HOST']);
 
 	if(!empty($reurl['host']) && !in_array($reurl['host'], array($http_host, 'www.'.$http_host)) && !in_array($http_host, array($reurl['host'], 'www.'.$reurl['host']))) {
@@ -1813,7 +1818,7 @@ function periodscheck($periods, $showmessage = 1) {
 		if($_G['setting']['postignorearea']) {
 			$location = $whitearea = '';
 			require_once libfile('function/misc');
-			$location = trim(convertip($_G['clientip'], "./"));
+			$location = trim(convertip($_G['clientip']));
 			if($location) {
 				$whitearea = preg_quote(trim($_G['setting']['postignorearea']), '/');
 				$whitearea = str_replace(array("\\*"), array('.*'), $whitearea);

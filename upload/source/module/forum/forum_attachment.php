@@ -165,7 +165,7 @@ if(empty($_GET['nothumb']) && $attach['isimage'] && $attach['thumb']) {
 }
 
 $filename = $_G['setting']['attachdir'].'/forum/'.$attach['attachment'];
-if(!$attach['remote'] && !is_readable($filename)) {
+if(!$attach['remote'] && !is_readable($filename)) {	
 	if(!$requestmode) {
 		showmessage('attachment_nonexistence');
 	} else {
@@ -202,6 +202,8 @@ if(!$requestmode) {
 
 }
 
+// 解析range的范围, readmod = 1 or 4的时候，支持range
+// range传入有可能没有end，这时候要在获取了文件大小后，根据文件大小设置range_end
 $range_start = 0;
 $range_end = 0;
 $has_range_header = false;
@@ -237,19 +239,21 @@ if($attach['remote'] && !$_G['setting']['ftp']['hideurl'] && $isimage) {
 	dheader('location:'.$_G['setting']['ftp']['attachurl'].'forum/'.$attach['attachment']);
 }
 
+// 获取支持h5媒体播放的mimetype，Safari要有mimetype和range支持才能正确播放
 $mimetype = ext_to_mimetype($attach['filename']);
 $filesize = !$attach['remote'] ? filesize($filename) : $attach['filesize'];
+// 如果range_end没有传入，更新range_end
 if ($has_range_header && !$range_end) $range_end = $filesize - 1;
-$attach['filename'] = '"'.(strtolower(CHARSET) == 'utf-8' && strexists($_SERVER['HTTP_USER_AGENT'], 'MSIE') ? urlencode($attach['filename']) : $attach['filename']).'"';
+$filenameencode = strtolower(CHARSET) == 'utf-8' ? rawurlencode($attach['filename']) : rawurlencode(diconv($attach['filename'], CHARSET, 'UTF-8'));
 
 dheader('Date: '.gmdate('D, d M Y H:i:s', $attach['dateline']).' GMT');
 dheader('Last-Modified: '.gmdate('D, d M Y H:i:s', $attach['dateline']).' GMT');
 dheader('Content-Encoding: none');
 
 if($isimage && !empty($_GET['noupdate']) || !empty($_GET['request'])) {
-	dheader('Content-Disposition: inline; filename='.$attach['filename']);
+	dheader('Content-Disposition: inline; filename="'.(($attach['filename'] == $filenameencode) ? $attach['filename'].'"' : $filenameencode.'"; filename*=utf-8\'\''.$filenameencode));
 } else {
-	dheader('Content-Disposition: attachment; filename='.$attach['filename']);
+	dheader('Content-Disposition: attachment; filename="'.(($attach['filename'] == $filenameencode) ? $attach['filename'].'"' : $filenameencode.'"; filename*=utf-8\'\''.$filenameencode));
 }
 if($isimage) {
 	dheader('Content-Type: image');
@@ -277,6 +281,7 @@ if(!empty($xsendfile)) {
 	}
 }
 
+// readmod = 1 or 4 的时候，支持Range
 if (($readmod == 4) || ($readmod == 1)) {
 	dheader('Accept-Ranges: bytes');
 	if($has_range_header) {
@@ -328,7 +333,7 @@ function getlocalfile($filename, $readmod = 2, $range_start = 0, $range_end = 0)
 }
 
 function send_file_by_chunk($fp, $limit = PHP_INT_MAX) {
-	static $CHUNK_SIZE = 65536;
+	static $CHUNK_SIZE = 65536; // 每次最大读 64KB
 	$count = 0;
 	while (!feof($fp)) {
 		$size_to_read = $CHUNK_SIZE;
@@ -366,18 +371,18 @@ function ext_to_mimetype($path) {
 	$ext = pathinfo($path, PATHINFO_EXTENSION);
 	$map = array(
 		'aac' => 'audio/aac',
-		'flac' => 'audio/flac',
-		'mp3' => 'audio/mpeg',
-		'm4a' => 'audio/mp4',
-		'wav' => 'audio/wav',
+		'flac' => 'audio/flac', 
+		'mp3' => 'audio/mpeg', 
+		'm4a' => 'audio/mp4', 
+		'wav' => 'audio/wav', 
 		'ogg' => 'audio/ogg',
 		'weba' => 'audio/webm',
-		'flv' => 'video/x-flv',
-		'mp4' => 'video/mp4',
-		'm4v' => 'video/mp4',
+		'flv' => 'video/x-flv', 
+		'mp4' => 'video/mp4', 
+		'm4v' => 'video/mp4', 
 		'3gp' => 'video/3gpp',
 		'ogv' => 'video/ogg',
-		'webm' => 'video/webm'
+		'webm' => 'video/webm' 
 	);
 	$mime = $map[$ext];
 	if (!$mime) $mime = "application/octet-stream";

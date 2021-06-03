@@ -530,7 +530,9 @@ if($operation == 'ad') {
 		array('adv_admin_list', 'adv&operation=list', 1),
 		array('adv_admin_listall', 'adv&operation=ad', 0),
 	));
+	/*search={"adv_admin":"action=adv","adv_admin_list":"action=adv&operation=list"}*/
 	showtips('adv_list_tip');
+	/*search*/
 
 	$advs = getadvs();
 	showtableheader('', 'fixpadding');
@@ -561,6 +563,7 @@ if($operation == 'ad') {
 			}
 			if($adv['class'] == 'custom') {
 				$customadv = $adv;
+				$img = file_exists(DISCUZ_ROOT.'./static/image/admincp/'.$customadv['class'].'.gif') ? '<img src="static/image/admincp/'.$customadv['class'].'.gif" /><br />' : '';
 				echo '<td width="'.$rowwidth.'%" class="hover" align="center">';
 				echo $img.$lang['adv_custom_add'];
 				showformheader("adv&operation=custom&do=add");

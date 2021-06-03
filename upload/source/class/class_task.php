@@ -46,7 +46,7 @@ class task {
 				if($task['allowapply'] < 0) {
 					continue;
 				}
-				$task['noperm'] = $task['applyperm'] && $task['applyperm'] != 'all' && !(($task['applyperm'] == 'member'&& $_G['adminid'] == '0') || ($task['applyperm'] == 'admin' && $_G['adminid'] > '0') || forumperm($task['applyperm']));
+				$task['noperm'] = $task['applyperm'] && $task['applyperm'] != 'all' && !(($task['applyperm'] == 'member' && in_array($_G['adminid'], array(0, -1))) || ($task['applyperm'] == 'admin' && $_G['adminid'] > '0') || forumperm($task['applyperm']));
 				$task['appliesfull'] = $task['tasklimits'] && $task['achievers'] >= $task['tasklimits'];
 				if($item == 'canapply' && ($task['noperm'] || $task['appliesfull'])) {
 					continue;
@@ -254,7 +254,7 @@ class task {
 		}
 
 		if($allowapply > 0) {
-			if($this->task['applyperm'] && $this->task['applyperm'] != 'all' && !(($this->task['applyperm'] == 'member' && $_G['adminid'] == '0') || ($this->task['applyperm'] == 'admin' && $_G['adminid'] > '0') || preg_match("/(^|\t)(".$_G['groupid'].")(\t|$)/", $this->task['applyperm']))) {
+			if($this->task['applyperm'] && $this->task['applyperm'] != 'all' && !(($this->task['applyperm'] == 'member' && in_array($_G['adminid'], array(0, -1))) || ($this->task['applyperm'] == 'admin' && $_G['adminid'] > '0') || preg_match("/(^|\t)(".$_G['groupid'].")(\t|$)/", $this->task['applyperm']))) {
 				$allowapply = -2;
 			} elseif($this->task['tasklimits'] && $this->task['achievers'] >= $this->task['tasklimits']) {
 				$allowapply = -3;
@@ -325,7 +325,7 @@ class task {
 
 		if($this->task['relatedtaskid'] && !C::t('common_mytask')->count($_G['uid'], $this->task['relatedtaskid'], 1)) {
 			return -1;
-		} elseif($this->task['applyperm'] && $this->task['applyperm'] != 'all' && !(($this->task['applyperm'] == 'member' && $_G['adminid'] == '0') || ($this->task['applyperm'] == 'admin' && $_G['adminid'] > '0') || preg_match("/(^|\t)(".$_G['groupid'].")(\t|$)/", $this->task['applyperm']))) {
+		} elseif($this->task['applyperm'] && $this->task['applyperm'] != 'all' && !(($this->task['applyperm'] == 'member' && in_array($_G['adminid'], array(0, -1))) || ($this->task['applyperm'] == 'admin' && $_G['adminid'] > '0') || preg_match("/(^|\t)(".$_G['groupid'].")(\t|$)/", $this->task['applyperm']))) {
 			return -2;
 		} elseif(!$this->task['period'] && C::t('common_mytask')->count($_G['uid'], $id)) {
 			return -3;
@@ -501,12 +501,67 @@ class task {
 			showmessage('task_nonexistence');
 		}
 
+		$escript = explode(':', $this->task['scriptname']);
+		if(count($escript) > 1) {
+			include_once DISCUZ_ROOT.'./source/plugin/'.$escript[0].'/task/task_'.$escript[1].'.php';
+			$taskclassname = 'task_'.$escript[1];
+		} else {
+			require_once libfile('task/'.$this->task['scriptname'], 'class');
+			$taskclassname = 'task_'.$this->task['scriptname'];
+		}
+		$taskclass = new $taskclassname;
 		if(method_exists($taskclass, 'delete')) {
 			$taskclass->delete($this->task);
 		}
 
 		C::t('common_mytask')->delete($_G['uid'], $id);
 		C::t('common_task')->update_applicants($id, -1);
+		return true;
+	}
+
+	function update_available($update = 0) {
+		global $_G;
+		$updatetasknext = 0;
+		loadcache('tasknext');
+		$tasknext = getglobal('cache/tasknext');
+		if(!is_array($tasknext)) {
+			$tasknext = array();
+		}
+		if(!isset($tasknext['starttime']) || $tasknext['starttime'] > TIMESTAMP + 86400) {
+			$tasknext['starttime'] = 0;
+		}
+		if(!isset($tasknext['endtime']) || $tasknext['endtime'] > TIMESTAMP + 86400) {
+			$tasknext['endtime'] = 0;
+		}
+		if(TIMESTAMP >= $tasknext['starttime'] || TIMESTAMP >= $tasknext['endtime'] || $update) {
+			$processname = 'update_task_available';
+			if($update || !discuz_process::islocked($processname, 600)) {
+				if(TIMESTAMP >= $tasknext['starttime'] || $update) {
+					//上线开始的活动
+					C::t('common_task')->update_available(2);
+					//下个活动开始时间
+					$starttime = C::t('common_task')->fetch_next_starttime();
+					//下次触发时间不超过24小时
+					$tasknext['starttime'] = $starttime ? min($starttime, TIMESTAMP + 86400) : TIMESTAMP + 86400;
+					$updatetasknext = 1;
+				}
+
+				if(TIMESTAMP >= $tasknext['endtime'] || $update) {
+					//隐藏未开始或者结束的活动
+					C::t('common_task')->update_available(1);
+					//下个活动结束时间
+					$endtime = C::t('common_task')->fetch_next_endtime();
+					//下次触发时间不超过24小时
+					$tasknext['endtime'] = $endtime ? min($endtime, TIMESTAMP + 86400) : TIMESTAMP + 86400;
+					$updatetasknext = 1;
+				}
+
+				if($updatetasknext) {
+					savecache('tasknext', $tasknext);
+				}
+				discuz_process::unlock($processname);
+			}
+		}
 		return true;
 	}
 

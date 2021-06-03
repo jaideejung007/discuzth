@@ -205,6 +205,7 @@ EOF;
 
 	if(empty($_GET['uid']) && empty($_GET['username']) && empty($_GET['ip'])) {
 
+		/*search={"nav_repeat":"action=members&operation=repeat"}*/
 		shownav('user', 'nav_members');
 		showsubmenu('nav_members', array(
 			array('search', 'members&operation=search', 0),
@@ -220,6 +221,7 @@ EOF;
 		showsubmit('submit', 'submit');
 		showtablefooter();
 		showformfooter();
+		/*search*/
 
 	} else {
 
@@ -343,11 +345,11 @@ EOF;
 		if(!empty($_GET['uidarray'])) {
 			$uids = array();
 			$allmember = C::t('common_member')->fetch_all($_GET['uidarray']);
-			$count = count($allmember);
+			
 			$membernum = 0;
 			foreach($allmember as $uid => $member) {
 				if($member['adminid'] !== 1 && $member['groupid'] !== 1) {
-					if($count < 2000 || !empty($_GET['uidarray'])) {
+					if($membernum < 2000 ) {
 						$extra .= '<input type="hidden" name="uidarray[]" value="'.$member['uid'].'" />';
 					}
 					$uids[] = $member['uid'];
@@ -359,7 +361,7 @@ EOF;
 			$uids = searchmembers($search_condition, $delmemberlimit, 0);
 		}
 		$allnum = intval($_GET['allnum']);
-		$conditions = $uids ? 'm.uid IN ('.dimplode($uids).')' : '0';
+		
 
 		if((empty($membernum) || empty($uids))) {
 			if($deletestart) {
@@ -395,10 +397,8 @@ EOF;
 
 			} else {
 
-				if(empty($uids)) {
-					cpmsg('members_no_find_deluser', '', 'error');
-				}
-				$numdeleted = $numdeleted ? $numdeleted : count($uids);
+				
+				
 				$pertask = 1000;
 				$current = $_GET['current'] ? intval($_GET['current']) : 0;
 				$deleteitem = $_GET['deleteitem'] ? trim($_GET['deleteitem']) : 'post';
@@ -571,7 +571,7 @@ EOF;
 		}
 		showsearchform('newsletter');
 
-		if(submitcheck('submit')) {
+		if(submitcheck('submit', 1)) {
 			$dostr = '';
 			if($_GET['do'] == 'mobile') {
 				$search_condition['token_noempty'] = 'token';
@@ -646,7 +646,6 @@ EOF;
 			    $grouppm['message'].'<br /><br />'.
 			    (!$do ?
 				'<a href="'.ADMINSCRIPT.'?action=members&operation=grouppmlist&do='.$grouppm['id'].'">'.cplang('members_grouppmlist_view', array('number' => $grouppm['numbers'])).'</a>' :
-				'<a href="'.ADMINSCRIPT.'?action=members&operation=grouppmlist&do='.$grouppm['id'].'">'.cplang('members_grouppmlist_view_all').'</a>('.$grouppm['numbers'].') &nbsp; '.
 				'<a href="'.ADMINSCRIPT.'?action=members&operation=grouppmlist&do='.$grouppm['id'].'&filter=unread">'.cplang('members_grouppmlist_view_unread').'</a>('.$unreads.') &nbsp; '.
 				'<a href="'.ADMINSCRIPT.'?action=members&operation=grouppmlist&do='.$grouppm['id'].'&filter=read">'.cplang('members_grouppmlist_view_read').'</a>('.($grouppm['numbers'] - $unreads).')'),
 				'<a href="'.ADMINSCRIPT.'?action=members&operation=grouppmlist&delete='.$grouppm['id'].'">'.cplang('delete').'</a>'
@@ -667,8 +666,8 @@ EOF;
 			$count = $unreads;
 		}
 		$multipage = multi($count, $ppp, $page, ADMINSCRIPT."?action=members&operation=grouppmlist&do=$do".$filteradd);
-		$alldata = C::t('common_member_grouppm')->fetch_all_by_gpmid($gpmid, $_GET['filter'] == 'read' ? 1 : 0, $start_limit, $ppp);
-		$allmember = $gpmuser ? C::t('common_member')->fetch_all_username_by_uid(array_keys($gpmuser)) : array();
+		$alldata = C::t('common_member_grouppm')->fetch_all_by_gpmid($do, $_GET['filter'] == 'read' ? 1 : 0, $start_limit, $ppp);
+		$allmember = $alldata ? C::t('common_member')->fetch_all_username_by_uid(array_keys($alldata)) : array();
 		foreach($alldata as $uid => $gpmuser) {
 			echo '<div style="margin-bottom:5px;float:left;width:24%"><b><a href="home.php?mod=space&uid='.$uid.'" target="_blank">'.$allmember[$uid].'</a></b><br />&nbsp;';
 			if($gpmuser['status'] == 0) {
@@ -916,6 +915,7 @@ EOF;
 			($groupselect['special'] ? '<optgroup label="'.$lang['usergroups_special'].'">'.$groupselect['special'].'</optgroup>' : '').
 			($groupselect['specialadmin'] ? '<optgroup label="'.$lang['usergroups_specialadmin'].'">'.$groupselect['specialadmin'].'</optgroup>' : '').
 			'<optgroup label="'.$lang['usergroups_system'].'">'.$groupselect['system'].'</optgroup>';
+		/*search={"nav_members_add":"action=members&operation=add"}*/
 		shownav('user', 'nav_members_add');
 		showsubmenu('members_add');
 		showformheader('members&operation=add');
@@ -928,6 +928,7 @@ EOF;
 		showsubmit('addsubmit');
 		showtablefooter();
 		showformfooter();
+		/*search*/
 
 	} else {
 
@@ -1058,6 +1059,7 @@ EOF;
 			$groups['member'] = '<option value="'.$group['groupid'].'" gtype="member">'.$group['grouptitle'].'</option>';
 		}
 
+		/*search={"members_group":"action=members&operation=group"}*/
 		shownav('user', 'members_group');
 		showsubmenu('members_group_member', array(), '', array('username' => $member['username']));
 		echo '<script src="static/js/calendar.js" type="text/javascript"></script>';
@@ -1084,6 +1086,7 @@ EOF;
 		showtablefooter();
 
 		showformfooter();
+		/*search*/
 
 	} else {
 
@@ -1174,7 +1177,7 @@ EOF;
 		}
 
 		if($_GET['groupidnew'] != $member['groupid'] && (in_array($_GET['groupidnew'], array(4, 5)) || in_array($member['groupid'], array(4, 5)))) {
-			$my_opt = in_array($_GET['groupidnew'], array(4, 5)) ? 'banuser' : 'unbanuser';
+			$my_opt = in_array($_GET['groupidnew'], array(4, 5)) ? 'banuser' : 'unbanuser';			
 			banlog($member['username'], $member['groupid'], $_GET['groupidnew'], $groupexpirynew, $_GET['reason']);
 		}
 
@@ -1226,6 +1229,7 @@ EOF;
 EOT;
 		shownav('user', 'members_credit');
 		showsubmenu('members_credit');
+		/*search={"members_credit":"action=members&operation=credit"}*/
 		showtips('members_credit_tips');
 		showformheader("members&operation=credit&uid={$_GET['uid']}");
 		showtableheader('<em class="right"><a href="'.ADMINSCRIPT.'?action=logs&operation=credit&srch_uid='.$_GET['uid'].'&frame=yes" target="_blank">'.cplang('members_credit_logs').'</a></em>'.cplang('members_credit').' - '.$member['username'].'('.$member['grouptitle'].')', 'nobottom');
@@ -1238,6 +1242,7 @@ EOT;
 		showsubmit('creditsubmit');
 		showtablefooter();
 		showformfooter();
+		/*search*/
 
 	} else {
 
@@ -1522,7 +1527,7 @@ EOF;
 			if($postcomment_cache_pid) {
 				C::t('forum_postcache')->delete($postcomment_cache_pid);
 			}
-			if(!$member['adminid']) {
+			if(in_array($member['adminid'], array(0, -1))) {
 				$member_status = C::t('common_member_status')->fetch($member['uid']);
 			}
 		} elseif($member['groupid'] == 4 || $member['groupid'] == 5) {
@@ -1731,7 +1736,7 @@ EOF;
 					C::t('forum_postcache')->delete($postcomment_cache_pid);
 				}
 			}
-
+            
 			if(in_array('profile', $_GET['clear'])) {
 				C::t('common_member_profile'.$tableext)->delete($member['uid']);
 				C::t('common_member_profile'.$tableext)->insert(array('uid' => $member['uid']));
@@ -1765,6 +1770,7 @@ EOF;
 
 		shownav('user', 'members_access_edit');
 		showsubmenu('members_access_edit');
+		/*search={"members_access_edit":"action=members&operation=access"}*/
 		showtips('members_access_tips');
 		showtableheader(cplang('members_access_now').' - '.$member['username'], 'nobottom fixpadding');
 		showsubtitle(array('forum', 'members_access_view', 'members_access_post', 'members_access_reply', 'members_access_getattach', 'members_access_getimage', 'members_access_postattach', 'members_access_postimage', 'members_access_adminuser', 'members_access_dateline'));
@@ -1818,6 +1824,7 @@ EOF;
 		showsubmit('accesssubmit', 'submit');
 		showtablefooter();
 		showformfooter();
+		/*search*/
 
 	} else {
 
@@ -1937,6 +1944,7 @@ EOF;
 		$member['signature'] = html2bbcode($member['sightml']);
 
 		shownav('user', 'members_edit');
+		/*search={"members_edit":"action=members&operation=edit"}*/
 		showsubmenu("$lang[members_edit] - $member[username]", array(
 			array('connect_member_info', 'members&operation=edit&uid='.$uid,  1),
 			!empty($_G['setting']['connect']['allow']) ? array('connect_member_bindlog', 'members&operation=edit&do=bindlog&uid='.$uid,  0) : array(),
@@ -1999,6 +2007,7 @@ EOF;
 		showsubmit('editsubmit');
 		showtablefooter();
 		showformfooter();
+		/*search*/
 
 	} else {
 
@@ -2139,7 +2148,7 @@ EOF;
 				$ipbanned .= showtablerow('', array('class="td25"'), array(
 					"<input class=\"checkbox\" type=\"checkbox\" name=\"delete[$banned[id]]\" value=\"$banned[id]\" $disabled />",
 					$theip,
-					convertip($theip, "./"),
+					convertip($theip),
 					$banned[admin],
 					$banned[dateline],
 					"<input type=\"text\" class=\"txt\" size=\"10\" name=\"expirationnew[$banned[id]]\" value=\"$banned[expiration]\" $disabled />"
@@ -2216,7 +2225,7 @@ EOF;
 					'dateline' => $_G['timestamp'],
 					'expiration' => $expiration,
 				);
-				C::t('common_banned')->insert($data);
+				C::t('common_banned')->insert($data);				
 			}
 
 			if(is_array($_GET['expirationnew'])) {
@@ -2773,6 +2782,7 @@ function showsearchform($operation = '') {
 		$usertagselect .= "<option value=\"$row[tagid]\" ".(in_array($row['tagid'], $tagid) ? 'selected' : '').">$row[tagname]</option>\n";
 	}
 
+	/*search={"nav_members":"action=members&operation=search"}*/
 	showtagheader('div', 'searchmembers', !$_GET['submit']);
 	echo '<script src="static/js/calendar.js" type="text/javascript"></script>';
 	echo '<style type="text/css">#residedistrictbox select, #birthdistrictbox select{width: auto;}</style>';
@@ -2927,6 +2937,7 @@ function showsearchform($operation = '') {
 	showtablefooter();
 	showformfooter();
 	showtagfooter('div');
+	/*search*/
 }
 
 function searchcondition($condition) {
@@ -3303,7 +3314,7 @@ function notifymembers($operation, $variable) {
 
 function banlog($username, $origgroupid, $newgroupid, $expiration, $reason, $status = 0) {
 	global $_G, $_POST;
-	$cloud_apps = dunserialize($_G['setting']['cloud_apps']);
+	$cloud_apps = dunserialize($_G['setting']['cloud_apps']);	
 	writelog('banlog', dhtmlspecialchars("$_G[timestamp]\t{$_G[member][username]}\t$_G[groupid]\t$_G[clientip]\t$username\t$origgroupid\t$newgroupid\t$expiration\t$reason\t$status"));
 }
 

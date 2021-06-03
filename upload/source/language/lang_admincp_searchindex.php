@@ -146,7 +146,7 @@ $lang = array (
   array (
     'index' =>
     array (
-      'Money Setttings' => 'action=setting&operation=credits',
+      'Credits Setttings' => 'action=setting&operation=credits',
     ),
     'text' =>
     array (
@@ -2207,7 +2207,7 @@ $lang = array (
       9 => 'Generate the number of sheets',//'生成张数',
       10 => 'Set the resulting number of card secret sheets',//'设置本次生成的卡密张数',
       11 => 'card_make_extcredits',
-      12 => 'Points amount and type',//'积分数额及类型',
+      12 => 'Credits amount and type',//'积分数额及类型',
       13 => 'Set the amount and type of points to generate secret recharge card',//'设置本次生成充值卡密可充得的积分数额与类型',
       14 => 'card_make_price',
       15 => 'The actual card price',//'实际面值',
@@ -2996,7 +2996,7 @@ $lang = array (
     'index' =>
     array (
       'Forums' => 'action=forums',//'版块管理',
-      'Extended points exchange strategy' => 'action=forums&operation=edit&anchor=credits',//'扩展积分增减策略',
+      'Extended credits exchange strategy' => 'action=forums&operation=edit&anchor=credits',//'扩展积分增减策略',
     ),
     'text' =>
     array (
@@ -5196,7 +5196,7 @@ $lang = array (
   array (
     'index' =>
     array (
-      'Money Setttings' => 'action=setting&operation=credits',//'积分设置',
+      'Credits Setttings' => 'action=setting&operation=credits',//'积分设置',
       'Basic settings' => 'action=setting&operation=credits&anchor=base',//'基本设置',
     ),
     'text' =>
@@ -5206,7 +5206,7 @@ $lang = array (
       2 => 'Exchange points ratio',//'扩展积分设置',
       3 => 'Set exchanging coefficient for internal points and external currencies. Once the exchange rate is set, a user can exchange their points to external currencies and backward. If you do not want to use points conversion, set the exchange ratio to 0.',//'兑换比率为单项积分对应一个单位标准积分的值，例如 extcredits1 的比率为 1.5(相当于 1.5 个单位标准积分)、extcredits2 的比率为 3(相当于 3 个单位标准积分)、extcredits3 的比率为 15(相当于 15 个单位标准积分)，则 extcredits3 的 1 分相当于 extcredits2 的 5 分或 extcredits1 的 10 分。一旦设置兑换比率，则用户将可以在个人中心自行兑换各项设置了兑换比率的积分，如不希望实行积分自由兑换，请将其兑换比率设置为 0',
       4 => 'setting_credits',
-      5 => 'Money Setttings',//'积分设置',
+      5 => 'Credits Setttings',//'积分设置',
       6 => 'setting_credits_trans',
       7 => 'Points Transactions',//'交易积分设置',
       8 => 'Use the points transactions',//'交易积分是一种可以由用户间自行转让、买卖交易、发布悬赏主题的积分类型，你可以指定一种积分作为交易积分。如果不指定交易积分，则用户间积分交易功能将不能使用。注意: 交易积分必须是已启用的积分，一旦确定请尽量不要更改，否则以往记录及交易可能会产生问题',
@@ -5492,6 +5492,27 @@ $lang = array (
       22 => 'setting_datetime_searchbanperiods',
       23 => 'No search period',//'禁止全文搜索时间段',
       24 => 'Set a time period when users can not use the full-text search.',//'每天该时间段内用户不能使用全文搜索，格式和用法同上',
+      25 => 'setting_attach_basic_dir',
+      26 => 'Attachments Directory',//'本地附件保存位置',
+      27 => 'Set the absolute server path without ending slash ("/"). It must have attributes 777 and must be accessible by web.',//'服务器路径，属性 777，必须为 web 可访问到的目录，结尾不加 "/"，相对目录务必以 "./" 开头',
+      28 => 'setting_attach_basic_url',
+      29 => 'Attachments URL',//'本地附件 URL 地址',
+      30 => 'Enter relative path from the web-server root, or an absolute URL starting from http://, without ending "/".',//'可为当前 URL 下的相对地址或 http:// 开头的绝对地址，结尾不加 "/"，不能把这个设为远程附件URL地址',
+      31 => 'setting_attach_image_lib',
+      32 => 'Image processing library',//'图片处理库类型',
+      33 => 'Select a library to handle thumbnails and watermark image. GD is the most widely used library, but require more resources. ImageMagick eat less system resources, but require the execute the command line instructions. If you want to use this program, please go to <a href="http://www.imagemagick.org" target="_blank">http://www.imagemagick.org</a> for download, and follow the installation instruction.',//'请选择 Discuz! 用来处理缩略图和水印的图像处理库。GD 是最广泛的处理库但是使用的系统资源较多。ImageMagick 速度快系统资源占用少，但需要服务器有执行命令行命令的权限。如果你的服务器有条件安装此程序，请到 http://www.imagemagick.org 下载，安装后在下面指定安装的路径',
+      34 => 'setting_attach_image_impath',
+      35 => 'ImageMagick installed path',//'ImageMagick 程序安装路径',
+      36 => 'ImageMagick 6 installation path. If the server operating system is Windows, path do not use long file names',//'ImageMagick 6 程序的安装路径。如果服务器的操作系统为 Windows，路径不要使用长文件名',
+      37 => 'setting_attach_image_thumbquality',
+      38 => 'Thumbnail quality',//'缩略图质量',
+      39 => 'Set a quality of the thumbnail image in range of 0 - 100 (integer value). Larger quality give a better result, but require greater image size.',//'设置图片附件缩略图的质量参数，范围为 0～100 的整数，数值越大结果图片效果越好，但尺寸也越大',
+      40 => 'setting_attach_image_disabledmobile',
+      41 => 'Generate thumbnails for mobile version',//'是否生成手机版缩略图',
+      42 => 'Set whether to generate a thumbnail of each attachment for mobile version',//'设置是否为每个附件生成手机版的缩略图',
+      43 => 'setting_attach_image_preview',
+      44 => 'Preview',//'预览',
+      45 => 'No need to save the settings to preview',//'无需保存设置即可预览',
     ),
   ),
   278 =>
@@ -5935,10 +5956,10 @@ $lang = array (
       4 => 'Money/points exchange ratio',//'现金/积分兑换比率',
       5 => 'Set an exchange ratio between the real money cash (in USD) and intenal points. For example, if is set to 10, 1 USD can be exchanged to 10 points. This feature is required to enable sale operations with points, and an access to the related external paymet system (i.e. Alipay). Set to 0 for prohibit the use of cash and a conversion to points.',//'设置真实货币现金(以人民币元为单位)与站点交易积分间的兑换比率，例如设置为 10，则 1 元人民币可以兑换 10 个单位的交易积分。本功能需开启交易积分，并成功进行支付宝收款账号的相关设置后方可使用，如果禁止使用现金与交易积分的兑换功能，请设置为 0',
       6 => 'setting_ec_mincredits',
-      7 => 'Minimal amount of points for single purchase',//'单次购买最小积分数额',
+      7 => 'Minimal amount of credits for single purchase',//'单次购买最小积分数额',
       8 => 'Set the user minimal summ to pay in points for buy the smallest transaction. Set to 0 for no limit.',//'设置用户一次支付所购买的交易积分的最小数额，单位为交易积分的单位，0 为不限制',
       9 => 'setting_ec_maxcredits',
-      10 => 'Maximal amount of points to single purchase',//'单次购买最大积分数额',
+      10 => 'Maximal amount of credits to single purchase',//'单次购买最大积分数额',
       11 => 'Set the user maximum summ to pay in points for a single transaction. Set to 0 for no limit.',//'设置用户一次支付所购买的交易积分的最大数额，单位为交易积分的单位，0 为不限制',
       12 => 'setting_ec_maxcreditspermonth',
       13 => 'Largest amount of points to buy per month',//'每月购买最大积分数额',

@@ -1,7 +1,7 @@
 <?php
 
 /*
-	[Discuz!] (C)2001-2007 Comsenz Inc.
+	[Discuz!] (C)2001-2099 Comsenz Inc.
 	This is NOT a freeware, use is subject to license terms
 
 	$Id: admincp_recyclebinpost.php 28728 2012-03-09 03:15:48Z songlixin $
@@ -84,8 +84,8 @@ if(!$operation) {
 	$keywords = $_GET['keywords'];
 	$pstarttime = $_GET['pstarttime'];
 	$pendtime = $_GET['pendtime'];
-
-	$secStatus = false;
+	
+	$secStatus = false;	
 
 	$searchsubmit = $_GET['searchsubmit'];
 
@@ -104,6 +104,7 @@ if(!$operation) {
 		array('search', 'recyclebinpost&operation=search', 1),
 		array('clean', 'recyclebinpost&operation=clean', 0)
 	));
+	/*search={"nav_recyclebinpost":"action=recyclebinpost","search":"action=recyclebinpost&operation=search"}*/
 	echo <<<EOT
 <script type="text/javascript" src="static/js/calendar.js"></script>
 <script type="text/JavaScript">
@@ -129,6 +130,7 @@ EOT;
 	showtablefooter();
 	showformfooter();
 	showtagfooter('div');
+	/*search*/
 
 	if(submitcheck('searchsubmit')) {
 
@@ -166,12 +168,14 @@ EOT;
 			array('search', 'recyclebinpost&operation=search', 0),
 			array('clean', 'recyclebinpost&operation=clean', 1)
 		));
+		/*search={"nav_recyclebinpost":"action=recyclebinpost","clean":"action=recyclebinpost&operation=clean"}*/
 		showformheader('recyclebinpost&operation=clean');
 		showtableheader('recyclebinpost_clean');
 		showsetting('recyclebinpost_clean_days', 'days', '30', 'text');
 		showsubmit('cleanrbsubmit');
 		showtablefooter();
 		showformfooter();
+		/*search*/
 
 	} else {
 

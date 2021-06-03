@@ -678,11 +678,7 @@ if(!submitcheck('modsubmit')) {
 			}
 
 			if($updatemodlog) {
-				if($operation != 'delete') {
-					updatemodlog($moderatetids, $modaction, $expiration);
-				} else {
-					updatemodlog($moderatetids, $modaction, $expiration, 0, $reason);
-				}
+				updatemodlog($moderatetids, $modaction, $expiration, 0, $reason);
 			}
 
 			updatemodworks($modaction, $modpostsnum);
@@ -706,6 +702,13 @@ if(!submitcheck('modsubmit')) {
 			if($stampstatus) {
 				set_stamp($stampstatus, $stampaction, $threadlist, $expiration);
 			}
+
+			// 当进行管理操作后, 更新相关板块的板块缓存
+			$fidarr = array();
+			foreach ($threadlist as $thread) {
+				$fidarr[] = $thread['fid'];
+			}
+			C::t('forum_thread')->clear_cache($fidarr, 'forumdisplay_');
 
 		}
 		showmessage('admin_succeed', $_G['referer']);

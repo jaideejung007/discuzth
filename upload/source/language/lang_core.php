@@ -93,7 +93,6 @@ $lang = array
 	'title_article_favorite' => 'บทความโปรด',
 	'title_all_favorite' => 'บุ๊คมาร์กทั้งหมด',
 	'title_friend_list' => 'รายชื่อเพื่อน',
-	'title_of' => 'ของ',
 	'title_all_poll' => 'โพลทั้งหมด',
 	'title_we_poll' => 'โพลของเพื่อน',
 	'title_me_poll' => 'โพลของฉัน',
@@ -155,7 +154,6 @@ $lang = array
 	'title_memcp_blog' => 'เขียนบล็อก',
 	'title_memcp_upload' => 'อัปโหลด',
 	'title_memcp_share' => 'ร่วมแชร์สิ่งดีๆ',
-	'title_memcp_sendmail' => 'ส่งอีเมลแจ้งเตือน',
 	'title_memcp_privacy' => 'ความเป็นส่วนตัว',
 	'title_memcp_avatar' => 'เปลี่ยนรูปโปรไฟล์',
 	'title_memcp_profile' => 'ข้อมูลส่วนตัว',
@@ -219,6 +217,13 @@ $lang = array
 	'page' => 'หน้า {page}',
 
 	'close' => 'ปิด',
+
+	'attackevasive_1_subject' => 'ขีดจำกัดการรีเฟรชบ่อยครั้ง',
+	'attackevasive_1_message' => 'การเข้าถึงไซต์นี้ของคุณเร็วเกินไปหรือช่วงเวลาการรีเฟรชน้อยกว่าสองวินาที! กรุณารอให้หน้าเว็บข้ามไปโดยอัตโนมัติ ...',
+	'attackevasive_2_subject' => 'ข้อจำกัดการเข้าถึงพร็อกซีเซิร์ฟเวอร์',
+	'attackevasive_2_message' => 'ขณะนี้ไซต์นี้ถูกจำกัดให้ใช้การเข้าถึงพร็อกซีเซิร์ฟเวอร์ กรุณาลบการตั้งค่าพร็อกซีของคุณและไปที่ไซต์นี้โดยตรง',
+	'attackevasive_4_subject' => 'เปิดการโหลดหน้าซ้ำ',
+	'attackevasive_4_message' => 'ยินดีต้อนรับสู่เว็บไซต์นี้ กำลังโหลดหน้าใหม่ กรุณารอสักครู่ ...',
 );
 
 ?>

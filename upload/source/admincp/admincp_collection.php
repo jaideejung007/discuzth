@@ -19,6 +19,7 @@ showsubmenu('collection', array(
 	array('collection_comment', 'collection&operation=comment', $current['comment']),
 	array('collection_recommend', 'collection&operation=recommend', $current['recommend'])
 ));
+/*search={"collection":"action=collection"}*/
 echo '<script src="static/js/calendar.js"></script>';
 
 if($operation == 'comment') {
@@ -35,8 +36,8 @@ if($operation == 'comment') {
 			foreach($cidlist as $uniquecid) {
 				$decreasnum[$uniquecid['ctid']]++;
 			}
-			foreach($cidlist as $uniquecid) {
-				C::t('forum_collection')->update_by_ctid($uniquecid['ctid'], 0, 0, -$decreasnum[$uniquecid['ctid']]);
+			foreach($decreasnum as $ctid => $num) {
+				C::t('forum_collection')->update_by_ctid($ctid, 0, 0, -$num);
 			}
 		}
 		cpmsg('collection_admin_updated', 'action=collection&operation=comment&searchsubmit=yes&perpage='.$_GET['perpage'].'&page='.$_GET['page'], 'succeed');
@@ -257,4 +258,5 @@ function removeNonExistsCollection($collectionrecommend) {
 	}
 	return $collectionrecommend;
 }
+/*search*/
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 /*
-	[UCenter] (C)2001-2009 Comsenz Inc.
+	[UCenter] (C)2001-2099 Comsenz Inc.
 	This is NOT a freeware, use is subject to license terms
 
 	$Id: db.class.php 980 2009-12-22 03:12:49Z zhaoxiongfei $
@@ -36,6 +36,8 @@ class ucserver_db {
 		if(!$this->link = new mysqli($dbhost, $dbuser, $dbpw, $dbname)) {
 			$this->halt('Can not connect to MySQL server');
 		}
+
+		$this->link->options(MYSQLI_OPT_LOCAL_INFILE, false);
 
 		if($this->version() > '4.1') {
 			if($dbcharset) {

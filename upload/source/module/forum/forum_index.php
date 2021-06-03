@@ -455,13 +455,6 @@ function get_index_announcements() {
 	return $announcements;
 }
 
-function replace_formhash($timestamp, $input) {
-	global $_G;
-	$temp_formhash = substr(md5(substr($timestamp, 0, -3).substr($_G['config']['security']['authkey'], 3, -3)), 8, 8);
-	$formhash = constant("FORMHASH");
-	return preg_replace('/(name=[\'|\"]formhash[\'|\"] value=[\'\"]|formhash=)'.$temp_formhash.'/ismU', '${1}'.$formhash, $input);
-}
-
 function get_index_page_guest_cache() {
 	global $_G;
 	$indexcache = getcacheinfo(0);
@@ -476,8 +469,12 @@ function get_index_page_guest_cache() {
 		});
 		readfile($indexcache['filename']);
 		$updatetime = dgmdate($filemtime, 'Y-m-d H:i:s');
-		$gzip = $_G['gzipcompress'] ? ', Gzip On' : '';
-		echo '<script type="text/javascript">$("debuginfo") ? $("debuginfo").innerHTML = ", Updated at '.$updatetime.', Processed in '.sprintf("%0.6f", microtime(TRUE) - $start_time).' second(s)'.$gzip.'." : "";</script></body></html>';
+		$debuginfo = ", Updated at $updatetime";
+		if(getglobal('setting/debug')) {
+			$gzip = $_G['gzipcompress'] ? ', Gzip On' : '';
+			$debuginfo .= ', Processed in '.sprintf("%0.6f", microtime(TRUE) - $start_time).' second(s)'.$gzip;
+		}
+		echo '<script type="text/javascript">$("debuginfo") ? $("debuginfo").innerHTML = "'.$debuginfo.'." : "";</script></body></html>';
 		ob_end_flush();
 		exit();
 	}

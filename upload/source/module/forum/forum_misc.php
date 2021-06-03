@@ -425,13 +425,9 @@ IconIndex=1
 		$filename = $_G['setting']['bbname'].'.url';
 	}
 
-	if(!strexists($_SERVER['HTTP_USER_AGENT'], 'MSIE')) {
-		$filename = diconv($filename, CHARSET, 'UTF-8');
-	} else {
-		$filename = diconv($filename, CHARSET, 'GBK');
-	}
+	$filenameencode = strtolower(CHARSET) == 'utf-8' ? rawurlencode($filename) : rawurlencode(diconv($filename, CHARSET, 'UTF-8'));
 	dheader('Content-type: application/octet-stream');
-	dheader('Content-Disposition: attachment; filename="'.$filename.'"');
+	dheader('Content-Disposition: attachment; filename="'.(($filename == $filenameencode) ? $filename.'"' : $filenameencode.'"; filename*=utf-8\'\''.$filenameencode));
 	echo $shortcut;
 	exit;
 } elseif($_GET['action'] == 'livelastpost') {
@@ -998,7 +994,7 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 
 	foreach(C::t('forum_threadmod')->fetch_all_by_tid($_G['tid']) as $log) {
 		$log['dateline'] = dgmdate($log['dateline'], 'u');
-		$log['expiration'] = !empty($log['expiration']) ? dgmdate($log['expiration'], 'd') : '';
+		$log['expiration'] = !empty($log['expiration']) ? dgmdate($log['expiration'], 'dt') : '';
 		$log['status'] = empty($log['status']) ? 'style="text-decoration: line-through" disabled' : '';
 		if(!$modactioncode[$log['action']] && preg_match('/S(\d\d)/', $log['action'], $a) || $log['action'] == 'SPA') {
 			loadcache('stamps');
@@ -1023,6 +1019,8 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 	if(empty($loglist)) {
 		showmessage('threadmod_nonexistence');
 	}
+
+	$reasons_public = $_G['setting']['modreasons_public'];
 
 	include template('forum/viewthread_mod');
 

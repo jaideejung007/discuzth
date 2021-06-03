@@ -1,7 +1,7 @@
 <?php
 
 /*
-	[Discuz!] (C)2001-2009 Comsenz Inc111.
+	[Discuz!] (C)2001-2099 Comsenz Inc111.
 	This is NOT a freeware, use is subject to license terms
 
 	$Id: home_magic.php 33875 2013-08-26 07:33:49Z andyzheng $
@@ -366,7 +366,7 @@ if($action == 'shop') {
 				if(discuz_process::islocked('magiclock_'.$_G['uid'].'_'.$magicid, 0, 1)) {
 					showmessage('magics_locked');
 				}
-
+				
 				$magicnum = intval($_GET['magicnum']);
 
 				if(!$magicnum || $magicnum < 0) {

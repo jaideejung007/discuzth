@@ -822,7 +822,11 @@ var rowtypedata = [
 					showtips('forums_edit_tips');
 				}
 				showtableheader('forums_edit_extend', 'nobottom');
-				showsetting('forums_edit_extend_style', '', '', $styleselect);
+				$multi_styleselect = $_GET['multi'] ? preg_replace('/\w+new/', 'multinew['.$_G['showsetting_multi'].'][\\0]', $styleselect) : $styleselect;
+				$styleid = $forum['styleid'];
+				$multi_styleselect = str_replace("selected=\"selected\"", "", $multi_styleselect);
+				$multi_styleselect = str_replace("value=\"$styleid\"", "value=\"$styleid\" selected=\"selected\"", $multi_styleselect);
+				showsetting('forums_edit_extend_style', '', '', $multi_styleselect);
 				if($forum['type'] != 'sub') {
 					showsetting('forums_edit_extend_sub_horizontal', 'forumcolumnsnew', $forum['forumcolumns'], 'text');
 					showsetting('forums_edit_extend_subforumsindex', array('subforumsindexnew', array(
@@ -859,10 +863,13 @@ var rowtypedata = [
 				if($_G['setting']['allowreplybg']) {
 					$replybghtml = '';
 					if($forum['replybg']) {
-						$replybghtml = '<label><input type="checkbox" class="checkbox" name="delreplybg" value="yes" /> '.$lang['delete'].'</label><br /><img src="'.$_G['setting']['attachurl'].'common/'.$forum['replybg'].'" width="200px" />';
-					}
-					if($forum['replybg']) {
 						$replybgurl = parse_url($forum['replybg']);
+						if(isset($replybgurl['host'])) {
+							$replybgicon = $forum['replybg'];
+						} else {
+							$replybgicon = $_G['setting']['attachurl'].'common/'.$forum['replybg'].'?'.random(6);
+						}
+						$replybghtml = '<label><input type="checkbox" class="checkbox" name="delreplybg" value="yes" /> '.$lang['delete'].'</label><br /><img src="'.$replybgicon.'" width="200px" />';                        
 					}
 					showsetting('forums_edit_extend_reply_background', 'replybgnew', (!$replybgurl['host'] ? str_replace($_G['setting']['attachurl'].'common/', '', $forum['replybg']) : $forum['replybg']), 'filetext', '', 0, $replybghtml);
 				}
@@ -1593,6 +1600,10 @@ EOT;
 										$threadtypes_newdisplayorder = intval($_GET['newdisplayorder'][$key]);
 										$threadtypes_newicon = trim($_GET['newicon'][$key]);
 										$newtypeid = C::t('forum_threadclass')->insert(array('fid' => $fid, 'name' => $val, 'displayorder' => $threadtypes_newdisplayorder, 'icon' => $threadtypes_newicon, 'moderators' => intval($_GET['newmoderators'][$key])), true);
+									} else {
+										$threadtypes_newicon = $newtypearr['icon'];// 已存在的分类,使用原来属性
+										$threadtypes_newdisplayorder = $newtypearr['displayorder'];
+										$_GET['newmoderators'][$key] = $newtypearr['moderators'];
 									}
 									$threadtypesnew['options']['name'][$newtypeid] = $val;
 									$threadtypesnew['options']['icon'][$newtypeid] = $threadtypes_newicon;
@@ -1791,9 +1802,9 @@ EOT;
 			if(!$multiset) {
 
 				if($_GET['delreplybg']) {
-					$valueparse = parse_url($_GET['replybgnew']);
-					if(!isset($valueparse['host']) && file_exists($_G['setting']['attachurl'].'common/'.$_GET['replybgnew'])) {
-						@unlink($_G['setting']['attachurl'].'common/'.$_GET['replybgnew']);
+					$valueparse = parse_url($forum['replybg']);
+					if(!isset($valueparse['host']) && file_exists($_G['setting']['attachurl'].'common/'.$forum['replybg'])) {
+						@unlink($_G['setting']['attachurl'].'common/'.$forum['replybg']);
 					}
 					$_GET['replybgnew'] = '';
 				}

@@ -158,7 +158,7 @@ INSERT INTO pre_common_nav VALUES ('','0','ทักทาย','Doing','home.php
 INSERT INTO pre_common_nav VALUES ('', '0', 'สถิติเว็บไซต์', '', 'misc.php?mod=stat', 'stat', 0, 0, 1, 1, 0, 0, 0, 0, '', '', '', 1, '');
 INSERT INTO pre_common_nav VALUES ('', '0', 'รายงานหน้านี้', '', '#', 'report', 0, 0, 1, 2, 0, 0, 0, 0, '', '', '', 1, '');
 INSERT INTO pre_common_nav VALUES ('', '0', 'ข้อความล้วน', '', 'archiver/', 'archiver', 0, 0, 1, 3, 0, 0, 0, 0, '', '', '', 1, '');
-INSERT INTO pre_common_nav VALUES ('', '0', 'อุปกรณ์พกพา', '', 'forum.php?mobile=yes', 'mobile', 0, 0, 1, 3, 0, 0, 0, 0, '', '', '', 1, '');
+INSERT INTO pre_common_nav VALUES ('', '0', 'อุปกรณ์พกพา', '', 'forum.php?mobile=yes', 'mobile', 0, 0, 0, 3, 0, 0, 0, 0, '', '', '', 1, '');
 INSERT INTO pre_common_nav VALUES ('', '0', 'ประวัติการแบน', '', 'forum.php?mod=misc&action=showdarkroom', 'darkroom', 0, 0, 1, 3, 0, 0, 0, 0, '', '', '', 1, '');
 
 INSERT INTO pre_common_nav VALUES ('', '0', 'บล็อก', '', 'home.php?mod=space&do=blog', 'blog', 0, 0, -1, 2, 0, 0, 0, 0, '{STATICURL}image/feed/blog.gif', 'เขียน', 'home.php?mod=spacecp&ac=blog', 2, '');
@@ -166,9 +166,7 @@ INSERT INTO pre_common_nav VALUES ('', '0', 'อัลบั้ม', '', 'home.p
 INSERT INTO pre_common_nav VALUES ('', '0', 'แบ่งปัน', '', 'home.php?mod=space&do=share', 'share', 0, 0, -1, 4, 0, 0, 0, 0, '{STATICURL}image/feed/share.gif', 'เพิ่ม', 'home.php?mod=spacecp&ac=share', 2, '');
 INSERT INTO pre_common_nav VALUES ('', '0', 'ทักทาย', '', 'home.php?mod=space&do=doing', 'doing', 0, 0, -1, 5, 0, 0, 0, 0, '{STATICURL}image/feed/doing.gif', '', '', 2, '');
 INSERT INTO pre_common_nav VALUES ('', '0', 'ติดตาม', '', 'home.php?mod=follow', 'follow', 0, 0, -1, 6, 0, 0, 0, 0, '{STATICURL}image/feed/follow.gif', '', '', 2, '');
-INSERT INTO pre_common_nav VALUES ('', '0', '{userpanelarea1}', '', '', '', 0, 0, 1, 7, 0, 0, 0, 0, '', '', '', 2, '');
 INSERT INTO pre_common_nav VALUES ('', '0', '{hr}', '', '', '', 0, 1, 1, 8, 0, 0, 0, 0, '', '', '', 2, '');
-INSERT INTO pre_common_nav VALUES ('', '0', '{userpanelarea2}', '', '', '', 0, 0, 1, 9, 0, 0, 0, 0, '', '', '', 2, '');
 
 INSERT INTO pre_common_nav VALUES ('', '0', 'เพื่อน', '', 'home.php?mod=space&do=friend', 'friend', 0, 0, 0, 1, 0, 0, 0, 0, '{STATICURL}image/feed/friend_b.png', '', '', 3, '');
 INSERT INTO pre_common_nav VALUES ('', '0', 'กระทู้แนะนำของฉัน', '', 'forum.php?mod=guide&view=my', 'thread', 0, 0, 0, 2, 0, 0, 0, 0, '{STATICURL}image/feed/thread_b.png', '', '', 3, '');
@@ -306,7 +304,6 @@ INSERT INTO pre_common_setting VALUES ('friendgroupnum','8');
 INSERT INTO pre_common_setting VALUES ('ftp','a:10:{s:2:\"on\";s:1:\"0\";s:3:\"ssl\";s:1:\"0\";s:4:\"host\";s:0:\"\";s:4:\"port\";s:2:\"21\";s:8:\"username\";s:0:\"\";s:8:\"password\";s:0:\"\";s:9:\"attachdir\";s:1:\".\";s:9:\"attachurl\";s:0:\"\";s:7:\"hideurl\";s:1:\"0\";s:7:\"timeout\";s:1:\"0\";}');
 INSERT INTO pre_common_setting VALUES ('globalstick','1');
 INSERT INTO pre_common_setting VALUES ('targetblank','0');
-INSERT INTO pre_common_setting VALUES ('google','1');
 INSERT INTO pre_common_setting VALUES ('groupstatus','0');
 INSERT INTO pre_common_setting VALUES ('portalstatus','0');
 INSERT INTO pre_common_setting VALUES ('followstatus','0');
@@ -791,7 +788,7 @@ INSERT INTO pre_common_word_type SET `id`='1', `typename`='แบ่งปัน
 INSERT INTO pre_common_word_type SET `id`='2', `typename`='ค้าขาย';
 
 INSERT INTO pre_forum_bbcode VALUES ('1','0','fly','bb_fly.gif','<marquee width=\"90%\" scrollamount=\"3\">{1}</marquee>','[fly]This is sample text[/fly]','แสดงเนื้หาเลื่อนตามแนวนอน การกระทำนี้จะคล้ายกับ HTML และ marquee คำค้น หมายเหตุ: การกระทำนี้มีผลกับเบราว์เซอร์ Internet Explorer เท่านั้น','1','กรุณาใส่ข้อความที่จะแสดง:','1','19','1	2	3	12	13	14	15	16	17	18	19');
-INSERT INTO pre_forum_bbcode VALUES ('2','0','qq','bb_qq.gif','<a href=\"http://wpa.qq.com/msgrd?v=3&uin={1}&amp;site=[Discuz!]&amp;from=discuz&amp;menu=yes\" target=\"_blank\"><img src=\"static/image/common/qq_big.gif\" border=\"0\"></a>','[qq]688888[/qq]','แสดงสถานะ QQ ออนไลน์，คลิกที่ไอคอนของเขา(เธอ)เพื่อสนทนา','1','กรุณาใส่หมายเลข QQ เพื่อแสดงสถานะออนไลน์:<a href=\"\" class=\"xi2\" onclick=\"this.href=\'http://wp.qq.com/set.html?from=discuz&uin=\'+$(\'e_cst1_qq_param_1\').value\" target=\"_blank\" style=\"float:right;\">ตั้งค่า QQ สถานะออนไลน์&nbsp;&nbsp;</a>','1','21','1	2	3	10	11	12	13	14	15	16	17	18	19');
+INSERT INTO pre_forum_bbcode VALUES ('2','0','qq','bb_qq.gif','<a href=\"https://wpa.qq.com/msgrd?v=3&uin={1}&amp;site=[Discuz!]&amp;from=discuz&amp;menu=yes\" target=\"_blank\"><img src=\"static/image/common/qq_big.gif\" border=\"0\"></a>','[qq]688888[/qq]','แสดงสถานะ QQ ออนไลน์，คลิกที่ไอคอนของเขา(เธอ)เพื่อสนทนา','1','กรุณาใส่หมายเลข QQ เพื่อแสดงสถานะออนไลน์:<a href=\"\" class=\"xi2\" onclick=\"this.href=\'https://wp.qq.com/set.html?from=discuz&uin=\'+$(\'e_cst1_qq_param_1\').value\" target=\"_blank\" style=\"float:right;\">ตั้งค่า QQ สถานะออนไลน์&nbsp;&nbsp;</a>','1','21','1	2	3	10	11	12	13	14	15	16	17	18	19');
 INSERT INTO pre_forum_bbcode VALUES ('3','0','sup','bb_sup.gif','<sup>{1}</sup>','X[sup]2[/sup]','แสดงตัวอักษรลักษณะยกกำลัง','1','ใส่ข้อความที่นี่: ','1','22','1	2	3	12	13	14	15	16	17	18	19');
 INSERT INTO pre_forum_bbcode VALUES ('4','0','sub','bb_sub.gif','<sub>{1}</sub>','X[sub]2[/sub]','แสดงตัวอักษรลักษณะตัวห้อย','1','ใส่ข้อความที่นี่: ','1','23','1	2	3	12	13	14	15	16	17	18	19');
 INSERT INTO pre_forum_bbcode VALUES ('5', '2', 'spoil', 'bb_spoil.png', '<div style="display: inline;"><div style="display: inline;"><span onClick="if (this.parentNode.parentNode.getElementsByTagName(''div'')[1].getElementsByTagName(''div'')[0].style.display != '''') {  this.parentNode.parentNode.getElementsByTagName(''div'')[1].getElementsByTagName(''div'')[0].style.display = ''''; this.innerHTML = ''<a href=\\''javascript:void(0);\\'' onClick=\\''return false;\\'' style=\\''color: #FF0000;\\''>[Spoil] คลิกเพื่อซ่อนข้อความ</a>''; } else { this.parentNode.parentNode.getElementsByTagName(''div'')[1].getElementsByTagName(''div'')[0].style.display = ''none''; this.innerHTML = ''<a href=\\''javascript:void(0);\\'' onClick=\\''return false;\\'' style=\\''color: #FF0000;\\''>[Spoil] คลิกเพื่อดูข้อความที่ซ่อนไว้</a>''; }" /><a href="javascript:void(0);" onClick="return false;" style="color: #FF0000;">[Spoil] คลิกเพื่อดูข้อความที่ซ่อนไว้</a></span></div><div style="display: inline;"><div style="border: dashed 1px #FF0000;padding: 10px 0px 10px 20px;margin: 10px 0px;display: none;">{1}</div></div></div>', '', 'สปอยล์', '1', 'กรอกข้อความที่คุณต้องการสปอยล์', '1', '24', '10	11	12	13	14	15	20	16	17	18	19	1	2	3');

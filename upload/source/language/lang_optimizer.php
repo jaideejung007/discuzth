@@ -119,5 +119,9 @@ $lang = array
 	'optimizer_white_list_no_need' => 'White list is not set',
 	'optimizer_security_daily_need' => 'Enabling the daily waterproof wall optimization can clear the traces of deleted posts',
 	'optimizer_white_list_no_need' => 'White list is not set',
+	'optimizer_dos8p3_need' => 'DOS 8.3 file name support is wrongly turned on.',
+	'optimizer_dos8p3_no_need' => 'DOS 8.3 file name support is not enabled or the bottom layer does not support.',
+	'optimizer_httphost_need' => 'Empty HOST access is open',
+	'optimizer_httphost_no_need' => 'Empty HOST access support is not enabled or the bottom layer does not support.',
 );
 ?>
