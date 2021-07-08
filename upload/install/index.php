@@ -286,8 +286,8 @@ if($method == 'show_license') {
 			$mysqlmode = function_exists("mysql_connect") ? 'mysql' : 'mysqli';
 			$link = ($mysqlmode == 'mysql') ? @mysql_connect($dbhost, $dbuser, $dbpw) : new mysqli($dbhost, $dbuser, $dbpw);
 			if(($mysqlmode == 'mysql' && !$link) || ($mysqlmode != 'mysql' && $link->connect_errno)) {
-				$errno = ($mysqlmode == 'mysql') ? mysql_errno($link) : $link->connect_errno;
-				$error = ($mysqlmode == 'mysql') ? mysql_error($link) : $link->connect_error;
+				$errno = ($mysqlmode == 'mysql') ? mysql_errno() : $link->connect_errno;
+				$error = ($mysqlmode == 'mysql') ? mysql_error() : $link->connect_error;
 				if($errno == 1045) {
 					show_msg('database_errno_1045', $error, 0);
 				} elseif($errno == 2003) {
@@ -406,7 +406,16 @@ if($method == 'show_license') {
 
 		$password = md5(random(10));
 
-		$db->query("REPLACE INTO {$tablepre}common_member (uid, username, password, adminid, groupid, email, regdate) VALUES ('$uid', '$username', '$password', '1', '1', '$email', '".time()."');");
+		$db->query("REPLACE INTO {$tablepre}common_member (uid, username, password, adminid, groupid, email, regdate, timeoffset) VALUES ('$uid', '$username', '$password', '1', '1', '$email', '".time()."', '9999');");
+
+		// UID 是变量, 不做适配会导致积分操作等异常
+		if($uid) {
+			$db->query("REPLACE INTO {$tablepre}common_member_count SET uid='$uid';");
+			$db->query("REPLACE INTO {$tablepre}common_member_status SET uid='$uid';");
+			$db->query("REPLACE INTO {$tablepre}common_member_field_forum SET uid='$uid';");
+			$db->query("REPLACE INTO {$tablepre}common_member_field_home SET uid='$uid';");
+			$db->query("REPLACE INTO {$tablepre}common_member_profile SET uid='$uid';");
+		}
 
 		$notifyusers = addslashes('a:1:{i:1;a:2:{s:8:"username";s:'.strlen($username).':"'.$username.'";s:5:"types";s:20:"11111111111111111111";}}');
 		$db->query("REPLACE INTO {$tablepre}common_setting (skey, svalue) VALUES ('notifyusers', '$notifyusers')");

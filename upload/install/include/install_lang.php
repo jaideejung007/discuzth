@@ -116,7 +116,10 @@ $lang = array(
 	'click_to_back' => 'คลิกกลับไปที่ขั้นตอนที่แล้ว',
 	'adminemail' => 'อีเมลผู้ดูแล',
 	'adminemail_comment' => 'ใช้ในการส่งรายงานข้อผิดพลาด',
-	'dbhost_comment' => 'ทั่วไปจะเป็น localhost',
+	'dbhost_comment' => 'โดยทั่วไปจะเป็น 127.0.0.1 หรือ localhost',
+	'dbname_comment' => 'ชื่อฐานข้อมูลใช้สำหรับติดตั้ง Discuz!',
+	'dbuser_comment' => 'ชื่อผู้ใช้ฐานข้อมูลของคุณ',
+	'dbpw_comment' => 'รหัสผ่านฐานข้อมูลของคุณ ',
 	'tablepre_comment' => 'ถ้าติดตั้งในฐานข้อมูลเดียวกันกรุณาแก้ไขคำนำหน้า',
 	'forceinstall_check_label' => 'ฉันต้องการลบข้อมูลที่ติดตั้ง!!!',
 
@@ -264,30 +267,31 @@ $lang = array(
 
 <h3>I. Licensed Rights</h3>
 <ol>
-<li>You can fully comply with the end user license agreement, based on the software used in this non-commercial use, without having to pay for software copyright licensing fees.</li>
-<li>Agreement you can within the constraints and limitations modify Discuz! source code (if provided) or interface styles to suit your site requirements.</li>
-<li>You have to use this software to build the forum all the membership information, articles and related information of ownership, and is independent of commitment and legal obligations related to the article content.</li>
-<li>A commercial license, you can use this software for commercial applications, while according to the type of license purchased to determine the period of technical support, technical support, technical support form and content, from the moment of purchase, within the period of technical support have a way to get through the specified designated areas of technical support services. Business authorized users have the power to reflect and comment, relevant comments will be a primary consideration, but not necessarily be accepted promise or guarantee.</li>
-<li>You can download the application that suits your website from the application center service provided by Kangsheng, but you should pay the application developer / owner accordingly.</li>
+   <li>You can fully comply with the end user license agreement, based on the software used in this non-commercial use, without having to pay for software copyright licensing fees.</li>
+   <li>Agreement you can within the constraints and limitations modify Discuz! source code (if provided) or interface styles to suit your site requirements.</li>
+   <li>You have to use this software to build the forum all the membership information, articles and related information of ownership, and is independent of commitment and legal obligations related to the article content.</li>
+   <li>A commercial license, you can use this software for commercial applications, while according to the type of license purchased to determine the period of technical support, technical support, technical support form and content, from the moment of purchase, within the period of technical support have a way to get through the specified designated areas of technical support services. Business authorized users have the power to reflect and comment, relevant comments will be a primary consideration, but not necessarily be accepted promise or guarantee.</li>
+   <li>You can download the application that suits your website from the application center service provided by Kangsheng, but you should pay the application developer / owner accordingly.</li>
 </ol>
 
 <h3>II. Constraints and restrictions stipulated in the agreement</h3>
 <ol>
-<li>The software may not be used for commercial purposes (including, but not limited to, corporate websites, operational websites, profit-oriented websites, or profitable websites) without written commercial authorization from Kangsheng. For commercial license purchase, please visit http://www.discuz.com for reference, or call 8610-51282255 for details.</li>
-<li>May not associated with the software or business license for rental, sale, mortgage or grant sub-licenses.</li>
-<li>In any case, that no matter how used, whether modified or landscaping, changes to what extent, just use Discuz! the whole or any part, without the written permission of the Forum page footer Department Discuz! name and Sing Imagination (Beijing) Technology Co., Ltd. affiliated website (http://www.comsenz.com, http://www.discuz.com or http://www.discuz.net) the link must be retained, not removed or modified .</li>
-<li>Prohibited Discuz! the whole or any part of the basis for the development of any derivative version, modified version or third-party version for redistribution.</li>
-<li>The applications you download from the Application Center must not be reverse engineered, decompiled, decompiled, etc. without the written permission of the application developer/owner, Publishing, publishing, developing related derivative products, works, etc.</li>
-<li>If you fail to comply with the terms of this agreement, your authorization will be terminated, your licensed rights will be revoked, and you will be held legally responsible.
+   <li>The software may not be used for commercial purposes (including, but not limited to, corporate websites, operational websites, profit-oriented websites, or profitable websites) without written commercial authorization from Kangsheng. For commercial license purchase, please visit http://www.discuz.com for reference, or call 8610-51282255 for details.</li>
+   <li>May not associated with the software or business license for rental, sale, mortgage or grant sub-licenses.</li>
+   <li>In any case, that no matter how used, whether modified or landscaping, changes to what extent, just use Discuz! the whole or any part, without the written permission of the Forum page footer Department Discuz! name and Sing Imagination (Beijing) Technology Co., Ltd. affiliated website (http://www.comsenz.com, http://www.discuz.com or http://www.discuz.net) the link must be retained, not removed or modified .</li>
+   <li>Prohibited Discuz! the whole or any part of the basis for the development of any derivative version, modified version or third-party version for redistribution.</li>
+   <li>The applications you download from the Application Center must not be reverse engineered, decompiled, decompiled, etc. without the written permission of the application developer/owner, Publishing, publishing, developing related derivative products, works, etc.</li>
+   <li>If you fail to comply with the terms of this agreement, your authorization will be terminated, your licensed rights will be revoked, and you will be held legally responsible.
 </ol>
 
 <h3>III. Limited Warranty and Disclaimer</h3>
 <ol>
-<li>The software and the accompanying documents as not to provide any express or implied, or guarantee in the form of compensation provided.</li>
-<li>User voluntary use of this software, you must understand the risks of using this software, technical services in the not to buy products before, we do not promise to provide any form of technical support, use of guarantees, nor liable for any use of this software issues related to liability arising.</li>
-<li>Hong Sing Company does not use the software to build a website or forum post or liable for the information, you assume full responsibility.</li>
-<li>Hong Sing company provides software and services in a timely manner, security, accuracy is not guaranteed, due to force majeure, Hong Sing factors beyond the control of the company (including hacker attacks, stopping power, etc.) caused by software and services Suspension or termination, and give your losses, you agree to Sing corporate responsibility waiver of all rights.</li>
-<li>Hong Sing Company specifically draw your attention to Hong Sing Company in order to protect business development and adjustment of autonomy, Hong Sing Company has at any time with or without prior notice to modify the service content, suspend or terminate some or all of the rights of software and services , changes will be posted on the relevant pages of Sing website, including without notice. Hong Sing Company to modify or discontinue the exercise, termination of some or all of the rights of software and services resulting from the loss, without Hong Sing Company to you or any third party.</li>
+   <li>The software and the accompanying documents as not to provide any express or implied, or guarantee in the form of compensation provided.</li>
+   <li>User voluntary use of this software, you must understand the risks of using this software, technical services in the not to buy products before, we do not promise to provide any form of technical support, use of guarantees, nor liable for any use of this software issues related to liability arising.</li>
+   <li>Hong Sing Company does not use the software to build a website or forum post or liable for the information, you assume full responsibility.</li>
+   <li>Hong Sing company provides software and services in a timely manner, security, accuracy is not guaranteed, due to force majeure, Hong Sing factors beyond the control of the company (including hacker attacks, stopping power, etc.) caused by software and services Suspension or termination, and give your losses, you agree to Sing corporate responsibility waiver of all rights.</li>
+   <li>Kangsheng Company does not guarantee the timeliness, safety and accuracy of the software and services provided by Kangsheng Company. The use of software and services are caused by force majeure factors and factors beyond the control of Kangsheng Company (including hacker attacks, power outages, etc.). If the suspension or termination causes losses to you, you agree to waive all rights to hold Kangsheng Company responsible.</li>
+   <li>Kangsheng Company especially draws your attention that in order to protect the autonomy of the company’s business development and adjustment, Kangsheng Company has the right to modify the content of the service, suspend or terminate part or all of the software use and service at any time, with or without prior notice. , The amendment will be announced on the relevant page of the Kangsheng company’s website, once announced, it will be deemed as a notice. If Kangsheng Company exercises the right to modify or suspend or terminate part or all of the software use and service and cause losses, Kangsheng Company shall not be liable to you or any third party.</li>
 </ol>
 
 <p>Hong Sing products on the end user license agreement, business license and technical services to the details provided by the Hong Sing exclusive. Sing the company has without prior notice, modify the license agreement and services price list right to the modified agreement or price list from the change of the date of the new authorized user to take effect.</p>
@@ -336,7 +340,7 @@ $lang = array(
 	'advice_xml' => 'ตรวจสอบดูว่าสนับสนุน PHP สำหรับ XML หรือไม่ โปรดติดต่อผู้ให้บริการโฮสต์เพื่อตรวจสอบการเปิดคุณลักษณะนี้',
 	'none' => 'ไม่มี',
 
-	'dbhost' => 'เซิร์ฟเวอร์',
+	'dbhost' => 'ที่อยู่เซิร์ฟเวอร์ฐานข้อมูล',
 	'dbuser' => 'ชื่อผู้ใช้',
 	'dbpw' => 'รหัสผ่าน',
 	'dbname' => 'ชื่อฐานข้อมูล',

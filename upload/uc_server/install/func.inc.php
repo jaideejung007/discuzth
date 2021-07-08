@@ -65,8 +65,8 @@ function check_db($dbhost, $dbuser, $dbpw, $dbname, $tablepre) {
 	$mysqlmode = function_exists('mysql_connect') ? 'mysql' : 'mysqli';
 	$link = ($mysqlmode == 'mysql') ? @mysql_connect($dbhost, $dbuser, $dbpw) : new mysqli($dbhost, $dbuser, $dbpw);
 	if(($mysqlmode == 'mysql' && !$link) || ($mysqlmode != 'mysql' && $link->connect_errno)) {
-		$errno = ($mysqlmode == 'mysql') ? mysql_errno($link) : $link->connect_errno;
-		$error = ($mysqlmode == 'mysql') ? mysql_error($link) : $link->connect_error;
+		$errno = ($mysqlmode == 'mysql') ? mysql_errno() : $link->connect_errno;
+		$error = ($mysqlmode == 'mysql') ? mysql_error() : $link->connect_error;
 		if($errno == 1045) {
 			show_msg('database_errno_1045', $error, 0);
 		} elseif($errno == 2003) {
@@ -635,7 +635,7 @@ function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
 function generate_key() {
 	$random = random(32);
 	$info = md5($_SERVER['SERVER_SOFTWARE'].$_SERVER['SERVER_NAME'].$_SERVER['SERVER_ADDR'].$_SERVER['SERVER_PORT'].$_SERVER['HTTP_USER_AGENT'].time());
-	$return = '';
+	$return = array();
 	for($i=0; $i<64; $i++) {
 		$p = intval($i/2);
 		$return[$i] = $i % 2 ? $random[$p] : $info[$p];

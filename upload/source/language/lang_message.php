@@ -35,9 +35,9 @@ $lang = array (
   'thread_nonexistence' => 'ขออภัย! ไม่พบกระทู้ตามที่ร้องขอ กระทู้อาจจะถูกลบออกหรืออยู่ในระหว่างรอการตรวจสอบ',
   'parameters_error' => 'ค่าพารามิเตอร์มีความผิดพลาด',
   'thread_poll_succeed' => 'การโหวตของคุณถูกส่งเรียบร้อย ขณะนี้ระบบกำลังพาคุณไปยังหน้าโพล ',
-  'thread_hidden_error' => 'Sorry, can not hide specified topic ',
-  'thread_hidden_success' => 'Hidden Successfully ',
-  'thread_hiderecover_success' => 'Thread recovered from the hidden state',
+  'thread_hidden_error' => 'ขออภัย ไม่สามารถซ่อนกระทู้ที่ระบุได้ ',
+  'thread_hidden_success' => 'ซ่อนเรียบร้อยแล้ว ',
+  'thread_hiderecover_success' => 'กู้คืนกระทู้ที่ถูกซ่อนไว้เรียบร้อยแล้ว',
   'thread_rate_range_invalid' => 'กรุณากรอกคะแนนที่ถูกต้อง',
   'rate_post_error' => 'โพสต์นี้ไม่มีอยู่ ไม่สามารถให้คะแนนได้',
   'thread_rate_log_nonexistence' => 'ขออภัย! โพสต์ที่บันทึกไว้มากกว่า 1 ปี ไม่สามารถให้คะแนนได้',
@@ -160,7 +160,7 @@ $lang = array (
   'credits_addfunds_toomuch' => 'ขออภัย! ในเดือนนี้คุณได้รับอนุญาตให้ซื้อได้ {ec_maxcreditspermonth} ต่อเดือน',
   'credits_transaction_amount_invalid' => 'ขออภัย! คุณใส่จำนวนเครดิตที่ต้องการโอนหรือแลกเปลี่ยนไม่ถูกต้อง กรุณากลับไปแก้ไข',
   'credits_password_invalid' => 'ขออภัย! คุณกรอกรหัสผ่านไม่ถูกต้อง',
-  'credits_transfer_msg_locked' => 'Sorry, another point transfer operation is in progress, the transfer failed, please try again later',
+  'credits_transfer_msg_locked' => 'ขออภัย เครดิตที่จะทำการโอนมีการทำรายการส่วนอื่นอยู่ ไม่สามารถโอนได้สำเร็จ กรุณาลองอีกครั้งในภายหลัง',
   'extcredits_dataerror' => 'ขออภัย! การเปลี่ยนแปลงล้มเหลว กรุณาติดต่อผู้ดูแลระบบ',
   'start_time_is_greater_than_end_time' => 'วันเริ่มต้นของสถิติไม่สามารถน้อยกว่าวันสิ้นสุดได้',
   'should_write_that' => 'ยังไม่พบข้อความใดๆ เลย อย่างน้อยคุณควรเขียนข้อความหรืออะไรลงไปบ้าง',
@@ -220,7 +220,7 @@ $lang = array (
   'no_privilege_avatar' => 'ขออภัย! คุณจะต้องเปลี่ยนรูปโปรไฟล์ของคุณก่อน จึงจะสามารถดำเนินการนี้ได้ <a href="home.php?mod=spacecp&ac=avatar">คลิกที่นี่เพื่อเปลี่ยนรูปโปรไฟล์</a>',
   'no_privilege_email' => 'ขออภัย! คุณจะต้องยืนยันการเปิดใช้งานอีเมลของคุณก่อน จึงจะสามารถดำเนินการนี้ได้ <a href="home.php?mod=spacecp&ac=profile&op=password">คลิกที่นี่เพื่อเปิดใช้งานอีเมล</a>',
   'no_privilege_friendnum' => 'ขออภัย! คุณจะต้องมีเพื่อน {friendnum} คน จึงจะสามารถดำเนินการนี้ได้ <a href="home.php?mod=spacecp&ac=friend&op=find">คลิกที่นี่เพื่อเพิ่มเพื่อน</a>',
-  'login_seccheck2' => 'Please enter verification code to continue after login',
+  'login_seccheck2' => 'กรุณากรอกรหัสยืนยันเพื่อเข้าสู่ระบบต่อไป',
   'login_succeed' => 'ขอบคุณ {username} ระดับ {usergroup} สำหรับการลงชื่อเข้าใช้ ระบบจะพาคุณไปยังก่อนหน้านี้',
   'login_strike' => 'ระบบตรวจจับได้ว่า คุณลงชื่อเข้าใช้ผิดพลาดเกินกำหนดไว้ กรุณารอหลังจาก 15 นาที แล้วลองใหม่อีกครั้ง',
   'logout_succeed' => 'คุณออกจากระบบจากเว็บไซตแล้ว ระบบกำลังพาคุณไปยังก่อนหน้านี้…… {ucsynlogout} ',
@@ -245,7 +245,7 @@ $lang = array (
   'magicuse_object_once_limit' => 'ขออภัย! ไอเท็มถูกใช้กับข้อมูลนี้อยู่แล้ว คุณไม่สามารถนำมาใช้ใหม่ได้',
   'magicuse_bad_object' => 'คุณยังไม่ได้เลือกไอเท็มที่เหมาะสม',
   'magicuse_has_no_valid_friend' => 'ขออภัย! ใช้ไอเท็มล้มเหลว ชื่อเพื่อนไม่ถูกต้อง',
-  'mobile_template_no_found' => 'You visit the page without mobile phone page, whether further access to the computer version?<br /><br /><a href="{url}">Continue to visit</a><br /><br />',
+  'mobile_template_no_found' => 'หน้าเว็บที่คุณเยี่ยมชมยังไม่พร้อมใช้งานบนมือถือ คุณต้องการเยี่ยมชมเวอร์ชันคอมพิวเตอร์ต่อไปหรือไม่ <br /><br /><a href="{url}">ดำเนินการต่อ</a><br /><br />',
 
   'portal_status_off' => 'ขออภัย! หน้าพอร์ทัลยังไม่เปิดใช้งาน',
 
@@ -270,8 +270,8 @@ $lang = array (
 
   'forum_passwd_incorrect' => 'ขออภัย! คุณกรอกรหัสผ่านไม่ถูกต้อง ไม่สามารถเข้าใช้งานบอร์ดนี้ได้',
   'forum_passwd_correct' => 'รหัสผ่านถูกต้อง กำลังเข้าสู่หน้ารายการกระทู้ในบอร์ดนี้ ',
-  'forum_pay_incorrect' => 'Sorry, you have to pay {paycredits} {credits} to enter this forum. You have not enough {title}.',
-  'forum_pay_correct' => 'Paid successfully, please continue to access this forum',
+  'forum_pay_incorrect' => 'ขออภัย ส่วนนี้กำหนดให้ชำระเงิน {paycredits} {credits} เพื่อเข้าสู่ส่วนนี้ {title} ของคุณไม่เพียงพอ ',
+  'forum_pay_correct' => 'ชำระเงินเสร็จแล้ว สามารถเข้าถึงส่วนนี้ได้',
 
   'group_rediret_now' => 'ไปที่หน้าแรกของ{_G/setting/navs/3/navname}เดี๋ยวนี้',
   'group_verify' => '{_G/setting/navs/3/navname} ตรวจสอบกลุ่ม',
@@ -873,6 +873,7 @@ $lang = array (
   'usergroups_join_succeed' => 'คุณได้เข้าร่วมกลุ่มสมาชิก {group}',
   'usergroups_exit_succeed' => 'คุณได้ออกจากกลุ่มสมาชิก {group}',
   'usergroup_switch_not_allow' => 'กลุ่มสมาชิกของคุณยังไม่หมดอายุ ไม่สามารถสลับไปยังกลุ่มสมาชิกอื่นได้',
+  'usergroup_switch_not_allowvisit' => 'ขออภัย คุณไม่สามารถสลับไปยังกลุ่มผู้ใช้ที่ไม่อนุญาตให้เข้าถึงเว็บบอร์ดได้',
   'usergroups_switch_succeed' => 'คุณได้ย้ายไปยังกลุ่มสมาชิก {group}',
 
   'no_privilege_banpost' => 'ขออภัย! คุณไม่มีสิทธิ์ที่จะแบนกระทู้',

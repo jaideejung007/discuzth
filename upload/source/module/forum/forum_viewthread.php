@@ -34,7 +34,7 @@ if($page === 1 && !empty($_G['setting']['antitheft']['allow']) && empty($_G['set
 	helper_antitheft::check($_G['forum_thread']['tid'], 'tid');
 }
 
-if($_G['setting']['cachethreadlife'] && $_G['forum']['threadcaches'] && !$_G['uid'] && $page == 1 && !$_G['forum']['special'] && empty($_GET['do']) && empty($_GET['from']) && empty($_GET['threadindex']) && !defined('IN_ARCHIVER') && !defined('IN_MOBILE')) {
+if($_G['setting']['cachethreadlife'] && $_G['forum']['threadcaches'] && !$_G['uid'] && $page == 1 && !$_G['forum']['special'] && empty($_GET['do']) && empty($_GET['from']) && empty($_GET['threadindex']) && !defined('IN_ARCHIVER') && !defined('IN_MOBILE') && !defined('IS_ROBOT')) {
 	viewthread_loadcache();
 }
 
@@ -268,8 +268,8 @@ if($_G['forum_thread']['replycredit'] > 0) {
 }
 $_G['group']['raterange'] = $_G['setting']['modratelimit'] && $adminid == 3 && !$_G['forum']['ismoderator'] ? array() : $_G['group']['raterange'];
 
-$_G['group']['allowgetattach'] = !empty($_G['forum']['allowgetattach']) || ($_G['group']['allowgetattach'] && !$_G['forum']['getattachperm']) || forumperm($_G['forum']['getattachperm']);
-$_G['group']['allowgetimage'] = !empty($_G['forum']['allowgetimage']) || ($_G['group']['allowgetimage'] && !$_G['forum']['getattachperm']) || forumperm($_G['forum']['getattachperm']);
+$_G['group']['allowgetattach'] = (!empty($_G['forum']['allowgetattach'])) ? ($_G['forum']['allowgetattach'] == 1 ? true : false) : ($_G['forum']['getattachperm'] ? forumperm($_G['forum']['getattachperm']) : $_G['group']['allowgetattach']);
+$_G['group']['allowgetimage'] = (!empty($_G['forum']['allowgetimage'])) ? ($_G['forum']['allowgetimage'] == 1 ? true : false) : ($_G['forum']['getattachperm'] ? forumperm($_G['forum']['getattachperm']) : $_G['group']['allowgetimage']);
 $_G['getattachcredits'] = '';
 if($_G['forum_thread']['attachment']) {
 	$exemptvalue = $_G['forum']['ismoderator'] ? 32 : 4;
@@ -618,7 +618,7 @@ if(!empty($isdel_post)) {
 	}
 	if($updatedisablepos && !$rushreply) {
 		C::t('forum_threaddisablepos')->insert(array('tid' => $_G['tid']), false, true);
-		dheader("Location:forum.php?mod=viewthread&tid=$_G[tid]");
+		dheader('Location:'.$_G['siteurl'].'forum.php?mod=viewthread&tid='.$_G['tid']);
 	}
 	$ordertype != 1 ? ksort($postarr) : krsort($postarr);
 }
@@ -1085,7 +1085,6 @@ function viewthread_procpost($post, $lastvisit, $ordertype, $maxposition = 0) {
 				$post['number'] = ++$_G['forum_numpost'];
 			} else {
 				$post['number'] = $post['first'] == 1 ? 1 : --$_G['forum_numpost'];
-				$post['number'] = $post['number'] - 1;
 			}
 		}
 	}

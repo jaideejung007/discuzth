@@ -464,6 +464,22 @@ EOT;
 			'permprompt' => $_GET['permpromptnew'],
 		));
 
+		if($_GET['identifiernew'] != $option['identifier'] && $_GET['typenew'] == $option['type']){
+			if(in_array($_GET['typenew'], array('radio'))) {
+				$type_tableoption_sql = "smallint(6) UNSIGNED NOT NULL DEFAULT '0'";
+			} elseif(in_array($_GET['typenew'], array('number', 'range'))) {
+				$type_tableoption_sql = "int(10) UNSIGNED NOT NULL DEFAULT '0'";
+			} elseif($_GET['typenew'] == 'select') {
+				$type_tableoption_sql = "varchar(50) NOT NULL";
+			} else {
+				$type_tableoption_sql = "mediumtext NOT NULL";
+			}
+			$typevar_list = DB::fetch_all('SELECT sortid FROM %t WHERE optionid=%d', array('forum_typevar', $_GET['optionid']));
+			foreach($typevar_list as $typevar) {
+				C::t('forum_optionvalue')->alter($typevar['sortid'], "change ".$option['identifier']." ".$_GET['identifiernew']." ".$type_tableoption_sql);
+			}
+		}
+		
 		updatecache('threadsorts');
 		cpmsg('threadtype_infotypes_option_succeed', 'action=threadtypes&operation=typeoption&classid='.$option['classid'], 'succeed');
 	}
@@ -1181,7 +1197,7 @@ EOT;
 					$decline = '_';
 					while(!$findname) {
 						if(C::t('forum_threadtype')->checkname($tmpnewname1)) {
-							$tmpnewname1 = $newname1.$decline;
+							$tmpnewname1 = $newname1.$decline.random(6);
 							$decline .= '_';
 						} else {
 							$findname = 1;
@@ -1213,16 +1229,19 @@ EOT;
 				'rules' => $value['rules'],
 				'permprompt' => $value['permprompt'],
 			);
-			if(strlen($value['identifier']) > 34) {
-				cpmsg('threadtype_infotypes_optionvariable_invalid', 'action=threadtypes', 'error');
-			}
 
 			$findidentifier = 0;
-			$tmpidentifier = $value['identifier'];
+			$tmpidentifier = trim($value['identifier']);
+			if(strlen($tmpidentifier) > 40 || !ispluginkey($tmpidentifier)) {
+				cpmsg('threadtype_infotypes_optionvariable_invalid', 'action=threadtypes', 'error');
+			}
 			$decline = '_';
 			while(!$findidentifier) {
-				if(C::t('forum_typeoption')->fetch_all_by_identifier($tmpidentifier, 0, 1) || !ispluginkey($tmpidentifier) || in_array(strtoupper($tmpidentifier), $mysql_keywords)) {
+				if(C::t('forum_typeoption')->fetch_all_by_identifier($tmpidentifier, 0, 1) || in_array(strtoupper($tmpidentifier), $mysql_keywords)) {
 					$tmpidentifier = $value['identifier'].$decline.$sortid;
+					if(strlen($tmpidentifier) > 40) {
+						cpmsg('threadtype_infotypes_optionvariable_invalid', 'action=threadtypes', 'error');
+					}
 					$decline .= '_';
 				} else {
 					$findidentifier = 1;

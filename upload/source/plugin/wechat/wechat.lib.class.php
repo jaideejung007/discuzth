@@ -79,24 +79,24 @@ class WeChatServer {
 
 		switch ($result['type']) {
 			case 'text':
-				$result['content'] = (string) $postObj->Content; // Content ÏûÏ¢ÄÚÈİ
+				$result['content'] = (string) $postObj->Content; // Content æ¶ˆæ¯å†…å®¹
 				break;
 
 			case 'location':
-				$result['X'] = (float) $postObj->Location_X; // Location_X µØÀíÎ»ÖÃÎ³¶È
-				$result['Y'] = (float) $postObj->Location_Y; // Location_Y µØÀíÎ»ÖÃ¾­¶È
-				$result['S'] = (float) $postObj->Scale;      // Scale µØÍ¼Ëõ·Å´óĞ¡
-				$result['I'] = (string) $postObj->Label;     // Label µØÀíÎ»ÖÃĞÅÏ¢
+				$result['X'] = (float) $postObj->Location_X; // Location_X åœ°ç†ä½ç½®çº¬åº¦
+				$result['Y'] = (float) $postObj->Location_Y; // Location_Y åœ°ç†ä½ç½®ç»åº¦
+				$result['S'] = (float) $postObj->Scale;      // Scale åœ°å›¾ç¼©æ”¾å¤§å°
+				$result['I'] = (string) $postObj->Label;     // Label åœ°ç†ä½ç½®ä¿¡æ¯
 				break;
 
 			case 'image':
-				$result['url'] = (string) $postObj->PicUrl;  // PicUrl Í¼Æ¬Á´½Ó£¬¿ª·¢Õß¿ÉÒÔÓÃHTTP GET»ñÈ¡
-				$result['mid'] = (string) $postObj->MediaId; // MediaId Í¼Æ¬ÏûÏ¢Ã½Ìåid£¬¿ÉÒÔµ÷ÓÃ¶àÃ½ÌåÎÄ¼şÏÂÔØ½Ó¿ÚÀ­È¡Êı¾İ¡£
+				$result['url'] = (string) $postObj->PicUrl;  // PicUrl å›¾ç‰‡é“¾æ¥ï¼Œå¼€å‘è€…å¯ä»¥ç”¨HTTP GETè·å–
+				$result['mid'] = (string) $postObj->MediaId; // MediaId å›¾ç‰‡æ¶ˆæ¯åª’ä½“idï¼Œå¯ä»¥è°ƒç”¨å¤šåª’ä½“æ–‡ä»¶ä¸‹è½½æ¥å£æ‹‰å–æ•°æ®ã€‚
 				break;
 
 			case 'video':
-				$result['mid'] = (string) $postObj->MediaId;      // MediaId Í¼Æ¬ÏûÏ¢Ã½Ìåid£¬¿ÉÒÔµ÷ÓÃ¶àÃ½ÌåÎÄ¼şÏÂÔØ½Ó¿ÚÀ­È¡Êı¾İ¡£
-				$result['thumbmid'] = (string) $postObj->ThumbMediaId; // ThumbMediaId ÊÓÆµÏûÏ¢ËõÂÔÍ¼µÄÃ½Ìåid£¬¿ÉÒÔµ÷ÓÃ¶àÃ½ÌåÎÄ¼şÏÂÔØ½Ó¿ÚÀ­È¡Êı¾İ¡£
+				$result['mid'] = (string) $postObj->MediaId;      // MediaId å›¾ç‰‡æ¶ˆæ¯åª’ä½“idï¼Œå¯ä»¥è°ƒç”¨å¤šåª’ä½“æ–‡ä»¶ä¸‹è½½æ¥å£æ‹‰å–æ•°æ®ã€‚
+				$result['thumbmid'] = (string) $postObj->ThumbMediaId; // ThumbMediaId è§†é¢‘æ¶ˆæ¯ç¼©ç•¥å›¾çš„åª’ä½“idï¼Œå¯ä»¥è°ƒç”¨å¤šåª’ä½“æ–‡ä»¶ä¸‹è½½æ¥å£æ‹‰å–æ•°æ®ã€‚
 				break;
 
 			case 'link':
@@ -304,7 +304,7 @@ class WeChatServer {
 class WeChatClient {
 
 	public static $_URL_API_ROOT = 'https://api.weixin.qq.com';
-	public static $_URL_FILE_API_ROOT = 'http://file.api.weixin.qq.com';
+	public static $_URL_FILE_API_ROOT = 'https://api.weixin.qq.com';
 	public static $_URL_QR_ROOT = 'https://mp.weixin.qq.com';
 	public static $_QRCODE_TICKET_DEFAULT_ID = 1;
 	public static $ERRCODE_MAP = array(
@@ -427,6 +427,9 @@ class WeChatClient {
 	}
 
 	public static function get($url) {
+		if (!function_exists('curl_init')) {
+			return dfsockopen($url);
+		}
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
 		# curl_setopt($ch, CURLOPT_HEADER, 1);
@@ -447,7 +450,7 @@ class WeChatClient {
 
 	private static function post($url, $data) {
 		if (!function_exists('curl_init')) {
-			return '';
+			return dfsockopen($url, 0, $data);
 		}
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);

@@ -63,21 +63,6 @@ INSERT INTO pre_common_friendlink VALUES ('1','0','เว็บบอร์ด D
 INSERT INTO pre_common_friendlink VALUES ('2','1','แอปสโตร์','https://addon.dismall.com/','','','2');
 INSERT INTO pre_common_friendlink VALUES ('3','2','Discuz! TH Official Repositories','https://github.com/jaideejung007/discuzth','มาร่วมเป็นส่วนหนึ่งในการพัฒนา Discuz! TH ไปพร้อม ๆ กัน','static/image/common/logo_discuzth_repositories_88_31.gif','2');
 
-
-
-
-INSERT INTO pre_common_member_count SET uid='1';
-
-INSERT INTO pre_common_member_status SET uid='1';
-
-INSERT INTO pre_common_member_field_forum SET uid='1';
-
-
-INSERT INTO pre_common_member_field_home SET uid='1';
-
-
-INSERT INTO pre_common_member_profile SET uid='1';
-
 INSERT INTO pre_common_member_profile_setting VALUES('realname', 1, 0, 0, 'ชื่อจริง', '', 0, 0, 0, 0, 0, 0, 1, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('gender', 1, 0, 0, 'เพศ', '', 0, 0, 0, 0, 0, 0, 1, 'select', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('birthyear', 1, 0, 0, 'ปีเกิด', '', 0, 0, 0, 0, 0, 0, 1, 'select', 0, '', '');
@@ -158,7 +143,7 @@ INSERT INTO pre_common_nav VALUES ('','0','ทักทาย','Doing','home.php
 INSERT INTO pre_common_nav VALUES ('', '0', 'สถิติเว็บไซต์', '', 'misc.php?mod=stat', 'stat', 0, 0, 1, 1, 0, 0, 0, 0, '', '', '', 1, '');
 INSERT INTO pre_common_nav VALUES ('', '0', 'รายงานหน้านี้', '', '#', 'report', 0, 0, 1, 2, 0, 0, 0, 0, '', '', '', 1, '');
 INSERT INTO pre_common_nav VALUES ('', '0', 'ข้อความล้วน', '', 'archiver/', 'archiver', 0, 0, 1, 3, 0, 0, 0, 0, '', '', '', 1, '');
-INSERT INTO pre_common_nav VALUES ('', '0', 'อุปกรณ์พกพา', '', 'forum.php?mobile=yes', 'mobile', 0, 0, 0, 3, 0, 0, 0, 0, '', '', '', 1, '');
+INSERT INTO pre_common_nav VALUES ('', '0', 'อุปกรณ์พกพา', '', 'forum.php?mobile=yes', 'mobile', 0, 0, 1, 3, 0, 0, 0, 0, '', '', '', 1, '');
 INSERT INTO pre_common_nav VALUES ('', '0', 'ประวัติการแบน', '', 'forum.php?mod=misc&action=showdarkroom', 'darkroom', 0, 0, 1, 3, 0, 0, 0, 0, '', '', '', 1, '');
 
 INSERT INTO pre_common_nav VALUES ('', '0', 'บล็อก', '', 'home.php?mod=space&do=blog', 'blog', 0, 0, -1, 2, 0, 0, 0, 0, '{STATICURL}image/feed/blog.gif', 'เขียน', 'home.php?mod=spacecp&ac=blog', 2, '');
@@ -381,7 +366,7 @@ INSERT INTO pre_common_setting VALUES ('memliststatus','1');
 INSERT INTO pre_common_setting VALUES ('memory', 'a:16:{s:13:"common_member";i:0;s:19:"common_member_count";i:0;s:20:"common_member_status";i:0;s:21:"common_member_profile";i:0;s:24:"common_member_field_home";i:0;s:25:"common_member_field_forum";i:0;s:20:"common_member_verify";i:0;s:12:"forum_thread";i:172800;s:25:"forum_thread_forumdisplay";i:300;s:23:"forum_collectionrelated";i:0;s:15:"forum_postcache";i:300;s:16:"forum_collection";i:300;s:11:"home_follow";i:86400;s:10:"forumindex";i:30;s:8:"diyblock";i:300;s:14:"diyblockoutput";i:30;}');
 INSERT INTO pre_common_setting VALUES ('minpostsize','10');
 INSERT INTO pre_common_setting VALUES ('minpostsize_mobile','0');
-INSERT INTO pre_common_setting VALUES ('mobile','a:10:{s:11:\"allowmobile\";i:0;s:13:\"mobileforward\";i:1;s:14:\"mobileregister\";i:0;s:13:\"mobilecharset\";s:5:\"utf-8\";s:16:\"mobilesimpletype\";i:0;s:18:\"mobiletopicperpage\";i:10;s:17:\"mobilepostperpage\";i:5;s:15:\"mobilecachetime\";i:0;s:15:\"mobileforumview\";i:0;s:13:\"mobilepreview\";i:1;}');
+INSERT INTO pre_common_setting VALUES ('mobile','a:16:{s:11:\"allowmobile\";i:1;s:9:\"allowmnew\";i:0;s:13:\"mobileforward\";i:1;s:10:\"otherindex\";i:1;s:14:\"mobileregister\";i:1;s:13:\"mobileseccode\";i:0;s:15:\"mobilehotthread\";i:0;s:19:\"mobiledisplayorder3\";i:0;s:16:\"mobilesimpletype\";i:0;s:18:\"mobiletopicperpage\";i:10;s:17:\"mobilepostperpage\";i:5;s:15:\"mobilecachetime\";i:0;s:15:\"mobileforumview\";i:0;s:14:\"mobilecomefrom\";s:0:\"\";s:13:\"mobilepreview\";i:0;s:3:\"wml\";i:0;}');
 INSERT INTO pre_common_setting VALUES ('moddisplay','flat');
 INSERT INTO pre_common_setting VALUES ('modratelimit','0');
 INSERT INTO pre_common_setting VALUES ('modreasons','โพสต์โฆษณา\r\nสแปมโพสต์\r\nโพสต์ไม่เข้ากับเนื้อหา\r\nโพสต์ผิดห้อง\r\n\r\nถูกใจ\r\nรักเลย\r\nฮ่าๆ\r\nว้าว\r\nเศร้า\r\nโกรธ');
