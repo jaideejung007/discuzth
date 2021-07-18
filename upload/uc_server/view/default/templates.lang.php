@@ -304,7 +304,7 @@ $languages = array(
 	'setting_addappbyurl_comment' => 'Whether to enable the function of adding applications via URL, it is recommended to enable it only when adding applications via URL',
 
 	'setting_user_failedtime' => 'อนุญาตให้เข้าสู่ระบบผิดได้ไม่เกินกี่ครั้ง',
-	'setting_user_failedtime_comment' => 'เมื่อผู้ใช้งานเข้าสู่ระบบผิดเกินจำนวนครั้งที่กำหนด จะไม่สามารถเข้าสู่ระบบได้ใน 15 นาที ถ้ากำหนด 0 หมายถึง ไม่จำกัด',
+	'setting_user_failedtime_comment' => 'หากผู้ใช้เข้าสู่ระบบผิดเกินจำนวนครั้งที่กำหนด จะไม่สามารถเข้าสู่ระบบได้ใน 15 นาที ถ้ากำหนด 0 หมายถึง ใช้การตั้งค่าเริ่มต้น และจำนวนลบ หมายถึง ไม่จำกัดจำนวนครั้ง (ไม่ปลอดภัย)',
 
 	'setting_register' => 'ตั้งค่าลงทะเบียน',
 	'setting_register_tips' => 'ระบุอีเมลล์ที่ใช้สำหรับการลงทะเบียน, 1 บรรทัดเป็น 1 โดเทน. ตัวอย่าง. @hotmail.com',

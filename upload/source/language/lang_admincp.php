@@ -454,6 +454,7 @@ $lang = array
 	'nav_misc_links' => 'ตั้งค่าเว็บลิงก์',
 	'nav_misc_relatedlink' => 'ลิงก์ที่เกี่ยวข้อง',
 	'nav_posting_censor' => 'ตั้งค่ากรองคำหยาบ',
+	'nav_remoderate' => 'ตรวจสอบเนื้อหา',
 	'nav_posting_bbcode' => 'แก้ไขโค้ด Discuz!',
 	'nav_thread_icon' => 'ไอคอนกระทู้',
 	'nav_thread_stamp' => 'จัดการแสตมป์',
@@ -1164,13 +1165,15 @@ $lang = array
 	'setting_styles_refresh_messages_comment' => 'เมื่อเปิดโดยตรง/หลังจากข้ามไปอย่างรวดเร็ว ข้อมูลต่อไปนี้จะข้ามไปได้โดยตรง กรอกคำสำคัญของข้อมูลต่อแถว',
 
 	'setting_follow' => 'ตั้งค่าการติดตาม',
-	'setting_follow_base' => 'Basic settings',
-	'setting_follow_base_default_referer' => 'View broadcast page by default',
+	'setting_follow_base' => 'การตั้งค่าพื้นฐาน',
+	'setting_follow_base_default_referer' => 'ดูหน้าบอร์ดแคสต์ตามค่าเริ่มต้น',
 	'setting_follow_base_default_referer_comment' => 'Select "Yes" for view the broadcast page by default; If "No" selected then view the space page',
 	'setting_follow_base_default_follow_retain_day' => 'Broadcast archive time',
 	'setting_follow_base_default_follow_retain_day_comment' => 'Broadcastings older than this number of days will be moved to the archive table (unit: days)',
 	'setting_follow_base_default_view_profile' => 'Default Profile View',
 	'setting_follow_base_default_view_profile_comment' => 'This setting is usefull for administrator, when open a member page the personal data will be shown',
+	'setting_follow_base_default_follow_add_notice' => 'แจ้งเตือนผู้ติดตามเมื่อมีการติดตามใหม่',
+	'setting_follow_base_default_follow_add_notice_comment' => 'หลังจากเปิดแล้วจะแจ้งผู้ใช้เมื่อมีการติดตามใหม่',
 	'setting_home' => 'ตั้งค่าสเปซ',
 	'setting_home_base' => 'ตั้งค่าพื้นฐาน',
 	'setting_home_base_feedday' => 'จำนวนวันที่เก็บข้อมูลอัปเดต',
@@ -1915,6 +1918,10 @@ $lang = array
 	'setting_permissions_editby_comment' => 'Editing after 60 seconds from created time will add a remark "Post edited by xxx at xxxx-xx-xx". Administrators can avoid this restriction.',
 	'setting_permissions_post_append' => 'Enable Post append function',
 	'setting_permissions_post_append_comment' => 'When enabled, users can not edit their posts, but can add content',
+	'setting_permissions_nsprofiles' => 'ข้อมูลส่วนบุคคลจะไม่ปรากฏในหน้าโปรไฟล์',
+	'setting_permissions_nsprofiles_comment' => 'หลังจากเปิดใช้งานข้อมูลส่วนบุคคลจะไม่ปรากฏในหน้าโปรไฟล์',
+	'setting_permissions_modasban' => 'ไม่สนใจการตรวจสอบเนื้อหา',
+	'setting_permissions_modasban_comment' => 'If such keywords are found in a module that does not support audit keywords after being enabled, the posting will be rejected, and posting will be allowed if closed',
 
 	'setting_credits' => 'ตั้งค่าเครดิต',
 	'setting_credits_base' => 'ตั้งค่าพื้นฐาน',
@@ -2284,7 +2291,9 @@ $lang = array
 	'setting_sec_accountguard_loginpwcheck_prompt' => 'Enable and prompt',
 	'setting_sec_accountguard_loginpwcheck_force' => 'Enable and force to modify the weak password',
 	'setting_sec_accountguard_loginoutofdate' => 'Abnormal log in detecting',
-	'setting_sec_accountguard_loginoutofdate_comment' => 'When a user was logged on/off more than 90 days since the last Log in, the account became the "unverified" status. A user can verify his mailbox or complaint the thaw account. QQ logged in users not affects this function <a href="'.ADMINSCRIPT.'?action=moderate&operation=members">Audit users</a>',
+	'setting_sec_accountguard_loginoutofdate_comment'	=> 'When the user has logged in for more than a certain period of time, the account will enter the unaudited group, and the user can unfreeze the account by verifying the mailbox or appealing, and the QQ login user will not be affected by this feature. <a href="'.ADMINSCRIPT.'?action=moderate&operation=members">Audit users</a>',
+	'setting_sec_accountguard_loginoutofdatenum' => 'Number of days for abnormal login detection',
+	'setting_sec_accountguard_loginoutofdatenum_comment' => 'Configure the number of days for abnormal login detection, the default value is 90 days',
 
 
 	'setting_attach' => 'ตั้งค่าไฟล์แนบ',
@@ -2473,6 +2482,10 @@ $lang = array
 	'setting_search_status_comment' => 'Check the areas you want to enable search',
 	'setting_search_onoff' => 'เปิด',
 	'search_item_name' => 'พื้นที่ค้นหา',
+
+	'setting_search_srchsetting' => 'Search option settings',
+	'setting_search_srchcensor' => 'Search is controlled by word filtering',
+
 	'setting_search_srchhotkeywords' => 'แท็กนิยม',
 	'setting_search_srchhotkeywords_comment' => 'One per line',
 	'setting_search_srchhotkeywords_disabled' => '<strong>You have turned the aspect of search services, search-related settings please go to <a href="'.ADMINSCRIPT.'?action=cloud&operation=search">Cloud platform -> Aspect search</a> Set up</strong>',
@@ -2617,8 +2630,8 @@ $lang = array
 	'setting_mobile_index_forumview_comment' => 'Such as "put away", Forum Home will show by default only forum titles<br />Users need to click a forum link to view thread list under this Forum',
 	'setting_mobile_come_from' => 'Mark Mobile posts',
 	'setting_mobile_come_from_comment' => 'Default is blank. If completed, a post will be marked by "From mobile phone". You can add a custom text or icon<br />Such as: &lt;a href=\'http://m.x.com\'&gt;Mobile Channel&lt;/a&gt;<br />HTML tags supported: &lt;a&gt;&lt;font&gt;&lt;span&gt;&lt;strong&gt;&lt;b&gt;&lt;img&gt;<br />If you use the icon, Please ensure the image height is 16px (pixels) or less',
-	'setting_mobile_wml' => 'Enable the minimalist version',
-	'setting_mobile_wml_comment' => 'Minimalist version supports only WML language compatible with the old devices browsers.',
+	'setting_mobile_wml' => 'Enable the WML version',
+	'setting_mobile_wml_comment' => 'WML version supports only WML language compatible with the old devices browsers.',
 	'pack' => 'Pack',
 	'unwind' => 'Expand',
 
@@ -3363,7 +3376,7 @@ $lang = array
 	'styles_default0' => 'PC version',
 	'styles_default1' => 'Standard Mobile Edition (WAP)',
 	'styles_default2' => 'Mobile touch screen version',
-	'styles_default3' => 'Mobile minimalistic version',
+	'styles_default3' => 'Mobile WML version',
 
 	'styles_import' => 'ตัวเลือกการนำเข้าไฟล์ของรูปแบบสไตล์',
 	'styles_import_ignore_version' => 'อนุญาตให้นำเข้ารูปแบบสไตล์ของ Discuz! เวอร์ชันที่ต่างกัน (อาจจะเกิดข้อผิดพลาดได้โดยง่าย!!)',
@@ -6022,6 +6035,22 @@ $lang = array
 	'counter_have_cover' => 'รวมไปถึงกระทู้ที่มีหน้าปกอยู่แล้ว',
 	'counter_tips' => '<li>The following data is not normal. You can use this function to update the data to correct state. Please try to avoid the peak time of members access</li>
 				<li>Each cycle update the number: Set the value in a reasonable range. Must be not too large, Otherwise it increase the server load pressure</li>
+				',
+
+	'remoderate' => 'Content moderation',
+	'remoderate_thread' => 'Moderate threads and replies',
+	'remoderate_blog' => 'Moderate blog title and content',
+	'remoderate_pic' => 'Moderate images',
+	'remoderate_doing' => 'Moderate doings',
+	'remoderate_share' => 'Moderate shares',
+	'remoderate_comment' => 'Moderate guestbook',
+	'remoderate_article' => 'Moderate articles',
+	'remoderate_articlecomment' => 'Moderate article comments',
+	'remoderate_topiccomment' => 'Moderate topic comments',
+	'remoderate_amount' => 'Update amount per cycle',
+	'remoderate_processing' => 'Processing from {current} to {next}',
+	'remoderate_tips' => '<li>When the word filtering parameters have a large change or are near sensitive time points, you can use this function to review the historical data. Please try to avoid the peak hours of member visits</li>
+				<li>The number of updates per cycle: Please keep the value within a reasonable range, not too large, otherwise it will put load pressure on the server</li>
 				',
 
 	'db' => 'จัดการฐานข้อมูล',

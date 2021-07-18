@@ -1068,7 +1068,6 @@ function output() {
 				$temp_md5 = md5(substr($_G['timestamp'], 0, -3).substr($_G['config']['security']['authkey'], 3, -3));
 				$temp_formhash = substr($temp_md5, 8, 8);
 				$content = preg_replace('/(name=[\'|\"]formhash[\'|\"] value=[\'\"]|formhash=)('.constant("FORMHASH").')/ismU', '${1}'.$temp_formhash, $content);
-				//避免siteurl伪造被缓存
 				$temp_siteurl = 'siteurl_'.substr($temp_md5, 16, 8);
 				$content = preg_replace('/("|\')('.preg_quote($_G['siteurl'], '/').')/ismU', '${1}'.$temp_siteurl, $content);
 				fwrite($fp, empty($content) ? ob_get_contents() : $content);
@@ -1418,9 +1417,9 @@ function adshow($parameter) {
 	}
 	$adfunc = 'ad_'.$params[0];
 	$_G['setting']['pluginhooks'][$adfunc] = null;
-	hookscript('ad', 'global', 'funcs', array('params' => $params, 'content' => $adcontent), $adfunc);
+	hookscript('ad', 'global', 'funcs', array('params' => $params, 'content' => $adcontent, 'customid' => $customid), $adfunc);
 	if(!$_G['setting']['hookscript']['global']['ad']['funcs'][$adfunc]) {
-		hookscript('ad', $_G['basescript'], 'funcs', array('params' => $params, 'content' => $adcontent), $adfunc);
+		hookscript('ad', $_G['basescript'], 'funcs', array('params' => $params, 'content' => $adcontent, 'customid' => $customid), $adfunc);
 	}
 	return $_G['setting']['pluginhooks'][$adfunc] === null ? $adcontent : $_G['setting']['pluginhooks'][$adfunc];
 }
@@ -1446,8 +1445,8 @@ function simplepage($num, $perpage, $curpage, $mpurl) {
 	return helper_page::simplepage($num, $perpage, $curpage, $mpurl);
 }
 
-function censor($message, $modword = NULL, $return = FALSE) {
-	return helper_form::censor($message, $modword, $return);
+function censor($message, $modword = NULL, $return = FALSE, $modasban = TRUE) {
+	return helper_form::censor($message, $modword, $return, $modasban);
 }
 
 function censormod($message) {
@@ -1523,7 +1522,6 @@ function dreferer($default = '') {
 		$_G['referer'] = '';
 	}
 
-	// HTTP_HOST变量中有可能有端口号
 	list($http_host,)=explode(':', $_SERVER['HTTP_HOST']);
 
 	if(!empty($reurl['host']) && !in_array($reurl['host'], array($http_host, 'www.'.$http_host)) && !in_array($http_host, array($reurl['host'], 'www.'.$reurl['host']))) {

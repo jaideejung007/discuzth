@@ -107,6 +107,9 @@ if($_G['setting']['verify']['enabled']) {
 	space_merge($space, 'verify');
 }
 foreach($_G['cache']['profilesetting'] as $fieldid => $field) {
+	if($_G['setting']['nsprofiles']) {
+		break;
+	}
 	if(!$field['available'] || in_array($fieldid, array('birthprovince', 'birthdist', 'birthcommunity', 'resideprovince', 'residedist', 'residecommunity'))) {
 			continue;
 	}

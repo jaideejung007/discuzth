@@ -36,11 +36,11 @@ class helper_form {
 		}
 	}
 
-	public static function censor($message, $modword = NULL, $return = FALSE) {
+	public static function censor($message, $modword = NULL, $return = FALSE, $modasban = TRUE) {
 		global $_G;
 		$censor = discuz_censor::instance();
 		$censor->check($message, $modword);
-		if($censor->modbanned() && empty($_G['group']['ignorecensor'])) {
+		if(($censor->modbanned() && empty($_G['group']['ignorecensor'])) || (($modasban && !empty($_G['setting']['modasban'])) && $censor->modmoderated() && empty($_G['group']['ignorecensor']))) {
 			$wordbanned = implode(', ', $censor->words_found);
 			if($return) {
 				return array('message' => lang('message', 'word_banned', array('wordbanned' => $wordbanned)));

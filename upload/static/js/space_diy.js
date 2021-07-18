@@ -194,7 +194,7 @@ spaceDiy.extend({
 				dom.innerHTML = 'แก้ไข';
 				$('spacename').appendChild(dom);
 			}
-			$('spaceinfoshow').onmousedown = function () {spaceDiy.showEditSpaceInfo();};
+			$('infoedit').onmousedown = function () {spaceDiy.showEditSpaceInfo();};
 		}
 		if ($('nv')) {
 			if(!$('nv').getElementsByTagName('li').length) {

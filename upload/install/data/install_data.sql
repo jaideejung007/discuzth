@@ -61,7 +61,7 @@ INSERT INTO pre_common_cron VALUES ('20','1','system','อัปเดตระ�
 
 INSERT INTO pre_common_friendlink VALUES ('1','0','เว็บบอร์ด Discuz! อย่างเป็นทางการ','https://www.discuz.net','ติดตามข่าวสารความเคลื่อนไหวของดิสคัส! รวมไปถึงการดาวน์โหลดและแลกเปลี่ยนข้อมูลทางเทคนิค','static/image/common/logo_88_31.gif','2');
 INSERT INTO pre_common_friendlink VALUES ('2','1','แอปสโตร์','https://addon.dismall.com/','','','2');
-INSERT INTO pre_common_friendlink VALUES ('3','2','Discuz! TH Official Repositories','https://github.com/jaideejung007/discuzth','มาร่วมเป็นส่วนหนึ่งในการพัฒนา Discuz! TH ไปพร้อม ๆ กัน','static/image/common/logo_discuzth_repositories_88_31.gif','2');
+INSERT INTO pre_common_friendlink VALUES ('3','2','Discuz! TH Official Repositories','https://github.com/jaideejung007/discuzth','ดาวน์โหลดและติดตามการอัปเดต Discuz! ภาษาไทยล่าสุด','static/image/common/logo_discuzth_repositories_88_31.gif','2');
 
 INSERT INTO pre_common_member_profile_setting VALUES('realname', 1, 0, 0, 'ชื่อจริง', '', 0, 0, 0, 0, 0, 0, 1, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('gender', 1, 0, 0, 'เพศ', '', 0, 0, 0, 0, 0, 0, 1, 'select', 0, '', '');
@@ -212,6 +212,9 @@ INSERT INTO pre_common_setting VALUES ('authoronleft','1');
 INSERT INTO pre_common_setting VALUES ('uidlogin','0');
 INSERT INTO pre_common_setting VALUES ('autoidselect','0');
 INSERT INTO pre_common_setting VALUES ('avatarmethod','0');
+INSERT INTO pre_common_setting VALUES ('nsprofiles','1');
+INSERT INTO pre_common_setting VALUES ('modasban','1');
+INSERT INTO pre_common_setting VALUES ('srchcensor','1');
 INSERT INTO pre_common_setting VALUES ('backupdir','f027b6');
 INSERT INTO pre_common_setting VALUES ('bannedmessages','1');
 INSERT INTO pre_common_setting VALUES ('bbclosed','');
@@ -558,6 +561,7 @@ INSERT INTO pre_common_setting VALUES ('report_receive', 'a:2:{s:9:"adminuser";a
 INSERT INTO pre_common_setting VALUES ('leftsideopen', '0');
 INSERT INTO pre_common_setting VALUES ('showexif', '0');
 INSERT INTO pre_common_setting VALUES ('followretainday', '7');
+INSERT INTO pre_common_setting VALUES ('followaddnotice', '0');
 INSERT INTO pre_common_setting VALUES ('newbie', '20');
 INSERT INTO pre_common_setting VALUES ('collectionteamworkernum', '3');
 INSERT INTO pre_common_setting VALUES ('collectionnum', '10');

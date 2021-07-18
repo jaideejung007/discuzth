@@ -478,10 +478,14 @@ function build_cache_setting() {
 	}
 	$data['output'] = $output;
 	$data['connect'] = in_array('qqconnect', $data['plugins']['available']) ? $data['connect'] : array();
-	
+
 	$data['parseflv'] = get_cachedata_discuzcode_parseflv();
 
 	$data['securesiteurl'] = $_G['siteurl'];
+
+	if($data['membersplit']) {
+		C::t('common_member_archive')->check_table();
+	}
 
 	savecache('setting', $data);
 	$_G['setting'] = $data;
@@ -617,7 +621,6 @@ function get_cachedata_setting_plugin($method = '') {
 									if($hscript == 'home' && in_array($curscript, array('space', 'spacecp'))) {
 										$curscript .= '_'.$v[1];
 									}
-									// If $funcname include __ , then before __ is $curscript.
 									if(strpos($funcname, '__') !== false) {
 										$curscript = current(explode('__', $funcname));
 									}
@@ -1034,7 +1037,7 @@ function get_cachedata_discuzcode_parseflv() {
 	$mediadir = DISCUZ_ROOT.'./source/function/media';
 	$parseflv = array();
 	if(file_exists($mediadir)) {
-		$mediadirhandle = dir($mediadir);	
+		$mediadirhandle = dir($mediadir);
 		while($entry = $mediadirhandle->read()) {
 			if(!in_array($entry, array('.', '..')) && preg_match("/^media\_([\_\w]+)\.php$/", $entry, $entryr) && substr($entry, -4) == '.php' && is_file($mediadir.'/'.$entry)) {
 				$checkurl = array();
@@ -1042,7 +1045,7 @@ function get_cachedata_discuzcode_parseflv() {
 				$parseflv[$entryr[1]] = $checkurl;
 			}
 		}
-	}	
+	}
 	return $parseflv;
 }
 

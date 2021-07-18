@@ -39,6 +39,9 @@ function getblockhtml($blockname,$parameters = array()) {
 			$privacy = $space['privacy']['profile'] ? $space['privacy']['profile'] : array();
 
 			foreach($_G['cache']['profilesetting'] as $fieldid=>$field) {
+				if($_G['setting']['nsprofiles']) {
+					break;
+				}
 				if(!$field['available'] || in_array($fieldid, array('birthprovince', 'birthdist', 'birthcommunity', 'resideprovince', 'residedist', 'residecommunity'))) {
 					continue;
 				}
@@ -564,7 +567,7 @@ function getblockhtml($blockname,$parameters = array()) {
 			break;
 
 		case 'myapp':
-			$html = '';		
+			$html = '';
 			break;
 		case 'block1':
 		case 'block2':

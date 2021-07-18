@@ -109,6 +109,7 @@ $lang = array
 	'menu_setting_collection' => 'จัดการคลังกระทู้',
 	'menu_posting_tags' => 'จัดการแท็ก',
 	'menu_posting_censors' => 'ตั้งค่ากรองคำหยาบ',
+	'menu_remoderate' => 'ตรวจสอบเนื้อหา',
 	'menu_maint_report' => 'รายงานจากสมาชิก',
 	'menu_threads_forumstick' => 'จัดการปักหมุดกระทู้',
 	'menu_post_position_index' => 'จัดการประสิทธิภาพโพสต์',

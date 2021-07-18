@@ -179,7 +179,7 @@ var Util = {
 		aParent.insertBefore(b, afterA);
 	},
 	hasClass: function(el, name){
-		return el && el.nodeType == 1 && el.className.split(/\s+/).indexOf(name) != -1;
+		return el && el.nodeType == 1 && typeof el.className === 'string'  && el.className.split(/\s+/).indexOf(name) != -1;
 	},
 	addClass: function(el, name){
 		el.className += this.hasClass(el, name) ? '' : ' ' + name;
@@ -1224,7 +1224,7 @@ var Util = {
 		setClose : function () {
 			if (!this.isChange) {
 				window.onbeforeunload = function() {
-					return 'ข้อมูลมีการแก้ไข หากคุณออกจากการทำงานนี้ ระบบจะไม่บันทึกการเปลี่ยนแปลงใดๆ ทั้งสิ้น';
+					return 'ข้อมูลมีการแก้ไข หากคุณออกจากการทำงานนี้ ระบบจะไม่บันทึกการเปลี่ยนแปลงใด ๆ ทั้งสิ้น';
 				};
 			}
 			this.isChange = true;
