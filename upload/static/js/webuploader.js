@@ -1,6 +1,6 @@
 
 jQuery.noConflict();
-	
+
 var getBasePath = function() {
 	var els = document.getElementsByTagName('script'),
 	src;
@@ -500,10 +500,8 @@ function fileDialogComplete() {
 					switchAttachbutton('attachlist');
 				}
 				try {
-					//if(this.uploader.getStats().queueNum) {
 						$('attach_tblheader').style.display = '';
 						$('attach_notice').style.display = '';
-					//}
 				} catch (ex) {}
 			} else if(this.customSettings.uploadType == 'image') {
 				if(typeof switchImagebutton == "function") {
@@ -550,9 +548,8 @@ function uploadStart(file) {
 
 function uploadProgress(file, percentage) {
 	try {
-		var percent = Math.ceil((bytesLoaded / bytesTotal) * 100);
 		var progress = new FileProgress(file, this.customSettings.progressTarget);
-		progress.setStatus("กำลังอัปโหลด (" + Math.round(percentage * 100) + "%)...");
+		progress.setStatus("กำลังอัปโหลด <progress value='" + percentage + "' max='1' style='width: 200px;'></progress> " + Math.ceil(percentage * 100) + "%");
 	} catch (ex) {
 		this.debug(ex);
 	}
@@ -563,7 +560,6 @@ function uploadSuccess(file, serverData) {
 		var progress = new FileProgress(file, this.customSettings.progressTarget);
 		if(this.customSettings.uploadSource == 'forum') {
 			if(this.customSettings.uploadType == 'poll') {
-				//var data = eval('('+serverData+')');
 				var data = serverData;
 				if(parseInt(data.aid)) {
 					var preObj = $(this.customSettings.progressTarget);
@@ -614,13 +610,9 @@ function uploadSuccess(file, serverData) {
 					this.uploader.cancelFile(file);
 					progress.setCancelled();
 					progress.toggleCancel(true, this.uploader);
-					//var stats = this.uploader.getStats();
-					//var obj = {'successNum':--stats.successNum, 'cancelNum':++stats.cancelNum};
-					//this.setStats(obj);
 				}
 			}
 		} else if(this.customSettings.uploadType == 'album') {
-			//var data = eval('('+serverData+')');
 			var data = serverData;
 			if(parseInt(data.picid)) {
 				var newTr = document.createElement("TR");
@@ -645,7 +637,6 @@ function uploadSuccess(file, serverData) {
 			}
 			$(file.id).style.display = 'none';
 		} else if(this.customSettings.uploadType == 'blog') {
-			//var data = eval('('+serverData+')');
 			var data = serverData;
 			if(parseInt(data.picid)) {
 				var tdObj = getInsertTdId(this.customSettings.imgBoxObj, 'image_td_'+data.picid);
@@ -666,7 +657,6 @@ function uploadSuccess(file, serverData) {
 			}
 			$(file.id).style.display = 'none';
 		} else if(this.customSettings.uploadSource == 'portal') {
-			//var data = eval('('+serverData+')');
 			var data = serverData;
 			if(data.aid) {
 				if(this.customSettings.uploadType == 'attach') {

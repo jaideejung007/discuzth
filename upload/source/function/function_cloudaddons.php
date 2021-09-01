@@ -29,7 +29,7 @@ define('CLOUDADDONS_CHECK_URL', $addon['check_url']);
 define('CLOUDADDONS_CHECK_IP', $addon['check_ip']);
 
 function cloudaddons_md5($file) {
-	return dfsockopen(CLOUDADDONS_CHECK_URL.$file, 0, '', '', false, CLOUDADDONS_CHECK_IP, 60);
+	return dfsockopen(CLOUDADDONS_CHECK_URL.$file, 0, '', '', false, CLOUDADDONS_CHECK_IP, 999);
 }
 
 function cloudaddons_getuniqueid() {
@@ -85,8 +85,8 @@ function cloudaddons_open($extra, $post = '', $timeout = 15) {
 	return dfsockopen(cloudaddons_url('&from=s').$extra, 0, $post, '', false, CLOUDADDONS_DOWNLOAD_IP, $timeout);
 }
 
-function cloudaddons_pluginlogo_url($id, $type = 'plugin') {
-	return CLOUDADDONS_WEBSITE_URL.'?_'.$id.'&type='.$type;
+function cloudaddons_pluginlogo_url($id) {
+	return CLOUDADDONS_WEBSITE_URL.'?_'.$id;
 }
 
 function cloudaddons_installlog($addonid) {
@@ -128,15 +128,6 @@ function cloudaddons_upgradecheck($addonids) {
 		$post[] = 'rid['.$addonid.']='.$array['RevisionID'].'&sn['.$addonid.']='.$array['SN'].'&rd['.$addonid.']='.$array['RevisionDateline'];
 	}
 	return cloudaddons_open('&mod=app&ac=validator&ver=2', implode('&', $post), 15);
-}
-
-function cloudaddons_newaddon($addonids) {
-	$post = array();
-	foreach($addonids as $addonid) {
-		$array = cloudaddons_getmd5($addonid);
-		$post[] = 'rid['.$addonid.']='.$array['RevisionID'].'&sn['.$addonid.']='.$array['SN'].'&rd['.$addonid.']='.$array['RevisionDateline'];
-	}
-	return cloudaddons_open('&mod=app&ac=newaddon&ver=2', implode('&', $post), 15);
 }
 
 function cloudaddons_getmd5($md5file) {

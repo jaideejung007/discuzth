@@ -715,6 +715,7 @@ $lang = array
 	'home_sys_info' => 'ข้อมูลของระบบ',
 	'home_discuz_version' => 'Discuz! เวอร์ชัน',
 	'home_ucclient_version' => 'UCenter เวอร์ชัน',
+	'home_git_version' => '（ไม่ใช่เวอร์ชันอย่างเป็นทางการ）',
 	'home_check_newversion' => 'ดูเวอร์ชันล่าสุด',
 	'home_environment' => 'OS และ PHP',
 	'home_serversoftware' => 'ซอฟต์แวร์เซิร์ฟเวอร์',
@@ -2530,6 +2531,10 @@ $lang = array
 	'setting_ranklist_cache_time' => 'ระยะเวลาแคช(หน่วยเป็น:ชั่วโมง)',
 	'setting_ranklist_ignorefid' => 'Ignore Forum/Group rating',
 	'setting_ranklist_ignorefid_comment' => 'Enter the forum ID or group ID, Corresponds forum and group threads will not appear in the list. Separate multiple ID with a comma.',
+	'setting_ranklist_member_show' => 'ฟังก์ชันการจัดอันดับเปิดใช้งานอยู่',
+	'setting_ranklist_member_show_comment' => 'เปิดฟังก์ชั่นการจัดอันดับภายใต้โมดูลผู้ใช้',
+	'setting_ranklist_member_show_announcement' => 'ข้อความประกาศฟังก์ชันการจัดอันดับผู้ใช้',
+	'setting_ranklist_member_show_announcement_comment' => 'กรอกข้อความประกาศฟังก์ชันการจัดอันดับผู้ใช้',
 	'setting_ranklist_show_num' => 'แสดงจำนวน',
 	'setting_ranklist_block_comment' => 'เพื่อไม่ให้เป็นภาระของเซิร์ฟเวอร์มากเกินไป ควรตั้งค่าช่วงเวลาแคชที่เหมาะสม ค่าที่แนะนำคือไม่ควรน้อยกว่า 5 ชั่วโมง จำนวนที่แสดงกำหนดได้ตามต้องการ แต่ไม่ควรเกิน 100 ค่าเริ่มต้นคือ 20',
 	'setting_ranklist_show_num_comment' => 'หลังจากที่ทำการเปลี่ยนแปลงค่าต่างๆ จะแสดงผลหลังจากการอัปเดตแคช',
@@ -3440,7 +3445,7 @@ $lang = array
 	'members_add_email_notify' => 'ส่งข้อความแจ้งไปยังที่อยู่อีเมลของสมาชิก',
 	'members_admin_tips' => '<li>การค้นหาและแก้ไขชื่อสมาชิกนี้ เหมาะสำหรับผู้ดูแลที่ต้องการทราบรายละเอียดต่างๆ ของสมาชิกว่า อยู่ในกลุ่มใด, สิทธิ์การใช้งานเป็นอย่างไร, มียอดเครดิตเท่าไหร่, มีเหรียญกี่เหรียญ ต่างๆ เป็นต้น</li><li>การค้นหานี้ สามารถค้นหาได้ในเฉพาะกลุ่มที่กำหนดไว้ได้ ซึ่งอาจจะช่วยให้ผู้ดูระบบ สามารถทำการมอบเหรียญ หรือจัดการเครดิตเป็นกลุ่มๆ ไปได้โดยง่าย</li>',
 	'members_admin_comment' => 'สมาชิกชื่อกลุ่มในตัวหนาเพื่อแสดงว่าสมาชิกกลุ่มระบบ; จะปรากฏในหนังสือแบบตัวเอียงเป็นพิเศษของกลุ่มสมาชิกหรือกลุ่มสมาชิกสมาชิก',
-	'members_export_tips' => '<li>ชื่อของกลุ่มสมาชิกที่แสดงผลเป็นตัวหนา กลุ่มสมาชิกของระบบ;แสดงตัวเอียง สำหรับกลุ่มสมาชิกพิเศษ;ตัวธรรมดาเป็นกลุ่มสมาชิกทั่วไป </li><li>ส่งออกข้อมูลสมาชิกสนับสนุน 10000 ข้อมูล ไฟล์ที่ส่งออกจะอยู่ในรูปแบบ .xls สามารถเปิดใน Excel ได้เลย </li>',
+	'members_export_tips' => '<li>ชื่อของกลุ่มสมาชิกที่แสดงผลเป็นตัวหนา กลุ่มสมาชิกของระบบ;แสดงตัวเอียง สำหรับกลุ่มสมาชิกพิเศษ;ตัวธรรมดาเป็นกลุ่มสมาชิกทั่วไป </li><li>ส่งออกข้อมูลสมาชิกสนับสนุน 10000 ข้อมูล ไฟล์ที่ส่งออกอาจเป็นรูปแบบ EXCEL, WPS <a href="https://docs.google.com/" target="_blank">เปิด Google เอกสาร</a>และเครื่องมืออื่น ๆ</li>',
 
 	'members_delete_post' => 'Post',
 	'members_delete_blog' => 'Blog',
@@ -3575,7 +3580,7 @@ $lang = array
 	'members_ban_validity_comment' => 'After the specified time period the banned user can automatically become a regular user.',
 	'members_ban_delpost' => 'Posts',
 	'members_ban_delfollow' => 'Follows',
-	'members_ban_delfollower' => 'Follower',
+	'members_ban_delothers' => 'Miscellaneous',
 	'members_ban_delblog' => 'Blogs',
 	'members_ban_delalbum' => 'Albums',
 	'members_ban_deldoing' => 'Doings',
@@ -5461,7 +5466,7 @@ $lang = array
 	'card_log_num' => 'Number of operations',
 	'succeed_num' => 'Success number',
 	'fail_num' => 'Failed Number',
-	'card_manage_tips' => '<li>Export support prepaid card secret up to 10000 items. Resulting .xls file can be open by corresponding tools such as EXCEL.</li>',
+	'card_manage_tips' => '<li>Export support prepaid card secret up to 10000 items. ไฟล์ที่ส่งออกอาจเป็นรูปแบบ EXCEL, WPS <a href="https://docs.google.com/" target="_blank">เปิด Google เอกสาร</a>และเครื่องมืออื่น ๆ</li>',
 	'card_manage_title' => 'Recharge card secret list',
 	'card_status' => 'Status',
 	'card_manage_status_1' => 'Unused',
@@ -7105,10 +7110,10 @@ $lang = array
 # เปิดโหมด RewriteEngine
 RewriteEngine On
 
-# ถ้าไฟล์ดิสคัสไม่ได้เก็บไว้ในซับโฟลเดอร์ กรุณาลบ /discuz แต่ถ้าไฟล์ดิสคัสถูกเก็บไว้ในซับโฟลเดอร์ ให้แก้ไขค่า /discuz เป็นชื่อโฟลเดอร์ที่เก็บไฟล์ดิสคัส และหากดิสคัสถูกต้องตั้งใน Root ให้เปลี่ยนค่าเป็น "/"
-RewriteBase /discuz
+# ตัวอย่าง ถ้าเว็บไซต์เป็น www.discuz.net/bbs/ จะต้องตั้งค่าเป็น RewriteBase /bbs/ หากไฟล์ดิสคัสอยู่ในโฟลเดอร์ราก (ROOT) ให้ตั้งค่าเป็น RewriteBase /
+RewriteBase {siteroot}
 
-# เงื่อนไข Rewrite ไม่ควรแก้ไขค่าระบบ
+# หากไม่มีความจำเป็น ไม่ควรแก้ไขค่า Rewrite
 {apache2}
 </pre>
 

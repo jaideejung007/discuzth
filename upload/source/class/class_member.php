@@ -108,6 +108,7 @@ class logging_ctl {
 					$groupid = $this->setting['regverify'] ? 8 : $this->setting['newusergroupid'];
 
 					C::t('common_member')->insert($uid, $result['ucresult']['username'], md5(random(10)), $result['ucresult']['email'], $_G['clientip'], $groupid, $init_arr);
+					$_G['member']['lastvisit'] = TIMESTAMP;
 					$result['member'] = getuserbyuid($uid);
 					$result['status'] = 1;
 				}
@@ -536,8 +537,9 @@ class register_ctl {
 				checkemail($email);
 			}
 			if($sendurl) {
+				$mobile = $this->setting['mobile']['mobileregister'] ? '' : ($this->setting['mobile']['allowmobile'] ? '&amp;mobile=no' : '');
 				$hashstr = urlencode(authcode("$_GET[email]\t$_G[timestamp]", 'ENCODE', $_G['config']['security']['authkey']));
-				$registerurl = $_G['setting']['securesiteurl']."member.php?mod=".$this->setting['regname']."&amp;hash={$hashstr}&amp;email={$email}";
+				$registerurl = $_G['setting']['securesiteurl']."member.php?mod=".$this->setting['regname']."&amp;hash={$hashstr}&amp;email={$email}{$mobile}";
 				$email_register_message = lang('email', 'email_register_message', array(
 					'bbname' => $this->setting['bbname'],
 					'siteurl' => $_G['setting']['securesiteurl'],

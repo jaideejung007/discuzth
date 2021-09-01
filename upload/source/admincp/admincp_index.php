@@ -303,12 +303,12 @@ if(empty($newversion['newversion']['qqqun'])){
 showtableheader('home_sys_info', 'fixpadding left" style="width : 48%;');
 showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight smallfont"'), array(
 	cplang('home_discuz_version'),
-	'Discuz! '.DISCUZ_VERSION.' R'.DISCUZ_RELEASE.' '.strtoupper(CHARSET).''
+	'Discuz! '.DISCUZ_VERSION.' R'.DISCUZ_RELEASE.' '.strtoupper(CHARSET).((strlen(DISCUZ_RELEASE) == 8 && DISCUZ_RELEASE != '20180101') ? '' : cplang('home_git_version'))
 ));
 
 /*jaideejung007*/ showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight smallfont"'), array(
 /*jaideejung007*/	'&#3648;&#3623;&#3629;&#3619;&#3660;&#3594;&#3633;&#3609;&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;',
-/*jaideejung007*/	'<a href="https://github.com/jaideejung007/discuzth" class="lightlink2" target="_blank">Discuz! &#xE20;&#xE32;&#xE29;&#xE32;&#xE44;&#xE17;&#xE22;</a>, Rev: '.DISCUZ_TH_REVISION
+/*jaideejung007*/	'<a href="https://discuzthai.com" class="lightlink2" target="_blank">Discuz! &#xE20;&#xE32;&#xE29;&#xE32;&#xE44;&#xE17;&#xE22;</a>, Rev: '.DISCUZ_TH_REVISION
 /*jaideejung007*/));
 
 $newversion['newversion'] = !empty($newversion['newversion']) ? $newversion['newversion'] : array();
@@ -440,6 +440,7 @@ showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight"'), ar
 	<a href="https://www.dismall.com/" class="lightlink2" target="_blank">'.cplang('app_discussion').'</a>,
 	<a href="https://www.discuz.net/" class="lightlink2" target="_blank">'.cplang('discussion_area').'</a>,
 	<a href="'.ADMINSCRIPT.'?action=cloudaddons" class="lightlink2" target="_blank">'.cplang('app_center').'</a>,
+<!--jaideejung007-->	<a href="https://discuzthai.com" class="lightlink2" target="_blank">&#xE14;&#xE34;&#xE2A;&#xE04;&#xE31;&#xE2A;&#xE44;&#xE17;&#xE22;!</a>,	
 <!--jaideejung007-->	<a href="https://github.com/jaideejung007/discuzth" class="lightlink2" target="_blank">Discuz! Thai Official Repositories</a>	
 '));
 showtablefooter();

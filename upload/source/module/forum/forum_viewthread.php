@@ -34,7 +34,7 @@ if($page === 1 && !empty($_G['setting']['antitheft']['allow']) && empty($_G['set
 	helper_antitheft::check($_G['forum_thread']['tid'], 'tid');
 }
 
-if($_G['setting']['cachethreadlife'] && $_G['forum']['threadcaches'] && !$_G['uid'] && $page == 1 && !$_G['forum']['special'] && empty($_GET['do']) && empty($_GET['from']) && empty($_GET['threadindex']) && !defined('IN_ARCHIVER') && !defined('IN_MOBILE') && !defined('IS_ROBOT')) {
+if($_G['setting']['cachethreadlife'] && $_G['forum']['threadcaches'] && !$_G['uid'] && $page == 1 && !$_G['forum']['special'] && empty($_GET['do']) && empty($_GET['from']) && empty($_GET['threadindex']) && !defined('IN_ARCHIVER') && !defined('IN_MOBILE') && !IS_ROBOT) {
 	viewthread_loadcache();
 }
 
@@ -1275,14 +1275,14 @@ function viewthread_procpost($post, $lastvisit, $ordertype, $maxposition = 0) {
 
 function viewthread_loadcache() {
 	global $_G;
-	$_G['thread']['livedays'] = ceil((TIMESTAMP - $_G['thread']['dateline']) / 86400);	// 本贴子存在了多少天，最少是1天
-	$_G['thread']['lastpostdays'] = ceil((TIMESTAMP - $_G['thread']['lastpost']) / 86400);	// 最后发帖天数，最少1天
+	$_G['thread']['livedays'] = ceil((TIMESTAMP - $_G['thread']['dateline']) / 86400);
+	$_G['thread']['lastpostdays'] = ceil((TIMESTAMP - $_G['thread']['lastpost']) / 86400);
 
 	$threadcachemark = 100 - (
-		$_G['thread']['digest'] * 20 +							// 精华，占20分
-		min($_G['thread']['views'] / max($_G['thread']['livedays'], 10) * 2, 50) +	// 阅读数与天数关系，占50分。阅读越多分越高，天数越久分越低
-		max(-10, (15 - $_G['thread']['lastpostdays'])) +				// 最后回复时间，占15分，超过15天开始倒扣分，最多扣10分
-		min($_G['thread']['replies'] / $_G['setting']['postperpage'] * 1.5, 15));	// 帖子页数，占15分，10页以上就是满分
+		$_G['thread']['digest'] * 20 +
+		min($_G['thread']['views'] / max($_G['thread']['livedays'], 10) * 2, 50) +
+		max(-10, (15 - $_G['thread']['lastpostdays'])) +
+		min($_G['thread']['replies'] / $_G['setting']['postperpage'] * 1.5, 15));
 	if($threadcachemark < $_G['forum']['threadcaches']) {
 
 		$threadcache = getcacheinfo($_G['tid']);

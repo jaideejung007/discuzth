@@ -98,7 +98,7 @@ class discuz_admincp
 			} elseif ($session['dateline'] < $this->sessionlimit) {
 				$this->cpaccess = 1;
 
-			} elseif ($this->cpsetting['checkip'] && ($session['ip'] != $this->core->var['clientip'])) {
+			} elseif ($this->cpsetting['checkip'] && ($session['ip'] != substr($this->core->var['clientip'], 0, strlen($session['ip'])))) {
 				$this->cpaccess = 1;
 
 			} elseif ($session['errorcount'] >= 0 && $session['errorcount'] <= 3) {
