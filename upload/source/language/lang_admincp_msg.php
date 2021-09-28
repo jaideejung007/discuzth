@@ -618,9 +618,7 @@ $lang = array (
   'members_verify_update_title_error' => 'Authentication enabled name cannot be empty, please return.',
   'members_verify_title_invalid' => 'You do not enable authentication set authentication name',
 
-  'connect_like_url_error' => 'QQ space favorite links must be in qq.com domain',
-  'connect_like_url_miss' => 'You did not fill in the QQ space favorite link URL',
-  'connect_update_succeed' => 'QQ binding settings updated successfully',
+  'connect_update_succeed' => 'อัปเดตการตั้งค่าการเชื่อมโยง QQ เรียบร้อยแล้ว',
 
   'my_app_status_off' => 'กรุณาเปิดใช้งานแอพลิเคชัน',
 

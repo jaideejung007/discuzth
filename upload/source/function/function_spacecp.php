@@ -610,6 +610,14 @@ function emailcheck_send($uid, $email) {
 	global $_G;
 
 	if($uid && $email) {
+		$memberauthstr = C::t('common_member_field_forum')->fetch($uid);
+		if(!empty($memberauthstr['authstr'])) {
+			list($dateline) = explode("\t", $memberauthstr['authstr']);
+			$interval = $_G['setting']['mailinterval'] > 0 ? (int)$_G['setting']['mailinterval'] : 300;
+			if($dateline && $dateline > TIMESTAMP - $interval) {
+				return false;
+			}
+		}
 		$timestamp = $_G['timestamp'];
 		$idstring = substr(md5($email), 0, 6);
 		C::t('common_member_field_forum')->update($uid, array('authstr' => "$timestamp\t3\t$idstring"));
@@ -629,6 +637,7 @@ function emailcheck_send($uid, $email) {
 			runlog('sendmail', "$email sendmail failed.");
 		}
 	}
+	return true;
 }
 
 function picurl_get($picurl, $maxlenth='200') {

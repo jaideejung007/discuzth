@@ -67,7 +67,7 @@ function uploadAvatarDone() {
             jQuery('#selector').height(150);
             $('avatarimage').src = e.target.result;
             jQuery("#slider").slider('value', 50);
-        };       
+        };
         fr.readAsDataURL(this.files[0]);
     }
 }
@@ -75,7 +75,7 @@ function uploadAvatarDone() {
 function showAvatarFileSelector() {
     $('avatarimage').src = null;
     clearAvatar();
-    $('avataradjuster').style.display = 'none'; 
+    $('avataradjuster').style.display = 'none';
     $('avatarfileselector').style.display = 'block';
 }
 
@@ -118,7 +118,7 @@ function clearAvatar() {
     ctx.clearRect(0, 0, cw, ch);
 }
 
-function refreshAvatarCanvas(uiposition) { 
+function refreshAvatarCanvas(uiposition) {
     var canvas = $('avatarcanvas');
     var cw = canvas.width;
     var ch = canvas.height;
@@ -128,8 +128,9 @@ function refreshAvatarCanvas(uiposition) {
     var iw = jQuery('#avatarimage').width();
     var ih = jQuery('#avatarimage').height();
     var img = $('avatarimage');
+    ctx.imageSmoothingQuality = 'high';
     ctx.drawImage(img, 0,0, iw, ih, ad.left, ad.top, ad.width, ad.height);
-    var sd = getSelectorDimention();    
+    var sd = getSelectorDimention();
     if (uiposition) {
         sd.left = uiposition.left;
         sd.top = uiposition.top;
@@ -158,7 +159,7 @@ function forceSelectorInsideAvatar() {
     if (sd.left<ad.left) jQuery('#selector').css('left', ad.left);
     if (sd.top<ad.top) jQuery('#selector').css('top', ad.top);
     if (sd.left+sd.width>ad.left+ad.width) jQuery('#selector').css('left', ad.left+ad.width-sd.width);
-    if (sd.top+sd.height>ad.top+ad.height) jQuery('#selector').css('top', ad.top+ad.height-sd.height);     
+    if (sd.top+sd.height>ad.top+ad.height) jQuery('#selector').css('top', ad.top+ad.height-sd.height);
     refreshAvatarCanvas();
 }
 
@@ -182,13 +183,14 @@ function saveAvatar() {
         var r = Math.max(sw/200, sh/250);
         tw = Math.floor(sw/r);
         th = Math.floor(sh/r);
-    }          
+    }
     var canvas = document.createElement('canvas');
     canvas.width = tw;
     canvas.height = th;
     var ctx = canvas.getContext("2d");
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, tw, th);
+    ctx.imageSmoothingQuality = 'high';
     ctx.drawImage(img, sl, st, sw, sh, 0, 0, tw, th);
     var dataURL = canvas.toDataURL("image/jpeg");
     jQuery('#avatar1').val(dataURL.substr(dataURL.indexOf(",") + 1));
@@ -199,13 +201,14 @@ function saveAvatar() {
         var r = Math.max(sw/120, sh/120);
         tw = Math.floor(sw/r);
         th = Math.floor(sh/r);
-    }     
+    }
     var canvas = document.createElement('canvas');
     canvas.width = tw;
     canvas.height = th;
     var ctx = canvas.getContext("2d");
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, tw, th);
+    ctx.imageSmoothingQuality = 'high';
     ctx.drawImage(img, sl, st, sw, sh, 0, 0, tw, th);
     var dataURL = canvas.toDataURL("image/jpeg");
     jQuery('#avatar2').val(dataURL.substr(dataURL.indexOf(",") + 1));
@@ -227,13 +230,14 @@ function saveAvatar() {
     var ctx = canvas.getContext("2d");
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, tw, th);
+    ctx.imageSmoothingQuality = 'high';
     ctx.drawImage(img, sl, st, sw, sh, 0, 0, tw, th);
     var dataURL = canvas.toDataURL("image/jpeg");
     jQuery('#avatar3').val(dataURL.substr(dataURL.indexOf(",") + 1));
 
     var src = $('avatarform').action;
     $('avatarform').action = data[data.indexOf('src')+1].replace('images/camera.swf?inajax=1', 'index.php?m=user&a=rectavatar&base64=yes');
-    $('avatarform').target='rectframe'; 
+    $('avatarform').target='rectframe';
 }
 
 function refreshAvatarCanvasForDisplay() {
@@ -258,9 +262,10 @@ function refreshAvatarCanvasForDisplay() {
         var r = Math.max(sw/200, sh/250);
         tw = Math.floor(sw/r);
         th = Math.floor(sh/r);
-    }  
+    }
     var ctl = 10;
     var ctt = 10;
+    ctx.imageSmoothingQuality = 'high';
     ctx.drawImage(img, sl, st, sw, sh, ctl, ctt, tw, th);
     ctl += 20 + tw;
 
@@ -270,7 +275,7 @@ function refreshAvatarCanvasForDisplay() {
         var r = Math.max(sw/120, sh/120);
         tw = Math.floor(sw/r);
         th = Math.floor(sh/r);
-    }     
+    }
     ctx.drawImage(img, sl, st, sw, sh, ctl, ctt, tw, th);
     ctl += 20 + tw;
 
@@ -301,9 +306,9 @@ function rectAvatarDone(res) {
         jQuery('#avatardisplayer').show();
         refreshAvatarCanvasForDisplay();
         jQuery('#avataradjuster').hide();
-        jQuery('#avatarfileselector').hide();            
+        jQuery('#avatarfileselector').hide();
     } else if (res == 'failure') {
-        alert('การอัปโหลดไม่สำเร็จ');
+        alert('อัปโหลดไม่สำเร็จ');
     }
 }
 })();

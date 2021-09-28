@@ -137,7 +137,7 @@ class plugin_qqconnect extends plugin_qqconnect_base {
 	function _viewthread_share_method_output() {
 		global $_G;
 		$_G['connect']['qq_share_url'] = $_G['siteurl'] . 'home.php?mod=spacecp&ac=plugin&id=qqconnect:spacecp&pluginop=share&sh_type=4&thread_id=' . $_G['tid'];
-		return tpl_viewthread_share_method($jsurl);		
+		return tpl_viewthread_share_method($jsurl);
 	}
 
 }
@@ -221,16 +221,6 @@ class plugin_qqconnect_member extends plugin_qqconnect {
 }
 
 class plugin_qqconnect_forum extends plugin_qqconnect {
-
-	function index_status_extra() {
-		global $_G;
-		if(!$this->allow) {
-			return;
-		}
-		if($_G['setting']['connect']['like_allow'] && $_G['setting']['connect']['like_url'] || $_G['setting']['connect']['turl_allow'] && $_G['setting']['connect']['turl_code']) {
-			return tpl_index_status_extra();
-		}
-	}
 
 	function viewthread_share_method_output() {
 		return $this->_viewthread_share_method_output();

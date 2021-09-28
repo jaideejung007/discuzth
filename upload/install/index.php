@@ -66,6 +66,13 @@ if(in_array($method, array('app_reg', 'ext_info'))) {
 	$default_appurl = $bbserver.substr($PHP_SELF, 0, strrpos($PHP_SELF, '/') - 8);
 }
 
+if(isset($_COOKIE['ULTRAXINSTID']) && strpos($_COOKIE['ULTRAXINSTID'], 'ULTRAXINSTID') === 0) {
+	$instid = $_COOKIE['ULTRAXINSTID'];
+} else {
+	$instid = uniqid('ULTRAXINSTID', true);
+	setcookie('ULTRAXINSTID', $instid);
+}
+
 if($method == 'show_license') {
 
 	transfer_ucinfo($_POST);
@@ -408,7 +415,6 @@ if($method == 'show_license') {
 
 		$db->query("REPLACE INTO {$tablepre}common_member (uid, username, password, adminid, groupid, email, regdate, timeoffset) VALUES ('$uid', '$username', '$password', '1', '1', '$email', '".time()."', '9999');");
 
-		// UID 是变量, 不做适配会导致积分操作等异常
 		if($uid) {
 			$db->query("REPLACE INTO {$tablepre}common_member_count SET uid='$uid';");
 			$db->query("REPLACE INTO {$tablepre}common_member_status SET uid='$uid';");
@@ -492,7 +498,7 @@ if($method == 'show_license') {
 	} else {
 		show_header();
 		echo '</div><div class="main" style="margin-top: -123px;padding-left:30px"><span id="platformIntro"></span>';
-/*jaideejung007*/		echo '<iframe frameborder="0" width="700" height="550" allowTransparency="true" src="https://log.1080ip.com/outer.php?id=installed&siteurl='.urlencode($default_appurl).'&platform=Discuz&version='.DISCUZ_VERSION.'&release='.DISCUZ_RELEASE.'&threvision='.DISCUZ_TH_REVISION.'"></iframe>';
+/*jaideejung007*/		echo '<iframe frameborder="0" width="700" height="550" allowTransparency="true" src="https://logs.discuzthai.com/outer.php?id=installed&siteurl='.urlencode($default_appurl).'&platform=Discuz&version='.DISCUZ_VERSION.'&release='.DISCUZ_RELEASE.'&threvision='.DISCUZ_TH_REVISION.'"></iframe>';
 		echo '<p align="center"><a href="'.$default_appurl.'" style="padding: 10px 20px;color: #fff;background: #09C;border-radius: 4px;height: 40px;line-height: 40px;font-size: 16px;">'.$lang['install_finish'].'</a></p><br />';
 		echo '</div>';
 		show_footer();

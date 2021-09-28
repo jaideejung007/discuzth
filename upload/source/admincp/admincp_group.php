@@ -12,8 +12,8 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 }
 
 cpheader();
-if($operation != 'setting' && empty($_G['setting']['groupstatus'])) {
-	cpmsg('group_status_off', 'action=group&operation=setting', 'error');
+if(empty($_G['setting']['groupstatus'])) {
+	cpmsg('group_status_off', 'action=setting&operation=functions', 'error');
 }
 
 if($operation == 'setting') {
@@ -35,11 +35,9 @@ if($operation == 'setting') {
 	if(!submitcheck('updategroupsetting')) {
 		shownav('group', 'nav_group_setting');
 		showsubmenu('nav_group_setting');
-		/*search={"nav_group_setting":"action=group&operation=setting"}*/
 		showformheader('group&operation=setting');
 		showtableheader();
 		showtitle('groups_setting_basic');
-		showsetting('groups_setting_basic_status', 'settingnew[groupstatus]', $setting['groupstatus'], 'radio');
 		showsetting('groups_setting_basic_mod', 'settingnew[groupmod]', $setting['groupmod'], 'radio');
 		showsetting('groups_setting_basic_iconsize', 'settingnew[group_imgsizelimit]', $setting['group_imgsizelimit'], 'text');
 		showsetting('groups_setting_basic_recommend', 'settingnew[group_recommend]', $setting['group_recommend'], 'text');
@@ -55,14 +53,13 @@ if($operation == 'setting') {
 		showsubmit('updategroupsetting');
 		showtablefooter();
 		showformfooter();
-		/*search*/
 	} else {
 
 		require_once libfile('function/group');
 		$settings = array();
 		$settings['group_recommend'] = cacherecommend($_GET['settingnew']['group_recommend']);
 		require_once libfile('function/discuzcode');
-		$skey_array = array('groupstatus','group_imgsizelimit','group_allowfeed', 'groupmod');
+		$skey_array = array('group_imgsizelimit','group_allowfeed', 'groupmod');
 		foreach($_GET['settingnew'] as $skey => $svalue) {
 			if(in_array($skey, $skey_array)){
 				$settings[$skey] = intval($svalue);
@@ -114,7 +111,7 @@ var rowtypedata = [
 				foreach ($forums[$id] as $forum) {
 					$showed[] = showgroup($forum);
 					$lastfid = 0;
-					if(!empty($subs[$forum['fid']])) {//群组不展示了  废弃代码
+					if(!empty($subs[$forum['fid']])) {
 						foreach ($subs[$forum['fid']] as $sub) {
 							$showed[] = showgroup($sub, 'sub');
 							$lastfid = $sub['fid'];
@@ -506,7 +503,7 @@ var rowtypedata = [
 
 		} else {
 
-			$threads = C::t('forum_thread')->count_by_fid($fid);//群组不展示了  废弃代码
+			$threads = C::t('forum_thread')->count_by_fid($fid);
 			$formhash = formhash();
 			cpmsg('grouptype_delete_alarm', "action=group&operation=deletetype&fid=$fid&confirmed=1&formhash=$formhash", 'loadingform', array(), '<div id="percent">0%</div>', FALSE);
 			echo "
@@ -643,7 +640,6 @@ var rowtypedata = [
 		shownav('group', 'nav_group_userperm');
 		$varname = array('newgroup_userperm', array(), 'isfloat');
 		showsubmenu(cplang('nav_group_userperm').' - '.cplang('group_userperm_moderator'));
-		/*search={"newgroup_userperm":"action=group&operation=userperm"}*/
 		showformheader("group&operation=userperm&id=$id");
 		showtableheader();
 		$varname[1] = array(
@@ -697,7 +693,6 @@ var rowtypedata = [
 		showsubmit('permsubmit', 'submit');
 		showtablefooter();
 		showformfooter();
-		/*search*/
 	} else {
 		$default_perm = array('allowstickthread' => 0, 'allowbumpthread' => 0, 'allowhighlightthread' => 0, 'allowlivethread' => 0, 'allowstampthread' => 0, 'allowclosethread' => 0, 'allowmergethread' => 0, 'allowsplitthread' => 0, 'allowrepairthread' => 0, 'allowrefund' => 0, 'alloweditpoll' => 0, 'allowremovereward' => 0, 'alloweditactivity' => 0, 'allowedittrade' => 0, 'allowdigestthread' => 0, 'alloweditpost' => 0, 'allowwarnpost' => 0, 'allowbanpost' => 0, 'allowdelpost' => 0, 'allowupbanner' => 0, 'disablepostctrl' => 0, 'allowviewip' => 0);
 		$_GET['newgroup_userperm'] = array_merge($default_perm, $_GET['newgroup_userperm']);
@@ -741,9 +736,7 @@ var rowtypedata = [
 EOT;
 			shownav('group', 'nav_group_level');
 			showsubmenu('nav_group_level');
-			/*search={"nav_group_level":"action=group&operation=level"}*/
 			showtips('group_level_tips');
-			/*search*/
 
 			showformheader('group&operation=level');
 			showtableheader('group_level', 'fixpadding', 'id="grouplevel"');
@@ -1098,7 +1091,6 @@ function searchgroups($submit) {
 		$dayselect .= "<option value=\"$d\" ".($birthday == $d ? 'selected' : '').">$d</option>\n";
 	}
 
-	/*search={"nav_group_manage":"action=group&operation=manage"}*/
 	showtagheader('div', 'searchgroups', !$submit);
 	echo '<script src="static/js/calendar.js" type="text/javascript"></script>';
 	showformheader("group&operation=manage");
@@ -1119,7 +1111,6 @@ function searchgroups($submit) {
 	showtablefooter();
 	showformfooter();
 	showtagfooter('div');
-	/*search*/
 }
 
 function countgroups() {

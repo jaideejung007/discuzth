@@ -332,7 +332,7 @@ $lang = array(
 	'card_update_doing' => ' <a class="xi2" href="###">[อัปเดตข้อความทักทาย]</a>',
 	'email_acitve_message' => '<img src="{imgdir}/mail_inactive.png" alt="ยังไม่ได้ยืนยัน" class="vm" /> <span class="xi1">อีเมล ({newemail}) ของคุณยังไม่ได้ยืนยัน...</span><br />
 								ระบบได้ส่งการยืนยันไปยังอีเมลที่คุณใช้ลงทะเบียนแล้ว โปรดตรวจสอบเพื่อยืนยันและเปิดใช้งาน<br>
-								ถ้าคุณไม่ได้รับ คุณสามารถเปลี่ยนอีเมลใหม่ หรือ<a href="home.php?mod=spacecp&ac=profile&op=password&resend=1" class="xi2">คลิกที่นี่เพื่อขอรับการยืนยันอีกครั้ง</a>',
+								ถ้าคุณไม่ได้รับ คุณสามารถเปลี่ยนอีเมลใหม่ หรือ<a href="home.php?mod=spacecp&ac=profile&op=password&resend=1&formhash={formhash}" class="xi2">คลิกที่นี่เพื่อขอรับการยืนยันอีกครั้ง</a>',
 	'qq_set_status' => 'ฉันกำหนดค่าสถานะ QQ ของฉันเป็นออนไลน์',
 	'qq_dialog' => 'เริ่มการแชทด้วย QQ',
 
