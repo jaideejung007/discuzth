@@ -115,7 +115,6 @@ CREATE TABLE IF NOT EXISTS `pre_connect_disktask` (
   KEY `status` (`status`)
 ) TYPE=MyISAM;
 
-
 REPLACE INTO pre_common_setting VALUES ('regconnect', '1');
 
 EOF;
@@ -163,8 +162,7 @@ if ($connect['feed']) {
 }
 
 if ($needCreateGroup) {
-	include DISCUZ_ROOT . 'source/language/lang_admincp_cloud.php';
-	$name = $extend_lang['connect_guest_group_name'];
+	$name = $installlang['connect_guest_group_name'];
 	$userGroupData = array(
 		'type' => 'special',
 		'grouptitle' => $name,
