@@ -1544,14 +1544,14 @@ $lang = array (
   'connect_fill_profile_to_view' => '<a href="member.php?mod=connect" target="_blank">การเชื่อมต่อบัญชีผู้ใช้</a> <a href="member.php?mod=connect&ac=bind" target="_blank">ผูกบัญชีผู้ใช้งาน</a>',
   'connect_fill_profile_to_comment' => 'คุณจำเป็นต้อง <a href="member.php?mod=connect" class="xi2">เชื่อมต่อบัญชีผู้ใช้</a> หรือ <a href="member.php?mod=connect&ac=bind" class="xi2">ผูกบัญชีผู้ใช้งาน</a> ก่อนที่จะดำเนินการใดๆ',
   'save_to_album' => 'บันทึกลงในอัลบั้ม',
-  'usergroup_expired' => 'กลุ่มผู้ใช้งานของคุณได้หมดอายุแล้ว กรุณาเลือกตำแหน่งสำหรับต่ออายุหรือสลับไปยังกลุ่มผู้ใช้งานอื่น',
-  'freeze_pw_tips' => 'บัญชีของคุณถูกตั้งสถานะเป็น Freeze เนื่องจากมีความเสี่ยงในด้านความปลอดภัย กรุณาเปลี่ยนรหัสผ่านของคุณใหม่ทันที สถานะดังกล่าวจึงจะถูกยกเลิก',
-  'freeze_email_tips' => 'บัญชีของคุณถูกตั้งสถานะเป็น Freeze คุณต้องคลิกรับลิงก์อีเมลยืนยันอีกครั้งด้านล่างนี้ เพื่อยืนยันที่อยู่อีเมลและยกเลิกสถานะ Freeze ของคุณ',
+  'usergroup_expired' => 'กลุ่มผู้ใช้ปัจจุบันของคุณหมดอายุแล้ว กรุณาเลือกว่าจะต่ออายุหรือเปลี่ยนไปใช้กลุ่มผู้ใช้งานอื่น',
+  'freeze_pw_tips' => 'บัญชีของคุณถูกระงับชั่วคราว กรุณาเปลี่ยนรหัสผ่านของคุณใหม่เพื่อให้สามารถใช้งานต่อได้',
+  'freeze_email_tips' => 'บัญชีของคุณถูกระงับชั่วคราว คุณต้องยืนยันที่อยู่อีเมลของคุณก่อนจึงจะสามารถปลดล็อกได้ <a href="home.php?mod=spacecp&ac=profile&op=password&resend=1&formhash={FORMHASH}" class="xi2">รับการยืนยันผ่านทางอีเมล</a>',
   'freeze_admincp_tips' => 'บัญชีปัจจุบันของคุณถูกระงับการใช้งานชั่วคราว คุณต้องกรอกเหตุผลการอุทธรณ์ในหน้านี้และจะสามารถยกเลิกได้หลังจากผู้ดูแลระบบได้อนุมัติแล้ว',
   'freeze_reason' => 'ระบุเหตุผลการอุทธรณ์',
   'freeze_reason_comment' => 'หากไม่สามารถยืนยันตัวบุคคลผ่านอีเมลได้ กรุณากรอกข้อมูลสำหรับการอุทธรณ์ได้ที่นี่',
   'freeze_reason_admincp_comment' => 'หากคุณคิดว่าบัญชีของคุณไม่ควรถูกระงับการใช้งานชั่วคราว กรุณากรอกเหตุผลในการอุทธรณ์',
   'freeze_remark' => 'ผลการตรวจสอบ',
-  'freeze_remark_comment' => 'You have submitted $space[freezemodsubmittimes] reviews, the last review was made by $space[freezemodadmin] on $space[freezemoddate]',
+  'freeze_remark_comment' => 'คุณได้ส่งการตรวจสอบ $space[freezemodsubmittimes] แล้ว ดำเนินการตรวจสอบครั้งล่าสุดโดย $space[freezemodadmin] เมื่อ $space[freezemoddate]',
 );
 ?>

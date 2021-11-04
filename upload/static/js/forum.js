@@ -9,7 +9,7 @@ function saveData(ignoreempty) {
 	var ignoreempty = isUndefined(ignoreempty) ? 0 : ignoreempty;
 	var obj = $('postform') && (($('fwin_newthread') && $('fwin_newthread').style.display == '') || ($('fwin_reply') && $('fwin_reply').style.display == '')) ? $('postform') : ($('fastpostform') ? $('fastpostform') : $('postform'));
 	if(!obj) return;
-		var bbcode = (typeof wysiwyg != 'undefined' && wysiwyg == 1) ? html2bbcode(editdoc.body.innerHTML) : $('postform').message.value;
+	var bbcode = (typeof wysiwyg != 'undefined' && wysiwyg == 1) ? html2bbcode(editdoc.body.innerHTML) : obj.message.value;
 	if(typeof isfirstpost != 'undefined') {
 		if(typeof wysiwyg != 'undefined' && wysiwyg == 1) {
 			var messageisnull = trim(bbcode) === '';
@@ -175,7 +175,7 @@ function announcement() {
                 ann.announcementScrollnext(targetTop);
             }, 10);
         } else {
-            this.annrowcount++; 
+            this.annrowcount++;
             this.annst = setTimeout(function() {
                 ann.announcementScroll();
             }, this.anndelay);
@@ -237,14 +237,14 @@ function fastpostvalidate(theform, noajaxpost) {
 		}
 	}
 	if(theform.message.value == '' || theform.subject.value == '') {
-		s = 'ขออภัย! คุณยังไม่ได้ใส่ชื่อกระทู้หรือเนื้อหาใดๆ เลย';
+		s = 'ขออภัย คุณยังไม่ได้ใส่ชื่อกระทู้หรือเนื้อหาใด ๆ เลย';
 		theform.message.focus();
 	} else if(mb_strlen(theform.subject.value) > 255) {
 		s = 'ชื่อกระทู้จะต้องไม่ยาวเกิน 255 ตัวอักษร';
 		theform.subject.focus();
 	}
 	if(!disablepostctrl && ((postminchars != 0 && mb_strlen(theform.message.value) < postminchars) || (postmaxchars != 0 && mb_strlen(theform.message.value) > postmaxchars))) {
-		s = 'แจ้งเตือน\n\nคุณพิมพ์ข้อความแล้ว: ' + mb_strlen(theform.message.value) + ' ' + ' ไบต์\nจะต้องอยู่ในระหว่าง: ' + postminchars + ' ถึง ' + postmaxchars + ' ไบต์เท่านั้น';
+		s = 'ความยาวของโพสต์คุณไม่เป็นไปตามข้อกำหนด\n\nความยาวปัจจุบัน: ' + mb_strlen(theform.message.value) + ' ' + ' ไบต์\nจะต้องอยู่ระหว่าง: ' + postminchars + ' ถึง ' + postmaxchars + ' ไบต์เท่านั้น';
 	}
 	if(s) {
 		showError(s);
@@ -407,7 +407,7 @@ function checkForumnew(fid, lasttime) {
 			}
 			removetbodyrow(table, 'forumnewshow');
 			var colspan = table.getElementsByTagName('tbody')[0].rows[0].children.length;
-			var checknew = {'tid':'', 'thread':{'common':{'className':'', 'val':'<a href="javascript:void(0);" onclick="ajaxget(\'forum.php?mod=ajax&action=forumchecknew&fid=' + fid+ '&time='+lasttime+'&uncheck=1&inajax=yes\', \'forumnew\');">มีโพสต์เข้ามาใหม่ คลิกเพื่อดู', 'colspan': colspan }}};
+			var checknew = {'tid':'', 'thread':{'common':{'className':'', 'val':'<a href="javascript:void(0);" onclick="ajaxget(\'forum.php?mod=ajax&action=forumchecknew&fid=' + fid+ '&time='+lasttime+'&uncheck=1&inajax=yes\', \'forumnew\');">มีคนตอบกระทู้ใหม่ คลิกเพื่อดู', 'colspan': colspan }}};
 			addtbodyrow(table, ['tbody'], ['forumnewshow'], 'separatorline', checknew);
 		} else {
 			if(checkForumcount < 50) {
