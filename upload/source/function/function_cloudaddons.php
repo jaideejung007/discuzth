@@ -92,21 +92,21 @@ function cloudaddons_pluginlogo_url($id) {
 function cloudaddons_installlog($addonid) {
 	$array = cloudaddons_getmd5($addonid);
 	if($array['RevisionID']) {
-		cloudaddons_open('&mod=app&ac=installlog&rid='.$array['RevisionID']);
+/*jaideejung007*/		/*cloudaddons_open('&mod=app&ac=installlog&rid='.$array['RevisionID']);*/
 	}
 }
 
 function cloudaddons_downloadlog($addonid) {
 	$array = cloudaddons_getmd5($addonid);
 	if($array['RevisionID']) {
-		cloudaddons_open('&mod=app&ac=downloadlog&rid='.$array['RevisionID']);
+/*jaideejung007*/		/*cloudaddons_open('&mod=app&ac=downloadlog&rid='.$array['RevisionID']);*/
 	}
 }
 
 function cloudaddons_faillog($rid, $type) {
 	$rid = intval($rid);
 	$type = intval($type);
-	cloudaddons_open('&mod=app&ac=faillog&rid='.$rid.'&type='.$type.'&serverinfo='.urlencode($_SERVER['SERVER_SOFTWARE']));
+/*jaideejung007*/	/*cloudaddons_open('&mod=app&ac=faillog&rid='.$rid.'&type='.$type.'&serverinfo='.urlencode($_SERVER['SERVER_SOFTWARE']));*/
 }
 
 function cloudaddons_removelog($rid) {
