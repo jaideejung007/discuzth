@@ -184,7 +184,6 @@ function replace_formhash($timestamp, $input) {
 	$temp_md5 = md5(substr($timestamp, 0, -3).substr($_G['config']['security']['authkey'], 3, -3));
 	$temp_formhash = substr($temp_md5, 8, 8);
 	$input = preg_replace('/(name=[\'|\"]formhash[\'|\"] value=[\'\"]|formhash=)'.$temp_formhash.'/ismU', '${1}'.constant("FORMHASH"), $input);
-	//避免siteurl伪造被缓存
 	$temp_siteurl = 'siteurl_'.substr($temp_md5, 16, 8);
 	$input = preg_replace('/("|\')'.$temp_siteurl.'/ismU', '${1}'.$_G['siteurl'], $input);
 	return $input;
@@ -395,14 +394,14 @@ function forumleftside() {
 	return $leftside;
 }
 
-function threadclasscount($fid, $id = 0, $idtype = '', $count = 0) {
+function threadclasscount($fid, $id = 0, $idtype = '', $count = null) {
 	if(!$fid) {
 		return false;
 	}
 	$typeflag = ($id && $idtype && in_array($idtype, array('typeid', 'sortid')));
 	$threadclasscount = C::t('common_cache')->fetch('threadclasscount_'.$fid);
 	$threadclasscount = dunserialize($threadclasscount['cachevalue']);
-	if($count) {
+	if($count !== null) {
 		if($typeflag) {
 			$threadclasscount[$idtype][$id] = $count;
 			C::t('common_cache')->insert(array(

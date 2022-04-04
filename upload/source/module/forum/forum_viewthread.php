@@ -178,7 +178,7 @@ if(empty($_G['forum']['allowview'])) {
 	if(!$_G['forum']['viewperm'] && !$_G['group']['readaccess']) {
 		showmessage('group_nopermission', NULL, array('grouptitle' => $_G['group']['grouptitle']), array('login' => 1));
 	} elseif($_G['forum']['viewperm'] && !forumperm($_G['forum']['viewperm'])) {
-		showmessagenoperm('viewperm', $_G['fid']);
+		showmessagenoperm('viewperm', $_G['fid'], $_G['forum']['formulaperm']);
 	}
 
 } elseif($_G['forum']['allowview'] == -1) {
@@ -618,7 +618,7 @@ if(!empty($isdel_post)) {
 	}
 	if($updatedisablepos && !$rushreply) {
 		C::t('forum_threaddisablepos')->insert(array('tid' => $_G['tid']), false, true);
-		dheader('Location:'.$_G['siteurl'].'forum.php?mod=viewthread&tid='.$_G['tid']);
+		dheader('Location:'.$_G['siteurl'].'forum.php?mod=viewthread&tid='.$_G['tid'].($_G['forum_auditstatuson'] ? '&modthreadkey='.$_GET['modthreadkey'] : '').($_G['page'] > 1 ? '&page=' . $_G['page'] : ''));
 	}
 	$ordertype != 1 ? ksort($postarr) : krsort($postarr);
 }
@@ -787,6 +787,7 @@ if($postusers) {
 		if(getstatus($post['status'], 6)) {
 			$locationpids[] = $pid;
 		}
+		$postusers[$post['authorid']]['field_position'] = $postusers[$post['authorid']]['position'];
 		$post = array_merge($postlist[$pid], (array)$postusers[$post['authorid']]);
 		$postlist[$pid] = viewthread_procpost($post, $_G['member']['lastvisit'], $ordertype, $maxposition);
 	}

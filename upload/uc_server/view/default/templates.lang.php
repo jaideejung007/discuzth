@@ -14,7 +14,7 @@ $languages = array(
 	'shortcut_tips' => 'คลิกแก้ไขและบันทึก',
 	'welcome' => 'ยินดีต้อนรับเข้าสู่',
 	'edit' => 'แก้ไข',
-	'plugin' => 'ตรวจสอบไฟล์',
+	'plugin' => 'ศูนย์ปลั๊กอิน',
 	'to' => 'ถึง',
 	'menu' => 'เมนู',
 
@@ -158,6 +158,7 @@ $languages = array(
 	'app_ip_comment' => 'ปรกติปล่อยว่างไว้. ถ้าการเชื่อมต่อ UCenter กับโดเมนเนมมีปัญหา, ลองตั้งค่าด้วยการใช้ IP ของ Server。',
 	'app_key' => 'คีย์สำหรับเชื่อมต่อ',
 	'app_key_comment' => 'ใช้ตัวอีกาณภาษาอังกฤษและตัวเลขเท่านั้น, สูงสุด 64 ไบต์. เพื่อให้โปรแกรมเชื่อมต่อโดยสมบูรณ์จำเป็นต้องมี คีย์ สำหรับเชื่อมต่อ, ไม่อย่างนั้นจะไม่สามารถทำการติดต่อ UCenter。และเชื่อมต่อกับโปรแกรมอื่นได้',
+	'app_key_generate' => 'สร้างคีย์การสื่อสารที่ปลอดภัย',
 	'app_login' => 'เปิดให้เข้าระบบพร้อมกัน',
 	'app_login_comment' => 'เปิดให้เข้าระบบพร้อมกัน, เมื่อสมาชิกเข้าระบบจากโปรแกรมอื่นๆ, จะเข้าระบบโปรแกรมทั้งหมด',
 	'app_charset' => 'ภาษาของโปรแกรม',
@@ -201,11 +202,11 @@ $languages = array(
 	'badword_add'		=> 'Add Bad Words',
 	'badword_add_succeed'	=> 'Bad Word Added Successfully.',
 	'badword_delete'	=> 'Delete',
-	'badword_keyword'	=> 'Bad Words',
+	'badword_keyword'	=> 'Sensitive Words',
 	'badword_replace'	=> 'Replace to',
 	'badword_admin' 	=> 'Operator',
 	'badword_multi_add'		=> 'Bulk Add',
-	'badword_multi_add_comment'	=> '<li>One item per each line, use "=" for separate the bad words and the replacement word.</li>
+	'badword_multi_add_comment'	=> '<li>One group per line, use "=" to separate sensitive words and replacement words.</li>
 					<li>If you want to replace some words as **, Only need type that word here.</li>
 					<li><strong>Example:</strong></li>
 					<li>toobadword</li>
@@ -406,6 +407,7 @@ $languages = array(
 	'db_start_export_dumpfile' => 'เริ่มสำรองข้อมูล โปรดรอสักครู่ กรุณาอย่าปิดเบราเซอร์',
 	'db_list_tips' => 'ตามตัวเลือกวันที่สำรองที่คุณต้องการเรียกคืนข้อมูลสำรอง คลิกที่ 「รายละเอียด」 หลังจากที่คุณเลือกรายการที่คุณต้องการเรียกคืนการสำรองข้อมูลของโปรแกรม',
 	'db_import_tips' => 'เลือกโปรแกรมที่คุณต้องการเรียกคืน หลังจากคลิก 「ส่ง」 ที่ปุ่มเรียกคืนข้อมูลสำรอง',
+	'db_security_tips' => 'ด้วยเหตุผลด้านความปลอดภัย หลังจากดาวน์โหลดไฟล์สำรองฐานข้อมูลหรือตั้งค่าไฟล์สำรองฐานข้อมูล เราขอแนะนำให้คุณลบไฟล์สำรองฐานข้อมูลในหน้าการกู้คืนออกทุกครั้ง เพื่อให้มั่นใจในความปลอดภัยของเว็บไซต์และไม่สามารถเข้าถึงไฟล์ดังกล่าวผ่าน URL ได้',
 	'dumpfile_exists' => 'กำลังสำรอง',
 
 	'message_title'=>'ข้อมูลคำแนะนำ',
@@ -482,6 +484,7 @@ $languages = array(
 	'oldpw' => 'รหัสผ่านเดิม',
 	'newpw' => 'รหัสผ่านใหม่',
 	'repeatpw' => 'ยืนยันรหัสผ่านใหม่',
+	'reconfkey' => 'รีเซ็ต KEY',
 	'admin_list' => 'รายชื่อผู้ดูแลระบบ',
 	'confirm_delete' => 'คุณต้องการลบ?',
 	'profile' => 'ข้อมูล',

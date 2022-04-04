@@ -163,7 +163,17 @@ function pluginupgrade($pluginarray, $installtype) {
 	}
 	$pluginarray['plugin']['modules'] = serialize($pluginarray['plugin']['modules']);
 
-	C::t('common_plugin')->update($plugin['pluginid'], array('version' => $pluginarray['plugin']['version'], 'modules' => $pluginarray['plugin']['modules']));
+	$data = array();
+	foreach($pluginarray['plugin'] as $key => $val) {
+		if($key == 'directory') {
+			$val .= (!empty($val) && substr($val, -1) != '/') ? '/' : '';
+		} elseif($key == 'available') {
+			continue;
+		}
+		$data[$key] = $val;
+	}
+
+	C::t('common_plugin')->update($plugin['pluginid'], $data);
 
 	cloudaddons_installlog($pluginarray['plugin']['identifier'].'.plugin');
 	cron_create($pluginarray['plugin']['identifier']);
@@ -184,11 +194,11 @@ function updatepluginlanguage($pluginarray) {
 	}
 	foreach(array('script', 'template', 'install', 'system') as $type) {
 		loadcache('pluginlanguage_'.$type, 1);
-		if(empty($_G['cache']['pluginlanguage_'.$type])) {             
-			$_G['cache']['pluginlanguage_'.$type] = array();             
+		if(empty($_G['cache']['pluginlanguage_'.$type])) {
+			$_G['cache']['pluginlanguage_'.$type] = array();
 		}
 		if($type != 'system') {
-			if(!empty($pluginarray['language'][$type.'lang'])) {				
+			if(!empty($pluginarray['language'][$type.'lang'])) {
 				$_G['cache']['pluginlanguage_'.$type][$pluginarray['plugin']['identifier']] = $pluginarray['language'][$type.'lang'];
 			}
 		} else {

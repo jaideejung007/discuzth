@@ -134,7 +134,7 @@ function env_check(&$env_items) {
 		if($key == 'php') {
 			$env_items[$key]['current'] = PHP_VERSION;
 		} elseif($key == 'attachmentupload') {
-			$env_items[$key]['current'] = @ini_get('file_uploads') ? ini_get('upload_max_filesize') : 'unknow';
+			$env_items[$key]['current'] = @ini_get('file_uploads') ? (min(min(ini_get('upload_max_filesize'), ini_get('post_max_size')), ini_get('memory_limit'))) : 'unknow';
 		} elseif($key == 'gdversion') {
 			$tmp = function_exists('gd_info') ? gd_info() : array();
 			$env_items[$key]['current'] = empty($tmp['GD Version']) ? 'noext' : $tmp['GD Version'];
@@ -647,7 +647,7 @@ function show_header() {
 <div class="container">
 	<div class="header">
 		<h1>$title</h1>
-		<span>Discuz!$version $install_lang $release Rev.$th_revision</span>
+		<span>Discuz!$version $install_lang $release Rev.$th_revision</span><!-- jaideejung007 -->
 EOT;
 
 	$step > 0 && show_step($step);
@@ -797,17 +797,6 @@ function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
 		return $keyc.str_replace('=', '', base64_encode($result));
 	}
 
-}
-
-function generate_key() {
-	$random = random(32);
-	$info = md5($_SERVER['SERVER_SOFTWARE'].$_SERVER['SERVER_NAME'].$_SERVER['SERVER_ADDR'].$_SERVER['SERVER_PORT'].$_SERVER['HTTP_USER_AGENT'].time());
-	$return = array();
-	for($i=0; $i<64; $i++) {
-		$p = intval($i/2);
-		$return[$i] = $i % 2 ? $random[$p] : $info[$p];
-	}
-	return implode('', $return);
 }
 
 function show_install() {
@@ -1335,14 +1324,14 @@ EOT;
 	return $success;
 }
 
-function _generate_key() {
-	$random = random(32);
+function _generate_key($length = 32) {
+	$random = random($length);
 	$info = md5($_SERVER['SERVER_SOFTWARE'].$_SERVER['SERVER_NAME'].$_SERVER['SERVER_ADDR'].$_SERVER['SERVER_PORT'].$_SERVER['HTTP_USER_AGENT'].time());
-	$return = array();
-	for($i=0; $i<32; $i++) {
-		$return[$i] = $random[$i].$info[$i];
+	$return = '';
+	for($i=0; $i<$length; $i++) {
+		$return .= $random[$i].$info[$i];
 	}
-	return implode('', $return);
+	return $return;
 }
 
 function uc_write_config($config, $file, $password) {
@@ -1495,6 +1484,10 @@ function buildarray($array, $level = 0, $pre = '$_config') {
 	}
 
 	foreach ($array as $key => $val) {
+		if(!preg_match("/^[a-zA-Z0-9_\x7f-\xff]+$/", $key)) {
+			continue;
+		}
+
 		if($level == 0) {
 			$newline = str_pad('  CONFIG '.strtoupper($key).'  ', 70, '-', STR_PAD_BOTH);
 			$return .= "\r\n// $newline //\r\n";

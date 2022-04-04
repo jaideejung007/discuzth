@@ -84,21 +84,41 @@ class forum_upload {
 				return $this->uploadmsg(11);
 			}
 		}
-		updatemembercount($_G['uid'], array('todayattachs' => 1, 'todayattachsize' => $upload->attach['size']));
+
+		$filename = censor($upload->attach['name'], NULL, TRUE);
+		if(is_array($filename)) {
+			return $this->uploadmsg(12);
+		} else {
+			$filename = dhtmlspecialchars($filename);
+		}
+
+		if(isset($_GET['type']) && $_GET['type'] == 'image' && !$upload->attach['isimage']) {
+			return $this->uploadmsg(7);
+		}
+
+		if($upload->attach['isimage']) {
+			$imageinfo = @getimagesize($upload->attach['tmp_name']);
+			list($width, $height, $type) = !empty($imageinfo) ? $imageinfo : array(0, 0, 0);
+			$size = $width * $height;
+			if((!getglobal('setting/imagelib') && $size > (getglobal('setting/gdlimit') ? getglobal('setting/gdlimit') : 16777216)) || $size < 16 ) {
+				return $this->uploadmsg(13);
+			}
+			if(!in_array($type, array(1, 2, 3, 6, 13)) || ($upload->attach['ext'] == 'swf' && $type != 4 && $type != 13)) {
+				return $this->uploadmsg(7);
+			}
+		}
+
 		$upload->save();
 		if($upload->error() == -103) {
 			return $this->uploadmsg(8);
 		} elseif($upload->error()) {
 			return $this->uploadmsg(9);
 		}
+
+		updatemembercount($_G['uid'], array('todayattachs' => 1, 'todayattachsize' => $upload->attach['size']));
+
 		$thumb = $remote = $width = 0;
-		if($_GET['type'] == 'image' && !$upload->attach['isimage']) {
-			return $this->uploadmsg(7);
-		}
 		if($upload->attach['isimage']) {
-			if(!in_array($upload->attach['imageinfo']['2'], array(1,2,3,6))) {
-				return $this->uploadmsg(7);
-			}
 			if($_G['setting']['showexif']) {
 				require_once libfile('function/attachment');
 				$exif = getattachexif(0, $upload->attach['target']);
@@ -127,7 +147,7 @@ class forum_upload {
 		$insert = array(
 			'aid' => $aid,
 			'dateline' => $_G['timestamp'],
-			'filename' => dhtmlspecialchars(censor($upload->attach['name'])),
+			'filename' => $filename,
 			'filesize' => $upload->attach['size'],
 			'attachment' => $upload->attach['attachment'],
 			'isimage' => $upload->attach['isimage'],

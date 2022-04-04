@@ -74,7 +74,7 @@ class discuz_admincp
 		$session = array();
 
 		if(!$this->adminuser['uid']) {
-			$this->cpaccess = 0;
+			$this->cpaccess = getglobal('config/admincp/mustlogin') ? -5 : 0;
 		} else {
 
 			if(!$this->isfounder) {

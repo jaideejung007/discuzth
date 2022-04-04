@@ -637,7 +637,7 @@ if(!$operation) {
 		pluginupgrade($pluginarray, $installtype);
 
 		if(!empty($plugin['directory']) && !empty($pluginarray['upgradefile']) && preg_match('/^[\w\.]+$/', $pluginarray['upgradefile'])) {
-			dheader('location: '.ADMINSCRIPT.'?action=plugins&operation=pluginupgrade&dir='.$dir.'&installtype='.$modules['extra']['installtype'].'&fromversion='.$plugin['version']);
+			dheader('location: '.ADMINSCRIPT.'?action=plugins&operation=pluginupgrade&dir='.$dir.'&installtype='.$installtype.'&fromversion='.$plugin['version']);
 		}
 		$toversion = $pluginarray['plugin']['version'];
 
@@ -1372,7 +1372,14 @@ if(!$operation) {
 		$importtxt = @implode('', file($importfile));
 		$pluginarray = getimportdata('Discuz! Plugin');
 	}
-
+	if(!empty($pluginarray['checkfile']) && preg_match('/^[\w\.]+$/', $pluginarray['checkfile'])) {
+		$filename = DISCUZ_ROOT.'./source/plugin/'.$plugin['identifier'].'/'.$pluginarray['checkfile'];
+		if(file_exists($filename)) {
+			loadcache('pluginlanguage_install');
+			$installlang = $_G['cache']['pluginlanguage_install'][$plugin['identifier']];
+			@include $filename;
+		}
+	}
 	$identifier = $plugin['identifier'];
 	C::t('common_plugin')->delete($pluginid);
 	C::t('common_pluginvar')->delete_by_pluginid($pluginid);
