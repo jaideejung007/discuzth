@@ -221,7 +221,7 @@ $lang = array (
   'no_privilege_email' => 'ขออภัย! คุณจะต้องยืนยันการเปิดใช้งานอีเมลของคุณก่อน จึงจะสามารถดำเนินการนี้ได้ <a href="home.php?mod=spacecp&ac=profile&op=password">คลิกที่นี่เพื่อเปิดใช้งานอีเมล</a>',
   'no_privilege_friendnum' => 'ขออภัย! คุณจะต้องมีเพื่อน {friendnum} คน จึงจะสามารถดำเนินการนี้ได้ <a href="home.php?mod=spacecp&ac=friend&op=find">คลิกที่นี่เพื่อเพิ่มเพื่อน</a>',
   'login_seccheck2' => 'กรุณากรอกรหัสยืนยันเพื่อเข้าสู่ระบบต่อไป',
-  'login_succeed' => 'ขอบคุณ {username} ระดับ {usergroup} สำหรับการลงชื่อเข้าใช้ ระบบจะพาคุณไปยังก่อนหน้านี้',
+  'login_succeed' => 'ยินดีต้อนรับการกลับมาของคุณ {username} ระดับ {usergroup} ระบบจะพาคุณไปยังก่อนหน้านี้',
   'login_strike' => 'ระบบตรวจจับได้ว่า คุณลงชื่อเข้าใช้ผิดพลาดเกินกำหนดไว้ กรุณารอหลังจาก 15 นาที แล้วลองใหม่อีกครั้ง',
   'logout_succeed' => 'คุณออกจากระบบจากเว็บไซตแล้ว ระบบกำลังพาคุณไปยังก่อนหน้านี้…… {ucsynlogout} ',
   'location_logout_succeed_mobile' => 'ออกจากระบบเรียบร้อยแล้ว และกำลังโหลดหน้าเพจใหม่ในฐานะบุคคลทั่วไป รอสักครู่...',
@@ -282,7 +282,7 @@ $lang = array (
   'group_exit_founder' => 'ขออภัย! ผู้ก่อตั้ง{_G/setting/navs/3/navname}ไม่สามารถออกจาก{_G/setting/navs/3/navname}นี้ได้',
   'group_exit_succeed' => 'ออกจาก{_G/setting/navs/3/navname}เรียบร้อยแล้ว',
   'group_create_usergroup_failed' => 'ขออภัย! กลุ่มสมาชิกของคุณไม่สามารถสร้าง{_G/setting/navs/3/navname}ได้',
-  'group_create_usergroup_credits_failed' => 'Sorry, you have not enough credits. You need to have {buildgroupcredits} for create {_G/setting/navs/3/navname}',
+  'group_create_usergroup_credits_failed' => 'ขออภัย คุณมีเครดิตไม่เพียงพอในการสร้าง{_G/setting/navs/3/navname} ต้องใช้{buildgroupcredits}',
   'group_create_max_failed' => 'ขออภัย! จำนวน{_G/setting/navs/3/navname}ที่คุณสร้าง ถึงจำนวนที่ระบบกำหนดไว้แล้ว ไม่สามารถสร้าง{_G/setting/navs/3/navname}ใหม่ได้',
   'group_category_error' => 'ขออภัย! การเลือกหมวดหมู่{_G/setting/navs/3/navname}มีข้อผิดพลาด',
   'group_create_mod_succeed' => 'สร้าง{_G/setting/navs/3/navname}เรียบร้อยแล้วและกำลังดำเนินการตรวจสอบ',
@@ -311,6 +311,7 @@ $lang = array (
   'attachment_buyall' => 'ได้ทำการสั่งซื้อทั้งหมดเรียบร้อยแล้ว ',
   'attachment_buy' => 'ซื้อเรียบร้อยแล้ว คุณสามารถดูหรือดาวน์โหลดไฟล์ [{filename}] นี้ได้',
   'attachment_mobile_buy' => 'ซื้อเรียบร้อยแล้ว',
+  'attachment_locked' => 'ขออภัย ไฟล์แนบไม่สามารถซื้อได้ในขณะนี้ เนื่องจากกำลังซื้อไฟล์แนบอื่นอยู่ กรุณาลองใหม่อีกครั้งในภายหลัง',
   'no_privilege_postimage' => 'ขออภัย! ตอนนี้คุณไม่มีสิทธิ์ในการอัปโหลดรูปภาพ <a href="home.php?mod=spacecp&ac=usergroup" target="_blank">คลิกที่นี่เพื่อดู</a>',
   'no_privilege_postattach' => 'ขออภัย! ตอนนี้คุณไม่มีสิทธิ์ในการอัปโหลดไฟล์แนบ <a href="home.php?mod=spacecp&ac=usergroup" target="_blank">คลิกที่นี่เพื่อดู</a>',
   'thread_closed' => 'โพสต์นี้ได้ถูกปิดแล้ว ไม่สามารถแสดงความเห็นเพิ่มเติม',
@@ -570,7 +571,7 @@ $lang = array (
   'no_privilege_deluserapp' => 'ขออภัย! คุณไม่มีสิทธิ์ที่จะดำเนินการกับแอพลิเคชันนี้',
 
   'email_check_sucess' => 'อีเมล ({email}) ของคุณผ่านการตรวจสอบและเปิดใช้งานเรียบร้อยแล้ว',
-  'email_check_account_invalid' => 'Sorry, to protect users or founder can not use the mailbox to verify directly modify user information.',
+  'email_check_account_invalid' => 'ขออภัย ผู้ใช้หรือผู้ก่อตั้งที่มีสถานะเป็นผู้ก่อตั้งจะไม่สามารถใช้อีเมลในการยืนยันการแก้ไขข้อมูลโดยตรงได้',
   'email_check_error' => 'ขออภัย! ลิงก์ยืนยันอีเมลของคุณไม่ถูกต้อง คุณสามารถขอรับลิงก์ยืนยันอีเมลได้ใหม่อีกครั้ง',
 
   'news_does_not_exist' => 'ขออภัย! ข้อมูลที่ระบุไม่มีอยู่',
@@ -588,7 +589,7 @@ $lang = array (
   'recommend_expiration_invalid' => 'รูปแบบเวลาไม่ถูกต้อง รูปแบบที่ถูกต้องคือ [yyyy-mm-dd hh:mm]',
 
   'members_edit_succeed' => 'อัปเดตข้อมูลสมาชิกสมบูรณ์',
-  'modcp_member_ban_illegal' => 'You can not ban the user directly',
+  'modcp_member_ban_illegal' => 'คุณไม่สามารถแบนผู้ใช้ได้โดยตรง',
   'modcp_member_ban_succeed' => 'ข้อมูลของสมาชิกได้อัปเดตเรียบร้อยแล้ว',
 
   'modcp_noaction' => 'คุณไม่ได้เลือกที่จะดำเนินการใดๆ',
@@ -619,7 +620,7 @@ $lang = array (
   'block_topic_nopermission' => 'ขออภัย! คุณไม่ได้รับอนุญาตให้เพิ่มโมดูลนี้',
   'block_add_nopermission' => 'ขออภัย! คุณไม่มีสิทธิ์ในการเพิ่มโมดูล',
   'block_no_recommend_library' => 'ไลบรารีนี้ไม่มีโมดูลแนะนำ',
-  'data_in_mod_library' => '<div class="bm"><div class="ntc_l hm">Data to push in the module library, and you push this entry data, you have no right to make changes</div></div>',
+  'data_in_mod_library' => '<div class="bm"><div class="ntc_l hm">ข้อมูลนี้มีอยู่แล้วในไลบรารีพุชของโมดูล และคุณไม่มีสิทธิ์แก้ไขเนื่องจากไม่ใช่ข้อมูลที่พุชได้</div></div>',
   'block_data_type_invalid' => 'รูปแบบข้อมูลที่ไม่ตรงกัน ไม่สามารถดำเนินการ',
   'no_right_manage_data' => 'ขออภัย! คุณไม่มีสิทธิ์ในการจัดการข้อมูลสำหรับโมดูลแนะนำ',
 
@@ -721,8 +722,8 @@ $lang = array (
   'memcp_credits_card_msg_cleardateline_early' => 'ขออภัย! รหัสบัตรเงินสดนี้หมดอายุแล้ว',
   'memcp_credits_card_msg_succeed' => '<span class="xi1">{extcreditsval}{extcreditstitle}</span> เติมเงินสำเร็จ ',
   'memcp_credits_addfunds_msg_incorrect' => 'ขออภัย! คุณไม่ได้ใส่จำนวนที่ต้องการรับ',
-  'memcp_credits_addfunds_msg_notype' => 'Sorry, you did not selected a payment method',
-  'memcp_credits_exchange_msg_locked' => 'Sorry, other points redemption operations are in progress, redemption failed, please try again later',
+  'memcp_credits_addfunds_msg_notype' => 'ขออภัย คุณยังไม่ได้เลือกวิธีการชำระเงิน',
+  'memcp_credits_exchange_msg_locked' => 'ขออภัย กำลังดำเนินการแลกเปลี่ยนเครดิตอื่น ๆ การดำเนินการจึงไม่สำเร็จ กรุณาลองใหม่อีกครั้งในภายหลัง',
   'credits_addfunds_amount_invalid' => 'จำนวนได ๆ ไม่ควร ต่ำกว่ากำหนด {ec_maxcredits} หรือสูงกว่า {ec_mincredits}',
   'memcp_credits_transfer_msg_self_incorrect' => 'คุณไม่สามารถโอนให้ตัวเองได้',
   'credits_transfer_balance_insufficient' => 'ขออภัย! หลังจากการโอน{title}จะน้อยกว่า {minbalance}',
@@ -907,7 +908,7 @@ $lang = array (
   'admin_move_nopermission' => 'ขออภัย! คุณไม่มีสิทธิจัดการในบอร์ดเป้าหมายทั้งหมด',
   'no_privilege_edittypethread' => 'ขออภัย! คุณไม่มีสิทธิ์กำหนดประเภทของกระทู้',
   'admin_type_invalid' => 'ขออภัย! แบ่งหมวดหมู่ไม่ถูกต้อง',
-  'admin_expiration_invalid' => 'ขออภัย! วันหมดอายุไม่ถูกต้อง, period should be between {min} and {max}',
+  'admin_expiration_invalid' => 'ขออภัย วันหมดอายุไม่ถูกต้อง วันหมดอายุควรอยู่ระหว่าง {min} ถึง {max}',
 
   'special_refundment_invalid' => 'ขออภัย! กระทู้พิเศษไม่สามารถบังคับคืนเงิน',
 
@@ -1016,14 +1017,14 @@ $lang = array (
   'threadtype_unchangeable_invalid' => 'ขออภัย! ข้อมูลไม่สามารถแก้ไข โปรดกลับไปตรวจสอบตัวเลือก {typetitle}',
 
   'location_login' => '',
-  'location_login_force_qq' => 'Your user group must use the QQ account for login',
-  'location_login_force_mail' => 'Your user group must use mailbox for login',
-  'location_login_outofdate' => 'Your account has been frozen because of you did not logged in for a long time. For reactivate your account you must start of your email verification.',
+  'location_login_force_qq' => 'กลุ่มผู้ใช้ที่คุณอยู่ต้องใช้บัญชี QQ เพื่อเข้าสู่ระบบ',
+  'location_login_force_mail' => 'กลุ่มผู้ใช้ที่คุณเป็นสมาชิกจะต้องเข้าสู่ระบบด้วยอีเมล',
+  'location_login_outofdate' => 'บัญชีปัจจุบันของคุณถูกระงับเนื่องจากไม่ได้ลงชื่อเข้าใช้เว็บไซต์เป็นเวลานาน คุณต้องยืนยันที่อยู่อีเมลของคุณก่อนจึงจะสามารถยกเลิกการระงับได้',
   'location_login_succeed_mobile' => 'ยินดีต้อนรับ, {username} คลิกไปยังก่อนหน้านี้',
   'location_login_succeed' => '',
-  'location_activation' => 'Your account is inactive, click to activate',
+  'location_activation' => 'บัญชีของคุณไม่ได้เปิดใช้งาน คลิกเพื่อเปิดใช้งาน',
   'login_succeed_inactive_member' => 'ยินดีต้อนรับกลับมา {username} {usergroup} บัญชีของคุณอยู่ในสถานะไม่ใช้งาน และฟังก์ชันบางอย่างอาจทำงานไม่ถูกต้อง ตอนนี้คุณจะถูกนำไปที่หน้าความปลอดภัยของรหัสผ่าน',
-  'login_succeed_password_change' => 'Your account is under the security risk. It is recommended to change your password immediately.',
+  'login_succeed_password_change' => 'บัญชีของคุณมีความเสี่ยงด้านความปลอดภัย แนะนำให้เปลี่ยนรหัสผ่านทันที',
   'login_question_empty' => 'กรุณาเลือกคำถาม และตอบคำถามให้ถูกต้อง',
   'login_question_invalid' => 'ขออภัย! ตอบคำถามไม่ถูกต้อง',
   'login_invalid' => 'ลงชื่อเข้าใช้ล้มเหลว คุณสามารถลองลงชื่อเข้าใช้ได้อีก {loginperm} ครั้ง',
@@ -1056,12 +1057,12 @@ $lang = array (
   'board_closed' => 'ขออภัย! เว็บไซต์นี้ถูกปิดชั่วคราว สำหรับรายละเอียดกรุณา <a href="mailto:{adminemail}">ติดต่อผู้ดูแลระบบ</a>',
 
   'admin_cpanel_noaccess' => 'ขออภัย! คุณไม่มีสิทธิเข้าถึงเมนูผู้ดูแลระบบ กรุณาลงชื่อเข้าใช้ในเว็บไซต์ แล้วลองใหม่อีกครั้ง',
-  'admin_cpanel_locked' => 'ขออภัย! คุณกรอกโค้ดผ่านผิดหลายครั้ง ดังนั้นศูนย์กลางการจัดการจะถูกล็อคชั่วคราว <br /><br />หลังจากนี้ประมาณ <strong>{unlocktime}</strong> ล็อคจะถูกยกเลิกโดยอัตโนมัติ',
+  'admin_cpanel_locked' => 'ขออภัย! คุณกรอกรหัสผ่านผิดหลายครั้ง ดังนั้นศูนย์กลางจัดการจะถูกล็อกชั่วคราว <br /><br />หลังจากนี้ประมาณ <strong>{unlocktime}</strong> จะถูกยกเลิกโดยอัตโนมัติ',
 
   'submit_secqaa_invalid' => 'ขออภัย! ตอบคำถามผิด',
   'post_url_nopermission' => 'ขออภัย! คุณไม่ได้รับอนุญาตให้โพสต์ลิงก์ URL',
 
-  'not_in_mobile' => 'หน้าที่คุณจะชมไม่มีหน้าสำหรับอุปกรณ์พกพา, ต้องการใช้โหมดคอมพิวเตอร์?',
+  'not_in_mobile' => 'หน้าที่คุณเยี่ยมชมไม่มีหน้าสำหรับมือถือ คุณต้องการเยี่ยมชมเวอร์ชันคอมพิวเตอร์เพิ่มเติมหรือไม่',
 
   'magics_operation_nopermission' => 'ขออภัย! ไอเท็มนี้สามารถใช้งานได้กับกระทู้และโพสต์ของตัวเองเท่านั้น',
 
@@ -1075,9 +1076,9 @@ $lang = array (
 
   'magics_thunder_message' => 'ใช้ไอเท็ม {magicname} เสร็จเรียบร้อยแล้ว',
 
-  'topicadmin_live_noset_error' => 'The thread is not set for live posts',
-  'no_privilege_livethread' => 'Sorry, you have no permission to set live posts',
-  'portal_category_has_no_folder_name' => 'Sorry, the article category directory name is not set',
+  'topicadmin_live_noset_error' => 'กระทู้นี้ไม่ได้ตั้งค่าให้เป็นไลฟ์โพสต์',
+  'no_privilege_livethread' => 'ขออภัย คุณไม่ได้รับอนุญาตให้ตั้งเป็นไลฟ์โพสต์ได้',
+  'portal_category_has_no_folder_name' => 'ขออภัย แชนเนลของบทความไม่มีการกำหนดชื่อไดเร็กทอรี',
   'noreply_replynum_error' => 'ขออภัย คุณมีจำนวนการตอบกลับของโพสต์นี้ถึงจำนวนสูงสุดแล้ว',
   'author_not_uploadpic' => 'ยูสเซอร์นี้ยังไม่ได้อัปโหลดภาพ',
   'noreply_yourself_error' => 'คุณไม่สามารถโหวตในโพสต์ของคุณ',

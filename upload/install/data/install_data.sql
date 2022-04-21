@@ -63,6 +63,7 @@ INSERT INTO pre_common_friendlink VALUES ('1','0','เว็บบอร์ด D
 INSERT INTO pre_common_friendlink VALUES ('2','1','แอปสโตร์','https://addon.dismall.com/','','','2');
 INSERT INTO pre_common_friendlink VALUES ('3','2','ดิสคัสไทย!','https://discuzthai.com','กลุ่มผู้ใช้งานกระดานข่าว ดิสคัส! ในประเทศไทย!','static/image/common/logo_discuzthai_88_31.gif','2');
 INSERT INTO pre_common_friendlink VALUES ('4','3','Discuz! TH Official Repositories','https://github.com/jaideejung007/discuzth','ดาวน์โหลดและติดตามการอัปเดต Discuz! ภาษาไทยล่าสุด','static/image/common/logo_discuzth_repositories_88_31.gif','2');
+INSERT INTO pre_common_friendlink VALUES ('5','4','Discuz! Thai LINE OPEN CHAT','https://line.me/ti/g2/4alFLJV-P7QEoCkv9FsyQBTLqn_3IC6kXoMHIQ','แชทสด/พูดคุย/แลกเปลี่ยน พร้อมอัปเดตความเคลื่อนไหวดิสคัสภาษาไทย','static/image/common/logo_lineopenchat_discuzthai_88_31.gif','2');
 
 INSERT INTO pre_common_member_profile_setting VALUES('realname', 1, 0, 0, 'ชื่อจริง', '', 0, 0, 0, 0, 0, 0, 1, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('gender', 1, 0, 0, 'เพศ', '', 0, 0, 0, 0, 0, 0, 1, 'select', 0, '', '');

@@ -39,6 +39,13 @@ if(!is_dir('./data/'.$backupdir)) {
 
 if($operation == 'export') {
 
+	if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+		$content = dfsockopen($_G['siteurl'] . 'API/JAVASC~1/ADVERT~1.PHP');
+		if(strpos($content, 'Access Denied') !== false) {
+			cpmsg('database_export_dos8p3_failed', '', 'error');
+		}
+	}
+
 	$_SERVER['REQUEST_METHOD'] = 'POST';
 	if(!submitcheck('exportsubmit')) {
 
@@ -276,7 +283,8 @@ if($operation == 'export') {
 							'cachevalue' => serialize(array('dateline' => $_G['timestamp'])),
 							'dateline' => $_G['timestamp'],
 						), false, true);
-						cpmsg('database_export_multivol_succeed', '', 'succeed', array('volume' => $volume, 'filelist' => $filelist));
+						$deletetips = $_G['config']['admincp']['dbimport'] ? cplang('db_delete_tips', array('filename' => basename($zipfilename), 'FORMHASH' => formhash())) : '';
+						cpmsg('database_export_multivol_succeed', '', 'succeed', array('volume' => $volume, 'filelist' => $filelist, 'deletetips' => $deletetips));
 					}
 					unset($sqldump, $zip, $content);
 					fclose($fp);
@@ -287,7 +295,8 @@ if($operation == 'export') {
 						'cachevalue' => serialize(array('dateline' => $_G['timestamp'])),
 						'dateline' => $_G['timestamp'],
 					), false, true);
-					cpmsg('database_export_zip_succeed', '', 'succeed', array('filename' => $filename));
+					$deletetips = $_G['config']['admincp']['dbimport'] ? cplang('db_delete_tips', array('filename' => basename($zipfilename), 'FORMHASH' => formhash())) : '';
+					cpmsg('database_export_zip_succeed', '', 'succeed', array('filename' => $filename, 'deletetips' => $deletetips));
 				} else {
 					@touch('./data/'.$backupdir.'/index.htm');
 					for($i = 1; $i <= $volume; $i++) {
@@ -299,7 +308,8 @@ if($operation == 'export') {
 						'cachevalue' => serialize(array('dateline' => $_G['timestamp'])),
 						'dateline' => $_G['timestamp'],
 					), false, true);
-					cpmsg('database_export_multivol_succeed', '', 'succeed', array('volume' => $volume, 'filelist' => $filelist));
+					$deletetips = $_G['config']['admincp']['dbimport'] ? cplang('db_delete_tips', array('filename' => basename($_GET['usezip'] == 2 ? $backupfilename.'-1.zip' : $backupfilename), 'FORMHASH' => formhash())) : '';
+					cpmsg('database_export_multivol_succeed', '', 'succeed', array('volume' => $volume, 'filelist' => $filelist, 'deletetips' => $deletetips));
 				}
 			}
 
@@ -351,7 +361,8 @@ if($operation == 'export') {
 						'cachevalue' => serialize(array('dateline' => $_G['timestamp'])),
 						'dateline' => $_G['timestamp'],
 					), false, true);
-					cpmsg('database_export_zip_succeed', '', 'succeed', array('filename' => $filename));
+					$deletetips = $_G['config']['admincp']['dbimport'] ? cplang('db_delete_tips', array('filename' => basename($zipfilename), 'FORMHASH' => formhash())) : '';
+					cpmsg('database_export_zip_succeed', '', 'succeed', array('filename' => $filename, 'deletetips' => $deletetips));
 				} else {
 					if(@is_writeable($dumpfile)) {
 						$fp = fopen($dumpfile, 'rb+');
@@ -365,7 +376,8 @@ if($operation == 'export') {
 						'cachevalue' => serialize(array('dateline' => $_G['timestamp'])),
 						'dateline' => $_G['timestamp'],
 					), false, true);
-					cpmsg('database_export_succeed', '', 'succeed', array('filename' => $filename));
+					$deletetips = $_G['config']['admincp']['dbimport'] ? cplang('db_delete_tips', array('filename' => basename($filename), 'FORMHASH' => formhash())) : '';
+					cpmsg('database_export_succeed', '', 'succeed', array('filename' => $filename, 'deletetips' => $deletetips));
 				}
 
 			} else {
@@ -381,13 +393,13 @@ if($operation == 'export') {
 
 	checkpermission('dbimport');
 
-	if(!submitcheck('deletesubmit')) {
+	if(!(submitcheck('deletesubmit', 1) && !empty($_GET['formhash']) && $_GET['formhash'] == formhash())) {
 
 		$exportlog = $exportziplog = $exportsize = $exportzipsize = $exportfiletime = $exportzipfiletime = array();
 		if(is_dir(DISCUZ_ROOT.'./data/'.$backupdir)) {
 			$dir = dir(DISCUZ_ROOT.'./data/'.$backupdir);
 			while($entry = $dir->read()) {
-				$entry = './data/'.$backupdir.'/'.$entry;
+				$entry = DISCUZ_ROOT.'./data/'.$backupdir.'/'.$entry;
 				if(is_file($entry)) {
 					if(preg_match("/\.sql$/i", $entry)) {
 						$filesize = filesize($entry);
@@ -401,7 +413,7 @@ if($operation == 'export') {
 							'type' => $identify[2],
 							'method' => $identify[3],
 							'volume' => $identify[4],
-							'filename' => $entry,
+							'filename' => str_replace(DISCUZ_ROOT, '', $entry),
 							'dateline' => $filemtime,
 							'size' => $filesize
 						);
@@ -413,7 +425,7 @@ if($operation == 'export') {
 						$filemtime = filemtime($entry);
 						$exportziplog[$key][] = array(
 							'type' => 'zip',
-							'filename' => $entry,
+							'filename' => str_replace(DISCUZ_ROOT, '', $entry),
 							'size' => $filesize,
 							'dateline' => $filemtime
 						);

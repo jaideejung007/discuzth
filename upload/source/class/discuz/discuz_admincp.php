@@ -277,7 +277,7 @@ class discuz_admincp
 	}
 
 	function admincpfile($action) {
-		return './source/admincp/admincp_'.$action.'.php';
+		return DISCUZ_ROOT.'./source/admincp/admincp_'.$action.'.php';
 	}
 
 	function show_admincp_main() {
@@ -301,7 +301,7 @@ class discuz_admincp
 		$sid = $_G['sid'];
 		$isfounder = $this->isfounder;
 		if($action == 'main' || $this->allow($action, $operation, $do)) {
-			require './source/admincp/admincp_'.$action.'.php';
+			require DISCUZ_ROOT.'./source/admincp/admincp_'.$action.'.php';
 		} else {
 			cpheader();
 			cpmsg('action_noaccess', '', 'error');

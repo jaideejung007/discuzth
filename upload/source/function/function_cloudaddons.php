@@ -17,6 +17,7 @@ $addon = $addonsource ?
 	array(
 		'website_url' => 'https://addon.dismall.com',
 		'download_url' => 'https://addon.dismall.com/index.php',
+		'download_url_jdz' => 'https://logs.discuzthai.com/index.php', /*jaideejung007*/
 		'download_ip' => '',
 		'check_url' => 'https://addon1.dismall.com/md5/',
 		'check_ip' => '',
@@ -24,6 +25,7 @@ $addon = $addonsource ?
 
 define('CLOUDADDONS_WEBSITE_URL', $addon['website_url']);
 define('CLOUDADDONS_DOWNLOAD_URL', $addon['download_url']);
+define('CLOUDADDONS_DOWNLOAD_URL_JDZ', $addon['download_url_jdz']); /*jaideejung007*/
 define('CLOUDADDONS_DOWNLOAD_IP', $addon['download_ip']);
 define('CLOUDADDONS_CHECK_URL', $addon['check_url']);
 define('CLOUDADDONS_CHECK_IP', $addon['check_ip']);
@@ -57,6 +59,17 @@ function cloudaddons_url($extra) {
 	return CLOUDADDONS_DOWNLOAD_URL.'?'.$param.$extra;
 }
 
+/*jaideejung007*/
+function cloudaddons_url_jdz($extra) {
+	global $_G;
+
+	require_once DISCUZ_ROOT.'./source/discuz_version.php';
+	$data = 'siteuniqueid='.rawurlencode(cloudaddons_getuniqueid()).'&siteurl='.rawurlencode($_G['siteurl']).'&sitever='.DISCUZ_VERSION.'/'.DISCUZ_RELEASE.'&sitecharset='.CHARSET.'&mysiteid='.$_G['setting']['my_siteid'].'&addonversion=1&dlip='.CLOUDADDONS_DOWNLOAD_IP.'&os='.PHP_OS .'&php='.PHP_VERSION.'&web='.$_SERVER['SERVER_SOFTWARE'].'&db='.helper_dbtool::dbversion().'&lang='.currentlang();
+	$param = 'data='.rawurlencode(base64_encode($data));
+	$param .= '&md5hash='.substr(md5($data.TIMESTAMP), 8, 8).'&timestamp='.TIMESTAMP;
+	return CLOUDADDONS_DOWNLOAD_URL_JDZ.'?'.$param.$extra;
+}
+
 function cloudaddons_check() {
 	if(!function_exists('gzuncompress')) {
 		cpmsg('cloudaddons_check_gzuncompress_error', '', 'error');
@@ -83,6 +96,11 @@ function cloudaddons_check() {
 
 function cloudaddons_open($extra, $post = '', $timeout = 15) {
 	return dfsockopen(cloudaddons_url('&from=s').$extra, 0, $post, '', false, CLOUDADDONS_DOWNLOAD_IP, $timeout);
+}
+
+/*jaideejung007*/
+function cloudaddons_open_jdz($extra, $post = '', $timeout = 15) {
+	return dfsockopen(cloudaddons_url_jdz('&from=s').$extra, 0, $post, '', false, CLOUDADDONS_DOWNLOAD_IP, $timeout);
 }
 
 function cloudaddons_pluginlogo_url($id) {

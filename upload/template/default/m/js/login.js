@@ -43,7 +43,7 @@ var login = {
 		});
 
 		secure.checkDzVersion();
-		
+
 		if (TOOLS.getQuery('loginErr')) {
 			var loginErr = TOOLS.getQuery('loginErr');
 			if (loginErr == 1001) {
@@ -52,7 +52,7 @@ var login = {
 				TOOLS.showTips('บัญชีนี้ยังไม่ได้เชื่อมต่อไว้<br />กรุณาลงทะเบียนและเข้าสู่ระบบเพื่อดำเนินการเชื่อมต่อบัญชีใหม่', true);
 			}
 		}
-		
+
 		if (TOOLS.getQuery('loginUrl')) {
 			TOOLS.dajax('GET', unescape(TOOLS.getQuery('loginUrl')), null, function (r) {
 				login.loginSuccess();
@@ -126,7 +126,7 @@ var login = {
 		}
 	},
 	bindEvent: function () {
-		$('#registerBtn').on('click', function () { 
+		$('#registerBtn').on('click', function () {
 			TOOLS.openNewPage(DOMAIN + 'member.php?mod=' + login.regname + '&mobile=2');
 		});
 		$('.qqLogin').on('click', function () {

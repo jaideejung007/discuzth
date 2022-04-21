@@ -138,7 +138,9 @@ shownav();
 require_once libfile('function/cloudaddons');
 $newversion = (CHARSET == 'utf-8') ? dunserialize($_G['setting']['cloudaddons_newversion']) : json_decode($_G['setting']['cloudaddons_newversion'],true);
 if(empty($newversion['newversion']) || !is_array($newversion['newversion']) || abs($_G['timestamp'] - $newversion['updatetime']) > 86400 || (isset($_GET['checknewversion']) && $_G['formhash'] == $_GET['formhash'])) {
-	$newversion = json_decode(cloudaddons_open('&mod=app&ac=upgrade'), true);
+
+	/*jaideejung007 */
+	$newversion = json_decode(cloudaddons_open_jdz('&mod=app&ac=upgrade'), true);
 	if(!empty($newversion['newversion'])){
 		$newversion['updatetime'] = $_G['timestamp'];
 		C::t('common_setting')->update('cloudaddons_newversion', ((CHARSET == 'utf-8') ? $newversion : json_encode($newversion)));
@@ -347,9 +349,9 @@ foreach ($newversion['newversion']['downlist'] as $key => $value){
 
 showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight smallfont"'), array(
 	cplang('home_check_newversion'),
-    ($newversion['newversion']['release'] ? ($newversion['newversion']['release'] != DISCUZ_RELEASE ? '<b style="color:red;">' : '').'Discuz! '.$newversion['newversion']['version'].' R'.$newversion['newversion']['release'].' '.strtoupper(CHARSET).' '.($newversion['newversion']['release'] != DISCUZ_RELEASE ? '</b>' : '') : '<a href="https://www.dismall.com/thread-73-1-1.html" target="_blank">'.cplang('detect_environment_error').'</a>').
+/*jaideejung007*/    ($newversion['newversion']['release'] ? ($newversion['newversion']['release'] != DISCUZ_RELEASE ? '<b style="color:red;">' : '').'Discuz! '.$newversion['newversion']['version'].' R'.$newversion['newversion']['release'].' '.strtoupper(CHARSET).' '.($newversion['newversion']['release'] != DISCUZ_RELEASE ? '</b>' : '') : '<a href="https://discuzthai.com/thread-40670-1-1.html" target="_blank">'.cplang('detect_environment_error').'</a>').
 	  ' <a href="'.ADMINSCRIPT.'?action=index&checknewversion&formhash='.$_G['formhash'].'">[ '.cplang('refresh').' ]</a>&nbsp;&nbsp;<br><br>'.
-    (!empty($downlist) ? implode('&#x3001;', $downlist).($newversion['newversion']['qqqun'] ? '<span class="bold">&nbsp;&nbsp;|&nbsp;&nbsp;'.cplang('qq_group').$newversion['newversion']['qqqun'].'</span>' : '') : '<span class="bold"><a href="https://gitee.com/3dming/DiscuzL/attach_files" target="_blank">'.cplang('download_latest').'</a> | '.cplang('qq_group').'73'.'21'.'03'.'690</span>')
+/*jaideejung007*/    (!empty($downlist) ? implode('&#x2C;&#x20;', $downlist).($newversion['newversion']['qqqun'] ? '<span class="bold">&nbsp;&nbsp;|&nbsp;&nbsp;'.cplang('qq_group').$newversion['newversion']['qqqun'].'</span>' : '') : '<span class="bold"><a href="https://github.com/jaideejung007/discuzth/releases" target="_blank">'.cplang('download_latest').'</a> | '.cplang('qq_group').'73'.'21'.'03'.'690</span>')
 ));
 
 showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight smallfont"'), array(
@@ -393,11 +395,11 @@ if(!empty($newversion['news'])){
     }
 } else {
     showtablerow('', array('', 'class="td21" style="text-align:right;"'), array(
-        '<a href="https://www.dismall.com/" target="_blank">'.cplang('log_in_to_update').'</a>',
+/*jaideejung007*/        '<a href="https://discuzthai.com/" target="_blank">'.cplang('log_in_to_update').'</a>',
         '',
     ));
     showtablerow('', array('', 'class="td21" style="text-align:right;"'), array(
-        '<a href="https://gitee.com/3dming/DiscuzL/attach_files" target="_blank">'.cplang('download_latest').'</a>',
+/*jaideejung007*/        '<a href="https://github.com/jaideejung007/discuzth/releases" target="_blank">'.cplang('download_latest').'</a>',
         '',
     ));
 }

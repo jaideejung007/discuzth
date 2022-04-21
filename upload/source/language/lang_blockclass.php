@@ -41,7 +41,7 @@ $lang = array(
 	'blockclass_myapp_field_title' => 'ชื่อแอพพลิฯ',
 	'blockclass_myapp_field_icon' => 'ไอคอนแอพพลิฯ',
 	'blockclass_myapp_field_icon_small' => 'ไอคอนขนาดเล็ก',
-	'blockclass_myapp_field_icon_abouts' => 'Application icon',
+	'blockclass_myapp_field_icon_abouts' => 'ไอคอนแอปพลิเคชัน (ภาพใหญ่)',
 	'blockclass_myapp_script_myapp' => 'แอพลิเคชันที่ใช้ร่วมกัน',
 
 	'blockclass_forum' => 'กระทู้',

@@ -838,7 +838,7 @@ CSS 写作注意事项：
 .tb { margin-top: 10px; padding-left: 5px; line-height: 30px; border-bottom: 1px solid {COMMONBORDER}; }
 	.tb li { float: left; margin: 0 3px -1px 0; }
 		.ie6 .tb .a, .ie6 .tb .current { position: relative; }
-	.tb a { display: block; padding: 0 10px; border: 1px solid {COMMONBORDER}; background: {SPECIALBG}; }
+	.tb a { display: block; padding: 0 7px; border: 1px solid {COMMONBORDER}; background: {SPECIALBG}; } /* jaideejung007 */
 		.tb .a a, .tb .current a { border-bottom-color: {WRAPBG}; background: {WRAPBG}; font-weight: 700;}
 		.tb a:hover { text-decoration: none; }
 	.tb .y { float: right; margin-right: 0; }

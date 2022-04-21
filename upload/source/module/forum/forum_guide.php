@@ -13,7 +13,7 @@ if(!defined('IN_DISCUZ')) {
 
 $view = $_GET['view'];
 loadcache('forum_guide');
-if(!in_array($view, array('hot', 'digest', 'new', 'my', 'newthread', 'sofa'))) {
+if(!in_array($view, array('hot', 'digest', 'new', 'my', 'newthread', 'sofa', 'index'))) {
 	$view = 'hot';
 }
 $lang = lang('forum/template');
@@ -99,6 +99,7 @@ if($view != 'index') {
 			$searchbody = 1;
 		}
 		require_once libfile('function/forumlist');
+		$orderactives[$viewtype] = 'class="a"';
 		$forumlist = forumselect(FALSE, 0, intval($_GET['fid']));
 		$data['my'] = get_my_threads($viewtype, $_GET['fid'], $filter, $searchkey, $start, $perpage, $theurl);
 		$tids = $data['my']['tids'];
@@ -134,6 +135,7 @@ function get_guide_list($view, $start = 0, $num = 50, $again = 0) {
 	loadcache('forums');
 	$cachetimelimit = ($view != 'sofa') ? 900 : 60;
 	$cache = $_G['cache']['forum_guide'][$view.($view=='sofa' && $_G['fid'] ? $_G['fid'] : '')];
+	$notsofatids = array();
 	if($cache && (TIMESTAMP - $cache['cachetime']) < $cachetimelimit) {
 		$tids = $cache['data'];
 		$threadcount = count($tids);
@@ -189,6 +191,10 @@ function get_guide_list($view, $start = 0, $num = 50, $again = 0) {
 		if($thread['displayorder'] < 0) {
 			continue;
 		}
+		if($view == 'sofa' && $thread['replies'] > 0) {
+			$notsofatids[] = $thread['tid'];
+			continue;
+		}
 		$thread = guide_procthread($thread);
 		$threadids[] = $thread['tid'];
 		if($tids || ($n >= $start && $n < ($start + $num))) {
@@ -222,6 +228,9 @@ function get_guide_list($view, $start = 0, $num = 50, $again = 0) {
 		$data = array('cachetime' => TIMESTAMP, 'data' => $threadids);
 		$_G['cache']['forum_guide'][$view.($view=='sofa' && $_G['fid'] ? $_G['fid'] : '')] = $data;
 		savecache('forum_guide', $_G['cache']['forum_guide']);
+		if(!empty($notsofatids)) {
+			C::t('forum_sofa')->delete($notsofatids);
+		}
 	}
 	return array('forumnames' => $forumnames, 'threadcount' => $threadcount, 'threadlist' => $threadlist);
 }
@@ -304,7 +313,7 @@ function get_my_threads($viewtype, $fid = 0, $filter = '', $searchkey = '', $sta
 		unset($pids, $tids, $postcommentarr);
 		if($fids) {
 			$fids = array_unique($fids);
-			$forumnames = C::t('forum_forum')->fetch_all_name_by_fid($gids);
+			$forumnames = C::t('forum_forum')->fetch_all_name_by_fid($fids);
 		}
 		$listcount = count($list);
 	} else {
@@ -326,6 +335,7 @@ function get_my_threads($viewtype, $fid = 0, $filter = '', $searchkey = '', $sta
 			$closed = 0;
 		}
 		require_once libfile('function/post');
+		$followfid = getglobal('setting/followforumid');
 		$posts = C::t('forum_post')->fetch_all_by_authorid(0, $_G['uid'], true, 'DESC', $start, $perpage, null, $invisible, $fid, $followfid);
 		$listcount = count($posts);
 		foreach($posts as $pid => $post) {
@@ -406,6 +416,7 @@ function guide_procthread($thread) {
 	$thread['moved'] = $thread['heatlevel'] = $thread['new'] = 0;
 	$thread['icontid'] = $thread['forumstick'] || !$thread['moved'] && $thread['isgroup'] != 1 ? $thread['tid'] : $thread['closed'];
 	$thread['folder'] = 'common';
+	$thread['dbdateline'] = $thread['dateline'];
 	$thread['weeknew'] = TIMESTAMP - 604800 <= $thread['dbdateline'];
 	if($thread['replies'] > $thread['views']) {
 		$thread['views'] = $thread['replies'];
@@ -419,7 +430,6 @@ function guide_procthread($thread) {
 		}
 	}
 	$thread['istoday'] = $thread['dateline'] > $todaytime ? 1 : 0;
-	$thread['dbdateline'] = $thread['dateline'];
 	$thread['dateline'] = dgmdate($thread['dateline'], 'u', '9999', getglobal('setting/dateformat'));
 	$thread['dblastpost'] = $thread['lastpost'];
 	$thread['lastpost'] = dgmdate($thread['lastpost'], 'u');

@@ -122,7 +122,7 @@ $lang = array (
   'collection_totalrates' => '(จาก {$_G[collection][ratenum]} คะแนน)',
   'collection_comment_specthread' => 'ความเห็นสำหรับ 《$thread[subject]》: ',
   'collection_comment_thread' => 'ความเห็นหัวข้อ',
-  'no_content' => 'ยังไม่มีเนื้อหาใดๆ',
+  'no_content' => 'ยังไม่มีเนื้อหาใด ๆ',
   'collection_invite' => 'เชิญชวน',
   'collection_max_invite' => 'สามารถเชิญชวนเพื่อนเข้าร่วมคลังกระทู้ได้สูงสุด <span id="invitenum">$maxteamworkers</span> คน',
   'collection_selectfriend' => 'เลือกเพื่อน',

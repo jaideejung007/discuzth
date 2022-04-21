@@ -4542,7 +4542,7 @@ Tenpay service hotline: 0755-83762288-2 (24-hour service hotline)',
       39 => 'Disabling the session mechanism can significantly reduce the the server loading. Proposed to turn on if the number of online users is more than 20000 (Note: Online duration and the number of visitors and users will no longer be statistical, The forum Home and Forum List pages online user list function will be unavailable)',
       40 => 'setting_serveropti_onlineguestsmultiple',
       41 => 'Count Online visitors',
-      42 => 'After closing the session mechanism, The total online visitors (Including guests and users) ≈ The actual number of online users * Estimated Online ratio. The recommended value is about 10, for floating-point (Note: the actual number of online users cache cycle is 600 seconds)',
+      42 => 'After closing the session mechanism, The total online visitors (Including guests and users) โ The actual number of online users * Estimated Online ratio. The recommended value is about 10, for floating-point (Note: the actual number of online users cache cycle is 600 seconds)',
     ),
   ),
   234 => 

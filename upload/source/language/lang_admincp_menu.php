@@ -27,18 +27,18 @@ $lang = array
 	'header_adv' => 'โฆษณา',
 	'header_tools' => 'เครื่องมือ',
 	'header_uc' => 'UCenter',
-	'header_welcome' => 'สวัสดีจ้า',
+	'header_welcome' => 'สวัสดี',
 	'header_logout' => 'ออกจากระบบ',
 	'header_bbs' => 'หน้าแรก',
 	'header_portal' => 'พอร์ทัล',
 	'header_group' => 'คลับ',
 	'header_safe' => 'ความปลอดภัย',
 	'header_founder' => 'เว็บมาสเตอร์',
-	'header_cloudaddons' => 'แอพฯ',
+	'header_cloudaddons' => 'แอปฯ',
 
 
-	'menu_home' => 'หน้าหลัก ADMINCP',
-	'menu_home_clearhistorymenus' => 'ล้างประวัติการดำเนิน',
+	'menu_home' => 'หน้าแรกของศูนย์กลางจัดการ',
+	'menu_home_clearhistorymenus' => 'ล้างประวัติเมนู',
 
 	'menu_setting_basic' => 'ข้อมูลเว็บไซต์',
 	'menu_setting_access' => 'ลงทะเบียน/การเข้าถึง',
@@ -76,7 +76,7 @@ $lang = array
 	'menu_members_add' => 'เพิ่มสมาชิกใหม่',
 	'menu_members_edit' => 'จัดการสมาชิก',
 	'menu_members_newsletter' => 'จัดการข่าวประกาศ',
-	'menu_members_mobile' => 'จัดการแจ้งเตือนผ่านอุปกรณ์พกพา',
+	'menu_members_mobile' => 'จัดการแจ้งเตือนอุปกรณ์พกพา',
 	'menu_usertag' => 'จัดการแท็กผู้ใช้งาน',
 	'menu_members_edit_ban_user' => 'แบนสมาชิก',
 	'menu_members_ipban' => 'แบน IP',
@@ -211,7 +211,7 @@ $lang = array
 
 	'menu_cloud_doctor' => 'เครื่องมือวินิจฉัย',
 
-	'admincp_title' => 'ศูนย์การจัดการ '.$_G['setting']['bbname'].'',
+	'admincp_title' => 'ศูนย์กลางจัดการ '.$_G['setting']['bbname'].'',
 
 );
 

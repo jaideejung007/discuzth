@@ -22,11 +22,10 @@ if($this->cpaccess == -3) {
 	html_login_header();
 }
 
-
 if($this->cpaccess == -5) {
 	echo  '<p class="logintips">'.lang('admincp_login', 'login_cp_guest').'</p>';
 
-} elseif($this->cpaccess == -2) {
+}elseif($this->cpaccess == -2 || $this->cpaccess == -3) {
 	echo  '<p class="logintips">'.lang('admincp_login', 'login_cp_noaccess').'</p>';
 
 }elseif($this->cpaccess == -1) {

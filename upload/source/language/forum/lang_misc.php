@@ -177,7 +177,7 @@ $lang = array
 	'week_5' => 'ศุกร์',
 	'week_6' => 'เสาร์',
 
-	'y_m_d' => 'Yปีmเดือนdวัน',
+	'y_m_d' => 'วันที่ d เดือนm ปี Y',
 
 	'notice_actor' => 'ฯลฯ $actorcount คน',
 

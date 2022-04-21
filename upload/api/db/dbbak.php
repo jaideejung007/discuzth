@@ -484,7 +484,7 @@ if($get['method'] == 'export') {
 	$dumpfile = BACKUP_DIR.$get['sqlpath'].'/'.$get['backupfilename'].'-'.$get['volume'].'.sql';
 	if(trim($sqldump)) {
 		$sqldump = "$idstring".
-			"# <?exit();?>\n".
+			"# <?php exit();?>\n".
 			"# $apptype Multi-Volume Data Dump Vol.$get[volume]\n".
 			"# Time: $time\n".
 			"# Type: $apptype\n".
@@ -504,7 +504,7 @@ if($get['method'] == 'export') {
 			auto_next($get, $dumpfile);
 		}
 	} else {
-		@touch(ROOT_PATH.$get['sqlpath'].'/index.htm');
+		@touch(BACKUP_DIR.$get['sqlpath'].'/index.htm');
 		api_msg('explor_success', 'explor_success');
 	}
 
@@ -605,13 +605,13 @@ if($get['method'] == 'export') {
 } elseif($get['method'] == 'delete') {
 
 	$sqlpath = trim($get['sqlpath']);
-	if(empty($sqlpath) || !is_dir(BACKUP_DIR.$sqlpath)) {
+	if(empty($sqlpath) || !is_dir(BACKUP_DIR.$sqlpath) || !preg_match('/^backup_(\d+)_\w+$/', $get['sqlpath'])) {
 		api_msg('dir_no_exists', $sqlpath);
 	}
 	$directory = dir(BACKUP_DIR.$sqlpath);
 	while($entry = $directory->read()) {
 		$filename = BACKUP_DIR.$sqlpath.'/'.$entry;
-		if(is_file($filename) && preg_match('/\d+_\w+\-(\d+).sql$/', $filename) && !@unlink($filename)) {
+		if(is_file($filename) && preg_match('/^\d+_\w+\-(\d+).sql$/', $entry) && !@unlink($filename)) {
 			api_msg('delete_dumpfile_error', $filename);
 		}
 	}
@@ -897,7 +897,7 @@ function _authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
 	}
 
 	if($operation == 'DECODE') {
-		if((substr($result, 0, 10) == 0 || substr($result, 0, 10) - time() > 0) && substr($result, 10, 16) == substr(md5(substr($result, 26).$keyb), 0, 16)) {
+		if((substr($result, 0, 10) == 0 || substr($result, 0, 10) - time() > 0) && substr($result, 10, 16) === substr(md5(substr($result, 26).$keyb), 0, 16)) {
 			return substr($result, 26);
 		} else {
 				return '';
