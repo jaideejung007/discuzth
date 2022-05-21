@@ -253,58 +253,59 @@ $lang = array(
 	'init_gift_task' => 'กิจกรรมกล่องของขวัญ',
 	'init_avatar_task' => 'กิจกรรมเปลี่ยนรูปโปรไฟล์',
 
-	'license' => '<div class="license"><h1>ข้อตกลงสิทธิ์ใช้งานเวอร์ชันภาษาอังกฤษ (อย่างไม่เป็นทางการ)</h1>
+	'license' => '
+<div class="license"><h1>ข้อตกลงสิทธิ์ใช้งานเวอร์ชันภาษาไทยสำหรับผู้ใช้ภาษาไทย (อย่างไม่เป็นทางการ)</h1>
+<p>ลิขสิทธิ์ (c) 2001-2022, Tencent Cloud Computing (Beijing) Co., Ltd. (เดิมชื่อ Beijing Kangsheng Xinchuang Technology Co., Ltd.) สงวนลิขสิทธิ์</p>
 
-<p>Copyright (c) 2001-2021, Tencent Cloud Computing (Beijing) Co., Ltd. (formerly Beijing Kangsheng Xinchuang Technology Co., Ltd.) All rights reserved.</p>
+<p>ขอขอบคุณที่เลือกใช้ผลิตภัณฑ์ Tencent Cloud หวังว่าความตั้งใจของเราจะมอบโซลูชันไซต์ที่มีประสิทธิภาพ รวดเร็ว ทรงพลัง และโซลูชันฟอรัมชุมชนที่มีประสิทธิภาพ เว็บไซต์ของ Tencent Cloud คือ https://www.qcloud.com และเว็บไซต์ของชุมชนการสนทนาเกี่ยวกับผลิตภัณฑ์อย่างเป็นทางการคือ https://www.dismall.com เว็บไซต์อย่างเป็นทางการของศูนย์แอปพลิเคชันผลิตภัณฑ์คือ: https://addon.dismall.com โค้ดโอเพ่นซอร์สสามารถดูได้ที่ https://code.dismall.com</p>
 
-<p>Thank you for choosing Kangsheng products. We hope that our efforts can provide you with an efficient, fast, powerful site solution, and a powerful community forum solution. The website of Kangsheng Company is http://www.comsenz.com, and the official discussion website of the product is http://www.discuz.net.</p>
+<p>ศูนย์แอปพลิเคชันอย่างเป็นทางการที่รวมอยู่ในโครงการ Discuz! X ของผลิตภัณฑ์ Tencent Cloud ดำเนินการโดย Hefei Erdao Network Technology Co., Ltd. โครงการโอเพ่นซอร์ส Discuz! X ได้รับการดูแลโดย Hefei Erdao Network Technology Co., Ltd. โค้ดโอเพ่นซอร์ส Discuz! X ได้รับการดูแลร่วมกันโดยคณะกรรมการการจัดการโอเพ่นซอร์สของโครงการและนักพัฒนาชุมชน Tencent Cloud ให้บริการทั้งหมดยกเว้นบริการข้างต้น</p>
 
-<p>Note to users: This agreement is a legal agreement between you and Kangsheng about your use of various software products and services provided by Kangsheng. Regardless of whether you are an individual or an organization, profitable or not, and for whatever purpose (including for the purpose of learning and research), you need to read this agreement carefully, including the exemption clauses that exempt or limit Kang Sheng\'s liability and restrictions on your rights. Please review and accept or not accept these Terms of Service. If you do not agree to these Terms of Service and/or any changes to them by Kang Sheng at any time, you should not use or actively cancel Kang Sheng products provided by Kang Sheng. Otherwise, any of your use of registration, login, download, and viewing of related services in Kangsheng products will be deemed to be your full acceptance of these Terms of Service, including any amendments made by Kangsheng to the Terms of Service at any time.
-<p>Once these Terms of Service are changed, Kang Sheng will post the changes on the website. Once the revised terms of service are published on the website management background, they will effectively replace the original terms of service. You can check the latest version of the terms of service at the official forum of Kangsheng at any time. If you choose to accept these terms, you agree to be bound by the terms of the agreement. If you do not agree to these Terms of Service, you will not be granted the right to use the Service. If you violate the provisions of this clause, Kangsheng Company has the right to suspend or terminate your qualification to use Kangsheng products at any time and reserves the right to pursue relevant legal responsibilities.</p>
-<p>After understanding, agreeing, and complying with all the terms of this agreement, you can start using Kangsheng products. You may enter into another written agreement directly with Kangsheng to supplement or replace all or any part of this agreement.</p></p>
+<p>ประกาศสำหรับผู้ใช้: ข้อตกลงนี้เป็นข้อตกลงทางกฎหมายระหว่างคุณและ Tencent Cloud เกี่ยวกับการใช้ผลิตภัณฑ์ซอฟต์แวร์และบริการต่าง ๆ ที่ Tencent Cloud จัดหาให้ ไม่ว่าคุณจะเป็นบุคคลหรือองค์กรแสวงกำไรหรือไม่ และคุณใช้งานด้วยวิธีการใด (รวมถึงเพื่อวัตถุประสงค์ในการเรียนรู้และการวิจัย) คุณต้องอ่านข้อตกลงนี้อย่างละเอียด ซึ่งรวมถึงข้อความปฏิเสธความรับผิดชอบที่ยกเว้นหรือจำกัดความรับผิดและข้อจำกัดของ Tencent Cloud สิทธิของคุณ กรุณาตรวจสอบและยอมรับหรือไม่ยอมรับข้อกำหนดในการให้บริการเหล่านี้ หากคุณไม่ยอมรับข้อกำหนดในการให้บริการและ/หรือการเปลี่ยนแปลงของ Tencent Cloud ในเวลาใด ๆ คุณไม่ควรใช้หรือยกเลิกใช้งานผลิตภัณฑ์ Tencent Cloud โดยสมัครใจที่ Tencent Cloud ให้บริการ มิฉะนั้น การลงทะเบียน เข้าสู่ระบบ ดาวน์โหลด ดู ฯลฯ ของบริการที่เกี่ยวข้องในผลิตภัณฑ์ Tencent Cloud จะถือว่าคุณยอมรับข้อกำหนดในการให้บริการเหล่านี้อย่างเต็มที่ ซึ่งรวมถึงการยอมรับการแก้ไขใด ๆ ที่ Tencent Cloud ดำเนินการกับข้อกำหนดในการให้บริการเมื่อใดก็ได้ตลอดเวลา</p>
+<p>เมื่อข้อกำหนดในการให้บริการมีการเปลี่ยนแปลง Tencent Cloud จะประกาศเนื้อหาที่แก้ไขบนเว็บไซต์ เมื่อข้อกำหนดในการให้บริการฉบับแก้ไขได้รับการเผยแพร่บนระบบการจัดการเว็บไซต์ (AdminCP) เงื่อนไขเหล่านี้จะแทนที่ข้อกำหนดในการให้บริการเดิมทันที คุณสามารถตรวจสอบข้อกำหนดในการให้บริการเวอร์ชันล่าสุดได้ตลอดเวลาโดยลงชื่อเข้าใช้เว็บไซต์โค้ดโอเพนซอร์ส หากคุณเลือกที่จะยอมรับข้อกำหนดเหล่านี้ แสดงว่าคุณตกลงที่จะมีพันธะผูกพันตามข้อกำหนดของข้อตกลง หากคุณไม่ยอมรับข้อกำหนดในการให้บริการนี้ คุณจะไม่สามารถรับสิทธิ์ในการใช้บริการได้ หากคุณละเมิดข้อกำหนดเหล่านี้ Tencent Cloud มีสิทธิ์ที่จะระงับหรือยุติคุณสมบัติของคุณในการใช้ผลิตภัณฑ์ Tencent Cloud เมื่อใดก็ได้ และขอสงวนสิทธิ์ในการรับผิดชอบทางกฎหมายที่เกี่ยวข้อง</p>
+<p>คุณสามารถเริ่มใช้ผลิตภัณฑ์ Tencent Cloud ได้ก็ต่อเมื่อคุณเข้าใจ ยอมรับ และปฏิบัติตามข้อกำหนดทั้งหมดของข้อตกลงนี้เท่านั้น คุณสามารถทำข้อตกลงเป็นลายลักษณ์อักษรอื่นโดยตรงกับ Tencent Cloud เพื่อเสริมหรือแทนที่ทั้งหมดหรือบางส่วนของข้อตกลงนี้</p>
 
-<p>All intellectual property Kang Sheng has the software. This software is only for the license, not for sale. Kang Sheng only allows you to copy, in accordance with the terms of this agreement, download installation, use or otherwise benefit from the functions of the software or intellectual property rights.</p>
+<p>Tencent Cloud เป็นเจ้าของสิทธิ์ในทรัพย์สินทางปัญญาทั้งหมดของซอฟต์แวร์นี้ ซอฟต์แวร์นี้มีไว้เพื่อสัญญาอนุญาตเท่านั้น จะไม่มีการขายใด ๆ Tencent Cloud อนุญาตให้คุณคัดลอก ดาวน์โหลด ติดตั้ง ใช้หรือได้รับประโยชน์อย่างอื่นจากฟังก์ชันหรือสิทธิ์ในทรัพย์สินทางปัญญาของซอฟต์แวร์นี้ตามเงื่อนไขของข้อตกลงนี้เท่านั้น</p>
 
-<h3>I. Licensed Rights</h3>
+<h3>I. สิทธิ์ที่ได้รับอนุญาตในข้อตกลง</h3>
 <ol>
-   <li>You can fully comply with the end user license agreement, based on the software used in this non-commercial use, without having to pay for software copyright licensing fees.</li>
-   <li>Agreement you can within the constraints and limitations modify Discuz! source code (if provided) or interface styles to suit your site requirements.</li>
-   <li>You have to use this software to build the forum all the membership information, articles and related information of ownership, and is independent of commitment and legal obligations related to the article content.</li>
-   <li>A commercial license, you can use this software for commercial applications, while according to the type of license purchased to determine the period of technical support, technical support, technical support form and content, from the moment of purchase, within the period of technical support have a way to get through the specified designated areas of technical support services. Business authorized users have the power to reflect and comment, relevant comments will be a primary consideration, but not necessarily be accepted promise or guarantee.</li>
-   <li>You can download the application that suits your website from the application center service provided by Kangsheng, but you should pay the application developer / owner accordingly.</li>
+   <li>คุณสามารถใช้ซอฟต์แวร์เพื่อการใช้งานที่ไม่ใช่เชิงพาณิชย์หรือเชิงพาณิชย์ (จำกัดเฉพาะสิทธิ์ใช้งานที่ปรับให้เข้ากับข้อตกลงนี้) บนพื้นฐานของการปฏิบัติตามข้อตกลงสิทธิ์การใช้งานนี้โดยสมบูรณ์ โดยไม่ต้องชำระค่าธรรมเนียมใบอนุญาตลิขสิทธิ์ซอฟต์แวร์</li>
+   <li>คุณสามารถแก้ไขซอร์สโค้ดของผลิตภัณฑ์ Tencent Cloud (หากมีให้) หรือรูปแบบอินเทอร์เฟซเพื่อให้เหมาะกับข้อกำหนดของเว็บไซต์ของคุณภายในข้อจำกัดที่ระบุไว้ในข้อตกลง</li>
+   <li>คุณเป็นเจ้าของข้อมูลสมาชิก บทความ และข้อมูลที่เกี่ยวข้องทั้งหมดบนเว็บไซต์ที่สร้างขึ้นโดยใช้ซอฟต์แวร์นี้ และดำเนินการตรวจสอบและให้ความสนใจกับเนื้อหาของเว็บไซต์ที่สร้างขึ้นโดยใช้ซอฟต์แวร์นี้โดยอิสระเพื่อให้แน่ใจว่าจะไม่ละเมิดต่อสิทธิ์ที่ชอบด้วยกฎหมายและผลประโยชน์ของใครก็ตาม และรับผิดชอบโดยอิสระสำหรับความรับผิดชอบทั้งหมดที่เกิดขึ้นจากการใช้ซอฟต์แวร์และบริการ Tencent Cloud คุณจะต้องชดใช้ค่าเสียหายทั้งหมดสำหรับความสูญเสียที่เกิดขึ้นกับ Tencent Cloud Company หรือผู้ใช้</li>
+   <li>หากคุณต้องการใช้ซอฟต์แวร์หรือผู้ใช้บริการของ Tencent Cloud เพื่อวัตถุประสงค์ทางการค้า คุณต้องปฏิบัติตามกฎหมายที่เกี่ยวข้องของสาธารณรัฐประชาชนจีน หากคุณต้องการจัดเตรียมวิธีการสนับสนุนทางเทคนิคหรือเนื้อหาการสนับสนุนทางเทคนิค กรุณาให้บริการสนับสนุนด้านเทคนิคแก่ศูนย์แอปพลิเคชันอย่างเป็นทางการ (https://addon.dismall.com/service.html)</li>
+   <li>คุณสามารถดาวน์โหลดแอปพลิเคชันที่เหมาะสมกับเว็บไซต์ของคุณได้จากบริการศูนย์แอปพลิเคชันที่ให้บริการโดย Tencent Cloud แต่คุณควรชำระค่าธรรมเนียมที่เกี่ยวข้องให้กับผู้พัฒนา/เจ้าของแอปพลิเคชัน</li>
 </ol>
 
-<h3>II. Constraints and restrictions stipulated in the agreement</h3>
+<h3>II. ข้อผูกมัดและข้อจำกัดที่ระบุไว้ในข้อตกลง</h3>
 <ol>
-   <li>The software may not be used for commercial purposes (including, but not limited to, corporate websites, operational websites, profit-oriented websites, or profitable websites) without written commercial authorization from Kangsheng. For commercial license purchase, please visit http://www.discuz.com for reference, or call 8610-51282255 for details.</li>
-   <li>May not associated with the software or business license for rental, sale, mortgage or grant sub-licenses.</li>
-   <li>In any case, that no matter how used, whether modified or landscaping, changes to what extent, just use Discuz! the whole or any part, without the written permission of the Forum page footer Department Discuz! name and Sing Imagination (Beijing) Technology Co., Ltd. affiliated website (http://www.comsenz.com, http://www.discuz.com or http://www.discuz.net) the link must be retained, not removed or modified .</li>
-   <li>Prohibited Discuz! the whole or any part of the basis for the development of any derivative version, modified version or third-party version for redistribution.</li>
-   <li>The applications you download from the Application Center must not be reverse engineered, decompiled, decompiled, etc. without the written permission of the application developer/owner, Publishing, publishing, developing related derivative products, works, etc.</li>
-   <li>If you fail to comply with the terms of this agreement, your authorization will be terminated, your licensed rights will be revoked, and you will be held legally responsible.
+   <li>ซอฟต์แวร์หรือใบอนุญาตทางการค้าที่เกี่ยวข้องไม่สามารถเช่า ขาย จำนอง หรือให้อนุญาตให้ใช้สิทธิช่วงได้</li>
+   <li>ไม่ว่าในกรณีใด ไม่ว่าจะมีการแก้ไขหรือตกแต่ง หรือระดับของการแก้ไข ตราบใดที่ผลิตภัณฑ์ Tencent Cloud ทั้งหมดหรือบางส่วนถูกใช้โดยไม่ได้รับอนุญาตเป็นลายลักษณ์อักษร ชื่อผลิตภัณฑ์ Tencent Cloud ที่ส่วนท้ายของหน้าและเว็บไซต์ของ Tencent Cloud Company (http://cloud.tencent.com หรือ https://www.discuz.net) และลิงก์ไปยังศูนย์แอปพลิเคชันอย่างเป็นทางการในระบบหลังบ้านของโปรแกรม (https://addon.dismall.com) ต้องถูกเก็บรักษาไว้ และไม่สามารถลบ แก้ไข หรือแทนที่ได้</li>
+   <li>ห้ามพัฒนาในลักษณะเวอร์ชันลอกเลียนแบบ เวอร์ชันดัดแปลง หรือเวอร์ชันของบุคคลที่สามโดยอิงจากผลิตภัณฑ์ Tencent Cloud ทั้งหมดหรือบางส่วนเพื่อการแจกจ่ายซ้ำ</li>
+   <li>แอปพลิเคชันที่คุณดาวน์โหลดจากศูนย์แอปพลิเคชันจะต้องไม่ทำวิศวกรรมย้อนกลับ ประกอบย้อนกลับ ถอดรหัส ฯลฯ โดยไม่ได้รับอนุญาตเป็นลายลักษณ์อักษรจากผู้พัฒนา/เจ้าของแอปพลิเคชัน และจะไม่ถูกคัดลอก ดัดแปลง เชื่อมโยง ทำซ้ำ หรือประกอบโดยไม่ได้รับอนุญาต เผยแพร่ แชร์ พัฒนาผลิตภัณฑ์ลอกเลียนแบบ ผลงาน ฯลฯ</li>
+   <li>หากคุณไม่ปฏิบัติตามข้อกำหนดของข้อตกลงนี้ การอนุญาตของคุณจะสิ้นสุดลง สิทธิ์ที่ได้รับใบอนุญาตจะถูกเพิกถอน และคุณควรรับผิดชอบทางกฎหมายที่เกี่ยวข้อง</li>
 </ol>
 
-<h3>III. Limited Warranty and Disclaimer</h3>
+<h3>III. การรับประกันแบบจำกัดและข้อจำกัดความรับผิดชอบ</h3>
 <ol>
-   <li>The software and the accompanying documents as not to provide any express or implied, or guarantee in the form of compensation provided.</li>
-   <li>User voluntary use of this software, you must understand the risks of using this software, technical services in the not to buy products before, we do not promise to provide any form of technical support, use of guarantees, nor liable for any use of this software issues related to liability arising.</li>
-   <li>Hong Sing Company does not use the software to build a website or forum post or liable for the information, you assume full responsibility.</li>
-   <li>Hong Sing company provides software and services in a timely manner, security, accuracy is not guaranteed, due to force majeure, Hong Sing factors beyond the control of the company (including hacker attacks, stopping power, etc.) caused by software and services Suspension or termination, and give your losses, you agree to Sing corporate responsibility waiver of all rights.</li>
-   <li>Kangsheng Company does not guarantee the timeliness, safety and accuracy of the software and services provided by Kangsheng Company. The use of software and services are caused by force majeure factors and factors beyond the control of Kangsheng Company (including hacker attacks, power outages, etc.). If the suspension or termination causes losses to you, you agree to waive all rights to hold Kangsheng Company responsible.</li>
-   <li>Kangsheng Company especially draws your attention that in order to protect the autonomy of the company’s business development and adjustment, Kangsheng Company has the right to modify the content of the service, suspend or terminate part or all of the software use and service at any time, with or without prior notice. , The amendment will be announced on the relevant page of the Kangsheng company’s website, once announced, it will be deemed as a notice. If Kangsheng Company exercises the right to modify or suspend or terminate part or all of the software use and service and cause losses, Kangsheng Company shall not be liable to you or any third party.</li>
+   <li>ซอฟต์แวร์นี้และเอกสารประกอบมีให้โดยไม่มีการชดใช้หรือการรับประกันโดยชัดแจ้งหรือโดยนัย</li>
+   <li>ผู้ใช้ใช้ซอฟต์แวร์นี้โดยสมัครใจ และคุณต้องเข้าใจความเสี่ยงของการใช้ซอฟต์แวร์นี้ เราไม่ให้คำมั่นสัญญาว่าจะให้การสนับสนุนด้านเทคนิคในรูปแบบใด ๆ การรับประกันการใช้งาน และไม่รับผิดชอบต่อปัญหาที่เกิดจากการใช้ซอฟต์แวร์นี้</li>
+   <li>Tencent Cloud Company ไม่รับผิดชอบต่อบทความหรือข้อมูลในเว็บไซต์หรือฟอรัมที่สร้างขึ้นโดยใช้ซอฟต์แวร์นี้ และคุณมีหน้าที่รับผิดชอบแต่เพียงผู้เดียวสำหรับความรับผิดชอบทั้งหมด</li>
+   <li>ศูนย์แอปพลิเคชันอย่างเป็นทางการไม่สามารถตรวจสอบแอปพลิเคชันที่อัปโหลดไปยังศูนย์แอปพลิเคชันโดยบุคคลที่สามอย่างครอบคลุม ดังนั้นจึงไม่รับประกันความถูกต้องตามกฎหมาย ความปลอดภัย ความสมบูรณ์ ความถูกต้อง หรือคุณภาพของแอปพลิเคชัน เมื่อคุณดาวน์โหลดแอปพลิเคชันจากศูนย์แอปพลิเคชัน คุณยอมรับที่จะดำเนินการ การตัดสินใจของคุณเอง และแบกรับความเสี่ยงทั้งหมดโดยไม่ต้องพึ่ง Tencent Cloud และศูนย์แอปพลิเคชันอย่างเป็นทางการ อย่างไรก็ตาม ไม่ว่าในกรณีใด ศูนย์แอปพลิเคชันอย่างเป็นทางการมีสิทธิ์หยุดให้บริการศูนย์แอปพลิเคชันตามกฎหมายและดำเนินการที่เกี่ยวข้อง ซึ่งรวมถึงแต่ไม่จำกัดเพียงการถอนการติดตั้งแอปพลิเคชันที่เกี่ยวข้อง การระงับบริการทั้งหมดหรือบางส่วน การบันทึกบันทึกที่เกี่ยวข้อง และรายงานต่อหน่วยงานที่เกี่ยวข้อง Tencent Cloud และศูนย์แอปพลิเคชันอย่างเป็นทางการจะไม่รับผิดชอบโดยตรง ทางอ้อมหรือร่วมกันสำหรับการสูญเสียที่อาจเกิดขึ้นกับคุณและบุคคลที่สาม</li>
+   <li>Tencent Cloud ไม่รับประกันความตรงเวลา ความปลอดภัย และความถูกต้องของซอฟต์แวร์และบริการที่ Tencent Cloud จัดหาให้ และการใช้ซอฟต์แวร์และบริการอันเนื่องมาจากเหตุสุดวิสัยและปัจจัยที่อยู่นอกเหนือการควบคุมของ Tencent Cloud (รวมถึงการโจมตีของแฮ็กเกอร์ ไฟดับ ฯลฯ) หาก การระงับหรือการยกเลิกทำให้คุณสูญเสีย คุณยอมรับที่จะสละสิทธิ์ทั้งหมดในการดำเนินตามความรับผิดชอบของ Tencent Cloud   </li>
+   <li>Tencent Cloud Company ดึงความสนใจของคุณไปที่ข้อเท็จจริงที่ว่าเพื่อปกป้องเอกราชของบริษัทในการพัฒนาและปรับเปลี่ยนธุรกิจ Tencent Cloud Company มีสิทธิ์ในการแก้ไขเนื้อหาบริการ ระงับหรือยุติซอฟต์แวร์และบริการบางส่วนหรือทั้งหมดได้ตลอดเวลา โดยมีหรือไม่มีการแจ้งให้ทราบล่วงหน้า การแก้ไขจะประกาศในหน้าที่เกี่ยวข้องของเว็บไซต์ Tencent Cloud และจะถือเป็นการแจ้งเตือนเมื่อมีการประกาศ Tencent Cloud จะไม่รับผิดชอบต่อคุณหรือบุคคลที่สามสำหรับความสูญเสียที่เกิดจากการใช้สิทธิ์ของ Tencent Cloud ในการแก้ไขหรือระงับหรือยุติซอฟต์แวร์และบริการบางส่วนหรือทั้งหมด</li>
 </ol>
 
-<p>Hong Sing products on the end user license agreement, business license and technical services to the details provided by the Hong Sing exclusive. Sing the company has without prior notice, modify the license agreement and services price list right to the modified agreement or price list from the change of the date of the new authorized user to take effect.</p>
+<p>รายละเอียดของข้อตกลงสิทธิ์การใช้งานสำหรับผู้ใช้ผลิตภัณฑ์ Tencent Cloud การอนุญาตเชิงพาณิชย์ และบริการทางเทคนิคมีให้โดย Tencent Cloud เท่านั้น Tencent Cloud มีสิทธิ์แก้ไขข้อตกลงใบอนุญาตและรายการราคาบริการโดยไม่ต้องแจ้งให้ทราบล่วงหน้า และข้อตกลงที่แก้ไขหรือรายการราคาจะมีผลสำหรับผู้ใช้ที่ได้รับอนุญาตใหม่นับจากวันที่เปลี่ยนแปลง</p>
 
-<p>Once you start the installation Hong Sing products, shall be deemed to fully understand and accept the terms of this Agreement, the terms in the enjoyment of the rights granted at the same time, by the relevant constraints and restrictions. Licensing agreement outside the scope of acts would be a direct violation of this License Agreement and constitute an infringement, we have the right to terminate the authorization, shall be ordered to stop the damage, and retain the power to investigate related responsibilities.</p>
+<p>เมื่อคุณเริ่มติดตั้งผลิตภัณฑ์ Tencent Cloud จะถือว่าคุณเข้าใจและยอมรับข้อกำหนดของข้อตกลงนี้โดยสมบูรณ์ และคุณจะต้องอยู่ภายใต้ข้อบังคับและข้อจำกัดที่เกี่ยวข้องในขณะที่เพลิดเพลินกับสิทธิ์ที่ได้รับจากข้อกำหนดข้างต้น พฤติกรรมที่อยู่นอกเหนือขอบเขตของข้อตกลงจะเป็นการละเมิดข้อตกลงสิทธิ์การใช้งานนี้โดยตรงและถือเป็นการละเมิด เรามีสิทธิ์ที่จะยุติการอนุญาตเมื่อใดก็ได้ เพื่อหยุดความเสียหาย และสงวนสิทธิ์ในการรับผิดชอบที่เกี่ยวข้อง</p>
 
-<p>The interpretation of the terms of the license agreement, validity, and dispute resolution, applicable to the mainland People\'s Republic of law.</p>
+<p>การตีความ ความถูกต้อง และการระงับข้อพิพาทของเงื่อนไขของข้อตกลงใบอนุญาตนี้จะอยู่ภายใต้กฎหมายของสาธารณรัฐประชาชนจีน</p>
 
-<p>Between Hong Sing if you and any dispute or controversy, should first be settled through friendly consultations, the consultation fails, you hereby agree to submit the dispute or controversy Sing Haidian District People\'s Court where jurisdiction. Hong Sing Company has the right to interpret the above terms and discretion.</p>
+<p>หากมีข้อพิพาทหรือข้อพิพาทใด ๆ ระหว่างคุณกับ Tencent Cloud ควรแก้ไขโดยการเจรจาฉันมิตรก่อน หากการเจรจาไม่เป็นผล คุณยินยอมอย่างเต็มที่ที่จะส่งข้อพิพาทหรือข้อพิพาทไปยังศาลประชาชนของเขต Haidian กรุงปักกิ่ง โดยที่ Tencent Cloud ตั้งอยู่ Tencent Cloud มีสิทธิ์ตีความและแก้ไขเนื้อหาของข้อกำหนดข้างต้น</p>
 
-<p>(End of text)</p>
+<p>(ท้ายข้อความ)</p>
 
-<p align="right">Kang Sheng</p>
+<p align="right">Tencent Cloud Company</p>
 
 </div>',
 
@@ -329,8 +330,8 @@ $lang = array(
 	'php' => 'PHP เวอร์ชั่น',
 	'attachmentupload' => 'อัปโหลดไฟล์',
 	'unlimit' => 'ไม่จำกัด',
-	'version' => 'เวอร์ชั่น',
-	'gdversion' => 'GD เวอร์ชั่น',
+	'version' => 'เวอร์ชัน',
+	'gdversion' => 'GD เวอร์ชัน',
 	'allow' => 'อนุญาต',
 	'unix' => 'คลาส Unix',
 	'diskspace' => 'พื้นที่ดิสก์',
