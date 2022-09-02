@@ -89,7 +89,7 @@ class model_forum_thread extends discuz_model
 		}
 
 
-		$this->param['sortid'] = $this->param['special'] && $this->forum['threadsorts']['types'][$this->param['sortid']] ? 0 : $this->param['sortid'];
+		$this->param['sortid'] = $this->param['special'] || !$this->forum['threadsorts']['types'][$this->param['sortid']] ? 0 : $this->param['sortid'];
 		$this->param['typeexpiration'] = intval($this->param['typeexpiration']);
 
 		if($this->forum['threadsorts']['expiration'][$this->param['typeid']] && !$this->param['typeexpiration']) {
@@ -160,8 +160,14 @@ class model_forum_thread extends discuz_model
 		}
 
 		if($this->param['moderated']) {
-			updatemodlog($this->tid, ($this->param['displayorder'] > 0 ? 'STK' : 'DIG'));
-			updatemodworks(($this->param['displayorder'] > 0 ? 'STK' : 'DIG'), 1);
+			if($this->param['displayorder'] > 0) {
+				updatemodlog($this->tid, 'STK');
+				updatemodworks('STK', 1);
+			}
+			if($this->param['digest']) {
+				updatemodlog($this->tid, 'DIG');
+				updatemodworks('DIG', 1);
+			}
 		}
 
 		$this->param['bbcodeoff'] = checkbbcodes($this->param['message'], !empty($this->param['bbcodeoff']));

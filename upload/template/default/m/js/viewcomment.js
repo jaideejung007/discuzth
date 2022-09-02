@@ -224,8 +224,8 @@ var dataLoaded = function (json, isInit) {
 			}
 		});
 
-		threadTitle = json.Variables.thread.subject ? json.Variables.thread.subject : '快来看看这个晒图';
-		threadContent = '我参加了#' + SITE_INFO.siteName + '#举办的晒图活动，快来帮我点赞吧';
+		threadTitle = json.Variables.thread.subject ? json.Variables.thread.subject : 'มาดูรูปนี้กัน';
+		threadContent = 'ฉันเข้าร่วมกิจกรรมแชร์รูปภาพที่จัดโดย #' + SITE_INFO.siteName + '# มากดไลก์ฉันหน่อยนะ';
 
 		if (postItem.authorid == member_uid) {
 			$('.tipBor').html('หวังว่าผู้คนจะชื่นชอบรูปภาพของคุณมากยิ่งขึ้น โดยคลิกที่มุมขวาบนไอคอนแชร์ <span class="arrLeft"></span>');

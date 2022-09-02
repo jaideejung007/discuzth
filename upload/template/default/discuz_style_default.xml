@@ -6,7 +6,7 @@
 		<item id="templateid"><![CDATA[1]]></item>
 		<item id="tplname"><![CDATA[ชุดเทมเพลตเริ่มต้น]]></item>
 		<item id="directory"><![CDATA[./template/default]]></item>
-		<item id="copyright"><![CDATA[腾讯云计算（北京）有限责任公司]]></item>
+		<item id="copyright"><![CDATA[Tencent Cloud Computing (Beijing) Co., Ltd.]]></item>
 		<item id="style">
 			<item id="smfont"><![CDATA[Arial]]></item>
 			<item id="threadtitlefontsize"><![CDATA[14px]]></item>

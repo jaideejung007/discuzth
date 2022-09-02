@@ -1,6 +1,4 @@
 
-jQuery.noConflict();
-
 var getBasePath = function() {
 	var els = document.getElementsByTagName('script'),
 	src;
@@ -474,7 +472,7 @@ function fileQueueError(errorCode) {
 			err = 'สามารถอัปโหลดได้สูงสุดไม่เกิน ' + this.settings.fileNumLimit + ' ไฟล์';
 			break;
 		case 'Q_EXCEED_SIZE_LIMIT':
-			err = 'ขนาดไฟล์อัพโหลดทั้งหมดเกิน ' + WebUploader.Base.formatSize(this.uploader.option('fileSizeLimit')) + '';
+			err = 'ขนาดไฟล์อัปโหลดทั้งหมดเกิน ' + WebUploader.Base.formatSize(this.uploader.option('fileSizeLimit')) + '';
 			break;
 		case 'Q_TYPE_DENIED':
 			err = 'รูปแบบไฟล์ไม่ถูกต้อง กรุณาอัปโหลดไฟล์ใหม่';

@@ -37,7 +37,7 @@ $lang = array
 	'header_cloudaddons' => 'แอปฯ',
 
 
-	'menu_home' => 'หน้าแรกของศูนย์กลางจัดการ',
+	'menu_home' => 'หน้าแรก AdminCP',
 	'menu_home_clearhistorymenus' => 'ล้างประวัติเมนู',
 
 	'menu_setting_basic' => 'ข้อมูลเว็บไซต์',
@@ -76,7 +76,7 @@ $lang = array
 	'menu_members_add' => 'เพิ่มสมาชิกใหม่',
 	'menu_members_edit' => 'จัดการสมาชิก',
 	'menu_members_newsletter' => 'จัดการข่าวประกาศ',
-	'menu_members_mobile' => 'จัดการแจ้งเตือนอุปกรณ์พกพา',
+	'menu_members_mobile' => 'แจ้งเตือนผ่านมือถือ',
 	'menu_usertag' => 'จัดการแท็กผู้ใช้งาน',
 	'menu_members_edit_ban_user' => 'แบนสมาชิก',
 	'menu_members_ipban' => 'แบน IP',
@@ -135,7 +135,7 @@ $lang = array
 
 	'menu_patch' => 'แพทช์ความปลอดภัย',
 	'menu_upgrade' => 'จัดการอัปเกรด',
-	'menu_optimizer' => 'ประเมินประสิทธิภาพระบบ',
+	'menu_optimizer' => 'ประเมินระบบ',
 	'menu_security' => 'ตั้งค่าตรวจสอบระบบ',
 	'menu_serversec' => 'ตรวจสอบความปลอดภัย',
 
