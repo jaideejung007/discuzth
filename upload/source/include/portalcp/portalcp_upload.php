@@ -80,6 +80,7 @@ if($operation == 'downremotefile') {
 					fwrite($fp, $content);
 					fclose($fp);
 				}
+
 				if(!$upload->get_image_info($attach['target'])) {
 					@unlink($attach['target']);
 					continue;
@@ -115,7 +116,7 @@ if($attachs) {
 			$image->Watermark($attach['target'], '', 'portal');
 		}
 
-		if(getglobal('setting/ftp/on') && ((!$_G['setting']['ftp']['allowedexts'] && !$_G['setting']['ftp']['disallowedexts']) || ($_G['setting']['ftp']['allowedexts'] && in_array($attach['ext'], $_G['setting']['ftp']['allowedexts'])) || ($_G['setting']['ftp']['disallowedexts'] && !in_array($attach['ext'], $_G['setting']['ftp']['disallowedexts']))) && (!$_G['setting']['ftp']['minsize'] || $attach['size'] >= $_G['setting']['ftp']['minsize'] * 1024)) {
+		if(ftpperm($attach['ext'], $attach['size'])) {
 			if(ftpcmd('upload', 'portal/'.$attach['attachment']) && (!$attach['thumb'] || ftpcmd('upload', 'portal/'.getimgthumbname($attach['attachment'])))) {
 				@unlink($_G['setting']['attachdir'].'/portal/'.$attach['attachment']);
 				@unlink($_G['setting']['attachdir'].'/portal/'.getimgthumbname($attach['attachment']));
@@ -151,6 +152,7 @@ if($attachs) {
 	if($downremotefile && $imagereplace) {
 		$string = preg_replace(array("/\<(script|style|iframe)[^\>]*?\>.*?\<\/(\\1)\>/si", "/\<!*(--|doctype|html|head|meta|link|body)[^\>]*?\>/si"), '', $string);
 		$string = str_replace($imagereplace['oldimageurl'], $imagereplace['newimageurl'], $string);
+		$string = str_replace("\n", '<br>', $string);
 		$string = str_replace(array("\r", "\n", "\r\n"), '', addcslashes($string, '/"\\\''));
 		print <<<EOF
 		<script type="text/javascript">
@@ -182,7 +184,7 @@ function portal_upload_show($attach) {
 		$filehtml = get_uploadcontent($attach, 'portal', 'upload');
 	}
 
-	echo '<script type="text/javascript" src="'.$_G[setting][jspath].'handlers.js?'.$_G['style']['verhash'].'"></script>';
+	echo '<script type="text/javascript" src="'.$_G['setting']['jspath'].'handlers.js?'.$_G['style']['verhash'].'"></script>';
 	echo '<script>';
 	if($imagehtml) echo 'var tdObj = getInsertTdId(parent.$(\'imgattachlist\'), \'attach_list_'.$attach['attachid'].'\');tdObj.innerHTML = \''.addslashes($imagehtml).'\';';
 	if($filehtml) echo 'parent.$(\'attach_file_body\').innerHTML = \''.addslashes($filehtml).'\'+parent.$(\'attach_file_body\').innerHTML;';

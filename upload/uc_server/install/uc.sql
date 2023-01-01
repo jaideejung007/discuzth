@@ -22,19 +22,22 @@ DROP TABLE IF EXISTS uc_members;
 CREATE TABLE uc_members (
   uid mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   username char(15) NOT NULL DEFAULT '',
-  `password` char(32) NOT NULL DEFAULT '',
-  email char(32) NOT NULL DEFAULT '',
+  `password` varchar(255) NOT NULL DEFAULT '',
+  `secmobicc` varchar(3) NOT NULL DEFAULT '',
+  `secmobile` varchar(12) NOT NULL DEFAULT '',
+  email varchar(255) NOT NULL DEFAULT '',
   myid char(30)  NOT NULL DEFAULT '',
   myidkey char(16) NOT NULL DEFAULT '',
   regip varchar(45) NOT NULL DEFAULT '',
   regdate int(10) unsigned NOT NULL DEFAULT '0',
   lastloginip int(10) NOT NULL DEFAULT '0',
   lastlogintime int(10) unsigned NOT NULL DEFAULT '0',
-  salt char(6) NOT NULL,
+  salt varchar(20) NOT NULL DEFAULT '',
   secques char(8) NOT NULL default '',
   PRIMARY KEY(uid),
   UNIQUE KEY username(username),
-  KEY email(email)
+  KEY email(email(40)),
+  KEY secmobile (`secmobile`, `secmobicc`)
 ) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_memberfields;
@@ -103,7 +106,7 @@ REPLACE INTO uc_settings(k, v) VALUES ('censorusername','');
 REPLACE INTO uc_settings(k, v) VALUES ('dateformat','y-n-j');
 REPLACE INTO uc_settings(k, v) VALUES ('doublee','0');
 REPLACE INTO uc_settings(k, v) VALUES ('nextnotetime','0');
-REPLACE INTO uc_settings(k, v) VALUES ('timeoffset','28800');
+REPLACE INTO uc_settings(k, v) VALUES ('timeoffset','25200');
 REPLACE INTO uc_settings(k, v) VALUES ('privatepmthreadlimit','25');
 REPLACE INTO uc_settings(k, v) VALUES ('chatpmthreadlimit','30');
 REPLACE INTO uc_settings(k, v) VALUES ('chatpmmemberlimit','35');
@@ -125,7 +128,7 @@ REPLACE INTO uc_settings(k, v) VALUES ('maildelimiter', '0');
 REPLACE INTO uc_settings(k, v) VALUES ('mailusername', '1');
 REPLACE INTO uc_settings(k, v) VALUES ('mailsilent', '1');
 REPLACE INTO uc_settings(k, v) VALUES ('login_failedtime', '5');
-REPLACE INTO uc_settings(k, v) VALUES ('version', '1.6.0');
+REPLACE INTO uc_settings(k, v) VALUES ('version', '1.7.0');
 
 DROP TABLE IF EXISTS uc_badwords;
 CREATE TABLE uc_badwords (
@@ -134,8 +137,7 @@ CREATE TABLE uc_badwords (
   find varchar(255) NOT NULL default '',
   replacement varchar(255) NOT NULL default '',
   findpattern varchar(255) NOT NULL default '',
-  PRIMARY KEY  (id),
-  UNIQUE KEY `find` (`find`(100))
+  PRIMARY KEY  (id)
 ) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS uc_notelist;
@@ -213,7 +215,7 @@ CREATE TABLE uc_admins (
 DROP TABLE IF EXISTS uc_failedlogins;
 CREATE TABLE uc_failedlogins (
   ip varchar(45) NOT NULL default '',
-  count tinyint(1) unsigned NOT NULL default '0',
+  count tinyint(3) unsigned NOT NULL default '0',
   lastupdate int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (ip)
 ) ENGINE=InnoDB;
@@ -222,7 +224,7 @@ DROP TABLE IF EXISTS uc_protectedmembers;
 CREATE TABLE uc_protectedmembers (
   uid mediumint(8) unsigned NOT NULL default '0',
   username char(15) NOT NULL default '',
-  appid tinyint(1) unsigned NOT NULL default '0',
+  appid tinyint(3) unsigned NOT NULL default '0',
   dateline int(10) unsigned NOT NULL default '0',
   `admin` char(15) NOT NULL default '0',
   UNIQUE KEY(username, appid)
@@ -265,7 +267,7 @@ DROP TABLE IF EXISTS uc_pm_members;
 CREATE TABLE uc_pm_members (
   plid mediumint(8) unsigned NOT NULL default '0',
   uid mediumint(8) unsigned NOT NULL default '0',
-  isnew tinyint(1) unsigned NOT NULL default '0',
+  isnew tinyint(1) NOT NULL default '0',
   pmnum int(10) unsigned NOT NULL default '0',
   lastupdate int(10) unsigned NOT NULL default '0',
   lastdateline int(10) unsigned NOT NULL default '0',
@@ -279,7 +281,7 @@ DROP TABLE IF EXISTS uc_pm_lists;
 CREATE TABLE uc_pm_lists (
   plid mediumint(8) unsigned NOT NULL auto_increment,
   authorid mediumint(8) unsigned NOT NULL default '0',
-  pmtype tinyint(1) unsigned NOT NULL default '0',
+  pmtype tinyint(3) unsigned NOT NULL default '0',
   subject varchar(80) NOT NULL,
   members smallint(5) unsigned NOT NULL default '0',
   min_max varchar(17) NOT NULL,
@@ -305,7 +307,7 @@ CREATE TABLE uc_pm_messages_0 (
   plid mediumint(8) unsigned NOT NULL default '0',
   authorid mediumint(8) unsigned NOT NULL default '0',
   message text NOT NULL,
-  delstatus tinyint(1) unsigned NOT NULL default '0',
+  delstatus tinyint(3) unsigned NOT NULL default '0',
   dateline int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (pmid),
   KEY plid (plid,delstatus,dateline),
@@ -318,7 +320,7 @@ CREATE TABLE uc_pm_messages_1 (
   plid mediumint(8) unsigned NOT NULL default '0',
   authorid mediumint(8) unsigned NOT NULL default '0',
   message text NOT NULL,
-  delstatus tinyint(1) unsigned NOT NULL default '0',
+  delstatus tinyint(3) unsigned NOT NULL default '0',
   dateline int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (pmid),
   KEY plid (plid,delstatus,dateline),
@@ -331,7 +333,7 @@ CREATE TABLE uc_pm_messages_2 (
   plid mediumint(8) unsigned NOT NULL default '0',
   authorid mediumint(8) unsigned NOT NULL default '0',
   message text NOT NULL,
-  delstatus tinyint(1) unsigned NOT NULL default '0',
+  delstatus tinyint(3) unsigned NOT NULL default '0',
   dateline int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (pmid),
   KEY plid (plid,delstatus,dateline),
@@ -344,7 +346,7 @@ CREATE TABLE uc_pm_messages_3 (
   plid mediumint(8) unsigned NOT NULL default '0',
   authorid mediumint(8) unsigned NOT NULL default '0',
   message text NOT NULL,
-  delstatus tinyint(1) unsigned NOT NULL default '0',
+  delstatus tinyint(3) unsigned NOT NULL default '0',
   dateline int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (pmid),
   KEY plid (plid,delstatus,dateline),
@@ -357,7 +359,7 @@ CREATE TABLE uc_pm_messages_4 (
   plid mediumint(8) unsigned NOT NULL default '0',
   authorid mediumint(8) unsigned NOT NULL default '0',
   message text NOT NULL,
-  delstatus tinyint(1) unsigned NOT NULL default '0',
+  delstatus tinyint(3) unsigned NOT NULL default '0',
   dateline int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (pmid),
   KEY plid (plid,delstatus,dateline),
@@ -370,7 +372,7 @@ CREATE TABLE uc_pm_messages_5 (
   plid mediumint(8) unsigned NOT NULL default '0',
   authorid mediumint(8) unsigned NOT NULL default '0',
   message text NOT NULL,
-  delstatus tinyint(1) unsigned NOT NULL default '0',
+  delstatus tinyint(3) unsigned NOT NULL default '0',
   dateline int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (pmid),
   KEY plid (plid,delstatus,dateline),
@@ -383,7 +385,7 @@ CREATE TABLE uc_pm_messages_6 (
   plid mediumint(8) unsigned NOT NULL default '0',
   authorid mediumint(8) unsigned NOT NULL default '0',
   message text NOT NULL,
-  delstatus tinyint(1) unsigned NOT NULL default '0',
+  delstatus tinyint(3) unsigned NOT NULL default '0',
   dateline int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (pmid),
   KEY plid (plid,delstatus,dateline),
@@ -396,7 +398,7 @@ CREATE TABLE uc_pm_messages_7 (
   plid mediumint(8) unsigned NOT NULL default '0',
   authorid mediumint(8) unsigned NOT NULL default '0',
   message text NOT NULL,
-  delstatus tinyint(1) unsigned NOT NULL default '0',
+  delstatus tinyint(3) unsigned NOT NULL default '0',
   dateline int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (pmid),
   KEY plid (plid,delstatus,dateline),
@@ -409,7 +411,7 @@ CREATE TABLE uc_pm_messages_8 (
   plid mediumint(8) unsigned NOT NULL default '0',
   authorid mediumint(8) unsigned NOT NULL default '0',
   message text NOT NULL,
-  delstatus tinyint(1) unsigned NOT NULL default '0',
+  delstatus tinyint(3) unsigned NOT NULL default '0',
   dateline int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (pmid),
   KEY plid (plid,delstatus,dateline),
@@ -422,7 +424,7 @@ CREATE TABLE uc_pm_messages_9 (
   plid mediumint(8) unsigned NOT NULL default '0',
   authorid mediumint(8) unsigned NOT NULL default '0',
   message text NOT NULL,
-  delstatus tinyint(1) unsigned NOT NULL default '0',
+  delstatus tinyint(3) unsigned NOT NULL default '0',
   dateline int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (pmid),
   KEY plid (plid,delstatus,dateline),

@@ -66,7 +66,7 @@ function _ajaxpost(formid, showid, waitid, showidclass, submitbtn, recall) {
 				try {
 					s = $(ajaxframeid).contentWindow.document.documentElement.firstChild.nodeValue;
 				} catch(e) {
-					s = 'พบข้อผิดพลาดภายใน ไม่สามารถแสดงเนื้อหานี้ได้';
+					s = 'ข้อผิดพลาดภายใน ไม่สามารถแสดงเนื้อหานี้ได้';
 				}
 			}
 		}

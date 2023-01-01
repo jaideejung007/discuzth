@@ -27,8 +27,8 @@ $_G['setting']['search']['group']['searchctrl'] = intval($_G['setting']['search'
 
 $srchmod = 5;
 
-$cachelife_time = 300;		
-$cachelife_text = 3600;		
+$cachelife_time = 300;		// Life span for cache of searching in specified range of time
+$cachelife_text = 3600;		// Life span for cache of text searching
 
 $srchtype = empty($_GET['srchtype']) ? '' : trim($_GET['srchtype']);
 $searchid = isset($_GET['searchid']) ? intval($_GET['searchid']) : 0;
@@ -162,7 +162,7 @@ if(!submitcheck('searchsubmit', 1)) {
 			}
 			$forums = C::t('forum_forum')->fetch_all_by_fid($fids);
 			foreach($threads as $thread) {
-				if($forums[$value['fid']]['status'] == 3) {
+				if($forums[$thread['fid']]['status'] == 3) {
 					$tids .= ','.$thread['tid'];
 					$tnum++;
 				}

@@ -22,12 +22,12 @@ class discuz_memory extends discuz_base
 	public $enable = false;
 	public $debug = array();
 
-	public $gotset = false; // 是否支持Set数据类型
-	public $gothash = false; // 是否支持Hash数据类型
-	public $goteval = false; // 是否支持lua脚本eval
-	public $gotsortedset = false; // 是否支持SortedSet
-	public $gotcluster = false; // 是否是集群环境
-	public $gotpipeline = false; // 是否支持pipeline
+	public $gotset = false; 
+	public $gothash = false; 
+	public $goteval = false; 
+	public $gotsortedset = false; 
+	public $gotcluster = false; 
+	public $gotpipeline = false; 
 
 	public function __construct() {
 	}
@@ -104,7 +104,7 @@ class discuz_memory extends discuz_base
 		}
 		return $ret;
 	}
-	
+
 	public function add($key, $value, $ttl = 0, $prefix = '') {
 		$ret = false;
 		if($value === false) $value = '';
@@ -117,7 +117,7 @@ class discuz_memory extends discuz_base
 
 	public function exists($key, $prefix = '') {
 		$ret = false;
-		if ($this->enable) {
+		if ($this->enable && method_exists($this->memory, 'exists')) {
 			$this->userprefix = $prefix;
 			$ret = $this->memory->exists($this->_key($key));
 		}
@@ -259,11 +259,7 @@ class discuz_memory extends discuz_base
 		return $this->memory->hget($this->_key($key), $field);
 	}
 
-	/*
-	 * 如果设置了sha_key，将脚本load，然后将sha保存在$prefix_$sha_key中
-	 * 如果sha_key中有sha，则执行evalSha
-	 * 如果没有sha_key，则eval脚本
-	 */
+	
 	public function evalscript($script, $argv, $sha_key, $prefix = '') {
 		if (!$this->enable || !$this->goteval) {
 			return false;
@@ -280,7 +276,7 @@ class discuz_memory extends discuz_base
 				if (!$script) return false;
 				$should_load = true;
 			} else {
-				if (!$this->memory->scriptexists($sha)) { // 重启redis后，有可能sha-key存在，但script已经不存在了
+				if (!$this->memory->scriptexists($sha)) { 
 					$should_load = true;
 				}
 			}
@@ -288,9 +284,9 @@ class discuz_memory extends discuz_base
 				$sha = $this->memory->loadscript($script);
 				$this->memory->set($this->_key($sha_key), $sha);
 			}
-			return $this->memory->evalSha($sha, array_merge(array($this->_key('')), $argv));				
+			return $this->memory->evalSha($sha, array_merge(array($this->_key('')), $argv));
 		} else {
-			return $this->memory->evalscript($script, array_merge(array($this->_key('')), $argv));				
+			return $this->memory->evalscript($script, array_merge(array($this->_key('')), $argv));
 		}
 	}
 

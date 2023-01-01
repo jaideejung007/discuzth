@@ -35,7 +35,7 @@ if(!submitcheck('modsubmit')) {
 			showmessage('admin_copy_hava_mod');
 		}
 	}
-	$toforum['threadsorts_arr'] = unserialize($toforum['threadsorts']);
+	$toforum['threadsorts_arr'] = dunserialize($toforum['threadsorts']);
 
 	if($thread['sortid'] != 0 && $toforum['threadsorts_arr']['types'][$thread['sortid']]) {
 		foreach(C::t('forum_typeoptionvar')->fetch_all_by_search($thread['sortid'], null, $thread['tid']) as $result) {
@@ -57,11 +57,17 @@ if(!submitcheck('modsubmit')) {
 
 	$thread['posttableid'] = 0;
 	$threadid = C::t('forum_thread')->insert($thread, true);
+	C::t('forum_newthread')->insert(array(
+		'tid' => $threadid,
+		'fid' => $thread['fid'],
+		'dateline' => $thread['dateline'],
+	));
+	C::t('forum_sofa')->insert(array('tid' => $threadid,'fid' => $thread['fid']));
 	if($post = C::t('forum_post')->fetch_threadpost_by_tid_invisible($_G['tid'])) {
 		$post['pid'] = '';
 		$post['tid'] = $threadid;
 		$post['fid'] = $copyto;
-		$post['dateline'] = TIMESTAMP;
+		$post['dateline'] = $thread['dateline'];
 		$post['attachment'] = 0;
 		$post['invisible'] = $post['rate'] = $post['ratetimes'] = 0;
 		$post['message'] .= "\n".lang('forum/thread', 'source').": [url=forum.php?mod=viewthread&tid={$sourcetid}]{$thread['subject']}[/url]";
@@ -86,7 +92,7 @@ if(!submitcheck('modsubmit')) {
 
 	$modpostsnum ++;
 	$resultarray = array(
-	'redirect'	=> "forum.php?mod=forumdisplay&fid=$_G[fid]",
+	'redirect'	=> "forum.php?mod=forumdisplay&fid={$_G['fid']}",
 	'reasonpm'	=> ($sendreasonpm ? array('data' => array($thread), 'var' => 'thread', 'item' => 'reason_copy', 'notictype' => 'post') : array()),
 	'reasonvar'	=> array('tid' => $thread['tid'], 'subject' => $thread['subject'], 'modaction' => $modaction, 'reason' => $reason, 'threadid' => $threadid),
 	'modtids'	=> $thread['tid'],

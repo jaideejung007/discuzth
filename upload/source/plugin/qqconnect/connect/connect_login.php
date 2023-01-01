@@ -55,13 +55,13 @@ if($op == 'init') {
 
 	$params = $_GET;
 
-	if(!isset($params['receive'])) {		
+	if(!isset($params['receive'])) {
 		require_once DISCUZ_ROOT.'/source/plugin/qqconnect/lib/Util.php';
 		$utilService = new Cloud_Service_Util();
 		echo '<script type="text/javascript">setTimeout("window.location.href=\'connect.php?receive=yes&'.str_replace("'", "\'", $utilService->httpBuildQuery($_GET, '', '&')).'\'", 1)</script>';
 		exit;
 	}
-	
+
 	if($_GET['state'] != md5(FORMHASH)){
 		showmessage('qqconnect:connect_get_access_token_failed', $referer);
 	}
@@ -156,7 +156,7 @@ if($op == 'init') {
 				'conisqqshow' => $isqqshow,
 			));
 
-		} else { 
+		} else { // debug 当前登录的论坛账号并没有绑定任何QQ号，则可以绑定当前的这个QQ号
 			if(empty($current_connect_member)) {
 				C::t('#qqconnect#common_member_connect')->insert(array(
 					'uid' => $_G['uid'],
@@ -209,7 +209,7 @@ if($op == 'init') {
 
 	} else {
 
-		if($connect_member) { 
+		if($connect_member) { // debug 此分支是用户直接点击QQ登录，并且这个QQ号已经绑好一个论坛账号了，将直接登进论坛了
 			C::t('#qqconnect#common_member_connect')->update($connect_member['uid'], array(
 				'conuintoken' => $conuintoken,
 				'conopenid' => $conopenid,
@@ -233,7 +233,7 @@ if($op == 'init') {
 			dsetcookie('stats_qc_login', 3, 86400);
 			showmessage('login_succeed', $referer, $param, array('extrajs' => $ucsynlogin));
 
-		} else { 
+		} else { // debug 此分支是用户直接点击QQ登录，并且这个QQ号还未绑定任何论坛账号，将将跳转到一个新页引导用户注册个新论坛账号或绑一个已有的论坛账号
 
 			$auth_hash = authcode($conopenid, 'ENCODE');
 			$insert_arr = array(
@@ -244,10 +244,10 @@ if($op == 'init') {
 			$connectGuest = C::t('#qqconnect#common_connect_guest')->fetch($conopenid);
 			if ($connectGuest['conqqnick']) {
 				$insert_arr['conqqnick'] = $connectGuest['conqqnick'];
-			} else {				
+			} else {
 				try {
 					require_once DISCUZ_ROOT.'/source/plugin/qqconnect/lib/ConnectOAuth.php';
-					$connectOAuthClient = new Cloud_Service_Client_ConnectOAuth();					
+					$connectOAuthClient = new Cloud_Service_Client_ConnectOAuth();
 					$connectUserInfo = $connectOAuthClient->connectGetUserInfo_V2($conopenid, $conuintoken);
 					if ($connectUserInfo['nickname']) {
 						$connectUserInfo['nickname'] = strip_tags($connectUserInfo['nickname']);
@@ -285,7 +285,7 @@ if($op == 'init') {
 
 } elseif($op == 'change') {
 	$callback = $_G['connect']['callback_url'] . '&referer=' . urlencode($_GET['referer']);
-	
+
 	try {
 		dsetcookie('con_request_uri', $callback);
 		$redirect = $connectOAuthClient->getOAuthAuthorizeURL_V2($callback);

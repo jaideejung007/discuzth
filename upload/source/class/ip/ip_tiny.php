@@ -13,30 +13,27 @@ if(!defined('IN_DISCUZ')) {
 
 class ip_tiny_init_exception extends Exception {}
 
-class ip_tiny {
-	
+class ip_tiny { /* jaideejung007 */
+
 	private static $instance = NULL;
-	private $fd = NULL;
-	private $offset = array();
-	private $index = NULL;
-	private $length = 0;
+	private $jdzfp = NULL;
 
 	private function __construct() {
-		$ipdatafile = constant("DISCUZ_ROOT").'./data/ipdata/tinyipdata.dat';
-		if($this->fp === NULL && $this->fp = fopen($ipdatafile, 'rb')) {
-			$this->offset = unpack('Nlen', fread($this->fp, 4));
-			$this->index  = fread($this->fp, $this->offset['len'] - 4);
+		require_once constant("DISCUZ_ROOT").'./data/ipdata/geoip2.phar';
+
+		$ipdatafile = constant("DISCUZ_ROOT").'./data/ipdata/GeoLite2-City.mmdb';
+
+		if($this->jdzfp === NULL && $this->jdzfp = new GeoIp2\Database\Reader($ipdatafile)) {
 		}
-		if($this->fp === FALSE) {
+		if($this->jdzfp === FALSE) {
 			throw new ip_tiny_init_exception();
 		}
 
-		$this->length = $this->offset['len'] - 1028;
 	}
 
 	function __destruct() {
-		if ($this->fd) {
-			@fclose($this->fd);
+		if ($this->jdzfp) {
+			unset($this->jdzfp);
 		}
 	}
 
@@ -53,30 +50,19 @@ class ip_tiny {
 
 	public function convert($ip) {
 
-		$ipdot = explode('.', $ip);
-		$ip    = pack('N', ip2long($ip));
+		try {
+			$jdzrecord = $this->jdzfp->city($ip);
+			$return = $jdzrecord->city->name; // ชื่อเมือง/นคร/เขต ผลลัพธ์: 'Ban Dan'
+			$return .= ($jdzrecord->city->name == NULL ? "" : ", ".$jdzrecord->mostSpecificSubdivision->name); // ชื่อจังหวัด/รัฐ ผลลัพธ์: 'Surin'
+			$return .= ($jdzrecord->mostSpecificSubdivision->name == NULL ? $jdzrecord->country->name : ", ".$jdzrecord->country->name); // ชื่อประเทศ ผลลัพธ์: 'United States'
 
-		$ipdot[0] = (int)$ipdot[0];
-		$ipdot[1] = (int)$ipdot[1];
-
-
-		$start  = @unpack('Vlen', $this->index[$ipdot[0] * 4] . $this->index[$ipdot[0] * 4 + 1] . $this->index[$ipdot[0] * 4 + 2] . $this->index[$ipdot[0] * 4 + 3]);
-
-		for ($start = $start['len'] * 8 + 1024; $start < $this->length; $start += 8) {
-
-			if ($this->index[$start] . $this->index[$start + 1] . $this->index[$start + 2] . $this->index[$start + 3] >= $ip) {
-				$index_offset = @unpack('Vlen', $this->index[$start + 4] . $this->index[$start + 5] . $this->index[$start + 6] . "\x0");
-				$index_length = @unpack('Clen', $this->index[$start + 7]);
-				break;
-			}
+		} catch (Exception $e) {
+			$return = 'ERR';
 		}
-
-		@fseek($this->fp, $this->offset['len'] + $index_offset['len'] - 1024);
-		if($index_length['len']) {
-			return '- '.@fread($this->fp, $index_length['len']);
-		} else {
-			return '- Unknown';
+		if(!@$return) {
+			$return = '??';
 		}
+		return '- '.$return;
 	}
 
 }

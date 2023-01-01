@@ -1,6 +1,7 @@
 {eval
+	$space_uid = $space['uid'];
 	$filter = array( 'common' => '{lang have_posted}', 'save' => '{lang draft}', 'close' => '{lang closed}', 'aduit' => '{lang pending}', 'ignored' => '{lang ignored}', 'recyclebin' => '{lang recyclebin}');
-	$_G[home_tpl_spacemenus][] = "<a href=\"home.php?mod=space&uid=$space[uid]&do=thread&view=me\">{lang they_thread}</a>";
+	$_G['home_tpl_spacemenus'][] = "<a href=\"home.php?mod=space&uid=$space_uid&do=thread&view=me\">{lang they_thread}</a>";
 }
 
 <!--{if $diymode}-->
@@ -45,7 +46,7 @@
 	<div id="pt" class="bm cl">
 		<div class="z">
 			<a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a> <em>&rsaquo;</em>
-			<!--{if $_G[setting][homestyle]}--><a href="home.php">$_G[setting][navs][4][navname]</a> <em>&rsaquo;</em> <!--{/if}-->
+			<!--{if $_G[setting][homestyle] && isset($_G[setting][navs][4])}--><a href="home.php">$_G[setting][navs][4][navname]</a> <em>&rsaquo;</em> <!--{/if}-->
 			<a href="home.php?mod=space&do=blog">{lang thread}</a>
 		</div>
 	</div>
@@ -239,7 +240,7 @@
 							<!--{loop $tids[$stid] $pid}-->
 							<!--{eval $post = $posts[$pid];}-->
 							<tr>
-								<td colspan="5" class="xg1">&nbsp;<svg width="15" height="14" class="vm"><path fill="#ddd" d="M6 8v5H1V8C1 5 4 .5 6 .5V3C5 3 3.5 6 3.5 8zm8 0v5H9V8c0-3 3-7.5 5-7.5V3c-1 0-2.5 3-2.5 5z" /></svg> <a href="forum.php?mod=redirect&goto=findpost&ptid=$thread[tid]&pid=$pid" target="_blank"><!--{if $post[message]}-->{$post[message]}<!--{else}-->......<!--{/if}--></a> <svg width="15" height="14" class="vm"><path fill="#ddd" d="M9 6V1h5v5c0 3-3 7.5-5 7.5V11c1 0 2.5-3 2.5-5zM1 6V1h5v5c0 3-3 7.5-5 7.5V11c1 0 2.5-3 2.5-5z" /></svg></td>
+								<td colspan="5" class="xg1">&nbsp;<svg width="15" height="14" class="vm"><path fill="#ddd" d="M6 8v5H1V8C1 5 4 .5 6 .5V3C5 3 3.5 6 3.5 8zm8 0v5H9V8c0-3 3-7.5 5-7.5V3c-1 0-2.5 3-2.5 5z" /></svg> <a href="forum.php?mod=redirect&goto=findpost&ptid=$thread[tid]&pid=$pid" target="_blank"><!--{if $post['message'] || is_numeric($post['message'])}-->{$post[message]}<!--{else}-->......<!--{/if}--></a> <svg width="15" height="14" class="vm"><path fill="#ddd" d="M9 6V1h5v5c0 3-3 7.5-5 7.5V11c1 0 2.5-3 2.5-5zM1 6V1h5v5c0 3-3 7.5-5 7.5V11c1 0 2.5-3 2.5-5z" /></svg></td>
 							</tr>
 							<!--{/loop}-->
 						<!--{/if}-->

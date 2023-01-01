@@ -1,6 +1,10 @@
 <?php
 
-
+/**
+ * DiscuzX Convert
+ *
+ * $Id: members.php 17836 2010-11-03 05:24:59Z cnteacher $
+ */
 
 $curprg = basename(__FILE__);
 

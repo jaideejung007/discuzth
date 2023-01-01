@@ -19,7 +19,7 @@ function getuploadconfig($uid=0, $fid=0, $limit=true) {
 	$authkey = $_G['config']['security']['authkey'];
 	$config['hash'] = md5(substr(md5($authkey), 8).$uid);
 
-	$imageexts = array('jpg','jpeg','gif','png','bmp');
+	$imageexts = array('jpg','jpeg','gif','png','bmp','webp');
 	$forumattachextensions = '';
 	$fid = intval($fid);
 	if($fid) {
@@ -37,7 +37,7 @@ function getuploadconfig($uid=0, $fid=0, $limit=true) {
 	loadcache('attachtype');
 	$fid = isset($_G['cache']['attachtype'][$fid]) ? $fid : 0;
 	$filter = array();
-	if(is_array($_G['cache']['attachtype'][$fid])) {
+	if(isset($_G['cache']['attachtype'][$fid]) && is_array($_G['cache']['attachtype'][$fid])) {
 		foreach($_G['cache']['attachtype'][$fid] as $extension => $maxsize) {
 			if($maxsize == 0) {
 				$notallow[] = $extension;
@@ -70,7 +70,7 @@ function getuploadconfig($uid=0, $fid=0, $limit=true) {
 	if(!empty($_G['group']['maxattachsize'])) {
 		$config['max'] = intval($_G['group']['maxattachsize']);
 	} else {
-		$config['max'] = @ini_get(upload_max_filesize);
+		$config['max'] = getmaxupload();
 		$unit = strtolower(substr($config['max'], -1, 1));
 		$config['max'] = intval($config['max']);
 		if($unit == 'k') {
@@ -106,5 +106,32 @@ function filterexts($needle, $haystack) {
 		}
 	}
 	return $needle;
+}
+function getmaxupload() {
+	$sizeconv = array('B' => 1, 'KB' => 1024, 'MB' => 1048576, 'GB' => 1073741824);
+	$sizes = array();
+	$sizes[] = ini_get('upload_max_filesize');
+	$sizes[] = ini_get('post_max_size');
+	$sizes[] = ini_get('memory_limit');
+	if(intval($sizes[1]) === 0) {
+		unset($sizes[1]);
+	}
+	if(intval($sizes[2]) === -1) {
+		unset($sizes[2]);
+	}
+	$sizes = preg_replace_callback(
+		'/^(\-?\d+)([KMG]?)$/i',
+		function($arg) use ($sizeconv) {
+			return (intval($arg[1]) * $sizeconv[strtoupper($arg[2]).'B']).'|'.strtoupper($arg[0]);
+		},
+		$sizes
+	);
+	natsort($sizes);
+	$output = explode('|', current($sizes));
+	if(!empty($output[1])) {
+		return $output[1];
+	} else {
+		return ini_get('upload_max_filesize');
+	}
 }
 ?>

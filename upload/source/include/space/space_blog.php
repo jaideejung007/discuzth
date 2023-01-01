@@ -42,7 +42,7 @@ if($id) {
 		include template('home/space_privacy');
 		exit();
 	} elseif(!$space['self'] && $blog['friend'] == 4 && $_G['adminid'] != 1) {
-		$cookiename = "view_pwd_blog_$blog[blogid]";
+		$cookiename = "view_pwd_blog_{$blog['blogid']}";
 		$cookievalue = empty($_G['cookie'][$cookiename])?'':$_G['cookie'][$cookiename];
 		if($cookievalue != md5(md5($blog['password']))) {
 			$invalue = $blog;
@@ -70,7 +70,7 @@ if($id) {
 	$otherlist = array();
 	$query = C::t('home_blog')->fetch_all_by_uid($space['uid'], 'dateline', 0, 6);
 	foreach($query as $value) {
-		if($value['blogid'] != $blog['blogid'] && empty($value['friend']) && $blog['status'] == 0) {
+		if($value['blogid'] != $blog['blogid'] && empty($value['friend']) && $value['status'] == 0) {
 			$otherlist[] = $value;
 		}
 	}
@@ -78,7 +78,7 @@ if($id) {
 	$newlist = array();
 	$query = C::t('home_blog')->fetch_all_by_hot($minhot, 'dateline', 0, 6);
 	foreach($query as $value) {
-		if($value['blogid'] != $blog['blogid'] && empty($value['friend']) && $blog['status'] == 0) {
+		if($value['blogid'] != $blog['blogid'] && empty($value['friend']) && $value['status'] == 0) {
 			$newlist[] = $value;
 		}
 	}
@@ -112,7 +112,7 @@ if($id) {
 		}
 	}
 
-	$multi = multi($count, $perpage, $page, "home.php?mod=space&uid=$blog[uid]&do=$do&id=$id#comment");
+	$multi = multi($count, $perpage, $page, "home.php?mod=space&uid={$blog['uid']}&do=$do&id=$id#comment");
 
 	if(!$_G['setting']['preventrefresh'] || !$space['self'] && $_G['cookie']['viewid'] != 'blog_'.$blog['blogid']) {
 		C::t('home_blog')->increase($blog['blogid'], 0, array('viewnum' => 1));
@@ -266,7 +266,7 @@ if($id) {
 				$fuid_actives = array($fuid=>' selected');
 			} else {
 				$uids = explode(',', $space['feedfriend']);
-				$theurl = "home.php?mod=space&uid=$space[uid]&do=$do&view=we";
+				$theurl = "home.php?mod=space&uid={$space['uid']}&do=$do&view=we";
 				$f_index = 'dateline';
 			}
 
@@ -353,18 +353,24 @@ if($id) {
 }
 
 function blog_get_stick($uid, $stickblogs, $summarylen) {
-	$list = array_flip($stickblogs);
+	$list = array();
 	if($stickblogs) {
-		$data_blog = C::t('home_blog')->fetch_all($stickblogs);
+		$data_blog = C::t('home_blog')->fetch_all_blog($stickblogs);
 		$data_blogfield = C::t('home_blogfield')->fetch_all($stickblogs);
-		foreach($data_blog as $curblogid=>$value) {
-			$value = array_merge($value, (array)$data_blogfield[$curblogid]);
-			$value['message'] = getstr($value['message'], $summarylen, 0, 0, 0, -1);
-			$value['message'] = preg_replace("/&[a-z]+\;/i", '', $value['message']);
-			if($value['pic']) $value['pic'] = pic_cover_get($value['pic'], $value['picflag']);
-			$value['dateline'] = dgmdate($value['dateline']);
-			$value['stickflag'] = true;
-			$list[$value['blogid']] = $value;
+		foreach ($stickblogs as $blogid) {
+			if(!empty($data_blog[$blogid]) && !empty($data_blogfield[$blogid])) {
+				$value = array_merge($data_blog[$blogid], $data_blogfield[$blogid]);
+				$value['message'] = getstr($value['message'], $summarylen, 0, 0, 0, -1);
+				$value['message'] = preg_replace("/&[a-z]+\;/i", '', $value['message']);
+				if($value['pic']) $value['pic'] = pic_cover_get($value['pic'], $value['picflag']);
+				$value['dateline'] = dgmdate($value['dateline']);
+				$value['stickflag'] = true;
+				$list[$value['blogid']] = $value;
+				$stickids[] = $value['blogid'];
+			}
+		}
+		if(count($stickids) != count($stickblogs)) {
+			C::t('common_member_field_home')->update($uid, array('stickblogs' => implode(',', $stickids)));
 		}
 	}
 	return $list;

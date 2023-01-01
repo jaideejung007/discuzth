@@ -1,6 +1,10 @@
 <?php
 
-
+/**
+ * DiscuzX Convert
+ *
+ * $Id: forums.php 15819 2010-08-27 03:50:24Z monkey $
+ */
 
 $curprg = basename(__FILE__);
 

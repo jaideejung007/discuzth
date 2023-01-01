@@ -45,10 +45,14 @@ if($op == 'edit') {
 
 			!empty($_GET['locationnew']) && $locationnew = dhtmlspecialchars($_GET['locationnew']);
 
+			
+			if($_G['setting']['profilehistory']) {
+				C::t('common_member_profile_history')->insert(array_merge(C::t('common_member_profile')->fetch(intval($member['uid'])), array('dateline' => time())));
+			}
 			C::t('common_member_profile')->update($member['uid'], array('bio' => $biohtmlnew));
 			C::t('common_member_field_forum')->update($member['uid'], array('sightml' => $sightmlnew));
 		}
-		acpmsg('members_edit_succeed', "$cpscript?mod=modcp&action=$_GET[action]&op=$op");
+		acpmsg('members_edit_succeed', "$cpscript?mod=modcp&action={$_GET['action']}&op=$op");
 
 	} elseif($member) {
 
@@ -91,13 +95,24 @@ if($op == 'edit') {
 			$banexpirynew = $banexpirynew > TIMESTAMP ? $banexpirynew : 0;
 			if($banexpirynew) {
 				$member['groupterms'] = $member['groupterms'] && is_array($member['groupterms']) ? $member['groupterms'] : array();
-				$member['groupterms']['main'] = array('time' => $banexpirynew, 'adminid' => $member['adminid'], 'groupid' => $member['groupid']);
+				if($member['groupid'] == 4 || $member['groupid'] == 5) {
+					$member['groupterms']['main']['time'] = $banexpirynew;
+					if (empty($member['groupterms']['main']['groupid'])) {
+						$groupnew = C::t('common_usergroup')->fetch_by_credits($member['credits']);
+						$member['groupterms']['main']['groupid'] = $groupnew['groupid'];
+					}
+					if (!isset($member['groupterms']['main']['adminid'])) {
+						$member['groupterms']['main']['adminid'] = $member['adminid'];
+					}
+				}else{
+					$member['groupterms']['main'] = array('time' => $banexpirynew, 'adminid' => $member['adminid'], 'groupid' => $member['groupid']);
+				}
 				$member['groupterms']['ext'][$groupidnew] = $banexpirynew;
 				$setarr['groupexpiry'] = groupexpiry($member['groupterms']);
 			} else {
 				$setarr['groupexpiry'] = 0;
 			}
-			if(!$member['adminid']) {
+			if(in_array($member['adminid'], array(0, -1))) {
 				$member_status = C::t('common_member_status')->fetch($member['uid']);
 			}
 			$adminidnew = -1;
@@ -130,7 +145,7 @@ if($op == 'edit') {
 		C::t('common_member_field_forum')->update($member['uid'], array('groupterms' => serialize($member['groupterms'])));
 		if($_GET['bannew'] == 4) {
 			$notearr = array(
-				'user' => "<a href=\"home.php?mod=space&uid=$_G[uid]\">$_G[username]</a>",
+				'user' => "<a href=\"home.php?mod=space&uid={$_G['uid']}\">{$_G['username']}</a>",
 				'day' => $_GET['banexpirynew'],
 				'reason' => $reason,
 				'from_id' => 0,
@@ -140,7 +155,7 @@ if($op == 'edit') {
 		}
 		if($_GET['bannew'] == 5) {
 			$notearr = array(
-				'user' => "<a href=\"home.php?mod=space&uid=$_G[uid]\">$_G[username]</a>",
+				'user' => "<a href=\"home.php?mod=space&uid={$_G['uid']}\">{$_G['username']}</a>",
 				'day' => $_GET['banexpirynew'],
 				'reason' => $reason,
 				'from_id' => 0,
@@ -153,7 +168,7 @@ if($op == 'edit') {
 			crime('recordaction', $member['uid'], ($_GET['bannew'] == 4 ? 'crime_banspeak' : 'crime_banvisit'), $reason);
 		}
 
-		acpmsg('modcp_member_ban_succeed', "$cpscript?mod=modcp&action=$_GET[action]&op=$op");
+		acpmsg('modcp_member_ban_succeed', "$cpscript?mod=modcp&action={$_GET['action']}&op=$op");
 
 	}
 
@@ -181,7 +196,7 @@ if($op == 'edit') {
 
 		if(!empty($_GET['expirationnew']) && is_array($_GET['expirationnew'])) {
 			foreach($_GET['expirationnew'] as $id => $expiration) {
-				if($expiration == intval($expiration)) {
+				if($expiration === intval($expiration)) {
 					$expiration = $expiration > 1 ? (TIMESTAMP + $expiration * 86400) : TIMESTAMP + 86400;
 					$updatecheck = C::t('common_banned')->update_expiration_by_id($id, $expiration, $_G['adminid'], $_G['username']);
 				}

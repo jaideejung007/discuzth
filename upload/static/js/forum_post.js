@@ -28,7 +28,9 @@ var STATUSMSG = {
 	'8' : 'ไม่สามารถบันทึกไฟล์แนบ',
 	'9' : 'ไม่มีไฟล์แนบที่จะอัปโหลด',
 	'10' : 'การดำเนินการผิดพลาด',
-	'11' : 'วันนี้คุณไม่สามารถอัปโหลดไฟล์แนบที่มีขนาดใหญ่ได้'
+	'11' : 'วันนี้คุณไม่สามารถอัปโหลดไฟล์แนบที่มีขนาดใหญ่ได้',
+	'12' : 'ส่งไม่สำเร็จเนื่องจากชื่อไฟล์มีคำที่ละเอียดอ่อน',
+	'13' : 'เนื่องด้วยข้อจำกัดของเซิร์ฟเวอร์ไม่สามารถอัปโหลดไฟล์แนบที่มีความละเอียดสูงได้'
 };
 
 EXTRAFUNC['validator'] = [];
@@ -75,8 +77,12 @@ function validate(theform) {
 	if(($('postsubmit').name != 'replysubmit' && !($('postsubmit').name == 'editsubmit' && !isfirstpost) && theform.subject.value == "") || !sortid && !special && trim(message) == "") {
 		showError('ขออภัย! คุณยังไม่ได้ใส่ชื่อกระทู้หรือเนื้อหาใดๆ เลย');
 		return false;
-	} else if(theform.subject.value.length > 255) {
+	} else if(dstrlen(theform.subject.value) > 255) {
 		showError('ชื่อกระทู้จะต้องไม่ยาวเกิน 255 ตัวอักษร');
+		return false;
+	}
+	if(!disablepostctrl && theform.subject.value != "" && ((postminsubjectchars != 0 && dstrlen(theform.subject.value) < postminsubjectchars) || (postminsubjectchars != 0 && dstrlen(theform.subject.value) > postmaxsubjectchars))) {
+		showError('ชื่อกระทู้มีความยาวไม่ตรงตามข้อกำหนดของระบบ\n\nความยาวปัจจุบัน: ' + dstrlen(theform.subject.value) + ' ตัวอักษร\nจะต้องอยู่ระหว่าง: ' + postminsubjectchars + ' ถึง ' + postmaxsubjectchars + ' ตัวอักษรเท่านั้น');
 		return false;
 	}
 	if(in_array($('postsubmit').name, ['topicsubmit', 'editsubmit'])) {
@@ -129,7 +135,12 @@ function validate(theform) {
 					setTimeout(function () { validate(theform); }, 100);
 					chk = 0;
 				} else if(chkv.indexOf('check_right') == -1) {
-					showError('คำถามหรือคำตอบผิด กรุณากรอกใหม่');
+					if($('secqaaverify_' + theform.secqaahash.value) == document.activeElement) {
+						$('postsubmit').focus();
+						setTimeout(function () { validate(theform); }, 100);
+					} else {
+						showError('คำถามหรือคำตอบผิด กรุณากรอกใหม่');
+					}
 					chk = 0;
 				}
 			}
@@ -139,7 +150,12 @@ function validate(theform) {
 					setTimeout(function () { validate(theform); }, 100);
 					chk = 0;
 				} else if(chkv.indexOf('check_right') === -1) {
-					showError('รหัสไม่ถูกต้อง กรุณากรอกใหม่');
+					if($('seccodeverify_' + theform.seccodehash.value) == document.activeElement) {
+						$('postsubmit').focus();
+						setTimeout(function () { validate(theform); }, 100);
+					} else {
+						showError('รหัสไม่ถูกต้อง กรุณากรอกใหม่');
+					}
 					chk = 0;
 				}
 			}
@@ -405,10 +421,22 @@ function appendAttachDel(ids) {
 	for(id in ids) {
 		aids += '&aids[]=' + id;
 	}
-	var x = new Ajax();
-	x.get('forum.php?mod=ajax&action=deleteattach&inajax=yes&tid=' + (typeof tid == 'undefined' ? 0 : tid) + '&pid=' + (typeof pid == 'undefined' ? 0 : pid) + aids + ($('modthreadkey') ? '&modthreadkey=' + $('modthreadkey').value : ''), function() {});
-	if($('delattachop')) {
-		$('delattachop').value = 1;
+	list = document.getElementsByTagName("input");
+	formhash = null;
+	for(i=0; i<list.length; i++) {
+		if(list[i].name == "formhash") {
+			formhash = list[i].value;
+			break;
+		}
+	}
+	if(formhash) {
+		var x = new Ajax();
+		x.get('forum.php?mod=ajax&action=deleteattach&inajax=yes&formhash=' + formhash + '&tid=' + (typeof tid == 'undefined' ? 0 : tid) + '&pid=' + (typeof pid == 'undefined' ? 0 : pid) + aids + ($('modthreadkey') ? '&modthreadkey=' + $('modthreadkey').value : ''), function() {});
+		if($('delattachop')) {
+			$('delattachop').value = 1;
+		}
+	} else {
+		showError('ขออภัย ไม่สามารถลบได้ กรุณารีเฟรชหน้านี้แล้วลองอีกครั้ง');
 	}
 }
 
@@ -430,7 +458,7 @@ function updateattachnum(type) {
 	var num = ATTACHNUM[type + 'used'] + ATTACHNUM[type + 'unused'];
 	if(num) {
 		if($(editorid + '_' + type)) {
-			$(editorid + '_' + type).title = 'ประกอบด้วย ' + num + (type == 'image' ? ' รูปภาพ' : ' ไฟล์อื่นๆ');
+			$(editorid + '_' + type).title = 'ประกอบด้วย ' + num + (type == 'image' ? ' รูปภาพ' : ' ไฟล์อื่น ๆ');
 		}
 		if($(editorid + '_' + type + 'n')) {
 			$(editorid + '_' + type + 'n').style.display = '';
@@ -438,7 +466,7 @@ function updateattachnum(type) {
 		ATTACHORIMAGE = 1;
 	} else {
 		if($(editorid + '_' + type)) {
-			$(editorid + '_' + type).title = type == 'image' ? 'รูปภาพ' : 'ไฟล์อื่นๆ';
+			$(editorid + '_' + type).title = type == 'image' ? 'รูปภาพ' : 'ไฟล์อื่น ๆ';
 		}
 		if($(editorid + '_' + type + 'n')) {
 			$(editorid + '_' + type + 'n').style.display = 'none';
@@ -616,7 +644,7 @@ function addpolloption() {
 		addUploadEvent(imgid, proid)
 
 	} else {
-		$('polloption_new').innerHTML = 'โหวตได้จำนวนสูงสุดถึง '+maxoptions;
+		$('polloption_new').innerHTML = 'โหวตได้จำนวนสูงสุดถึง ' + maxoptions;
 	}
 }
 
@@ -813,6 +841,7 @@ function getreplycredit() {
 
 	var reply_credits_sum = Math.ceil(parseInt(credit_once * times));
 
+	$('replycredit_sum').innerHTML = reply_credits_sum > 0 ? reply_credits_sum : 0 ;
 	if(real_reply_credit > userextcredit) {
 		$('replycredit').innerHTML = '<b class="xi1">ระบุจำนวนเครดิตรางวัลของคำตอบเยอะเกินไป ('+real_reply_credit+')</b>';
 	} else {
@@ -821,7 +850,6 @@ function getreplycredit() {
 		} else {
 			$('replycredit').innerHTML = replycredit_result_lang + (real_reply_credit > 0 ? real_reply_credit : 0 );
 		}
-		$('replycredit_sum').innerHTML = reply_credits_sum > 0 ? reply_credits_sum : 0 ;
 	}
 }
 
@@ -832,7 +860,7 @@ function extraCheckall() {
 }
 
 function deleteThread() {
-	if(confirm('คุณแน่ใจว่าต้องการลบรายการนี้?') != 0){
+	if(confirm('คุณแน่ใจว่าต้องการลบรายการนี้หรือไม่') != 0){
 		$('delete').value = '1';
 		$('postform').submit();
 	}

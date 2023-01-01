@@ -51,6 +51,10 @@ if($_GET['operation'] == 'upload') {
 
 } elseif($_GET['operation'] == 'poll') {
 
+	if(!$_G['group']['allowpostpoll'] || !$_G['group']['allowpostimage']) {
+		exit("{\"aid\":0, \"errorcode\":4}");
+	}
+
 	$upload = new discuz_upload();
 
 	$_FILES["Filedata"]['name'] = addslashes(diconv(urldecode($_FILES["Filedata"]['name']), 'UTF-8'));
@@ -75,10 +79,11 @@ if($_GET['operation'] == 'upload') {
 			$imginfo = @getimagesize($attach['target']);
 			if($imginfo !== FALSE) {
 				$attach['width'] = $imginfo[0];
+				$attach['height'] = $imginfo[1];
 			}
 		}
 
-		if(getglobal('setting/ftp/on') && ((!$_G['setting']['ftp']['allowedexts'] && !$_G['setting']['ftp']['disallowedexts']) || ($_G['setting']['ftp']['allowedexts'] && in_array($attach['ext'], $_G['setting']['ftp']['allowedexts'])) || ($_G['setting']['ftp']['disallowedexts'] && !in_array($attach['ext'], $_G['setting']['ftp']['disallowedexts']))) && (!$_G['setting']['ftp']['minsize'] || $attach['size'] >= $_G['setting']['ftp']['minsize'] * 1024)) {
+		if(ftpperm($attach['ext'], $attach['size'])) {
 			if(ftpcmd('upload', 'forum/'.$attach['attachment']) && (!$attach['thumb'] || ftpcmd('upload', 'forum/'.getimgthumbname($attach['attachment'])))) {
 				@unlink($_G['setting']['attachdir'].'/forum/'.$attach['attachment']);
 				@unlink($_G['setting']['attachdir'].'/forum/'.getimgthumbname($attach['attachment']));
@@ -102,7 +107,8 @@ if($_GET['operation'] == 'upload') {
 				'thumb' => $attach['thumb'],
 				'remote' => $attach['remote'],
 				'dateline' => $_G['timestamp'],
-				'width' => $attach['width']
+				'width' => $attach['width'],
+				'height' => $attach['height']
 		);
 		$image = array();
 		if($aid) {
@@ -120,7 +126,7 @@ if($_GET['operation'] == 'upload') {
 		require_once libfile('function/home');
 		$smallimg = pic_get($attach['attachment'], 'forum', $attach['thumb'], $attach['remote']);
 		$bigimg = pic_get($attach['attachment'], 'forum', 0, $attach['remote']);
-		echo "{\"aid\":$attach[attachid], \"smallimg\":\"$smallimg\", \"bigimg\":\"$bigimg\", \"errorcode\":$errorcode}";
+		echo "{\"aid\":{$attach['attachid']}, \"smallimg\":\"$smallimg\", \"bigimg\":\"$bigimg\", \"errorcode\":$errorcode}";
 		exit();
 	} else {
 		echo "{\"aid\":0, \"errorcode\":$errorcode}";
@@ -144,7 +150,7 @@ if($_GET['operation'] == 'upload') {
 			if(!empty($file) && is_array($file)) {
 				$url = pic_get($file['filepath'], 'album', $file['thumb'], $file['remote']);
 				$bigimg = pic_get($file['filepath'], 'album', 0, $file['remote']);
-				echo "{\"picid\":\"$file[picid]\", \"url\":\"$url\", \"bigimg\":\"$bigimg\"}";
+				echo "{\"picid\":\"{$file['picid']}\", \"url\":\"$url\", \"bigimg\":\"$bigimg\"}";
 				$showerror = false;
 			}
 		}
@@ -198,7 +204,7 @@ if($_GET['operation'] == 'upload') {
 			$image->Watermark($attach['target'], '', 'portal');
 		}
 
-		if(getglobal('setting/ftp/on') && ((!$_G['setting']['ftp']['allowedexts'] && !$_G['setting']['ftp']['disallowedexts']) || ($_G['setting']['ftp']['allowedexts'] && in_array($attach['ext'], $_G['setting']['ftp']['allowedexts'])) || ($_G['setting']['ftp']['disallowedexts'] && !in_array($attach['ext'], $_G['setting']['ftp']['disallowedexts']))) && (!$_G['setting']['ftp']['minsize'] || $attach['size'] >= $_G['setting']['ftp']['minsize'] * 1024)) {
+		if(ftpperm($attach['ext'], $attach['size'])) {
 			if(ftpcmd('upload', 'portal/'.$attach['attachment']) && (!$attach['thumb'] || ftpcmd('upload', 'portal/'.getimgthumbname($attach['attachment'])))) {
 				@unlink($_G['setting']['attachdir'].'/portal/'.$attach['attachment']);
 				@unlink($_G['setting']['attachdir'].'/portal/'.getimgthumbname($attach['attachment']));
@@ -230,11 +236,11 @@ if($_GET['operation'] == 'upload') {
 			$smallimg = pic_get($attach['attachment'], 'portal', $attach['thumb'], $attach['remote']);
 			$bigimg = pic_get($attach['attachment'], 'portal', 0, $attach['remote']);
 			$coverstr = addslashes(serialize(array('pic'=>'portal/'.$attach['attachment'], 'thumb'=>$attach['thumb'], 'remote'=>$attach['remote'])));
-			echo "{\"aid\":$setarr[attachid], \"isimage\":$attach[isimage], \"smallimg\":\"$smallimg\", \"bigimg\":\"$bigimg\", \"errorcode\":$errorcode, \"cover\":\"$coverstr\"}";
+			echo "{\"aid\":{$setarr['attachid']}, \"isimage\":{$attach['isimage']}, \"smallimg\":\"$smallimg\", \"bigimg\":\"$bigimg\", \"errorcode\":$errorcode, \"cover\":\"$coverstr\"}";
 			exit();
 		} else {
 			$fileurl = 'portal.php?mod=attachment&id='.$attach['attachid'];
-			echo "{\"aid\":$setarr[attachid], \"isimage\":$attach[isimage], \"file\":\"$fileurl\", \"errorcode\":$errorcode}";
+			echo "{\"aid\":{$setarr['attachid']}, \"isimage\":{$attach['isimage']}, \"file\":\"$fileurl\", \"errorcode\":$errorcode}";
 			exit();
 		}
 	} else {

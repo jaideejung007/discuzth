@@ -1,6 +1,10 @@
 <?php
 
-
+/**
+ * DiscuzX Convert
+ *
+ * $Id: pollvoter.php 19528 2011-01-05 09:12:03Z liulanbo $
+ */
 
 $curprg = basename(__FILE__);
 $table_source = $db_source->tablepre . 'polloptions';

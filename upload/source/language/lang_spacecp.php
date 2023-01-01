@@ -71,40 +71,6 @@ $lang = array(
 	'mail_my' => 'แจ้งเตือนการโต้ตอบระหว่างฉันและเพื่อน',
   	'mail_system' => 'แจ้งเตือนจากระบบ',
 
-	'invite_subject' => '{username} เชิญคุณเข้าร่วมและเป็นเพื่อนใน {sitename}',
-	'invite_massage' => '<table border="0">
-		<tr>
-		<td valign="top">{avatar}</td>
-		<td valign="top">
-		<h3>สวัสดี ฉันชื่อ {username} ขอเชิญชวนคุณเข้าร่วมและเป็นเพื่อนกับฉันใน {sitename}</h3><br>
-		 ได้โปรดเข้าร่วมและเป็นเพื่อนกับฉับ คุณสามารถติดตามความเคลื่อนไหว อ่านบล็อก ดูรูปภาพ แลกเปลี่ยนความรู้/ประสบการณ์ใหม่ๆ และติดต่อกับฉันได้ตลอดเวลา<br>
-		<br>
-		หากคุณยินดียอมรับอินไวท์:<br>{saymsg}
-		<br><br>
-		<strong>กรุณาคลิกที่ลิงก์ด้านล่างนี้ เพื่อยอมรับอินไวท์:</strong><br>
-		<a href="{inviteurl}">{inviteurl}</a><br>
-		<br>
-		<strong>ถ้าคุณเป็นสมาชิกของ {sitename} อยู่แล้ว โปรดคลิกที่ลิงก์ด้านล่างเพื่อเข้าเยี่ยมชมโปรไฟล์ของฉัน:</strong><br>
-		<a href="{siteurl}home.php?mod=space&uid={uid}">{siteurl}home.php?mod=space&uid={uid}</a><br>
-		</td></tr></table>',
-
-	'app_invite_subject' => '{username} เชิญชวนคุณเข้าร่วมสนุกกับ {appname} ใน {sitename}',
-	'app_invite_massage' => '<table border="0">
-		<tr>
-		<td valign="top">{avatar}</td>
-		<td valign="top">
-		<h3>สวัสดี ฉันชื่อ {username}  ที่ {sitename} มี {appname} ให้ร่วมสนุก ฉันอยากจะเชิญชวนคุณมาร่วมสนุกด้วยกัน</h3><br>
-		<br>
-		หากคุณยินดียอมรับอินไวท์:<br>
-		{saymsg}
-		<br><br>
-		<strong>โปรดคลิกที่ลิงก์ด้านล่าง เพื่อยอมรับอินไวท์และร่วมสนุกกับ {appname} ด้วยกัน:</strong><br>
-		<a href="{inviteurl}">{inviteurl}</a><br>
-		<br>
-		<strong>ถ้าคุณเป็นสมาชิกของ {sitename} อยู่แล้ว โปรดคลิกที่ลิงก์ด้านล่างเพื่อเข้าเยี่ยมชมโปรไฟล์ของฉัน:</strong><br>
-		<a href="{siteurl}home.php?mod=space&uid={uid}">{siteurl}home.php?mod=space&uid={uid}</a><br>
-		</td></tr></table>',
-
 	'person' => 'คน',
 	'delete' => 'ลบ',
 
@@ -120,8 +86,8 @@ $lang = array(
 	'share_article' => 'แชร์บทความ',
 	'album' => 'อัลบั้ม',
 	'share_thread' => 'แชร์กระทู้',
-	'mtag' => '{$_G[setting][navs][3][navname]}',
-	'share_mtag' => 'แชร์ {$_G[setting][navs][3][navname]}',
+	'mtag' => '{$_G[\'setting\'][\'navs\'][3][\'navname\']}',
+	'share_mtag' => 'แชร์ {$_G[\'setting\'][\'navs\'][3][\'navname\']}',
 	'share_mtag_membernum' => 'สมาชิกที่มีอยู่ {membernum} คน',
 	'share_tag' => 'แชร์คีย์เวิร์ด',
 	'share_tag_blognum' => 'บล็อกที่มีอยู่ {blognum} บล็อก',
@@ -143,7 +109,7 @@ $lang = array(
 	'not_allow_upload_extend' => 'ไฟล์ประเภท {extend} ไม่อนุญาตให้อัปโหลด',
 	'files_can_not_exceed_size' => 'ไฟล์ประเภท {extend} ไม่สามารถมีขนาดเกิน {size} ได้',
 	'get_passwd_subject' => 'คำขอเปลี่ยนรหัสผ่านใหม่',
-	'get_passwd_message' => 'คลิกลิงก์ด้านล่างนี้เพื่อตั้งค่ารหัสผ่านของคุณ ลิงก์นี้จะมีอายุเพียง 3 วันเท่านั้น:<br />\\1<br />(ให้ทำการคัดลอกลิงก์แล้ววางที่บราวเซอร์หากลิงก์ไม่สามารถคลิกได้)<br />เมื่อไปยังลิงก์ที่ส่งมาแล้ว กรอกรหัสผ่านใหม่ หลังจากนั้นคุณสามารถใช้รหัสผ่านใหม่เพื่อลงชื่อเข้าใช้',
+	'get_passwd_message' => 'คลิกลิงก์ด้านล่างนี้เพื่อตั้งค่ารหัสผ่านของคุณ ลิงก์นี้จะมีอายุเพียง 3 วันเท่านั้น:<br />\\1<br />(ให้ทำการคัดลอกลิงก์แล้ววางที่บราวเซอร์หากลิงก์ไม่สามารถคลิกได้)<br />เมื่อไปยังลิงก์ที่ส่งมาแล้ว กรอกรหัสผ่านใหม่ หลังจากนั้นคุณสามารถใช้รหัสผ่านใหม่เพื่อเข้าสู่ระบบ',
 	'file_is_too_big' => 'ไฟล์ขนาดใหญ่เกินไป',
 
 	'take_part_in_the_voting' => '{actor} โหวตโพล <a href="{url}" target="_blank">{subject}</a> ของ {touser} ได้รับ {reward} ',
@@ -174,12 +140,11 @@ $lang = array(
 	'present_user_magics' => 'คุณได้รับไอเท็ม \\1 เป็นของขวัญจากผู้ดูแลระบบ',
 	'has_not_more_doodle' => 'คุณไม่ได้วาดภาพ',
 
-	'do_stat_login' => 'ลงชื่อเข้าใช้',
-	'do_stat_mobilelogin' => 'ลงชื่อเข้าใช้ผ่านอุปกรณ์พกพา',
-	'do_stat_connectlogin' => 'ลงชื่อเข้าใช้ด้วยบัญชี QQ',
+	'do_stat_login' => 'เข้าสู่ระบบ',
+	'do_stat_mobilelogin' => 'เข้าสู่ระบบผ่านอุปกรณ์พกพา',
+	'do_stat_connectlogin' => 'เข้าสู่ระบบด้วยบัญชี QQ',
 	'do_stat_register' => 'ลงทะเบียนใหม่',
 	'do_stat_invite' => 'ชวนเพื่อน',
-	'do_stat_appinvite' => 'เชิญให้เข้าร่วมแอพลิเคชัน',
 	'do_stat_add' => 'เผยแพร่',
 	'do_stat_comment' => 'โต้ตอบ',
 	'do_stat_space' => 'ข้อมูลเชิงโต้ตอบ',
@@ -189,10 +154,10 @@ $lang = array(
 	'do_stat_reward' => 'รางวัล',
 	'do_stat_debate' => 'โต้วาที',
 	'do_stat_trade' => 'สินค้า',
-	'do_stat_group' => "สร้าง{$_G[setting][navs][3][navname]}",
-	'do_stat_tgroup' => "{$_G[setting][navs][3][navname]}",
-	'do_stat_home' => "{$_G[setting][navs][4][navname]}",
-	'do_stat_forum' => "{$_G[setting][navs][2][navname]}",
+	'do_stat_group' => "สร้าง".(isset($_G['setting']['navs'][3]['navname']) ? $_G['setting']['navs'][3]['navname'] : ''),
+	'do_stat_tgroup' => (isset($_G['setting']['navs'][3]['navname']) ? $_G['setting']['navs'][3]['navname'] : ''),
+	'do_stat_home' => (isset($_G['setting']['navs'][4]['navname']) ? $_G['setting']['navs'][4]['navname'] : ''),
+	'do_stat_forum' => (isset($_G['setting']['navs'][2]['navname']) ? $_G['setting']['navs'][2]['navname'] : ''),
 	'do_stat_groupthread' => 'กระทู้ของคลับ',
 	'do_stat_post' => 'ตอบกลับ',
 	'do_stat_grouppost' => 'ตอบกลับของคลับ',
@@ -218,7 +183,7 @@ $lang = array(
 	'do_stat_friend' => 'รับเป็นเพื่อน',
 	'do_stat_post_number' => 'จำนวนโพสต์',
 	'do_stat_statistic' => 'สถิติโดยรวม',
-	'logs_credit_update_INDEX' => array('TRC','RTC','RAC','MRC','BMC','TFR','RCV','CEC','ECU','SAC','BAC','PRC','RSC','STC','BTC','AFD','UGP','RPC','ACC','RCT','RCA','RCB','CDC','RGC','BGC','AGC','RKC','BME','RPR','RPZ','FCP','BGC'),
+	'logs_credit_update_INDEX' => array('TRC','RTC','RAC','MRC','BMC','TFR','RCV','CEC','ECU','SAC','BAC','PRC','RSC','STC','BTC','AFD','UGP','RPC','ACC','RCT','RCA','RCB','CDC','RGC','BGC','AGC','RKC','BME','RPR','RPZ','FCP','BGR'),
 	'logs_credit_update_TRC' => 'ร่วมกิจกรรมของเว็บไซต์',
 	'logs_credit_update_RTC' => 'ตั้งกระทู้รางวัล',
 	'logs_credit_update_RAC' => 'ตอบคำถามถูกต้อง',
@@ -249,9 +214,9 @@ $lang = array(
 	'logs_credit_update_BME' => 'ซื้อเหรียญ',
 	'logs_credit_update_RPR' => 'เครดิตสะสม',
 	'logs_credit_update_RPZ' => 'ประวัติเครดิต',
-	'logs_credit_update_FCP' => 'Pay the forum',
-	'logs_credit_update_BGR' => 'Build Group',
-	'buildgroup' => 'View already built groups',
+	'logs_credit_update_FCP' => 'การซื้อจ่ายในเว็บบอร์ด',
+	'logs_credit_update_BGR' => 'การสร้างกลุ่ม',
+	'buildgroup' => 'ดูกลุ่มที่สร้าง',
 	'logs_credit_update_reward_clean' => 'เคลียร์',
 	'logs_select_operation' => 'กรุณาเลือกประเภทของการดำเนินการ',
 	'task_credit' => 'รางวัลเครดิตภารกิจ',
@@ -277,7 +242,7 @@ $lang = array(
 	'buy_credit' => 'เติมเงินเครดิต',
 	'buy_usergroup' => 'เติมเงินกลุ่มผู้ใช้งาน',
 	'buy_medal' => 'ซื้อเหรียญ',
-	'buy_forum' => 'Buy a paid forum access permissions',
+	'buy_forum' => 'ซื้อสิทธิ์การเข้าถึงเว็บบอร์ด',
 	'report_credit' => 'รายงานเครดิต',
 	'join' => 'เข้าร่วม',
 	'activity_credit' => 'หักเครดิตค่ากิจกรรม',
@@ -301,9 +266,10 @@ $lang = array(
 	'profile_verify_modify_error' => '{verify} การรับรองไม่อนุญาตให้แก้ไข',
 	'profile_verify_verifying' => 'ข้อมูล {verify} ของคุณได้ถูกส่งเรียบร้อยแล้ว กรุณารอการตรวจสอบ',
 
+	'district_level_0' => '-ประเทศหรือภูมิภาค-',
 	'district_level_1' => '-จังหวัด-',
-	'district_level_2' => '-อำเภอ-',
-	'district_level_3' => '-ตำบล-',
+	'district_level_2' => '-อำเภอ/เขต-',
+	'district_level_3' => '-ตำบล/แขวง-',
 	'district_level_4' => '-หมู่บ้าน-',
 	'invite_you_to_visit' => '{user} เชิญชวนคุณให้เข้าชม {bbname}',
 
@@ -320,7 +286,7 @@ $lang = array(
 	'wall' => 'ข้อความ',
 	'homepage' => 'หน้าแรก',
 	'ranklist' => 'รายการจัดอันดับ',
-	'medal' => 'เหรียญ',
+	'medal' => 'เหรียญรางวัล',
 	'task' => 'ภารกิจ',
 	'magic' => 'ไอเท็ม',
 	'favorite' => 'รายการโปรด',
@@ -336,11 +302,19 @@ $lang = array(
 
 	'spacecp_message_prompt' => '(สนับสนุนตั้งแต่ {msg} ตัวอักษร จนถึงสูงสุด 1000 ตัวอักษร)',
 	'card_update_doing' => ' <a class="xi2" href="###">[อัปเดตข้อความทักทาย]</a>',
-	'email_acitve_message' => '<i class="fico-email vm fc-i" title="ยังไม่ได้ตรวจสอบ"></i><span class="xi1 vm">อีเมลใหม่ ({newemail}) ของคุณยังไม่ได้ยืนยัน...</span><br />
+	'email_acitve_message' => '<i class="fico-email vm fc-i" title="ยังไม่ได้ยืนยัน"></i><span class="xi1 vm">อีเมลใหม่ ({newemail})กำลังรอการยืนยัน...</span><br />
 								ระบบได้ส่งการยืนยันไปยังอีเมลที่คุณใช้ลงทะเบียนแล้ว โปรดตรวจสอบเพื่อยืนยันและเปิดใช้งาน<br>
-								ถ้าคุณไม่ได้รับ คุณสามารถเปลี่ยนอีเมลใหม่ หรือ<a href="home.php?mod=spacecp&ac=profile&op=password&resend=1" class="xi2">คลิกที่นี่เพื่อขอรับการยืนยันอีกครั้ง</a>',
+								ถ้าคุณไม่ได้รับ คุณสามารถเปลี่ยนอีเมลใหม่ หรือ<a href="home.php?mod=spacecp&ac=profile&op=password&resend=1&formhash={formhash}" class="xi2">คลิกที่นี่เพื่อขอรับการยืนยันอีกครั้ง</a>',
 	'qq_set_status' => 'ฉันกำหนดค่าสถานะ QQ ของฉันเป็นออนไลน์',
 	'qq_dialog' => 'เริ่มการแชทด้วย QQ',
+
+	'payment_alipay' => 'Alipay',
+	'payment_wechat' => 'WeChat Payment',
+	'payment_qpay' => 'QQ Wallet Payment',
+	'payment_status_0' => 'ยังไม่ได้ชำระเงิน',
+	'payment_status_1' => 'ชำระเงินแล้ว',
+	'payment_status_2' => 'หมดอายุแล้ว',
+	'payment_credit' => 'การเติมเครดิต',
 
 );
 

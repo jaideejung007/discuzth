@@ -25,7 +25,16 @@ class table_common_template extends discuz_table
 		return DB::fetch_all('SELECT * FROM %t', array($this->_table));
 	}
 
-	public function delete($val) {
+	public function delete($val, $unbuffered = false) {
+		if (defined('DISCUZ_DEPRECATED')) {
+			throw new Exception('NotImplementedException');
+			return parent::delete($val, $unbuffered);
+		} else {
+			return $this->delete_tpl($val);
+		}
+	}
+
+	public function delete_tpl($val) {
 		if(!$val) {
 			return;
 		}
@@ -34,6 +43,14 @@ class table_common_template extends discuz_table
 
 	public function get_templateid($name) {
 		return DB::result_first("SELECT templateid FROM %t WHERE name=%s", array($this->_table, $name));
+	}
+
+	public function get_templateid_by_directory($directory) {
+		return DB::result_first("SELECT templateid FROM %t WHERE directory=%s", array($this->_table, $directory));
+	}
+
+	public function fetch_by_templateid($templateid) {
+		return DB::fetch_first("SELECT * FROM %t WHERE templateid=%s", array($this->_table, $templateid));
 	}
 
 }

@@ -51,20 +51,20 @@ CREATE TABLE IF NOT EXISTS pre_common_connect_guest (
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `pre_connect_disktask` (
- `taskid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '任务ID',
- `aid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '附件ID',
- `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
- `openid` char(32) NOT NULL DEFAULT '' COMMENT 'openId',
- `filename` varchar(255) NOT NULL DEFAULT '' COMMENT '附件名称',
- `verifycode` char(32) NOT NULL DEFAULT '' COMMENT '下载验证码',
- `status` smallint(6) unsigned NOT NULL DEFAULT '0' COMMENT '下载状态',
- `dateline` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '添加任务的时间',
- `downloadtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '下载完成时间',
- `extra` text COMMENT '保留字段',
+ `taskid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+ `aid` int(10) unsigned NOT NULL DEFAULT '0',
+ `uid` int(10) unsigned NOT NULL DEFAULT '0',
+ `openid` char(32) NOT NULL DEFAULT '',
+ `filename` varchar(255) NOT NULL DEFAULT '',
+ `verifycode` char(32) NOT NULL DEFAULT '',
+ `status` smallint(6) unsigned NOT NULL DEFAULT '0',
+ `dateline` int(10) unsigned NOT NULL DEFAULT '0',
+ `downloadtime` int(10) unsigned NOT NULL DEFAULT '0',
+ `extra` text,
  PRIMARY KEY (`taskid`),
  KEY `openid` (`openid`),
  KEY `status` (`status`)
-) ENGINE=INNODB COMMENT='网盘下载任务表';
+) TYPE=INNODB;
 
 EOF;
 
@@ -85,7 +85,7 @@ while($temp = DB::fetch($query)) {
 		continue;
 	}
 }
-$sql .= !$columnexisted ? "ALTER TABLE ".DB::table('common_member_connect')." ADD COLUMN conisqqshow tinyint(1) unsigned NOT NULL default '0';\n" : '';
+$sql .= !$columnexisted ? "ALTER TABLE ".DB::table('common_member_connect')." ADD COLUMN conisqqshow tinyint(1) NOT NULL default '0';\n" : '';
 $sql .= !$uintokenexisted ? "ALTER TABLE ".DB::table('common_member_connect')." ADD COLUMN conuintoken char(32) NOT NULL DEFAULT '';\n" : '';
 
 $query = DB::query("SHOW COLUMNS FROM ".DB::table('common_connect_guest'));
@@ -106,7 +106,7 @@ if($sql) {
 	runquery($sql);
 }
 
-$connect = C::t('common_setting')->fetch('connect', true);
+$connect = C::t('common_setting')->fetch_setting('connect', true);
 
 if (!array_key_exists('reply', $connect['t'])) {
 	$connect['t']['reply'] = 1;
@@ -126,7 +126,6 @@ if ($connect['guest_groupid']) {
 }
 
 $newConnect = array();
-include DISCUZ_ROOT . 'source/language/lang_admincp_cloud.php';
 $name = $extend_lang['connect_guest_group_name'];
 if ($needCreateGroup) {
 	$userGroupData = array(
@@ -154,6 +153,6 @@ $https = json_decode(dfsockopen('https://graph.qq.com/user/get_user_info'));
 $newConnect['oauth2'] = $https->ret == -1 ? 1 : 0;
 
 $updateData = array_merge($connect, $newConnect);
-C::t('common_setting')->update('connect', serialize($updateData));
+C::t('common_setting')->update_setting('connect', serialize($updateData));
 updatecache('setting');
 $finish = true;

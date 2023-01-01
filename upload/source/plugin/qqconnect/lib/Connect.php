@@ -124,7 +124,7 @@ class Cloud_Service_Connect {
 
 		$jsurl = $_G['connect']['discuz_new_feed_url'];
 		require_once DISCUZ_ROOT.'/source/plugin/qqconnect/lib/Util.php';
-		$utilService = new Cloud_Service_Util();		
+		$utilService = new Cloud_Service_Util();
 		$jsurl .= '?' . $utilService->httpBuildQuery($params, '', '&');
 
 		return $jsurl;
@@ -175,7 +175,7 @@ class Cloud_Service_Connect {
 		$attachIds = array();
 		$attachImages = array ();
 		$attachments = C::t('forum_attachment')->fetch_all_by_id('pid', $pId);
-		$attachments = C::t('forum_attachment_n')->fetch_all("pid:$pId", array_keys($attachments));
+		$attachments = C::t('forum_attachment_n')->fetch_all_attachment("pid:$pId", array_keys($attachments));
 
 		foreach ($attachments as $k => $attach) {
 			$aid = $attach['aid'];
@@ -239,7 +239,7 @@ class Cloud_Service_Connect {
 			'readaccess' => 'readPermission',
 			'allowvisit' => 'allowVisit'
 		);
-		$userGroup = C::t('common_usergroup')->fetch_all($gid);
+		$userGroup = C::t('common_usergroup')->fetch_all_usergroup($gid);
 		$userGroupInfo = array();
 		foreach ($userGroup as $id => $value) {
 			$userGroupInfo[$id] = array_merge($value, $_G['cache']['usergroups'][$id]);
@@ -267,7 +267,7 @@ class Cloud_Service_Connect {
 				$userGroupInfo[$groupId]['forbidForumIds'][] = $fid;
 				continue;
 			}
-			$perm = unserialize($forumField['formulaperm']);
+			$perm = dunserialize($forumField['formulaperm']);
 			if(is_array($perm)) {
 				if($perm[0] || $perm[1] || $perm['users']) {
 					$userGroupInfo[$groupId]['forbidForumIds'][] = $fid;
@@ -363,8 +363,8 @@ class Cloud_Service_Connect {
 
 		loadcache('connect_has_setting_count');
 		if (!$_G['cache']['connect_has_setting_count']) {
-			$times = C::t('common_setting')->fetch('connect_login_times');
-			C::t('common_setting')->update('connect_login_times', $times + 1);
+			$times = C::t('common_setting')->fetch_setting('connect_login_times');
+			C::t('common_setting')->update_setting('connect_login_times', $times + 1);
 			savecache('connect_has_setting_count', '1');
 		} else {
 			C::t('common_setting')->update_count('connect_login_times', 1);
@@ -397,7 +397,7 @@ class Cloud_Service_Connect {
 		$url = urlencode($url);
 
 		require_once DISCUZ_ROOT.'/source/plugin/qqconnect/lib/Util.php';
-		$utilService = new Cloud_Service_Util();		
+		$utilService = new Cloud_Service_Util();
 		$param_str = urlencode($utilService->httpBuildQuery($params, '', '&'));
 
 		$base_string = $method.'&'.$url.'&'.$param_str;
@@ -557,7 +557,7 @@ class Cloud_Service_Connect {
 		global $_G;
 
 		require_once DISCUZ_ROOT.'/source/plugin/qqconnect/lib/Util.php';
-		$utilService = new Cloud_Service_Util();		
+		$utilService = new Cloud_Service_Util();
 		$response = '';
 
 		if ($loginTimes) {

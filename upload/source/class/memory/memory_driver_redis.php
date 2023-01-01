@@ -66,7 +66,7 @@ class memory_driver_redis {
 		}
 	}
 
-	function &instance() {
+	public static function &instance() {
 		static $object;
 		if (empty($object)) {
 			$object = new memory_driver_redis();
@@ -278,7 +278,7 @@ class memory_driver_redis {
 
 	private function _try_deserialize($data) {
 		try {
-			$ret = unserialize($data);
+			$ret = dunserialize($data);
 			if ($ret === FALSE) {
 				return $data;
 			}

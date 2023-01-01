@@ -11,7 +11,7 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-$connect = C::t('common_setting')->fetch('connect', true);
+$connect = C::t('common_setting')->fetch_setting('connect', true);
 
 $sql = <<<EOF
 
@@ -20,12 +20,12 @@ CREATE TABLE IF NOT EXISTS pre_common_member_connect (
   `conuin` char(40) NOT NULL default '',
   `conuinsecret` char(16) NOT NULL default '',
   `conopenid` char(32) NOT NULL default '',
-  `conisfeed` tinyint(1) unsigned NOT NULL default '0',
-  `conispublishfeed` tinyint(1) unsigned NOT NULL default '0',
-  `conispublisht` tinyint(1) unsigned NOT NULL default '0',
-  `conisregister` tinyint(1) unsigned NOT NULL default '0',
-  `conisqzoneavatar` tinyint(1) unsigned NOT NULL default '0',
-  `conisqqshow` tinyint(1) unsigned NOT NULL default '0',
+  `conisfeed` tinyint(1) NOT NULL default '0',
+  `conispublishfeed` tinyint(1) NOT NULL default '0',
+  `conispublisht` tinyint(1) NOT NULL default '0',
+  `conisregister` tinyint(1) NOT NULL default '0',
+  `conisqzoneavatar` tinyint(1) NOT NULL default '0',
+  `conisqqshow` tinyint(1) NOT NULL default '0',
   `conuintoken` char(32) NOT NULL DEFAULT '',
   PRIMARY KEY  (`uid`),
   KEY `conuin` (`conuin`),
@@ -100,21 +100,20 @@ CREATE TABLE IF NOT EXISTS pre_common_connect_guest (
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `pre_connect_disktask` (
-  `taskid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '任务ID',
-  `aid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '附件ID',
-  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
-  `openid` char(32) NOT NULL DEFAULT '' COMMENT 'openId',
-  `filename` varchar(255) NOT NULL DEFAULT '' COMMENT '附件名称',
-  `verifycode` char(32) NOT NULL DEFAULT '' COMMENT '下载验证码',
-  `status` smallint(6) unsigned NOT NULL DEFAULT '0' COMMENT '下载状态',
-  `dateline` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '添加任务的时间',
-  `downloadtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '下载完成时间',
-  `extra` text COMMENT '保留字段',
+  `taskid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `aid` int(10) unsigned NOT NULL DEFAULT '0',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0',
+  `openid` char(32) NOT NULL DEFAULT '',
+  `filename` varchar(255) NOT NULL DEFAULT '',
+  `verifycode` char(32) NOT NULL DEFAULT '',
+  `status` smallint(6) unsigned NOT NULL DEFAULT '0',
+  `dateline` int(10) unsigned NOT NULL DEFAULT '0',
+  `downloadtime` int(10) unsigned NOT NULL DEFAULT '0',
+  `extra` text,
   PRIMARY KEY (`taskid`),
   KEY `openid` (`openid`),
   KEY `status` (`status`)
-) ENGINE=INNODB COMMENT='网盘下载任务表';
-
+) TYPE=INNODB;
 
 REPLACE INTO pre_common_setting VALUES ('regconnect', '1');
 
@@ -163,8 +162,7 @@ if ($connect['feed']) {
 }
 
 if ($needCreateGroup) {
-	include DISCUZ_ROOT . 'source/language/lang_admincp_cloud.php';
-	$name = $extend_lang['connect_guest_group_name'];
+	$name = $installlang['connect_guest_group_name'];
 	$userGroupData = array(
 		'type' => 'special',
 		'grouptitle' => $name,
@@ -190,6 +188,6 @@ if ($needCreateGroup) {
 $https = json_decode(dfsockopen('https://graph.qq.com/user/get_user_info'));
 $connect['oauth2'] = $https->ret == -1 ? 1 : 0;
 
-C::t('common_setting')->update('connect', serialize($connect));
+C::t('common_setting')->update_setting('connect', serialize($connect));
 updatecache('setting');
 $finish = true;

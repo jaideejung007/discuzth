@@ -1,6 +1,10 @@
 <?php
 
-
+/**
+ * DiscuzX Convert
+ *
+ * $Id: navs.php 8876 2010-04-23 07:17:36Z monkey $
+ */
 
 $curprg = basename(__FILE__);
 

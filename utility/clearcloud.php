@@ -27,16 +27,16 @@ $discuz->init();
 $_G['siteurl'] = preg_replace('/\/install\/$/i', '/', $_G['siteurl']);
 
 $plugins = array('cloudstat', 'soso_smilies', 'security', 'pcmgr_url_safeguard', 'manyou', 'cloudcaptcha', 'cloudunion', 'qqgroup', 'xf_storage', 'cloudsearch');
-foreach($plugins as $pluginid) {			
+foreach($plugins as $pluginid) {
 	$plugin = C::t('common_plugin')->fetch_by_identifier($pluginid);
 	if($plugin) {
 		$modules = unserialize($plugin['modules']);
 		$modules['system'] = 0;
 		$modules = serialize($modules);
 		C::t('common_plugin')->update($plugin['pluginid'], array('modules' => $modules));
-	}			
+	}
 }
 
-echo "云平台插件已降为非系统级插件，请删除本工具";
+echo "ปลั๊กอินแพลตฟอร์มคลาวด์ของดิสคัส ได้ถูกลดความสำคัญเป็นแค่ปลั๊กอินที่ไม่ใช่ระดับระบบแล้ว คุณสามารถลบเครื่องมือนี้ทันที";
 
 ?>

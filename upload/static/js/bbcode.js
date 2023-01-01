@@ -43,7 +43,7 @@ function bbcode2html(str) {
 	}
 
 	if(fetchCheckbox('allowimgurl')) {
-		str = str.replace(/([^>=\]"'\/]|^)((((https?|ftp):\/\/)|www\.)([\w\-]+\.)*[\w\-\u4e00-\u9fa5]+\.([\.a-zA-Z0-9]+|\u4E2D\u56FD|\u7F51\u7EDC|\u516C\u53F8)((\?|\/|:)+[\w\.\/=\?%\-&~`@':+!]*)+\.(jpg|gif|png|bmp))/ig, '$1[img]$2[/img]');
+		str = str.replace(/([^>=\]"'\/]|^)((((https?|ftp):\/\/)|www\.)([\w\-]+\.)*[\w\-\u4e00-\u9fa5]+\.([\.a-zA-Z0-9]+|\u4E2D\u56FD|\u7F51\u7EDC|\u516C\u53F8)((\?|\/|:)+[\w\.\/=\?%\-&~`@':+!]*)+\.(jpg|gif|png|bmp|webp))/ig, '$1[img]$2[/img]');
 	}
 
 	if(!allowhtml || !fetchCheckbox('htmlon')) {
@@ -77,7 +77,7 @@ function bbcode2html(str) {
 	if(!fetchCheckbox('bbcodeoff') && allowbbcode) {
 		str = clearcode(str);
 		str = str.replace(/\[url\]\s*((https?|ftp|gopher|news|telnet|rtsp|mms|callto|bctp|thunder|qqdl|synacast){1}:\/\/|www\.)([^\[\"']+?)\s*\[\/url\]/ig, function($1, $2, $3, $4) {return cuturl($2 + $4);});
-		str = str.replace(/\[url=((https?|ftp|gopher|news|telnet|rtsp|mms|callto|bctp|thunder|qqdl|synacast){1}:\/\/|www\.|mailto:)?([^\r\n\[\"']+?)\]([\s\S]+?)\[\/url\]/ig, '<a href="$1$3" target="_blank">$4</a>');
+		str = str.replace(/\[url=((https?|ftp|gopher|news|telnet|rtsp|mms|callto|bctp|thunder|qqdl|synacast){1}:\/\/|www\.|mailto:|tel:|magnet:)?([^\r\n\[\"']+?)\]([\s\S]+?)\[\/url\]/ig, '<a href="$1$3" target="_blank">$4</a>');
 		str = str.replace(/\[email\](.[^\\=[]*)\[\/email\]/ig, '<a href="mailto:$1">$1</a>');
 		str = str.replace(/\[email=(.[^\\=[]*)\](.*?)\[\/email\]/ig, '<a href="mailto:$1" target="_blank">$2</a>');
 		str = str.replace(/\[postbg\]\s*([^\[\<\r\n;'\"\?\(\)]+?)\s*\[\/postbg\]/ig, function($1, $2) {
@@ -157,7 +157,7 @@ function bbcode2html(str) {
 
 function clearcode(str) {
 	str= str.replace(/\[url\]\[\/url\]/ig, '', str);
-	str= str.replace(/\[url=((https?|ftp|gopher|news|telnet|rtsp|mms|callto|bctp|thunder|qqdl|synacast){1}:\/\/|www\.|mailto:)?([^\s\[\"']+?)\]\[\/url\]/ig, '', str);
+	str= str.replace(/\[url=((https?|ftp|gopher|news|telnet|rtsp|mms|callto|bctp|thunder|qqdl|synacast){1}:\/\/|www\.|mailto:|tel:|magnet:)?([^\s\[\"']+?)\]\[\/url\]/ig, '', str);
 	str= str.replace(/\[email\]\[\/email\]/ig, '', str);
 	str= str.replace(/\[email=(.[^\[]*)\]\[\/email\]/ig, '', str);
 	str= str.replace(/\[color=([^\[\<]+?)\]\[\/color\]/ig, '', str);
@@ -314,6 +314,12 @@ function html2bbcode(str) {
 		return str;
 	}
 
+	if(navigator.userAgent.indexOf('Chrome') > -1){
+		str = str.replace(/<div><br><\/div>/ig, '<br>');
+		str = str.replace(/<div>/ig, '<br><div>');
+		str = str.replace(/<\/div>((<br[^>]*>){1,})<div>/ig, '$1');
+	}
+
 	str = str.replace(/<div\sclass=["']?blockcode["']?>[\s\S]*?<blockquote>([\s\S]+?)<\/blockquote>[\s\S]*?<\/div>/ig, function($1, $2) {return codetag($2);});
 
 	if(!fetchCheckbox('bbcodeoff') && allowbbcode) {
@@ -338,7 +344,7 @@ function html2bbcode(str) {
 	str= str.replace(/&((#(32|127|160|173))|shy|nbsp);/ig, ' ');
 
 	if(fetchCheckbox('allowimgurl')) {
-		str = str.replace(/([^>=\]"'\/]|^)((((https?|ftp):\/\/)|www\.)([\w\-]+\.)*[\w\-\u4e00-\u9fa5]+\.([\.a-zA-Z0-9]+|\u4E2D\u56FD|\u7F51\u7EDC|\u516C\u53F8)((\?|\/|:)+[\w\.\/=\?%\-&~`@':+!]*)+\.(jpg|gif|png|bmp))/ig, '$1[img]$2[/img]');
+		str = str.replace(/([^>=\]"'\/]|^)((((https?|ftp):\/\/)|www\.)([\w\-]+\.)*[\w\-\u4e00-\u9fa5]+\.([\.a-zA-Z0-9]+|\u4E2D\u56FD|\u7F51\u7EDC|\u516C\u53F8)((\?|\/|:)+[\w\.\/=\?%\-&~`@':+!]*)+\.(jpg|gif|png|bmp|webp))/ig, '$1[img]$2[/img]');
 	}
 
 	if(!fetchCheckbox('parseurloff')) {
@@ -499,6 +505,7 @@ function litag(listoptions, text) {
 
 function parsecode(text) {
 	DISCUZCODE['num']++;
+	text = text.replace(/\$/ig, '$$$$');
 	DISCUZCODE['html'][DISCUZCODE['num']] = '<div class="blockcode"><blockquote>' + htmlspecialchars(text) + '</blockquote></div>';
 	return "[\tDISCUZ_CODE_" + DISCUZCODE['num'] + "\t]";
 }

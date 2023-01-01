@@ -47,7 +47,7 @@ if($operation == 'filecheck') {
 			}
 		}
 
-		$md5data = array();
+		$md5data = $md5datanew = $addlist = $dellist = $modifylist = $showlist = array();
 		$cachelist = checkcachefiles('data/sysdata/');
 		checkfiles('./', '', 0);
 		checkfiles('config/', '', 1, 'config_global.php,config_ucenter.php');
@@ -64,7 +64,6 @@ if($operation == 'filecheck') {
 		checkfiles('data/threadcache/', '\.htm', 0);
 		checkfiles('template/', '');
 		checkfiles('api/', '');
-		checkfiles('m/', '\.php');
 		checkfiles('source/', '', 1, 'discuzfiles.md5,plugin');
 		checkfiles('static/', '');
 		checkfiles('archiver/', '');
@@ -103,19 +102,21 @@ if($operation == 'filecheck') {
 		}
 
 		$weekbefore = TIMESTAMP - 604800;
-		$addlist = @array_merge(@array_diff_assoc($md5data, $md5datanew), $cachelist[2]);
-		$dellist = @array_diff_assoc($md5datanew, $md5data);
-		$modifylist = @array_merge(@array_diff_assoc($modifylist, $dellist), $cachelist[1]);
-		$showlist = @array_merge($md5data, $md5datanew, $cachelist[0]);
+		$md5data = is_array($md5data) ? $md5data : array();
+		$md5datanew = is_array($md5datanew) ? $md5datanew : array();
+		$addlist = array_merge(array_diff_assoc($md5data, $md5datanew), is_array($cachelist[2]) ? $cachelist[2] : array());
+		$dellist = array_diff_assoc($md5datanew, $md5data);
+		$modifylist = array_merge(array_diff_assoc($modifylist, $dellist), is_array($cachelist[1]) ? $cachelist[1] : array());
+		$showlist = array_merge($md5data, $md5datanew, $cachelist[0]);
 		$doubt = 0;
 		$dirlist = $dirlog = array();
 		foreach($showlist as $file => $md5) {
 			$dir = dirname($file);
-			if(@array_key_exists($file, $modifylist)) {
+			if(is_array($modifylist) && array_key_exists($file, $modifylist)) {
 				$fileststus = 'modify';
-			} elseif(@array_key_exists($file, $dellist)) {
+			} elseif(is_array($dellist) && array_key_exists($file, $dellist)) {
 				$fileststus = 'del';
-			} elseif(@array_key_exists($file, $addlist)) {
+			} elseif(is_array($addlist) && array_key_exists($file, $addlist)) {
 				$fileststus = 'add';
 			} else {
 				$filemtime = @filemtime($file);
@@ -147,11 +148,11 @@ if($operation == 'filecheck') {
 
 		if($homecheck) {
 			ajaxshowheader();
-			echo "<em class=\"edited\">$lang[filecheck_modify]: $modifiedfiles</em> &nbsp; ".
-				"<em class=\"del\">$lang[filecheck_delete]: $deletedfiles</em> &nbsp; ".
-				"<em class=\"unknown\">$lang[filecheck_unknown]: $unknownfiles</em> &nbsp; ".
-				"<em class=\"unknown\">$lang[filecheck_doubt]: $doubt</em>  &nbsp; ".
-				$lang['filecheck_last_homecheck'].': '.dgmdate(TIMESTAMP, 'u').' <a href="'.ADMINSCRIPT.'?action=checktools&operation=filecheck&step=3">['.$lang['filecheck_view_list'].']</a>';
+			echo "<div><em class=\"edited\">{$lang['filecheck_modify']}<span class=\"bignum\">$modifiedfiles</span></em>".
+				"<em class=\"del\">{$lang['filecheck_delete']}<span class=\"bignum\">$deletedfiles</span></em>".
+				"<em class=\"unknown\">{$lang['filecheck_unknown']}<span class=\"bignum\">$unknownfiles</span></em>".
+				"<em class=\"unknown\">{$lang['filecheck_doubt']}<span class=\"bignum\">$doubt</span></em></div><p>".
+				$lang['filecheck_last_homecheck'].': '.dgmdate(TIMESTAMP, 'u').' <a href="'.ADMINSCRIPT.'?action=checktools&operation=filecheck&step=3">['.$lang['filecheck_view_list'].']</a></p>';
 			ajaxshowfooter();
 		}
 
@@ -173,16 +174,18 @@ if($operation == 'filecheck') {
 
 		$result .= '<script>function showresult(o) {'.$resultjs.'$(\'status_\' + o).style.display=\'\';}</script>';
 		showtips('filecheck_tips');
-		showtableheader('filecheck_completed');
-		showtablerow('', 'colspan="4"', "<div class=\"margintop marginbot\">".
-			"<em class=\"edited\">$lang[filecheck_modify]: $modifiedfiles</em> ".($modifiedfiles > 0 ? "<a href=\"###\" onclick=\"showresult('modify')\">[$lang[view]]</a> " : '').
-			" &nbsp; <em class=\"del\">$lang[filecheck_delete]: $deletedfiles</em> ".($deletedfiles > 0 ? "<a href=\"###\" onclick=\"showresult('del')\">[$lang[view]]</a> " : '').
-			" &nbsp; <em class=\"unknown\">$lang[filecheck_unknown]: $unknownfiles</em> ".($unknownfiles > 0 ? "<a href=\"###\" onclick=\"showresult('add')\">[$lang[view]]</a> " : '').
-			($doubt > 0 ? "&nbsp;&nbsp;&nbsp;&nbsp;<em class=\"unknown\">$lang[filecheck_doubt]: $doubt</em> <a href=\"###\" onclick=\"showresult('doubt')\">[$lang[view]]</a> " : '').
-			"</div>");
+		showboxheader('filecheck_completed');
+		echo "<div>".
+			"<em class=\"edited\">{$lang['filecheck_modify']}: $modifiedfiles</em> ".($modifiedfiles > 0 ? "<a href=\"###\" onclick=\"showresult('modify')\">[{$lang['view']}]</a> " : '').
+			" &nbsp; <em class=\"del\">{$lang['filecheck_delete']}: $deletedfiles</em> ".($deletedfiles > 0 ? "<a href=\"###\" onclick=\"showresult('del')\">[{$lang['view']}]</a> " : '').
+			" &nbsp; <em class=\"unknown\">{$lang['filecheck_unknown']}: $unknownfiles</em> ".($unknownfiles > 0 ? "<a href=\"###\" onclick=\"showresult('add')\">[{$lang['view']}]</a> " : '').
+			($doubt > 0 ? "&nbsp;&nbsp;&nbsp;&nbsp;<em class=\"unknown\">{$lang['filecheck_doubt']}: $doubt</em> <a href=\"###\" onclick=\"showresult('doubt')\">[{$lang['view']}]</a> " : '').
+			"</div></div><div class=\"boxbody\">";
+		showtableheader();
 		showsubtitle(array('filename', '', 'lastmodified', ''));
 		echo $result;
 		showtablefooter();
+		showboxfooter();
 
 	}
 
@@ -199,14 +202,14 @@ if($operation == 'filecheck') {
 	if($step == 1) {
 		$styleselect = "<br><br><select name=\"styleid\">";
 		foreach(C::t('common_style')->fetch_all_data() as $style) {
-			$styleselect .= "<option value=\"$style[styleid]\" ".
+			$styleselect .= "<option value=\"{$style['styleid']}\" ".
 				($style['styleid'] == $_G['setting']['styleid'] ? 'selected="selected"' : NULL).
-				">$style[name]</option>\n";
+				">{$style['name']}</option>\n";
 		}
 		$styleselect .= '</select>';
 		cpmsg(cplang('hookcheck_tips_step1', array('template' => $styleselect)), 'action=checktools&operation=hookcheck&step=2', 'form', '', FALSE);
 	} elseif($step == 2) {
-		cpmsg(cplang('hookcheck_verifying'), "action=checktools&operation=hookcheck&step=3&styleid=$_POST[styleid]", 'loading', '', FALSE);
+		cpmsg(cplang('hookcheck_verifying'), "action=checktools&operation=hookcheck&step=3&styleid={$_POST['styleid']}", 'loading', '', FALSE);
 	} elseif($step == 3) {
 		if(!$discuzfiles = @file('./source/admincp/discuzhook.dat')) {
 			cpmsg('filecheck_nofound_md5file', '', 'error');
@@ -274,8 +277,8 @@ if($operation == 'filecheck') {
 			showformheader('forums');
 			showtableheader('hookcheck_completed');
 			showtablerow('', 'colspan="4"', "<div class=\"margintop marginbot\">".
-				'<a href="javascript:;" onclick="show_all_hook(\'dir_\', \'tbody\')">'.$lang[show_all].'</a> | <a href="javascript:;" onclick="hide_all_hook(\'dir_\', \'tbody\')">'.$lang[hide_all].'</a>'.
-				" &nbsp; <em class=\"del\">$lang[hookcheck_delete]: $diffnum</em> ".
+				'<a href="javascript:;" onclick="show_all_hook(\'dir_\', \'tbody\')">'.$lang['show_all'].'</a> | <a href="javascript:;" onclick="hide_all_hook(\'dir_\', \'tbody\')">'.$lang['hide_all'].'</a>'.
+				" &nbsp; <em class=\"del\">{$lang['hookcheck_delete']}: $diffnum</em> ".
 				"</div>");
 			showsubtitle(array('', 'filename', 'hookcheck_discuzhook', 'hookcheck_delhook'));
 			echo $result;
@@ -286,21 +289,64 @@ if($operation == 'filecheck') {
 		}
 	}
 
+} elseif($operation == 'replacekey') {
+
+	$step = max(1, intval($_GET['step']));
+	shownav('tools', 'nav_replacekey');
+	showsubmenusteps('nav_replacekey', array(
+		array('nav_replacekey_confirm', $step == 1),
+		array('nav_replacekey_verify', $step == 2),
+		array('nav_replacekey_completed', $step == 3)
+	));
+	showtips('replacekey_tips');
+	if($step == 1) {
+		cpmsg(cplang('replacekey_tips_step1'), 'action=checktools&operation=replacekey&step=2', 'form', '', FALSE);
+	} elseif($step == 2) {
+		cpmsg(cplang('replacekey_tips_step2'), "action=checktools&operation=replacekey&step=3", 'loading', '', FALSE);
+	} elseif($step == 3) {
+		if(!is_writeable('./config/config_global.php')) {
+			cpmsg('replacekey_must_write_config', '', 'error');
+		}
+
+		$oldauthkey = $_G['config']['security']['authkey'];
+		$newauthkey = generate_key(64);
+
+		$configfile = trim(file_get_contents(DISCUZ_ROOT.'./config/config_global.php'));
+		$configfile = substr($configfile, -2) == '?>' ? substr($configfile, 0, -2) : $configfile;
+		$configfile = str_replace($oldauthkey, $newauthkey, $configfile);
+
+		if(file_put_contents(DISCUZ_ROOT.'./config/config_global.php', trim($configfile)) === false) {
+			cpmsg('replacekey_must_write_config', '', 'error');
+		}
+
+		$ecdata = authcode($_G['setting']['ec_contract'], 'DECODE', $oldauthkey);
+		$ecdata = authcode($ecdata, 'ENCODE', $newauthkey);
+		C::t('common_setting')->update('ec_contract', $ecdata);
+
+		$ftpdata = $_G['setting']['ftp'];
+		$ftppasswd = authcode($ftpdata['password'], 'DECODE', md5($oldauthkey));
+		$ftpdata['password'] = authcode($ftppasswd, 'ENCODE', md5($newauthkey));
+		C::t('common_setting')->update('ftp', $ftpdata);
+
+		updatecache('setting');
+
+		cpmsg('replacekey_succeed', '', 'succeed', '', FALSE);
+	}
+
 } elseif($operation == 'ftpcheck') {
 
 	$alertmsg = '';
-	$testcontent = md5('Discuz!' + $_G['config']['security']['authkey']);
+	$testcontent = md5('Discuz!' . random(64));
 	$testfile = 'test/discuztest.txt';
 	$attach_dir = $_G['setting']['attachdir'];
 	@mkdir($attach_dir.'test', 0777);
-	if($fp = @fopen($attach_dir.'/'.$testfile, 'w')) {
-		fwrite($fp, $testcontent);
-		fclose($fp);
+	if(file_put_contents($attach_dir.'/'.$testfile, $testcontent) === false) {
+		$alertmsg = cplang('setting_attach_remote_wtferr');
 	}
 
 	if(!$alertmsg) {
 		$settingnew = $_GET['settingnew'];
-		$settings['ftp'] = C::t('common_setting')->fetch('ftp', true);
+		$settings['ftp'] = C::t('common_setting')->fetch_setting('ftp', true);
 		$settings['ftp']['password'] = authcode($settings['ftp']['password'], 'DECODE', md5($_G['config']['security']['authkey']));
 		$pwlen = strlen($settingnew['ftp']['password']);
 		if($settingnew['ftp']['password'][0] == $settings['ftp']['password'][0] && $settingnew['ftp']['password'][$pwlen - 1] == $settings['ftp']['password'][strlen($settings['ftp']['password']) - 1] && substr($settingnew['ftp']['password'], 1, $pwlen - 2) == '********') {
@@ -362,7 +408,8 @@ if($operation == 'filecheck') {
 						'auth' => $_GET['newsmtp']['auth'][$id] ? 1 : 0,
 						'from' => $_GET['newsmtp']['from'][$id],
 						'auth_username' => $_GET['newsmtp']['auth_username'][$id],
-						'auth_password' => $_GET['newsmtp']['auth_password'][$id]
+						'auth_password' => $_GET['newsmtp']['auth_password'][$id],
+						'precedence' => $_GET['newsmtp']['precedence'][$id]
 					);
 			}
 		}
@@ -427,7 +474,9 @@ if($operation == 'filecheck') {
 		}
 	} else {
 		$type = $_GET['type'];
-		if(!$_G['setting']['watermarkstatus'][$type]) {
+		$status = dunserialize($_G['setting']['watermarkstatus']);
+		$status = is_array($status) ? $status : array();
+		if(!array_key_exists($type, $status) || !$status[$type]) {
 			cpmsg('watermarkpreview_error', '', 'error');
 		}
 		require_once libfile('class/image');
@@ -453,25 +502,27 @@ if($operation == 'filecheck') {
 
 	$rule = array();
 	$rewritedata = rewritedata();
-	$rule['{apache1}'] = $rule['{apache2}'] = $rule['{iis}'] = $rule['{iis7}'] = $rule['{zeus}'] = $rule['{nginx}'] = '';
+	$rule['{apache1}'] = $rule['{apache2}'] = $rule['{iis}'] = $rule['{iis7}'] = $rule['{nginx}'] = $rule['{lighttpd}'] = $rule['{caddy}'] = '';
 	foreach($rewritedata['rulesearch'] as $k => $v) {
-		if(!in_array($k, $_G['setting']['rewritestatus'])) {
+		if(!is_array($_G['setting']['rewritestatus']) || !in_array($k, $_G['setting']['rewritestatus'])) {
 			continue;
 		}
-		$v = !$_G['setting']['rewriterule'][$k] ? $v : $_G['setting']['rewriterule'][$k];
+		$v = empty($_G['setting']['rewriterule'][$k]) ? $v : $_G['setting']['rewriterule'][$k];
 		$pvmaxv = count($rewritedata['rulevars'][$k]) + 2;
 		$vkeys = array_keys($rewritedata['rulevars'][$k]);
 		$rewritedata['rulereplace'][$k] = pvsort($vkeys, $v, $rewritedata['rulereplace'][$k]);
 		$v = str_replace($vkeys, $rewritedata['rulevars'][$k], addcslashes($v, '?*+^$.[]()|'));
 		$rulepath = $k != 'forum_archiver' ? '' : 'archiver/';
-		$rule['{apache1}'] .= "\t".'RewriteCond %{QUERY_STRING} ^(.*)$'."\n\t".'RewriteRule ^(.*)/'.$v.'$ $1/'.$rulepath.pvadd($rewritedata['rulereplace'][$k])."&%1\n";
-		$rule['{apache2}'] .= 'RewriteCond %{QUERY_STRING} ^(.*)$'."\n".'RewriteRule ^'.$v.'$ '.$rulepath.$rewritedata['rulereplace'][$k]."&%1\n";
-		$rule['{iis}'] .= 'RewriteRule ^(.*)/'.$v.'(\?(.*))*$ $1/'.$rulepath.addcslashes(pvadd($rewritedata['rulereplace'][$k]).'&$'.($pvmaxv + 1), '.?')."\n";
-		$rule['{iis7}'] .= "\t\t".'&lt;rule name="'.$k.'"&gt;'."\n\t\t\t".'&lt;match url="^(.*/)*'.str_replace('\.', '.', $v).'\?*(.*)$" /&gt;'."\n\t\t\t".'&lt;action type="Rewrite" url="{R:1}/'.str_replace(array('&', 'page\%3D'), array('&amp;amp;', 'page%3D'), $rulepath.addcslashes(pvadd($rewritedata['rulereplace'][$k], 1).'&{R:'.$pvmaxv.'}', '?')).'" /&gt;'."\n\t\t".'&lt;/rule&gt;'."\n";
-		$rule['{zeus}'] .= 'match URL into $ with ^(.*)/'.$v.'\?*(.*)$'."\n".'if matched then'."\n\t".'set URL = $1/'.$rulepath.pvadd($rewritedata['rulereplace'][$k]).'&$'.$pvmaxv."\nendif\n";
-		$rule['{nginx}'] .= 'rewrite ^([^\.]*)/'.$v.'$ $1/'.$rulepath.stripslashes(pvadd($rewritedata['rulereplace'][$k]))." last;\n";
+		$rule['{apache1}'] .= "\t".'RewriteCond %{QUERY_STRING} ^(.*)$'."\n\t".'RewriteRule ^(.*)/'.$rulepath.$v.'$ $1/'.$rulepath.pvadd($rewritedata['rulereplace'][$k])."&%1\n";
+		$rule['{apache2}'] .= 'RewriteCond %{QUERY_STRING} ^(.*)$'."\n".'RewriteRule ^'.$rulepath.$v.'$ '.$rulepath.$rewritedata['rulereplace'][$k]."&%1\n";
+		$rule['{iis}'] .= 'RewriteRule ^(.*)/'.$rulepath.$v.'(\?(.*))*$ $1/'.$rulepath.addcslashes(pvadd($rewritedata['rulereplace'][$k]).'&$'.($pvmaxv + 1), '.?')."\n";
+		$rule['{iis7}'] .= "\t\t".'&lt;rule name="'.$k.'"&gt;'."\n\t\t\t".'&lt;match url="^(.*/)*'.$rulepath.str_replace('\.', '.', $v).'\?*(.*)$" /&gt;'."\n\t\t\t".'&lt;action type="Rewrite" url="{R:1}/'.str_replace(array('&', 'page\%3D'), array('&amp;amp;', 'page%3D'), $rulepath.addcslashes(pvadd($rewritedata['rulereplace'][$k], array('{R:', '}')).'&{R:'.$pvmaxv.'}', '?')).'" /&gt;'."\n\t\t".'&lt;/rule&gt;'."\n";
+		$rule['{nginx}'] .= 'rewrite ^([^\.]*)/'.$rulepath.$v.'$ $1/'.$rulepath.stripslashes(pvadd($rewritedata['rulereplace'][$k]))." last;\n";
+		$rule['{lighttpd}'] .= '"(.*)/'.$rulepath.$v.'\?*(.*)$" =&gt; "$1/'.$rulepath.pvadd($rewritedata['rulereplace'][$k]).'&$'.$pvmaxv.'",'."\n";
+		$rule['{caddy}'] .= '@'.$k.' path_regexp '.$k.' ^(.*)/'.$rulepath.$v."$\n".'rewrite @'.$k.' {re.'.$k.'.1}/'.$rulepath.pvadd($rewritedata['rulereplace'][$k], array('{re.'.$k.'.', '}')).'&{query}'."\n";
 	}
 	$rule['{nginx}'] .= "if (!-e \$request_filename) {\n\treturn 404;\n}";
+	$rule['{siteroot}'] = !empty($_G['siteroot']) ? $_G['siteroot'] : '/';
 	echo str_replace(array_keys($rule), $rule, cplang('rewrite_message'));
 
 } elseif($operation == 'robots') {
@@ -493,7 +544,7 @@ if($operation == 'filecheck') {
 		define('FOOTERDISABLED' , 1);
 		exit();
 	}
-	cpmsg('robots_output', 'action=checktools&operation=robots&do=output&frame=no', 'download', array('siteurl' => $_G['siteurl']));
+	cpmsg('robots_output', 'action=checktools&operation=robots&do=output&frame=no', 'download', array('siteurl' => dhtmlspecialchars($_G['scheme'].'://'.$_SERVER['HTTP_HOST'].'/')));
 
 }
 
@@ -514,12 +565,12 @@ function pvsort($key, $v, $s) {
 	return $s;
 }
 
-function pvadd($s, $t = 0) {
+function pvadd($s, $t = array()) {
 	$s = str_replace(array('$3', '$2', '$1'), array('~4', '~3', '~2'), $s);
 	if(!$t) {
 		return str_replace(array('~4', '~3', '~2'), array('$4', '$3', '$2'), $s);
 	} else {
-		return str_replace(array('~4', '~3', '~2'), array('{R:4}', '{R:3}', '{R:2}'), $s);
+		return str_replace(array('~4', '~3', '~2'), array($t[0].'4'.$t[1], $t[0].'3'.$t[1], $t[0].'2'.$t[1]), $s);
 	}
 
 }
@@ -529,6 +580,10 @@ function checkfiles($currentdir, $ext = '', $sub = 1, $skip = '') {
 	$dir = @opendir(DISCUZ_ROOT.$currentdir);
 	$exts = '/('.$ext.')$/i';
 	$skips = explode(',', $skip);
+
+	if($dir == false) {
+		return;
+	}
 
 	while($entry = @readdir($dir)) {
 		$file = $currentdir.$entry;
@@ -583,8 +638,9 @@ function getremotefile($file) {
 	global $_G;
 	@set_time_limit(0);
 	$file = $file.'?'.TIMESTAMP.rand(1000, 9999);
-	$str = @implode('', @file($file));
-	if(!$str) {
+	if(strpos($file, 'ftp://') === 0) {
+		$str = file_get_contents($file);
+	} else {
 		$str = dfsockopen($file);
 	}
 	return $str;
@@ -629,4 +685,13 @@ function findhook($hookid, $key) {
 	}
 	$hooks[] = '<!--{hook/'.$hookid.$key.'}-->';
 }
-?>
+
+function generate_key($length = 32) {
+	$random = secrandom($length);
+	$info = md5($_SERVER['SERVER_SOFTWARE'].$_SERVER['SERVER_NAME'].$_SERVER['SERVER_ADDR'].$_SERVER['SERVER_PORT'].$_SERVER['HTTP_USER_AGENT'].time());
+	$return = '';
+	for($i=0; $i<$length; $i++) {
+		$return .= $random[$i].$info[$i];
+	}
+	return $return;
+}

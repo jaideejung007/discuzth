@@ -30,7 +30,7 @@ if($cat['closed'] && !$_G['group']['allowdiy'] && !$categoryperm[$catid]['allowm
 if(!isset($_G['makehtml'])) {
 	if(!empty($cat['url']))	dheader('location:'.$cat['url']);
 	if(defined('SUB_DIR') && $_G['siteurl']. substr(SUB_DIR, 1) != $cat['caturl'] || !defined('SUB_DIR') && $_G['siteurl'] != substr($cat['caturl'], 0, strrpos($cat['caturl'], '/')+1)) {
-		dheader('location:'.$cat['caturl'], '301');
+		dheader('location:'.$cat['caturl'], true, '301');
 	}
 }
 
@@ -203,21 +203,3 @@ function category_get_list_more($cat, $wheresql, $hassub = true,$hasnew = true,$
 	}
 	return $data;
 }
-
-function article_title_style($value = array()) {
-
-	$style = array();
-	$highlight = '';
-	if($value['highlight']) {
-		$style = explode('|', $value['highlight']);
-		$highlight = ' style="';
-		$highlight .= $style[0] ? 'color: '.$style[0].';' : '';
-		$highlight .= $style[1] ? 'font-weight: bold;' : '';
-		$highlight .= $style[2] ? 'font-style: italic;' : '';
-		$highlight .= $style[3] ? 'text-decoration: underline;' : '';
-		$highlight .= '"';
-	}
-	return $highlight;
-
-}
-?>

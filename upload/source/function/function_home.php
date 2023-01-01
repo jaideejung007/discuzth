@@ -90,13 +90,6 @@ function ckstart($start, $perpage) {
 	}
 }
 
-
-function get_my_app() {
-}
-
-function get_my_userapp() {
-}
-
 function getspace($uid) {
 	return getuserbyuid($uid);
 }
@@ -315,9 +308,6 @@ function sarray_rand($arr, $num=1) {
 	return $r_values;
 }
 
-function my_showgift() {
-}
-
 function getsiteurl() {
 	global $_G;
 	return $_G['siteurl'];
@@ -403,7 +393,7 @@ function pic_upload($FILES, $type='album', $thumb_width=0, $thumb_height=0, $thu
 		}
 	}
 
-	if(getglobal('setting/ftp/on')) {
+	if(ftpperm($upload->attach['ext'], $upload->attach['size'])) {
 		if(ftpcmd('upload', $type.'/'.$upload->attach['attachment'])) {
 			if($result['thumb']) {
 				ftpcmd('upload', $type.'/'.getimgthumbname($upload->attach['attachment']));
@@ -450,7 +440,7 @@ function getdefaultdoing() {
 	$result = array();
 	$key = 0;
 
-	if(($result = C::t('common_setting')->fetch('defaultdoing'))) {
+	if(($result = C::t('common_setting')->fetch_setting('defaultdoing'))) {
 		$_G['setting']['defaultdoing'] = explode("\r\n", $result);
 		$key = rand(0, count($_G['setting']['defaultdoing'])-1);
 	} else {
@@ -502,7 +492,6 @@ function getuserdefaultdiy() {
 									'block`wall' => array('attr' => array('name'=>'wall'))
 							),
 							'column`frame1_right' => array(
-									'block`myapp' => array('attr' => array('name'=>'myapp')),
 									'block`friend' => array('attr' => array('name'=>'friend')),
 									'block`visitor' => array('attr' => array('name'=>'visitor')),
 									'block`group' => array('attr' => array('name'=>'group'))
@@ -520,7 +509,6 @@ function getuserdefaultdiy() {
 					'visitor' => array('shownum' => 18),
 					'wall' => array('shownum' => 16),
 					'feed' => array('shownum' => 16),
-					'myapp' => array('shownum' => 9, 'logotype'=> 'logo'),
 			),
 		'nv' => array(
 			'nvhidden' => 0,
@@ -588,6 +576,48 @@ function getthread() {
 		}
 	}
 	return $threads;
+}
+
+function show_view() {
+	global $_G, $space;
+
+	if(!$space['self'] && $_G['uid']) {
+		$visitor = C::t('home_visitor')->fetch_by_uid_vuid($space['uid'], $_G['uid']);
+		$is_anonymous = empty($_G['cookie']['anonymous_visit_'.$_G['uid'].'_'.$space['uid']]) ? 0 : 1;
+		if(empty($visitor['dateline'])) {
+			$setarr = array(
+				'uid' => $space['uid'],
+				'vuid' => $_G['uid'],
+				'vusername' => $is_anonymous ? '' : $_G['username'],
+				'dateline' => $_G['timestamp']
+			);
+			C::t('home_visitor')->insert($setarr, false, true);
+			show_credit();
+		} else {
+			if($_G['timestamp'] - $visitor['dateline'] >= 300) {
+				C::t('home_visitor')->update_by_uid_vuid($space['uid'], $_G['uid'], array('dateline'=>$_G['timestamp'], 'vusername'=>$is_anonymous ? '' : $_G['username']));
+			}
+			if($_G['timestamp'] - $visitor['dateline'] >= 3600) {
+				show_credit();
+			}
+		}
+		updatecreditbyaction('visit', 0, array(), $space['uid']);
+	}
+}
+
+function show_credit() {
+	global $_G, $space;
+
+	$showinfo = C::t('home_show')->fetch($space['uid']);
+	if($showinfo['credit'] > 0) {
+		$showinfo['unitprice'] = intval($showinfo['unitprice']);
+		if($showinfo['credit'] <= $showinfo['unitprice']) {
+			notification_add($space['uid'], 'show', 'show_out');
+			C::t('home_show')->delete($space['uid']);
+		} else {
+			C::t('home_show')->update_credit_by_uid($space['uid'], -$showinfo['unitprice']);
+		}
+	}
 }
 
 ?>

@@ -1,10 +1,10 @@
 <?php
 
 /*
-[UCenter] (C)2001-2099 Comsenz Inc.
-This is NOT a freeware, use is subject to license terms
+	[UCenter] (C)2001-2099 Comsenz Inc.
+	This is NOT a freeware, use is subject to license terms
 
-$Id: base.php 1167 2014-11-03 03:06:21Z hypowang $
+	$Id: base.php 1167 2014-11-03 03:06:21Z hypowang $
 */
 
 !defined('IN_UC') && exit('Access Denied');
@@ -16,26 +16,31 @@ class base {
 	var $onlineip;
 	var $db;
 	var $view;
-	var $user = array();
-	var $settings = array();
-	var $cache = array();
-	var $app = array();
-	var $lang = array();
-	var $input = array();
+	var $settings;
+	var $cache;
+	var $_CACHE;
+	var $app;
+	var $user;
+	var $lang;
+	var $input;
 
 	function __construct() {
 		$this->base();
 	}
 
 	function base() {
-		$this->init_var();
-		$this->init_db();
-		$this->init_cache();
-		$this->init_app();
-		$this->init_user();
-		$this->init_template();
-		$this->init_note();
-		$this->init_mail();
+		require_once UC_ROOT.'./model/var.php';
+		base_var::bind($this);
+		if(empty($this->time)) {
+			$this->init_var();
+			$this->init_db();
+			$this->init_cache();
+			$this->init_app();
+			$this->init_user();
+			$this->init_template();
+			$this->init_note();
+			$this->init_mail();
+		}
 	}
 
 	function init_var() {
@@ -47,7 +52,7 @@ class base {
 			if(defined('UC_IPGETTER') && !empty(constant('UC_IPGETTER'))) {
 				$s = defined('UC_IPGETTER_'.constant('UC_IPGETTER')) && is_array(constant('UC_IPGETTER_'.constant('UC_IPGETTER'))) ? constant('UC_IPGETTER_'.constant('UC_IPGETTER')) : array();
 				$c = 'ucip_getter_'.constant('UC_IPGETTER');
-				require_once UC_ROOT.'./lib/ucip/'.$c.'.class.php';
+				require_once UC_ROOT.'./lib/'.$c.'.class.php';
 				$r = $c::get($s);
 				$this->onlineip = ucip::validate_ip($r) ? $r : $this->onlineip;
 			} else if (isset($_SERVER['HTTP_CLIENT_IP']) && ucip::validate_ip($_SERVER['HTTP_CLIENT_IP'])) {
@@ -98,11 +103,7 @@ class base {
 	}
 
 	function init_db() {
-		if(function_exists("mysql_connect")) {
-			require_once UC_ROOT.'lib/db.class.php';
-		} else {
-			require_once UC_ROOT.'lib/dbi.class.php';
-		}
+		require_once UC_ROOT.'lib/dbi.class.php';
 		$this->db = new ucserver_db();
 		$this->db->connect(UC_DBHOST, UC_DBUSER, UC_DBPW, UC_DBNAME, UC_DBCHARSET, UC_DBCONNECT, UC_DBTABLEPRE);
 	}
@@ -188,7 +189,7 @@ class base {
 		}
 
 		if($operation == 'DECODE') {
-			if((substr($result, 0, 10) == 0 || substr($result, 0, 10) - time() > 0) && substr($result, 10, 16) == substr(md5(substr($result, 26).$keyb), 0, 16)) {
+			if(((int)substr($result, 0, 10) == 0 || (int)substr($result, 0, 10) - time() > 0) && substr($result, 10, 16) === substr(md5(substr($result, 26).$keyb), 0, 16)) {
 				return substr($result, 26);
 			} else {
 				return '';
@@ -257,7 +258,8 @@ class base {
 			} else {
 				require_once UC_ROOT."model/$model.php";
 			}
-			eval('$_ENV[$model] = new '.$model.'model($base);');
+			$modelname = $model.'model';
+			$_ENV[$model] = new $modelname($base);
 		}
 		return $_ENV[$model];
 	}
@@ -285,8 +287,8 @@ class base {
 			$message = $lang[$message] ? str_replace(array_keys($vars), array_values($vars), $lang[$message]) : $message;
 		}
 		$this->view->assign('message', $message);
-		if(!strpos($redirect, 'sid=') && (!strpos($redirect, 'ttp://'))) {
-			if(!strpos($redirect, '?')) {
+		if($redirect != 'BACK' && !preg_match('/^https?:\/\//is', $redirect) && strpos($redirect, 'sid=') === FALSE) {
+			if(strpos($redirect, '?') === FALSE) {
 				$redirect .= '?sid='.$this->sid;
 			} else {
 				$redirect .= '&sid='.$this->sid;
@@ -324,9 +326,9 @@ class base {
 		$dir1 = substr($uid, 0, 3);
 		$dir2 = substr($uid, 3, 2);
 		$dir3 = substr($uid, 5, 2);
-		!is_dir($dir.'/'.$dir1) && mkdir($dir.'/'.$dir1, 0777);
-		!is_dir($dir.'/'.$dir1.'/'.$dir2) && mkdir($dir.'/'.$dir1.'/'.$dir2, 0777);
-		!is_dir($dir.'/'.$dir1.'/'.$dir2.'/'.$dir3) && mkdir($dir.'/'.$dir1.'/'.$dir2.'/'.$dir3, 0777);
+		!is_dir($dir.'/'.$dir1) && mkdir($dir.'/'.$dir1, 0777) && @touch($dir.'/'.$dir1.'/index.htm');
+		!is_dir($dir.'/'.$dir1.'/'.$dir2) && mkdir($dir.'/'.$dir1.'/'.$dir2, 0777) && @touch($dir.'/'.$dir1.'/'.$dir2.'/index.htm');
+		!is_dir($dir.'/'.$dir1.'/'.$dir2.'/'.$dir3) && mkdir($dir.'/'.$dir1.'/'.$dir2.'/'.$dir3, 0777) && @touch($dir.'/'.$dir1.'/'.$dir2.'/'.$dir3.'/index.htm');
 	}
 
 	function get_home($uid) {
@@ -349,17 +351,17 @@ class base {
 	}
 
 	function &cache($cachefile) {
-		static $_CACHE = array();
-		if(!isset($_CACHE[$cachefile])) {
+		if(!isset($this->_CACHE[$cachefile])) {
 			$cachepath = UC_DATADIR.'./cache/'.$cachefile.'.php';
 			if(!file_exists($cachepath)) {
 				$this->load('cache');
 				$_ENV['cache']->updatedata($cachefile);
 			} else {
 				include_once $cachepath;
+				$this->_CACHE[$cachefile] = $_CACHE[$cachefile];
 			}
 		}
-		return $_CACHE[$cachefile];
+		return $this->_CACHE[$cachefile];
 	}
 
 	function input($k) {
@@ -373,7 +375,7 @@ class base {
 		    } elseif(!preg_match("/^[0-9]+$/", $this->input[$k])) {
 		        return NULL;
 		    }
-		}		
+		}
 		return isset($this->input[$k]) ? (is_array($this->input[$k]) ? $this->input[$k] : trim($this->input[$k])) : NULL;
 	}
 
@@ -453,7 +455,7 @@ class base {
 		(!defined('UC_COOKIEPATH')) && define('UC_COOKIEPATH', '/');
 		(!defined('UC_COOKIEDOMAIN')) && define('UC_COOKIEDOMAIN', '');
 
-		if($value == '' || $life < 0) {
+		if($value === '' || $life < 0) {
 			$value = '';
 			$life = -1;
 		}
@@ -498,17 +500,12 @@ class base {
 	}
 
 	function detectescape($basepath, $relativepath) {
-		// 感谢 oldhu 贡献此代码
-		// 如果base不存在，有问题
 		if(!file_exists($basepath)) {
 			return FALSE;
 		}
 
-		// 如果文件或目录不存在，有可能是创建前的检查，使用其上一级路径
 		if(!file_exists($basepath . $relativepath)) {
 			$relativepath = dirname($relativepath);
-			// 上一级还不存在，按最坏情况处理，阻止请求
-			// 不区分返回值的目的也是为了避免给攻击者有价值的信息
 			if(!file_exists($basepath . $relativepath)) {
 				return FALSE;
 			}
@@ -517,14 +514,88 @@ class base {
 		$real_base = realpath($basepath);
 		$real_target = realpath($basepath . $relativepath);
 
-		// $real_base与$real_target相等，表示就是在访问base目录，允许
-		// 或者
-		// $real_target的开头就是$real_base，表示在访问base之下的文件/目录，允许
 		if(strcmp($real_target, $real_base) !== 0 && strpos($real_target, $real_base . DIRECTORY_SEPARATOR) !== 0) {
 			return FALSE;
 		}
 
 		return TRUE;
+	}
+
+	function random($length, $numeric = 0) {
+		$seed = base_convert(md5(microtime().$_SERVER['DOCUMENT_ROOT']), 16, $numeric ? 10 : 35);
+		$seed = $numeric ? (str_replace('0', '', $seed).'012340567890') : ($seed.'zZ'.strtoupper($seed));
+		if($numeric) {
+			$hash = '';
+		} else {
+			$hash = chr(rand(1, 26) + rand(0, 1) * 32 + 64);
+			$length--;
+		}
+		$max = strlen($seed) - 1;
+		for($i = 0; $i < $length; $i++) {
+			$hash .= $seed[mt_rand(0, $max)];
+		}
+		return $hash;
+	}
+
+	function secrandom($length, $numeric = 0, $strong = false) {
+		$chars = $numeric ? array('A','B','+','/','=') : array('+','/','=');
+		$num_find = str_split('CDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
+		$num_repl = str_split('01234567890123456789012345678901234567890123456789');
+		$isstrong = false;
+		if(function_exists('random_bytes')) {
+			$isstrong = true;
+			$random_bytes = function($length) {
+				return random_bytes($length);
+			};
+		} elseif(extension_loaded('mcrypt') && function_exists('mcrypt_create_iv')) {
+			$isstrong = true;
+			$random_bytes = function($length) {
+				$rand = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
+				if ($rand !== false && strlen($rand) === $length) {
+					return $rand;
+				} else {
+					return false;
+				}
+			};
+		} elseif(extension_loaded('openssl') && function_exists('openssl_random_pseudo_bytes')) {
+			$isstrong = true;
+			$random_bytes = function($length) {
+				$rand = openssl_random_pseudo_bytes($length, $secure);
+				if($secure === true) {
+					return $rand;
+				} else {
+					return false;
+				}
+			};
+		}
+		if(!$isstrong) {
+			return $strong ? false : random($length, $numeric);
+		}
+		$retry_times = 0;
+		$return = '';
+		while($retry_times < 128) {
+			$getlen = $length - strlen($return); // 33% extra bytes
+			$bytes = $random_bytes(max($getlen, 12));
+			if($bytes === false) {
+				return false;
+			}
+			$bytes = str_replace($chars, '', base64_encode($bytes));
+			$return .= substr($bytes, 0, $getlen);
+			if(strlen($return) == $length) {
+				return $numeric ? str_replace($num_find, $num_repl, $return) : $return;
+			}
+			$retry_times++;
+		}
+	}
+
+	function generate_key($length = 32) {
+		$random = $this->secrandom($length);
+		$info = md5($_SERVER['SERVER_SOFTWARE'].$_SERVER['SERVER_NAME'].$_SERVER['SERVER_ADDR'].$_SERVER['SERVER_PORT'].$_SERVER['HTTP_USER_AGENT'].time());
+		$return = '';
+		for($i=0; $i<$length; $i++) {
+			$return .= $random[$i].$info[$i];
+		}
+		return $return;
 	}
 
 }

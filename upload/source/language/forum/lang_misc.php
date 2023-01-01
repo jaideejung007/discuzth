@@ -127,7 +127,7 @@ $lang = array
 	'formulaperm_regdate' => 'เวลาที่ลงทะเบียน',
 	'formulaperm_regday' => 'วันที่ลงทะเบียน',
 	'formulaperm_regip' => 'IP ที่ใช้ทะเบียน',
-	'formulaperm_lastip' => 'IP ที่ใช้ลงชื่อเข้าใช้ล่าสุด',
+	'formulaperm_lastip' => 'IP ที่ใช้เข้าสู่ระบบล่าสุด',
 	'formulaperm_buyercredit' => 'การประเมินเครดิตผู้ซื้อ',
 	'formulaperm_sellercredit' => 'การประเมินเครดิตผู้ขาย',
 	'formulaperm_digestposts' => 'กระทู้สำคัญ',
@@ -156,7 +156,7 @@ $lang = array
 	'modcp_logs_action_log' => 'จัดการบันทึก',
 	'modcp_logs_action_stat' => 'จัดการสถิติ',
 
-	'modcp_logs_action_login' => 'ลงชื่อเข้าใช้',
+	'modcp_logs_action_login' => 'เข้าสู่ระบบ',
 
 	'uch_selectalbum' => 'กรุณาเลือกอัลบั้ม',
 	'uch_noalbum' => 'ขออภัย! คุณไม่มีอัลบั้มภาพ, ',
@@ -167,7 +167,7 @@ $lang = array
 	'pm_to' => 'ถึง',
 	'pm_date' => 'วันที่',
 
-	'share_message' => 'สวัสดี! ฉันเห็นกระทู้นี้จาก {$_G[setting][bbname]} ฉันคิดว่าเป็นกระทู้ที่น่าสนใจมาก ดังนั้น ฉันจึงอยากจะแนะนำให้คุณอ่าน\\n\\n$thread[subject]\\nลิงก์ [url={$threadurl}]{$threadurl}[/url]\\n\\nหวังว่าคุณคงถูกใจไม่มากก็น้อย',
+	'share_message' => 'สวัสดี! ฉันเห็นกระทู้นี้จาก {$_G[\'setting\'][\'bbname\']} ฉันคิดว่าเป็นกระทู้ที่น่าสนใจมาก ดังนั้น ฉันจึงอยากจะแนะนำให้คุณอ่าน\\n\\n$thread[\'subject\']\\nลิงก์ [url={$threadurl}]{$threadurl}[/url]\\n\\nหวังว่าคุณคงถูกใจไม่มากก็น้อย',
 
 	'week_0' => 'อาทิตย์',
 	'week_1' => 'จันทร์',
@@ -177,7 +177,7 @@ $lang = array
 	'week_5' => 'ศุกร์',
 	'week_6' => 'เสาร์',
 
-	'y_m_d' => 'Yปีmเดือนdวัน',
+	'y_m_d' => 'วันที่ d เดือนm ปี Y',
 
 	'notice_actor' => 'ฯลฯ $actorcount คน',
 
@@ -261,7 +261,6 @@ $lang = array
 	'perms_allowpoke' => 'สะกิด(ส่วนตัว)',
 	'perms_allowfriend' => 'เพิ่มเพื่อน',
 	'perms_allowclick' => 'แสดงความรู้สึก',
-	'perms_allowmyop' => 'ใช้แอพลิเคชัน',
 	'perms_allowcomment' => 'แสดงความคิดเห็น',
 	'perms_allowstatdata' => 'ดูสถิติข้อมูล',
 	'perms_allowstat' => 'ดูแนวโน้มสถิติ',
@@ -293,9 +292,9 @@ $lang = array
 	'crime_postreason' => '{reason} &nbsp; <a href="forum.php?mod=redirect&goto=findpost&pid={pid}&ptid={tid}" target="_blank" class="xi2">รายละเอียด</a>',
 	'crime_reason' => '{reason}',
 
-	'connectguest_message_search' => array('ยังไม่ได้ลงชื่อเข้าระบบ', 'ลงชื่อเข้าใช้แล้ว'),
+	'connectguest_message_search' => array('ยังไม่ได้ลงชื่อเข้าระบบ', 'เข้าสู่ระบบแล้ว'),
 	'connectguest_message_replace' => array('ยังไม่ได้ <a href="member.php?mod=connect" class="xi2">เชื่อมโยง</a> หรือ <a href="member.php?mod=connect&ac=bind" class="xi2">ผูกบัญชีผู้ใช้</a> ', 'ก่อนที่จะ <a href="member.php?mod=connect" class="xi2">เชื่อมต่อ</a> หรือ <a href="member.php?mod=connect&ac=bind" class="xi2">ผูกบัญชีผู้ใช้</a> '),
-	'connectguest_message_mobile_search' => array('ยังไม่ได้ลงชื่อเข้าใช้', 'ลงชื่อเข้าใช้งาน'),
+	'connectguest_message_mobile_search' => array('ยังไม่ได้เข้าสู่ระบบ', 'เข้าสู่ระบบ'),
 	'connectguest_message_mobile_replace' => 'อัปเดตบัญชีของคุณหรือผูกบัญชีที่มีอยู่แล้ว',
 
 	'avatar' => 'รูปโปรไฟล์',
@@ -323,7 +322,7 @@ $lang = array
 
 	'seccode' => 'รหัสยืนยัน',
 	'seccode_update' => 'เปลี่ยน',
-	'seccode_player' => '<span style="padding:2px"><img border="0" style="vertical-align:middle" src="static/image/common/seccodeplayer.gif" /> <a href="javascript:;" onclick="window.document.seccodeplayer_{idhash}.SetVariable(\'isPlay\', 1)">ฟังเสียงรหัสยืนยัน</a></span>',
+	'seccode_player' => '<span style="padding:2px"><img border="0" style="vertical-align:middle" src="'.STATICURL.'image/common/seccodeplayer.gif" /> <a href="javascript:;" id="seccodeplay_{idhash}">ฟังเสียงรหัสยืนยัน</a></span>',
 	'secqaa' => 'ตอบคำถามรหัสยืนยัน',
 
 	'mobileoem_creditrule' => 'ลงทะเบียนผ่านอุปกรณ์พกพา',

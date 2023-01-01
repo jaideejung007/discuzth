@@ -13,9 +13,9 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'bindqq' => 'You need to bind QQ account before you can open this application',
-	'bindqq_link' => '<a href="javascript:;" class="lightlink" onclick="BindQQ()"><b>Start binding QQ</b></a>',
-	'back' => 'Click here to return back',
+	'bindqq' => 'คุณต้องผูกบัญชี QQ ก่อนจึงจะสามารถเปิดแอปพลิเคชันนี้ได้',
+	'bindqq_link' => '<a href="javascript:;" class="lightlink" onclick="BindQQ()"><b>เริ่มผูก QQ</b></a>',
+	'back' => 'คลิกที่นี่เพื่อกลับไปยังก่อนหน้า',
 );
 
 ?>

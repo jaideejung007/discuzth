@@ -117,6 +117,11 @@ function mb_strlen(str) {
 	return len;
 }
 
+function dstrlen(str) { /*jaideejung007*/
+	var count = 0;
+	return count;
+}
+
 function mb_cutstr(str, maxlen, dot) {
 	var len = 0;
 	var ret = '';
@@ -131,6 +136,37 @@ function mb_cutstr(str, maxlen, dot) {
 		ret += str.substr(i, 1);
 	}
 	return ret;
+}
+
+function dcutstr(str, maxlen) {
+	var len = 0;
+	var ret = '';
+	var dot = arguments.length > 2 && arguments[2] !== undefined && arguments[2] !== false ? arguments[2] : '...';
+	var flag = true;
+	var strmaxlen = maxlen - dot.length;
+	for(var i = 0; i < strlen(str); i++) {
+		value = str.charCodeAt(i);
+		if(value > 127) {
+			len++;
+		}
+		len++;
+		if(flag && len > strmaxlen) {
+			flag = false;
+			ret = str.substr(0, i);
+			ret += dot;
+		}
+		if(len > maxlen) {
+			break;
+		}
+		if(value >= 55296 && value <= 57343) {
+			i++;
+		}
+	}
+	if(len > maxlen) {
+		return ret;
+	} else {
+		return str;
+	}
 }
 
 function preg_replace(search, replace, str, regswitch) {
@@ -184,7 +220,7 @@ function setcookie(cookieName, cookieValue, seconds, path, domain, secure) {
 	path = !path ? cookiepath : path;
 	document.cookie = escape(cookiepre + cookieName) + '=' + escape(cookieValue)
 		+ (expires ? '; expires=' + expires.toGMTString() : '')
-		+ (path ? '; path=' + path : '/')
+		+ '; path=' + (path ? path : '/')
 		+ (domain ? '; domain=' + domain : '')
 		+ (secure ? '; secure' : '');
 }
@@ -1500,7 +1536,7 @@ function codetag(text, br) {
 	var br = !br ? 1 : br;
 	DISCUZCODE['num']++;
 	if(br > 0 && typeof wysiwyg != 'undefined' && wysiwyg) text = text.replace(/<br[^\>]*>/ig, '\n');
-	text = text.replace(/\$/ig, '$$');
+	text = text.replace(/\$/ig, '$$$$');
 	DISCUZCODE['html'][DISCUZCODE['num']] = '[code]' + text + '[/code]';
 	return '[\tDISCUZ_CODE_' + DISCUZCODE['num'] + '\t]';
 }
@@ -1552,6 +1588,18 @@ function openDiy(){
 
 function hasClass(elem, className) {
 	return elem.className && (" " + elem.className + " ").indexOf(" " + className + " ") != -1;
+}
+
+function addClass(elem, className) {
+	if(!hasClass(elem, className)) elem.className = trim(elem.className += " " + className);
+}
+
+function removeClass(elem, className) {
+	elem.className = trim((" " + elem.className + " ").replace(" " + trim(className) + " ", " "));
+}
+
+function toggleClass(elem, className) {
+	elem.className = hasClass(elem, className) ? removeClass(elem, className) : trim(elem.className += " " + className);
 }
 
 function runslideshow() {
@@ -1704,6 +1752,10 @@ function searchFocus(obj) {
 	}
 }
 
+function sendsecmobseccode(svctype, secmobicc, secmobile) {
+	showWindow('sendsecmobseccode', 'misc.php?mod=secmobseccode&action=send&svctype=' + svctype + '&secmobicc=' + secmobicc + '&secmobile=' + secmobile);
+}
+
 function extstyle(css) {
 	$F('_extstyle', arguments);
 }
@@ -1731,10 +1783,6 @@ function createPalette(colorid, id, func) {
 
 function showForummenu(fid) {
 	$F('_showForummenu', arguments);
-}
-
-function showUserApp() {
-	$F('_showUserApp', arguments);
 }
 
 function cardInit() {
@@ -1781,10 +1829,24 @@ function navShow(id) {
 
 function strLenCalc(obj, checklen, maxlen) {
 	var v = obj.value, charlen = 0, maxlen = !maxlen ? 200 : maxlen, curlen = maxlen, len = strlen(v);
+	for(var i = 0; i < v.length; i++) {
+		if(v.charCodeAt(i) < 0 || v.charCodeAt(i) > 255) {
+			curlen -= charset == 'utf-8' ? 2 : 1;
+		}
+	}
 	if(curlen >= len) {
 		$(checklen).innerHTML = curlen - len;
 	} else {
-		obj.value = obj.value.substr(v, maxlen);
+		obj.value = mb_cutstr(v, maxlen, 0);
+	}
+}
+
+function dstrLenCalc(obj, checklen, maxlen) { /*jaideejung007, special thanks to Kriang Lerdsuwanakij*/
+	var v = obj.value, maxlen = !maxlen ? 200 : maxlen, len = strlen(v);
+	if(maxlen >= len) {
+		$(checklen).innerHTML = maxlen - len;
+	} else {
+		obj.value = v.substring(0, maxlen);
 	}
 }
 
@@ -1994,13 +2056,15 @@ function detectHtml5Support() {
 function detectPlayer(randomid, ext, src, width, height) {
 	var h5_support = new Array('aac', 'flac', 'mp3', 'm4a', 'wav', 'flv', 'mp4', 'm4v', '3gp', 'ogv', 'ogg', 'weba', 'webm');
 	var trad_support = new Array('mp3', 'wma', 'mid', 'wav', 'ra', 'ram', 'rm', 'rmvb', 'swf', 'asf', 'asx', 'wmv', 'avi', 'mpg', 'mpeg', 'mov');
+	width = width.indexOf("%") == -1 ? width + 'px' : width;
+	height = height.indexOf("%") == -1 ? height + 'px' : height;
 	if (in_array(ext, h5_support) && detectHtml5Support()) {
 		html5Player(randomid, ext, src, width, height);
 	} else if (in_array(ext, trad_support)) {
 		tradionalPlayer(randomid, ext, src, width, height);
 	} else {
-		$(randomid).style.width = width + 'px';
-		$(randomid).style.height = height + 'px';
+		$(randomid).style.width = width;
+		$(randomid).style.height = height;
 	}
 }
 
@@ -2039,8 +2103,8 @@ function tradionalPlayer(randomid, ext, src, width, height) {
 		default:
 			break;
 	}
-	$(randomid).style.width = width + 'px';
-	$(randomid).style.height = height + 'px';
+	$(randomid).style.width = width;
+	$(randomid).style.height = height;
 	$(randomid + '_container').innerHTML = html;
 }
 
@@ -2053,26 +2117,35 @@ function html5Player(randomid, ext, src, width, height) {
 		case 'wav':
 		case 'ogg':
 			height = 66;
-			appendstyle(STATICURL + 'js/player/aplayer.min.css');
-			appendscript(STATICURL + 'js/player/aplayer.min.js');
+			if(!HTML5PLAYER['apload']) {
+				appendstyle(STATICURL + 'js/player/aplayer.min.css');
+				appendscript(STATICURL + 'js/player/aplayer.min.js');
+				HTML5PLAYER['apload'] = 1;
+			}
 			html5APlayer(randomid, ext, src, width, height);
 			break;
 		case 'flv':
-			appendscript(STATICURL + 'js/player/flv.min.js');
+			if(!HTML5PLAYER['flvload']) {
+				appendscript(STATICURL + 'js/player/flv.min.js');
+				HTML5PLAYER['flvload'] = 1;
+			}
 		case 'mp4':
 		case 'm4v':
 		case '3gp':
 		case 'ogv':
 		case 'webm':
-			appendstyle(STATICURL + 'js/player/dplayer.min.css');
-			appendscript(STATICURL + 'js/player/dplayer.min.js');
+			if(!HTML5PLAYER['dpload']) {
+				appendstyle(STATICURL + 'js/player/dplayer.min.css');
+				appendscript(STATICURL + 'js/player/dplayer.min.js');
+				HTML5PLAYER['dpload'] = 1;
+			}
 			html5DPlayer(randomid, ext, src, width, height);
 			break;
 		default:
 			break;
 	}
-	$(randomid).style.width = width + 'px';
-	$(randomid).style.height = height + 'px';
+	$(randomid).style.width = width;
+	$(randomid).style.height = height;
 }
 
 function html5APlayer(randomid, ext, src, width, height) {
@@ -2163,6 +2236,11 @@ var CLIPBOARDSWFDATA = '';
 var NOTICETITLE = [];
 var NOTICECURTITLE = document.title;
 var safescripts = {}, evalscripts = [];
+
+var HTML5PLAYER = [];
+HTML5PLAYER['apload'] = 0;
+HTML5PLAYER['dpload'] = 0;
+HTML5PLAYER['flvload'] = 0;
 
 if(BROWSER.firefox && window.HTMLElement) {
 	HTMLElement.prototype.__defineGetter__( "innerText", function(){

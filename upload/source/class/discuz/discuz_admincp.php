@@ -32,7 +32,7 @@ class discuz_admincp
 	var $sessionlife = 1800;
 	var $sessionlimit = 0;
 
-	function &instance() {
+	public static function &instance() {
 		static $object;
 		if(empty($object)) {
 			$object = new discuz_admincp();
@@ -52,6 +52,7 @@ class discuz_admincp
 
 		$this->cpsetting = $this->core->config['admincp'];
 		$this->adminuser = & $this->core->var['member'];
+		$this->core->var['setting']['jspath'] = 'static/js/';
 
 		$this->isfounder = $this->checkfounder($this->adminuser);
 
@@ -74,16 +75,16 @@ class discuz_admincp
 		$session = array();
 
 		if(!$this->adminuser['uid']) {
-			$this->cpaccess = 0;
+			$this->cpaccess = getglobal('config/admincp/mustlogin') ? -5 : 0;
 		} else {
 
 			if(!$this->isfounder) {
 				$session = C::t('common_admincp_member')->fetch($this->adminuser['uid']);
 				if($session) {
-					$session = array_merge($session, C::t('common_admincp_session')->fetch($this->adminuser['uid'], $this->panel));
+					$session = array_merge($session, C::t('common_admincp_session')->fetch_session($this->adminuser['uid'], $this->panel));
 				}
 			} else {
-				$session = C::t('common_admincp_session')->fetch($this->adminuser['uid'], $this->panel);
+				$session = C::t('common_admincp_session')->fetch_session($this->adminuser['uid'], $this->panel);
 			}
 
 			if(empty($session)) {
@@ -129,7 +130,7 @@ class discuz_admincp
 		}
 
 		if($this->cpaccess == 1) {
-			C::t('common_admincp_session')->delete($this->adminuser['uid'], $this->panel, $this->sessionlife);
+			C::t('common_admincp_session')->delete_session($this->adminuser['uid'], $this->panel, $this->sessionlife);
 			C::t('common_admincp_session')->insert(array(
 				'uid' => $this->adminuser['uid'],
 				'adminid' => $this->adminuser['adminid'],
@@ -140,7 +141,7 @@ class discuz_admincp
 			));
 		} elseif ($this->cpaccess == 3) {
 			$this->load_admin_perms();
-			C::t('common_admincp_session')->update($this->adminuser['uid'], $this->panel, array('dateline' => TIMESTAMP, 'ip' => $this->core->var['clientip'], 'errorcount' => -1));
+			C::t('common_admincp_session')->update_session($this->adminuser['uid'], $this->panel, array('dateline' => TIMESTAMP, 'ip' => $this->core->var['clientip'], 'errorcount' => -1));
 		}
 
 		if($this->cpaccess != 3) {
@@ -157,11 +158,11 @@ class discuz_admincp
 		loaducenter();
 		$ucresult = uc_user_login($this->adminuser['uid'], $_POST['admin_password'], 1, 1, $_POST['admin_questionid'], $_POST['admin_answer'], $this->core->var['clientip']);
 		if($ucresult[0] > 0) {
-			C::t('common_admincp_session')->update($this->adminuser['uid'], $this->panel, array('dateline' => TIMESTAMP, 'ip' => $this->core->var['clientip'], 'errorcount' => -1));
+			C::t('common_admincp_session')->update_session($this->adminuser['uid'], $this->panel, array('dateline' => TIMESTAMP, 'ip' => $this->core->var['clientip'], 'errorcount' => -1));
 			dheader('Location: '.ADMINSCRIPT.'?'.cpurl('url', array('sid')));
 		} else {
 			$errorcount = $this->adminsession['errorcount'] + 1;
-			C::t('common_admincp_session')->update($this->adminuser['uid'], $this->panel, array('dateline' => TIMESTAMP, 'ip' => $this->core->var['clientip'], 'errorcount' => $errorcount));
+			C::t('common_admincp_session')->update_session($this->adminuser['uid'], $this->panel, array('dateline' => TIMESTAMP, 'ip' => $this->core->var['clientip'], 'errorcount' => $errorcount));
 		}
 	}
 
@@ -259,9 +260,9 @@ class discuz_admincp
 			return false;
 		} elseif(empty($founders)) {
 			return true;
-		} elseif(strexists(",$founders,", ",$user[uid],")) {
+		} elseif(strexists(",$founders,", ",{$user['uid']},")) {
 			return true;
-		} elseif(!is_numeric($user['username']) && strexists(",$founders,", ",$user[username],")) {
+		} elseif(!is_numeric($user['username']) && strexists(",$founders,", ",{$user['username']},")) {
 			return true;
 		} else {
 			return FALSE;
@@ -273,11 +274,11 @@ class discuz_admincp
 	}
 
 	function do_admin_logout() {
-		C::t('common_admincp_session')->delete($this->adminuser['uid'], $this->panel, $this->sessionlife);
+		C::t('common_admincp_session')->delete_session($this->adminuser['uid'], $this->panel, $this->sessionlife);
 	}
 
 	function admincpfile($action) {
-		return './source/admincp/admincp_'.$action.'.php';
+		return DISCUZ_ROOT.'./source/admincp/admincp_'.$action.'.php';
 	}
 
 	function show_admincp_main() {
@@ -301,7 +302,7 @@ class discuz_admincp
 		$sid = $_G['sid'];
 		$isfounder = $this->isfounder;
 		if($action == 'main' || $this->allow($action, $operation, $do)) {
-			require './source/admincp/admincp_'.$action.'.php';
+			require DISCUZ_ROOT.'./source/admincp/admincp_'.$action.'.php';
 		} else {
 			cpheader();
 			cpmsg('action_noaccess', '', 'error');

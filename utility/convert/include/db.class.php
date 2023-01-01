@@ -1,6 +1,10 @@
 <?php
 
-
+/**
+ * DiscuzX Convert
+ *
+ * $Id: db.class.php 10469 2010-05-11 09:12:14Z monkey $
+ */
 
 class db_mysql
 {

@@ -12,6 +12,7 @@ error_reporting(0);
 
 _get_script_url();
 define('UC_API', strtolower((is_https() ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].substr($_SERVER['PHP_SELF'], 0, strrpos($_SERVER['PHP_SELF'], '/'))));
+define('UC_AVTURL', '');
 
 $uid = isset($_GET['uid']) ? $_GET['uid'] : 0;
 $size = isset($_GET['size']) ? $_GET['size'] : '';
@@ -19,11 +20,10 @@ $random = isset($_GET['random']) ? $_GET['random'] : '';
 $type = isset($_GET['type']) ? $_GET['type'] : '';
 $check = isset($_GET['check_file_exists']) ? $_GET['check_file_exists'] : '';
 
-// ts=1，表示不用301回复，同时整个URL后面加上图像文件的最后修改时间
 $ts = isset($_GET['ts']) ? $_GET['ts'] : '';
 
-$avatar = './data/avatar/'.get_avatar($uid, $size, $type);
-$avatar_file = dirname(__FILE__).'/'.$avatar;
+$avatar = get_avatar($uid, $size, $type);
+$avatar_file = dirname(__FILE__).'/data/avatar/'.$avatar;
 if(file_exists($avatar_file)) {
 	if($check) {
 		echo 1;
@@ -36,23 +36,23 @@ if(file_exists($avatar_file)) {
 		exit;
 	}
 	$size = in_array($size, array('big', 'middle', 'small')) ? $size : 'middle';
-	$avatar_url = 'images/noavatar.svg';
-	$avatar_file = dirname(__FILE__).'/'.$avatar_url;
+	$avatar_url = 'noavatar.svg';
+	$avatar_file = dirname(__FILE__).'/data/avatar/'.$avatar_url;
 }
 
 if(empty($random)) {
-	if (empty($ts)) { // 如果不加随机数，也不加最后修改时间
+	if (empty($ts)) {
 		header("HTTP/1.1 301 Moved Permanently");
 		header("Last-Modified:".date('r'));
-		header("Expires: ".date('r', time() + 86400));	
-	} else { // 如果不加随机数，加最后修改时间
+		header("Expires: ".date('r', time() + 86400));
+	} elseif($avatar_url != 'noavatar.svg') {
 		$avatar_url .= '?ts='.filemtime($avatar_file);
 	}
-} else { // 如果加随机数
+} else {
 	$avatar_url .= '?random='.rand(1000, 9999);
 }
 
-header('Location: '.UC_API.'/'.$avatar_url);
+header('Location: '.(UC_AVTURL ?: UC_API.'/data/avatar').'/'.$avatar_url);
 exit;
 
 function get_avatar($uid, $size = 'middle', $type = '') {
@@ -86,19 +86,19 @@ function _get_script_url() {
 }
 
 function is_https() {
-	if (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) != "off") {
+	if(isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off') {
 		return true;
 	}
-	if (isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && strtolower($_SERVER["HTTP_X_FORWARDED_PROTO"]) == "https") {
+	if(isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) == 'https') {
 		return true;
 	}
-	if (isset($_SERVER["HTTP_SCHEME"]) && strtolower($_SERVER["HTTP_SCHEME"]) == "https") {
+	if(isset($_SERVER['HTTP_X_CLIENT_SCHEME']) && strtolower($_SERVER['HTTP_X_CLIENT_SCHEME']) == 'https') {
 		return true;
 	}
-	if (isset($_SERVER["HTTP_FROM_HTTPS"]) && strtolower($_SERVER["HTTP_FROM_HTTPS"]) != "off") {
+	if(isset($_SERVER['HTTP_FROM_HTTPS']) && strtolower($_SERVER['HTTP_FROM_HTTPS']) != 'off') {
 		return true;
 	}
-	if (isset($_SERVER["SERVER_PORT"]) && $_SERVER["SERVER_PORT"] == 443) {
+	if(isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443) {
 		return true;
 	}
 	return false;

@@ -1,6 +1,8 @@
 <script type="text/javascript">
 var postminchars = parseInt('$_G['setting']['minpostsize']');
 var postmaxchars = parseInt('$_G['setting']['maxpostsize']');
+var postminsubjectchars = parseInt('$_G['setting']['minsubjectsize']');
+var postmaxsubjectchars = parseInt('$_G['setting']['maxsubjectsize']');
 var disablepostctrl = parseInt('{$_G['group']['disablepostctrl']}');
 </script>
 
@@ -59,6 +61,16 @@ var disablepostctrl = parseInt('{$_G['group']['disablepostctrl']}');
 								<!--{else}-->
 									{lang connect_fill_profile_to_post}
 								<!--{/if}-->
+							<!--{elseif $thread['closed'] && !$_G['forum']['ismoderator'] && !$thread['isgroup']}-->
+								{lang post_thread_closed}
+							<!--{elseif !$thread['isgroup'] && $post_autoclose = checkautoclose($thread) && $autoclose = $_G['forum']['autoclose']}-->
+								<!--{if $post_autoclose == 'post_thread_closed_by_dateline'}-->
+									{lang post_thread_closed_by_dateline}
+								<!--{else}-->
+									{lang post_thread_closed_by_lastpost}
+								<!--{/if}-->
+							<!--{elseif $_G['forum']['replyperm'] && !forumperm($_G['forum']['replyperm'])}-->
+								{lang replyperm_nopermission}
 							<!--{else}-->
 								{lang no_permission_to_post}<a href="javascript:;" onclick="$('fastpostform').submit()" class="xi2">{lang click_to_show_reason}</a>
 							<!--{/if}-->
@@ -130,10 +142,10 @@ var disablepostctrl = parseInt('{$_G['group']['disablepostctrl']}');
 							progressTarget : "attachlist",
 							uploadSource: 'forum',
 							uploadType: 'attach',
-							<!--{if $swfconfig['maxsizeperday']}-->
+							<!--{if !empty($swfconfig['maxsizeperday'])}-->
 							maxSizePerDay: $swfconfig['maxsizeperday'],
 							<!--{/if}-->
-							<!--{if $swfconfig['maxattachnum']}-->
+							<!--{if !empty($swfconfig['maxattachnum'])}-->
 							maxAttachNum: $swfconfig['maxattachnum'],
 							<!--{/if}-->
 							uploadFrom: 'fastpost'

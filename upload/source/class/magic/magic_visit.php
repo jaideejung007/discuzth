@@ -91,7 +91,7 @@ class magic_visit {
 				C::t('home_poke')->insert($insertdata, false, true);
 			}
 			$repokeids = array();
-			foreach(C::t('home_poke')->fetch_all_by_uid_fromuid($fids, $_G['uid']) as $value) {
+			foreach(C::t('home_poke')->fetch_all_by_uid_fromuid($_G['uid'], $fids) as $value) {
 				$repokeids[] = $value['uid'];
 			}
 			$ids = array_diff($fids, $repokeids);
@@ -115,11 +115,11 @@ class magic_visit {
 			$ip = $_G['clientip'];
 			$note_inserts = array();
 			foreach ($fids as $fid) {
-				$actor = "<a href=\"home.php?mod=space&uid=$_G[uid]\">$_G[username]</a>";
+				$actor = "<a href=\"home.php?mod=space&uid={$_G['uid']}\">{$_G['username']}</a>";
 				$inserts[] = array(
 					'uid' => $fid,
 					'id' => $fid,
-					'idtype'=> uid,
+					'idtype'=> 'uid',
 					'authorid' => $_G['uid'],
 					'author' => $_G['username'],
 					'ip' => $ip,

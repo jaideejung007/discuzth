@@ -39,42 +39,49 @@ if(submitcheck('orderssubmit')) {
 
 showtips(lang('plugin/wechat', 'wechatapi_tips'));
 
-$apihook = WeChatHook::getAPIHook();
-
-$plugins = DB::fetch_all('SELECT identifier, name FROM %t', array('common_plugin'), 'identifier');
-
 showformheader('plugins&operation=config&do='.$pluginid.'&identifier=wechat&pmod=api_setting');
-showtableheader(lang('plugin/wechat', 'api_wsq'));
-echo '<tr class="header"><th>'.lang('plugin/wechat', 'api_hook').'</th><th>'.cplang('plugins_name').'</th><th>'.cplang('enable').'/'.cplang('display_order').'</th><th>'.lang('plugin/wechat', 'api_method').'</th></tr>';
 
-foreach($apihook as $page => $hooks) {
-	foreach($hooks as $hook => $rows) {
-		$i = 0;
-		foreach($rows as $plugin => $row) {
-			if(!$plugins[$plugin]) {
-				$deleteplugins[] = $plugin;
+$mobilewechatsetting = C::t('common_setting')->fetch_all(array('mobilewechat'));
+$mobilewechatsetting = (array)dunserialize($mobilewechatsetting['mobilewechat']);
+
+if($mobilewechatsetting['wsq_sitetoken']) {
+
+	$apihook = WeChatHook::getAPIHook();
+
+	$plugins = DB::fetch_all('SELECT identifier, name FROM %t', array('common_plugin'), 'identifier');
+
+	showtableheader(lang('plugin/wechat', 'api_wsq'));
+	echo '<tr class="header"><th>'.lang('plugin/wechat', 'api_hook').'</th><th>'.cplang('plugins_name').'</th><th>'.cplang('enable').'/'.cplang('display_order').'</th><th>'.lang('plugin/wechat', 'api_method').'</th></tr>';
+
+	foreach($apihook as $page => $hooks) {
+		foreach($hooks as $hook => $rows) {
+			$i = 0;
+			foreach($rows as $plugin => $row) {
+				if(!$plugins[$plugin]) {
+					$deleteplugins[] = $plugin;
+				}
+				$row['plugin'] = $plugin;
+				echo '<tr class="hover"><td>'.(!$i ? $page.'_'.$hook : '').'</td>'.
+					'<td>'.$plugins[$plugin]['name'].'</td>'.
+					'<td><input class="checkbox" type="checkbox" name="allow['.$page.']['.$hook.']['.$plugin.']" value="1"'.($row['allow'] ? ' checked' : '').'>'.
+					($hook != 'variables' ?
+					'<input class="txt num" type="text" name="order['.$page.']['.$hook.']['.$plugin.']" value="'.$row['order'].'"></td>' :
+					'</td>').
+					'<td>'.formathook($row).'</td></tr>';
+				$i++;
 			}
-			$row['plugin'] = $plugin;
-			echo '<tr class="hover"><td>'.(!$i ? $page.'_'.$hook : '').'</td>'.
-				'<td>'.$plugins[$plugin]['name'].'</td>'.
-				'<td><input class="checkbox" type="checkbox" name="allow['.$page.']['.$hook.']['.$plugin.']" value="1"'.($row['allow'] ? ' checked' : '').'>'.
-				($hook != 'variables' ?
-				'<input class="txt num" type="text" name="order['.$page.']['.$hook.']['.$plugin.']" value="'.$row['order'].'"></td>' :
-				'</td>').
-				'<td>'.formathook($row).'</td></tr>';
-			$i++;
 		}
 	}
+
+	if($deleteplugins) {
+		WeChatHook::delAPIHook($deleteplugins);
+	}
+
+	showsubmit('orderssubmit');
+	showtablefooter();
+
+	showformfooter();
 }
-
-if($deleteplugins) {
-	WeChatHook::delAPIHook($deleteplugins);
-}
-
-showsubmit('orderssubmit');
-showtablefooter();
-
-showformfooter();
 
 $redirect = WeChatHook::getRedirect();
 $response = WeChatHook::getResponse();
@@ -97,7 +104,7 @@ foreach($response as $k => $row) {
 }
 showtablefooter();
 
-$wechatresponseExts = unserialize($_G['setting']['wechatresponseExts']);
+$wechatresponseExts = dunserialize($_G['setting']['wechatresponseExts']);
 if($wechatresponseExts) {
 	showtableheader();
 	foreach($wechatresponseExts as $extk => $response) {
@@ -122,11 +129,11 @@ if($deleteresponseExts) {
 	}
 }
 
-$wechatappInfos = unserialize($_G['setting']['wechatappInfos']);
+$wechatappInfos = dunserialize($_G['setting']['wechatappInfos']);
 if($wechatappInfos) {
 	showtableheader();
 	echo '<tr class="header"><th width="200">'.lang('plugin/wechat', 'wechat_devids').'</th><th>'.lang('plugin/wechat', 'wechat_appId').'</th><th>'.lang('plugin/wechat', 'wechat_appsecret').'</th></tr>';
-	foreach(unserialize($_G['setting']['wechatappInfos']) as $k => $info) {
+	foreach(dunserialize($_G['setting']['wechatappInfos']) as $k => $info) {
 		echo '<tr class="hover"><td>'.$k.'</td><td>'.$info['appId'].'</td><td>'.$info['appSecret'].'</td></tr>';
 	}
 	showtablefooter();

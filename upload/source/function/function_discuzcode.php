@@ -78,7 +78,13 @@ function discuzcode($message, $smileyoff = false, $bbcodeoff = false, $htmlon = 
 
 	if($pid && strpos($message, '[/password]') !== FALSE) {
 		if($authorid != $_G['uid'] && !$_G['forum']['ismoderator']) {
-			$message = preg_replace_callback("/\s?\[password\](.+?)\[\/password\]\s?/i", create_function('$matches', 'return parsepassword($matches[1], '.intval($pid).');'), $message);
+			$message = preg_replace_callback(
+				"/\s?\[password\](.+?)\[\/password\]\s?/i",
+				function ($matches) use ($pid) {
+					return parsepassword($matches[1], intval($pid));
+				},
+				$message
+			);
 			if($_G['forum_discuzcode']['passwordlock'][$pid]) {
 				return '';
 			}
@@ -88,6 +94,7 @@ function discuzcode($message, $smileyoff = false, $bbcodeoff = false, $htmlon = 
 		}
 	}
 
+	$message = preg_replace('/\[\tDISCUZ_CODE_\d+\t\]/', '', $message);
 	if($parsetype != 1 && !$bbcodeoff && $allowbbcode && (strpos($message, '[/code]') || strpos($message, '[/CODE]')) !== FALSE) {
 		$message = preg_replace_callback("/\s?\[code\](.+?)\[\/code\]\s?/is", 'discuzcode_callback_codedisp_1', $message);
 	}
@@ -118,19 +125,19 @@ function discuzcode($message, $smileyoff = false, $bbcodeoff = false, $htmlon = 
 
 	if($allowbbcode) {
 		if(strpos($msglower, 'ed2k://') !== FALSE) {
-			$message = preg_replace_callback("/ed2k:\/\/(.+?)\//", 'discuzcode_callback_parseed2k_1', $message);
+			$message = preg_replace_callback("/ed2k:\/\/([^\/\s'\"]+)\//", 'discuzcode_callback_parseed2k_1', $message);
 		}
 	}
 
 	if(!$bbcodeoff && $allowbbcode) {
 		if(strpos($msglower, '[/url]') !== FALSE) {
-			$message = preg_replace_callback("/\[url(=((https?|ftp|gopher|news|telnet|rtsp|mms|callto|bctp|thunder|qqdl|synacast){1}:\/\/|www\.|mailto:)?([^\r\n\[\"']+?))?\](.+?)\[\/url\]/is", 'discuzcode_callback_parseurl_152', $message);
+			$message = preg_replace_callback("/\[url(=((https?|ftp|gopher|news|telnet|rtsp|mms|callto|bctp|thunder|qqdl|synacast){1}:\/\/|www\.|mailto:|tel:|magnet:)?([^\r\n\[\"']+?))?\](.+?)\[\/url\]/is", 'discuzcode_callback_parseurl_152', $message);
 		}
 		if(strpos($msglower, '[/email]') !== FALSE) {
-			$message = preg_replace_callback("/\[email(=([a-z0-9\-_.+]+)@([a-z0-9\-_]+[.][a-z0-9\-_.]+))?\](.+?)\[\/email\]/is", 'discuzcode_callback_parseemail_14', $message);
+			$message = preg_replace_callback("/\[email(=([A-Za-z0-9\-_.+]+)@([A-Za-z0-9\-_]+[.][A-Za-z0-9\-_.]+))?\](.+?)\[\/email\]/is", 'discuzcode_callback_parseemail_14', $message);
 		}
 /*jaideejung007*/	if(strpos($msglower, '[/spoil]') !== FALSE) {
-/*jaideejung007*/		$message = str_replace(array('[spoil]','[/spoil]'), array("<div style=\"display: inline;\"><div style=\"display: inline;\"><span onClick=\"if (this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display != '') {  this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display = ''; this.innerHTML = '<a href=\'javascript:void(0);\' onClick=\'return false;\' style=\'color: #FF0000;\'>[Spoil] คลิกเพื่อซ่อนข้อความ</a>'; } else { this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display = 'none'; this.innerHTML = '<a href=\'javascript:void(0);\' onClick=\'return false;\' style=\'color: #FF0000;\'>[Spoil] คลิกเพื่อดูข้อความที่ซ่อนไว้</a>'; }\" /><a href=\"javascript:void(0);\" onClick=\"return false;\" style=\"color: #FF0000;\">[Spoil] คลิกเพื่อดูข้อความที่ซ่อนไว้</a></span></div><div style=\"display: inline;\"><div style=\"border: dashed 1px #FF0000;padding: 10px 0px 10px 20px;margin: 10px 0px;display: none;\">","</div></div></div>"), $message);
+/*jaideejung007*/		$message = str_replace(array('[spoil]','[/spoil]'), array("<div style=\"display: inline;\"><div style=\"display: inline;\"><span onClick=\"if (this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display != '') {  this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display = ''; this.innerHTML = '<a href=\'javascript:void(0);\' onClick=\'return false;\' style=\'text-decoration: none;cursor: pointer;border: 1px solid transparent;white-space: nowrap;border-radius: 4px;padding: 5px 10px 5px 10px;text-align: center;color: #edf6fd;background: #2577b1;border-color: #2985c6 #21699c #21699c #2985c6;line-height: 2;\'>Spoiler: คลิกเพื่อซ่อนข้อความ</a>'; } else { this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display = 'none'; this.innerHTML = '<a href=\'javascript:void(0);\' onClick=\'return false;\' style=\'text-decoration: none;cursor: pointer;border: 1px solid transparent;white-space: nowrap;border-radius: 4px;padding: 5px 10px 5px 10px;text-align: center;color: #edf6fd;background: #2577b1;border-color: #2985c6 #21699c #21699c #2985c6;line-height: 2;\'>Spoiler: คลิกเพื่อดูข้อความที่ซ่อนไว้</a>'; }\" /><a href=\"javascript:void(0);\" onClick=\"return false;\" style=\"text-decoration: none;cursor: pointer;border: 1px solid transparent;white-space: nowrap;border-radius: 4px;padding: 5px 10px 5px 10px;text-align: center;color: #edf6fd;background: #2577b1;border-color: #2985c6 #21699c #21699c #2985c6;line-height: 2;\">Spoiler: คลิกเพื่อดูข้อความที่ซ่อนไว้</a></span></div><div style=\"display: inline;\"><div style=\"display: flow-root;margin: .5em 0;background: #f5f5f5;border: 1px solid #e7e7e7;border-left: 3px solid #f2930d;position: relative;padding: 6px 10px;display: none;\">","</div></div></div>"), $message);
 /*jaideejung007*/	}
 		$nest = 0;
 		while(strpos($msglower, '[table') !== FALSE && strpos($msglower, '[/table]') !== FALSE){
@@ -174,7 +181,13 @@ function discuzcode($message, $smileyoff = false, $bbcodeoff = false, $htmlon = 
 			), $message));
 
 		if($pid && !defined('IN_MOBILE')) {
-			$message = preg_replace_callback("/\s?\[postbg\]\s*([^\[\<\r\n;'\"\?\(\)]+?)\s*\[\/postbg\]\s?/is", create_function('$matches', 'return parsepostbg($matches[1], '.intval($pid).');'), $message);
+			$message = preg_replace_callback(
+				"/\s?\[postbg\]\s*([^\[\<\r\n;'\"\?\(\)]+?)\s*\[\/postbg\]\s?/is",
+				function ($matches) use ($pid) {
+					return parsepostbg($matches[1], intval($pid));
+				},
+				$message
+			);
 		} else {
 			$message = preg_replace("/\s?\[postbg\]\s*([^\[\<\r\n;'\"\?\(\)]+?)\s*\[\/postbg\]\s?/is", "", $message);
 		}
@@ -189,7 +202,7 @@ function discuzcode($message, $smileyoff = false, $bbcodeoff = false, $htmlon = 
 		}
 		if(!defined('IN_MOBILE') || !in_array(constant('IN_MOBILE'), array('1', '3', '4'))) {
 			if(strpos($msglower, '[/media]') !== FALSE) {
-				$message = preg_replace_callback("/\[media=([\w,]+)\]\s*([^\[\<\r\n]+?)\s*\[\/media\]/is", $allowmediacode ? 'discuzcode_callback_parsemedia_12' : 'discuzcode_callback_bbcodeurl_2', $message);
+				$message = preg_replace_callback("/\[media=([\w%,]+)\]\s*([^\[\<\r\n]+?)\s*\[\/media\]/is", $allowmediacode ? 'discuzcode_callback_parsemedia_12' : 'discuzcode_callback_bbcodeurl_2', $message);
 			}
 			if(strpos($msglower, '[/audio]') !== FALSE) {
 				$message = preg_replace_callback("/\[audio(=1)*\]\s*([^\[\<\r\n]+?)\s*\[\/audio\]/is", $allowmediacode ? 'discuzcode_callback_parseaudio_2' : 'discuzcode_callback_bbcodeurl_2', $message);
@@ -199,7 +212,7 @@ function discuzcode($message, $smileyoff = false, $bbcodeoff = false, $htmlon = 
 			}
 		} else {
 			if(strpos($msglower, '[/media]') !== FALSE) {
-				$message = preg_replace("/\[media=([\w,]+)\]\s*([^\[\<\r\n]+?)\s*\[\/media\]/is", "[media]\\2[/media]", $message);
+				$message = preg_replace("/\[media=([\w%,]+)\]\s*([^\[\<\r\n]+?)\s*\[\/media\]/is", "[media]\\2[/media]", $message);
 			}
 			if(strpos($msglower, '[/audio]') !== FALSE) {
 				$message = preg_replace("/\[audio(=1)*\]\s*([^\[\<\r\n]+?)\s*\[\/audio\]/is", "[media]\\2[/media]", $message);
@@ -218,14 +231,20 @@ function discuzcode($message, $smileyoff = false, $bbcodeoff = false, $htmlon = 
 				$msglower = strtolower($message);
 			}
 			if(strpos($msglower, '[hide=d') !== FALSE) {
-				$message = preg_replace_callback("/\[hide=(d\d+)?[,]?(\d+)?\]\s*(.*?)\s*\[\/hide\]/is", create_function('$matches', 'return expirehide($matches[1], $matches[2], $matches[3], '.intval($pdateline).');'), $message);
+				$message = preg_replace_callback(
+					"/\[hide=(d\d+)?[,]?(\d+)?\]\s*(.*?)\s*\[\/hide\]/is",
+					function ($matches) use ($pdateline) {
+						return expirehide($matches[1], $matches[2], $matches[3], intval($pdateline));
+					},
+					$message
+				);
 				$msglower = strtolower($message);
 			}
 			if(strpos($msglower, '[hide]') !== FALSE) {
 				if($authorreplyexist === null) {
 					if(!$_G['forum']['ismoderator']) {
 						if($_G['uid']) {
-							$_post = C::t('forum_post')->fetch('tid:'.$_G['tid'], $pid);
+							$_post = C::t('forum_post')->fetch_post('tid:'.$_G['tid'], $pid);
 							$authorreplyexist = $_post['tid'] == $_G['tid'] ? C::t('forum_post')->fetch_pid_by_tid_authorid($_G['tid'], $_G['uid']) : FALSE;
 						}
 					} else {
@@ -240,7 +259,13 @@ function discuzcode($message, $smileyoff = false, $bbcodeoff = false, $htmlon = 
 				}
 			}
 			if(strpos($msglower, '[hide=') !== FALSE) {
-				$message = preg_replace_callback("/\[hide=(\d+)\]\s*(.*?)\s*\[\/hide\]/is", create_function('$matches', 'return creditshide($matches[1], $matches[2], '.intval($pid).', '.intval($authorid).');'), $message);
+				$message = preg_replace_callback(
+					"/\[hide=(\d+)\]\s*(.*?)\s*\[\/hide\]/is",
+					function ($matches) use ($pid, $authorid) {
+						return creditshide($matches[1], $matches[2], intval($pid), intval($authorid));
+					},
+					$message
+				);
 			}
 		}
 	}
@@ -251,8 +276,26 @@ function discuzcode($message, $smileyoff = false, $bbcodeoff = false, $htmlon = 
 		}
 		$attrsrc = !IS_ROBOT && $lazyload ? 'file' : 'src';
 		if(strpos($msglower, '[/img]') !== FALSE) {
-			$message = preg_replace_callback("/\[img\]\s*([^\[\<\r\n]+?)\s*\[\/img\]/is", create_function('$matches', 'return '.intval($allowimgcode).' ? parseimg(0, 0, $matches[1], '.intval($lazyload).', '.intval($pid).', \'onmouseover="img_onmouseoverfunc(this)" \'.('.intval($lazyload).' ? \'lazyloadthumb="1"\' : \'onload="thumbImg(this)"\')) : ('.intval($allowbbcode).' ? (!defined(\'IN_MOBILE\') ? bbcodeurl($matches[1], \'<a href="{url}" target="_blank">{url}</a>\') : bbcodeurl($matches[1], \'\')) : bbcodeurl($matches[1], \'{url}\'));'), $message);
-			$message = preg_replace_callback("/\[img=(\d{1,4})[x|\,](\d{1,4})\]\s*([^\[\<\r\n]+?)\s*\[\/img\]/is", create_function('$matches', 'return '.intval($allowimgcode).' ? parseimg($matches[1], $matches[2], $matches[3], '.intval($lazyload).', '.intval($pid).') : ('.intval($allowbbcode).' ? (!defined(\'IN_MOBILE\') ? bbcodeurl($matches[3], \'<a href="{url}" target="_blank">{url}</a>\') : bbcodeurl($matches[3], \'\')) : bbcodeurl($matches[3], \'{url}\'));'), $message);
+			$message = preg_replace_callback(
+				"/\[img\]\s*([^\[\<\r\n]+?)\s*\[\/img\]/is",
+				function ($matches) use ($allowimgcode, $lazyload, $pid, $allowbbcode) {
+					if (intval($allowimgcode)) {
+						return parseimg(0, 0, $matches[1], intval($lazyload), intval($pid), 'onmouseover="img_onmouseoverfunc(this)" '.(intval($lazyload) ? 'lazyloadthumb="1"' : 'onload="thumbImg(this)"'));
+					}
+					return (intval($allowbbcode) ? (!defined('IN_MOBILE') ? bbcodeurl($matches[1], '<a href="{url}" target="_blank">{url}</a>') : bbcodeurl($matches[1], '')) : bbcodeurl($matches[1], '{url}'));
+				},
+				$message
+			);
+			$message = preg_replace_callback(
+				"/\[img=(\d{1,4})[x|\,](\d{1,4})\]\s*([^\[\<\r\n]+?)\s*\[\/img\]/is",
+				function ($matches) use ($allowimgcode, $lazyload, $pid, $allowbbcode) {
+					if (intval($allowimgcode))  {
+						return parseimg($matches[1], $matches[2], $matches[3], intval($lazyload), intval($pid));
+					}
+					return (intval($allowbbcode) ? (!defined('IN_MOBILE') ? bbcodeurl($matches[3], '<a href="{url}" target="_blank">{url}</a>') : bbcodeurl($matches[3], '')) : bbcodeurl($matches[3], '{url}'));
+				},
+				$message
+			);
 		}
 	}
 
@@ -350,14 +393,9 @@ function parseurl($url, $text, $scheme) {
 function parseflash($w, $h, $url) {
 	$w = !$w ? 550 : $w;
 	$h = !$h ? 400 : $h;
-	preg_match("/((https?){1}:\/\/|www\.)[^\r\n\[\"'\?]+(\.swf|\.flv)(\?[^\r\n\[\"'\?]+)?/i", $url, $matches);
-	$url = $matches[0];
-	$randomid = 'swf_'.random(3);
-	if(fileext($url) != 'flv') {
-		return '<span id="'.$randomid.'"></span><script type="text/javascript" reload="1">$(\''.$randomid.'\').innerHTML=AC_FL_RunContent(\'width\', \''.$w.'\', \'height\', \''.$h.'\', \'allowNetworking\', \'internal\', \'allowScriptAccess\', \'never\', \'src\', encodeURI(\''.$url.'\'), \'quality\', \'high\', \'bgcolor\', \'#ffffff\', \'wmode\', \'transparent\', \'allowfullscreen\', \'true\');</script>';
-	} else {
-		return '<span id="'.$randomid.'"></span><script type="text/javascript" reload="1">$(\''.$randomid.'\').innerHTML=AC_FL_RunContent(\'width\', \''.$w.'\', \'height\', \''.$h.'\', \'allowNetworking\', \'internal\', \'allowScriptAccess\', \'never\', \'src\', \''.STATICURL.'image/common/flvplayer.swf\', \'flashvars\', \'file='.rawurlencode($url).'\', \'quality\', \'high\', \'wmode\', \'transparent\', \'allowfullscreen\', \'true\');</script>';
-	}
+	$ext = fileext($url) == 'flv' ? 'flv' : 'swf';
+	$params = "$ext,$w,$h";
+	return parsemedia($params, $url);
 }
 
 function parseed2k($url) {
@@ -376,12 +414,18 @@ function parseed2k($url) {
 function parseattachurl($aid, $ext, $ignoretid = 0) {
 	global $_G;
 	$_G['forum_skipaidlist'][] = $aid;
+	if(!empty($ext)) {
+		$attach = C::t('forum_attachment_n')->fetch('aid:'.$aid, $aid);
+		if(!in_array(attachtype(fileext($attach['filename'])), array(9, 10))) {
+			$ext = 0;
+		}
+	}
 	return $_G['siteurl'].'forum.php?mod=attachment&aid='.aidencode($aid, $ext, $ignoretid ? '' : $_G['tid']).($ext ? '&request=yes&_f=.'.$ext : '');
 }
 
 function parseemail($email, $text) {
 	$text = str_replace('\"', '"', $text);
-	if(!$email && preg_match("/\s*([a-z0-9\-_.+]+)@([a-z0-9\-_]+[.][a-z0-9\-_.]+)\s*/i", $text, $matches)) {
+	if(!$email && preg_match("/\s*([A-Za-z0-9\-_.+]+)@([A-Za-z0-9\-_]+[.][A-Za-z0-9\-_.]+)\s*/i", $text, $matches)) {
 		$email = trim($matches[0]);
 		return '<a href="mailto:'.$email.'">'.$email.'</a>';
 	} else {
@@ -449,13 +493,26 @@ function parseaudio($url, $width = 400) {
 	}
 	$type = fileext($url);
 	$randomid = random(3);
-	return '<div id="'.$type.'_'.$randomid.'" class="media"><div id="'.$type.'_'.$randomid.'_container" class="media_container"></div><div id="'.$type.'_'.$randomid.'_tips" class="media_tips"><a href="'.$url.'" target="_blank">'.lang('template', 'parse_av_tips').'</a></div></div><script type="text/javascript">detectPlayer("'.$type.'_'.$randomid.'", "'.$type.'", "'.$url.'", "'.$width.'", "66");</script>';
+	return '<ignore_js_op><div id="'.$type.'_'.$randomid.'" class="media"><div id="'.$type.'_'.$randomid.'_container" class="media_container"></div><div id="'.$type.'_'.$randomid.'_tips" class="media_tips"><a href="'.$url.'" target="_blank">'.lang('template', 'parse_av_tips').'</a></div></div><script type="text/javascript">detectPlayer("'.$type.'_'.$randomid.'", "'.$type.'", "'.$url.'", "'.$width.'", "66");</script></ignore_js_op>';
 }
 
 function parsemedia($params, $url) {
 	$params = explode(',', $params);
-	$width = intval($params[1]) > 800 ? 800 : intval($params[1]);
-	$height = intval($params[2]) > 600 ? 600 : intval($params[2]);
+
+	if(preg_match('/^(auto|100%|[0-9]{1,2}%)$/', $params[1], $matches)) {
+		$width = $matches[1];
+	} else {
+		$width = ($params[1] > 0 && $params[1] < 8192) ? intval($params[1]) : 800;
+	}
+
+	if(preg_match('/^(auto|100%|[0-9]{1,2}%)$/', $params[2], $matches)) {
+		$height = $matches[1];
+	} else {
+		$height = ($params[2] > 0 && $params[2] < 4096) ? intval($params[2]) : 600;
+	}
+
+	$width = defined('IN_MOBILE') ? '100%' : $width;
+	$height = defined('IN_MOBILE') ? 'auto' : $height;
 
 	$url = addslashes($url);
         if(!in_array(strtolower(substr($url, 0, 6)), array('http:/', 'https:', 'ftp://', 'rtsp:/', 'mms://')) && !preg_match('/^static\//', $url) && !preg_match('/^data\//', $url)) {
@@ -478,7 +535,7 @@ function parsemedia($params, $url) {
 			return parseaudio($url, $width);
 		} else if (in_array($type, $video)) {
 			$randomid = random(3);
-			return '<div id="'.$type.'_'.$randomid.'" class="media"><div id="'.$type.'_'.$randomid.'_container" class="media_container"></div><div id="'.$type.'_'.$randomid.'_tips" class="media_tips"><a href="'.$url.'" target="_blank">'.lang('template', 'parse_av_tips').'</a></div></div><script type="text/javascript">detectPlayer("'.$type.'_'.$randomid.'", "'.$type.'", "'.$url.'", "'.$width.'", "'.$height.'");</script>';
+			return '<ignore_js_op><div id="'.$type.'_'.$randomid.'" class="media"><div id="'.$type.'_'.$randomid.'_container" class="media_container"></div><div id="'.$type.'_'.$randomid.'_tips" class="media_tips"><a href="'.$url.'" target="_blank">'.lang('template', 'parse_av_tips').'</a></div></div><script type="text/javascript">detectPlayer("'.$type.'_'.$randomid.'", "'.$type.'", "'.$url.'", "'.$width.'", "'.$height.'");</script></ignore_js_op>';
 		} else {
 			return '<a href="'.$url.'" target="_blank">'.$url.'</a>';
 		}
@@ -517,11 +574,11 @@ function highlightword($text, $words, $prepend) {
 function parseflv($url, $width = 0, $height = 0) {
 	global $_G;
 	$lowerurl = strtolower($url);
-	$flv = $iframe = $imgurl = '';		
+	$flv = $iframe = $imgurl = '';
 	if(empty($_G['setting']['parseflv']) || !is_array($_G['setting']['parseflv'])) {
 		return FALSE;
 	}
-	
+
 	foreach($_G['setting']['parseflv'] as $script => $checkurl) {
 		$check = FALSE;
 		foreach($checkurl as $row) {
@@ -537,7 +594,7 @@ function parseflv($url, $width = 0, $height = 0) {
 			}
 			break;
 		}
-	}	    	
+	}
 	if($flv || $iframe) {
 		if(!$width && !$height) {
 			return array('flv' => $flv, 'iframe' => $iframe, 'imgurl' => $imgurl);
@@ -547,11 +604,10 @@ function parseflv($url, $width = 0, $height = 0) {
 			$flv = addslashes($flv);
 			$iframe = addslashes($iframe);
 			$randomid = 'flv_'.random(3);
-			
 			$player_iframe = $iframe ? "\"<iframe src='$iframe' border='0' scrolling='no' framespacing='0' allowfullscreen='true' style='max-width: 100%' width='$width' height='$height' frameborder='no'></iframe>\"" : '';
 			$player_flv = $flv ? "AC_FL_RunContent('width', '$width', 'height', '$height', 'allowNetworking', 'internal', 'allowScriptAccess', 'never', 'src', '$flv', 'quality', 'high', 'bgcolor', '#ffffff', 'wmode', 'transparent', 'allowfullscreen', 'true')" : '';
 			$player = (!empty($player_iframe) && !empty($player_flv)) ? "detectHtml5Support() ? $player_iframe : $player_flv" : (empty($player_iframe) ? $player_flv : $player_iframe);
-			return '<span id="'.$randomid.'"></span><script type="text/javascript" reload="1">document.getElementById(\''.$randomid.'\').innerHTML=('.$player.');</script>';
+			return '<ignore_js_op><span id="'.$randomid.'"></span><script type="text/javascript" reload="1">document.getElementById(\''.$randomid.'\').innerHTML=('.$player.');</script></ignore_js_op>';
 		}
 	} else {
 		return FALSE;
@@ -559,7 +615,7 @@ function parseflv($url, $width = 0, $height = 0) {
 }
 
 function parseimg($width, $height, $src, $lazyload, $pid, $extra = '') {
-	global $_G;
+	global $_G, $aimgs;
 	static $styleoutput = null;
 	if($_G['setting']['domainwhitelist_affectimg']) {
 		$tmp = parse_url($src);
@@ -581,7 +637,7 @@ function parseimg($width, $height, $src, $lazyload, $pid, $extra = '') {
 	}
 	$attrsrc = !IS_ROBOT && $lazyload ? 'file' : 'src';
 	$rimg_id = random(5);
-	$GLOBALS['aimgs'][$pid][] = $rimg_id;
+	$aimgs[$pid][] = $rimg_id;
 	$guestviewthumb = !empty($_G['setting']['guestviewthumb']['flag']) && empty($_G['uid']);
 	$img = '';
 	if($guestviewthumb) {
@@ -643,7 +699,7 @@ function parsepostbg($bgimg, $pid) {
 
 function parsepassword($password, $pid) {
 	global $_G;
-	static $postpw;
+	static $postpw = array();
 	if($postpw[$pid]) {
 		return '';
 	}

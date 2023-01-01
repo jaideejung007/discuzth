@@ -109,7 +109,7 @@ class mobile_core {
 		}
 		$pluginvariables = array();
 		if(!empty($_G['setting']['mobileapihook'])) {
-			$mobileapihook = unserialize($_G['setting']['mobileapihook']);
+			$mobileapihook = dunserialize($_G['setting']['mobileapihook']);
 			if(!empty($mobileapihook[$_GET['module']])) {
 				if(!empty($mobileapihook[$_GET['module']]['variables'])) {
 					mobile_core::activeHook($_GET['module'], $mobileapihook, $variables, true);
@@ -251,6 +251,7 @@ class mobile_core {
 
 	public static function activeHook($module, $mobileapihook, &$param, $isavariables = false) {
 		global $_G;
+		static $pluginclasses = array();
 		if($isavariables) {
 			$mobileapihook[$module] = array(
 			    'variables' => $mobileapihook[$module]['variables']
@@ -357,14 +358,6 @@ class base_plugin_mobile {
 				"/\[size=(\d{1,2}(\.\d{1,2}+)?(px|pt)+?)\]/i",
 				"/\[\/size]/i",
 			), '', $_G['discuzcodemessage']);
-		}
-		if(in_array('soso_smilies', $_G['setting']['plugins']['available'])) {
-			$sosoclass = DISCUZ_ROOT.'./source/plugin/soso_smilies/soso.class.php';
-			if(file_exists($sosoclass)) {
-				include_once $sosoclass;
-				$soso_class = new plugin_soso_smilies;
-				$soso_class->discuzcode($param);
-			}
 		}
 	}
 

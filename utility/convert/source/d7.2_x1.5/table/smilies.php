@@ -1,6 +1,10 @@
 <?php
 
-
+/**
+ * DiscuzX Convert
+ *
+ * $Id: smilies.php 15475 2010-08-24 07:34:47Z monkey $
+ */
 
 $curprg = basename(__FILE__);
 

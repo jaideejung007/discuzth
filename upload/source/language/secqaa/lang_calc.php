@@ -13,8 +13,8 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'calc_name' => 'Addition and subtraction inside 100',
-	'calc_desc' => 'Show random from 100 verification of addition and subtraction from Questions and Answers',
+	'calc_name' => 'การบวกและการลบจำนวน 100',
+	'calc_desc' => 'สุ่มแสดงคำถาม/คำตอบความปลอดภัยของการบวกและการลบจำนวน 100',
 );
 
 ?>

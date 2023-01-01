@@ -15,12 +15,12 @@ include_once 'misc.php';
 
 class mobile_api {
 
-	function common() {
+	public static function common() {
 		global $_G;
 		if (!$_G['uid'] || !in_array('wechat', $_G['setting']['plugins']['available'])) {
 			mobile_core::result(mobile_core::variable(array()));
 		}
-		$_G['wechat']['setting'] = unserialize($_G['setting']['mobilewechat']);
+		$_G['wechat']['setting'] = dunserialize($_G['setting']['mobilewechat']);
 		if (!$_G['wechat']['setting']['wsq_apicredit']) {
 			mobile_core::result(mobile_core::variable(array()));
 		}
@@ -39,7 +39,7 @@ class mobile_api {
 		mobile_core::result(mobile_core::variable($return));
 	}
 
-	function output() {
+	public static function output() {
 	}
 
 }

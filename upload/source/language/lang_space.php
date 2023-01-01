@@ -104,8 +104,8 @@ $lang = array(
 	'blockdata' => array('personalinfo' => 'ข้อมูลส่วนตัว', 'profile' => 'รูปโปรไฟล์', 'doing' => 'ทักทาย', 'feed' => 'อัปเดต',
 				'blog' => 'บล็อก', 'stickblog' => 'ปักหมุดบล็อก', 'album' => 'อัลบั้ม', 'friend' => 'เพื่อน',
 				'visitor' => 'ผู้เข้าชมล่าสุด', 'wall' => 'ฝากข้อความ', 'share' => 'แชร์',
-				'thread' => 'กระทู้', 'group'=>$_G[setting][navs][3][navname],'music'=>'กล่องเพลง',
-				'statistic' => 'สถิติ','myapp' => 'แอพลิเคชัน',
+				'thread' => 'กระทู้', 'group'=>(isset($_G['setting']['navs'][3]['navname']) ? $_G['setting']['navs'][3]['navname'] : ''),'music'=>'กล่องเพลง',
+				'statistic' => 'สถิติ',
 				'block1'=>'โมดูฟรี 1', 'block2'=>'โมดูฟรี 2', 'block3'=>'โมดูฟรี 3',
 				'block4'=>'โมดูฟรี 4','block5'=>'โมดูฟรี 5'),
 
@@ -119,7 +119,7 @@ $lang = array(
 	'visitor_list' => '<a href="home.php?mod=space&uid={uid}" target="_blank" class="avt"><em class="{class}"></em><em class="{self}" onclick="javascript:removeVisitor(event, {cuid});" title="ลบร่องรอยการเข้าถึง"></em>{avatar}</a><p><a href="home.php?mod=space&uid={uid}" title="{username}">{username}</a></p>',
 	'wall_form' => '<div class="space_wall_post">
 						<form action="home.php?mod=spacecp&ac=comment" id="quickcommentform_{uid}" name="quickcommentform_{uid}" method="post" autocomplete="off" onsubmit="ajaxpost(\'quickcommentform_{uid}\', \'return_commentwall_{uid}\');doane(event);">
-							'.($_G['uid'] ? '<span id="message_face" onclick="showFace(this.id, \'comment_message\');return false;" class="cur1"><img src="static/image/common/facelist.gif" alt="facelist" class="mbn vm" /></span>
+							'.($_G['uid'] ? '<span id="message_face" onclick="showFace(this.id, \'comment_message\');return false;" class="cur1"><img src="'.STATICURL.'image/common/facelist.gif" alt="facelist" class="mbn vm" /></span>
 							<br /><textarea name="message" id="comment_message" class="pt" rows="3" cols="60" onkeydown="ctrlEnter(event, \'commentsubmit_btn\');" style="width: 90%;"></textarea>
 							<input type="hidden" name="refer" value="home.php?mod=space&uid={uid}" />
 							<input type="hidden" name="id" value="{uid}" />
@@ -153,7 +153,7 @@ $lang = array(
 	'wall_del' => '<a href="home.php?mod=spacecp&ac=comment&op=delete&cid={cid}&handlekey=delcommenthk_{cid}" id="c_{cid}_delete" onclick="showWindow(this.id, this.href, \'get\', 0);">ลบ</a> ',
 	'wall_reply' => '<a href="home.php?mod=spacecp&ac=comment&op=reply&cid={cid}&handlekey=replycommenthk_{cid}" id="c_{cid}_reply" onclick="showWindow(this.id, this.href, \'get\', 0);">ตอบกลับ</a>',
 	'group_li' => '<li><a href="forum.php?mod=group&fid={groupid}" target="_blank"><img src="{icon}" alt="{name}" /></a><p><a href="forum.php?mod=group&fid={groupid}" target="_blank">{name}</a></p></li>',
-	'poll_li' => '<div class="c z"><img alt="poll" src="static/image/feed/poll.gif" alt="poll" class="t" /><h4 class="h"><a target="_blank" href="forum.php?mod=viewthread&tid={tid}" target="_blank">{subject}</a></h4><div class="mtn xg1">โพสต์เมื่อ: {dateline}</div></div>',
+	'poll_li' => '<div class="c z"><img alt="poll" src="'.STATICURL.'image/feed/poll.gif" alt="poll" class="t" /><h4 class="h"><a target="_blank" href="forum.php?mod=viewthread&tid={tid}" target="_blank">{subject}</a></h4><div class="mtn xg1">โพสต์เมื่อ: {dateline}</div></div>',
 	'music_no_content' => 'ไม่ได้ใส่เพลง',
 	'block_profile_diy' => 'แต่งโปรไฟล์',
 	'block_profile_wall' => 'ดูข้อความ',
@@ -184,8 +184,6 @@ $lang = array(
 	'block_group_no_content' => 'ไม่มีคลับ',
 	'block_group_no_content_publish' => ', <a href ="forum.php?mod=group&action=create">สร้างคลับของคุณเอง</a> หรือ <a href ="group.php?mod=index">เข้าร่วมคลับ</a>',
 	'block_group_no_content_join' => ', <a href ="group.php?mod=index">เข้าร่วมคลับ</a>',
-	'block_myapp_no_content' => 'ไม่มีแอพลิเคชัน',
-	'block_myapp_no_content_publish' => ', <a href ="userapp.php?mod=manage&my_suffix=/app/list">ฉันต้องการเล่นแอพลิเคชัน</a>',
 	'block_view_noperm' => 'ไม่มีสิทธิ์ในการดู',
 	'block_view_profileinfo_noperm' => 'ไม่มีข้อมูล หรือไม่ได้รับอนุญาตให้ดู',
 	'click_play' => 'คลิกเพื่อเล่น',
@@ -202,7 +200,7 @@ $lang = array(
 	'manage_blog' => 'บล็อก',
 	'manage_comment' => 'ความคิดเห็น',
 	'manage_doing' => 'ทักทาย',
-	'manage_feed' => 'อัปเดต',
+	'manage_feed' => 'ฟีดข่าว',
 	'manage_group_prune' => 'ลบโพสต์',
 	'manage_group_threads' => 'กระทู้',
 	'manage_share' => 'แชร์',
@@ -218,14 +216,14 @@ $lang = array(
 	'sb_wall' => 'กระดานข้อความของ {who}',
 	'sb_profile' => 'ข้อมูลส่วนตัวของ {who}',
 	'sb_thread' => 'กระทู้ของ {who}',
-	'doing_you_can' => 'คุณกำลังคิดอะไรอยู่เหรอ...?',
+	'doing_you_can' => 'คุณกำลังคิดอะไรอยู่...',
 	'block_profile_all' => '<p style="text-align: right;"><a href="home.php?mod=space&uid={uid}&do=profile">ดูข้อมูลส่วนตัวทั้งหมด</a></p>',
 	'block_profile_edit' => '<span class="y xw0"><a href="home.php?mod=spacecp&ac=profile">แก้ไขข้อมูลของฉัน</a></span>',
 	'sb_follow' => 'ติดตามของ {who}',
 
 	'viewthread_userinfo_hour' => 'ชั่วโมง',
 	'viewthread_userinfo_uid' => 'UID',
-	'viewthread_userinfo_posts' => 'โพสต์',
+	'viewthread_userinfo_posts' => 'ตอบกลับ',
 	'viewthread_userinfo_threads' => 'กระทู้',
 	'viewthread_userinfo_doings' => 'ทักทาย',
 	'viewthread_userinfo_blogs' => 'บล็อก',
@@ -248,12 +246,12 @@ $lang = array(
 	'follow_view_follow' => 'การติดตามขณะนี้',
 	'follow_view_special' => 'การติดตามพิเศษ',
 	'follow_view_other' => 'การติดตามอื่นๆ',
-	'follow_view_feed' => '{who} เผยแพร่',
-	'follow_view_thread' => '{who} หัวข้อ',
+	'follow_view_feed' => '{who} ฟีดข่าว',
+	'follow_view_thread' => '{who} กระทู้',
 	'follow_view_reply' => '{who} ตอบกลับ',
 	'follow_view_profile' => '{who} ข้อมูลส่วนตัว',
 	'follow_view_type_feed' => 'ฟีดข่าว',
-	'follow_view_type_thread' => 'หัวข้อ',
+	'follow_view_type_thread' => 'กระทู้',
 	'follow_view_type_reply' => 'ตอบกลับ',
 	'follow_view_type_profile' => 'ข้อมูลส่วนตัว',
 	'follow_view_type_follower' => 'ผู้ติดตาม',

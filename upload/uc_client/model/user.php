@@ -38,20 +38,17 @@ class usermodel {
 		return $arr;
 	}
 
+	function get_user_by_secmobile($secmobicc, $secmobile) {
+		return $this->db->fetch_first_stmt("SELECT * FROM ".UC_DBTABLEPRE."members WHERE secmobicc=? AND secmobile=?", array('d', 'd'), array($secmobicc, $secmobile));
+	}
+
 	function check_username($username) {
 		$charset = strtolower(UC_CHARSET);
 		if ($charset === 'utf-8') {
-			
-			
-			
 			$guestexp = '\xE3\x80\x80|\xE6\xB8\xB8\xE5\xAE\xA2|\xE9\x81\x8A\xE5\xAE\xA2';
 		} elseif ($charset === 'gbk') {
-			
-			
 			$guestexp = '\xA1\xA1|\xD3\xCE\xBF\xCD';
 		} elseif ($charset === 'big5') {
-			
-			
 			$guestexp = '\xA1\x40|\xB9\x43\xAB\xC8';
 		} else {
 			return FALSE;
@@ -59,7 +56,7 @@ class usermodel {
 		$guestexp .= '|^Guest';
 
 		$len = $this->dstrlen($username);
-		if($len > 15 || $len < 3 || preg_match("/\s+|^c:\\con\\con|[%,\*\"\s\<\>\&]|$guestexp/is", $username)) {
+		if($len > 15 || $len < 3 || preg_match("/\s+|^c:\\con\\con|[%,\*\"\s\<\>\&\(\)']|$guestexp/is", $username)) {
 			return FALSE;
 		} else {
 			return TRUE;
@@ -108,7 +105,7 @@ class usermodel {
 	}
 
 	function check_emailformat($email) {
-		return strlen($email) > 6 && strlen($email) <= 32 && preg_match("/^([A-Za-z0-9\-_.+]+)@([A-Za-z0-9\-]+[.][A-Za-z0-9\-.]+)$/", $email);
+		return strlen($email) > 6 && strlen($email) <= 255 && preg_match("/^([A-Za-z0-9\-_.+]+)@([A-Za-z0-9\-]+[.][A-Za-z0-9\-.]+)$/", $email);
 	}
 
 	function check_emailaccess($email) {
@@ -134,44 +131,57 @@ class usermodel {
 		return $email;
 	}
 
+	function check_secmobileexists($secmobicc, $secmobile, $username = '') {
+		$sqladd = $username !== '' ? "AND username<>'$username'" : '';
+		$secmobicc == 0 && $secmobicc = '';
+		$secmobile == 0 && $secmobile = '';
+		$secmobile = $this->db->result_first("SELECT secmobile FROM  ".UC_DBTABLEPRE."members WHERE secmobicc='$secmobicc' AND secmobile='$secmobile' $sqladd");
+		return $secmobile;
+	}
+
 	function check_login($username, $password, &$user) {
 		$user = $this->get_user_by_username($username);
 		if(empty($user['username'])) {
 			return -1;
-		} elseif($user['password'] != md5(md5($password).$user['salt'])) {
+		} elseif(!$this->verify_password($password, $user['password'], $user['salt'])) {
 			return -2;
 		}
+		$this->upgrade_password($username, $password, $user['password'], $user['salt']);
 		return $user['uid'];
 	}
 
-	function add_user($username, $password, $email, $uid = 0, $questionid = '', $answer = '', $regip = '') {
+	function add_user($username, $password, $email, $uid = 0, $questionid = '', $answer = '', $regip = '', $secmobicc = '', $secmobile = '') {
 		$regip = empty($regip) ? $this->base->onlineip : $regip;
-		$salt = substr(uniqid(rand()), -6);
-		$password = md5(md5($password).$salt);
+		$salt = '';
+		$password = $this->generate_password($password);
 		$sqladd = $uid ? "uid='".intval($uid)."'," : '';
 		$sqladd .= $questionid > 0 ? " secques='".$this->quescrypt($questionid, $answer)."'," : " secques='',";
+		$sqladd = $secmobicc ? "secmobicc='".$secmobicc."'," : '';
+		$sqladd = $secmobile ? "secmobile='".$secmobile."'," : '';
 		$this->db->query("INSERT INTO ".UC_DBTABLEPRE."members SET $sqladd username='$username', password='$password', email='$email', regip='$regip', regdate='".$this->base->time."', salt='$salt'");
 		$uid = $this->db->insert_id();
 		$this->db->query("INSERT INTO ".UC_DBTABLEPRE."memberfields SET uid='$uid'");
 		return $uid;
 	}
 
-	function edit_user($username, $oldpw, $newpw, $email, $ignoreoldpw = 0, $questionid = '', $answer = '') {
+	function edit_user($username, $oldpw, $newpw, $email, $ignoreoldpw = 0, $questionid = '', $answer = '', $secmobicc = '', $secmobile = '') {
 		$data = $this->db->fetch_first("SELECT username, uid, password, salt FROM ".UC_DBTABLEPRE."members WHERE username='$username'");
 
 		if($ignoreoldpw) {
-			$isprotected = $this->db->result_first("SELECT COUNT(*) FROM ".UC_DBTABLEPRE."protectedmembers WHERE uid = '$data[uid]'");
+			$isprotected = $this->db->result_first("SELECT COUNT(*) FROM ".UC_DBTABLEPRE."protectedmembers WHERE uid = '{$data['uid']}'");
 			if($isprotected) {
 				return -8;
 			}
 		}
 
-		if(!$ignoreoldpw && $data['password'] != md5(md5($oldpw).$data['salt'])) {
+		if(!$ignoreoldpw && !$this->verify_password($oldpw, $data['password'], $data['salt'])) {
 			return -1;
 		}
 
-		$sqladd = $newpw ? "password='".md5(md5($newpw).$data['salt'])."'" : '';
+		$sqladd = $newpw ? "password='".$this->generate_password($newpw)."', salt=''" : '';
 		$sqladd .= $email ? ($sqladd ? ',' : '')." email='$email'" : '';
+		$sqladd .= $secmobicc !== '' ? ($sqladd ? ',' : '').(!empty($secmobicc) ? " secmobicc='$secmobicc'" : " secmobicc=''") : '';
+		$sqladd .= $secmobile !== '' ? ($sqladd ? ',' : '').(!empty($secmobile) ? " secmobile='$secmobile'" : " secmobile=''") : '';
 		if($questionid !== '') {
 			if($questionid > 0) {
 				$sqladd .= ($sqladd ? ',' : '')." secques='".$this->quescrypt($questionid, $answer)."'";
@@ -208,6 +218,21 @@ class usermodel {
 			return $this->db->affected_rows();
 		} else {
 			return 0;
+		}
+	}
+
+	function delete_useravatar($uidsarr) {
+		if(!defined('UC_DELAVTDIR')) {
+			define('UC_DELAVTDIR', UC_DATADIR.'./avatar/');
+		}
+		$uidsarr = (array)$uidsarr;
+		foreach((array)$uidsarr as $uid) {
+			file_exists($avatar_file = UC_DELAVTDIR.$this->base->get_avatar($uid, 'big', 'real')) && unlink($avatar_file);
+			file_exists($avatar_file = UC_DELAVTDIR.$this->base->get_avatar($uid, 'middle', 'real')) && unlink($avatar_file);
+			file_exists($avatar_file = UC_DELAVTDIR.$this->base->get_avatar($uid, 'small', 'real')) && unlink($avatar_file);
+			file_exists($avatar_file = UC_DELAVTDIR.$this->base->get_avatar($uid, 'big')) && unlink($avatar_file);
+			file_exists($avatar_file = UC_DELAVTDIR.$this->base->get_avatar($uid, 'middle')) && unlink($avatar_file);
+			file_exists($avatar_file = UC_DELAVTDIR.$this->base->get_avatar($uid, 'small')) && unlink($avatar_file);
 		}
 	}
 
@@ -252,7 +277,11 @@ class usermodel {
 
 	function can_do_login($username, $ip = '') {
 
-		$check_times = $this->base->settings['login_failedtime'] < 1 ? 5 : $this->base->settings['login_failedtime'];
+		$check_times = $this->base->settings['login_failedtime'] > 0 ? $this->base->settings['login_failedtime'] : ($this->base->settings['login_failedtime'] < 0 ? 0 : 5);
+
+		if($check_times == 0) {
+			return -1;
+		}
 
 		$username = substr(md5($username), 8, 15);
 		$expire = 15 * 60;
@@ -304,6 +333,56 @@ class usermodel {
 		$action = addslashes($action);
 		$extra = addslashes($extra);
 		$this->db->query_stmt("INSERT INTO ".UC_DBTABLEPRE."memberlogs SET uid=?, action=?, extra=?", array('i', 's', 's'), array($uid, $action, $extra));
+	}
+
+	function get_passwordalgo() {
+		$algo = $this->base->settings['passwordalgo'];
+		if(empty($algo)) {
+			return constant('PASSWORD_BCRYPT');
+		} else {
+			return constant($algo) === null ? constant('PASSWORD_BCRYPT') : constant($algo);
+		}
+	}
+
+	function get_passwordoptions() {
+		$options = $this->base->settings['passwordoptions'];
+		if(empty($options)) {
+			return array();
+		} else {
+			$result = json_decode($options, true);
+			return is_array($result) ? $result : array();
+		}
+	}
+
+	function generate_password($password) {
+		$algo = $this->get_passwordalgo();
+		$options = $this->get_passwordoptions();
+		$hash = password_hash($password, $algo, $options);
+		return ($hash === false || $hash === null || !password_verify($password, $hash)) ? password_hash($password, PASSWORD_BCRYPT) : $hash;
+	}
+
+	function verify_password($password, $hash, $salt = '') {
+		if(empty($salt)) {
+			return password_verify($password, $hash);
+		} else if(strlen($salt) == 6) {
+			return hash_equals($hash, md5(md5($password).$salt));
+		} else if(strlen($salt) > 6 && strlen($salt) < 20 && file_exists(UC_ROOT . "lib/uc_password_$salt.class.php")) {
+			$classname = "uc_password_$salt";
+			include(UC_ROOT . "lib/uc_password_$salt.class.php");
+			return $classname::verify_password($password, $hash);
+		}
+		return false;
+	}
+
+	function upgrade_password($username, $password, $hash, $salt = '') {
+		$algo = $this->get_passwordalgo();
+		$options = $this->get_passwordoptions();
+		if (!empty($salt) || password_needs_rehash($hash, $algo, $options)) {
+			$password_new = $this->generate_password($password);
+			$sqladd = "password = '$password_new', salt = ''";
+			return $this->db->query("UPDATE ".UC_DBTABLEPRE."members SET $sqladd WHERE username='$username'");
+		}
+		return true;
 	}
 
 }

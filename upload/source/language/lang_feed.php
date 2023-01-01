@@ -46,8 +46,8 @@ $lang = array
 	'feed_click_article' => '{actor} แสดงความรู้สึก “{click}” ในบทความ {subject} ของ {touser}',
 
 
-	'feed_task' => '{actor} เข้าร่วมกิจกรรม {task} เสร็จและรับรางวัลเรียบร้อยแล้ว',
-	'feed_task_credit' => '{actor} เข้าร่วมกิจกรรม {task} เสร็จและรับรางวัล {credit} เครดิต',
+	'feed_task' => '{actor} เข้าร่วมภารกิจ {task} เสร็จและรับรางวัลเรียบร้อยแล้ว',
+	'feed_task_credit' => '{actor} เข้าร่วมภารกิจ {task} เสร็จและรับรางวัล {credit} เครดิต',
 
 	'feed_profile_update_base' => '{actor} อัปเดตข้อมูลพื้นฐานของเขาใหม่',
 	'feed_profile_update_contact' => '{actor} อัปเดตข้อมูลที่ติดต่อของเขาใหม่',
@@ -92,15 +92,15 @@ $lang = array
 	'feed_thread_activity_title' =>		'{actor} จัดกิจกรรมใหม่',
 	'feed_thread_activity_message' =>	'<b>{subject}</b><br />เริ่มเวลา: {starttimefrom}<br />สถานที่จัดกิจกรรม: {activityplace}<br />{message}',
 
-	'feed_reply_activity_title' =>		'{actor} สมัครเข้าร่วมกิจกรรม {subject}',
+	'feed_reply_activity_title' =>		'{actor} ลงทะเบียนเข้าร่วมกิจกรรม {subject}',
 	'feed_reply_activity_message' =>	'',
 
 	'feed_thread_debate_title' =>		'{actor} เปิดประเด็นโต้วาทีใหม่',
 	'feed_thread_debate_message' =>		'<b>{subject}</b><br />เห็นด้วย: {affirmpoint}<br />ไม่เห็นด้วย: {negapoint}<br />{message}',
 
-	'feed_thread_debatevote_title_1' =>	'{actor} เข้าร่วมโต้วาทีเห็นด้วยใน {subject}',
-	'feed_thread_debatevote_title_2' =>	'{actor} เข้าร่วมโต้วาทีไม่เห็นด้วยใน {subject}',
-	'feed_thread_debatevote_title_3' =>	'{actor} เข้าร่วมโต้วาทีเป็นกลางใน {subject}',
+	'feed_thread_debatevote_title_1' =>	'{actor} เข้าร่วมโต้วาทีในหัวข้อ {subject} ในฐานะเห็นด้วย',
+	'feed_thread_debatevote_title_2' =>	'{actor} เข้าร่วมโต้วาทีในหัวข้อ {subject} ในฐานะไม่เห็นด้วย',
+	'feed_thread_debatevote_title_3' =>	'{actor} เข้าร่วมโต้วาทีในหัวข้อ {subject} ในฐานะเป็นกลาง',
 	'feed_thread_debatevote_message_1' =>	'',
 	'feed_thread_debatevote_message_2' =>	'',
 	'feed_thread_debatevote_message_3' =>	'',

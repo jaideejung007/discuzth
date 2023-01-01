@@ -67,13 +67,14 @@ if(!submitcheck('albumsubmit')) {
 		array('album_search', !$searchsubmit),
 		array('nav_album', $searchsubmit)
 	));
-	/*search={"nav_album":"action=album","newlist":"action=album"}*/
+	
 	if($muticondition) {
 		showtips('album_tips');
 	}
-	/*search*/
+	
+	$staticurl = STATICURL;
 	echo <<<EOT
-<script type="text/javascript" src="static/js/calendar.js"></script>
+<script type="text/javascript" src="{$staticurl}js/calendar.js"></script>
 <script type="text/JavaScript">
 function page(number) {
 	$('albumforum').page.value=number;
@@ -82,26 +83,26 @@ function page(number) {
 </script>
 EOT;
 	showtagheader('div', 'searchposts', !$searchsubmit && empty($newlist));
-	/*search={"nav_album":"action=album","search":"action=album&search=true"}*/
+	
 	showformheader("album".(!empty($_GET['search']) ? '&search=true' : ''), '', 'albumforum');
 	showhiddenfields(array('page' => $page, 'pp' => $_GET['pp'] ? $_GET['pp'] : $_GET['perpage']));
 	showtableheader();
 	showsetting('album_search_detail', 'detail', $detail, 'radio');
-	showsetting('album_search_perpage', '', $_GET['perpage'], "<select name='perpage'><option value='20'>$lang[perpage_20]</option><option value='50'>$lang[perpage_50]</option><option value='100'>$lang[perpage_100]</option></select>");
-	showsetting('resultsort', '', $orderby, "<select name='orderby'><option value=''>$lang[defaultsort]</option><option value='dateline'>$lang[topic_dateline]</option><option value='updatetime'>$lang[updatetime]</option><option value='picnum'>$lang[pic_num]</option></select> ");
-	showsetting('', '', $ordersc, "<select name='ordersc'><option value='desc'>$lang[orderdesc]</option><option value='asc'>$lang[orderasc]</option></select>", '', 0, '', '', '', true);
+	showsetting('album_search_perpage', '', $_GET['perpage'], "<select name='perpage'><option value='20'>{$lang['perpage_20']}</option><option value='50'>{$lang['perpage_50']}</option><option value='100'>{$lang['perpage_100']}</option></select>");
+	showsetting('resultsort', '', $orderby, "<select name='orderby'><option value=''>{$lang['defaultsort']}</option><option value='dateline'>{$lang['topic_dateline']}</option><option value='updatetime'>{$lang['updatetime']}</option><option value='picnum'>{$lang['pic_num']}</option></select> ");
+	showsetting('', '', $ordersc, "<select name='ordersc'><option value='desc'>{$lang['orderdesc']}</option><option value='asc'>{$lang['orderasc']}</option></select>", '', 0, '', '', '', true);
 	showsetting('album_search_albumname', 'albumname', $albumname, 'text');
 	showsetting('album_search_albumid', 'albumid', $albumid, 'text');
 	showsetting('album_search_uid', 'uid', $uid, 'text');
 	showsetting('album_search_user', 'users', $users, 'text');
-	showsetting('blog_search_friend', '', $friend, "<select name='friend'><option value='0'>$lang[setting_home_privacy_alluser]</option><option value='1'>$lang[setting_home_privacy_friend]</option><option value='2'>$lang[setting_home_privacy_specified_friend]</option><option value='3'>$lang[setting_home_privacy_self]</option><option value='4'>$lang[setting_home_privacy_password]</option></select>");
+	showsetting('blog_search_friend', '', $friend, "<select name='friend'><option value='0'>{$lang['setting_home_privacy_alluser']}</option><option value='1'>{$lang['setting_home_privacy_friend']}</option><option value='2'>{$lang['setting_home_privacy_specified_friend']}</option><option value='3'>{$lang['setting_home_privacy_self']}</option><option value='4'>{$lang['setting_home_privacy_password']}</option></select>");
 	showsetting('album_search_time', array('starttime', 'endtime'), array($starttime, $endtime), 'daterange');
 	echo '<input type="hidden" name="fromumanage" value="'.$fromumanage.'">';
 	showsubmit('searchsubmit');
 	showtablefooter();
 	showformfooter();
 	showtagfooter('div');
-	/*search*/
+	
 
 } else {
 	if($_GET['albumids']) {
@@ -114,7 +115,7 @@ EOT;
 		$albums = $catids = array();
 		$selectalbumids = !empty($_GET['ids']) && is_array($_GET['ids']) ? $_GET['ids'] : array();
 		if($selectalbumids) {
-			$query = C::t('home_album')->fetch_all($selectalbumids);
+			$query = C::t('home_album')->fetch_all_album($selectalbumids);
 			foreach($query as $value) {
 				$albums[$value['albumid']] = $value;
 				$catids[] = intval($value['catid']);
@@ -216,30 +217,30 @@ if(submitcheck('searchsubmit', 1) || $newlist) {
 				$album['updatetime'] = dgmdate($album['updatetime']);
 				switch ($album['friend']) {
 					case '0':
-						$privacy_name = $lang[setting_home_privacy_alluser];
+						$privacy_name = $lang['setting_home_privacy_alluser'];
 						break;
 					case '1':
-						$privacy_name = $lang[setting_home_privacy_friend];
+						$privacy_name = $lang['setting_home_privacy_friend'];
 						break;
 					case '2':
-						$privacy_name = $lang[setting_home_privacy_specified_friend];
+						$privacy_name = $lang['setting_home_privacy_specified_friend'];
 						break;
 					case '3':
-						$privacy_name = $lang[setting_home_privacy_self];
+						$privacy_name = $lang['setting_home_privacy_self'];
 						break;
 					case '4':
-						$privacy_name = $lang[setting_home_privacy_password];
+						$privacy_name = $lang['setting_home_privacy_password'];
 						break;
 					default:
-						$privacy_name = $lang[setting_home_privacy_alluser];
+						$privacy_name = $lang['setting_home_privacy_alluser'];
 				}
-				$album['friend'] = $album['friend'] ? " <a href=\"".ADMINSCRIPT."?action=album&friend=$album[friend]\">$privacy_name</a>" : $privacy_name;
+				$album['friend'] = $album['friend'] ? " <a href=\"".ADMINSCRIPT."?action=album&friend={$album['friend']}\">$privacy_name</a>" : $privacy_name;
 				$albums .= showtablerow('', '', array(
-					"<input class=\"checkbox\" type=\"checkbox\" name=\"ids[]\" value=\"$album[albumid]\" />",
-					"<a href=\"home.php?mod=space&uid=$album[uid]&do=album&id=$album[albumid]\" target=\"_blank\"><img src='$album[pic]' /></a>",
-					"<a href=\"home.php?mod=space&uid=$album[uid]&do=album&id=$album[albumid]\" target=\"_blank\">$album[albumname]</a>",
-					"<a href=\"home.php?mod=space&uid=$album[uid]\" target=\"_blank\">".$album['username']."</a>",
-					$album['updatetime'],"<a href=\"".ADMINSCRIPT."?action=pic&albumid=$album[albumid]\">".$album['picnum']."</a>",
+					"<input class=\"checkbox\" type=\"checkbox\" name=\"ids[]\" value=\"{$album['albumid']}\" />",
+					"<a href=\"home.php?mod=space&uid={$album['uid']}&do=album&id={$album['albumid']}\" target=\"_blank\"><img src='{$album['pic']}' /></a>",
+					"<a href=\"home.php?mod=space&uid={$album['uid']}&do=album&id={$album['albumid']}\" target=\"_blank\">{$album['albumname']}</a>",
+					"<a href=\"home.php?mod=space&uid={$album['uid']}\" target=\"_blank\">".$album['username']."</a>",
+					$album['updatetime'],"<a href=\"".ADMINSCRIPT."?action=pic&albumid={$album['albumid']}\">".$album['picnum']."</a>",
 					$album['friend']
 				), TRUE);
 			}

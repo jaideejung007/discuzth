@@ -9,21 +9,16 @@
 
 error_reporting(0);
 
-if(function_exists('set_magic_quotes_runtime')) {
-	set_magic_quotes_runtime(0);
-}
-
 $mtime = explode(' ', microtime());
 $starttime = $mtime[1] + $mtime[0];
 
 define('IN_UC', TRUE);
-define('UC_ROOT', substr(__FILE__, 0, -9));
+define('UC_ROOT', __DIR__.'/');
+define('UC_ADMINSCRIPT', basename(__FILE__));
 define('UC_API', strtolower((is_https() ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].substr($_SERVER['PHP_SELF'], 0, strrpos($_SERVER['PHP_SELF'], '/'))));
 define('UC_DATADIR', UC_ROOT.'data/');
 define('UC_DATAURL', UC_API.'/data');
-define('MAGIC_QUOTES_GPC', get_magic_quotes_gpc());
-
-unset($GLOBALS, $_ENV, $HTTP_GET_VARS, $HTTP_POST_VARS, $HTTP_COOKIE_VARS, $HTTP_SERVER_VARS, $HTTP_ENV_VARS);
+unset($_ENV, $HTTP_GET_VARS, $HTTP_POST_VARS, $HTTP_COOKIE_VARS, $HTTP_SERVER_VARS, $HTTP_ENV_VARS);
 
 $_GET		= daddslashes($_GET, 1, TRUE);
 $_POST		= daddslashes($_POST, 1, TRUE);
@@ -36,6 +31,9 @@ require UC_ROOT.'./release/release.php';
 require UC_DATADIR.'config.inc.php';
 require UC_ROOT.'model/base.php';
 require UC_ROOT.'model/admin.php';
+if(!defined('UC_KEY') || !UC_KEY) {
+	exit('This UCenter Server has been disabled.');
+}
 
 $m = getgpc('m');
 $a = getgpc('a');
@@ -44,7 +42,7 @@ $a = empty($a) ? 'index' : $a;
 
 define('RELEASE_ROOT', '');
 
-header('Content-Type: text/html; charset='.CHARSET);
+header('Content-Type: text/html; charset='.constant('UC_CHARSET'));
 
 if(in_array($m, array('admin', 'app', 'badword', 'cache', 'db', 'domain', 'frame', 'log', 'note', 'feed', 'mail', 'setting', 'user', 'credit', 'seccode', 'tool', 'plugin', 'pm'))) {
 	include UC_ROOT."control/admin/$m.php";
@@ -65,14 +63,12 @@ $mtime = explode(' ', microtime());
 $endtime = $mtime[1] + $mtime[0];
 
 function daddslashes($string, $force = 0, $strip = FALSE) {
-	if(!MAGIC_QUOTES_GPC || $force) {
-		if(is_array($string)) {
-			foreach($string as $key => $val) {
-				$string[$key] = daddslashes($val, $force, $strip);
-			}
-		} else {
-			$string = addslashes($strip ? stripslashes($string) : $string);
+	if(is_array($string)) {
+		foreach($string as $key => $val) {
+			$string[$key] = daddslashes($val, $force, $strip);
 		}
+	} else {
+		$string = addslashes($strip ? stripslashes($string) : $string);
 	}
 	return $string;
 }
@@ -87,7 +83,7 @@ function getgpc($k, $t='R') {
 	return isset($var[$k]) ? (is_array($var[$k]) ? $var[$k] : trim($var[$k])) : NULL;
 }
 
-function fsocketopen($hostname, $port = 80, &$errno, &$errstr, $timeout = 15) {
+function fsocketopen($hostname, $port = 80, &$errno = null, &$errstr = null, $timeout = 15) {
 	$fp = '';
 	if(function_exists('fsockopen')) {
 		$fp = @fsockopen($hostname, $port, $errno, $errstr, $timeout);
@@ -127,19 +123,19 @@ function dhtmlspecialchars($string, $flags = null) {
 }
 
 function is_https() {
-	if (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) != "off") {
+	if(isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off') {
 		return true;
 	}
-	if (isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && strtolower($_SERVER["HTTP_X_FORWARDED_PROTO"]) == "https") {
+	if(isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) == 'https') {
 		return true;
 	}
-	if (isset($_SERVER["HTTP_SCHEME"]) && strtolower($_SERVER["HTTP_SCHEME"]) == "https") {
+	if(isset($_SERVER['HTTP_X_CLIENT_SCHEME']) && strtolower($_SERVER['HTTP_X_CLIENT_SCHEME']) == 'https') {
 		return true;
 	}
-	if (isset($_SERVER["HTTP_FROM_HTTPS"]) && strtolower($_SERVER["HTTP_FROM_HTTPS"]) != "off") {
+	if(isset($_SERVER['HTTP_FROM_HTTPS']) && strtolower($_SERVER['HTTP_FROM_HTTPS']) != 'off') {
 		return true;
 	}
-	if (isset($_SERVER["SERVER_PORT"]) && $_SERVER["SERVER_PORT"] == 443) {
+	if(isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443) {
 		return true;
 	}
 	return false;

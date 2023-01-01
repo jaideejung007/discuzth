@@ -26,8 +26,8 @@ $_G['setting']['search']['album']['searchctrl'] = intval($_G['setting']['search'
 
 $srchmod = 4;
 
-$cachelife_time = 300;		
-$cachelife_text = 3600;		
+$cachelife_time = 300;		// Life span for cache of searching in specified range of time
+$cachelife_text = 3600;		// Life span for cache of text searching
 
 $srchtype = empty($_GET['srchtype']) ? '' : trim($_GET['srchtype']);
 $searchid = isset($_GET['searchid']) ? intval($_GET['searchid']) : 0;
@@ -61,7 +61,7 @@ if(!submitcheck('searchsubmit', 1)) {
 
 		$albumlist = array();
 		$maxalbum = $nowalbum = 0;
-		$query = C::t('home_album')->fetch_all(explode(',', $index['ids']), 'updatetime', $start_limit, $_G['tpp']);
+		$query = C::t('home_album')->fetch_all_album(explode(',', $index['ids']), 'updatetime', $start_limit, $_G['tpp']);
 		foreach($query as $value) {
 			if($value['friend'] != 4 && ckfriend($value['uid'], $value['friend'], $value['target_ids'])) {
 				$value['pic'] = pic_cover_get($value['pic'], $value['picflag']);

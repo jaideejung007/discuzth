@@ -9,11 +9,12 @@ function saveData(ignoreempty) {
 	var ignoreempty = isUndefined(ignoreempty) ? 0 : ignoreempty;
 	var obj = $('postform') && (($('fwin_newthread') && $('fwin_newthread').style.display == '') || ($('fwin_reply') && $('fwin_reply').style.display == '')) ? $('postform') : ($('fastpostform') ? $('fastpostform') : $('postform'));
 	if(!obj) return;
+	var bbcode = (typeof wysiwyg != 'undefined' && wysiwyg == 1) ? html2bbcode(editdoc.body.innerHTML) : obj.message.value;
 	if(typeof isfirstpost != 'undefined') {
 		if(typeof wysiwyg != 'undefined' && wysiwyg == 1) {
-			var messageisnull = trim(html2bbcode(editdoc.body.innerHTML)) === '';
+			var messageisnull = trim(bbcode) === '';
 		} else {
-			var messageisnull = $('postform').message.value === '';
+			var messageisnull = bbcode === '';
 		}
 		if(isfirstpost && (messageisnull && $('postform').subject.value === '')) {
 			return;
@@ -31,7 +32,7 @@ function saveData(ignoreempty) {
 				subject = trim(elvalue);
 			} else if(el.name == 'message') {
 				if(typeof wysiwyg != 'undefined' && wysiwyg == 1) {
-					elvalue = html2bbcode(editdoc.body.innerHTML);
+					elvalue = bbcode;
 				}
 				message = trim(elvalue);
 			}
@@ -236,14 +237,18 @@ function fastpostvalidate(theform, noajaxpost) {
 		}
 	}
 	if(theform.message.value == '' || theform.subject.value == '') {
-		s = 'ขออภัย! คุณยังไม่ได้ใส่ชื่อกระทู้หรือเนื้อหาใดๆ เลย';
+		s = 'ขออภัย คุณยังไม่ได้ใส่ชื่อกระทู้หรือเนื้อหาใด ๆ เลย';
 		theform.message.focus();
-	} else if(mb_strlen(theform.subject.value) > 255) {
+	} else if(dstrlen(theform.subject.value) > 255) {
 		s = 'ชื่อกระทู้จะต้องไม่ยาวเกิน 255 ตัวอักษร';
 		theform.subject.focus();
 	}
+	if(!disablepostctrl && dstrlen(trim(theform.subject.value)) && ((postminsubjectchars != 0 && dstrlen(theform.subject.value) < postminsubjectchars) || (postminsubjectchars != 0 && dstrlen(theform.subject.value) > postmaxsubjectchars))) {
+		showError('ชื่อกระทู้มีความยาวไม่ตรงตามข้อกำหนดของระบบ\n\nความยาวปัจจุบัน: ' + dstrlen(theform.subject.value) + ' ตัวอักษร\nจะต้องอยู่ระหว่าง: ' + postminsubjectchars + ' ถึง ' + postmaxsubjectchars + ' ตัวอักษรเท่านั้น');
+		return false;
+	}
 	if(!disablepostctrl && ((postminchars != 0 && mb_strlen(theform.message.value) < postminchars) || (postmaxchars != 0 && mb_strlen(theform.message.value) > postmaxchars))) {
-		s = 'แจ้งเตือน\n\nคุณพิมพ์ข้อความแล้ว: ' + mb_strlen(theform.message.value) + ' ' + ' ไบต์\nจะต้องอยู่ในระหว่าง: ' + postminchars + ' ถึง ' + postmaxchars + ' ไบต์เท่านั้น';
+		s = 'เนื้อหาโพสต์มีความยาวไม่ตรงตามข้อกำหนดของระบบ\n\nความยาวปัจจุบัน: ' + mb_strlen(theform.message.value) + ' ' + ' ไบต์\nจะต้องอยู่ระหว่าง: ' + postminchars + ' ถึง ' + postmaxchars + ' ไบต์เท่านั้น';
 	}
 	if(s) {
 		showError(s);
@@ -310,7 +315,7 @@ function loadData(quiet, formobj) {
 
 	if(in_array((data = trim(data)), ['', 'null', 'false', null, false])) {
 		if(!quiet) {
-			showDialog('ไม่สามารถกู้คืนข้อมูลได้!', 'info');
+			showDialog('ไม่สามารถกู้คืนข้อมูลได้!', 'notice');
 		}
 		return;
 	}
@@ -406,7 +411,7 @@ function checkForumnew(fid, lasttime) {
 			}
 			removetbodyrow(table, 'forumnewshow');
 			var colspan = table.getElementsByTagName('tbody')[0].rows[0].children.length;
-			var checknew = {'tid':'', 'thread':{'common':{'className':'', 'val':'<a href="javascript:void(0);" onclick="ajaxget(\'forum.php?mod=ajax&action=forumchecknew&fid=' + fid+ '&time='+lasttime+'&uncheck=1&inajax=yes\', \'forumnew\');">มีโพสต์เข้ามาใหม่ คลิกเพื่อดู', 'colspan': colspan }}};
+			var checknew = {'tid':'', 'thread':{'common':{'className':'', 'val':'<a href="javascript:void(0);" onclick="ajaxget(\'forum.php?mod=ajax&action=forumchecknew&fid=' + fid+ '&time='+lasttime+'&uncheck=1&inajax=yes\', \'forumnew\');">มีคนตอบกระทู้ใหม่ คลิกเพื่อดู', 'colspan': colspan }}};
 			addtbodyrow(table, ['tbody'], ['forumnewshow'], 'separatorline', checknew);
 		} else {
 			if(checkForumcount < 50) {

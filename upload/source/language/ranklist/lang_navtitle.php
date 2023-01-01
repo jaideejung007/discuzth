@@ -27,14 +27,14 @@ $lang = array(
   'ranklist_title_thread_reply' => 'อันดับกระทู้ที่มีสมาชิกตอบกลับเยอะที่สุด',
   'ranklist_title_thread_view' => 'อันดับกระทู้ที่มีผู้เข้าชมเยอะที่สุด',
   'ranklist_title_thread_share' => 'อันดับกระทู้ที่มีสมาชิกนำไปแชร์เยอะที่สุด',
-  'ranklist_title_thread_favorite' => 'อันดับกระทู้ที่มีสมาชิกเพิ่มในบุ๊คมาร์กเยอะที่สุด',
+  'ranklist_title_thread_favorite' => 'อันดับกระทู้ที่มีสมาชิกเพิ่มในรายการโปรดเยอะที่สุด',
   'ranklist_title_thread_heat' => 'อันดับกระทู้ที่ได้รับความนิยมมากที่สุด',
 
   'ranklist_title_blog_heat' => 'อันดับบล็อกที่ได้รับความนิยม',
   'ranklist_title_blog_reply' => 'อันดับบล็อกที่มีสมาชิกแสดงความคิดเห็นเยอะที่สุด',
   'ranklist_title_blog_view' => 'อันดับบล็อกที่มีผู้เข้าชมเยอะที่สุด',
   'ranklist_title_blog_share' => 'อันดับบล็อกที่มีสมาชิกนำไปแชร์เยอะที่สุด',
-  'ranklist_title_blog_favorite' => 'อันดับบล็อกที่มีสมาชิกเพิ่มในบุ๊คมาร์กเยอะที่สุด',
+  'ranklist_title_blog_favorite' => 'อันดับบล็อกที่มีสมาชิกเพิ่มในรายการโปรดเยอะที่สุด',
   'ranklist_title_blog_1' => 'อันดับบล็อกที่มีสมาชิกแสดงความรู้สึกเยอะที่สุด',
   'ranklist_title_blog_2' => 'อันดับบล็อกที่มีสมาชิกแสดงความรู้สึกเยอะที่สุด',
   'ranklist_title_blog_3' => 'อันดับบล็อกที่มีสมาชิกแสดงความรู้สึกเยอะที่สุด',
@@ -42,11 +42,11 @@ $lang = array(
   'ranklist_title_blog_5' => 'อันดับบล็อกที่มีสมาชิกแสดงความรู้สึกเยอะที่สุด',
 
   'ranklist_title_poll_heat' => 'อันดับโพลที่ได้รับความนิยม',
-  'ranklist_title_poll_favorite' => 'อันดับโพลที่มีสมาชิกเพิ่มในบุ๊คมาร์กเยอะที่สุด',
+  'ranklist_title_poll_favorite' => 'อันดับโพลที่มีสมาชิกเพิ่มในรายการโปรดเยอะที่สุด',
   'ranklist_title_poll_share' => 'อันดับโพลที่มีสมาชิกนำไปแชร์เยอะที่สุด',
 
   'ranklist_title_activity_heat' => 'อันดับกิจกรรมที่ได้รับความนิยม',
-  'ranklist_title_activity_favorite' => 'อันดับกิจกรรมที่มีสมาชิกเพิ่มในบุ๊คมาร์กเยอะที่สุด',
+  'ranklist_title_activity_favorite' => 'อันดับกิจกรรมที่มีสมาชิกเพิ่มในรายการโปรดเยอะที่สุด',
   'ranklist_title_activity_share' => 'อันดับกิจกรรมที่มีสมาชิกนำไปแชร์เยอะที่สุด',
 
   'ranklist_title_picture_heat' => 'อันดับรูปภาพที่ได้รับความนิยม',

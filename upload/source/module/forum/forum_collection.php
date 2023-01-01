@@ -17,7 +17,7 @@ if(!$_G['setting']['collectionstatus']) {
 
 require_once libfile('function/collection');
 
-$tpp = $_G['setting']['topicperpage']; 
+$tpp = $_G['setting']['topicperpage']; //per page
 $maxteamworkers = $_G['setting']['collectionteamworkernum'];
 
 $action = trim($_GET['action']);

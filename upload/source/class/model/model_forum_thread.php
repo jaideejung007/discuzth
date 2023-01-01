@@ -82,11 +82,11 @@ class model_forum_thread extends discuz_model
 			$this->param['price'] = $this->group['maxprice'] ? ($this->param['price'] <= $this->group['maxprice'] ? $this->param['price'] : $this->group['maxprice']) : 0;
 		}
 
-		if(!$this->param['typeid'] && $this->forum['threadtypes']['required'] && !$this->param['special']) {
+		if(!$this->param['typeid'] && !empty($this->forum['threadtypes']['required']) && !$this->param['special']) {
 			return $this->showmessage('post_type_isnull');
 		}
 
-		if(!$this->param['sortid'] && $this->forum['threadsorts']['required'] && !$this->param['special']) {
+		if(!$this->param['sortid'] && !empty($this->forum['threadsorts']['required']) && !$this->param['special']) {
 			return $this->showmessage('post_sort_isnull');
 		}
 
@@ -95,10 +95,10 @@ class model_forum_thread extends discuz_model
 		}
 
 
-		$this->param['sortid'] = $this->param['special'] && $this->forum['threadsorts']['types'][$this->param['sortid']] ? 0 : $this->param['sortid'];
+		$this->param['sortid'] = $this->param['special'] || !$this->forum['threadsorts']['types'][$this->param['sortid']] ? 0 : $this->param['sortid'];
 		$this->param['typeexpiration'] = intval($this->param['typeexpiration']);
 
-		if($this->forum['threadsorts']['expiration'][$this->param['typeid']] && !$this->param['typeexpiration']) {
+		if(!empty($this->forum['threadsorts']['expiration'][$this->param['typeid']]) && !$this->param['typeexpiration']) {
 			return $this->showmessage('threadtype_expiration_invalid');
 		}
 
@@ -148,6 +148,7 @@ class model_forum_thread extends discuz_model
 		    'fid' => $this->forum['fid'],
 		    'dateline' => $this->param['publishdate'],
 		));
+		C::t('forum_sofa')->insert(array('tid' => $this->tid,'fid' => $this->forum['fid']));
 		useractionlog($this->member['uid'], 'tid');
 
 		if(!getuserprofile('threads') && $this->setting['newbie']) {
@@ -164,8 +165,14 @@ class model_forum_thread extends discuz_model
 		}
 
 		if($this->param['moderated']) {
-			updatemodlog($this->tid, ($this->param['displayorder'] > 0 ? 'STK' : 'DIG'));
-			updatemodworks(($this->param['displayorder'] > 0 ? 'STK' : 'DIG'), 1);
+			if($this->param['displayorder'] > 0) {
+				updatemodlog($this->tid, 'STK');
+				updatemodworks('STK', 1);
+			}
+			if($this->param['digest']) {
+				updatemodlog($this->tid, 'DIG');
+				updatemodworks('DIG', 1);
+			}
 		}
 
 		$this->param['bbcodeoff'] = checkbbcodes($this->param['message'], !empty($this->param['bbcodeoff']));
@@ -215,7 +222,7 @@ class model_forum_thread extends discuz_model
 		updatestat($this->param['isgroup'] ? 'groupthread' : $statarr[$this->param['special']]);
 
 
-		if($this->param['geoloc'] && IN_MOBILE == 2) {
+		if($this->param['geoloc'] && defined('IN_MOBILE') && constant('IN_MOBILE') == 2) {
 			list($mapx, $mapy, $location) = explode('|', $this->param['geoloc']);
 			if($mapx && $mapy && $location) {
 				C::t('forum_post_location')->insert(array(
@@ -260,8 +267,6 @@ class model_forum_thread extends discuz_model
 				updategroupcreditlog($this->forum['fid'], $this->member['uid']);
 			}
 
-			C::t('forum_sofa')->insert(array('tid' => $this->tid,'fid' => $this->forum['fid']));
-
 			return 'post_newthread_succeed';
 
 		}
@@ -290,7 +295,7 @@ class model_forum_thread extends discuz_model
 					'subject' => "<a href=\"forum.php?mod=viewthread&tid={$this->tid}\">{$this->param['subject']}</a>",
 					'message' => messagecutstr($message, 150)
 				);
-				if(getglobal('forum_attachexist')) {//					$firstaid = DB::result_first("SELECT aid FROM ".DB::table(getattachtablebytid($tid))." WHERE pid='$pid' AND dateline>'0' AND isimage='1' ORDER BY dateline LIMIT 1");
+				if(getglobal('forum_attachexist')) {
 					$imgattach = C::t('forum_attachment_n')->fetch_max_image('tid:'.$this->tid, 'pid', $this->pid);
 					$firstaid = $imgattach['aid'];
 					unset($imgattach);
@@ -323,8 +328,8 @@ class model_forum_thread extends discuz_model
 			'htmlon', 'bbcodeoff', 'smileyoff', 'parseurloff', 'pstatus', 'geoloc',
 		);
 		foreach($varname as $name) {
-			if(!isset($this->param[$name]) && isset($parameters[$name])) {
-				$this->param[$name] = $parameters[$name];
+			if(!isset($this->param[$name])) {
+				$this->param[$name] = isset($parameters[$name]) ? $parameters[$name] : NULL;
 			}
 		}
 

@@ -21,6 +21,7 @@ if(!$_G['setting']['taskstatus']) {
 
 require_once libfile('class/task');
 $tasklib = & task::instance();
+$tasklib->update_available();
 
 $_G['mnid'] = 'mn_common';
 $id = intval($_GET['id']);
@@ -65,6 +66,8 @@ if(empty($do)) {
 		showmessage('task_duplicate', 'home.php?mod=task&item=new');
 	} elseif($result === -4) {
 		showmessage('task_nextperiod', 'home.php?mod=task&item=new');
+	} elseif($result === -5) {
+		showmessage('task_exclusivetask', 'home.php?mod=task&item=new');
 	} else {
 		dsetcookie('taskdoing_'.$_G['uid'], 1, 7776000);
 		showmessage('task_applied', 'home.php?mod=task&do=view&id='.$id);
@@ -88,6 +91,8 @@ if(empty($do)) {
 		showmessage('task_failed', 'home.php?mod=task&item=failed');
 	} elseif($result === -3) {
 		showmessage($tasklib->messagevalues['msg'], 'home.php?mod=task&do=view&id='.$id, $tasklib->messagevalues['values']);
+	} elseif($result === -4) {
+		showmessage('task_exclusivetask', 'home.php?mod=task&item=new');
 	} else {
 		cleartaskstatus();
 		showmessage('task_completed', 'home.php?mod=task&item=done');
@@ -112,7 +117,7 @@ include template('home/space_task');
 
 function cleartaskstatus() {
 	global $_G;
-	if(!C::t('common_mytask')->count($_G['uid'], false, 0)) {
+	if(!C::t('common_mytask')->count_mytask($_G['uid'], false, 0)) {
 		dsetcookie('taskdoing_'.$_G['uid']);
 	}
 }

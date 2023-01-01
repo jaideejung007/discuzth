@@ -23,7 +23,7 @@ if(!defined('DISCUZ_VERSION')) {
 if(in_array('mobile', $_G['setting']['plugins']['available'])) {
 	loadcache('wsq_checkinfo');
 	if (!$_G['cache']['wsq_checkinfo'] || TIMESTAMP - $_G['cache']['wsq_checkinfo']['expiration'] > 600) {
-		$_G['wechat']['setting'] = unserialize($_G['setting']['mobilewechat']);
+		$_G['wechat']['setting'] = dunserialize($_G['setting']['mobilewechat']);
 		$forums = C::t('forum_forum')->fetch_all_by_status(1);
 		foreach ($forums as $forum) {
 			$posts += $forum['posts'];
@@ -31,6 +31,7 @@ if(in_array('mobile', $_G['setting']['plugins']['available'])) {
 		loadcache('userstats');
 		$array = array(
 			'discuzversion' => 'X3.2',
+			'truediscuzversion' => DISCUZ_VERSION,
 			'charset' => CHARSET,
 			'version' => MOBILE_PLUGIN_VERSION,
 			'pluginversion' => $_G['setting']['plugins']['version']['mobile'],

@@ -43,7 +43,7 @@ class forum_upload {
 			return $this->uploadmsg(2);
 		}
 
-		$allowupload = !$_G['group']['maxattachnum'] || $_G['group']['maxattachnum'] && $_G['group']['maxattachnum'] > getuserprofile('todayattachs');;
+		$allowupload = ($_G['group']['allowpostattach'] || $_G['group']['allowpostimage']) ? (!$_G['group']['maxattachnum'] || $_G['group']['maxattachnum'] && $_G['group']['maxattachnum'] > getuserprofile('todayattachs')) : false;
 		if(!$allowupload) {
 			return $this->uploadmsg(6);
 		}
@@ -84,21 +84,39 @@ class forum_upload {
 				return $this->uploadmsg(11);
 			}
 		}
-		updatemembercount($_G['uid'], array('todayattachs' => 1, 'todayattachsize' => $upload->attach['size']));
+
+		$filename = censor($upload->attach['name'], NULL, TRUE);
+		if(is_array($filename)) {
+			return $this->uploadmsg(12);
+		}
+
+		if(isset($_GET['type']) && $_GET['type'] == 'image' && !$upload->attach['isimage']) {
+			return $this->uploadmsg(7);
+		}
+
+		if($upload->attach['isimage']) {
+			$imageinfo = @getimagesize($upload->attach['tmp_name']);
+			list($width, $height, $type) = !empty($imageinfo) ? $imageinfo : array(0, 0, 0);
+			$size = $width * $height;
+			if((!getglobal('setting/imagelib') && $size > (getglobal('setting/gdlimit') ? getglobal('setting/gdlimit') : 16777216)) || $size < 16 ) {
+				return $this->uploadmsg(13);
+			}
+			if(!in_array($type, array(1, 2, 3, 6, 13, 18)) || ($upload->attach['ext'] == 'swf' && $type != 4 && $type != 13)) {
+				return $this->uploadmsg(7);
+			}
+		}
+
 		$upload->save();
 		if($upload->error() == -103) {
 			return $this->uploadmsg(8);
 		} elseif($upload->error()) {
 			return $this->uploadmsg(9);
 		}
+
+		updatemembercount($_G['uid'], array('todayattachs' => 1, 'todayattachsize' => $upload->attach['size']));
+
 		$thumb = $remote = $width = 0;
-		if($_GET['type'] == 'image' && !$upload->attach['isimage']) {
-			return $this->uploadmsg(7);
-		}
 		if($upload->attach['isimage']) {
-			if(!in_array($upload->attach['imageinfo']['2'], array(1,2,3,6))) {
-				return $this->uploadmsg(7);
-			}
 			if($_G['setting']['showexif']) {
 				require_once libfile('function/attachment');
 				$exif = getattachexif(0, $upload->attach['target']);
@@ -110,14 +128,16 @@ class forum_upload {
 			if($_G['setting']['thumbsource'] && $_G['setting']['sourcewidth'] && $_G['setting']['sourceheight']) {
 				$thumb = $image->Thumb($upload->attach['target'], '', $_G['setting']['sourcewidth'], $_G['setting']['sourceheight'], 1, 1) ? 1 : 0;
 				$width = $image->imginfo['width'];
+				$height = $image->imginfo['height'];
 				$upload->attach['size'] = $image->imginfo['size'];
 			}
 			if($_G['setting']['thumbstatus']) {
 				$thumb = $image->Thumb($upload->attach['target'], '', $_G['setting']['thumbwidth'], $_G['setting']['thumbheight'], $_G['setting']['thumbstatus'], 0) ? 1 : 0;
 				$width = $image->imginfo['width'];
+				$height = $image->imginfo['height'];
 			}
 			if($_G['setting']['thumbsource'] || !$_G['setting']['thumbstatus']) {
-				list($width) = @getimagesize($upload->attach['target']);
+				list($width, $height) = @getimagesize($upload->attach['target']);
 			}
 		}
 		if($_GET['type'] != 'image' && $upload->attach['isimage']) {
@@ -127,7 +147,7 @@ class forum_upload {
 		$insert = array(
 			'aid' => $aid,
 			'dateline' => $_G['timestamp'],
-			'filename' => dhtmlspecialchars(censor($upload->attach['name'])),
+			'filename' => $filename,
 			'filesize' => $upload->attach['size'],
 			'attachment' => $upload->attach['attachment'],
 			'isimage' => $upload->attach['isimage'],
@@ -135,10 +155,11 @@ class forum_upload {
 			'thumb' => $thumb,
 			'remote' => $remote,
 			'width' => $width,
+			'height' => $height
 		);
 		C::t('forum_attachment_unused')->insert($insert);
 		if($upload->attach['isimage'] && $_G['setting']['showexif']) {
-			C::t('forum_attachment_exif')->insert($aid, $exif);
+			C::t('forum_attachment_exif')->insert_exif($aid, $exif);
 		}
 		return $this->uploadmsg(0);
 	}

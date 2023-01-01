@@ -46,10 +46,11 @@ class model_forum_post extends discuz_model {
 
 	protected function _init_parameters($parameters) {
 		$varname = array(
-			'member', 'group', 'forum', 'thread', 'extramessage', 'special',//'nauthorid' 'modnewreplies' 'tid'
+			'member', 'group', 'forum', 'thread', 'extramessage', 'special',
 			'message','clientip', 'invisible', 'isanonymous', 'usesig',
 			'htmlon', 'bbcodeoff', 'smileyoff', 'parseurloff', 'pstatus',
 			'noticetrimstr', 'noticeauthor', 'from', 'sechash', 'geoloc',
+			'timestamp',
 
 			'subject', 'special', 'sortid', 'typeid', 'isanonymous', 'cronpublish', 'cronpublishdate', 'save',
 			'readperm', 'price', 'ordertype', 'hiddenreplies', 'allownoticeauthor', 'audit', 'tags', 'bbcodeoff', 'imgcontent', 'imgcontentwidth',
@@ -149,7 +150,7 @@ class model_forum_post extends discuz_model {
 
 		useractionlog($this->member['uid'], 'pid');
 
-		if($this->param['geoloc'] && IN_MOBILE == 2) {
+		if($this->param['geoloc'] && defined('IN_MOBILE') && constant('IN_MOBILE') == 2) {
 			list($mapx, $mapy, $location) = explode('|', $this->param['geoloc']);
 			if($mapx && $mapy && $location) {
 				C::t('forum_post_location')->insert(array(
@@ -217,10 +218,6 @@ class model_forum_post extends discuz_model {
 
 
 		dsetcookie('clearUserdata', 'forum');
-
-		if($this->thread['replies'] <= 0) {
-			C::t('forum_sofa')->delete($this->thread['tid']);
-		}
 
 		if($this->param['modnewreplies']) {
 			updatemoderate('pid', $this->pid);
@@ -391,7 +388,7 @@ class model_forum_post extends discuz_model {
 
 
 
-			$this->param['readperm'] = $this->group['allowsetreadperm'] ? intval($this->param['readperm']) : ($isorigauthor ? 0 : 'ignore');
+			$this->param['readperm'] = $this->group['allowsetreadperm'] ? intval($this->param['readperm']) : ($isorigauthor ? $this->thread['readperm'] : 'ignore');
 			if($this->thread['special'] != 3) {
 				$this->param['price'] = intval($this->param['price']);
 				$this->param['price'] = $this->thread['price'] < 0 && !$this->thread['special']
@@ -414,6 +411,8 @@ class model_forum_post extends discuz_model {
 			$this->thread['status'] = setstatus(6, $this->param['allownoticeauthor'] ? 1 : 0, $this->thread['status']);
 
 			$displayorder = (empty($this->param['save']) || $this->thread['displayorder'] != -4 ) ? ($this->thread['displayorder'] == -4 ? -4 : $this->thread['displayorder']) : -4;
+			$this->param['typeid'] = isset($this->param['typeid']) && isset($this->forum['threadtypes']['types'][$this->param['typeid']]) && (!$this->forum['threadtypes']['moderators'][$this->param['typeid']] || $this->forum['ismoderator']) ? $this->param['typeid'] : 0;
+			$this->param['sortid'] = $this->param['special'] || !$this->forum['threadsorts']['types'][$this->param['sortid']] ? 0 : $this->param['sortid'];			
 
 
 			$this->param['threadupdatearr']['typeid'] = $this->param['typeid'];
@@ -436,7 +435,7 @@ class model_forum_post extends discuz_model {
 				if($this->thread['closed'] > 1) {
 					C::t('forum_thread')->update($this->thread['closed'], array('subject' => $this->param['subject']), true);
 				} elseif(empty($this->thread['isgroup'])) {
-					$threadclosed = C::t('forum_threadclosed')->fetch($thread['tid']);
+					$threadclosed = C::t('forum_threadclosed')->fetch($this->thread['tid']);
 					if($threadclosed['redirect']) {
 						C::t('forum_thread')->update($threadclosed['redirect'], array('subject' => $this->param['subject']), true);
 					}
@@ -467,8 +466,13 @@ class model_forum_post extends discuz_model {
 
 
 		if(getglobal('forum_auditstatuson') && $this->param['audit'] == 1) {
-			C::t('forum_post')->update($this->thread['posttableid'], $this->post['pid'], array('status' => 4), false, false, null, -2, null, 0);
-			updatepostcredits('+', $this->post['authorid'], ($isfirstpost ? 'post' : 'reply'), $this->forum['fid']);
+			if(getstatus($this->post['status'], 3) == 0) {
+				C::t('forum_post')->update_post($this->thread['posttableid'], $this->post['pid'], array('status' => 4), false, false, null, -2, null, 0);
+				updatepostcredits('+', $this->post['authorid'], ($isfirstpost ? 'post' : 'reply'), $this->forum['fid']);
+			}
+			if(!$isfirstpost) {
+				C::t('forum_thread')->increase($this->thread['tid'], array('replies' => 1));
+			} 
 			updatemodworks('MOD', 1);
 			updatemodlog($this->thread['tid'], 'MOD');
 		}
@@ -513,7 +517,7 @@ class model_forum_post extends discuz_model {
 		} else {
 			$setarr['invisible'] = $pinvisible;
 		}
-		C::t('forum_post')->update('tid:'.$this->thread['tid'], $this->post['pid'], $setarr);
+		C::t('forum_post')->update_post('tid:'.$this->thread['tid'], $this->post['pid'], $setarr);
 
 
 
@@ -575,17 +579,17 @@ class model_forum_post extends discuz_model {
 
 		if(!$this->param['handlereplycredit']) {
 			if(!$isfirstpost && !$this->param['isanonymous']) {
-				$postreplycredit = C::t('forum_post')->fetch('tid:'.$this->thread['tid'], $this->post['pid']);
+				$postreplycredit = C::t('forum_post')->fetch_post('tid:'.$this->thread['tid'], $this->post['pid']);
 				$postreplycredit = $postreplycredit['replycredit'];
 				if($postreplycredit) {
-					C::t('forum_post')->update('tid:'.$this->thread['tid'], $this->post['pid'], array('replycredit' => 0));
+					C::t('forum_post')->update_post('tid:'.$this->thread['tid'], $this->post['pid'], array('replycredit' => 0));
 					updatemembercount($this->post['authorid'], array($replycredit_rule['extcreditstype'] => '-'.$postreplycredit));
 				}
 			}
 		}
 
 
-		C::t('forum_post')->delete('tid:'.$this->thread['tid'], $this->post['pid']);
+		C::t('forum_post')->delete_post('tid:'.$this->thread['tid'], $this->post['pid']);
 
 
 		$forumcounter = array();
@@ -596,7 +600,7 @@ class model_forum_post extends discuz_model {
 				C::t($table)->delete_by_tid($this->thread['tid']);
 			}
 			C::t('forum_thread')->delete_by_tid($this->thread['tid']);
-			C::t('common_moderate')->delete($this->thread['tid'], 'tid');
+			C::t('common_moderate')->delete_moderate($this->thread['tid'], 'tid');
 			C::t('forum_threadmod')->delete_by_tid($this->thread['tid']);
 			if($this->setting['globalstick'] && in_array($this->thread['displayorder'], array(2, 3))) {
 				require_once libfile('function/cache');
@@ -617,7 +621,7 @@ class model_forum_post extends discuz_model {
 		$this->forum['lastpost'] = explode("\t", $this->forum['lastpost']);
 		if($this->post['dateline'] == $this->forum['lastpost'][2] && ($this->post['author'] == $this->forum['lastpost'][3] || ($this->forum['lastpost'][3] == '' && $this->post['anonymous']))) {
 			$lastthread = C::t('forum_thread')->fetch_by_fid_displayorder($this->forum['fid']);
-			C::t('forum_forum')->update($this->forum['fid'], array('lastpost' => "$lastthread[tid]\t$lastthread[subject]\t$lastthread[lastpost]\t$lastthread[lastposter]"));
+			C::t('forum_forum')->update($this->forum['fid'], array('lastpost' => "{$lastthread['tid']}\t{$lastthread['subject']}\t{$lastthread['lastpost']}\t{$lastthread['lastposter']}"));
 		}
 		C::t('forum_forum')->update_forum_counter($this->forum['fid'], $forumcounter['threads'], $forumcounter['posts']);
 

@@ -48,14 +48,19 @@ if(submitcheck('lostpwsubmit')) {
 		C::t('common_member'.$table_ext)->update($tmp['uid'], array('email' => $tmp['email']));
 	}
 
+	$memberauthstr = C::t('common_member_field_forum'.$table_ext)->fetch($member['uid']);
+	list($dateline, $operation, $idstring) = explode("\t", $memberauthstr['authstr']);
+	$interval = $_G['setting']['mailinterval'] > 0 ? (int)$_G['setting']['mailinterval'] : 300;
+	if($dateline && $operation == 1 && $dateline > TIMESTAMP - $interval) {
+		showmessage('getpasswd_has_send', '', array('interval' => $interval));
+	}
+
 	$idstring = random(6);
-	C::t('common_member_field_forum'.$table_ext)->update($member['uid'], array('authstr' => "$_G[timestamp]\t1\t$idstring"));
+	C::t('common_member_field_forum'.$table_ext)->update($member['uid'], array('authstr' => "{$_G['timestamp']}\t1\t$idstring"));
 	require_once libfile('function/mail');
-	$get_passwd_subject = lang('email', 'get_passwd_subject');
-	$get_passwd_message = lang(
-		'email',
-		'get_passwd_message',
-		array(
+	$get_passwd_message = array(
+		'tpl' => 'get_passwd',
+		'var' => array(
 			'username' => $member['username'],
 			'bbname' => $_G['setting']['bbname'],
 			'siteurl' => $_G['setting']['securesiteurl'],
@@ -65,8 +70,8 @@ if(submitcheck('lostpwsubmit')) {
 			'sign' => make_getpws_sign($member['uid'], $idstring),
 		)
 	);
-	if(!sendmail("$_GET[username] <$tmp[email]>", $get_passwd_subject, $get_passwd_message)) {
-		runlog('sendmail', "$tmp[email] sendmail failed.");
+	if(!sendmail("{$_GET['username']} <{$tmp['email']}>", $get_passwd_message)) {
+		runlog('sendmail', "{$tmp['email']} sendmail failed.");
 	}
 	showmessage('getpasswd_send_succeed', $_G['siteurl'], array(), array('showdialog' => 1, 'locationtime' => true));
 }

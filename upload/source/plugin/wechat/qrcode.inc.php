@@ -12,7 +12,7 @@ if (!defined('IN_DISCUZ')) {
 
 $dir = DISCUZ_ROOT.'./data/cache/qrcode/';
 
-$_G['wechat']['setting'] = unserialize($_G['setting']['mobilewechat']);
+$_G['wechat']['setting'] = dunserialize($_G['setting']['mobilewechat']);
 
 if($_GET['access']) {
 	dheader('Expires: '.gmdate('D, d M Y H:i:s', TIMESTAMP + 86400).' GMT');
@@ -32,7 +32,7 @@ if($_GET['access']) {
 			$dir = $dir.$dir1.'/'.$dir2.'/'.$dir3.'/';
 			$file = $dir.'/qr_t'.$tid.'.jpg';
 			if(!file_exists($file) || !filesize($file)) {
-				if(!C::t('forum_thread')->fetch($tid)) {
+				if(!C::t('forum_thread')->fetch_thread($tid)) {
 					exit;
 				}
 				dmkdir($dir);

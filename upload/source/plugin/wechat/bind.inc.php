@@ -38,7 +38,7 @@ if(isset($_GET['check'])) {
 			dsetcookie('wechat_ticket', '', -1);
 			$echostr = 'done';
 		} else {
-			$echostr = '1';
+			$echostr = '1';//json_encode($authcode);
 		}
 	 } else {
 		$echostr = '-1';

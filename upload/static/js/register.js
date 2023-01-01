@@ -272,8 +272,8 @@ function checkusername(id) {
 	} else {
 		lastusername = username;
 	}
-	if(username.match(/<|"/ig)) {
-		errormessage(id, 'ชื่อที่คุณใช้มีตัวอักษรหรือคำที่ห้ามใช้');
+	if(username.match(/<|>|"|\(|\)|'/ig)) {
+		errormessage(id, 'ชื่อผู้ใช้มีตัวอักษรที่ไม่อนุญาตให้ใช้งาน');
 		return;
 	}
 	var unlen = username.replace(/[^\x00-\xff]/g, "**").length;

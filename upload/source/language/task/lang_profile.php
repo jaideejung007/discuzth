@@ -18,7 +18,7 @@ $lang = array
 
 	'profile_view' => '<strong>รายการข้อมูลส่วนตัวต่อไปนี้คุณต้องจัดการให้สมบูรณ์:</strong><br>
 		<span style="color:red;">{profiles}</span><br><br>
-		<strong>คำแนะนำในการเข้าร่วมกิจกรรมนี้: </strong>
+		<strong>คำแนะนำในการเข้าร่วมภารกิจนี้: </strong>
 		<ul>
 		<li><a href="home.php?mod=spacecp&ac=profile" target="_blank" class="xi2">เปิดไปยังหน้าต่างใหม่เพื่อตั้งค่าข้อมูลส่วนตัว</a></li>
 		<li>ในหน้าการตั้งค่าข้อมูลส่วนตัวที่จะเปิดขึ้นมาใหม่ กรุณากรอกข้อมูลส่วนตัวให้ครบถ้วน</li>

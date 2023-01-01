@@ -20,7 +20,7 @@ function getmagic($magicid, $magicnum, $weight, $totalweight, $uid, $maxmagicswe
 	if($weight + $totalweight > $maxmagicsweight && !$force) {
 		showmessage('magics_weight_range_invalid', '', array('less' => $weight + $totalweight - $maxmagicsweight));
 	} else {
-		if(C::t('common_member_magic')->count($uid, $magicid)) {
+		if(C::t('common_member_magic')->count_magic($uid, $magicid)) {
 			C::t('common_member_magic')->increase($uid, $magicid, array('num' => $magicnum), false, true);
 		} else {
 			C::t('common_member_magic')->insert(array(
@@ -34,7 +34,7 @@ function getmagic($magicid, $magicnum, $weight, $totalweight, $uid, $maxmagicswe
 
 function getmagicweight($uid, $magicarray) {
 	$totalweight = 0;
-	$query = C::t('common_member_magic')->fetch_all($uid);
+	$query = C::t('common_member_magic')->fetch_all_magic($uid);
 	foreach($query as $magic) {
 		$totalweight += $magicarray[$magic['magicid']]['weight'] * $magic['num'];
 	}
@@ -44,34 +44,21 @@ function getmagicweight($uid, $magicarray) {
 
 function getpostinfo($id, $type, $colsarray = '') {
 	global $_G;
-	$sql = $comma = '';
 	$type = in_array($type, array('tid', 'pid', 'blogid')) && !empty($type) ? $type : 'tid';
-	$cols = '*';
-
-	if(!empty($colsarray) && is_array($colsarray)) {
-		$cols = '';
-		foreach($colsarray as $val) {
-			$cols .= $comma.$val;
-			$comma = ', ';
-		}
-	}
 
 	switch($type) {
 		case 'tid':
 			$info = C::t('forum_thread')->fetch_by_tid_displayorder($id, 0);
 			break;
 		case 'pid':
-			$info = C::t('forum_post')->fetch($_G['tid'], $id);
+			$info = C::t('forum_post')->fetch_post($_G['tid'], $id);
 			if($info && $info['invisible'] == 0) {
-				$thread = C::t('forum_thread')->fetch($_G['tid']);
+				$thread = C::t('forum_thread')->fetch_thread($_G['tid']);
 				$thread['thread_author'] = $thread['author'];
 				$thread['thread_authorid'] = $thread['authorid'];
 				$thread['thread_status'] = $thread['status'];
-				unset($thread['author']);
-				unset($thread['authorid']);
-				unset($thread['dateline']);
-				unset($thread['status']);
-				$info = array_merge($info, $thread);
+				$thread['thread_replycredit'] = $thread['replycredit'];
+				$info = array_merge($thread, $info);
 			} else {
 				$info = array();
 			}
@@ -84,7 +71,7 @@ function getpostinfo($id, $type, $colsarray = '') {
 			break;
 	}
 
-	if(!$info) {
+	if(empty($info)) {
 		showmessage('magics_target_nonexistence');
 	} else {
 		return daddslashes($info, 1);
@@ -174,7 +161,7 @@ function usemagic($magicid, $totalnum, $num = 1) {
 	global $_G;
 
 	if($totalnum == $num) {
-		C::t('common_member_magic')->delete($_G['uid'], $magicid);
+		C::t('common_member_magic')->delete_magic($_G['uid'], $magicid);
 	} else {
 		C::t('common_member_magic')->increase($_G['uid'], $magicid, array('num' => -$num));
 	}
@@ -242,7 +229,7 @@ function magic_peroid($magic, $uid) {
 	if($magic['useperoid']) {
 		$dateline = 0;
 		if($magic['useperoid'] == 1) {
-			$dateline = TIMESTAMP - (TIMESTAMP + $_G['setting']['timeoffset'] * 3600) % 86400 + $_G['setting']['timeoffset'] * 3600;
+			$dateline = TIMESTAMP - (TIMESTAMP + $_G['setting']['timeoffset'] * 3600) % 86400;
 		} elseif($magic['useperoid'] == 4) {
 			$dateline = TIMESTAMP - 86400;
 		} elseif($magic['useperoid'] == 2) {

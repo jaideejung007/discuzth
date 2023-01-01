@@ -476,9 +476,9 @@ function checkFocus() {
 			return;
 		}
 		try {
-			editwin.focus();
-		} catch(e) {
 			editwin.document.body.focus();
+		} catch(e) {
+			editwin.focus();
 		}
 	} else {
 		textobj.focus();
@@ -760,7 +760,7 @@ function discuzcode(cmd, arg) {
 		return;
 	} else if(!wysiwyg && cmd == 'removeformat') {
 		var simplestrip = new Array('b', 'i', 'u');
-		var complexstrip = new Array('font', 'color', 'backcolor', 'size');
+		var complexstrip = new Array('font', 'color', 'backcolor', 'size', 'align', 'float');
 
 		var str = getSel();
 		if(str === false) {
@@ -1001,7 +1001,12 @@ function showEditorMenu(tag, params) {
 		sel = wysiwyg ? editdoc.selection.createRange() : document.selection.createRange();
 		selection = wysiwyg ? sel.htmlText : sel.text;
 	} catch(e) {
-		sel = wysiwyg ? editdoc.getSelection().getRangeAt(0) : undefined;
+		if (wysiwyg) {
+			var gSel = editdoc.getSelection();
+			if (gSel.rangeCount > 0) {
+				sel = gSel.getRangeAt(0);
+			}
+		}
 		selection = getSel();
 	}
 
@@ -1072,7 +1077,7 @@ function showEditorMenu(tag, params) {
 				str = '<p class="pbn">ใส่ที่อยู่ของไฟล์เพลง:</p><p class="pbn"><input type="text" id="' + ctrlid + '_param_1" class="px" value="" style="width: 220px;" /></p><p class="xg2 pbn">สนับสนุนไฟล์ wma mp3 ra rm และรูปแบบเพลงจากเว็บไซต์อื่น ๆ <br />ตัวอย่าง: http://server/audio.wma</p>';
 				break;
 			case 'vid':
-				str = '<p class="pbn">ใส่ที่อยู่ไฟล์วิดีโอ:</p><p class="pbn"><input type="text" value="" id="' + ctrlid + '_param_1" style="width: 220px;" class="px" /></p><p class="pbn">กว้าง: <input id="' + ctrlid + '_param_2" size="5" value="500" class="px" /> &nbsp; สูง: <input id="' + ctrlid + '_param_3" size="5" value="375" class="px" /></p><p class="xg2 pbn">สามารถใส่ลิงก์วิดีโอได้โดยตรง<br />สนับสนุนไฟล์ wmv avi rmvb mov swf flv และรูปแบบวิดีโอจากเว็บไซต์อื่นๆ<br />ตัวอย่าง: http://server/movie.wmv</p>';
+				str = '<p class="pbn">ใส่ที่อยู่ไฟล์วิดีโอ:</p><p class="pbn"><input type="text" value="" id="' + ctrlid + '_param_1" style="width: 220px;" class="px" /></p><p class="pbn">กว้าง: <input id="' + ctrlid + '_param_2" size="5" value="560" class="px" /> &nbsp; สูง: <input id="' + ctrlid + '_param_3" size="5" value="315" class="px" /></p><p class="xg2 pbn">สามารถใส่ลิงก์วิดีโอได้โดยตรง<br />สนับสนุนไฟล์ wmv avi rmvb mov swf flv และรูปแบบวิดีโอจากเว็บไซต์อื่นๆ<br />ตัวอย่าง: http://server/movie.wmv</p>'; /*jaideejung007*/
 				break;
 			case 'fls':
 				str = '<p class="pbn">ใส่ที่อยู่ไฟล์ Flash:</p><p class="pbn"><input type="text" id="' + ctrlid + '_param_1" class="px" value="" style="width: 220px;" /></p><p class="pbn">กว้าง: <input id="' + ctrlid + '_param_2" size="5" value="" class="px" /> &nbsp; สูง: <input id="' + ctrlid + '_param_3" size="5" value="" class="px" /></p><p class="xg2 pbn">สนับสนุนไฟล์ swf flv และรูปแบบไฟล์ Flash จากเว็บไซต์อื่นๆ<br />ตัวอย่าง: http://server/flash.swf</p>';
@@ -1183,6 +1188,7 @@ function showEditorMenu(tag, params) {
 				break;
 			case 'code':
 				if(wysiwyg) {
+					var isCodeTag = 1 ;
 					opentag = '<div class="blockcode"><blockquote>';
 					closetag = '</blockquote></div><br />';
 					if(!BROWSER.ie) {
@@ -1217,6 +1223,9 @@ function showEditorMenu(tag, params) {
 				}
 				str = $(ctrlid + '_param_1') && $(ctrlid + '_param_1').value ? $(ctrlid + '_param_1').value : (selection ? selection : '');
 				if(wysiwyg) {
+					if(typeof isCodeTag != 'undefined') {
+						str = str.replace(/&/g, '&amp;');
+					}
 					str = preg_replace(['<', '>'], ['&lt;', '&gt;'], str);
 					str = str.replace(/\r?\n/g, '<br />');
 				}
@@ -1437,6 +1446,9 @@ function insertText(text, movestart, moveend, select, sel) {
 			} catch(e) {
 				if(!sel) {
 					var sel = editdoc.getSelection();
+					if (sel.rangeCount == 0) {
+						sel.collapse(editdoc.body, 0);
+					}
 					var range = sel.getRangeAt(0);
 				} else {
 					var range = sel;

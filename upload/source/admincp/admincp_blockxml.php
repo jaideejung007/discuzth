@@ -30,7 +30,7 @@ if($operation == 'add') {
 			array('add', 'blockxml&operation=add', 1)
 		));
 
-		
+		/*search={"blockxml":"action=blockxml","search":"action=blockxml&operation=add"}*/
 		showtips('blockxml_tips');
 		showformheader('blockxml&operation=add');
 		showtableheader('blockxml_add');
@@ -38,11 +38,11 @@ if($operation == 'add') {
 		showsetting('blockxml_clientid', 'clientid', $blockxml['clientid'], 'text');
 		showsetting('blockxml_signtype', array('signtype', $signtypearr), $blockxml['signtype'], 'select');
 		showsetting('blockxml_xmlkey', 'key', $blockxml['key'], 'text');
-		echo '<tr><td colspan="2"><input class="checkbox" type="checkbox" name="ignoreversion" id="ignoreversion" value="1" /><label for="ignoreversion"> '.cplang('blockxml_import_ignore_version').'</label></td></tr>';
+		echo '<tr><td colspan="2" class="rowform"><input class="checkbox" type="checkbox" name="ignoreversion" id="ignoreversion" value="1" /><label for="ignoreversion"> '.cplang('blockxml_import_ignore_version').'</label></td></tr>';
 		showsubmit('addsubmit');
 		showtablefooter();
 		showformfooter();
-		
+		/*search*/
 	}
 
 } elseif($operation == 'edit' && !empty($_GET['id'])) {
@@ -116,9 +116,9 @@ if($operation == 'add') {
 		showtablerow('', array('class=""', 'class=""', 'class="td28"'), array(
 			$row['name'],
 			$row['url'],
-			"<a href=\"".ADMINSCRIPT."?action=blockxml&operation=update&id=$row[id]\">".cplang('blockxml_update')."</a>&nbsp;&nbsp;".
-			"<a href=\"".ADMINSCRIPT."?action=blockxml&operation=edit&id=$row[id]\">".cplang('edit')."</a>&nbsp;&nbsp;".
-			"<a href=\"".ADMINSCRIPT."?action=blockxml&operation=delete&id=$row[id]\">".cplang('delete')."</a>&nbsp;&nbsp;"
+			"<a href=\"".ADMINSCRIPT."?action=blockxml&operation=update&id={$row['id']}\">".cplang('blockxml_update')."</a>&nbsp;&nbsp;".
+			"<a href=\"".ADMINSCRIPT."?action=blockxml&operation=edit&id={$row['id']}\">".cplang('edit')."</a>&nbsp;&nbsp;".
+			"<a href=\"".ADMINSCRIPT."?action=blockxml&operation=delete&id={$row['id']}\">".cplang('delete')."</a>&nbsp;&nbsp;"
 		));
 	}
 	showtablefooter();

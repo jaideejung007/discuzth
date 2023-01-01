@@ -26,6 +26,7 @@ $lang = array
 	'memberlist_birthcity' => 'บ้านเกิด',
 	'memberlist_avatarstatus' => 'เฉพาะคนที่มีรูป',
 	'memberlist_emailstatus' => 'เฉพาะคนที่มีอีเมล',
+	'memberlist_secmobilestatus' => 'เฉพาะคนที่ยืนยันด้วยเบอร์มือถือ',
 	'memberlist_verifystatus' => 'เฉพาะคนที่ยืนยันแล้ว',
 	'memberlist_special_default' => 'เพื่อนเริ่มต้น',
 	'memberlist_startrow' => 'จำนวนแถวข้อมูลเริ่มต้น',

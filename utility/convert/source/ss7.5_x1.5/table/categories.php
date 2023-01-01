@@ -1,6 +1,10 @@
 <?php
 
-
+/**
+ * DiscuzX Convert
+ *
+ * $Id: categories.php 21049 2011-03-11 03:34:37Z zhangguosheng $
+ */
 
 $curprg = basename(__FILE__);
 

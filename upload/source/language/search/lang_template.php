@@ -15,8 +15,8 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array (
   'search_nomatch' => 'ขออภัย! ไม่พบการค้นหาที่ตรงกัน',
-  'search_result' => 'ผลลัพธ์: <em>ค้นหาหัวข้อที่เกี่ยวข้อง $index[num] หัวข้อ</em>',
-  'search_result_keyword' => 'ผลลัพธ์: <em>การค้นหา [<span class="emfont">$keyword</span>] หัวข้อที่เกี่ยวข้อง $index[num] หัวข้อ</em>',
+  'search_result' => 'ผลลัพธ์: <em>พบการค้นหาหัวข้อที่เกี่ยวข้อง {$index[\'num\']} รายการ</em>',
+  'search_result_keyword' => 'ผลลัพธ์: <em>พบการค้นหา “<span class="emfont">$keyword</span>” ที่เกี่ยวข้อง {$index[\'num\']} รายการ</em>',
   'a_comment' => 'ความคิดเห็น',
   'a_visit' => 'เข้าชม',
   'heat' => 'ความนิยม',
@@ -64,9 +64,9 @@ $lang = array (
   'credits' => 'เครดิต',
   'member' => 'สมาชิก',
   'public' => 'เปิด',
-  'search_group_result' => 'ผลลัพธ์: <em>การค้นหา{$_G[setting][navs][3][navname]} $groupnum รายการ</em>',
-  'search_group_result_keyword' => 'ผลลัพธ์: <em>การค้นหา{$_G[setting][navs][3][navname]} $groupnum รายการ,&nbsp;&nbsp;หัวข้อที่เกี่ยวข้อง $index[num] รายการ</em>',
-  'search_group_viewgroup' => 'เข้าชม{$_G[setting][navs][3][navname]}',
+  'search_group_result' => 'ผลลัพธ์: <em>พบการค้นหา{$_G[\'setting\'][\'navs\'][3][\'navname\']}ที่เกี่ยวข้อง $groupnum รายการ</em>',
+  'search_group_result_keyword' => 'ผลลัพธ์: <em>พบการค้นหา{$_G[\'setting\'][\'navs\'][3][\'navname\']}ที่เกี่ยวข้อง $groupnum รายการ,&nbsp;&nbsp;หัวข้อที่เกี่ยวข้อง $index[\'num\'] รายการ</em>',
+  'search_group_viewgroup' => 'ดู{$_G[\'setting\'][\'navs\'][3][\'navname\']}',
   'threads' => 'กระทู้',
   'subscribe' => 'รับข่าวสาร',
   'comment' => 'ความคิดเห็น',

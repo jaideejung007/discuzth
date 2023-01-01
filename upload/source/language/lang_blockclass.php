@@ -36,14 +36,6 @@ $lang = array(
 	'blockclass_announcement_field_endtime' => 'สิ้นสุดเวลา',
 	'blockclass_announcement_script_announcement' => 'ประกาศของเว็บไซต์',
 
-	'blockclass_html_myapp' => 'แอพพลิฯ',
-	'blockclass_myapp_field_url' => 'ลิงก์แอพพลิฯ',
-	'blockclass_myapp_field_title' => 'ชื่อแอพพลิฯ',
-	'blockclass_myapp_field_icon' => 'ไอคอนแอพพลิฯ',
-	'blockclass_myapp_field_icon_small' => 'ไอคอนขนาดเล็ก',
-	'blockclass_myapp_field_icon_abouts' => 'Application icon',
-	'blockclass_myapp_script_myapp' => 'แอพลิเคชันที่ใช้ร่วมกัน',
-
 	'blockclass_forum' => 'กระทู้',
 
 	'blockclass_forum_thread' => 'กระทู้ล่าสุด',

@@ -104,7 +104,7 @@ function followcode($message, $tid = 0, $pid = 0, $length = 0, $allowimg = true)
 		$message = preg_replace_callback("/\[url(=((https?|ftp|gopher|news|telnet|rtsp|mms|callto|bctp|thunder|qqdl|synacast){1}:\/\/|www\.|mailto:)?([^\r\n\[\"']+?))?\](.+?)\[\/url\]/is", 'followcode_callback_fparseurl_152', $message);
 	}
 	if(strpos($msglower, '[/email]') !== FALSE) {
-		$message = preg_replace_callback("/\[email(=([a-z0-9\-_.+]+)@([a-z0-9\-_]+[.][a-z0-9\-_.]+))?\](.+?)\[\/email\]/is", 'followcode_callback_fparseemail_14', $message);
+		$message = preg_replace_callback("/\[email(=([A-Za-z0-9\-_.+]+)@([A-Za-z0-9\-_]+[.][A-Za-z0-9\-_.]+))?\](.+?)\[\/email\]/is", 'followcode_callback_fparseemail_14', $message);
 	}
 
 	$nest = 0;
@@ -114,7 +114,7 @@ function followcode($message, $tid = 0, $pid = 0, $length = 0, $allowimg = true)
 	}
 
 	if(strpos($msglower, '[/media]') !== FALSE) {
-		$message = preg_replace_callback("/\[media=([\w,]+)\]\s*([^\[\<\r\n]+?)\s*\[\/media\]/is", 'followcode_callback_fparsemedia_12', $message);
+		$message = preg_replace_callback("/\[media=([\w%,]+)\]\s*([^\[\<\r\n]+?)\s*\[\/media\]/is", 'followcode_callback_fparsemedia_12', $message);
 	}
 	if(strpos($msglower, '[/audio]') !== FALSE) {
 		$message = preg_replace_callback("/\[audio(=1)*\]\s*([^\[\<\r\n]+?)\s*\[\/audio\]/is", 'followcode_callback_fparseaudio_2', $message);
@@ -132,8 +132,20 @@ function followcode($message, $tid = 0, $pid = 0, $length = 0, $allowimg = true)
 	}
 
 	if(strpos($msglower, '[/img]') !== FALSE) {
-		$message = preg_replace_callback("/\[img\]\s*([^\[\<\r\n]+?)\s*\[\/img\]/is", create_function('$matches', 'return '.intval($allowimg).' ? fparseimg($matches[1], \''.addslashes($extra).'\') : \'\';'), $message);
-		$message = preg_replace_callback("/\[img=(\d{1,4})[x|\,](\d{1,4})\]\s*([^\[\<\r\n]+?)\s*\[\/img\]/is", create_function('$matches', 'return '.intval($allowimg).' ? fparseimg($matches[3], \''.addslashes($extra).'\') : \'\';'), $message);
+		$message = preg_replace_callback(
+			"/\[img\]\s*([^\[\<\r\n]+?)\s*\[\/img\]/is",
+			function ($matches) use ($allowimg, $extra) {
+				return intval($allowimg) ? fparseimg($matches[1], ''.addslashes($extra).'') : '';
+			},
+			$message
+		);
+		$message = preg_replace_callback(
+			"/\[img=(\d{1,4})[x|\,](\d{1,4})\]\s*([^\[\<\r\n]+?)\s*\[\/img\]/is",
+			function ($matches) use($allowimg, $extra) {
+				return intval($allowimg) ? fparseimg($matches[3], ''.addslashes($extra).'') : '';
+			},
+			$message
+		);
 	}
 
 	if($tid && $pid) {
@@ -142,8 +154,8 @@ function followcode($message, $tid = 0, $pid = 0, $length = 0, $allowimg = true)
 			if(!empty($_G['delattach']) && in_array($aid, $_G['delattach'])) {
 				continue;
 			}
-			$message .= "[attach]$attach[aid][/attach]";
-			$message = preg_replace("/\[attach\]$attach[aid]\[\/attach\]/i", fparseattach($attach['aid'], $length, $extra), $message, 1);
+			$message .= "[attach]{$attach['aid']}[/attach]";
+			$message = preg_replace("/\[attach\]{$attach['aid']}\[\/attach\]/i", fparseattach($attach['aid'], $length, $extra), $message, 1);
 		}
 	}
 
@@ -360,7 +372,6 @@ function fparseflash($url) {
 		$html = bbcodeurl($url, '<img src="'.IMGDIR.'/flash.gif" alt="'.lang('space', 'follow_click_play').'" onclick="javascript:showFlash(\'flash\', \''.$url.'\', this, \''.$rimg_id.'\');" class="tn" style="cursor: pointer;" />');
 		return fcodedisp($html, 'media');
 	} else {
-		$url = STATICURL.'image/common/flvplayer.swf?&autostart=true&file='.urlencode($matches[0]);
 		return fmakeflv($url);
 	}
 }
@@ -370,7 +381,7 @@ function fparseemail($email, $text) {
 
 	$text = str_replace('\"', '"', $text);
 	$html = '';
-	if(!$email && preg_match("/\s*([a-z0-9\-_.+]+)@([a-z0-9\-_]+[.][a-z0-9\-_.]+)\s*/i", $text, $matches)) {
+	if(!$email && preg_match("/\s*([A-Za-z0-9\-_.+]+)@([A-Za-z0-9\-_]+[.][A-Za-z0-9\-_.]+)\s*/i", $text, $matches)) {
 		$email = trim($matches[0]);
 		$html = '<a href="mailto:'.$email.'">'.$email.'</a>';
 	} else {
@@ -480,7 +491,6 @@ function fparsemedia($params, $url) {
 				return fparseaudio($url);
 				break;
 			case 'flv':
-				$url = STATICURL.'image/common/flvplayer.swf?&autostart=true&file='.urlencode($url);
 				return fmakeflv($url);
 				break;
 			case 'swf':

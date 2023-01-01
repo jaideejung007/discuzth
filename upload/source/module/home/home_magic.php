@@ -1,7 +1,7 @@
 <?php
 
 /*
-	[Discuz!] (C)2001-2009 Comsenz Inc111.
+	[Discuz!] (C)2001-2099 Comsenz Inc111.
 	This is NOT a freeware, use is subject to license terms
 
 	$Id: home_magic.php 33875 2013-08-26 07:33:49Z andyzheng $
@@ -26,7 +26,7 @@ loadcache('magics');
 
 $_G['mnid'] = 'mn_common';
 $magiclist = array();
-$_G['tpp'] = 12;
+$_G['tpp'] = 16;
 $page = max(1, intval($_GET['page']));
 $action = $_GET['action'];
 $operation = $_GET['operation'];
@@ -114,6 +114,10 @@ if($action == 'shop') {
 			showmessage('magics_nonexistence');
 		}
 		$magicperm = dunserialize($magic['magicperm']);
+		$useperm = (strstr($magicperm['usergroups'], "\t{$_G['groupid']}\t") || empty($magicperm['usergroups'])) ? '1' : '0';
+		if(!$useperm) {
+			showmessage('magics_use_nopermission');
+		}        
 		$querystring = array();
 		foreach($_GET as $k => $v) {
 			$querystring[] = rawurlencode($k).'='.rawurlencode($v);
@@ -149,8 +153,6 @@ if($action == 'shop') {
 		$useperoid = magic_peroid($magic, $_G['uid']);
 
 		if(!submitcheck('operatesubmit')) {
-
-			$useperm = (strstr($magicperm['usergroups'], "\t$_G[groupid]\t") || !$magicperm['usergroups']) ? '1' : '0';
 
 			if($magicperm['targetgroups']) {
 				loadcache('usergroups');
@@ -271,7 +273,7 @@ if($action == 'shop') {
 		$magiccount = C::t('common_member_magic')->count_by_uid($_G['uid']);
 
 		$multipage = multi($magiccount, $_G['tpp'], $page, "home.php?mod=magic&action=mybox&pid=$pid$typeadd");
-		$query = C::t('common_member_magic')->fetch_all($_G['uid'], null, $start_limit, $_G['tpp']);
+		$query = C::t('common_member_magic')->fetch_all_magic($_G['uid'], null, $start_limit, $_G['tpp']);
 		foreach($query as $value) {
 			$magicids[] = $value['magicid'];
 		}
@@ -293,13 +295,13 @@ if($action == 'shop') {
 	} else {
 
 		$magicid = intval($_GET['magicid']);
-		$membermagic = C::t('common_member_magic')->fetch($_G['uid'], $magicid);
+		$membermagic = C::t('common_member_magic')->fetch_magic($_G['uid'], $magicid);
 		$magic = $membermagic +	C::t('common_magic')->fetch($magicid);
 
 		if(!$membermagic) {
 			showmessage('magics_nonexistence');
 		} elseif(!$magic['num']) {
-			C::t('common_member_magic')->delete($_G['uid'], $magic['magicid']);
+			C::t('common_member_magic')->delete_magic($_G['uid'], $magic['magicid']);
 			showmessage('magics_nonexistence');
 		}
 		$magicperm = dunserialize($magic['magicperm']);
@@ -312,13 +314,13 @@ if($action == 'shop') {
 
 		if($operation == 'use') {
 
-			$useperm = (strstr($magicperm['usergroups'], "\t$_G[groupid]\t") || empty($magicperm['usergroups'])) ? '1' : '0';
+			$useperm = (strstr($magicperm['usergroups'], "\t{$_G['groupid']}\t") || empty($magicperm['usergroups'])) ? '1' : '0';
 			if(!$useperm) {
 				showmessage('magics_use_nopermission');
 			}
 
 			if($magic['num'] <= 0) {
-				C::t('common_member_magic')->delete($_G['uid'], $magic['magicid']);
+				C::t('common_member_magic')->delete_magic($_G['uid'], $magic['magicid']);
 				showmessage('magics_nopermission');
 			}
 
@@ -450,9 +452,7 @@ if($action == 'shop') {
 			foreach($luids as $log) {
 				$luids[$log['uid']] = $log['uid'];
 			}
-			$members = C::t('common_magiclog')->fetch_all($luids);
 			foreach($logs as $log) {
-				$log['username'] = $members[$log['uid']]['username'];
 				$log['dateline'] = dgmdate($log['dateline'], 'u');
 				$log['name'] = $magicarray[$log['magicid']]['name'];
 				$loglist[] = $log;

@@ -11,12 +11,13 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-$addonsource = $_G['config']['addonsource'] ? $_G['config']['addonsource'] : ($_G['setting']['addon_source'] ? $_G['setting']['addon_source'] : array());
+$addonsource = !empty($_G['config']['addonsource']) ? $_G['config']['addonsource'] : (!empty($_G['setting']['addon_source']) ? $_G['setting']['addon_source'] : array());
 $addon = $addonsource ?
 	$_G['config']['addon'][$addonsource] :
 	array(
 		'website_url' => 'https://addon.dismall.com',
 		'download_url' => 'https://addon.dismall.com/index.php',
+		'download_url_jdz' => 'https://logs.discuzthai.com/index.php', /*jaideejung007*/
 		'download_ip' => '',
 		'check_url' => 'https://addon1.dismall.com/md5/',
 		'check_ip' => '',
@@ -24,23 +25,24 @@ $addon = $addonsource ?
 
 define('CLOUDADDONS_WEBSITE_URL', $addon['website_url']);
 define('CLOUDADDONS_DOWNLOAD_URL', $addon['download_url']);
+define('CLOUDADDONS_DOWNLOAD_URL_JDZ', $addon['download_url_jdz']); /*jaideejung007*/
 define('CLOUDADDONS_DOWNLOAD_IP', $addon['download_ip']);
 define('CLOUDADDONS_CHECK_URL', $addon['check_url']);
 define('CLOUDADDONS_CHECK_IP', $addon['check_ip']);
 
 function cloudaddons_md5($file) {
-	return dfsockopen(CLOUDADDONS_CHECK_URL.$file, 0, '', '', false, CLOUDADDONS_CHECK_IP, 60);
+	return dfsockopen(CLOUDADDONS_CHECK_URL.$file, 0, '', '', false, CLOUDADDONS_CHECK_IP, 999);
 }
 
 function cloudaddons_getuniqueid() {
 	global $_G;
 	if(CLOUDADDONS_WEBSITE_URL == 'https://addon.dismall.com') {
-		return $_G['setting']['siteuniqueid'] ? $_G['setting']['siteuniqueid'] : C::t('common_setting')->fetch('siteuniqueid');
+		return $_G['setting']['siteuniqueid'] ? $_G['setting']['siteuniqueid'] : C::t('common_setting')->fetch_setting('siteuniqueid');
 	} else {
 		if(!$_G['setting']['addon_uniqueid']) {
 			$chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
 			$addonuniqueid = $chars[date('y')%60].$chars[date('n')].$chars[date('j')].$chars[date('G')].$chars[date('i')].$chars[date('s')].substr(md5($_G['clientip'].TIMESTAMP), 0, 4).random(6);
-			C::t('common_setting')->update('addon_uniqueid', $addonuniqueid);
+			C::t('common_setting')->update_setting('addon_uniqueid', $addonuniqueid);
 			require_once libfile('function/cache');
 			updatecache('setting');
 		}
@@ -51,21 +53,32 @@ function cloudaddons_url($extra) {
 	global $_G;
 
 	require_once DISCUZ_ROOT.'./source/discuz_version.php';
-	$data = 'siteuniqueid='.rawurlencode(cloudaddons_getuniqueid()).'&siteurl='.rawurlencode($_G['siteurl']).'&sitever='.DISCUZ_VERSION.'/'.DISCUZ_RELEASE.'&sitecharset='.CHARSET.'&mysiteid='.$_G['setting']['my_siteid'].'&addonversion=1&dlip='.CLOUDADDONS_DOWNLOAD_IP;
+	$data = 'siteuniqueid='.rawurlencode(cloudaddons_getuniqueid()).'&siteurl='.rawurlencode($_G['siteurl']).'&sitever='.DISCUZ_VERSION.'/'.DISCUZ_RELEASE.'&sitecharset='.CHARSET.'&mysiteid='.$_G['setting']['my_siteid'].'&addonversion=1&dlip='.CLOUDADDONS_DOWNLOAD_IP.'&os='.PHP_OS .'&php='.PHP_VERSION.'&web='.$_SERVER['SERVER_SOFTWARE'].'&db='.helper_dbtool::dbversion().'&lang='.currentlang();
 	$param = 'data='.rawurlencode(base64_encode($data));
 	$param .= '&md5hash='.substr(md5($data.TIMESTAMP), 8, 8).'&timestamp='.TIMESTAMP;
 	return CLOUDADDONS_DOWNLOAD_URL.'?'.$param.$extra;
+}
+
+/*jaideejung007*/
+function cloudaddons_url_jdz($extra) {
+	global $_G;
+
+	require_once DISCUZ_ROOT.'./source/discuz_version.php';
+	$data = 'siteuniqueid='.rawurlencode(cloudaddons_getuniqueid()).'&siteurl='.rawurlencode($_G['siteurl']).'&sitever='.DISCUZ_VERSION.'/'.DISCUZ_RELEASE.'&sitecharset='.CHARSET.'&mysiteid='.$_G['setting']['my_siteid'].'&addonversion=1&dlip='.CLOUDADDONS_DOWNLOAD_IP.'&os='.PHP_OS .'&php='.PHP_VERSION.'&web='.$_SERVER['SERVER_SOFTWARE'].'&db='.helper_dbtool::dbversion().'&lang='.currentlang();
+	$param = 'data='.rawurlencode(base64_encode($data));
+	$param .= '&md5hash='.substr(md5($data.TIMESTAMP), 8, 8).'&timestamp='.TIMESTAMP;
+	return CLOUDADDONS_DOWNLOAD_URL_JDZ.'?'.$param.$extra;
 }
 
 function cloudaddons_check() {
 	if(!function_exists('gzuncompress')) {
 		cpmsg('cloudaddons_check_gzuncompress_error', '', 'error');
 	}
-	
+
 	if(!function_exists('curl_init') || !function_exists('curl_exec')) {
 		cpmsg('cloudaddons_check_curl_error', '', 'error');
 	}
-	
+
 	foreach(array('download', 'addonmd5') as $path) {
 		$tmpdir = DISCUZ_ROOT.'./data/'.$path.'/'.random(5);
 		$tmpfile = $tmpdir.'/index.html';
@@ -85,6 +98,11 @@ function cloudaddons_open($extra, $post = '', $timeout = 15) {
 	return dfsockopen(cloudaddons_url('&from=s').$extra, 0, $post, '', false, CLOUDADDONS_DOWNLOAD_IP, $timeout);
 }
 
+/*jaideejung007*/
+function cloudaddons_open_jdz($extra, $post = '', $timeout = 15) {
+	return dfsockopen(cloudaddons_url_jdz('&from=s').$extra, 0, $post, '', false, CLOUDADDONS_DOWNLOAD_IP, $timeout);
+}
+
 function cloudaddons_pluginlogo_url($id) {
 	return CLOUDADDONS_WEBSITE_URL.'?_'.$id;
 }
@@ -92,21 +110,21 @@ function cloudaddons_pluginlogo_url($id) {
 function cloudaddons_installlog($addonid) {
 	$array = cloudaddons_getmd5($addonid);
 	if($array['RevisionID']) {
-		cloudaddons_open('&mod=app&ac=installlog&rid='.$array['RevisionID']);
+/*jaideejung007*/		/*cloudaddons_open('&mod=app&ac=installlog&rid='.$array['RevisionID']);*/
 	}
 }
 
 function cloudaddons_downloadlog($addonid) {
 	$array = cloudaddons_getmd5($addonid);
 	if($array['RevisionID']) {
-		cloudaddons_open('&mod=app&ac=downloadlog&rid='.$array['RevisionID']);
+/*jaideejung007*/		/*cloudaddons_open('&mod=app&ac=downloadlog&rid='.$array['RevisionID']);*/
 	}
 }
 
 function cloudaddons_faillog($rid, $type) {
 	$rid = intval($rid);
 	$type = intval($type);
-	cloudaddons_open('&mod=app&ac=faillog&rid='.$rid.'&type='.$type.'&serverinfo='.urlencode($_SERVER['SERVER_SOFTWARE']));
+/*jaideejung007*/	/*cloudaddons_open('&mod=app&ac=faillog&rid='.$rid.'&type='.$type.'&serverinfo='.urlencode($_SERVER['SERVER_SOFTWARE']));*/
 }
 
 function cloudaddons_removelog($rid) {
@@ -125,7 +143,9 @@ function cloudaddons_upgradecheck($addonids) {
 	$post = array();
 	foreach($addonids as $addonid) {
 		$array = cloudaddons_getmd5($addonid);
-		$post[] = 'rid['.$addonid.']='.$array['RevisionID'].'&sn['.$addonid.']='.$array['SN'].'&rd['.$addonid.']='.$array['RevisionDateline'];
+		if($array) {
+			$post[] = 'rid['.$addonid.']='.$array['RevisionID'].'&sn['.$addonid.']='.$array['SN'].'&rd['.$addonid.']='.$array['RevisionDateline'];
+		}
 	}
 	return cloudaddons_open('&mod=app&ac=validator&ver=2', implode('&', $post), 15);
 }
@@ -158,11 +178,12 @@ function cloudaddons_savemd5($md5file, $end, $md5) {
 	global $_G;
 	parse_str($end, $r);
 	require_once libfile('class/xml');
-	$xml = implode('', @file(DISCUZ_ROOT.'./data/addonmd5/'.$md5file.'.xml'));
-	$array = xml2array($xml);
-	$ridexists = false;
-	$data = array();
-	if($array['RevisionID']) {
+	$data = $array = array();
+	if(file_exists(DISCUZ_ROOT.'./data/addonmd5/'.$md5file.'.xml')) {
+		$xml = implode('', @file(DISCUZ_ROOT.'./data/addonmd5/'.$md5file.'.xml'));
+		$array = xml2array($xml);
+	}
+	if(!empty($array['RevisionID'])) {
 		foreach(explode(',', $array['RevisionID']) as $i => $rid) {
 			$sns = explode(',', $array['SN']);
 			$datalines = explode(',', $array['RevisionDateline']);
@@ -186,14 +207,10 @@ function cloudaddons_savemd5($md5file, $end, $md5) {
 	$array['Data'] = $array['Data'] ? array_merge($array['Data'], $md5) : $md5;
 	if(!isset($_G['siteftp'])) {
 		dmkdir(DISCUZ_ROOT.'./data/addonmd5/', 0777, false);
-		$fp = fopen(DISCUZ_ROOT.'./data/addonmd5/'.$md5file.'.xml', 'w');
-		fwrite($fp, array2xml($array));
-		fclose($fp);
+		file_put_contents(DISCUZ_ROOT.'./data/addonmd5/'.$md5file.'.xml', array2xml($array));
 	} else {
 		$localfile = DISCUZ_ROOT.'./data/'.random(5);
-		$fp = fopen($localfile, 'w');
-		fwrite($fp, array2xml($array));
-		fclose($fp);
+		file_put_contents($localfile, array2xml($array));
 		dmkdir(DISCUZ_ROOT.'./data/addonmd5/', 0777, false);
 		siteftp_upload($localfile, 'data/addonmd5/'.$md5file.'.xml');
 		@unlink($localfile);
@@ -241,11 +258,11 @@ function cloudaddons_copytree($from, $to) {
 			$readfile = $from.'/'.$file;
 			$writefile = $to.'/'.$file;
 			if(is_file($readfile)) {
-				if(!in_array($readfile, $_G['treeop']['copy'])) {
+				if(!is_array($_G['treeop']['copy']) || !in_array($readfile, $_G['treeop']['copy'])) {
 					continue;
 				}
 				if(!isset($_G['siteftp'])) {
-					$content = -1;
+					$content = false;
 					if($fp = @fopen($readfile, 'r')) {
 						$startTime = microtime();
 						do {
@@ -258,11 +275,15 @@ function cloudaddons_copytree($from, $to) {
 						if(!$canRead) {
 							cpmsg('cloudaddons_file_read_error', '', 'error');
 						}
-						$content = fread($fp, filesize($readfile));
-						flock($fp, LOCK_UN);
-						fclose($fp);
+						if(filesize($readfile) == 0) {
+							$content = '';
+						} else {
+							$content = fread($fp, filesize($readfile));
+							flock($fp, LOCK_UN);
+							fclose($fp);
+						}
 					}
-					if($content < 0) {
+					if($content === false) {
 						cpmsg('cloudaddons_file_read_error', '', 'error');
 					}
 					dmkdir(dirname($writefile), 0777, false);
@@ -397,10 +418,7 @@ function cloudaddons_clear($type, $id) {
 		$filedeleted = false;
 		while($f = $d->read()) {
 			if(preg_match('/^discuz\_'.$dirs[$type][0].'\_'.$id.'(\_\w+)?\.xml$/', $f)) {
-/*jaideejung007*/				/*@unlink($entrydir.'/'.$f);*/
 				if($type == 'plugin' && !$filedeleted) {
-/*jaideejung007*/					/*@unlink($entrydir.'/'.$f);*/
-					$importtxt = @implode('', file($entrydir.'/'.$f));
 					$pluginarray = getimportdata('Discuz! Plugin');
 					if($pluginarray['installfile']) {
 /*jaideejung007*/						/*@unlink($entrydir.'/'.$pluginarray['installfile']);*/
@@ -410,6 +428,7 @@ function cloudaddons_clear($type, $id) {
 					}
 					$filedeleted = true;
 				}
+/*jaideejung007*/				/*@unlink($entrydir.'/'.$f);*/
 			}
 		}
 	}
@@ -421,7 +440,7 @@ function versioncompatible($versions) {
 	$versions = strip_tags($versions);
 	foreach(explode(',', $versions) as $version) {
 		list($version) = explode(' ', trim($version));
-		if($version && ($currentversion === $version || $version === 'X3' || $version === 'X3.1' || $version === 'X3.2')) {
+		if($version && ($currentversion === $version)) {
 			return true;
 		}
 	}

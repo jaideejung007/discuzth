@@ -1,6 +1,10 @@
 <?php
 
-
+/**
+ * DiscuzX Convert
+ *
+ * $Id: common_member_log.php 15720 2010-08-25 23:56:08Z monkey $
+ */
 
 $curprg = basename(__FILE__);
 

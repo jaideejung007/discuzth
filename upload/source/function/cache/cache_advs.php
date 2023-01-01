@@ -36,7 +36,7 @@ function build_cache_advs() {
 			$advclass = 'adv_'.$adv['type'];
 		}
 		$advclass = new $advclass;
-		$adv['parameters'] = unserialize($adv['parameters']);
+		$adv['parameters'] = dunserialize($adv['parameters']);
 		unset($adv['parameters']['style'], $adv['parameters']['html'], $adv['parameters']['displayorder']);
 		$data['parameters'][$adv['type']][$adv['advid']] = $adv['parameters'];
 		if($adv['parameters']['extra']) {
@@ -59,7 +59,7 @@ function updateadvtype() {
 		$advtype[$row['type']] = 1;
 	}
 	$_G['setting']['advtype'] = $advtype = array_keys($advtype);
-	C::t('common_setting')->update('advtype', $advtype);
+	C::t('common_setting')->update_setting('advtype', $advtype);
 }
 
 ?>

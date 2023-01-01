@@ -75,10 +75,10 @@ function album_update_pic($albumid, $picid=0) {
 	}
 	require_once libfile('class/image');
 	$image = new image();
-	if($image->Thumb($picsource, 'album/'.$picdir.$albumid.'.jpg', 120, 120, 2)) {
+	if($image->Thumb($picsource, 'album/'.$picdir.$albumid.'.jpg', 300, 300, 2)) {
 		$setarr['pic'] = $picdir.$albumid.'.jpg';
 		$setarr['picflag'] = 1;
-		if(getglobal('setting/ftp/on')) {
+		if(ftpperm('jpg', filesize($_G['setting']['attachdir'].'album/'.$picdir.$albumid.'.jpg'))) {
 			if(ftpcmd('upload', 'album/'.$picdir.$albumid.'.jpg')) {
 				$setarr['picflag'] = 2;
 				@unlink($_G['setting']['attachdir'].'album/'.$picdir.$albumid.'.jpg');
@@ -138,6 +138,10 @@ function pic_save($FILE, $albumid, $title, $iswatermark = true, $catid = 0) {
 
 		if($_G['setting']['need_avatar'] && empty($_G['member']['avatarstatus'])) {
 			return lang('message', 'no_privilege_avatar');
+		}
+
+		if($_G['setting']['need_secmobile'] && empty($_G['member']['secmobilestatus'])) {
+			return lang('message', 'no_privilege_secmobile');
 		}
 
 		if($_G['setting']['need_email'] && empty($_G['member']['emailstatus'])) {
@@ -202,7 +206,7 @@ function pic_save($FILE, $albumid, $title, $iswatermark = true, $catid = 0) {
 	$pic_remote = 0;
 	$album_picflag = 1;
 
-	if(getglobal('setting/ftp/on')) {
+	if(ftpperm($upload->attach['ext'], $upload->attach['size'])) {
 		$ftpresult_thumb = 0;
 		$ftpresult = ftpcmd('upload', 'album/'.$upload->attach['attachment']);
 		if($ftpresult) {
@@ -224,7 +228,10 @@ function pic_save($FILE, $albumid, $title, $iswatermark = true, $catid = 0) {
 	}
 
 	$title = getstr($title, 200);
-	$title = censor($title);
+	$title = censor($title, NULL, TRUE, FALSE);
+	if(is_array($title)) {
+		return lang('message', 'word_banned');
+	}
 	if(censormod($title) || $_G['group']['allowuploadmod']) {
 		$pic_status = 1;
 	} else {
@@ -316,7 +323,7 @@ function stream_save($strdata, $albumid = 0, $fileext = 'jpg', $name='', $title=
 			$pic_remote = 0;
 			$album_picflag = 1;
 
-			if(getglobal('setting/ftp/on')) {
+			if(ftpperm($fileext, filesize($_G['setting']['attachdir'].'album/'.$filepath))) {
 				$ftpresult_thumb = 0;
 				$ftpresult = ftpcmd('upload', 'album/'.$filepath);
 				if($ftpresult) {
@@ -339,7 +346,10 @@ function stream_save($strdata, $albumid = 0, $fileext = 'jpg', $name='', $title=
 
 			$filename = $name ? $name : substr(strrchr($filepath, '/'), 1);
 			$title = getstr($title, 200);
-			$title = censor($title);
+			$title = censor($title, NULL, TRUE, FALSE);
+			if(is_array($title)) {
+				return lang('message', 'word_banned');
+			}
 			if(censormod($title) || $_G['group']['allowuploadmod']) {
 				$pic_status = 1;
 			} else {
@@ -499,7 +509,7 @@ function hot_update($idtype, $id, $hotuser) {
 		default:
 			return false;
 	}
-	if($feed = C::t('home_feed')->fetch($id, $idtype)) {
+	if($feed = C::t('home_feed')->fetch_feed($id, $idtype)) {
 		if(empty($feed['friend'])) {
 			C::t('home_feed')->update_hot_by_feedid($feed['feedid'], 1);
 		}
@@ -544,62 +554,6 @@ function ckrealname($return=0) {
 	return $result;
 }
 
-function ckvideophoto($tospace=array(), $return=0) {
-	global $_G;
-
-	if($_G['adminid'] != 1 && empty($_G['setting']['verify'][7]['available']) || $_G['member']['videophotostatus']) {
-		return true;
-	}
-
-	space_merge($tospace, 'field_home');
-
-	$result = true;
-	if(empty($tospace) || empty($tospace['privacy']['view']['videoviewphoto'])) {
-		if(!checkperm('videophotoignore') && empty($_G['setting']['verify'][7]['viewvideophoto']) && !checkperm('allowviewvideophoto')) {
-			$result = false;
-		}
-	} elseif ($tospace['privacy']['view']['videoviewphoto'] == 2) {
-		$result = false;
-	}
-	if($return) {
-		return $result;
-	} elseif(!$result) {
-		showmessage('no_privilege_videophoto', '', array(), array('return' => true));
-	}
-}
-
-function getvideophoto($filename) {
-	$dir1 = substr($filename, 0, 1);
-	$dir2 = substr($filename, 1, 1);
-	return 'data/avatar/'.$dir1.'/'.$dir2.'/'.$filename.".jpg";
-}
-
-function videophoto_upload($FILE, $uid) {
-	if($FILE['size']) {
-		$newfilename = md5(substr($_G['timestamp'], 0, 7).$uid);
-		$dir1 = substr($newfilename, 0, 1);
-		$dir2 = substr($newfilename, 1, 1);
-		if(!is_dir(DISCUZ_ROOT.'./data/avatar/'.$dir1)) {
-			if(!mkdir(DISCUZ_ROOT.'./data/avatar/'.$dir1)) return '';
-		}
-		if(!is_dir(DISCUZ_ROOT.'./data/avatar/'.$dir1.'/'.$dir2)) {
-			if(!mkdir(DISCUZ_ROOT.'./data/avatar/'.$dir1.'/'.$dir2)) return '';
-		}
-		$new_name = DISCUZ_ROOT.'./'.getvideophoto($newfilename);
-		$tmp_name = $FILE['tmp_name'];
-		if(@copy($tmp_name, $new_name)) {
-			@unlink($tmp_name);
-		} elseif((function_exists('move_uploaded_file') && @move_uploaded_file($tmp_name, $new_name))) {
-		} elseif(@rename($tmp_name, $new_name)) {
-		} else {
-			return '';
-		}
-		return $newfilename;
-	} else {
-		return '';
-	}
-}
-
 function isblacklist($touid) {
 	global $_G;
 
@@ -610,26 +564,36 @@ function emailcheck_send($uid, $email) {
 	global $_G;
 
 	if($uid && $email) {
-		// 用户论坛字段表内authstr字段保存token和时间戳，实现邮件链接不可重复使用
+		$memberauthstr = C::t('common_member_field_forum')->fetch($uid);
+		if(!empty($memberauthstr['authstr'])) {
+			list($dateline) = explode("\t", $memberauthstr['authstr']);
+			$interval = $_G['setting']['mailinterval'] > 0 ? (int)$_G['setting']['mailinterval'] : 300;
+			if($dateline && $dateline > TIMESTAMP - $interval) {
+				return false;
+			}
+		}
 		$timestamp = $_G['timestamp'];
 		$idstring = substr(md5($email), 0, 6);
 		C::t('common_member_field_forum')->update($uid, array('authstr' => "$timestamp\t3\t$idstring"));
 
 		$hash = authcode("$uid\t$email\t$timestamp", 'ENCODE', md5(substr(md5($_G['config']['security']['authkey']), 0, 16)));
 		$verifyurl = $_G['setting']['securesiteurl'].'home.php?mod=misc&amp;ac=emailcheck&amp;hash='.urlencode($hash);
-		$mailsubject = lang('email', 'email_verify_subject');
-		$mailmessage = lang('email', 'email_verify_message', array(
-			'username' => $_G['member']['username'],
-			'bbname' => $_G['setting']['bbname'],
-			'siteurl' => $_G['setting']['securesiteurl'],
-			'url' => $verifyurl
-		));
+		$mailmessage = array(
+			'tpl' => 'email_verify',
+			'var' => array(
+				'username' => $_G['member']['username'],
+				'bbname' => $_G['setting']['bbname'],
+				'siteurl' => $_G['setting']['securesiteurl'],
+				'url' => $verifyurl
+			)
+		);
 
 		require_once libfile('function/mail');
-		if(!sendmail($email, $mailsubject, $mailmessage)) {
+		if(!sendmail($email, $mailmessage)) {
 			runlog('sendmail', "$email sendmail failed.");
 		}
 	}
+	return true;
 }
 
 function picurl_get($picurl, $maxlenth='200') {

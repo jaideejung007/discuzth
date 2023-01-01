@@ -15,17 +15,17 @@ include_once 'forum.php';
 
 class mobile_api {
 
-	function common() {
+	public static function common() {
 
 	}
 
-	function output() {
-		global $_G, $thread;
+	public static function output() {
+		global $_G, $thread, $postlist, $threadsortshow;
 		if ($GLOBALS['hiddenreplies']) {
-			foreach ($GLOBALS['postlist'] as $k => $post) {
+			foreach ($postlist as $k => $post) {
 				if (!$post['first'] && $_G['uid'] != $post['authorid'] && $_G['uid'] != $_G['forum_thread']['authorid'] && !$_G['forum']['ismoderator']) {
-					$GLOBALS['postlist'][$k]['message'] = lang('plugin/mobile', 'mobile_post_author_visible');
-					$GLOBALS['postlist'][$k]['attachments'] = array();
+					$postlist[$k]['message'] = lang('plugin/mobile', 'mobile_post_author_visible');
+					$postlist[$k]['attachments'] = array();
 				}
 			}
 		}
@@ -34,7 +34,7 @@ class mobile_api {
 		$_G['thread']['ordertype'] = $GLOBALS['ordertype'];
 		$_G['thread']['recommend'] = $_G['uid'] && C::t('forum_memberrecommend')->fetch_by_recommenduid_tid($_G['uid'], $_G['tid']) ? 1 : 0;
 		if (!empty($_GET['viewpid'])) {
-			$GLOBALS['postlist'][$_GET['viewpid']] = $GLOBALS['post'];
+			$postlist[$_GET['viewpid']] = $GLOBALS['post'];
 		}
 		if ($GLOBALS['rushreply']) {
 			$_G['thread']['rushreply'] = $GLOBALS['rushreply'];
@@ -51,7 +51,7 @@ class mobile_api {
 		$variable = array(
 		    'thread' => $_G['thread'],
 		    'fid' => $_G['fid'],
-		    'postlist' => array_values(mobile_core::getvalues($GLOBALS['postlist'], array('/^\d+$/'), array('pid', 'tid', 'author', 'first', 'dbdateline', 'dateline', 'username', 'adminid', 'memberstatus', 'authorid', 'username', 'groupid', 'memberstatus', 'status', 'message', 'number', 'memberstatus', 'groupid', 'attachment', 'attachments', 'attachlist', 'imagelist', 'anonymous', 'position', 'rewardfloor', 'replycredit'))),
+		    'postlist' => array_values(mobile_core::getvalues($postlist, array('/^\d+$/'), array('pid', 'tid', 'author', 'first', 'dbdateline', 'dateline', 'username', 'adminid', 'memberstatus', 'authorid', 'username', 'groupid', 'memberstatus', 'status', 'message', 'number', 'memberstatus', 'groupid', 'attachment', 'attachments', 'attachlist', 'imagelist', 'anonymous', 'position', 'rewardfloor', 'replycredit'))),
 		    'allowpostcomment' => $_G['setting']['allowpostcomment'],
 		    'comments' => $GLOBALS['comments'],
 		    'commentcount' => $GLOBALS['commentcount'],
@@ -62,20 +62,20 @@ class mobile_api {
 		    'cache_custominfo_postno' => $_G['cache']['custominfo']['postno'],
 		);
 
-		if (!empty($GLOBALS['threadsortshow'])) {
+		if (!empty($threadsortshow)) {
 			$optionlist = array();
-			foreach ($GLOBALS['threadsortshow']['optionlist'] AS $key => $val) {
+			foreach ($threadsortshow['optionlist'] AS $key => $val) {
 				$val['optionid'] = $key;
 				$optionlist[] = $val;
 			}
 			if (!empty($optionlist)) {
-				$GLOBALS['threadsortshow']['optionlist'] = $optionlist;
-				$GLOBALS['threadsortshow']['threadsortname'] = $_G['forum']['threadsorts']['types'][$thread['sortid']];
+				$threadsortshow['optionlist'] = $optionlist;
+				$threadsortshow['threadsortname'] = $_G['forum']['threadsorts']['types'][$thread['sortid']];
 			}
 		}
-		$threadsortshow = mobile_core::getvalues($GLOBALS['threadsortshow'], array('/^(?!typetemplate).*$/'));
-		if (!empty($threadsortshow)) {
-			$variable['threadsortshow'] = $threadsortshow;
+		$threadsortshowvar = mobile_core::getvalues($threadsortshow, array('/^(?!typetemplate).*$/'));
+		if (!empty($threadsortshowvar)) {
+			$variable['threadsortshow'] = $threadsortshowvar;
 		}
 		foreach ($variable['postlist'] as $k => $post) {
 			if (!$_G['forum']['ismoderator'] && $_G['setting']['bannedmessages'] & 1 && (($post['authorid'] && !$post['username']) || ($_G['thread']['digest'] == 0 && ($post['groupid'] == 4 || $post['groupid'] == 5 || $post['memberstatus'] == '-1')))) {
@@ -131,6 +131,29 @@ class mobile_api {
 			$variable['postlist'][$k]['message'] = preg_replace('/(&nbsp;){2,}/', '', $variable['postlist'][$k]['message']);
 			$variable['postlist'][$k]['dateline'] = strip_tags($post['dateline']);
 			$variable['postlist'][$k]['groupiconid'] = mobile_core::usergroupIconId($post['groupid']);
+			if($firstpost['first'] && strpos($firstpost['message'],'[/hide]') !== FALSE ){
+				$authorreplyexist = false;
+				if(!$_G['forum']['ismoderator']) {
+				if($_G['uid']) {
+					$_post = C::t('forum_post')->fetch('tid:'.$_G['tid'], $pid);
+						$authorreplyexist = $_post['tid'] == $_G['tid'] ? C::t('forum_post')->fetch_pid_by_tid_authorid($_G['tid'], $_G['uid']) : false;
+					}
+				} else {
+					$authorreplyexist = true;
+				}
+				if(!$authorreplyexist){
+					$aids = array();
+					preg_match_all("/\[hide(.*?)?\]\s*(.*?)\s*\[\/hide\]/is",$firstpost['message'],$matches);
+					foreach ($matches[2] as $match){
+						preg_match_all("/\[attach\](\d+)\[\/attach\]/i",$match,$matchaids);
+						$aids = array_merge($aids,$matchaids[1]);
+					}
+					foreach($aids as $aid){
+						unset($variable['postlist'][$k]['attachments'][$aid]);
+					}
+					$variable['postlist'][$k]['attachlist'] = array_diff($variable['postlist'][$k]['attachlist'],$aids);
+				}
+			}
 		}
 
 		if (!empty($GLOBALS['polloptions'])) {
@@ -191,7 +214,7 @@ class mobile_api {
 		mobile_core::result(mobile_core::variable($variable));
 	}
 
-	function _findimg($string) {
+	static function _findimg($string) {
 		return preg_replace_callback('/(<img src=\")(.+?)(\".*?\>)/is', array(__CLASS__, 'findimg_callback_parseimg_123'), $string);
 	}
 
@@ -199,7 +222,7 @@ class mobile_api {
 		return mobile_api::_parseimg($matches[1], $matches[2], $matches[3]);
 	}
 
-	function _parseimg($before, $img, $after) {
+	static function _parseimg($before, $img, $after) {
 		$before = stripslashes($before);
 		$after = stripslashes($after);
 		if (!in_array(strtolower(substr($img, 0, 6)), array('http:/', 'https:', 'ftp://'))) {

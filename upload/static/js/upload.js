@@ -1124,15 +1124,15 @@ function fileQueueError(file, errorCode, message) {
 
 		switch (errorCode) {
 			case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
-				progress.setStatus("ไฟล์มีขนาดใหญ่เกินไป.");
+				progress.setStatus("ไฟล์มีขนาดใหญ่เกินไป");
 				this.debug("Error Code: File too big, File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
 				break;
 			case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
-				progress.setStatus("ไฟล์มีขนาด 0 ไบต์ ไม่สามารถอัปโหลด.");
+				progress.setStatus("ไฟล์มีขนาด 0 ไบต์ ไม่สามารถอัปโหลด");
 				this.debug("Error Code: Zero byte file, File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
 				break;
 			case SWFUpload.QUEUE_ERROR.INVALID_FILETYPE:
-				progress.setStatus("ห้ามอัปโหลดไฟล์ประเภทนี้.");
+				progress.setStatus("ห้ามอัปโหลดไฟล์ประเภทนี้");
 				this.debug("Error Code: Invalid File Type, File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
 				break;
 			case SWFUpload.QUEUE_ERROR.QUEUE_LIMIT_EXCEEDED:
@@ -1216,7 +1216,7 @@ function uploadProgress(file, bytesLoaded, bytesTotal) {
 		var percent = Math.ceil((bytesLoaded / bytesTotal) * 100);
 
 		var progress = new FileProgress(file, this.customSettings.progressTarget);
-		progress.setStatus("กำลังอัปโหลด ("+percent+"%)...");
+		progress.setStatus("กำลังอัปโหลด("+percent+"%)...");
 
 	} catch (ex) {
 		this.debug(ex);
@@ -1273,7 +1273,7 @@ function uploadSuccess(file, serverData) {
 						progress.setStatus(STATUSMSG[aid]);
 						showDialog(STATUSMSG[aid], 'notice', null, null, 0, null, null, null, null, sdCloseTime);
 					} else {
-						progress.setStatus("ยกเลิกอัปโหลด");
+						progress.setStatus("ยกเลิกการอัปโหลด");
 					}
 					this.cancelUpload(file.id);
 					progress.setCancelled();

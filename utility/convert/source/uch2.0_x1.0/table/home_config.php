@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * DiscuzX Convert
+ *
+ * $Id: home_config.php 11124 2010-05-24 09:51:29Z zhengqingpeng $
+ */
 
 $curprg = basename(__FILE__);
 

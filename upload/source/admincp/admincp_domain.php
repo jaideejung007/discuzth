@@ -31,11 +31,12 @@ if($operation == 'app') {
 			'mobile' => $lang['mobile'],
 			'default' => $lang['default']
 		);
-		
+		/*search={"setting_domain":"action=domain","setting_domain_app":"domain&operation=app"}*/
 		showtips('setting_domain_app_tips');
-		
+		/*search*/
 
 		showformheader('domain&operation=app');
+		showboxheader();
 		showtableheader();
 		showsubtitle(array('name', 'setting_domain_app_domain'));
 		$app = array();
@@ -52,6 +53,7 @@ if($operation == 'app') {
 		}
 		showsubmit('submit');
 		showtablefooter();
+		showboxfooter();
 		showhiddenfields($hiddenarr);
 		showformfooter();
 	} else {
@@ -59,7 +61,8 @@ if($operation == 'app') {
 		$_G['setting']['domain']['app'] = array();
 		$appset = false;
 		foreach($_GET['appnew'] as $appkey => $domain) {
-			if(preg_match('/^((http|https|ftp):\/\/|\.)|(\/|\.)$/i', $domain)) {
+			$domain = strtolower($domain);
+			if(!empty($domain) && !preg_match('/^((?=[a-z0-9-]{1,63}\.)(xn--)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}$/', $domain)) {
 				cpmsg('setting_domain_http_error', '', 'error');
 			}
 			if(!empty($domain) && in_array($domain, $_G['setting']['domain']['app'])) {
@@ -78,7 +81,7 @@ if($operation == 'app') {
 			C::t('common_nav')->update_by_identifier('mobile', array('url' => (!$_GET['appnew']['mobile'] ? 'forum.php?mobile=yes' : $_G['scheme'].'://'.$_GET['appnew']['mobile'])));
 		}
 
-		C::t('common_setting')->update('domain',$_G['setting']['domain']);
+		C::t('common_setting')->update_setting('domain',$_G['setting']['domain']);
 		updatecache('setting');
 		cpmsg('setting_update_succeed', 'action=domain&operation=app', 'succeed');
 	}
@@ -93,10 +96,11 @@ if($operation == 'app') {
 		'channel' => $lang['channel'],
 	);
 	if(!submitcheck('submit')) {
-		
+		/*search={"setting_domain":"action=domain","setting_domain_root":"domain&operation=root"}*/
 		showtips('setting_domain_root_tips');
-		
+		/*search*/
 		showformheader('domain&operation=root');
+		showboxheader();
 		showtableheader();
 		showsubtitle(array('name', 'setting_domain_app_domain'));
 		$hiddenarr = array();
@@ -113,13 +117,15 @@ if($operation == 'app') {
 		}
 		showsubmit('submit');
 		showtablefooter();
+		showboxfooter();
 		showhiddenfields($hiddenarr);
 		showformfooter();
 	} else {
 		$oldroot = $_G['setting']['domain']['root'];
 		$_G['setting']['domain']['root'] = array();
 		foreach($_GET['domainnew'] as $idtype => $domain) {
-			if(preg_match('/^((http|https|ftp):\/\/|\.)|(\/|\.)$/i', $domain)) {
+			$domain = strtolower($domain);
+			if(!empty($domain) && !preg_match('/^((?=[a-z0-9-]{1,63}\.)(xn--)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}$/', $domain)) {
 				cpmsg('setting_domain_http_error', '', 'error');
 			}
 			if($_G['setting']['domain']['root'][$idtype] != $domain) {
@@ -129,14 +135,14 @@ if($operation == 'app') {
 			$_G['setting']['domain']['root'][$idtype] = $domain;
 
 		}
-		C::t('common_setting')->update('domain', $_G['setting']['domain']);
+		C::t('common_setting')->update_setting('domain', $_G['setting']['domain']);
 		updatecache('setting');
 		cpmsg('setting_update_succeed', 'action=domain&operation=root', 'succeed');
 	}
 } else {
 	if(!submitcheck('domainsubmit')) {
 
-		
+		/*search={"setting_domain":"action=domain","setting_domain_base":"domain&operation=base"}*/
 		showtips('setting_domain_base_tips');
 		showformheader("domain");
 		showtableheader();
@@ -154,7 +160,7 @@ if($operation == 'app') {
 		showsubmit('domainsubmit');
 		showtablefooter();
 		showformfooter();
-		
+		/*search*/
 	} else {
 
 		$settings = $_GET['settingnew'];

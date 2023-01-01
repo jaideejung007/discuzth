@@ -10,7 +10,6 @@ if (!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-
 class memory_setting_array implements ArrayAccess {
 	private $can_lazy = false;
 	public $array = Array();
@@ -25,18 +24,18 @@ class memory_setting_array implements ArrayAccess {
 			'version', 'showusercard', 'disallowfloat', 'creditnotice', 'creditnames', 'jspath', 'csspath',
 			'portalstatus', 'navs', 'groupstatus', 'feedstatus', 'archiver', 'switchwidthauto', 'shortcut', 'topnavs',
 			'mynavs', 'showfjump', 'advtype', 'navmns', 'navdms', 'navmn', 'navlogos', 'avatarmethod', 'ucenterurl',
-			'connect', 'taskon', 'menunavs', 'subnavs', 'search', 'blogstatus', 'albumstatus', 'srchhotkeywords',
+			'connect', 'taskstatus', 'menunavs', 'subnavs', 'search', 'blogstatus', 'albumstatus', 'srchhotkeywords',
 			'forumallowside', 'focus', 'site_qq', 'footernavs', 'siteurl', 'sitename', 'icp', 'statcode', 'debug',
-			'boardlicensed', 'followstatus', 'disableipnotice', 'rewritestatus', 'ftp', 'visitbanperiods',
-			'cacheindexlife', 'whosonline_contract', 'regname', 'reglinkname', 'pwdsafety', 'autoidselect',
-			'uidlogin', 'forumstatus', 'friendstatus', 'guidestatus', 'favoritestatus', 'mps', 'mpsid'
+			'boardlicensed', 'followstatus', 'disableipnotice', 'rewritestatus', 'ftp', 'visitbanperiods', 'dynavt',
+			'cacheindexlife', 'whosonline_contract', 'regname', 'reglinkname', 'autoidselect', 'avatarurl', 'avatarpath',
+			'uidlogin', 'secmobilelogin', 'forumstatus', 'friendstatus', 'guidestatus', 'favoritestatus', 'mps', 'mpsid'
 		),
 		'forumdisplay_fields' => array(
 			'group_admingroupids', 'followforumid', 'targetblank', 'allowmoderatingthread', 'threadmaxpages',
 			'globalstick', 'recommendthread', 'heatthread', 'verify', 'visitedforums', 'fastpost', 'seccodedata',
 			'secqaa', 'creditstransextra', 'extcredits', 'threadplugins', 'leftsidewidth', 'forumseparator',
 			'forumdisplaythreadpreview', 'closeforumorderby', 'minpostsize', 'maxpostsize', 'fastsmilies', 'smcols',
-			'allowreplybg', 'newbiespan'
+			'allowreplybg', 'newbiespan', 'minpostsize_mobile', 'minsubjectsize', 'maxsubjectsize',
 		),
 		'viewthread_fields' => array(
 			'optimizeviews', 'antitheft', 'cachethreadlife', 'close_leftinfo', 'close_leftinfo_userctrl',
@@ -45,18 +44,18 @@ class memory_setting_array implements ArrayAccess {
 			'ratelogrecord', 'commentnumber', 'sigviewcond', 'lazyload', 'allowattachurl', 'relatedlinkstatus',
 			'numbercard', 'repliesrank', 'vtonlinestatus', 'alloweditpost', 'zoomstatus', 'imagemaxwidth',
 			'bannedmessages', 'authoronleft', 'profilenode', 'magicstatus', 'starthreshold', 'allowfastreply',
-			'sharestatus', 'globalsightml', 'need_avatar', 'need_email', 'need_friendnum'
+			'sharestatus', 'globalsightml', 'need_avatar', 'need_secmobile', 'need_email', 'need_friendnum'
 		)
 	);
 
 	public function __construct()
 	{
  		$this->can_lazy = C::memory()->goteval && C::memory()->gothash;
-		if (!$this->can_lazy) { 
+		if (!$this->can_lazy) {
 			$this->array = memory('get', self::SETTING_KEY);
 			foreach ($this->array as $key => $value) {
-				if ($value) $this->array[$key] = unserialize($value);
-			}			
+				if ($value) $this->array[$key] = dunserialize($value);
+			}
 		}
 	}
 
@@ -81,7 +80,7 @@ class memory_setting_array implements ArrayAccess {
 			}
 			if ($val === null) {
 				$data = memory('hget', self::SETTING_KEY, $index);
-				$val = \unserialize($data);
+				$val = dunserialize($data);
 				$this->offsetSet($index, $val);
 			}
 		}
@@ -100,7 +99,6 @@ class memory_setting_array implements ArrayAccess {
 		unset($this->array[$index]);
 	}
 
-	
 	public static function save($data)
 	{
 		$can_lazy = C::memory()->goteval && C::memory()->gothash;
@@ -129,7 +127,7 @@ LUA;
 			$data = memory('eval', $array_def . $script, array(), $shakey);
 		}
 		foreach ($fields as $index => $field) {
-			$this->offsetSet($field, unserialize($data[$index]));
+			$this->offsetSet($field, dunserialize($data[$index]));
 		}
 	}
 

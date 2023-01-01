@@ -16,7 +16,7 @@ define('ROOT_PATH', dirname(__FILE__).'/../');
 require ROOT_PATH.'./release/release.php';
 require ROOT_PATH.'./install/var.inc.php';
 require ROOT_PATH.'./install/lang.inc.php';
-require ROOT_PATH.'./install/dbi.class.php';// MySQLi Only, Git新增
+require ROOT_PATH.'./install/dbi.class.php';
 require ROOT_PATH.'./install/func.inc.php';
 
 file_exists(ROOT_PATH.'./install/extvar.inc.php') && require ROOT_PATH.'./install/extvar.inc.php';
@@ -72,7 +72,7 @@ if($method == 'show_license') {
 			}
 			foreach($items as $k => $v) {
 				$tmp = $$key;
-				$$k = $tmp[$k];
+				$$k = addslashes($tmp[$k]);
 				if(empty($$k) || !preg_match($v['reg'], $$k)) {
 					if(empty($$k) && !$v['required']) {
 						continue;
@@ -111,7 +111,7 @@ if($method == 'show_license') {
 		if(empty($dbname)) {
 			show_msg('dbname_invalid', $dbname, 0);
 		} else {
-			if(!$link = @mysqli_connect($dbhost, $dbuser, $dbpw)) {// MySQL全部改为MySQLi, 下同, Git新增
+			if(!$link = @mysqli_connect($dbhost, $dbuser, $dbpw)) {
 				$errno = mysqli_errno($link);
 				$error = mysqli_error($link);
 				if($errno == 1045) {
@@ -122,11 +122,7 @@ if($method == 'show_license') {
 					show_msg('database_connect_error', $error, 0);
 				}
 			}
-			if(mysqli_get_server_info($link) > '4.1') {
-				mysqli_query($link, "CREATE DATABASE IF NOT EXISTS `$dbname` DEFAULT CHARACTER SET ".DBCHARSET);
-			} else {
-				mysqli_query($link, "CREATE DATABASE IF NOT EXISTS `$dbname`");
-			}
+			mysqli_query($link, "CREATE DATABASE IF NOT EXISTS `$dbname` DEFAULT CHARACTER SET ".DBCHARSET);
 
 			if(mysqli_errno($link)) {
 				show_msg('database_errno_1044', mysqli_error($link), 0);
@@ -139,6 +135,11 @@ if($method == 'show_license') {
 		}
 
 		config_edit();
+
+		@set_time_limit(0);
+		@ignore_user_abort(TRUE);
+		ini_set('max_execution_time', 0);
+		ini_set('mysql.connect_timeout', 0);
 
 		$db = new dbstuff;
 		$db->connect($dbhost, $dbuser, $dbpw, $dbname, DBCHARSET);
@@ -186,7 +187,7 @@ if($method == 'show_license') {
 
 	}
 
-	@unlink(ROOT_PATH.'./install/index.php');// 删除UCenter安装文件, Git新增
+	@unlink(ROOT_PATH.'./install/index.php');
 
 } elseif($method == 'install_check') {
 

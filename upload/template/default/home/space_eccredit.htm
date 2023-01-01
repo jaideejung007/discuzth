@@ -1,6 +1,7 @@
 {eval
+	$space_uid = $space['uid'];
 	$filter = array( 'common' => '{lang have_posted}', 'save' => '{lang draft}', 'close' => '{lang closed}', 'aduit' => '{lang pending}', 'recyclebin' => '{lang recyclebin}');
-	$_G[home_tpl_spacemenus][] = "<a href=\"home.php?mod=space&uid=$space[uid]&do=thread&view=me\">{lang credit_rating}</a>";
+	$_G['home_tpl_spacemenus'][] = "<a href=\"home.php?mod=space&uid=$space_uid&do=thread&view=me\">{lang credit_rating}</a>";
 }
 <!--{if empty($_GET['sns'])}-->
 <!--{template common/header}-->
@@ -73,14 +74,13 @@
 			<script type="text/javascript" src="{$_G[setting][jspath]}forum.js?{VERHASH}"></script>
 
 			<p class="mtm mbw">
-				<!--{if $member['alipay']}--><a href="https://www.alipay.com/trade/i_credit.do?email=$member[alipay]" target="_blank"><img src="{IMGDIR}/alipaysmall.gif" alt="{lang payto_creditinfo}" class="vm" /></a>&nbsp;&nbsp;<!--{/if}-->
 				<!--{if $member['taobao']}--><script type="text/javascript">document.write('<a target="_blank" href="https://amos1.taobao.com/msg.ww?v=2&uid='+encodeURIComponent('$member[taobaoas]')+'&s=2"><img src="https://amos1.taobao.com/online.ww?v=2&uid='+encodeURIComponent('$member[taobaoas]')+'&s=1" alt="{lang taobao}" class="vm" /></a>&nbsp;');</script>&nbsp;&nbsp;<!--{/if}-->
 				{lang eccredit_buyerpercent}: $sellerpercent%;&nbsp;&nbsp;
 				{lang eccredit_sellerpercent}: $buyerpercent%;&nbsp;&nbsp;
 				{lang regdate}: $member[regdate]
 			</p>
 			<table id="sellcredit" summary="eccredit" cellspacing="0" cellpadding="0" class="dt">
-				<caption><h3 class="pbm">{lang eccredit_buyerinfo} $member[sellercredit] <img src="{STATICURL}image/traderank/seller/$member['sellerrank'].gif" alt="seller rank" class="vm" /></h3></caption>
+				<caption><h3 class="pbm">{lang eccredit_sellerinfo} $member[sellercredit] <img src="{STATICURL}image/traderank/seller/$member['sellerrank'].gif" alt="seller rank" class="vm" /></h3></caption>
 				<tr class="alt">
 					<td style="width: 45px;">&nbsp;</td>
 					<td>{lang eccredit_1week}</td>
@@ -124,7 +124,7 @@
 			</table>
 
 			<table id="buyercredit" summary="eccredit" cellspacing="0" cellpadding="0" class="dt">
-				<caption><h3 class="ptw pbm">{lang eccredit_sellerinfo} $member[buyercredit] <img src="{STATICURL}image/traderank/buyer/$member['buyerrank'].gif" alt="buyer rank" class="vm" /></h3></caption>
+				<caption><h3 class="ptw pbm">{lang eccredit_buyerinfo} $member[buyercredit] <img src="{STATICURL}image/traderank/buyer/$member['buyerrank'].gif" alt="buyer rank" class="vm" /></h3></caption>
 				<tr class="alt">
 					<td style="width: 45px;">&nbsp;</td>
 					<td>{lang eccredit_1week}</td>

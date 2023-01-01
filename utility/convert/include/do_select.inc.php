@@ -1,6 +1,10 @@
 <?php
 
-
+/**
+ * DiscuzX Convert
+ *
+ * $Id: do_select.inc.php 20664 2011-03-01 08:30:19Z shanzongjun $
+ */
 
 $config = loadconfig();
 $db_source = new db_mysql($config['source']);

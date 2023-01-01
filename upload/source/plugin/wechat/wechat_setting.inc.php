@@ -11,8 +11,8 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 	exit('Access Denied');
 }
 
-$setting = C::t('common_setting')->fetch_all(array('mobilewechat'));
-$setting = (array)unserialize($setting['mobilewechat']);
+$setting = C::t('common_setting')->fetch_all_setting(array('mobilewechat'));
+$setting = (array)dunserialize($setting['mobilewechat']);
 $apiurl = $_G['siteurl'].'api/mobile/?module=wechat';
 
 require_once DISCUZ_ROOT.'./source/plugin/wechat/wechat.lib.class.php';

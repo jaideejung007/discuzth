@@ -49,7 +49,6 @@ if(!in_array($operation, array('aids', 'catids', 'topicids'))) {
 	showsubmenu('html', $_nav, '');
 }
 if($operation == 'all') {
-	/*search={"nav_makehtml":"action=makehtml&operation=all"}*/
 	showtips('makehtml_tips_all');
 
 	showformheader('makehtml&operation=all');
@@ -67,7 +66,7 @@ form.onsubmit = function(){return false;};
 _attachEvent($('submit_portal_html'), 'click', function(){
 	$('mk_result').style.display = 'block';
 	$('mk_index').style.display = 'none';
-	this.innerHTML = '$lang[makehtml_recreate]';
+	this.innerHTML = '{$lang['makehtml_recreate']}';
 	var starttime = form['starttime'].value;
 	if(starttime){
 		make_html_article(starttime);
@@ -77,18 +76,18 @@ _attachEvent($('submit_portal_html'), 'click', function(){
 
 function make_html_ok() {
 	var dom = $('mk_index');
-	dom.innerHTML = '<div class="mk_msg">$lang[makehtml_allfilecomplete]</div>';
+	dom.innerHTML = '<div class="mk_msg">{$lang['makehtml_allfilecomplete']}</div>';
 }
 function make_html_index() {
 	var dom = $('mk_index');
-	dom.innerHTML = '<div class="mk_msg">$lang[makehtml_waitmaking]</div>';
+	dom.innerHTML = '<div class="mk_msg">{$lang['makehtml_waitmaking']}</div>';
 	dom.style.display = 'block';
 	new make_html_batch('portal.php?', 0, make_html_ok, dom, 1);
 }
 
 function make_html_category(starttime){
 	var dom = $('mk_category');
-	dom.innerHTML = '<div class="mk_msg">$lang[makehtml_waitmakingcategory]</div>';
+	dom.innerHTML = '<div class="mk_msg">{$lang['makehtml_waitmakingcategory']}</div>';
 	dom.style.display = 'block';
 	starttime = starttime || form['starttime'].value;
 	var x = new Ajax();
@@ -96,7 +95,7 @@ function make_html_category(starttime){
 		if(s) {
 			new make_html_batch('portal.php?mod=list&catid=', s.split(','), make_html_topic, dom);
 		} else {
-			dom.innerHTML = '$lang[makehtml_nofindcategory]<br/>$lang[makehtml_startmaketopic]<br /><a href="javascript:void(0);" onclick="\$(\'mk_category\').style.display = \'none\';make_html_topic();">$lang[makehtml_browser_error]</a>';
+			dom.innerHTML = '{$lang['makehtml_nofindcategory']}<br/>{$lang['makehtml_startmaketopic']}<br /><a href="javascript:void(0);" onclick="\$(\'mk_category\').style.display = \'none\';make_html_topic();">{$lang['makehtml_browser_error']}</a>';
 			setTimeout(function(){\$('mk_category').style.display = 'none'; make_html_topic();}, 1000);
 		}
 	});
@@ -104,7 +103,7 @@ function make_html_category(starttime){
 
 function make_html_topic(starttime){
 	var dom = $('mk_topic');
-	dom.innerHTML = '<div class="mk_msg">$lang[makehtml_waitchecktopic]</div>';
+	dom.innerHTML = '<div class="mk_msg">{$lang['makehtml_waitchecktopic']}</div>';
 	dom.style.display = 'block';
 	starttime = starttime || form['starttime'].value;
 	var x = new Ajax();
@@ -112,22 +111,22 @@ function make_html_topic(starttime){
 		if(s) {
 			new make_html_batch('portal.php?mod=topic&topicid=', s.split(','), make_html_index, dom);
 		} else {
-			dom.innerHTML = '$lang[makehtml_nofindtopic]<br/>$lang[makehtml_startmakeindex]<br /><a href="javascript:void(0);" onclick="\$(\'mk_category\').style.display = \'none\';make_html_index();">$lang[makehtml_browser_error]</a>';
-			setTimeout(function(){\$('mk_category').style.display = 'none'; make_html_index();}, 1000);
+			dom.innerHTML = '{$lang['makehtml_nofindtopic']}<br/>{$lang['makehtml_startmakeindex']}<br /><a href="javascript:void(0);" onclick="\$(\'mk_topic\').style.display = \'none\';make_html_index();">{$lang['makehtml_browser_error']}</a>';
+			setTimeout(function(){\$('mk_topic').style.display = 'none'; make_html_index();}, 1000);
 		}
 	});
 }
 
 function make_html_article(starttime) {
 	var dom = $('mk_article');
-	dom.innerHTML = '<div class="mk_msg">$lang[makehtml_waitcheckarticle]</div>';
+	dom.innerHTML = '<div class="mk_msg">{$lang['makehtml_waitcheckarticle']}</div>';
 	dom.style.display = 'block';
 	var x = new Ajax();
 	x.get('$adminscript?action=makehtml&operation=aids&inajax=1&frame=no&starttime='+starttime, function (s) {
 		if(s){
 			new make_html_batch('portal.php?mod=view&aid=', s.split(','), make_html_category, dom);
 		} else {
-			dom.innerHTML = '$lang[makehtml_nofindarticle]<br/>$lang[makehtml_startmakecategory]<br /><a href="javascript:void(0);" onclick="\$(\'mk_article\').style.display = \'none\';make_html_category();">$lang[makehtml_browser_error]</a>';
+			dom.innerHTML = '{$lang['makehtml_nofindarticle']}<br/>{$lang['makehtml_startmakecategory']}<br /><a href="javascript:void(0);" onclick="\$(\'mk_article\').style.display = \'none\';make_html_category();">{$lang['makehtml_browser_error']}</a>';
 			setTimeout(function(){\$('mk_article').style.display = 'none'; make_html_category();}, 1000);
 		}
 	});
@@ -137,7 +136,6 @@ function make_html_article(starttime) {
 EOT;
 	showtablefooter();
 	showformfooter();
-	/*search*/
 } elseif($operation == 'index') {
 
 	showtips('makehtml_tips_index');
@@ -154,7 +152,7 @@ form.onsubmit = function(){return false;};
 _attachEvent($('submit_portal_html'), 'click', function(){
 	$('mk_result').style.display = 'block';
 	$('mk_index').style.display = 'none';
-	this.innerHTML = '$lang[makehtml_recreate]';
+	this.innerHTML = '{$lang['makehtml_recreate']}';
 	this.disabled = true;
 	make_html_index();
 	return false;
@@ -162,7 +160,7 @@ _attachEvent($('submit_portal_html'), 'click', function(){
 
 function make_html_index() {
 	var dom = $('mk_index');
-	dom.innerHTML = '<div class="mk_msg">$lang[makehtml_waitmaking]</div>';
+	dom.innerHTML = '<div class="mk_msg">{$lang['makehtml_waitmaking']}</div>';
 	dom.style.display = 'block';
 	new make_html_batch('portal.php?', 0, null, dom, 1);
 }
@@ -193,7 +191,7 @@ form.onsubmit = function(){return false;};
 _attachEvent($('submit_portal_html'), 'click', function(){
 	$('mk_result').style.display = 'block';
 	$('mk_index').style.display = 'none';
-	this.innerHTML = '$lang[makehtml_recreate]';
+	this.innerHTML = '{$lang['makehtml_recreate']}';
 	var starttime = form['starttime'].value;
 	if(starttime){
 		make_html_category(starttime);
@@ -203,7 +201,9 @@ _attachEvent($('submit_portal_html'), 'click', function(){
 		var selectedids = [];
 		for(var i = 0; i < category.options.length; i++) {
 			var option = category.options[i];
-			allcatids.push(option.value);
+			if(option.value > 0) {
+				allcatids.push(option.value);
+			}
 			if(option.selected) {
 				selectedids.push(option.value);
 			}
@@ -213,7 +213,7 @@ _attachEvent($('submit_portal_html'), 'click', function(){
 		} else {
 			var dom = $('mk_index');
 			dom.style.display = 'block';
-			dom.innerHTML = '$lang[makehtml_nofindcategory]';
+			dom.innerHTML = '{$lang['makehtml_nofindcategory']}';
 		}
 	}
 	return false;
@@ -223,11 +223,11 @@ function make_html_category_ok() {
 	var dom = $('mk_index');
 	dom.style.display = 'block';
 	dom.style.color = 'green';
-	dom.innerHTML = '<div class="mk_msg">$lang[makehtml_selectcategorycomplete]</div>';
+	dom.innerHTML = '<div class="mk_msg">{$lang['makehtml_selectcategorycomplete']}</div>';
 }
 function make_html_category(starttime){
 	var dom = $('mk_category');
-	dom.innerHTML = '<div class="mk_msg">$lang[makehtml_waitmakingcategory]</div>';
+	dom.innerHTML = '<div class="mk_msg">{$lang['makehtml_waitmakingcategory']}</div>';
 	dom.style.display = 'block';
 	starttime = starttime || form['starttime'].value;
 	var x = new Ajax();
@@ -235,7 +235,7 @@ function make_html_category(starttime){
 		if(s) {
 			new make_html_batch('portal.php?mod=list&catid=', s.split(','), make_html_category_ok, dom);
 		} else {
-			dom.innerHTML = '$lang[makehtml_nofindcategory]';
+			dom.innerHTML = '{$lang['makehtml_nofindcategory']}';
 			setTimeout(function(){\$('mk_category').style.display = 'none'; make_html_index();}, 1000);
 		}
 	});
@@ -270,7 +270,7 @@ form.onsubmit = function(){return false;};
 _attachEvent($('submit_portal_html'), 'click', function(){
 	$('mk_result').style.display = 'block';
 	$('mk_index').style.display = 'none';
-	this.innerHTML = '$lang[makehtml_recreate]';
+	this.innerHTML = '{$lang['makehtml_recreate']}';
 	var starttime = form['starttime'].value;
 	var category = form['category'];
 	var allcatids = [];
@@ -289,7 +289,7 @@ _attachEvent($('submit_portal_html'), 'click', function(){
 	} else {
 		var dom = $('mk_index');
 		dom.style.display = 'block';
-		dom.innerHTML = '$lang[makehtml_nofindarticle]';
+		dom.innerHTML = '{$lang['makehtml_nofindarticle']}';
 	}
 	return false;
 });
@@ -298,7 +298,7 @@ function make_html_article_ok() {
 	var dom = $('mk_index');
 	dom.style.display = 'block';
 	dom.style.color = 'green';
-	dom.innerHTML = '<div class="mk_msg">$lang[makehtml_allarticlecomplete]</div>';
+	dom.innerHTML = '<div class="mk_msg">{$lang['makehtml_allarticlecomplete']}</div>';
 }
 
 function make_html_article(starttime, catids, startid, endid) {
@@ -306,14 +306,14 @@ function make_html_article(starttime, catids, startid, endid) {
 	startid = startid || 0;
 	endid = endid || 0;
 	var dom = $('mk_article');
-	dom.innerHTML = '<div class="mk_msg">$lang[makehtml_waitcheckarticle]</div>';
+	dom.innerHTML = '<div class="mk_msg">{$lang['makehtml_waitcheckarticle']}</div>';
 	dom.style.display = 'block';
 	var x = new Ajax();
 	x.get('$adminscript?action=makehtml&operation=aids&inajax=1&frame=no&starttime='+starttime+'&catids='+(catids == -1 ? '' : catids.join(','))+'&startid='+startid+'&endid='+endid, function (s) {
 		if(s && s.indexOf('<') < 0){
 			new make_html_batch('portal.php?mod=view&aid=', s.split(','), make_html_article_ok, dom);
 		} else {
-			dom.innerHTML = '$lang[makehtml_nofindarticle]';
+			dom.innerHTML = '{$lang['makehtml_nofindarticle']}';
 		}
 	});
 }
@@ -355,14 +355,14 @@ form.onsubmit = function(){return false;};
 _attachEvent($('submit_portal_html'), 'click', function(){
 	$('mk_result').style.display = 'block';
 	$('mk_index').style.display = 'none';
-	this.innerHTML = '$lang[makehtml_recreate]';
+	this.innerHTML = '{$lang['makehtml_recreate']}';
 	var starttime = form['starttime'].value;
 	if(starttime) {
 		make_html_topic(starttime);
 	} else {
 		var dom = $('mk_index');
 		dom.style.display = 'block';
-		dom.innerHTML = '$lang[makehtml_nofindtopic]';
+		dom.innerHTML = '{$lang['makehtml_nofindtopic']}';
 	}
 	return false;
 });
@@ -371,19 +371,19 @@ function make_html_topic_ok() {
 	var dom = $('mk_index');
 	dom.style.display = 'block';
 	dom.style.color = 'green';
-	dom.innerHTML = '<div class="mk_msg">$lang[makehtml_alltopiccomplete]</div>';
+	dom.innerHTML = '<div class="mk_msg">{$lang['makehtml_alltopiccomplete']}</div>';
 }
 
 function make_html_topic(starttime) {
 	var dom = $('mk_topic');
-	dom.innerHTML = '<div class="mk_msg">$lang[makehtml_waitchecktopic]</div>';
+	dom.innerHTML = '<div class="mk_msg">{$lang['makehtml_waitchecktopic']}</div>';
 	dom.style.display = 'block';
 	var x = new Ajax();
 	x.get('$adminscript?action=makehtml&operation=topicids&inajax=1&frame=no&starttime='+starttime, function (s) {
 		if(s && s.indexOf('<') < 0){
 			new make_html_batch('portal.php?mod=topic&topicid=', s.split(','), make_html_topic_ok, dom);
 		} else {
-			dom.innerHTML = '$lang[makehtml_nofindtopic]';
+			dom.innerHTML = '{$lang['makehtml_nofindtopic']}';
 		}
 	});
 }
@@ -416,7 +416,6 @@ EOT;
 } elseif ($operation == 'makehtmlsetting') {
 
 	if(!submitcheck('makehtmlsetting')) {
-		/*search={"nav_makehtml":"action=makehtml","setting_functions_makehtml":"action=makehtml&operation=makehtmlsetting"}*/
 		$setting = $_G['setting'];
 		showformheader("makehtml&operation=makehtmlsetting");
 		showtableheader('', 'nobottom', 'id="makehtml"'.($_GET['operation'] != 'makehtmlsetting' ? ' style="display: none"' : ''));
@@ -436,7 +435,6 @@ EOT;
 		showtablefooter();
 		showsubmit('makehtmlsetting', 'submit');
 		showformfooter();
-		/*search*/
 	} else {
 		$settingnew = $_GET['settingnew'];
 		if(isset($settingnew['makehtml'])) {
@@ -453,13 +451,13 @@ EOT;
 			}
 			$settingnew['makehtml']['articlehtmldir'] = trim($settingnew['makehtml']['articlehtmldir'], ' /\\');
 			$re = NULL;
-			preg_match_all('/[^\w\d\_\\]/',$settingnew['makehtml']['articlehtmldir'],$re);
+			preg_match_all('/[^\w\d\_\\\\]/',$settingnew['makehtml']['articlehtmldir'],$re);
 			if(!empty($re[0]) || !check_html_dir($settingnew['makehtml']['articlehtmldir'])) {
 				cpmsg(cplang('setting_functions_makehtml_articlehtmldir_invalid').','.cplang('return'), NULL, 'error');
 			}
 			$settingnew['makehtml']['topichtmldir'] = trim($settingnew['makehtml']['topichtmldir'], ' /\\');
 			$re = NULL;
-			preg_match_all('/[^\w\d\_\\]/',$settingnew['makehtml']['topichtmldir'],$re);
+			preg_match_all('/[^\w\d\_\\\\]/',$settingnew['makehtml']['topichtmldir'],$re);
 			if(!empty($re[0]) || !check_html_dir($settingnew['makehtml']['topichtmldir'])) {
 				cpmsg(cplang('setting_functions_makehtml_topichtmldir_invalid').','.cplang('return'), NULL, 'error');
 			}
@@ -481,7 +479,7 @@ EOT;
 				}
 			}
 			$settingnew['makehtml']['htmldirformat'] = intval($settingnew['makehtml']['htmldirformat']);
-			C::t('common_setting')->update('makehtml', $settingnew['makehtml']);
+			C::t('common_setting')->update_setting('makehtml', $settingnew['makehtml']);
 			updatecache('setting');
 		}
 		cpmsg('setting_update_succeed', 'action=makehtml&operation=makehtmlsetting', 'succeed');
@@ -494,7 +492,6 @@ EOT;
 		cpmsg('admincp_makehtml_cleanhtml_error', 'action=makehtml&operation=makehtmlsetting', 'error');
 	} else {
 		if(!submitcheck('cleanhtml')) {
-			/*search={"nav_makehtml":"action=makehtml","makehtml_clear":"action=makehtml&operation=cleanhtml"}*/
 
 			showformheader("makehtml&operation=cleanhtml");
 			showtableheader();
@@ -503,7 +500,6 @@ EOT;
 			showtablefooter();
 			showsubmit('cleanhtml', 'submit');
 			showformfooter();
-			/*search*/
 		} else {
 			if(isset($_GET['cleandata'])) {
 				$cleandata = $_GET['cleandata'];
@@ -619,7 +615,7 @@ function check_son_folder($file, $cat) {
 function check_html_dir($dir) {
 	$dir = str_replace("\\", '/', $dir);
 	list($first) = explode('/', $dir);
-	if(in_array(strtolower($first), array('template', 'source', 'config', 'api', 'archiver'), true)) {
+	if(in_array(strtolower($first), array('uc_server', 'uc_client', 'template', 'static', 'source', 'm', 'install', 'data', 'config', 'api', 'archiver'), true)) {
 		return false;
 	}
 	return true;

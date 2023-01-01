@@ -78,6 +78,7 @@ class db_driver_mysqli
 	}
 
 	function _dbconnect($dbhost, $dbuser, $dbpw, $dbcharset, $dbname, $pconnect, $halt = true) {
+		mysqli_report(MYSQLI_REPORT_OFF);
 		if (intval($pconnect) === 1) $dbhost = 'p:' . $dbhost; 
 		$link = new mysqli();
 		if(!$link->real_connect($dbhost, $dbuser, $dbpw, $dbname, null, null, MYSQLI_CLIENT_COMPRESS)) {
@@ -85,12 +86,10 @@ class db_driver_mysqli
 		} else {
 			$this->curlink = $link;
 			$link->options(MYSQLI_OPT_LOCAL_INFILE, false);
-			if($this->version() > '4.1') {
-				$link->set_charset($dbcharset ? $dbcharset : $this->config[1]['dbcharset']);
-				$serverset = $this->version() > '5.0.1' ? 'sql_mode=\'\',' : '';
-				$serverset .= 'character_set_client=binary';
-				$serverset && $link->query("SET $serverset");
-			}
+			$link->set_charset($dbcharset ? $dbcharset : $this->config[1]['dbcharset']);
+			$serverset = 'sql_mode=\'\',';
+			$serverset .= 'character_set_client=binary';
+			$serverset && $link->query("SET $serverset");
 		}
 		return $link;
 	}
@@ -162,11 +161,11 @@ class db_driver_mysqli
 	}
 
 	function error() {
-		return (($this->curlink) ? $this->curlink->error : mysqli_error());
+		return $this->curlink->error;
 	}
 
 	function errno() {
-		return intval(($this->curlink) ? $this->curlink->errno : mysqli_errno());
+		return $this->curlink->errno;
 	}
 
 	function result($query, $row = 0) {

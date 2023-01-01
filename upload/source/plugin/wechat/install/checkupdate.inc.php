@@ -15,7 +15,7 @@ if(!defined('IN_DISCUZ')) {
 
 $pluginupdated = false;
 
-$setting = $_G['setting']['mobilewechat'] ? (array)unserialize($_G['setting']['mobilewechat']) : array();
+$setting = $_G['setting']['mobilewechat'] ? (array)dunserialize($_G['setting']['mobilewechat']) : array();
 
 if($setting['RELEASE'] != PLUGIN_RELEASE) {
 
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS pre_common_member_wechat (
   `uid` mediumint(8) unsigned NOT NULL,
   `openid` char(32) NOT NULL default '',
   `status` tinyint(1) NOT NULL DEFAULT 0,
-  `isregister` tinyint(1) unsigned NOT NULL default '0',
+  `isregister` tinyint(1) NOT NULL default '0',
   PRIMARY KEY (`uid`),
   UNIQUE KEY `openid` (`openid`)
 ) ENGINE=INNODB;

@@ -14,24 +14,20 @@ if(!defined('UC_API')) {
 error_reporting(0);
 
 define('IN_UC', TRUE);
-define('UC_CLIENT_VERSION', '1.6.0');
-define('UC_CLIENT_RELEASE', '20170101');
 define('UC_ROOT', substr(__FILE__, 0, -10));
+require UC_ROOT.'./release/release.php';
 define('UC_DATADIR', UC_ROOT.'./data/');
 define('UC_DATAURL', UC_API.'/data');
-define('UC_API_FUNC', UC_CONNECT == 'mysql' ? 'uc_api_mysql' : 'uc_api_post');
-$GLOBALS['uc_controls'] = array();
+define('UC_API_FUNC', ((defined('UC_CONNECT') && UC_CONNECT == 'mysql') || UC_STANDALONE) ? 'uc_api_mysql' : 'uc_api_post');
+$uc_controls = array();
 
 function uc_addslashes($string, $force = 0, $strip = FALSE) {
-	!defined('MAGIC_QUOTES_GPC') && define('MAGIC_QUOTES_GPC', get_magic_quotes_gpc());
-	if(!MAGIC_QUOTES_GPC || $force) {
-		if(is_array($string)) {
-			foreach($string as $key => $val) {
-				$string[$key] = uc_addslashes($val, $force, $strip);
-			}
-		} else {
-			$string = addslashes($strip ? stripslashes($string) : $string);
+	if(is_array($string)) {
+		foreach($string as $key => $val) {
+			$string[$key] = uc_addslashes($val, $force, $strip);
 		}
+	} else {
+		$string = addslashes($strip ? stripslashes($string) : $string);
 	}
 	return $string;
 }
@@ -72,7 +68,7 @@ if(!function_exists('dhtmlspecialchars')) {
 	}
 }
 if(!function_exists('fsocketopen')) {
-	function fsocketopen($hostname, $port = 80, &$errno, &$errstr, $timeout = 15) {
+	function fsocketopen($hostname, $port = 80, &$errno = null, &$errstr = null, $timeout = 15) {
 		$fp = '';
 		if(function_exists('fsockopen')) {
 			$fp = @fsockopen($hostname, $port, $errno, $errstr, $timeout);
@@ -85,15 +81,6 @@ if(!function_exists('fsocketopen')) {
 	}
 }
 
-function uc_stripslashes($string) {
-	!defined('MAGIC_QUOTES_GPC') && define('MAGIC_QUOTES_GPC', get_magic_quotes_gpc());
-	if(MAGIC_QUOTES_GPC) {
-		return stripslashes($string);
-	} else {
-		return $string;
-	}
-}
-
 function uc_api_post($module, $action, $arg = array()) {
 	$s = $sep = '';
 	foreach($arg as $k => $v) {
@@ -102,12 +89,12 @@ function uc_api_post($module, $action, $arg = array()) {
 			$s2 = $sep2 = '';
 			foreach($v as $k2 => $v2) {
 				$k2 = urlencode($k2);
-				$s2 .= "$sep2{$k}[$k2]=".urlencode(uc_stripslashes($v2));
+				$s2 .= "$sep2{$k}[$k2]=".urlencode($v2);
 				$sep2 = '&';
 			}
 			$s .= $sep.$s2;
 		} else {
-			$s .= "$sep$k=".urlencode(uc_stripslashes($v));
+			$s .= "$sep$k=".urlencode($v);
 		}
 		$sep = '&';
 	}
@@ -134,14 +121,11 @@ function uc_api_input($data) {
 function uc_api_mysql($model, $action, $args=array()) {
 	global $uc_controls;
 	if(empty($uc_controls[$model])) {
-		if(function_exists("mysql_connect")) {
-			include_once UC_ROOT.'./lib/db.class.php';
-		} else {
-			include_once UC_ROOT.'./lib/dbi.class.php';
-		}
+		include_once UC_ROOT.'./lib/dbi.class.php';
 		include_once UC_ROOT.'./model/base.php';
 		include_once UC_ROOT."./control/$model.php";
-		eval("\$uc_controls['$model'] = new {$model}control();");
+		$modelname = $model.'control';
+		$uc_controls[$model] = new $modelname();
 	}
 	if($action[0] != '_') {
 		$args = uc_addslashes($args, 1, TRUE);
@@ -203,7 +187,7 @@ function uc_authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
 	}
 
 	if($operation == 'DECODE') {
-		if((substr($result, 0, 10) == 0 || substr($result, 0, 10) - time() > 0) && substr($result, 10, 16) == substr(md5(substr($result, 26).$keyb), 0, 16)) {
+		if(((int)substr($result, 0, 10) == 0 || (int)substr($result, 0, 10) - time() > 0) && substr($result, 10, 16) === substr(md5(substr($result, 26).$keyb), 0, 16)) {
 			return substr($result, 26);
 		} else {
 			return '';
@@ -225,16 +209,21 @@ function uc_fopen2($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE
 function uc_fopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE, $ip = '', $timeout = 15, $block = TRUE, $encodetype  = 'URLENCODE', $allowcurl = TRUE) {
 	$return = '';
 	$matches = parse_url($url);
-	$scheme = $matches['scheme'];
+	$scheme = strtolower($matches['scheme']);
 	$host = $matches['host'];
-	$path = $matches['path'] ? $matches['path'].(isset($matches['query']) && $matches['query'] ? '?'.$matches['query'] : '') : '/';
-	$port = !empty($matches['port']) ? $matches['port'] : ($matches['scheme'] == 'https' ? 443 : 80);
+	$path = !empty($matches['path']) ? $matches['path'].(!empty($matches['query']) ? '?'.$matches['query'] : '') : '/';
+	$port = !empty($matches['port']) ? $matches['port'] : ($scheme == 'https' ? 443 : 80);
 
 	if(function_exists('curl_init') && function_exists('curl_exec') && $allowcurl) {
 		$ch = curl_init();
 		$ip && curl_setopt($ch, CURLOPT_HTTPHEADER, array("Host: ".$host));
 		curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
-		curl_setopt($ch, CURLOPT_URL, $scheme.'://'.($ip ? $ip : $host).':'.$port.$path);
+		if(!empty($ip) && filter_var($ip, FILTER_VALIDATE_IP) && !filter_var($host, FILTER_VALIDATE_IP) && version_compare(PHP_VERSION, '5.5.0', 'ge')) {
+			curl_setopt($ch, CURLOPT_RESOLVE, array("$host:$port:$ip"));
+			curl_setopt($ch, CURLOPT_URL, $scheme.'://'.$host.':'.$port.$path);
+		} else {
+			curl_setopt($ch, CURLOPT_URL, $scheme.'://'.($ip ? $ip : $host).':'.$port.$path);
+		}
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -266,9 +255,13 @@ function uc_fopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE,
 		$out = "POST $path HTTP/1.0\r\n";
 		$header = "Accept: */*\r\n";
 		$header .= "Accept-Language: zh-cn\r\n";
-		$header .= "Content-Type: application/x-www-form-urlencoded\r\n";
-		$header .= "User-Agent: $_SERVER[HTTP_USER_AGENT]\r\n";
-		$header .= "Host: $host\r\n";
+		if($allowcurl) {
+			$encodetype = 'URLENCODE';
+		}
+		$boundary = $encodetype == 'URLENCODE' ? '' : '; boundary='.trim(substr(trim($post), 2, strpos(trim($post), "\n") - 2));
+		$header .= $encodetype == 'URLENCODE' ? "Content-Type: application/x-www-form-urlencoded\r\n" : "Content-Type: multipart/form-data$boundary\r\n";
+		$header .= "User-Agent: {$_SERVER['HTTP_USER_AGENT']}\r\n";
+		$header .= "Host: $host:$port\r\n";
 		$header .= 'Content-Length: '.strlen($post)."\r\n";
 		$header .= "Connection: Close\r\n";
 		$header .= "Cache-Control: no-cache\r\n";
@@ -278,30 +271,43 @@ function uc_fopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE,
 		$out = "GET $path HTTP/1.0\r\n";
 		$header = "Accept: */*\r\n";
 		$header .= "Accept-Language: zh-cn\r\n";
-		$header .= "User-Agent: $_SERVER[HTTP_USER_AGENT]\r\n";
-		$header .= "Host: $host\r\n";
+		$header .= "User-Agent: {$_SERVER['HTTP_USER_AGENT']}\r\n";
+		$header .= "Host: $host:$port\r\n";
 		$header .= "Connection: Close\r\n";
 		$header .= "Cookie: $cookie\r\n\r\n";
 		$out .= $header;
 	}
 
 	$fpflag = 0;
-	if(!$fp = @fsocketopen(($scheme == 'https' ? 'ssl://' : '').($scheme == 'https' ? $host : ($ip ? $ip : $host)), $port, $errno, $errstr, $timeout)) {
-		$context = array(
-			'http' => array(
-				'method' => $post ? 'POST' : 'GET',
-				'header' => $header,
-				'content' => $post,
-				'timeout' => $timeout,
-			),
-			'ssl' => array(
-				'verify_peer' => false,
-				'verify_peer_name' => false,
-			),
+	$context = array();
+	if($scheme == 'https') {
+		$context['ssl'] = array(
+			'verify_peer' => false,
+			'verify_peer_name' => false,
+			'peer_name' => $host
 		);
+		if(version_compare(PHP_VERSION, '5.6.0', '<')) {
+			$context['ssl']['SNI_enabled'] = true;
+			$context['ssl']['SNI_server_name'] = $host;
+		}
+	}
+	if(ini_get('allow_url_fopen')) {
+		$context['http'] = array(
+			'method' => $post ? 'POST' : 'GET',
+			'header' => $header,
+			'timeout' => $timeout
+		);
+		if($post) {
+			$context['http']['content'] = $post;
+		}
 		$context = stream_context_create($context);
-		$fp = @fopen($scheme.'://'.($scheme == 'https' ? $host : ($ip ? $ip : $host)).':'.$port.$path, 'b', false, $context);
+		$fp = @fopen($scheme.'://'.($ip ? $ip : $host).':'.$port.$path, 'b', false, $context);
 		$fpflag = 1;
+	} elseif(function_exists('stream_socket_client')) {
+		$context = stream_context_create($context);
+		$fp = @stream_socket_client(($scheme == 'https' ? 'ssl://' : '').($ip ? $ip : $host).':'.$port, $errno, $errstr, $timeout, STREAM_CLIENT_CONNECT, $context);
+	} else {
+		$fp = @fsocketopen(($scheme == 'https' ? 'ssl://' : '').($scheme == 'https' ? $host : ($ip ? $ip : $host)), $port, $errno, $errstr, $timeout);
 	}
 
 	if(!$fp) {
@@ -309,7 +315,9 @@ function uc_fopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE,
 	} else {
 		stream_set_blocking($fp, $block);
 		stream_set_timeout($fp, $timeout);
-		@fwrite($fp, $out);
+		if(!$fpflag) {
+			@fwrite($fp, $out);
+		}
 		$status = stream_get_meta_data($fp);
 		if(!$status['timed_out']) {
 			while (!feof($fp) && !$fpflag) {
@@ -388,13 +396,16 @@ function uc_user_register($username, $password, $email, $questionid = '', $answe
 	return call_user_func(UC_API_FUNC, 'user', 'register', array('username'=>$username, 'password'=>$password, 'email'=>$email, 'questionid'=>$questionid, 'answer'=>$answer, 'regip' => $regip));
 }
 
-function uc_user_login($username, $password, $isuid = 0, $checkques = 0, $questionid = '', $answer = '', $ip = '') {
+function uc_user_login($username, $password, $isuid = 0, $checkques = 0, $questionid = '', $answer = '', $ip = '', $nolog = 0) {
 	$isuid = intval($isuid);
-	$return = call_user_func(UC_API_FUNC, 'user', 'login', array('username'=>$username, 'password'=>$password, 'isuid'=>$isuid, 'checkques'=>$checkques, 'questionid'=>$questionid, 'answer'=>$answer, 'ip' => $ip));
+	$return = call_user_func(UC_API_FUNC, 'user', 'login', array('username'=>$username, 'password'=>$password, 'isuid'=>$isuid, 'checkques'=>$checkques, 'questionid'=>$questionid, 'answer'=>$answer, 'ip' => $ip, 'nolog' => $nolog));
 	return UC_CONNECT == 'mysql' ? $return : uc_unserialize($return);
 }
 
 function uc_user_synlogin($uid) {
+	if(UC_STANDALONE) {
+		return '';
+	}
 	$uid = intval($uid);
 	if(@include UC_ROOT.'./data/cache/apps.php') {
 		if(count($_CACHE['apps']) > 1) {
@@ -407,6 +418,9 @@ function uc_user_synlogin($uid) {
 }
 
 function uc_user_synlogout() {
+	if(UC_STANDALONE) {
+		return '';
+	}
 	if(@include UC_ROOT.'./data/cache/apps.php') {
 		if(count($_CACHE['apps']) > 1) {
 			$return = uc_api_post('user', 'synlogout', array());
@@ -417,8 +431,8 @@ function uc_user_synlogout() {
 	return $return;
 }
 
-function uc_user_edit($username, $oldpw, $newpw, $email, $ignoreoldpw = 0, $questionid = '', $answer = '') {
-	return call_user_func(UC_API_FUNC, 'user', 'edit', array('username'=>$username, 'oldpw'=>$oldpw, 'newpw'=>$newpw, 'email'=>$email, 'ignoreoldpw'=>$ignoreoldpw, 'questionid'=>$questionid, 'answer'=>$answer));
+function uc_user_edit($username, $oldpw, $newpw, $email, $ignoreoldpw = 0, $questionid = '', $answer = '', $secmobicc = '', $secmobile = '') {
+	return call_user_func(UC_API_FUNC, 'user', 'edit', array('username'=>$username, 'oldpw'=>$oldpw, 'newpw'=>$newpw, 'email'=>$email, 'ignoreoldpw'=>$ignoreoldpw, 'questionid'=>$questionid, 'answer'=>$answer, 'secmobicc'=>$secmobicc, 'secmobile'=>$secmobile));
 }
 
 function uc_user_delete($uid) {
@@ -426,7 +440,13 @@ function uc_user_delete($uid) {
 }
 
 function uc_user_deleteavatar($uid) {
-	uc_api_post('user', 'deleteavatar', array('uid'=>$uid));
+	if(UC_STANDALONE) {
+		@include_once UC_ROOT.'./extend_client.php';
+		uc_note_handler::loadavatarpath();
+		uc_api_mysql('user', 'deleteavatar', array('uid'=>$uid));
+	} else {
+		uc_api_post('user', 'deleteavatar', array('uid'=>$uid));
+	}
 }
 
 function uc_user_checkname($username) {
@@ -435,6 +455,10 @@ function uc_user_checkname($username) {
 
 function uc_user_checkemail($email) {
 	return call_user_func(UC_API_FUNC, 'user', 'check_email', array('email'=>$email));
+}
+
+function uc_user_checksecmobile($secmobicc, $secmobile) {
+	return call_user_func(UC_API_FUNC, 'user', 'check_secmobile', array('secmobicc'=>$secmobicc, 'secmobile'=>$secmobile));
 }
 
 function uc_user_addprotected($username, $admin='') {
@@ -625,24 +649,22 @@ function uc_tag_get($tagname, $nums = 0) {
 function uc_avatar($uid, $type = 'virtual', $returnhtml = 1) {
 	$uid = intval($uid);
 	$uc_input = uc_api_input("uid=$uid");
+	$avatarpath = UC_STANDALONE ? UC_AVTAPI : UC_API;
 	$uc_avatarflash = UC_API.'/images/camera.swf?inajax=1&appid='.UC_APPID.'&input='.$uc_input.'&agent='.md5($_SERVER['HTTP_USER_AGENT']).'&ucapi='.urlencode(UC_API).'&avatartype='.$type.'&uploadSize=2048';
+	$uc_avatarhtml5 = UC_API.'/index.php?m=user&a=camera&width=450&height=253&appid='.UC_APPID.'&input='.$uc_input.'&agent='.md5($_SERVER['HTTP_USER_AGENT']).'&ucapi='.urlencode(UC_API).'&avatartype='.$type.'&uploadSize=2048';
+	$uc_avatarstl = $avatarpath.'/index.php?m=user&inajax=1&a=rectavatar&appid='.UC_APPID.'&input='.$uc_input.'&agent='.md5($_SERVER['HTTP_USER_AGENT']).'&avatartype='.$type.'&base64=yes';
 	if($returnhtml) {
-		return '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="450" height="253" id="mycamera" align="middle">
-			<param name="allowScriptAccess" value="always" />
-			<param name="scale" value="exactfit" />
-			<param name="wmode" value="transparent" />
-			<param name="quality" value="high" />
-			<param name="bgcolor" value="#ffffff" />
-			<param name="movie" value="'.$uc_avatarflash.'" />
-			<param name="menu" value="false" />
-			<embed src="'.$uc_avatarflash.'" quality="high" bgcolor="#ffffff" width="450" height="253" name="mycamera" align="middle" allowScriptAccess="always" allowFullScreen="false" scale="exactfit"  wmode="transparent" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
-		</object>';
+		$flash = '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="450" height="253" id="mycamera" align="middle"><param name="allowScriptAccess" value="always" /><param name="scale" value="exactfit" /><param name="wmode" value="transparent" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><param name="movie" value="'.$uc_avatarflash.'" /><param name="menu" value="false" /><embed src="'.$uc_avatarflash.'" quality="high" bgcolor="#ffffff" width="450" height="253" name="mycamera" align="middle" allowScriptAccess="always" allowFullScreen="false" scale="exactfit"  wmode="transparent" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" /></object>';
+		$html5 = '<iframe src="' . $uc_avatarhtml5 . '" width="450" marginwidth="0" height="253" marginheight="0" scrolling="no" frameborder="0" id="mycamera" name="mycamera" align="middle"></iframe>';
+		return '<script type="text/javascript">document.write(document.createElement("Canvas").getContext ? \'' . $html5 . '\' : \'' . $flash . '\');</script>';
 	} else {
 		return array(
 			'width', '450',
 			'height', '253',
 			'scale', 'exactfit',
 			'src', $uc_avatarflash,
+			'html5_src', $uc_avatarhtml5,
+			'stl_src', $uc_avatarstl,
 			'id', 'mycamera',
 			'name', 'mycamera',
 			'quality','high',
@@ -654,13 +676,22 @@ function uc_avatar($uid, $type = 'virtual', $returnhtml = 1) {
 	}
 }
 
+function uc_rectavatar($uid) {
+	return uc_api_mysql('user', 'rectavatar', array('uid' => $uid));
+}
+
 function uc_mail_queue($uids, $emails, $subject, $message, $frommail = '', $charset = 'gbk', $htmlon = FALSE, $level = 1) {
 	return call_user_func(UC_API_FUNC, 'mail', 'add', array('uids' => $uids, 'emails' => $emails, 'subject' => $subject, 'message' => $message, 'frommail' => $frommail, 'charset' => $charset, 'htmlon' => $htmlon, 'level' => $level));
 }
 
 function uc_check_avatar($uid, $size = 'middle', $type = 'virtual') {
-	$url = UC_API."/avatar.php?uid=$uid&size=$size&type=$type&check_file_exists=1";
-	$res = uc_fopen2($url, 500000, '', '', TRUE, UC_IP, 20);
+	if(UC_STANDALONE && @include UC_ROOT.'./extend_client.php') {
+		$uc_chk = new uc_note_handler();
+		$res = $uc_chk->checkavatar(array('uid' => $uid, 'size' => $size, 'type' => $type), array());
+	} else {
+		$url = UC_API."/avatar.php?uid=$uid&size=$size&type=$type&check_file_exists=1";
+		$res = uc_fopen2($url, 500000, '', '', TRUE, UC_IP, 20);
+	}
 	if($res == 1) {
 		return 1;
 	} else {

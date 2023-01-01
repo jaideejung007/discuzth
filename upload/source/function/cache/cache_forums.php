@@ -22,14 +22,14 @@ function build_cache_forums() {
 		$forum = array('fid' => $val['fid'], 'type' => $val['type'], 'name' => $val['name'], 'fup' => $val['fup'], 'simple' => $val['simple'], 'status' => $val['status'], 'allowpostspecial' => $val['allowpostspecial'], 'viewperm' => $val['viewperm'], 'formulaperm' => $val['formulaperm'], 'havepassword' => $val['password'], 'postperm' => $val['postperm'], 'replyperm' => $val['replyperm'], 'getattachperm' => $val['getattachperm'], 'postattachperm' => $val['postattachperm'], 'extra' => $val['extra'], 'commentitem' => $val['commentitem'], 'uid' => $val['uid'], 'archive' => $val['archive'], 'domain' => $val['domain']);
 		$forum['orderby'] = bindec((($forum['simple'] & 128) ? 1 : 0).(($forum['simple'] & 64) ? 1 : 0));
 		$forum['ascdesc'] = ($forum['simple'] & 32) ? 'ASC' : 'DESC';
-		$forum['extra'] = unserialize($forum['extra']);
+		$forum['extra'] = dunserialize($forum['extra']);
 		if(!is_array($forum['extra'])) {
 			$forum['extra'] = array();
 		}
 
 		if(!isset($forumlist[$forum['fid']])) {
 			if($forum['uid']) {
-				$forum['users'] = "\t$forum[uid]\t";
+				$forum['users'] = "\t{$forum['uid']}\t";
 			}
 			unset($forum['uid']);
 			if($forum['fup']) {
@@ -40,7 +40,7 @@ function build_cache_forums() {
 			if(!$forumlist[$forum['fid']]['users']) {
 				$forumlist[$forum['fid']]['users'] = "\t";
 			}
-			$forumlist[$forum['fid']]['users'] .= "$forum[uid]\t";
+			$forumlist[$forum['fid']]['users'] .= "{$forum['uid']}\t";
 		}
 	}
 

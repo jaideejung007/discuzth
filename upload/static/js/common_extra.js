@@ -156,13 +156,15 @@ function _showdistrict(container, elems, totallevel, changelevel, containertype)
 		var op = elem.options[elem.selectedIndex];
 		return op['did'] || op.getAttribute('did') || '0';
 	};
-	var pid = changelevel >= 1 && elems[0] && $(elems[0]) ? getdid($(elems[0])) : 0;
-	var cid = changelevel >= 2 && elems[1] && $(elems[1]) ? getdid($(elems[1])) : 0;
-	var did = changelevel >= 3 && elems[2] && $(elems[2]) ? getdid($(elems[2])) : 0;
-	var coid = changelevel >= 4 && elems[3] && $(elems[3]) ? getdid($(elems[3])) : 0;
+	var countryid = changelevel >= 0 && elems[0] && $(elems[0]) ? getdid($(elems[0])) : 0;
+	var pid = changelevel >= 1 && elems[1] && $(elems[1]) ? getdid($(elems[1])) : 0;
+	var cid = changelevel >= 2 && elems[2] && $(elems[2]) ? getdid($(elems[2])) : 0;
+	var did = changelevel >= 3 && elems[3] && $(elems[3]) ? getdid($(elems[3])) : 0;
+	var coid = changelevel >= 4 && elems[4] && $(elems[4]) ? getdid($(elems[4])) : 0;
 	var url = "home.php?mod=misc&ac=ajax&op=district&container="+container+"&containertype="+containertype
-		+"&province="+elems[0]+"&city="+elems[1]+"&district="+elems[2]+"&community="+elems[3]
-		+"&pid="+pid + "&cid="+cid+"&did="+did+"&coid="+coid+'&level='+totallevel+'&handlekey='+container+'&inajax=1'+(!changelevel ? '&showdefault=1' : '');
+		+"&country="+elems[0]+"&province="+elems[1]+"&city="+elems[2]+"&district="+elems[3]+"&community="+elems[4]
+		+"&countryid="+countryid + "&pid="+pid + "&cid="+cid+"&did="+did+"&coid="+coid+'&level='+totallevel
+		+'&handlekey='+container+'&inajax=1'+(!changelevel ? '&showdefault=1' : '');
 	ajaxget(url, container, '');
 }
 
@@ -295,7 +297,7 @@ function _zoom(obj, zimg, nocover, pn, showexif) {
 				clearTimeout($(menuid).getAttribute('timer'));
 			}
 			showimage(zimg, w, h, imgw, imgh);
-			if(showexif && faid) {
+			if(showexif && faid && $(zoomid + '_exif')) {
 				var x = new Ajax();
 				x.get('forum.php?mod=ajax&action=exif&aid=' + faid + '&inajax=1', function(s, x) {
 					if(s) {
@@ -496,9 +498,9 @@ function _zoom(obj, zimg, nocover, pn, showexif) {
 			}
 			if(authorcurrent !== '') {
 				paid = authorcurrent > 0 ? authorimgs[authorcurrent - 1] : authorimgs[authorlength - 1];
-				picpage += ' <div id="zimg_prev" onmouseover="dragMenuDisabled=true;" onmouseout="dragMenuDisabled=false;" onclick="_zoom_page(\'' + paid + '\', ' + (showexif ? 1 : 0) + ')" class="zimg_prev"><strong>‹ ก่อนหน้า</strong></div> ';
+				picpage += ' <div id="zimg_prev" onmouseover="dragMenuDisabled=true;" onmouseout="dragMenuDisabled=false;" onclick="_zoom_page(\'' + paid + '\', ' + (showexif ? 1 : 0) + ')" class="zimg_prev"><strong>&#8249; ก่อนหน้า</strong></div> ';
 				paid = authorcurrent < authorlength - 1 ? authorimgs[authorcurrent + 1] : authorimgs[0];
-				picpage += ' <div id="zimg_next" onmouseover="dragMenuDisabled=true;" onmouseout="dragMenuDisabled=false;" onclick="_zoom_page(\'' + paid + '\', ' + (showexif ? 1 : 0) + ')" class="zimg_next"><strong>ถัดไป ›</strong></div> ';
+				picpage += ' <div id="zimg_next" onmouseover="dragMenuDisabled=true;" onmouseout="dragMenuDisabled=false;" onclick="_zoom_page(\'' + paid + '\', ' + (showexif ? 1 : 0) + ')" class="zimg_next"><strong>ถัดไป &#8250;</strong></div> ';
 			}
 			if(picpage) {
 				$(menuid + '_picpage').innerHTML = picpage;
@@ -1146,13 +1148,6 @@ function _showUpgradeinfo() {
 function _showForummenu(fid) {
 	if($('fjump_menu') && !$('fjump_menu').innerHTML) {
 		ajaxget('forum.php?mod=ajax&action=forumjump&jfid=' + fid, 'fjump_menu', 'ajaxwaitid');
-	}
-}
-
-function _showUserApp(fid) {
-	var menu = $('mn_userapp_menu');
-	if(menu && !menu.innerHTML) {
-		ajaxget('misc.php?mod=manyou&action=menu', 'mn_userapp_menu', 'ajaxwaitid');
 	}
 }
 

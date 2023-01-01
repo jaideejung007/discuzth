@@ -1,6 +1,10 @@
 <?php
 
-
+/**
+ * DiscuzX Convert
+ *
+ * $Id: favorites.php 9572 2010-04-29 10:11:30Z monkey $
+ */
 
 $curprg = basename(__FILE__);
 

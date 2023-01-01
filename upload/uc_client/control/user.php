@@ -16,6 +16,7 @@ define('UC_USER_EMAIL_FORMAT_ILLEGAL', -4);
 define('UC_USER_EMAIL_ACCESS_ILLEGAL', -5);
 define('UC_USER_EMAIL_EXISTS', -6);
 define('UC_USER_USERNAME_CHANGE_FAILED', -7);
+define('UC_USER_SECMOBILE_EXISTS', -9);
 
 class usercontrol extends base {
 
@@ -69,6 +70,8 @@ class usercontrol extends base {
 		$questionid = $this->input('questionid');
 		$answer = $this->input('answer');
 		$regip = $this->input('regip');
+		$secmobicc = $this->input('secmobicc');
+		$secmobile = $this->input('secmobile');
 
 		if(($status = $this->_check_username($username)) < 0) {
 			return $status;
@@ -76,7 +79,11 @@ class usercontrol extends base {
 		if(($status = $this->_check_email($email)) < 0) {
 			return $status;
 		}
-		$uid = $_ENV['user']->add_user($username, $password, $email, 0, $questionid, $answer, $regip);
+		if(($status = $this->_check_secmobile($secmobicc, $secmobile)) > 0) {
+			return UC_USER_SECMOBILE_EXISTS;
+		}
+
+		$uid = $_ENV['user']->add_user($username, $password, $email, 0, $questionid, $answer, $regip, $secmobicc, $secmobile);
 		return $uid;
 	}
 
@@ -89,16 +96,26 @@ class usercontrol extends base {
 		$ignoreoldpw = $this->input('ignoreoldpw');
 		$questionid = $this->input('questionid');
 		$answer = $this->input('answer');
+		$secmobicc = $this->input('secmobicc');
+		$secmobile = $this->input('secmobile');
 
 		if(!$ignoreoldpw && $email && ($status = $this->_check_email($email, $username)) < 0) {
 			return $status;
 		}
-		$status = $_ENV['user']->edit_user($username, $oldpw, $newpw, $email, $ignoreoldpw, $questionid, $answer);
+		if(($status = $this->_check_secmobile($secmobicc, $secmobile, $username)) > 0) {
+			return UC_USER_SECMOBILE_EXISTS;
+		}
+
+		$status = $_ENV['user']->edit_user($username, $oldpw, $newpw, $email, $ignoreoldpw, $questionid, $answer, $secmobicc, $secmobile);
 
 		if($newpw && $status > 0) {
 			$this->load('note');
 			$_ENV['note']->add('updatepw', 'username='.urlencode($username).'&password=');
 			$_ENV['note']->send();
+		}
+		if($status > 0) {
+			$tmp = $_ENV['user']->get_user_by_username($username);
+			$_ENV['user']->user_log($tmp['uid'], 'edituser', 'uid='.$tmp['uid'].'&email='.urlencode($email).'&secmobicc='.urlencode($secmobicc).'&secmobile='.urlencode($secmobile));
 		}
 		return $status;
 	}
@@ -112,10 +129,11 @@ class usercontrol extends base {
 		$questionid = $this->input('questionid');
 		$answer = $this->input('answer');
 		$ip = $this->input('ip');
+		$nolog = $this->input('nolog');
 
-		$this->settings['login_failedtime'] = is_null($this->settings['login_failedtime']) ? 5 : $this->settings['login_failedtime'];
+		$check_times = $this->settings['login_failedtime'] > 0 ? $this->settings['login_failedtime'] : ($this->settings['login_failedtime'] < 0 ? 0 : 5);
 
-		if($ip && $this->settings['login_failedtime'] && !$loginperm = $_ENV['user']->can_do_login($username, $ip)) {
+		if($ip && $check_times && !$loginperm = $_ENV['user']->can_do_login($username, $ip)) {
 			$status = -4;
 			return array($status, '', $password, '', 0);
 		}
@@ -124,21 +142,24 @@ class usercontrol extends base {
 			$user = $_ENV['user']->get_user_by_uid($username);
 		} elseif($isuid == 2) {
 			$user = $_ENV['user']->get_user_by_email($username);
+		} elseif($isuid == 4) {
+			list($secmobicc, $secmobile) = explode('-', $username);
+			$user = $_ENV['user']->get_user_by_secmobile($secmobicc, $secmobile);
 		} else {
 			$user = $_ENV['user']->get_user_by_username($username);
 		}
 
-		$passwordmd5 = preg_match('/^\w{32}$/', $password) ? $password : md5($password);
 		if(empty($user)) {
 			$status = -1;
-		} elseif($user['password'] != md5($passwordmd5.$user['salt'])) {
+		} elseif(!$_ENV['user']->verify_password($password, $user['password'], $user['salt'])) {
 			$status = -2;
 		} elseif($checkques && $user['secques'] != $_ENV['user']->quescrypt($questionid, $answer)) {
 			$status = -3;
 		} else {
+			$_ENV['user']->upgrade_password($username, $password, $user['password'], $user['salt']);
 			$status = $user['uid'];
 		}
-		if($ip && $this->settings['login_failedtime'] && $status <= 0) {
+		if(!$nolog && $ip && $check_times && $status <= 0) {
 			$_ENV['user']->loginfailed($username, $ip);
 		}
 		$merge = $status != -1 && !$isuid && $_ENV['user']->check_mergeuser($username) ? 1 : 0;
@@ -156,6 +177,13 @@ class usercontrol extends base {
 		$this->init_input();
 		$email = $this->input('email');
 		return $this->_check_email($email);
+	}
+
+	function oncheck_secmobile() {
+		$this->init_input();
+		$secmobicc = $this->input('secmobicc');
+		$secmobile = $this->input('secmobile');
+		return $this->_check_secmobile($secmobicc, $secmobile);
 	}
 
 	function oncheck_username() {
@@ -212,6 +240,12 @@ class usercontrol extends base {
 		$this->init_input();
 		$uid = $this->input('uid');
 		return $_ENV['user']->delete_user($uid);
+	}
+
+	function ondeleteavatar() {
+		$this->init_input();
+		$uid = $this->input('uid');
+		$_ENV['user']->delete_useravatar($uid);
 	}
 
 	function onaddprotected() {
@@ -288,12 +322,102 @@ class usercontrol extends base {
 		}
 	}
 
+	function _check_secmobile($secmobicc, $secmobile, $username = '') {
+		return $_ENV['user']->check_secmobileexists($secmobicc, $secmobile, $username);
+	}
+
 	function onuploadavatar() {
 	}
 
 	function onrectavatar() {
+		@header("Expires: 0");
+		@header("Cache-Control: private, post-check=0, pre-check=0, max-age=0", FALSE);
+		@header("Pragma: no-cache");
+		if(getgpc('base64', 'G')){
+			header("Content-type: text/html; charset=utf-8");
+		}else{
+			header("Content-type: application/xml; charset=utf-8");
+		}
+		$this->init_input(getgpc('agent'));
+		$uid = $this->input('uid');
+		if(empty($uid)) {
+			return '<root><message type="error" value="-1" /></root>';
+		}
+		$home = $this->get_home($uid);
+		if(!defined('UC_UPAVTDIR')) {
+			define('UC_UPAVTDIR', UC_DATADIR.'./avatar/');
+		}
+		if(!is_dir(UC_UPAVTDIR.$home)) {
+			$this->set_home($uid, UC_UPAVTDIR);
+		}
+		$avatartype = getgpc('avatartype', 'G') == 'real' ? 'real' : 'virtual';
+		$bigavatarfile = UC_UPAVTDIR.$this->get_avatar($uid, 'big', $avatartype);
+		$middleavatarfile = UC_UPAVTDIR.$this->get_avatar($uid, 'middle', $avatartype);
+		$smallavatarfile = UC_UPAVTDIR.$this->get_avatar($uid, 'small', $avatartype);
+		$bigavatar = $this->flashdata_decode(getgpc('avatar1', 'P'));
+		$middleavatar = $this->flashdata_decode(getgpc('avatar2', 'P'));
+		$smallavatar = $this->flashdata_decode(getgpc('avatar3', 'P'));
+		if(!$bigavatar || !$middleavatar || !$smallavatar) {
+			return '<root><message type="error" value="-2" /></root>';
+		}
+
+		$success = 1;
+		$fp = @fopen($bigavatarfile, 'wb');
+		@fwrite($fp, $bigavatar);
+		@fclose($fp);
+
+		$fp = @fopen($middleavatarfile, 'wb');
+		@fwrite($fp, $middleavatar);
+		@fclose($fp);
+
+		$fp = @fopen($smallavatarfile, 'wb');
+		@fwrite($fp, $smallavatar);
+		@fclose($fp);
+
+		$biginfo = @getimagesize($bigavatarfile);
+		$middleinfo = @getimagesize($middleavatarfile);
+		$smallinfo = @getimagesize($smallavatarfile);
+		if(!$biginfo || !$middleinfo || !$smallinfo || $biginfo[2] == 4 || $middleinfo[2] == 4 || $smallinfo[2] == 4
+			|| $biginfo[0] > 200 || $biginfo[1] > 250 || $middleinfo[0] > 120 || $middleinfo[1] > 120 || $smallinfo[0] > 48 || $smallinfo[1] > 48) {
+			file_exists($bigavatarfile) && unlink($bigavatarfile);
+			file_exists($middleavatarfile) && unlink($middleavatarfile);
+			file_exists($smallavatarfile) && unlink($smallavatarfile);
+			$success = 0;
+		}
+
+		if(getgpc('base64', 'G')){
+			if($success) {
+				return "<script>window.parent.postMessage('success','*');</script>";
+			} else {
+				return "<script>window.parent.postMessage('failure','*');</script>";
+			}
+		}else{
+			$filetype = '.jpg';
+			@unlink(UC_DATADIR.'./tmp/upload'.$uid.$filetype);
+			if($success) {
+				return '<?xml version="1.0" ?><root><face success="1"/></root>';
+			} else {
+				return '<?xml version="1.0" ?><root><face success="0"/></root>';
+			}
+		}
 	}
+
+
 	function flashdata_decode($s) {
+		$r = '';
+		if(getgpc('base64', 'G')){
+			$r = base64_decode($s);
+		}else{
+			$l = strlen($s);
+			for($i=0; $i<$l; $i=$i+2) {
+				$k1 = ord($s[$i]) - 48;
+				$k1 -= $k1 > 9 ? 7 : 0;
+				$k2 = ord($s[$i+1]) - 48;
+				$k2 -= $k2 > 9 ? 7 : 0;
+				$r .= chr($k1 << 4 | $k2);
+			}
+		}
+		return $r;
 	}
 }
 

@@ -116,7 +116,7 @@ if($num = C::t('forum_access')->fetch_all_by_fid_uid($_G['fid'], $suid, 1)) {
 
 	$page = $page > ceil($num / $ppp) ? ceil($num / $ppp) : $page;
 	$start_limit = ($page - 1) * $ppp;
-	$list['pagelink'] = multi($num, $ppp, $page, "forum.php?mod=modcp&fid=$_G[fid]&action=$_GET[action]");
+	$list['pagelink'] = multi($num, $ppp, $page, "forum.php?mod=modcp&fid={$_G['fid']}&action={$_GET['action']}");
 
 	$query = C::t('forum_access')->fetch_all_by_fid_uid($_G['fid'], $suid, 0, $start_limit, $ppp);
 	$uidarray = array();
@@ -137,7 +137,7 @@ if($num = C::t('forum_access')->fetch_all_by_fid_uid($_G['fid'], $suid, 1)) {
 
 	$users = array();
 	if($uids = dimplode($uidarray)) {
-		$users = C::t('common_member')->fetch_all_username_by_uid($uids);
+		$users = C::t('common_member')->fetch_all_username_by_uid($uidarray);
 	}
 }
 

@@ -28,8 +28,8 @@ $lang = array (
   'related_thread' => 'โพสต์ที่เกี่ยวข้อง',
   'replies' => 'ตอบ',
   'price' => 'ราคา',
-  'attach_img' => 'ไฟล์รูปภาพ',
-  'attachment' => 'ไฟล์แนบ',
+  'attach_img' => 'ไฟล์แนบรูปภาพ',
+  'attachment' => 'ไฟล์แนบทั่วไป',
   'thread_digest' => 'สำคัญ',
 );
 

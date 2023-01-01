@@ -170,7 +170,7 @@ function upload() {
 	}
 
 	if($('showmsg'+nid) != null) {
-		$('showmsg'+nid).innerHTML = 'กำลังอัปโหลด กรุณารอสักครู่ หากมีปัญหาให้(<a href="javascript:;" onclick="forms[nowUid].submit();">ลองใหม่</a>)';
+		$('showmsg'+nid).innerHTML = 'กำลังอัปโหลด กรุณารอสักครู่ หากพบปัญหาให้(<a href="javascript:;" onclick="forms[nowUid].submit();">ลองใหม่</a>)';
 		$('albumid_'+nid).value = albumid;
 		forms[nowUid].submit();
 	} else if(nowUid+1 == forms.length) {

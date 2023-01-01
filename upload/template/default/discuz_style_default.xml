@@ -2,11 +2,11 @@
 <root>
 	<item id="Title"><![CDATA[Discuz! Style]]></item>
 	<item id="Data">
-		<item id="name"><![CDATA[默认风格]]></item>
+		<item id="name"><![CDATA[สไตล์เริ่มต้น]]></item>
 		<item id="templateid"><![CDATA[1]]></item>
-		<item id="tplname"><![CDATA[默认模板套系]]></item>
+		<item id="tplname"><![CDATA[ชุดเทมเพลตเริ่มต้น]]></item>
 		<item id="directory"><![CDATA[./template/default]]></item>
-		<item id="copyright"><![CDATA[腾讯云计算（北京）有限责任公司]]></item>
+		<item id="copyright"><![CDATA[Tencent Cloud Computing (Beijing) Co., Ltd.]]></item>
 		<item id="style">
 			<item id="smfont"><![CDATA[Tahoma,Helvetica,sans-serif]]></item>
 			<item id="threadtitlefontsize"><![CDATA[14px]]></item>
@@ -43,6 +43,7 @@
 			<item id="styleimgdir"><![CDATA[]]></item>
 			<item id="imgdir"><![CDATA[]]></item>
 			<item id="boardimg"><![CDATA[logo.svg]]></item>
+			<item id="searchimg"><![CDATA[logo_sc.svg]]></item>
 			<item id="available"><![CDATA[]]></item>
 			<item id="headertext"><![CDATA[#444]]></item>
 			<item id="footertext"><![CDATA[#666]]></item>

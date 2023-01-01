@@ -13,7 +13,7 @@ if(!defined('IN_COMSENZ')) {
 
 define('SOFT_NAME', 'Discuz!');
 
-define('INSTALL_LANG', 'TH_UTF8'); /*jaideejung007*/
+define('INSTALL_LANG', 'SC_UTF8');
 
 define('CONFIG', './config/config_global.php');
 define('CONFIG_UC', './config/config_ucenter.php');
@@ -63,20 +63,19 @@ define('UNDEFINE_FUNC', 32);
 define('MISSING_PARAMETER', 33);
 define('LOCK_FILE_NOT_TOUCH', 34);
 
-$func_items = array('mysqli_connect', 'gethostbyname', 'file_get_contents', 'xml_parser_create');
+$func_items = array('mysqli_connect', 'xml_parser_create', 'json_encode');
 
 $filesock_items = array('fsockopen', 'pfsockopen', 'stream_socket_client', 'curl_init');
 
 $env_items = array
 (
 	'os' => array('c' => 'PHP_OS', 'r' => 'notset', 'b' => 'unix'),
-	'php' => array('c' => 'PHP_VERSION', 'r' => '5.3', 'b' => '7.1'),
+	'php' => array('c' => 'PHP_VERSION', 'r' => '5.6', 'b' => '7.3'),
 	'attachmentupload' => array('r' => 'notset', 'b' => '2M'),
 	'gdversion' => array('r' => '1.0', 'b' => '2.0'),
 	'curl' => array('r' => 'notset', 'b' => 'enable'),
 	'opcache' => array('r' => 'notset', 'b' => 'enable'),
 	'diskspace' => array('r' => 30 * 1048576, 'b' => 'notset'),
-	'filter_var' => array('f' => 'filter_var', 'r' => 'enable', 'b' => 'enable'),
 );
 
 $dirfile_items = array
@@ -246,10 +245,10 @@ $serialize_sql_setting = array (
   ),
   'postnocustom' =>
   array (
-    0 => 'คัดลอกลิงก์',
-    1 => 'คัดลอกลิงก์',
-    2 => 'คัดลอกลิงก์',
-    3 => 'คัดลอกลิงก์',
+    0 => 'เจ้าของโพสต์',
+    1 => 'เมนต์แรก',
+    2 => 'เมนต์สอง',
+    3 => 'เมนต์สาม',
   ),
   'recommendthread' =>
   array (
@@ -267,7 +266,6 @@ $serialize_sql_setting = array (
     'forum' => 'เว็บบอร์ด',
     'group' => 'คลับ',
     'home' => 'สเปซ',
-    'userapp' => 'แอพฯ',
   ),
   'activityfield' =>
   array (
@@ -321,18 +319,10 @@ $serialize_sql_setting = array (
     array (
       'icon' => '',
     ),
-    7 =>
-    array (
-      'title' => 'ยืนยันผ่านเว็บแคม',
-      'available' => '0',
-      'showicon' => '0',
-      'viewvideophoto' => '0',
-      'icon' => '',
-    ),
   ),
   'focus' =>
   array (
-    'title' => 'เว็บมาสเตอร์แนะนำ',
+    'title' => 'ผู้ดูแลแนะนำ',
     'data' =>
     array (
     ),

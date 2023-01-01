@@ -27,7 +27,7 @@ $lang = array
 	'type_bbs' => 'เว็บบอร์ด',
 	'type_system' => 'ระบบ',
 	'type_thread' => 'กระทู้',
-	'type_task' => 'กิจกรรม',
+	'type_task' => 'ภารกิจ',
 	'type_group' => 'คลับ',
 
 	'mail_to_user' => 'ข้อความใหม่',
@@ -56,10 +56,7 @@ $lang = array
 	'show_out' => '{actor} เยี่ยมชมโปรไฟล์ของคุณ และได้รับเครดิตสุดท้ายไปแล้ว',
 	'puse_article' => 'ขอแสดงความยินดี กระทู้<a href="{url}" target="_blank">{subject}</a>ของคุณถูกนำไปเป็นบทความ <a href="{newurl}" target="_blank">คลิกเพื่อดู</a>',
 
-	'myinvite_request' => 'ข้อความแอพลิเคชันใหม่<a href="home.php?mod=space&do=notice&view=userapp">คลิกที่นี่เพื่อดูหน้าข้อมูลแอพลิเคชันที่เกี่ยวข้อง</a>',
-
-
-	'group_member_join' => '{actor} ได้เข้าร่วมคลับ <a href="forum.php?mod=group&fid={fid}" target="_blank">{groupname}</a> ของคุณ ขณะนี้อยู่ในระหว่างรอการตรวจสอบ โปรดไปที่<a href="{url}" target="_blank">การจัดการคลับ</a> เพื่อดำเนินการตรวจสอบ',
+	'group_member_join' => '{actor} ได้เข้าร่วมคลับ <a href="forum.php?mod=group&fid={fid}" target="_blank">{groupname}</a> ของคุณ กรุณาไปที่<a href="{url}" target="_blank">การตั้งค่า</a>คลับ เพื่อตรวจสอบ',
 	'group_member_invite' => '{actor} เชิญคุณเข้าร่วมคลับ <a href="forum.php?mod=group&fid={fid}" target="_blank">{groupname}</a> <a href="{url}" target="_blank">คลิกที่นี่เพื่อเข้าร่วม</a>',
 	'group_member_check' => 'คุณได้ผ่านการตรวจสอบและสามารถเข้าร่วมคลับ <a href="{url}" target="_blank">{groupname}</a> ได้แล้ว กรุณา <a href="{url}" target="_blank">คลิกเพื่อเข้าชม</a>',
 	'group_member_check_failed' => 'คุณไม่ผ่านการตรวจสอบไม่สามารถเข้าร่วมคลับ <a href="{url}" target="_blank">{groupname}</a>',
@@ -102,19 +99,21 @@ $lang = array
 	'reason_live_update' => '{actor} ได้แนะนำกระทู้ของคุณใน <a href="forum.php?mod=viewthread&tid={tid}" target="_blank">{subject}</a> <div class="quote"><blockquote>{reason}</blockquote></div>',
 	'reason_live_cancle' => '{actor} ได้ยกเลิกแนะนำกระทู้ของคุณใน <a href="forum.php?mod=viewthread&tid={tid}" target="_blank">{subject}</a> <div class="quote"><blockquote>{reason}</blockquote></div>',
 
-	'modthreads_delete' => 'กระทู้ {threadsubject} ของคุณ ไม่ผ่านการตรวจสอบและตอนนี้ได้ถูกลบออกไปแล้ว!',
+	'modthreads_delete' => 'กระทู้ {threadsubject} ของคุณถูก {modusername} ตรวจสอบและได้ปฏิเสธแล้ว ตอนนี้รายการดังกล่าวถูกลบไปแล้วเช่นกัน!',
 
-	'modthreads_delete_reason' => 'กระทู้ {threadsubject} ของคุณ ไม่ผ่านการตรวจสอบและตอนนี้ได้ถูกลบออกไปแล้ว! <div class="quote"><blockquote>{reason}</blockquote></div>',
-	'modthreads_validate' => 'กระทู้ <a href="forum.php?mod=viewthread&tid={tid}" target="_blank">{threadsubject}</a> ของคุณ ผ่านการตรวจสอบและตอนนี้ถูกโพสต์ลงไปแล้ว! &nbsp; <a href="forum.php?mod=viewthread&tid={tid}" target="_blank" class="lit">ดูกระทู้ &rsaquo;</a>',
+	'modthreads_delete_reason' => 'กระทู้ {threadsubject} ของคุณถูก {modusername} ตรวจสอบและได้ปฏิเสธแล้ว ตอนนี้รายการดังกล่าวถูกลบไปแล้วเช่นกัน!<div class="quote"><blockquote>{reason}</blockquote></div>',
+	'modthreads_validate' => 'กระทู้ <a href="forum.php?mod=viewthread&tid={tid}" target="_blank">{threadsubject}</a> ของคุณถูก {modusername} อนุมัติแล้ว! &nbsp; <a href="forum.php?mod=viewthread&tid={tid}" target="_blank" class="lit">ดูเพิ่มเติม &rsaquo;</a>',
 
-	'modreplies_delete' => 'การโพสต์ตอบกลับของคุณไม่ผ่านการตรวจสอบ และได้ถูกลบออกไปแล้ว! <p class="summary">เนื้อหา: <span>{post}</span></p>',
+	'modreplies_delete' => 'การตอบกลับ/ความเห็นของคุณถูก {modusername} ตรวจสอบและได้ปฏิเสธแล้ว ตอนนี้รายการดังกล่าวถูกลบออกไปแล้วเช่นกัน! <p class="summary">เนื้อหาการตอบกลับ: <span>{post}</span></p>',
 
-	'modreplies_validate' => 'การโพสต์ตอบกลับของคุณผ่านการตรวจสอบแล้ว! &nbsp; <a href="forum.php?mod=redirect&goto=findpost&pid={pid}&ptid={tid}" target="_blank" class="lit">ดูเนื้อหา &rsaquo;</a> <p class="summary">เนื้อหา: <span>{post}</span></p>',
+	'modreplies_delete_reason' => 'การตอบกลับ/ความเห็นของคุณถูก {modusername} ตรวจสอบและได้ปฏิเสธแล้ว ตอนนี้รายการดังกล่าวถูกลบไปแล้วเช่นกัน! <p class="summary">เนื้อหาการตอบกลับ: <span>{post}</span></p><div class="quote"><blockquote>{reason}</blockquote></div>',
+
+	'modreplies_validate' => 'การตอบกลับ/ความเห็นของคุณถูก {modusername} อนุมัติแล้ว! &nbsp; <a href="forum.php?mod=redirect&goto=findpost&pid={pid}&ptid={tid}" target="_blank" class="lit">ดูเพิ่มเติม &rsaquo;</a> <p class="summary">เนื้อหาการตอบกลับ: <span>{post}</span></p>',
 
 	'transfer' => 'คุณได้รับจากเครดิตจาก {actor} ผ่านการโอนเป็นจำนวน {credit} &nbsp; <a href="home.php?mod=spacecp&ac=credit&op=log&suboperation=creditslog" target="_blank" class="lit">ดูรายละเอียด &rsaquo;</a>
 <p class="summary">{actor} ฝากข้อความถึงคุณว่า: <span>{transfermessage}</span></p>',
 
-	'addfunds' => 'การร้องขอแลกเปลี่ยนเครดิตของคุณเรียบร้อย ระบบได้ส่งรายงานการแลกเปลี่ยนมายังข้อความส่าวนตัวของคุณ &nbsp; <a href="home.php?mod=spacecp&ac=credit&op=base" target="_blank" class="lit">ดูรายละเอียด &rsaquo;</a>
+	'addfunds' => 'การร้องขอแลกเปลี่ยนเครดิตของคุณเรียบร้อย ระบบได้ส่งรายงานการแลกเปลี่ยนมายังข้อความส่วนตัวของคุณ &nbsp; <a href="home.php?mod=spacecp&ac=credit&op=base" target="_blank" class="lit">ดูรายละเอียด &rsaquo;</a>
 <p class="summary">หมายเลข: <span>{orderid}</span></p><p class="summary">ค่าใช้จ่าย: <span>฿ {price}  บาท</span></p><p class="summary">รายได้: <span>{value}</span></p>',
 
 	'rate_reason' => '{actor} ให้คะแนนกระทู้ <a href="forum.php?mod=redirect&goto=findpost&pid={pid}&ptid={tid}" target="_blank">{subject}</a> ของคุณ {ratescore} <div class="quote"><blockquote>{reason}</blockquote></div>',
@@ -137,11 +136,11 @@ $lang = array
 
 	'eccredit' => '{actor} การประเมินสินค้าของคุณ &nbsp; <a href="forum.php?mod=trade&orderid={orderid}" target="_blank" class="lit">ดูรายละเอียด &rsaquo;</a>',
 
-	'activity_notice' => '{actor} สมัครเข้าร่วมกิจกรรมของคุณ <a href="forum.php?mod=viewthread&tid={tid}" target="_blank">{subject}</a> โปรดตรวจสอบ &nbsp; <a href="forum.php?mod=viewthread&tid={tid}" target="_blank" class="lit">ดูรายละเอียด &rsaquo;</a>',
+	'activity_notice' => '{actor} ลงทะเบียนเข้าร่วมกิจกรรมของคุณ <a href="forum.php?mod=viewthread&tid={tid}" target="_blank">{subject}</a> โปรดตรวจสอบ &nbsp; <a href="forum.php?mod=viewthread&tid={tid}" target="_blank" class="lit">ดูรายละเอียด &rsaquo;</a>',
 
 	'activity_apply' => '{actor} สปอนเซอร์กิจกรรม <a href="forum.php?mod=viewthread&tid={tid}" target="_blank">{subject}</a> อนุญาตให้คุณเข้าร่วมในกิจกรรมนี้ &nbsp; <a href="forum.php?mod=viewthread&tid={tid}" target="_blank" class="lit">ดูรายละเอียด &rsaquo;</a> <div class="quote"><blockquote>{reason}</blockquote></div>',
 
-	'activity_replenish' => '{actor} สปอนเซอร์กิจกรรม <a href="forum.php?mod=viewthread&tid={tid}" target="_blank">{subject}</a> แจ้งข้อมูลที่คุณต้องใช้ดำเนินการในการสมัครเข้าร่วม &nbsp; <a href="forum.php?mod=viewthread&tid={tid}" target="_blank" class="lit">ดูรายละเอียด &rsaquo;</a> <div class="quote"><blockquote>{reason}</blockquote></div>',
+	'activity_replenish' => '{actor} สปอนเซอร์กิจกรรม <a href="forum.php?mod=viewthread&tid={tid}" target="_blank">{subject}</a> แจ้งข้อมูลที่คุณต้องใช้ดำเนินการในการลงทะเบียนเข้าร่วม &nbsp; <a href="forum.php?mod=viewthread&tid={tid}" target="_blank" class="lit">ดูรายละเอียด &rsaquo;</a> <div class="quote"><blockquote>{reason}</blockquote></div>',
 
 	'activity_delete' => '{actor} สปอนเซอร์กิจกรรม <a href="forum.php?mod=viewthread&tid={tid}" target="_blank">{subject}</a> ปฏิเสธการขอเข้าร่วมกิจกรรมของคุณ &nbsp; <a href="forum.php?mod=viewthread&tid={tid}"  target="_blank" class="lit">ดูรายละเอียด &rsaquo;</a> <div class="quote"><blockquote>{reason}</blockquote></div>',
 
@@ -159,17 +158,17 @@ $lang = array
 
 	'reppost_noticeauthor' => '{actor} ตอบกระทู้ <a href="forum.php?mod=redirect&goto=findpost&ptid={tid}&pid={pid}" target="_blank">{subject}</a> &nbsp; <a href="forum.php?mod=redirect&goto=findpost&pid={pid}&ptid={tid}" target="_blank" class="lit">ดูรายละเอียด</a>',
 
-	'task_reward_credit' => 'ขอแสดงความยินดีคุณได้ทำกิจกรรม: <a href="home.php?mod=task&do=view&id={taskid}" target="_blank">{name}</a> สำเร็จ คุณได้รับเครดิต {creditbonus} &nbsp; <a href="home.php?mod=spacecp&ac=credit&op=base" target="_blank" class="lit">ดูเครดิตของฉัน &rsaquo;</a></p>',
+	'task_reward_credit' => 'ขอแสดงความยินดีคุณได้ทำภารกิจ: <a href="home.php?mod=task&do=view&id={taskid}" target="_blank">{name}</a> สำเร็จ คุณได้รับเครดิต {creditbonus} &nbsp; <a href="home.php?mod=spacecp&ac=credit&op=base" target="_blank" class="lit">ดูเครดิตของฉัน &rsaquo;</a></p>',
 
-	'task_reward_magic' => 'ขอแสดงความยินดีคุณได้ทำกิจกรรม: <a href="home.php?mod=task&do=view&id={taskid}" target="_blank">{name}</a>สำเร็จ คุณได้รับไอเท็ม <a href="home.php?mod=magic&action=mybox" target="_blank">{rewardtext}</a> {bonus} ชิน',
+	'task_reward_magic' => 'ขอแสดงความยินดีคุณได้ทำภารกิจ: <a href="home.php?mod=task&do=view&id={taskid}" target="_blank">{name}</a>สำเร็จ คุณได้รับไอเท็ม <a href="home.php?mod=magic&action=mybox" target="_blank">{rewardtext}</a> {bonus} ชิน',
 
-	'task_reward_medal' => 'ขอแสดงความยินดีคุณได้ทำกิจกรรม: <a href="home.php?mod=task&do=view&id={taskid}" target="_blank">{name}</a>สำเร็จ คุณได้รับเหรียญรางวัล <a href="home.php?mod=medal" target="_blank">{rewardtext}</a> สามารถใช้ได้เป็นเวลา {bonus} วัน',
+	'task_reward_medal' => 'ขอแสดงความยินดีคุณได้ทำภารกิจ: <a href="home.php?mod=task&do=view&id={taskid}" target="_blank">{name}</a>สำเร็จ คุณได้รับเหรียญรางวัล <a href="home.php?mod=medal" target="_blank">{rewardtext}</a> สามารถใช้ได้เป็นเวลา {bonus} วัน',
 
-	'task_reward_medal_forever' => 'ขอแสดงความยินดี คุณได้ทำกิจกรรม: <a href="home.php?mod=task&do=view&id={taskid}" target="_blank">{name}</a> เสร็จสมบูรณ์ คุณได้รับเหรียญ <a href="home.php?mod=medal" target="_blank">{rewardtext}</a> เป็นรางวัลแบบถาวร',
+	'task_reward_medal_forever' => 'ขอแสดงความยินดี คุณได้ทำภารกิจ: <a href="home.php?mod=task&do=view&id={taskid}" target="_blank">{name}</a> เสร็จสมบูรณ์ คุณได้รับเหรียญ <a href="home.php?mod=medal" target="_blank">{rewardtext}</a> เป็นรางวัลแบบถาวร',
 
-	'task_reward_invite' => 'ขอแสดงความยินดีคุณได้ทำกิจกรรม: <a href="home.php?mod=task&do=view&id={taskid}" target="_blank">{name}</a>สำเร็จ คุณได้รับโค้ดเชิญชวน<a href="home.php?mod=spacecp&ac=invite" target="_blank">โค้ดเชิญชวน {rewardtext}</a> สามารถใช้ได้เป็นเวลา {bonus} วัน',
+	'task_reward_invite' => 'ขอแสดงความยินดีคุณได้ทำภารกิจ: <a href="home.php?mod=task&do=view&id={taskid}" target="_blank">{name}</a>สำเร็จ คุณได้รับโค้ดเชิญชวน<a href="home.php?mod=spacecp&ac=invite" target="_blank">โค้ดเชิญชวน {rewardtext}</a> สามารถใช้ได้เป็นเวลา {bonus} วัน',
 
-	'task_reward_group' => 'ขอแสดงความยินดีคุณได้ทำกิจกรรม: <a href="home.php?mod=task&do=view&id={taskid}" target="_blank">{name}</a>สำเร็จ คุณได้เข้าร่วมกลุ่ม {rewardtext} เป็นเวลา {bonus} วัน &nbsp; <a href="home.php?mod=spacecp&ac=usergroup" target="_blank" class="lit">ดูระดับการใช้งานของกลุ่มนี้ &rsaquo;</a>',
+	'task_reward_group' => 'ขอแสดงความยินดีคุณได้ทำภารกิจ: <a href="home.php?mod=task&do=view&id={taskid}" target="_blank">{name}</a>สำเร็จ คุณได้เข้าร่วมกลุ่ม {rewardtext} เป็นเวลา {bonus} วัน &nbsp; <a href="home.php?mod=spacecp&ac=usergroup" target="_blank" class="lit">ดูระดับการใช้งานของกลุ่มนี้ &rsaquo;</a>',
 
 	'user_usergroup' => 'กลุ่มสมาชิกของคุณได้อัปเกรดเป็น {usergroup} &nbsp; <a href="home.php?mod=spacecp&ac=usergroup" target="_blank" class="lit">ดูระดับการใช้งานของกลุ่มนี้ &rsaquo;</a>',
 
@@ -184,10 +183,13 @@ $lang = array
 
 	'profile_verify_error' => '{verify} ปฏิเสธข้อมูลของคุณ ต้องกรอกข้อมูลต่อไปนี้:<br/>{profile}<br/>สาเหตุของการปฏิเสธ:{reason}',
 	'profile_verify_pass' => 'ขอแสดงความยินดี ข้อมูลที่คุณกรอกผ่านการตรวจสอบ ตรวจสอบข้อมูลโดย {verify}',
-	'profile_verify_pass_refusal' => 'ขออภัย, {verify} ปฏิเสธข้อมูลที่คุณกรอก',
-	'member_ban_speak' => '{user} ถูกแบนห้ามโพสต์ เป็นเวลา: {day} วัน (ถ้าเป็น 0 คือถูกแบนถาวร) เหตุผล: {reason}',
-	'member_ban_visit' => '{user} ถูกแบนห้ามเข้าชม เป็นเวลา: {day} วัน (ถ้าเป็น 0 คือถูกแบนถาวร) เหตุผล: {reason}',
-	'member_ban_status' => '{user} ถูกแบนห้ามการเข้าถึง: {reason}',
+	'profile_verify_pass_refusal' => 'ขออภัย {verify} ปฏิเสธข้อมูลที่คุณกรอก',
+	'member_ban_speak' => 'คุณถูก {user} แบนห้ามโพสต์ เป็นเวลา: {day} วัน (ถ้าเป็น 0 คือถูกแบนถาวร) สาเหตุของการแบน: {reason}',
+	'member_ban_visit' => 'คุณถูก {user} แบนห้ามเข้าชม เป็นเวลา: {day} วัน (ถ้าเป็น 0 คือถูกแบนถาวร) สาเหตุของการแบน: {reason}',
+	'member_ban_status' => 'คุณถูก {user} แบน สาเหตุ：{reason}',
+	'member_change_usergroup' => 'คุณถูก {user} เปลี่ยนแปลงกลุ่มผู้ใช้เป็น {groupname} มีระยะเวลา {day} วัน(0: หมายถึงถาวร) รายละเอียดกลุ่มผู้ใช้ใหม่ของคุณคือ {extgroupinfo} และที่คุณได้รับแจ้งการเปลี่ยนแปลงนี้เนื่องจากผู้ดำเนินการได้กำหนดให้แจ้งถึงคุณ สาเหตุในการดำเนินการ: {reason}',
+	'member_change_credits' => 'คุณถูก {user} อัปเดตข้อมูลเครดิต {extcredits} ของคุณ และที่คุณได้รับแจ้งการอัปเดตนี้เนื่องจากผู้ดำเนินการได้กำหนดให้แจ้งถึงคุณ สาเหตุของการดำเนินการ: {reason}',
+
 	'member_follow' => 'มีสมาชิกได้แสดงความเห็นในติดตามจำนวน {count} ข้อความ <a href="home.php?mod=follow">คลิกที่นี่เพื่อดูรายละเอียด</a>',
 	'member_follow_add' => '{actor} เพิ่มการติดตามของคุณ <a href="home.php?mod=follow&do=follower">คลิกที่นี่เพื่อดูรายละเอียด</a>',
 
@@ -211,11 +213,11 @@ $lang = array
 	'manage_verifytopiccommont' => 'มีความคิดเห็นใหม่ในหัวข้อที่รอการตรวจสอบ <a href="admin.php?action=moderate&operation=topiccomments">ตรวจสอบตอนนี้</a>',
 	'manage_verify_field' => 'มีการกรอก {verifyname} ใหม่ที่รอการตรวจสอบ <a href="admin.php?action=verify&operation=verify&do={doid}">จัดการตอนนี้</a>',
 	'system_notice' => '{subject}<p class="summary">{message}</p>',
-	'system_adv_expiration' => 'โฆษณาเว็บไซต์ของคุณจะหมดอายุภายใน {day} วัน, โปรดรีบดำเนินการ: <br />{advs}',
+	'system_adv_expiration' => 'โฆษณาเว็บไซต์ของคุณจะหมดอายุภายใน {day} วัน กรุณารีบดำเนินการ: <br />{advs}',
 	'report_change_credits' => '{actor} จัดการกับการรายงานของคุณ {creditchange} {msg}',
 	'at_message' => '<a href="home.php?mod=space&uid={buyerid}" target="_blank">{buyer}</a> ได้กล่าวถึงคุณในโพสต์ของ <a href="forum.php?mod=redirect&goto=findpost&ptid={tid}&pid={pid}" target="_blank">{subject}</a> ว่า: <div class="quote"><blockquote>{message}</blockquote></div><a href="forum.php?mod=redirect&goto=findpost&ptid={tid}&pid={pid}" target="_blank">คลิกที่นี่เพื่อดูรายละเอียด</a>',
-	'new_report' => 'มีการรายงานเข้ามาใหม่ <a href="admin.php?action=report" target="_blank">คลิกที่นี่เพื่อดูและดำเนินการรายงานนี้</a>',
-	'new_post_report' => 'มีการรายงานใหม่ที่รอการตรวจสอบ <a href="forum.php?mod=modcp&action=report&fid={fid}" target="_blank">คลิกที่นี่เพื่อเข้าสู่ศูนย์จัดการระบบ</a>',
+	'new_report' => 'มีรายงานใหม่จาก {username} ที่กำลังรอดำเนินการ <a href="admin.php?action=report" target="_blank">คลิกที่นี่สำหรับเข้าสู่ AdminCP เพื่อดำเนินการ</a>',
+	'new_post_report' => 'มีรายงานใหม่จาก {username} ที่กำลังรอดำเนินการ <a href="forum.php?mod=modcp&action=report&fid={fid}" target="_blank">คลิกที่นี่เพื่อดำเนินการ</a>',
 	'magics_receive' => '{actor} ได้มอบไอเท็ม {magicname} ให้กับคุณ
 <p class="summary">และ {actor} ได้ฝากข้อความถึงคุณ: <span>{msg}</span></p>
 <p class="mbn"><a href="home.php?mod=magic" target="_blank">กลับไปยังรายการไอเท็ม</a><span class="pipe">|</span><a href="home.php?mod=magic&action=mybox" target="_blank">ดูกล่องไอเท็มของฉัน</a></p>',

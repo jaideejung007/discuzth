@@ -24,7 +24,7 @@ function modaction(action, pid, extra, mod) {
 		var checked = 1;
 	}
 	if(!checked) {
-		alert('กรุณาเลือกโพสต์ที่จะดำเนินการ!');
+		alert('กรุณาเลือกโพสต์ที่จะดำเนินการ');
 	} else {
 		$('modactions').action = mod + '&action='+ action +'&fid=' + fid + '&tid=' + tid + '&handlekey=mods&infloat=yes&nopost=yes' + (!pid ? '' : '&topiclist[]=' + pid) + extra + '&r' + Math.random();
 		showWindow('mods', 'modactions', 'post');
@@ -120,7 +120,7 @@ function tmodthreads(optgroup, operation) {
 		}
 	}
 	if(!checked) {
-		alert('กรุณาเลือกโพสต์ที่จะดำเนินการ!');
+		alert('กรุณาเลือกโพสต์ที่จะดำเนินการ');
 	} else {
 		$('moderate').optgroup.value = optgroup;
 		$('moderate').operation.value = operation;

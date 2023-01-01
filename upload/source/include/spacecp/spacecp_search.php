@@ -15,7 +15,7 @@ if (!$_G['setting']['friendstatus']) {
 	showmessage('friend_status_off');
 }
 
-$myfields = array('uid','gender','birthyear','birthmonth','birthday','birthprovince','birthcity','resideprovince','residecity', 'residedist', 'residecommunity');
+$myfields = array('uid','gender','birthyear','birthmonth','birthday','birthcountry','birthprovince','birthcity','residecountry','resideprovince','residecity', 'residedist', 'residecommunity');
 
 loadcache('profilesetting');
 $fields = array();
@@ -38,7 +38,7 @@ if(!empty($_GET['searchsubmit']) || !empty($_GET['searchmode'])) {
 		$wherearr[] = 's.'.DB::field('username', $searchkey);
 		$searchkey = dhtmlspecialchars($searchkey);
 	} else {
-		foreach (array('uid','username','videophotostatus','avatarstatus') as $value) {
+		foreach (array('uid','username','avatarstatus') as $value) {
 			if($_GET[$value]) {
 				if($value == 'username' && empty($_GET['precision'])) {
 					$_GET[$value] = stripsearchkey($_GET[$value]);
@@ -88,7 +88,7 @@ if(!empty($_GET['searchsubmit']) || !empty($_GET['searchmode'])) {
 		$wherearr['profile'] = "sf.uid=s.uid";
 	}
 
-	$list = array();
+	$list = $ols = array();
 	if($wherearr) {
 
 		$space['friends'] = array();
@@ -105,6 +105,13 @@ if(!empty($_GET['searchsubmit']) || !empty($_GET['searchmode'])) {
 		foreach($list as $uid => $value) {
 			$list[$uid]['follow'] = isset($follows[$uid]) ? 1 : 0;
 		}
+		if (!empty($list)) {
+			foreach(C::app()->session->fetch_all_by_uid(array_keys($list)) as $value) {
+				if(!$value['invisible']) {
+					$ols[$value['uid']] = 1;
+				}
+			}
+		}		
 	}
 
 
@@ -143,8 +150,8 @@ if(!empty($_GET['searchsubmit']) || !empty($_GET['searchmode'])) {
 	$marryarr = array($space['marry'] => ' selected');
 
 	include_once libfile('function/profile');
-	$birthcityhtml = showdistrict(array(0,0), array('birthprovince', 'birthcity'), 'birthcitybox', null, 'birth');
-	$residecityhtml = showdistrict(array(0,0, 0, 0), array('resideprovince', 'residecity', 'residedist', 'residecommunity'), 'residecitybox', null, 'reside');
+	$birthcityhtml = showdistrict(array(0,0,0), array('birthcountry', 'birthprovince', 'birthcity'), 'birthcitybox', null, 'birth');
+	$residecityhtml = showdistrict(array(0,0, 0, 0, 0), array('residecountry', 'resideprovince', 'residecity', 'residedist', 'residecommunity'), 'residecitybox', null, 'reside');
 
 	foreach ($fields as $fkey => $fvalue) {
 		if(empty($fvalue['choices'])) {

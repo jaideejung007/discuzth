@@ -51,7 +51,7 @@ class appcontrol extends base {
 			exit('-1');
 		}
 
-		if(md5(md5($ucfounderpw).UC_FOUNDERSALT) == UC_FOUNDERPW || (strlen($ucfounderpw) == 32 && $ucfounderpw == md5(UC_FOUNDERPW))) {
+		if($_ENV['user']->verify_password($ucfounderpw, UC_FOUNDERPW, UC_FOUNDERSALT) || (strlen($ucfounderpw) == 32 && hash_equals($ucfounderpw, md5(UC_FOUNDERPW)))) {
 			@ob_start();
 			$return  = '';
 
@@ -60,7 +60,7 @@ class appcontrol extends base {
 			$app = $this->db->fetch_first("SELECT * FROM ".UC_DBTABLEPRE."applications WHERE url='$appurl' AND type='$apptype'");
 
 			if(empty($app)) {
-				$authkey = $this->_generate_key();
+				$authkey = $this->generate_key(64);
 				$apptagtemplates = $this->serialize($apptagtemplates, 1);
 				$this->db->query("INSERT INTO ".UC_DBTABLEPRE."applications SET
 					name='$appname',
@@ -93,8 +93,8 @@ class appcontrol extends base {
 				$_ENV['note']->add('updateapps', '', $this->serialize($notedata, 1));
 				$_ENV['note']->send();
 			} else {
-				$this->_writelog('app_queryinfo', "appid=$app[appid]; by=url_add");
-				$return = "$app[authkey]|$app[appid]|".UC_DBHOST.'|'.UC_DBNAME.'|'.UC_DBUSER.'|'.UC_DBPW.'|'.UC_DBCHARSET.'|'.UC_DBTABLEPRE.'|'.UC_CHARSET;
+				$this->_writelog('app_queryinfo', "appid={$app['appid']}; by=url_add");
+				$return = "{$app['authkey']}|{$app['appid']}|".UC_DBHOST.'|'.UC_DBNAME.'|'.UC_DBUSER.'|'.UC_DBPW.'|'.UC_DBCHARSET.'|'.UC_DBTABLEPRE.'|'.UC_CHARSET;
 			}
 			@ob_end_clean();
 			exit($return);
@@ -118,31 +118,6 @@ class appcontrol extends base {
 		exit("UC_STATUS_OK|".UC_SERVER_VERSION."|".UC_SERVER_RELEASE."|".UC_CHARSET."|".UC_DBCHARSET."|".$apptypes);
 	}
 
-	function _random($length, $numeric = 0) {
-		PHP_VERSION < '4.2.0' && mt_srand((double)microtime() * 1000000);
-		if($numeric) {
-			$hash = sprintf('%0'.$length.'d', mt_rand(0, pow(10, $length) - 1));
-		} else {
-			$hash = '';
-			$chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
-			$max = strlen($chars) - 1;
-			for($i = 0; $i < $length; $i++) {
-				$hash .= $chars[mt_rand(0, $max)];
-			}
-		}
-		return $hash;
-	}
-
-	function _generate_key() {
-		$random = $this->_random(32);
-		$info = md5($_SERVER['SERVER_SOFTWARE'].$_SERVER['SERVER_NAME'].$_SERVER['SERVER_ADDR'].$_SERVER['SERVER_PORT'].$_SERVER['HTTP_USER_AGENT'].time());
-		$return = array();
-		for($i=0; $i<32; $i++) {
-			$return[$i] = $random[$i].$info[$i];
-		}
-		return implode('', $return);
-	}
-
 	function _format_notedata($notedata) {
 		$arr = array();
 		foreach($notedata as $key => $note) {
@@ -163,11 +138,7 @@ class appcontrol extends base {
 			}
 			@rename($logfile, UC_ROOT.'./data/logs/'.gmdate('Ym', $this->time).'_'.$hash.'.php');
 		}
-		if($fp = @fopen($logfile, 'a')) {
-			@flock($fp, 2);
-			@fwrite($fp, "<?PHP exit;?>\t".str_replace(array('<?', '?>', '<?php'), '', $log)."\n");
-			@fclose($fp);
-		}
+		file_put_contents($logfile, "<?PHP exit;?>\t".str_replace(array('<?', '?>', '<?php'), '', $log)."\n", FILE_APPEND);
 	}
 
 }

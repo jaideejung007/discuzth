@@ -20,11 +20,11 @@ function loadcalendar() {
 	s += '<table cellspacing="0" cellpadding="0" width="100%" style="text-align: center;" class="table1">';
 	s += '<thead>';
 	s += '<tr align="center" id="calendar_week">';
-	s += '<th><a href="###" onclick="refreshcalendar(yy, mm-1)" title="上一月">《</a></th>';
-	s += '<th colspan="5" style="text-align: center"><a href="###" onclick="showdiv(\'year\');_cancelBubble(event)" title="点击选择年份" id="year"></a>&nbsp; - &nbsp;<a id="month" title="点击选择月份" href="###" onclick="showdiv(\'month\');_cancelBubble(event)"></a></th>';
-	s += '<th><A href="###" onclick="refreshcalendar(yy, mm+1)" title="下一月">》</A></th>';
+	s += '<th><a href="###" onclick="refreshcalendar(yy, mm-1)" title="เดือนที่แล้ว">《</a></th>';
+	s += '<th colspan="5" style="text-align: center"><a href="###" onclick="showdiv(\'year\');_cancelBubble(event)" title="คลิกเลือกปี" id="year"></a>&nbsp; - &nbsp;<a id="month" title="คลิกเลือกเดือน" href="###" onclick="showdiv(\'month\');_cancelBubble(event)"></a></th>';
+	s += '<th><A href="###" onclick="refreshcalendar(yy, mm+1)" title="เดือนถัดไป">》</A></th>';
 	s += '</tr>';
-	s += '<tr id="calendar_header"><td>日</td><td>一</td><td>二</td><td>三</td><td>四</td><td>五</td><td>六</td></tr>';
+	s += '<tr id="calendar_header"><td>อา.</td><td>จ.</td><td>อ.</td><td>พ.</td><td>พฤ.</td><td>ศ.</td><td>ส.</td></tr>';
 	s += '</thead>';
 	s += '<tbody>';
 	for(var i = 0; i < 6; i++) {
@@ -33,7 +33,7 @@ function loadcalendar() {
 			s += "<td id=d" + (i * 7 + j) + " height=\"19\">0</td>";
 		s += "</tr>";
 	}
-	s += '<tr id="hourminute"><td colspan="7" align="center"><input type="text" size="2" value="" id="hour" onKeyUp=\'this.value=this.value > 23 ? 23 : zerofill(this.value);controlid.value=controlid.value.replace(/\\d+(\:\\d+)/ig, this.value+"$1")\'> 点 <input type="text" size="2" value="" id="minute" onKeyUp=\'this.value=this.value > 59 ? 59 : zerofill(this.value);controlid.value=controlid.value.replace(/(\\d+\:)\\d+/ig, "$1"+this.value)\'> 分</td></tr>';
+	s += '<tr id="hourminute"><td colspan="7" align="center"><input type="text" size="2" value="" id="hour" onKeyUp=\'this.value=this.value > 23 ? 23 : zerofill(this.value);controlid.value=controlid.value.replace(/\\d+(\:\\d+)/ig, this.value+"$1")\'> : <input type="text" size="2" value="" id="minute" onKeyUp=\'this.value=this.value > 59 ? 59 : zerofill(this.value);controlid.value=controlid.value.replace(/(\\d+\:)\\d+/ig, "$1"+this.value)\'> นาที</td></tr>';
 	s += '</tbody>';
 	s += '</table></div></div>';
 	s += '<div id="calendar_year" onclick="_cancelBubble(event)" style="display: none; z-index: 130;" class="calendarmenu"><div class="col" style="float: left; margin-right: 5px;">';
@@ -44,7 +44,7 @@ function loadcalendar() {
 	s += '</div></div>';
 	s += '<div id="calendar_month" onclick="_cancelBubble(event)" style="display: none; padding: 3px; z-index: 140" class="calendarmenu">';
 	for(var k = 1; k <= 12; k++) {
-		s += '<a href="###" onclick="refreshcalendar(yy, ' + (k - 1) + ');$(\'calendar_month\').style.display=\'none\'; "><span' + (today.getMonth()+1 == k ? ' class="bold"' : '') + ' id="calendar_month_' + k + '">' + k + ( k < 10 ? '&nbsp;' : '') + ' 月</span></a><br />';
+		s += '<a href="###" onclick="refreshcalendar(yy, ' + (k - 1) + ');$(\'calendar_month\').style.display=\'none\'; ">เดือน<span' + (today.getMonth()+1 == k ? ' class="bold"' : '') + ' id="calendar_month_' + k + '">' + k + ( k < 10 ? '&nbsp;' : '') + ' </span></a><br />';
 	}
 
 	s += '</div>';
@@ -140,7 +140,7 @@ function refreshcalendar(y, m) {
 		}
 		if(x.getFullYear() == today.getFullYear() && x.getMonth() == today.getMonth() && x.getDate() == today.getDate()) {
 			dd.className = 'bold';
-			dd.firstChild.title = '今天';
+			dd.firstChild.title = 'วันนี้';
 		}
 		if(x.getFullYear() == currday.getFullYear() && x.getMonth() == currday.getMonth() && x.getDate() == currday.getDate()) {
 			dd.className = 'error bold';

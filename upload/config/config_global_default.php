@@ -7,9 +7,9 @@
  *      $Id: config_global_default.php 36362 2017-02-04 02:02:03Z nemohou $
  */
 
-/* 提示：自X3.5版本起，本文件不支持调用系统内任何变量或函数，请依赖此行为的站点修正实现 */
-
 $_config = array();
+
+// 提示：自当前版本起，本文件不支持调用系统内任何变量或函数，请依赖此行为的站点修正实现 //
 
 // ----------------------------  CONFIG DB  ----------------------------- //
 // ----------------------------  数据库相关设置---------------------------- //
@@ -29,9 +29,9 @@ $_config = array();
  * ...
  *
  */
-$_config['db'][1]['dbhost']  		= 'localhost';
+$_config['db'][1]['dbhost']  		= '127.0.0.1';
 $_config['db'][1]['dbuser']  		= 'root';
-$_config['db'][1]['dbpw'] 	 	= 'root';
+$_config['db'][1]['dbpw'] 	 	= '';
 $_config['db'][1]['dbcharset'] 		= 'utf8mb4';
 $_config['db'][1]['pconnect'] 		= 0;
 $_config['db'][1]['dbname']  		= 'ultrax';
@@ -131,7 +131,8 @@ $_config['server']['id']		= 1;			// 服务器编号，多webserver的时候，�
 
 // 附件下载相关
 //
-// 本地文件读取模式; 模式2为最节省内存方式，但不支持多线程下载 如需附件URL地址、媒体附件播放，需选择支持Range参数的读取模式1或4
+// 本地文件读取模式; 模式2为最节省内存方式，但不支持多线程下载
+// 如需附件URL地址、媒体附件播放，需选择支持Range参数的读取模式1或4，其他模式会导致部分浏览器下视频播放异常
 // 1=fread 2=readfile 3=fpassthru 4=fpassthru+multiple
 $_config['download']['readmod'] = 2;
 
@@ -177,6 +178,8 @@ $_config['security']['creditsafe']['second'] 	= 0;		// 开启用户积分信息�
 $_config['security']['creditsafe']['times'] 	= 10;
 
 $_config['security']['fsockopensafe']['port']	= array(80, 443);	//fsockopen 有效的端口
+$_config['security']['fsockopensafe']['ipversion']	= array('ipv6', 'ipv4');	//fsockopen 有效的IP协议
+$_config['security']['fsockopensafe']['verifypeer']	= false;	// fsockopen是否验证证书有效性，开启可提升安全性，但需自行解决证书配置问题
 
 $_config['security']['error']['showerror'] = '1';	//是否在数据库或系统严重异常时显示错误详细信息，0=不显示(更安全)，1=显示详细信息(默认)，2=只显示错误本身
 $_config['security']['error']['guessplugin'] = '1';	//是否在数据库或系统严重异常时猜测可能报错的插件，0=不猜测，1=猜测(默认)
@@ -187,6 +190,7 @@ $_config['admincp']['forcesecques']		= 0;		// 管理人员必须设置安全提�
 $_config['admincp']['checkip']			= 1;		// 后台管理操作是否验证管理员的 IP, 1=是[安全], 0=否。仅在管理员无法登陆后台时设置 0。
 $_config['admincp']['runquery']			= 0;		// 是否允许后台运行 SQL 语句 1=是 0=否[安全]
 $_config['admincp']['dbimport']			= 1;		// 是否允许后台恢复论坛数据  1=是 0=否[安全]
+$_config['admincp']['mustlogin']		= 1;		// 是否必须前台登录后才允许后台登录  1=是[安全] 0=否
 
 /**
  * 系统远程调用功能模块
@@ -206,7 +210,8 @@ $_config['remote']['appkey'] = md5($_config['security']['authkey']);
 $_config['remote']['cron'] = 0;
 
 // $_GET|$_POST的兼容处理，0为关闭，1为开启；开启后即可使用$_G['gp_xx'](xx为变量名，$_GET和$_POST集合的所有变量名)，值为已经addslashes()处理过
-$_config['input']['compatible'] = 1;
+// 考虑到安全风险，自X3.5版本起本开关恢复默认值为0的设定，后续版本可能取消此功能，请各位开发人员注意
+$_config['input']['compatible'] = 0;
 
 /**
  * IP数据库扩展
