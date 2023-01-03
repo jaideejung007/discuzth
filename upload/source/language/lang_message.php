@@ -649,7 +649,7 @@ $lang = array (
 
   'diy_topic_noexist' => 'หัวข้อที่ระบุไม่มีอยู่ หากนี่คือความผิดพลาด กรุณาติดต่อผู้ดูแลระบบทันที',
   'diy_remote_upload_failed' => 'การอัปโหลดระยะไกลล้มเหลว',
-  'diy_sign_invalid' => 'การตรวจสอบเทมเพลทของ DIY มีความผิดพลาด',
+  'diy_sign_invalid' => 'การตรวจสอบเทมเพลตของ DIY มีความผิดพลาด',
   'diy_backup_noexist' => 'ไฟล์สำรองไม่มี',
   'diy_data_format_invalid' => 'รูปแบบข้อมูลผิดพลาด',
   'diy_no_export_data' => 'ไม่สามารถส่งออกข้อมูล',
@@ -1017,10 +1017,10 @@ $lang = array (
   'admin_reason_invalid' => 'กรุณาใส่เหตุผล',
 
   'css_contains_elements_of_insecurity' => 'ขออภัย! เนื้อหาของคุณประกอบโค้ดหรือตัวอักษรที่ไม่ปลอดภัย',
-  'diy_template_filename_invalid' => 'ชื่อเทมเพลท DIY ไม่ถูกต้อง',
-  'diy_tpldirectory_invalid' => 'โฟลเดอร์เทมเพลทของ DIY ไม่ถูกต้อง',
-  'diy_template_extension_invalid' => 'ส่วนขยายไฟล์เทมเพลทไม่ถูกต้อง',
-  'diy_template_noexist' => 'ไม่พบไฟล์เทมเพลท',
+  'diy_template_filename_invalid' => 'ชื่อเทมเพลต DIY ไม่ถูกต้อง',
+  'diy_tpldirectory_invalid' => 'โฟลเดอร์เทมเพลตของ DIY ไม่ถูกต้อง',
+  'diy_template_extension_invalid' => 'ส่วนขยายไฟล์เทมเพลตไม่ถูกต้อง',
+  'diy_template_noexist' => 'ไม่พบไฟล์เทมเพลต',
   'topic_title_cannot_be_empty' => 'ขออภัย! หัวข้อชื่อไม่สามารถว่างเปล่า',
   'topic_name_duplicated' => 'ขออภัย! ชื่อหัวข้อพิเศษไม่สามารถซ้ำได้',
   'topic_created_failed' => 'ขออภัย! สร้างหัวข้อล้มเหลว',

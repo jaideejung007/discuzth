@@ -212,7 +212,7 @@ $lang = array
 
 	'menu_setting_qqconnect' => 'เชื่อมต่อกับ QQ',
 
-	'admincp_title' => 'ศูนย์กลางจัดการ '.$_G['setting']['bbname'].'',
+	'admincp_title' => 'ศูนย์กลางจัดการเว็บไซต์ '.$_G['setting']['bbname'].'',
 
 );
 

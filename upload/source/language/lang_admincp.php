@@ -458,7 +458,7 @@ $lang = array
 
 	'nav_repeat' => 'ไอพีซ้ำ',
 
-	'nav_misc_onlinelist' => 'ไอคอนรายชื่อออนไลน์',
+	'nav_misc_onlinelist' => 'จัดการไอคอนออนไลน์',
 	'nav_misc_links' => 'ตั้งค่าเว็บลิงก์',
 	'nav_misc_relatedlink' => 'ลิงก์ที่เกี่ยวข้อง',
 	'nav_posting_censor' => 'ตั้งค่ากรองคำหยาบ',
@@ -694,7 +694,7 @@ $lang = array
 
 	'home' => 'หน้าแรก',
 	'home_diy' => 'หน้าแรก DIY',
-	'home_welcome' => 'ศูนย์กลางจัดการ {bbname}',
+	'home_welcome' => 'ศูนย์กลางจัดการเว็บไซต์ {bbname}',
 	'home_welcome_txt' => 'ขอต้อนรับกลับมา, ',
 	'home_security_tips' => 'คำแนะนำด้านความปลอดภัย',
 	'home_security_founder' => '<li>คุณสามารถพัฒนาเว็บไซต์ของคุณให้มีประสิทธิภาพได้ โดยการมอบหมายให้ทีมงานและสมาชิกในทีมช่วยกันดูแลและพัฒนาในส่วนต่างๆของเว็บไซต์ แบ่งหน้าที่ที่แตกต่างกันให้พวกเขาดูแลและจัดการส่วนต่างๆ ภายในเว็บไซต์<li>อาจจะต้องเพิ่ม [<strong>ผู้ช่วยผู้ดูแลระบบหรือผู้รักษาการแทนจัดการ</strong>] เพื่อให้ช่วยดูแลในส่วนที่สำคัญ [ผู้ดูแลระบบ] มีสิทธิ์ที่จะจัดการได้ทุกอย่าง</li>',
@@ -2637,7 +2637,7 @@ $lang = array
 	'usertag_send_notice' => 'Send notification',
 	'mobile' => 'อุปกรณ์พกพา',
 	'secmobile' => 'Secure phone number',
-	'setting_mobile' => 'การใช้งานบนอุปกรณ์พกพา',
+	'setting_mobile' => 'ตั้งค่าเวอร์ชันมือถือ',
 	'setting_mobile_status' => 'Global settings',
 	'setting_mobile_portal' => 'Portal settings',
 	'setting_mobile_forum' => 'Forum settings',
@@ -2808,8 +2808,8 @@ $lang = array
 	'forums_cat_display_comment' => 'เลือก "ไม่" ในส่วนนี้จะถูกซ่อนจะไม่ปรากฏ พื้นที่เนื้อหาจะยังคงอยู่ และผู้ใช้ยังสามารถเข้าถึงพื้นที่และ URL ของบอร์ด',
 	'forums_edit' => 'แก้ไขบอร์ด',
 	'forums_edit_comment' => 'แก้ไขการตั้งค่าของบอร์ด',
-	'forums_edit_inherited' => 'ตั้งค่าการรับช่วงในระดับที่สูง',
-	'forums_edit_newinherited' => 'Inherit the designated forum settings',
+	'forums_edit_inherited' => 'คัดลอกการตั้งค่าจากบอร์ดหลัก (บอร์ดด้านบนของบอร์ดย่อยนี้)',
+	'forums_edit_newinherited' => 'คัดลอกการตั้งค่าจากบอร์ดที่ระบุไว้',
 	'forums_edit_tips' => '<li>Following settings are not inherited, that is only the current Forum, that will not impact on the lower sub-Forums.</li>',
 	'forums_edit_switch' => 'เลือกบอร์ด',
 	'forums_multiedit' => 'เลือกบอร์ดที่ต้องการแก้ไขเป็นกลุ่ม',
@@ -3091,13 +3091,13 @@ $lang = array
 	'forums_edit_plugin' => 'ปลั๊กอินที่เกี่ยวข้อง',
 
 	'forums_copy' => 'คัดลอก',
-	'forums_copy_comment' => 'ส่วนนี้จะได้รับการตั้งค่าเพื่อคัดลอกส่วนอื่นๆ',
-	'forums_copy_tips' => '<li>คัดลอกการตั้งค่าที่มาของบางส่วนของคอลัมน์ควรจะตั้งค่าให้กับจานอื่นสำหรับจานของตั้งตาม, รวดเร็วตั้งค่าจำนวนของส่วน. </li><li>ส่วนการติดตั้งเมื่อคัดลอกส่งซึ่งมีผลในทันทีและไม่สามารถเรียกคืนอย่างถี่ถ้วนเลือกเป้าหมายจานและติดตั้งโครงการ</li>',
-	'forums_copy_source' => 'ต้นทางบอร์ด',
-	'forums_copy_target' => 'ปลายทางบอร์ด',
-	'forums_copy_target_comment' => 'เลือกเพื่อคัดลอกแหล่งจานที่จานเป้าหมายคุณสามารถเลือกที่จะกดปุ่ม CTRL ได้',
-	'forums_copy_options' => 'รายการ',
-	'forums_copy_options_comment' => 'เลือกเพื่อดูแหล่งที่กำหนดเป้าหมายเพื่อคัดลอกแผ่นสามารถกดปุ่ม CTRL เลือกได้',
+	'forums_copy_comment' => 'คัดลอกการตั้งค่าของเว็บบอร์ดนี้ไปยังเว็บบอร์ดอื่น',
+	'forums_copy_tips' => '<li>ฟีเจอร์คัดลอกการตั้งค่าเว็บบอร์ดนี้ จะใช้การตั้งค่าเว็บบอร์ดต้นทางเป็นฐาน เพื่อคัดลอกการตั้งค่าให้กับเว็บบอร์ดอื่น ๆ ได้อยางรวดเร็ว</li><li>การคัดลอกการตั้งค่าเว็บบอร์ดนี้จะมีผลทันทีที่กดปุ่มตกลงและไม่สามารถกู้คืนได้ กรุณาเลือกเว็บบอร์ดปลายทางและรายการการตั้งค่าที่จะคัดลอกไปอย่างระมัดระวัง</li>',
+	'forums_copy_source' => 'เว็บบอร์ดต้นทาง',
+	'forums_copy_target' => 'เว็บบอร์ดปลายทาง',
+	'forums_copy_target_comment' => 'เลือกเว็บบอร์ดปลายทางที่คุณจะคัดลอกการตั้งค่าจากเว็บบอร์ดต้นทาง คุณสามารถกด CTRL ค้างไว้เพื่อเลือกหลายรายการ',
+	'forums_copy_options' => 'เลือกรายการที่จะคัดลอกการตั้งค่า',
+	'forums_copy_options_comment' => 'เลือกการตั้งค่าของเว็บบอร์ดต้นทางที่จะคัดลอกไปยังเว็บบอร์ดปลายทาง กด CTRL ค้างไว้เพื่อเลือกหลายรายการ',
 
 	'forums_moderators' => 'ผู้ดูแล',
 	'forums_moderators_comment' => 'แก้ไขผู้ดูแลเว็บบอร์ดนี้',
@@ -3108,10 +3108,10 @@ $lang = array
 
 	'forums_delete_comment' => 'ลบบบอร์ดและกระทู้ทั้งหมดในบอร์ดนี้',
 
-	'forums_merge' => 'จัดการรวมบอร์ด',
-	'forums_merge_source' => 'ต้นทางของบอร์ด',
-	'forums_merge_source_comment' => 'ข้อมูลโพสต์ทั้งหมดในบอร์ดที่มาจะถูกโอนย้ายไปบอร์ดเป้าหมาย ในเวลาเดียวกันจะลบบอร์ดที่มา',
-	'forums_merge_target' => 'เป้าหมายของบอร์ด',
+	'forums_merge' => 'จัดการรวมเว็บบอร์ด',
+	'forums_merge_source' => 'เว็บบอร์ดต้นทาง',
+	'forums_merge_source_comment' => 'ข้อมูลกระทู้หรือโพสต์ต่าง ๆ ในเว็บบอร์ดต้นทางจะถูกย้ายไปเว็บบอร์ดปลายทางทั้งหมด พร้อมทั้งนี้เว็บบอร์ดต้นทางก็จะถูกลบออกด้วยเช่นกัน',
+	'forums_merge_target' => 'เว็บบอร์ดปลายทาง',
 
 	'threadtype_infotypes' => 'จัดการหมวดหมู่กระทู้',
 	'threadtype_infotypes_type' => 'จัดการหมวดหมู่',

@@ -233,7 +233,7 @@ $lang = array(
 
 	'init_default_style' => 'สไตล์มาตรฐาน',
 	'init_default_forum' => 'เว็บบอร์ดตัวอย่าง',
-	'init_default_template' => 'เทมเพลทมาตรฐาน',
+	'init_default_template' => 'เทมเพลตมาตรฐาน',
 	'init_default_template_copyright' => 'บริษัท เทนเซ็นต์คลาวด์คอมพิวติ้ง จำกัด',
 
 	'init_dataformat' => 'Y-n-j',
@@ -369,7 +369,7 @@ $lang = array(
 	'install_finish' => 'ติดตั้งเว็บไซต์เสร็จสมบูรณ์ ขอบคุณสำหรับการสนับสนุนของคุณ!',
 	'install_finish_next' => 'ขั้นตอนต่อไป คุณสามารถ:',
 	'finish_btn_admin' => 'เข้าสู่ระบบจัดการเว็บไซต์ (AdminCP)',
-	'finish_btn_cloudaddon' => 'ติดตั้งปลั๊กอิน/เทมเพลท',
+	'finish_btn_cloudaddon' => 'ติดตั้งปลั๊กอิน/เทมเพลต',
 	'finish_btn_direct' => 'เยี่ยมชมหน้าแรกเว็บไซต์',
 
 );

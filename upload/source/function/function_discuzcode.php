@@ -413,10 +413,11 @@ function parseed2k($url) {
 
 function parseattachurl($aid, $ext, $ignoretid = 0) {
 	global $_G;
+	require_once libfile('function/attachment');
 	$_G['forum_skipaidlist'][] = $aid;
 	if(!empty($ext)) {
 		$attach = C::t('forum_attachment_n')->fetch('aid:'.$aid, $aid);
-		if(!in_array(attachtype(fileext($attach['filename'])), array(9, 10))) {
+		if(!in_array(attachtype(fileext($attach['filename'])."\t", 'id'), array(9, 10))) {
 			$ext = 0;
 		}
 	}

@@ -471,10 +471,10 @@ function show_widgets() {
 
 function show_forever_thanks() {
 	$copyRightMessage = array(
-		'&#x7248;&#x6743;&#x6240;&#x6709;',
-		'&#x817E;&#x8BAF;&#x4E91;&#x8BA1;&#x7B97;&#xFF08;&#x5317;&#x4EAC;&#xFF09;&#x6709;&#x9650;&#x8D23;&#x4EFB;&#x516C;&#x53F8;',
-		'&#x627F;&#x63A5;&#x8FD0;&#x8425;',
-		'&#x5408;&#x80A5;&#x8D30;&#x9053;&#x7F51;&#x7EDC;&#x79D1;&#x6280;&#x6709;&#x9650;&#x516C;&#x53F8;',
+		'&#xE40;&#xE08;&#xE49;&#xE32;&#xE02;&#xE2D;&#xE07;&#xE25;&#xE34;&#xE02;&#xE2A;&#xE34;&#xE17;&#xE18;&#xE34;&#xE4C;',
+		'&#xE1A;&#xE23;&#xE34;&#xE29;&#xE31;&#xE17; &#xE40;&#xE17;&#xE19;&#xE40;&#xE0B;&#xE47;&#xE19;&#xE15;&#xE4C;&#xE04;&#xE25;&#xE32;&#xE27;&#xE14;&#xE4C;&#xE04;&#xE2D;&#xE21;&#xE1E;&#xE34;&#xE27;&#xE15;&#xE34;&#xE49;&#xE07; (&#xE01;&#xE23;&#xE38;&#xE07;&#xE1B;&#xE31;&#xE01;&#xE01;&#xE34;&#xE48;&#xE07;) &#xE08;&#xE33;&#xE01;&#xE31;&#xE14;',
+		'&#xE1C;&#xE39;&#xE49;&#xE23;&#xE31;&#xE1A;&#xE1C;&#xE34;&#xE14;&#xE0A;&#xE2D;&#xE1A;&#xE01;&#xE32;&#xE23;&#xE14;&#xE33;&#xE40;&#xE19;&#xE34;&#xE19;&#xE07;&#xE32;&#xE19;',
+		'&#xE1A;&#xE23;&#xE34;&#xE29;&#xE31;&#xE17; &#xE40;&#xE19;&#xE47;&#xE15;&#xE40;&#xE27;&#xE34;&#xE23;&#xE4C;&#xE04;&#xE40;&#xE17;&#xE04;&#xE42;&#xE19;&#xE42;&#xE25;&#xE22;&#xE35;&#xE40;&#xE2B;&#xE2D;&#xE40;&#xE1F;&#xE22;&#xE40;&#xE2D;&#xE49;&#xE2D;&#xE23;&#xE4C;&#xE40;&#xE15;&#xE4B;&#xE32; &#xE08;&#xE33;&#xE01;&#xE31;&#xE14;',
 	);
 	$gitTeamStr = '';
 	$gitTeam = array(

@@ -1,3 +1,9 @@
+
+--
+-- 导出表中的数据 `pre_common_district`
+--
+
+TRUNCATE TABLE `pre_common_district`;
 INSERT INTO `pre_common_district` (`id`, `name`, `level`, `usetype`, `upid`, `displayorder`) VALUES
 (1, 'กระบี่', 1, 3, 9999088, 0),
 (2, 'กรุงเทพมหานคร', 1, 3, 9999088, 0),

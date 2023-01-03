@@ -35,9 +35,11 @@ $config = array(
 	'tablepre' => $_G['config']['db']['1']['tablepre']
 );
 
-$step = !empty($_GET['step']) && in_array($_GET['step'], array('welcome', 'tips', 'license', 'envcheck', 'confirm', 'config', 'innodb', 'scheme', 'utf8mb4', 'serialize', 'serialize_plugin', 'file', 'dataupdate')) ? $_GET['step'] : 'welcome';
+$step = !empty($_GET['step']) && in_array($_GET['step'], array('welcome', 'tips', 'license', 'envcheck', 'confirm', 'config', 'innodb', 'scheme', 'utf8mb4', 'serialize', 'serialize_plugin', 'file', 'dataupdate', 'confirmthaidistrictupgrade', 'thaidistrictupgrade', 'cancelthaidistrictupgrade')) ? $_GET['step'] : 'welcome';
 $theurl = htmlspecialchars($_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_NAME']);
 $lockfile = DISCUZ_ROOT.'./data/update.lock';
+
+timezone_set();
 
 $tables = array();
 
@@ -432,7 +434,8 @@ if ($step == 'welcome') {
 
 		if ($config['dbcharset'] == 'utf8' || $config['dbcharset'] == 'utf8mb4') {
 			logmessage("serialize not needed because of this site is ".$config['dbcharset']." site.");
-			show_msg("ไม่จำเป็นต้องแปลงข้อมูลแบบซีเรียลไลซ์ กำลังเตรียมการในขั้นตอนต่อไป กรุณารอสักครู่......", 'คำแนะนำการอัปเกรด', 0, "$theurl?step=dataupdate");
+			//show_msg("ไม่จำเป็นต้องแปลงข้อมูลแบบซีเรียลไลซ์ กำลังเตรียมการในขั้นตอนต่อไป กรุณารอสักครู่......", 'คำแนะนำการอัปเกรด', 0, "$theurl?step=dataupdate");
+			show_msg("ไม่จำเป็นต้องแปลงข้อมูลแบบซีเรียลไลซ์ กำลังเตรียมการในขั้นตอนต่อไป กรุณารอสักครู่......", 'คำแนะนำการอัปเกรด', 0, "$theurl?step=confirmthaidistrictupgrade");
 		}
 
 		$configfile = DISCUZ_ROOT.'./config/config_global.php';
@@ -663,6 +666,7 @@ if ($step == 'welcome') {
 				}
 				if (dunserialize($datanew) !== false) {
 					$datanew = addslashes($datanew);
+					$data = addslashes($data);
 					$sql = "UPDATE `$stable` SET `$sfield` = '$datanew' WHERE `$sfield` = '$data';";
 					logmessage("RUNSQL ".$sql);
 					DB::query($sql);
@@ -671,6 +675,7 @@ if ($step == 'welcome') {
 			} elseif (strstr($stype, 'blob')) {
 				$datanew = diconv($data, $fromcharset, 'UTF-8');
 				$datanew = addslashes($datanew);
+				$data = addslashes($data);
 				$sql = "UPDATE `$stable` SET `$sfield` = '$datanew' WHERE `$sfield` = '$data';";
 				logmessage("RUNSQL ".$sql);
 				DB::query($sql);
@@ -699,7 +704,27 @@ if ($step == 'welcome') {
 	encode_tree(__DIR__.'/../source/plugin/');
 	encode_tree(__DIR__.'/../template/');
 
-	show_msg("แปลงการเข้ารหัสไฟล์เรียบร้อยแล้ว และกำลังดำเนินการในขั้นตอนต่อไป กรุณารอสักครู่......", 'คำแนะนำการอัปเกรด', 0, "$theurl?step=dataupdate");
+	//show_msg("แปลงการเข้ารหัสไฟล์เรียบร้อยแล้ว และกำลังดำเนินการในขั้นตอนต่อไป กรุณารอสักครู่......", 'คำแนะนำการอัปเกรด', 0, "$theurl?step=dataupdate");
+	show_msg("แปลงการเข้ารหัสไฟล์เรียบร้อยแล้ว และกำลังดำเนินการในขั้นตอนต่อไป กรุณารอสักครู่......", 'คำแนะนำการอัปเกรด', 0, "$theurl?step=confirmthaidistrictupgrade");
+
+} else if ($step == 'confirmthaidistrictupgrade') { /*jaideejung007*/
+
+	show_msg('<p class="lead" style="color: red;font-weight: bold;">ขั้นตอนนี้จะอัปเกรดฐานข้อมูลรายชื่อจังหวัด อำเภอ ตำบลในประเทศไทยใหม่ล่าสุด (จาก ThepExcel ปรับปรุงปี 2022) พร้อมทั้งรายชื่อ 199 ประเทศและอีก 52 ดินแดน (จากสำนักงานราชบัณฑิตยสภา 29 มิถุนายน 2565)</p><p class="lead" style="color: red;font-weight: bold;">ขอแนะนำให้อัปเกรด เนื่องจาก X3.4 ได้ใช้ฐานข้อมูลเก่าตั้งแต่ปี 2555 (ซึ่งปัจจุบันรายชื่อจังหวัด อำเภอ ตำบลมีการอัปเดตใหม่แล้ว) โดยกระบวนการนี้จะลบข้อมูลเก่าในตาราง pre_common_district ออกแล้วนำเข้าใหม่ทั้งหมด</p><p><button type="button" class="btn btn-primary" onclick="location.href=\'?step=thaidistrictupgrade\';">อัปเกรดฐานข้อมูลรายชื่อจังหวัดฯ ></button> <button type="button" class="btn btn-secondary" onclick="location.href=\'?step=cancelthaidistrictupgrade\';">ข้าม (ไม่แนะนำ)</button></p>', 'อัปเกรดฐานข้อมูลรายชื่อจังหวัด อำเภอ ตำบลในประเทศไทยใหม่ล่าสุด', 1);
+} else if ($step == 'thaidistrictupgrade') { /*jaideejung007*/
+
+	$sql = thai_district_upgrade_sql('pre_common_district'); // เรียกใช้ TRUNCATE TABLE pre_common_district เพื่อลบข้อมูลในตารางฐานข้อมูลออก
+	logmessage("RUNSQL ".$sql);
+	DB::query($sql);
+	logmessage("RUNSQL Success");
+	install_testdata(); // นำเข้าฐานข้อมูลรายชื่อจังหวัดฯ จากไฟล์ common_district_*.sql
+	logmessage("import Thai common_district_*.sql ok, continue.");
+	show_msg("อัปเกรดฐานข้อมูลรายชื่อจังหวัดฯ เรียบร้อยแล้ว และกำลังดำเนินการในขั้นตอนต่อไป กรุณารอสักครู่......", 'คำแนะนำการอัปเกรด', 0, "$theurl?step=dataupdate");
+
+} else if ($step == 'cancelthaidistrictupgrade') { /*jaideejung007*/
+	// หากผู้ใช้กดปุ่ม ข้าม การอัปเกรดฐานข้อมูลรายชื่อจังหวัดฯ ให้เรียกคำสั่งนี้
+	cancle_thai_district_upgrade();
+	logmessage("Skipped import Thai common_district_*.sql, continue.");
+	show_msg("คุณได้ข้ามการอัปเกรดฐานข้อมูลรายชื่อจังหวัดฯ กำลังดำเนินการในขั้นตอนต่อไป กรุณารอสักครู่......", 'คำแนะนำการอัปเกรด', 0, "$theurl?step=dataupdate");
 
 } else if ($step == 'dataupdate') {
 
@@ -714,6 +739,7 @@ if ($step == 'welcome') {
 	@unlink(DISCUZ_ROOT.'./source/function/cache/cache_ipbanned.php');
 	//jaideejung007 ลบไฟล์ geoiploc.php ออก เนื่องจากไม่ได้ใช้งานแล้ว
 	@unlink(DISCUZ_ROOT.'./data/ipdata/geoiploc.php');
+	logmessage("unlink ./data/ipdata/geoiploc.php");
 	
 	logmessage("unlink " . str_replace(DISCUZ_ROOT, '', $tablescachefile) . ".");
 	@unlink($tablescachefile);
@@ -1028,6 +1054,15 @@ function get_innodb_scheme_update_sql($table, $statusonly = false) {
 	return $statusonly ? array_key_exists($table, $query) : str_replace(' pre_', ' '.$config['tablepre'], $query[$table]);
 }
 
+function thai_district_upgrade_sql($table, $statusonly = false) { /*jaideejung007*/
+	global $config;
+	// ลบข้อมูลในตาราง pre_common_district ออกทั้งหมด เพื่อเตรียมนำเขัาข้อมูลใหม่
+	$query = array(
+		'pre_common_district' => 'TRUNCATE TABLE pre_common_district;' /*jaideejung007*/
+	);
+	return $statusonly ? array_key_exists($table, $query) : str_replace(' pre_', ' '.$config['tablepre'], $query[$table]);
+}
+
 function _serialize($str) {
 	$l = strlen($str[2]);
 	return 's:'.$l.':"'.$str[2].'";';
@@ -1155,9 +1190,6 @@ function db_content_update() {
 	DB::query("UPDATE ".DB::table('common_cron')." SET name = 'ตารางผู้ใช้รายวัน' WHERE filename = 'cron_member_optimize_daily.php'");
 	// 个人信息国别数据升级
 	logmessage("common_district upgrade");
-	DB::query("INSERT INTO ".DB::table('common_district')." (`name`, `level`, `upid`, `usetype`) VALUES ('ไทย', 0, 0, 3);");
-	$district_upid = DB::insert_id();
-	DB::query("UPDATE ".DB::table('common_district')." SET upid = $district_upid, usetype = 0 WHERE level = 1 AND upid = 0");
 	DB::query("UPDATE ".DB::table('common_member_profile')." SET birthcountry = 'ไทย' WHERE birthprovince != ''");
 	DB::query("UPDATE ".DB::table('common_member_profile')." SET residecountry = 'ไทย' WHERE resideprovince != ''");
 	// 允许用户浏览个人资料页
@@ -1175,6 +1207,20 @@ function db_content_update() {
 			C::t('common_plugin')->update($plugin['pluginid'], array('modules' => $modules));
 		}
 	}
+}
+
+function cancle_thai_district_upgrade() { /*jaideejung007 ฟังก์ชันนี้ เมื่อผู้ใช้กดข้าม การอัปเกรดฐานข้อมูลรายชื่อจังหวัดฯ */
+	setdbglobal();
+	define('IN_ADMINCP', true);
+	require_once libfile('function/admincp');
+	require_once libfile('function/importdata');
+	// รันคิวรีนี้ เมื่อผู้ใช้กดข้าม การอัปเกรดฐานข้อมูลรายชื่อจังหวัดฯ
+	logmessage("common_district upgrade");
+	DB::query("INSERT INTO ".DB::table('common_district')." (`name`, `level`, `upid`, `usetype`) VALUES ('ไทย', 0, 0, 3);");
+	$district_upid = DB::insert_id();
+	DB::query("UPDATE ".DB::table('common_district')." SET upid = $district_upid, usetype = 0 WHERE level = 1 AND upid = 0");
+	DB::query("UPDATE ".DB::table('common_member_profile')." SET birthcountry = 'ไทย' WHERE birthprovince != ''");
+	DB::query("UPDATE ".DB::table('common_member_profile')." SET residecountry = 'ไทย' WHERE resideprovince != ''");
 }
 
 function save_config_file($filename, $config, $default, $deletevar) {
@@ -1392,4 +1438,89 @@ function setdbglobal() {
 	// DB::query('SET GLOBAL connect_timeout=28800');
 	// DB::query('SET GLOBAL wait_timeout=28800');
 	// DB::query('SET GLOBAL interactive_timeout=28800');
+}
+
+function runquery($sql) { /*jaideejung007*/
+	//global $lang, $tablepre, $db;
+	global $config;
+	// $table = str_replace('pre_', $config['tablepre'], $table);
+
+	if(!isset($sql) || empty($sql)) return;
+
+	$sql = str_replace("\r", "\n", str_replace(' pre_', ' '.$config['tablepre'], $sql));
+	$sql = str_replace("\r", "\n", str_replace(' `pre_', ' `'.$config['tablepre'], $sql));
+	$ret = array();
+	$num = 0;
+	foreach(explode(";\n", trim($sql)) as $query) {
+		$ret[$num] = '';
+		$queries = explode("\n", trim($query));
+		foreach($queries as $query) {
+			$ret[$num] .= (isset($query[0]) && $query[0] == '#') || (isset($query[1]) && isset($query[1]) && $query[0].$query[1] == '--') ? '' : $query;
+		}
+		$num++;
+	}
+	unset($sql);
+
+	$oldtablename = "";
+	foreach($ret as $query) {
+		$query = trim($query);
+		if($query) {
+			if(substr($query, 0, 12) == 'CREATE TABLE') {
+				$name = preg_replace("/CREATE TABLE ([a-z0-9_]+) .*/is", "\\1", $query);
+				if (DB::query($query, 'SILENT')) {
+					logmessage("Create table ok, continue.");
+				} else {
+					logmessage("Create table failed.");
+					show_msg('สร้างตารางข้อมูล '.$name.' ไม่สำเร็จ', 'คำแนะนำการอัปเกรด');
+					return false;
+				}
+			} elseif(substr($query, 0, 6) == 'INSERT') {
+				$name = preg_replace("/INSERT\s+INTO\s+[\`]?([a-z0-9_]+)[\`]? .*/is", "\\1", $query);
+				if (DB::query($query, 'SILENT')) {
+						if($oldtablename != $name) {
+						logmessage("Init table data Thai common_district_*.sql ok, continue.");
+						$oldtablename = $name;
+					}
+				} else {
+					logmessage("Init table data Thai common_district_*.sql failed.");
+					show_msg('นำเข้าข้อมูลในตารางฐานข้อมูล '.$name.' ไม่สำเร็จ', 'คำแนะนำการอัปเกรด');
+					return false;
+				}
+			}else{
+				if (!DB::query($query, 'SILENT')) {
+					logmessage("import Thai common_district_*.sql failed.");
+					show_msg('นำเข้าข้อมูลไม่สำเร็จ', 'คำแนะนำการอัปเกรด');
+					return false;
+				}
+			}
+
+		}
+	}
+	return true;
+}
+
+function install_testdata() { /*jaideejung007*/
+	global $config;
+
+	$sqlfile_chk = DISCUZ_ROOT.'./install/data/common_district_1.sql';
+	if(!file_exists($sqlfile_chk)) {
+		logmessage("common_district_1.sql not found, not continue");
+		show_msg('<p><font color="red"><b>ไม่พบไฟล์ SQL ในตำแหน่งที่ตั้งนี้: '.$sqlfile_chk.'</p><p>หากมีการแบ่งไฟล์ SQL ออกเป็นหลาย ๆ พาร์ท กรุณาตั้งชื่อไฟล์ตามรูปแบบนี้ "common_district_X.sql" โดย X คือ ลำดับหมายเลขไฟล์ ตั้งแต่ 1 เป็นต้นไป</b></font></p>', 'คำแนะนำการอัปเกรด');
+	}
+
+	$sqlfile = DISCUZ_ROOT.'./install/data/common_district_{#id}.sql';
+	for($i = 1; $i < 4; $i++) {
+		$sqlfileid = str_replace('{#id}', $i, $sqlfile);
+		if(file_exists($sqlfileid)) {
+			$sql = file_get_contents($sqlfileid);
+			$sql = str_replace("\r\n", "\n", $sql);
+			runquery($sql);
+		}
+	}
+}
+
+function timezone_set($timeoffset = 7) {
+	if(function_exists('date_default_timezone_set')) {
+		@date_default_timezone_set('Etc/GMT'.($timeoffset > 0 ? '-' : '+').(abs($timeoffset)));
+	}
 }

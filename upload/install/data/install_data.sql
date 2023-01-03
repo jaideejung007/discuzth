@@ -807,7 +807,7 @@ INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (
 
 
 
-INSERT INTO pre_common_template VALUES ('1','เทมเพลทมาตรฐาน','./template/default','บริษัท เทนเซ็นต์คลาวด์คอมพิวติ้ง (กรุงปักกิ่ง) จำกัด');
+INSERT INTO pre_common_template VALUES ('1','เทมเพลตมาตรฐาน','./template/default','บริษัท เทนเซ็นต์คลาวด์คอมพิวติ้ง (กรุงปักกิ่ง) จำกัด');
 
 
 
@@ -923,7 +923,7 @@ INSERT INTO pre_home_click VALUES ('14','เอิ่ม...เอ่อ...','cli
 INSERT INTO pre_home_click VALUES ('15','อะไร? ยังไง?','click_14.gif','aid','1','0');
 
 -- [block_style]
-INSERT INTO pre_common_block_style (styleid, blockclass, `name`, template, `hash`, getpic, getsummary, makethumb, settarget, `fields`) VALUES(1, 'html_html', '[บิวท์อิน]เทมเพลทว่างเปล่า', 'a:9:{s:3:"raw";s:0:"";s:6:"footer";s:0:"";s:6:"header";s:0:"";s:9:"indexplus";a:0:{}s:5:"index";a:0:{}s:9:"orderplus";a:0:{}s:5:"order";a:0:{}s:8:"loopplus";a:0:{}s:4:"loop";a:0:{}}', 'ee3e718a', 0, 0, 0, 0, 'a:0:{}');
+INSERT INTO pre_common_block_style (styleid, blockclass, `name`, template, `hash`, getpic, getsummary, makethumb, settarget, `fields`) VALUES(1, 'html_html', '[บิวท์อิน]เทมเพลตว่างเปล่า', 'a:9:{s:3:"raw";s:0:"";s:6:"footer";s:0:"";s:6:"header";s:0:"";s:9:"indexplus";a:0:{}s:5:"index";a:0:{}s:9:"orderplus";a:0:{}s:5:"order";a:0:{}s:8:"loopplus";a:0:{}s:4:"loop";a:0:{}}', 'ee3e718a', 0, 0, 0, 0, 'a:0:{}');
 INSERT INTO pre_common_block_style (styleid, blockclass, `name`, template, `hash`, getpic, getsummary, makethumb, settarget, `fields`) VALUES(2, 'forum_forum', '[บิวท์อิน]รายชื่อบอร์ด', 'a:9:{s:3:"raw";s:130:"<div class="module cl xl xl1">\r\n<ul>\r\n[loop]\r\n<li><a href="{url}" title="{title}"{target}>{title}</a></li>\r\n[/loop]\r\n</ul>\r\n</div>";s:6:"footer";s:0:"";s:6:"header";s:0:"";s:9:"indexplus";a:0:{}s:5:"index";a:0:{}s:9:"orderplus";a:0:{}s:5:"order";a:0:{}s:8:"loopplus";a:0:{}s:4:"loop";s:60:"<li><a href="{url}" title="{title}"{target}>{title}</a></li>";}', 'c6c48ef5', 0, 0, 0, 1, 'a:2:{i:0;s:3:"url";i:1;s:5:"title";}');
 INSERT INTO pre_common_block_style (styleid, blockclass, `name`, template, `hash`, getpic, getsummary, makethumb, settarget, `fields`) VALUES(3, 'forum_forum', '[บิวท์อิน]ชื่อบอร์ด+กระทู้ทั้งหมด', 'a:9:{s:3:"raw";s:146:"<div class="module cl xl xl1">\r\n<ul>\r\n[loop]\r\n<li><em>{posts}</em><a href="{url}" title="{title}"{target}>{title}</a></li>\r\n[/loop]\r\n</ul>\r\n</div>";s:6:"footer";s:0:"";s:6:"header";s:0:"";s:9:"indexplus";a:0:{}s:5:"index";a:0:{}s:9:"orderplus";a:0:{}s:5:"order";a:0:{}s:8:"loopplus";a:0:{}s:4:"loop";s:76:"<li><em>{posts}</em><a href="{url}" title="{title}"{target}>{title}</a></li>";}', '91c25611', 0, 0, 0, 1, 'a:3:{i:0;s:5:"posts";i:1;s:3:"url";i:2;s:5:"title";}');
 INSERT INTO pre_common_block_style (styleid, blockclass, `name`, template, `hash`, getpic, getsummary, makethumb, settarget, `fields`) VALUES(4, 'forum_forum', '[บิวท์อิน]ชื่อบอร์ด+กระทู้ทั้งหมด(ลำดับ)', 'a:9:{s:3:"raw";s:146:"<div class="module cl xl xl1">\r\n<ol>\r\n[loop]\r\n<li><em>{posts}</em><a href="{url}" title="{title}"{target}>{title}</a></li>\r\n[/loop]\r\n</ol>\r\n</div>";s:6:"footer";s:0:"";s:6:"header";s:0:"";s:9:"indexplus";a:0:{}s:5:"index";a:0:{}s:9:"orderplus";a:0:{}s:5:"order";a:0:{}s:8:"loopplus";a:0:{}s:4:"loop";s:76:"<li><em>{posts}</em><a href="{url}" title="{title}"{target}>{title}</a></li>";}', '951323a8', 0, 0, 0, 1, 'a:3:{i:0;s:5:"posts";i:1;s:3:"url";i:2;s:5:"title";}');

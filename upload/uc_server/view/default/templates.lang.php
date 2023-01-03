@@ -394,7 +394,7 @@ $languages = array(
 
 	'cache_update' => 'อัปเดตแคช',
 	'cache_update_data' => 'แคชข้อมูล',
-	'cache_update_tpl' => 'แคชเทมเพลท',
+	'cache_update_tpl' => 'แคชเทมเพลต',
 
 	'db_export' => 'สำรองข้อมูล',
 	'db_export_filename' => 'ชื่อไฟล์สำรอง',
