@@ -118,8 +118,11 @@ function mb_strlen(str) {
 }
 
 function dstrlen(str) { /*jaideejung007*/
-	var count = 0;
-	return count;
+	var len = 0;
+	for(var i = 0; i < str.length; i++) {
+		len += str.charCodeAt(i) < 0 || str.charCodeAt(i) > 255 ? (charset == 'utf-8' ? 1 : 1) : 1;
+	}
+	return len;
 }
 
 function mb_cutstr(str, maxlen, dot) {

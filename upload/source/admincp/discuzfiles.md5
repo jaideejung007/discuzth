@@ -67,7 +67,7 @@ d41d8cd98f00b204e9800998ecf8427e *data/avatar/index.htm
 d41d8cd98f00b204e9800998ecf8427e *data/log/index.htm
 d41d8cd98f00b204e9800998ecf8427e *data/cache/index.htm
 f8689e3b96ecbac8ab0b9568cb412a5e *data/ipdata/geoip2.phar
-13bb1f0fa4d6e4900a32dc94c720d0ef *data/ipdata/GeoLite2-City.mmdb
+15f9378c594f27135b94d65a3937bc63 *data/ipdata/GeoLite2-City.mmdb
 7215ee9c7d9dc229d2921a40e899ec5f *data/ipdata/index.htm
 79da57ff3e78fd0dffa638c8144582ef *data/ipdata/ipv6wry.dat
 ebff35fbfdb5759cdf60b9b79b5b0a5b *data/ipdata/tinyipdata.dat
@@ -76,7 +76,7 @@ d41d8cd98f00b204e9800998ecf8427e *data/plugindata/index.htm
 d41d8cd98f00b204e9800998ecf8427e *data/threadcache/index.htm
 d41d8cd98f00b204e9800998ecf8427e *data/download/index.htm
 d41d8cd98f00b204e9800998ecf8427e *data/addonmd5/index.htm
-491f2ab72d64dd98b6d86d0d1f2fa49e *source/discuz_version.php
+26a4faf5e2e6e42085264c2f2d064c3c *source/discuz_version.php
 7215ee9c7d9dc229d2921a40e899ec5f *source/index.htm
 fc58890cc5df99f702af3a3d4cb9468a *source/admincp/admincp_admingroup.php
 be0ed17d7af5a8cf82a548219521f1c3 *source/admincp/admincp_adv.php
@@ -2568,7 +2568,7 @@ b4d18b265aa9e426b8e5d5385a450475 *static/js/at.js
 87fd7c6dbe707236e167455f8123e1f4 *static/js/autoloadpage.js
 aea4d28c0878fca4f0a6c8e11a66b665 *static/js/bbcode.js
 c1f1ddfd4e953966a03e5091b7bfe339 *static/js/calendar.js
-d10b6909ad438c5ff86c8de769f85514 *static/js/common.js
+f89036c767596b3a085815dcb0fce9f4 *static/js/common.js
 76075a8972349994f4f7179b647a47f5 *static/js/common_diy.js
 ff61dec039fb13c3ec6eeb388d931da4 *static/js/common_extra.js
 08c70f0d2dd5500a6d6b4d073a213181 *static/js/echarts/echarts.common.min.js
