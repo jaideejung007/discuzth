@@ -17,6 +17,10 @@ $lang = array
 	'login_title' => 'เข้าสู่ระบบศูนย์กลางจัดการเว็บไซต์',
 	'login_username' => 'ชื่อผู้ใช้',
 	'login_password' => 'รหัสผ่าน',
+	'login_dk_light_mode' => 'โหมดสว่าง',
+	'login_dk_by_system' => 'ตามค่าระบบ',
+	'login_dk_normal_mode' => 'โหมดปกติ',
+	'login_dk_dark_mode' => 'โหมดกลางคืน',
 
 	'submit' => 'เข้าสู่ระบบ',
 	'forcesecques' => 'ต้องระบุ',

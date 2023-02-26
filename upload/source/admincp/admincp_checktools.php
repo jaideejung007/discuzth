@@ -59,7 +59,7 @@ if($operation == 'filecheck') {
 		checkfiles('data/addonmd5/', '\.htm', 0);
 		checkfiles('data/avatar/', '\.htm', 0);
 		checkfiles('data/cache/', '\.htm', 0);
-		checkfiles('data/ipdata/', '\.htm|\.dat', 0);
+		checkfiles('data/ipdata/', '\.htm|\.dat|\.phar|\.mmdb', 0); /*jaideejung007*/
 		checkfiles('data/template/', '\.htm', 0);
 		checkfiles('data/threadcache/', '\.htm', 0);
 		checkfiles('template/', '');

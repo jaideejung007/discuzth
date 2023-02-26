@@ -61,7 +61,7 @@ if($operation == 'export' && $id) {
 
 cpheader();
 
-$predefinedvars = array('available' => array(), 'boardimg' => array(), 'searchimg' => array(), 'imgdir' => array(), 'styleimgdir' => array(), 'stypeid' => array(),
+$predefinedvars = array('available' => array(), 'boardimg' => array(), 'searchimg' => array(), 'touchimg' => array(), 'imgdir' => array(), 'styleimgdir' => array(), 'stypeid' => array(),
 	'headerbgcolor' => array(0, $lang['styles_edit_type_bg']),
 	'bgcolor' => array(0),
 	'sidebgcolor' => array(0, '', '#FFF sidebg.gif repeat-y 100% 0'),
@@ -241,7 +241,7 @@ if($operation == 'admin') {
 		showtips('styles_home_tips');
 		showformheader('styles');
 		showhiddenfields(array('updatecsscache' => 0));
-		showboxheader();
+		showboxheader('', 'nobottom');
 		echo $stylelist;
 		showboxfooter();
 		showtableheader();
@@ -356,7 +356,7 @@ if($operation == 'admin') {
 		showformheader('styles&operation=import', 'enctype');
 		showtableheader('styles_import');
 		showimportdata();
-		showtablerow('', '', '<input class="checkbox" type="checkbox" name="ignoreversion" id="ignoreversion" value="1" /><label for="ignoreversion"> '.cplang('styles_import_ignore_version').'</label>');
+		showtablerow('', 'colspan="2"', '<input class="checkbox" type="checkbox" name="ignoreversion" id="ignoreversion" value="1" /><label for="ignoreversion"> '.cplang('styles_import_ignore_version').'</label>');
 		showsubmit('importsubmit');
 		showtablefooter();
 		showformfooter();
@@ -517,7 +517,6 @@ function imgpre_switch(id) {
 </script>
 <?php
 
-		//是否有自定义配置文件
 		$configflag = false;
 		if(preg_match('/^.?\/template\/([a-z]+[a-z0-9_]*)$/', $style['directory'], $a)) {
 			$configfile = DISCUZ_ROOT . './template/' . $a[1] . '/config.inc.php';
@@ -528,7 +527,7 @@ function imgpre_switch(id) {
 		}
 
 		if(!$configflag) {
-			echo '<br /><iframe class="preview" frameborder="0" src="' . ADMINSCRIPT . '?action=styles&preview=yes&styleid=' . $id . '"></iframe>';
+			echo '<iframe class="preview" frameborder="0" src="' . ADMINSCRIPT . '?action=styles&preview=yes&styleid=' . $id . '"></iframe>';
 			showtips('styles_tips');
 
 			showformheader("styles&operation=edit&id=$id");
@@ -544,6 +543,7 @@ function imgpre_switch(id) {
 			showsetting('styles_edit_styleimgdir', '', '', '<input type="text" class="txt" name="stylevar['.$stylestuff['styleimgdir']['id'].']" id="styleimgdir" value="'.$stylestuff['styleimgdir']['subst'].'" />');
 			showsetting('styles_edit_logo', "stylevar[{$stylestuff['boardimg']['id']}]", $stylestuff['boardimg']['subst'], 'text');
 			showsetting('styles_edit_searchlogo', "stylevar[{$stylestuff['searchimg']['id']}]", $stylestuff['searchimg']['subst'], 'text');
+			showsetting('styles_edit_touchlogo', "stylevar[{$stylestuff['touchimg']['id']}]", empty($stylestuff['touchimg']['subst']) ? 'logo_m.svg' : $stylestuff['touchimg']['subst'], 'text');
 
 			foreach($predefinedvars as $predefinedvar => $v) {
 				if($v !== array()) {
@@ -591,7 +591,6 @@ function imgpre_switch(id) {
 			cpmsg('style_not_found', '', 'error');
 		}
 
-		//是否有自定义配置文件
 		$configflag = false;
 		if(preg_match('/^.?\/template\/([a-z]+[a-z0-9_]*)$/', $style['directory'], $a)) {
 			$configfile = DISCUZ_ROOT . './template/' . $a[1] . '/config.inc.php';
@@ -620,8 +619,11 @@ function imgpre_switch(id) {
 			if(isset($_GET['templateidnew'])) {
 				$data['templateid'] = $_GET['templateidnew'];
 			}
-			if(isset($_GET['defaultextstylenew']) && isset($_GET['extstylenew'])) {
-				if (!in_array($_GET['defaultextstylenew'], is_array($_GET['extstylenew']) ? $_GET['extstylenew'] : array())) {
+			if(isset($_GET['defaultextstylenew'])) {
+				if(!isset($_GET['extstylenew']) || !is_array($_GET['extstylenew'])) {
+					$_GET['extstylenew'] = array();
+				}
+				if(!in_array($_GET['defaultextstylenew'], $_GET['extstylenew'])) {
 					$_GET['extstylenew'][] = $_GET['defaultextstylenew'];
 				}
 				$data['extstyle'] = implode("\t", $_GET['extstylenew']) . '|' . $_GET['defaultextstylenew'];

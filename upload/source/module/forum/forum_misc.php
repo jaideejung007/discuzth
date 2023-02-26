@@ -771,7 +771,7 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 				'reason' => $reason,
 				'from_id' => 0,
 				'from_idtype' => 'rate'
-			));
+			), 'rate', 0);
 		}
 
 		$logs = array();

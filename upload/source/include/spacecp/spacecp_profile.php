@@ -200,7 +200,7 @@ if(submitcheck('profilesubmit')) {
 			}
 		}
 	}
-	if($_FILES) {
+	if($_FILES && $field['formtype'] == 'file') {
 		$upload = new discuz_upload();
 		foreach($_FILES as $key => $file) {
 			if(!isset($_G['cache']['profilesetting'][$key])) {
@@ -379,6 +379,10 @@ if(submitcheck('profilesubmit')) {
 		showmessage('profile_secmobile_not_change', '', array(), array('return' => true));
 	}
 
+	if($secmobiccnew === '' && $secmobilenew !== '' && preg_match('#^(\d){1,12}$#', $secmobilenew)) {
+		$secmobiccnew = $_G['setting']['smsdefaultcc'];
+	}
+
 	if($secmobiccnew === '') {
 		$secmobiccnew == 0;
 	}elseif(!preg_match('#^(\d){1,3}$#', $secmobiccnew)) {
@@ -433,7 +437,9 @@ if(submitcheck('profilesubmit')) {
 	}
 	$setarr['secmobicc'] = $secmobiccnew == 0 ? '' : $secmobiccnew;
 	$setarr['secmobile'] = $secmobilenew == 0 ? '' : $secmobilenew;
-	$setarr['secmobilestatus'] = sms::verify($_G['uid'], 1, $secmobiccnew, $secmobilenew, $secmobseccode);
+	if(strcmp($secmobiccnew, $_G['member']['secmobicc']) != 0 || strcmp($secmobilenew, $_G['member']['secmobile']) != 0) {
+		$setarr['secmobilestatus'] = sms::verify($_G['uid'], 1, $secmobiccnew, $secmobilenew, $secmobseccode);
+	}
 	if($setarr) {
 		if($_G['member']['freeze'] == 1) {
 			$setarr['freeze'] = 0;
@@ -462,6 +468,47 @@ if(submitcheck('profilesubmit')) {
 			), false, true);
 		}
 		manage_addnotify('verifyuser');
+	}
+
+	if(!empty($_GET['newpassword'])) {
+		if(!function_exists('sendmail')) {
+			include libfile('function/mail');
+		}
+
+		$reset_password_subject = array(
+			'tpl' => 'password_reset',
+			'var' => array(
+				'username' => $_G['member']['username'],
+				'bbname' => $_G['setting']['bbname'],
+				'siteurl' => $_G['setting']['securesiteurl'],
+				'datetime' => dgmdate(time(), 'Y-m-d H:i:s'),
+				'clientip' => $_G['clientip']
+			)
+		);
+		if(!sendmail("{$_G['member']['username']} <{$_G['member']['email']}>", $reset_password_subject)) {
+			runlog('sendmail', "{$_G['member']['email']} sendmail failed.");
+		}
+	}
+
+	if((strcmp($secmobiccnew, $_G['member']['secmobicc']) != 0 || strcmp($secmobilenew, $_G['member']['secmobile']) != 0) && (!$_G['setting']['smsstatus'] || $setarr['secmobilestatus'])) {
+		if(!function_exists('sendmail')) {
+			include libfile('function/mail');
+		}
+
+		$reset_secmobile_subject = array(
+			'tpl' => 'secmobile_reset',
+			'var' => array(
+				'username' => $_G['member']['username'],
+				'bbname' => $_G['setting']['bbname'],
+				'siteurl' => $_G['setting']['securesiteurl'],
+				'datetime' => dgmdate(time(), 'Y-m-d H:i:s'),
+				'secmobile' => $_G['member']['secmobicc'].'-'.$_G['member']['secmobile'],
+				'clientip' => $_G['clientip']
+			)
+		);
+		if(!sendmail("{$_G['member']['username']} <{$_G['member']['email']}>", $reset_secmobile_subject)) {
+			runlog('sendmail', "{$_G['member']['email']} sendmail failed.");
+		}
 	}
 
 	if($authstr) {

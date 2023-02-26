@@ -250,8 +250,8 @@ $lang = array (
   'profile_passwd_notmatch' => 'ขออภัย! รหัสผ่านทั้ง 2 ช่องไม่ตรงกัน',
   'profile_email_not_change' => 'ขออภัย เว็บไซต์นี้ไม่อนุญาตให้คุณแก้ไขอีเมลถ้าได้ผูกกับบัญชีไว้ก่อนหน้านี้แล้ว',
   'profile_secmobile_not_change' => 'ขออภัย ไซต์นี้ไม่อนุญาตให้คุณแก้ไขเบอร์มือถือที่ผ่านการยืนยันแล้ว',
-  'profile_secmobicc_illegal' => 'รูปแบบรหัสประเทศของหมายเลขโทรศัพท์ไม่ถูกต้อง',
-  'profile_secmobile_illegal' => 'รูปแบบหมายเลขโทรศัพท์ไม่ถูกต้อง',
+  'profile_secmobicc_illegal' => 'รูปแบบรหัสประเทศของเบอร์มือถือไม่ถูกต้อง',
+  'profile_secmobile_illegal' => 'รูปแบบเบอร์มือถือไม่ถูกต้อง',
   'profile_username_illegal' => 'ชื่อนี้ไม่อนุญาตให้ใช้ในการลงทะเบียน',
   'profile_username_duplicate' => 'ชื่อที่คุณต้องการมีผู้ใช้งานแล้ว',
   'profile_illegal' => 'รูปแบบข้อมูลไม่ถูกต้องหรือมีค่าว่างเปล่า',
@@ -287,6 +287,7 @@ $lang = array (
   'announcement_nonexistence' => 'ขออภัย! ประกาศนี้ไม่มีอยู่หรือถูกลบไปแล้ว',
 
   'attachment_expired' => 'ขออภัย! ไฟล์นี้หมดอายุการใช้งานแล้ว กรุณาเลือกอย่างใดอย่างหนึ่ง <br /><a href="forum.php?mod=attachment&aid={aid}">[ ดาวน์โหลดอีกครั้ง ]</a><br /><a href="forum.php?mod=redirect&goto=findpost&pid={pid}&ptid={tid}">[ ดูโพสต์ต้นฉบับ ]</a>',
+  'attachment_expired_nosession' => 'ขออภัย! ลิงก์ไฟล์แนบต้นฉบับไม่ถูกต้อง<br /><a href="forum.php?mod=redirect&goto=findpost&pid={pid}&ptid={tid}">[ คลิกที่นี่เพื่อดูโพสต์ต้นฉบับ ]</a>',
   'attachment_referer_invalid' => 'ขออภัย! ค่าอ้างอิงสำหรับดาวน์โหลดไฟล์นี้ไม่สมบูรณ์ หากนี่คือความผิดพลาด โปรดติดต่อผู้ดูแลระบบ',
   'attachment_payto' => 'คุณต้องจ่ายให้กับการดาวน์โหลดไฟล์แนบนี้',
   'attachement_payto_attach' => 'คุณต้องจ่ายให้กับการดาวน์โหลดไฟล์แนบนี้',

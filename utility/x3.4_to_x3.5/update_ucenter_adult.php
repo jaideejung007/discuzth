@@ -20,13 +20,26 @@ require UC_ROOT.'./release/release.php';
 
 header("Content-type: text/html; charset=utf-8");
 
-$step = !empty($_GET['step']) && in_array($_GET['step'], array('welcome', 'tips', 'license', 'envcheck', 'confirm', 'secques', 'innodb', 'utf8mb4_other', 'scheme', 'utf8mb4_user', 'serialize', 'file', 'dataupdate')) ? $_GET['step'] : 'welcome';
+$step = !empty($_GET['step']) && in_array($_GET['step'], array('welcome', 'tips', 'license', 'envcheck', 'confirm', 'secques', 'innodb', 'utf8mb4_other', 'scheme', 'utf8mb4_user', 'serialize', 'file', 'dataupdate', 'sendnote')) ? $_GET['step'] : 'welcome';
 $theurl = htmlspecialchars($_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_NAME']);
 $lockfile = UC_ROOT.'./data/upgrade.lock';
+
+timezone_set();
 
 $tables = array('uc_admins', 'uc_applications', 'uc_badwords', 'uc_domains', 'uc_failedlogins', 'uc_feeds', 'uc_friends', 'uc_mailqueue', 'uc_memberfields', 'uc_members', 'uc_mergemembers', 'uc_newpm', 'uc_notelist', 'uc_pm_indexes', 'uc_pm_lists', 'uc_pm_members', 'uc_pm_messages_0', 'uc_pm_messages_1', 'uc_pm_messages_2', 'uc_pm_messages_3', 'uc_pm_messages_4', 'uc_pm_messages_5', 'uc_pm_messages_6', 'uc_pm_messages_7', 'uc_pm_messages_8', 'uc_pm_messages_9', 'uc_protectedmembers', 'uc_settings', 'uc_sqlcache', 'uc_tags', 'uc_vars');
 
 $table = empty($_GET['table']) ? 'uc_admins' : (in_array($_GET['table'], $tables) ? $_GET['table'] : 'uc_admins');
+
+// PHP 8 拦截
+if (version_compare(PHP_VERSION, '8.0.0', '>=')) {
+	show_msg('เวอร์ชัน PHP ที่โปรแกรมอัปเกรดสนับสนุนคือ 5.6 - 7.4 เท่านั้น กรุณาดาวน์เกรด PHP เป็น 7.4 ก่อนอัปเกรดโปรแกรม UCenter และแอปพลิเคชันอื่น ๆ หลังจากนั้น หากอัปเกรดโปรแกรมและแอปพลิเคชันทั้งหมดแล้ว คุณสามารถสลับไปใช้ PHP 8.0 หรือสูงกว่าได้');
+}
+
+// Q004 保证无写入权限时可以正常报错
+// https://www.dismall.com/thread-14718-1-1.html
+if (!@touch(UPGRADE_LOG_PATH) || @!is_writable(UPGRADE_LOG_PATH)) {
+	show_msg('กรุณาเข้าสู่ระบบการจัดการเซิร์ฟเวอร์ เพื่อกำหนดสิทธิ์โฟลเดอร์ data/logs ที่อยู่ในโฟลเดอร์ UCenter จากนั้นจึงเรียกใช้ไฟล์นี้อีกครั้งเพื่ออัปเกรด');
+}
 
 logmessage("<?php exit;?>\t".date("Y-m-d H:i:s"));
 logmessage("Query String: ".$_SERVER['QUERY_STRING']);
@@ -37,7 +50,7 @@ if (!empty($_GET['lock'])) {
 	@touch($lockfile);
 	@unlink($theurl);
 	logmessage("upgrade success.");
-	show_msg('ยินดีด้วยนะ คุณอัปเกรดเป็น UCenter 1.7.0 เรียบร้อยแล้ว ขอบคุณที่เลือกใช้ผลิตภัณฑ์ของเรา');
+	show_msg('ขอแสดงความยินดี คุณอัปเกรดเป็น UCenter 1.7.0 เรียบร้อยแล้ว ขอบคุณที่เลือกใช้ผลิตภัณฑ์ของเรา');
 }
 
 if (file_exists($lockfile)) {
@@ -51,7 +64,7 @@ if ($step == 'welcome') {
 
 } else if ($step == 'tips') {
 
-	show_msg('<p class="lead">ย้ำอีกครั้ง ในขั้นตอนนี้ ก่อนที่จะดำเนินการอัปเกรดจาก UCenter 1.6.0 เป็น UCenter 1.7.0 เราขอแนะนำให้คุณสำรองข้อมูลเว็บไซต์ทั้งหมด (รวมถึงฐานข้อมูลและไฟล์ที่เกี่ยวข้อง) และดำเนินการอัปเกรดด้วยความระมัดระวัง</p><p class="lead">เนื่องด้วย UCenter 1.7.0 จะดำเนินการอัปเดตการเข้ารหัสฐานข้อมูลใหม่ หากชื่อผู้ใช้งานในฐานข้อมูล UCenter 1.7.0 รายใดไม่สนับสนุนการเข้ารหัส utf8mb4_unicode_ci จะถูกเปลี่ยนเป็นชื่อผู้ใช้งานที่มีอักษรแบบสุ่มใหม่จำนวน 15 ตัวให้โดยอัตโนมัติในระหว่างกระบวนการอัปเกรด หลังจากการดำเนินการเสร็จแล้ว ให้คุณตรวจสอบไฟล์บันทึกการเปลี่ยนชื่อผู้ใช้งานและดูบันทึกการแจ้งเตือนจากระบบหลังบ้านของ UCenter ว่ามีการดำเนินการแจ้งไปยังผู้ใช้งานที่ได้รับผลกระทบตามแอปที่ได้ผูกไว้กับ UCenter หรือไม่ ก่อนที่จะดำเนินการอัปเกรด Discuz! X3.5 ต่อไป และหลังจากอัปเกรดเสร็จสิ้นทั้งหมดแล้ว กรุณาแจ้งผู้ใช้งานที่ได้รับผลกระทบดังกล่าวด้วยตนเองอีกครั้ง โดยอาจจะแจ้งให้ผู้ใช้งานทำการเปลี่ยนชื่อใหม่ด้วยไอเท็มเปลี่ยนชื่อ หรืออื่น ๆ ผ่านประกาศของเว็บไซต์ หรือทางอีเมล หรือทาง SMS ตามแต่ผู้ดูแลระบบสะดวกที่จะดำเนินการแจ้งให้ผู้ใช้งานทราบ หากคุณต้องการให้ผู้ใช้งานที่ได้รับผลกระทบดังกล่าวเปลี่ยนชื่อได้ด้วยตนเองผ่านการใช้ไอเท็มเปลี่ยนชื่อ อย่าลืมตั้งค่าไอเท็มเปลี่ยนชื่อใน AdminCP ของระบบดิสคัสด้วย เพื่อเป็นทางเลือกให้กับผู้ที่ได้รับผลกระทบสามารถเปลี่ยนชื่อผู้ใช้งานใหม่ได้สะดวกมากยิ่งขึ้น</p><p class="lead">เนื่องด้วย UCenter 1.7.0 จะดำเนินการอัปเดตการเข้ารหัสฐานข้อมูลใหม่ หากผู้ใช้งานรายใดตั้งค่าให้ตอบคำถามความปลอดภัยโดยไม่ได้ใช้ข้อความ ASCII (ภาษาอังกฤษและตัวเลข) ก่อนเข้าสู่ระบบ คำตอบของคำถามความปลอดภัยดังกล่าวจะถูกล้างออกโดยอัตโนมัติ กรุณาแจ้งให้ผู้ใช้ทราบจากผลกระทบดังกล่าวและขอให้ผู้ใช้เมื่อจะเข้าสู่ระบบไม่ต้องกรอกคำตอบของคำถามความปลอดภัยใด ๆ</p><p class="lead">เนื่องด้วย UCenter 1.7.0 จะดำเนินการอัปเดตการเข้ารหัสฐานข้อมูลใหม่ หากผู้ใช้งานรายใดตั้งรหัสผ่านไม่ได้เป็นไปตามมาตรฐานของการตั้งรหัสผ่าน (เช่น ใช้รหัสผ่านที่ไม่ใช่ภาษาอังกฤษ อาจจะเป็นภาษาไทยหรือภาษาอื่น ๆ ลงไปในรหัสผ่าน) ผู้ใช้งานดังกล่าวอาจจะเข้าสู่ระบบไม่ได้ เมื่อคุณพบสถานการณ์นี้ กรุณาแจ้งให้ผู้ใช้งานทำการรีเซ็ตรหัสผ่านใหม่ โดยใช้ฟังก์ชันลืมรหัสผ่านในหน้าเข้าสู่ระบบ แล้วดำเนินการตามขั้นตอนที่แจ้ง ผู้ใช้งานดังกล่าวก็จะสามารถเข้าสู่ระบบด้วยรหัสผ่านใหม่ได้อีกครั้ง</p><p class="lead">กรุณาอย่าเรียกใช้งานโปรแกรมอัปเกรดนี้ซ้ำ การเรียกใช้งานซ้ำอาจทำให้เกิดปัญหาที่ไม่คาดคิดได้ หากพบปัญหาระหว่างการอัปเกรด ขอความกรุณาอย่าปิดหน้าเว็บเป็นอันขาด พยายามแก้ไขตามคำแนะนำที่ปรากฎในหน้าเว็บแล้วรีเฟรชหน้าเว็บใหม่ หากยังไม่สามารถแก้ไขปัญหาได้ กรุณาเรียกคืนข้อมูลสำรองและเรียกใช้งานโปรแกรมอัปเกรดนี้ใหม่อีกครั้ง</p><p class="lead">หากคุณอ่านคำแนะนำด้านบนเข้าใจโดยถ่องแท้แล้ว ให้คลิกปุ่ม ถัดไป เพื่อดำเนินการต่อ</p><p><button type="button" class="btn btn-primary" onclick="location.href=\'?step=license\';">ถัดไป ></button> <button type="button" class="btn btn-secondary" onclick="location.href=\'?step=welcome\';">ย้อนกลับ <</button></p>', 'กรุณาอ่านคำแนะนำเกี่ยวกับการอัปเกรด', 1);
+	show_msg('<p class="lead">ย้ำอีกครั้ง ในขั้นตอนนี้ ก่อนที่จะดำเนินการอัปเกรดจาก UCenter 1.6.0 เป็น UCenter 1.7.0 เราขอแนะนำให้คุณสำรองข้อมูลเว็บไซต์ทั้งหมด (รวมถึงฐานข้อมูลและไฟล์ที่เกี่ยวข้อง) และดำเนินการอัปเกรดด้วยความระมัดระวัง ในขณะเดียวกัน เราขอแนะนำให้อัปเกรด MySQL เป็นเวอร์ชัน 5.7 ขึ้นไปก่อนที่จะอัปเกรดเว็บไซต์ เพื่อหลักเลี่ยงการอัปเกรดหยุดชะงัก เนื่องจากปลั๊กอินบางตัวอาจจะมีดัชนีตารางฐานข้อมูลปริมาณมาก</p><p class="lead">เนื่องด้วย UCenter 1.7.0 จะดำเนินการอัปเดตการเข้ารหัสฐานข้อมูลใหม่ หากชื่อผู้ใช้งานในฐานข้อมูล UCenter 1.7.0 รายใดไม่สนับสนุนการเข้ารหัส utf8mb4_unicode_ci จะถูกเปลี่ยนเป็นชื่อผู้ใช้งานที่มีอักษรแบบสุ่มใหม่จำนวน 15 ตัวให้โดยอัตโนมัติในระหว่างกระบวนการอัปเกรด หลังจากการดำเนินการเสร็จแล้ว ให้คุณตรวจสอบไฟล์บันทึกการเปลี่ยนชื่อผู้ใช้งาน (บนแท็บ บันทึกกิจกรรมระบบ ในเมนู จัดการสมาชิก) และดูบันทึกการแจ้งเตือน (บนแท็บ บันทึกการแจ้งเตือน ในเมนู ไฟล์บันทึกระบบ) จากระบบหลังบ้านของ UCenter ว่ามีการดำเนินการแจ้งไปยังผู้ใช้งานที่ได้รับผลกระทบตามแอปที่ได้ผูกไว้กับ UCenter หรือไม่ ก่อนที่จะดำเนินการอัปเกรด Discuz! X3.5 ต่อไป และหลังจากอัปเกรดเสร็จสิ้นทั้งหมดแล้ว กรุณาแจ้งผู้ใช้งานที่ได้รับผลกระทบดังกล่าวด้วยตนเองอีกครั้ง โดยอาจจะแจ้งให้ผู้ใช้งานทำการเปลี่ยนชื่อใหม่ด้วยไอเท็มเปลี่ยนชื่อ หรืออื่น ๆ ผ่านประกาศของเว็บไซต์ หรือทางอีเมล หรือทาง SMS ตามแต่ผู้ดูแลระบบสะดวกที่จะดำเนินการแจ้งให้ผู้ใช้งานทราบ หากคุณต้องการให้ผู้ใช้งานที่ได้รับผลกระทบดังกล่าวเปลี่ยนชื่อได้ด้วยตนเองผ่านการใช้ไอเท็มเปลี่ยนชื่อ อย่าลืมตั้งค่าไอเท็มเปลี่ยนชื่อใน AdminCP ของระบบดิสคัสด้วย เพื่อเป็นทางเลือกให้กับผู้ที่ได้รับผลกระทบสามารถเปลี่ยนชื่อผู้ใช้งานใหม่ได้สะดวกมากยิ่งขึ้น</p><p class="lead">เนื่องด้วย UCenter 1.7.0 จะดำเนินการอัปเดตการเข้ารหัสฐานข้อมูลใหม่ หากผู้ใช้งานรายใดตั้งค่าให้ตอบคำถามความปลอดภัยโดยไม่ได้ใช้ข้อความ ASCII (ภาษาอังกฤษและตัวเลข) ก่อนเข้าสู่ระบบ คำตอบของคำถามความปลอดภัยดังกล่าวจะถูกล้างออกโดยอัตโนมัติ กรุณาแจ้งให้ผู้ใช้ทราบจากผลกระทบดังกล่าวและขอให้ผู้ใช้เมื่อจะเข้าสู่ระบบไม่ต้องกรอกคำตอบของคำถามความปลอดภัยใด ๆ</p><p class="lead">เนื่องด้วย UCenter 1.7.0 จะดำเนินการอัปเดตการเข้ารหัสฐานข้อมูลใหม่ หากผู้ใช้งานรายใดตั้งรหัสผ่านไม่ได้เป็นไปตามมาตรฐานของการตั้งรหัสผ่าน (เช่น ใช้รหัสผ่านที่ไม่ใช่ภาษาอังกฤษ อาจจะเป็นภาษาไทยหรือภาษาอื่น ๆ ลงไปในรหัสผ่าน) ผู้ใช้งานดังกล่าวอาจจะเข้าสู่ระบบไม่ได้ เมื่อคุณพบสถานการณ์นี้ กรุณาแจ้งให้ผู้ใช้งานทำการรีเซ็ตรหัสผ่านใหม่ โดยใช้ฟังก์ชันลืมรหัสผ่านในหน้าเข้าสู่ระบบ แล้วดำเนินการตามขั้นตอนที่แจ้ง ผู้ใช้งานดังกล่าวก็จะสามารถเข้าสู่ระบบด้วยรหัสผ่านใหม่ได้อีกครั้ง</p><p class="lead">กรุณาอย่าเรียกใช้งานโปรแกรมอัปเกรดนี้ซ้ำ การเรียกใช้งานซ้ำอาจทำให้เกิดปัญหาที่ไม่คาดคิดได้ หากพบปัญหาระหว่างการอัปเกรด ขอความกรุณาอย่าปิดหน้าเว็บเป็นอันขาด พยายามแก้ไขตามคำแนะนำที่ปรากฎในหน้าเว็บแล้วรีเฟรชหน้าเว็บใหม่ หากยังไม่สามารถแก้ไขปัญหาได้ กรุณาเรียกคืนข้อมูลสำรองและเรียกใช้งานโปรแกรมอัปเกรดนี้ใหม่อีกครั้ง</p><p class="lead">หากคุณอ่านคำแนะนำด้านบนเข้าใจโดยถ่องแท้แล้ว ให้คลิกปุ่ม ถัดไป เพื่อดำเนินการต่อ</p><p><button type="button" class="btn btn-primary" onclick="location.href=\'?step=license\';">ถัดไป ></button> <button type="button" class="btn btn-secondary" onclick="location.href=\'?step=welcome\';">ย้อนกลับ <</button></p>', 'กรุณาอ่านคำแนะนำเกี่ยวกับการอัปเกรด', 1);
 
 } else if ($step == 'license') {
 
@@ -139,9 +152,10 @@ if ($step == 'welcome') {
 		if (!empty($sql_check)) {
 			$result = $db->fetch_first($sql_check);
 			// 对文字排序进行过滤，避免不合法文字排序进入升级流程。考虑到部分站长自行进行了 utf8mb4 改造，因此额外添加 utf8mb4_general_ci 。
-			if (!in_array($result['Collation'], array('utf8mb4_unicode_ci', 'utf8_general_ci', 'gbk_chinese_ci', 'big5_chinese_ci', 'utf8mb4_general_ci'))) {
+			// 从 MySQL 8.0.28 开始, utf8_general_ci 更名为 utf8mb3_general_ci
+			if (!in_array($result['Collation'], array('utf8mb4_unicode_ci', 'utf8_general_ci', 'utf8mb3_general_ci', 'gbk_chinese_ci', 'big5_chinese_ci', 'utf8mb4_general_ci'))) {
 				logmessage("table ".$table." 's ci ".$result['Collation']." not support, not continue.");
-				show_msg("<font color=\"red\"><b>ไม่สนับสนุนการ Collation ข้อความ ".$result['Collation']." สำหรับตาราง ".$table." นี้ กรุณาแก้ไขด้วยตนเองก่อนดำเนินการต่อ</b></font>", 'คำแนะนำการอัปเกรด');
+				show_msg("<font color=\"red\"><b>ไม่สนับสนุนข้อความที่มี Collation เป็น ".$result['Collation']." ของตาราง ".$table." นี้ กรุณาแก้ไขด้วยตนเองก่อนดำเนินการต่อ</b></font>", 'คำแนะนำการอัปเกรด');
 			}
 			if ($table == 'uc_badwords') {
 				// 对于因数据库超时而升级失败的特大站点请看此函数
@@ -186,6 +200,21 @@ if ($step == 'welcome') {
 	$type = empty($_GET['myisam']) ? 'InnoDB' : 'MyISAM';
 
 	$sql = get_scheme_update_sql($id, $type);
+	// Q004 好像有些站点不存在 email 索引, 这里尝试判断一下, 遇到了就不删除直接跳过
+	// https://www.dismall.com/thread-14718-1-1.html
+	if ($sql == 'ALTER TABLE uc_members DROP KEY `email`;') {
+		$found = false;
+		$db_result_index = $db->fetch_all("SHOW INDEX FROM ".UC_DBTABLEPRE."members;");
+		foreach ($db_result_index as $dbi) {
+			if ($dbi['Key_name'] == 'email') {
+				$found = true;
+				break;
+			}
+		}
+		if(!$found) {
+			show_msg("กำลังดำเนินการอัปเกรดโครงสร้างฐานข้อมูล ความคืบหน้าปัจจุบันคือ $id / $scheme_count และกำลังดำเนินการขั้นตอนต่อไป กรุณารอสักครู่......", 'คำแนะนำการอัปเกรด', 0, "$theurl?step=".$step."&myisam=".(empty($_GET['myisam']) ? 0 : 1)."&id=".++$id);
+		}
+	}
 	if (!empty($sql)) {
 		// 对于因数据库超时而升级失败的特大站点请看此函数
 		setdbglobal($db);
@@ -207,9 +236,10 @@ if ($step == 'welcome') {
 		$result = $db->fetch_first($sql_check);
 		if ($result['Collation'] != 'utf8mb4_unicode_ci') {
 			// 对文字排序进行过滤，避免不合法文字排序进入升级流程。考虑到部分站长自行进行了 utf8mb4 改造，因此额外添加 utf8mb4_general_ci 。
-			if (!in_array($result['Collation'], array('utf8mb4_unicode_ci', 'utf8_general_ci', 'gbk_chinese_ci', 'big5_chinese_ci', 'utf8mb4_general_ci'))) {
+			// 从 MySQL 8.0.28 开始, utf8_general_ci 更名为 utf8mb3_general_ci
+			if (!in_array($result['Collation'], array('utf8mb4_unicode_ci', 'utf8_general_ci', 'utf8mb3_general_ci', 'gbk_chinese_ci', 'big5_chinese_ci', 'utf8mb4_general_ci'))) {
 				logmessage("table uc_members 's ci ".$result['Collation']." not support, not continue.");
-				show_msg("<font color=\"red\"><b>ไม่สนับสนุนการ Collation ข้อความ ".$result['Collation']." ของตาราง uc_members กรุณาแก้ไขด้วยตนเองก่อนดำเนินการต่อ!</b></font>", 'คำแนะนำการอัปเกรด');
+				show_msg("<font color=\"red\"><b>ไม่สนับสนุนข้อความที่มี Collation เป็น ".$result['Collation']." ของตาราง uc_members กรุณาแก้ไขด้วยตนเองก่อนดำเนินการต่อ!</b></font>", 'คำแนะนำการอัปเกรด');
 			}
 			$sql = get_convert_sql('utf8mb4', 'uc_members');
 			if (!empty($sql)) {
@@ -276,9 +306,10 @@ if ($step == 'welcome') {
 		$result = $db->fetch_first($sql_check);
 		if ($result['Collation'] != 'utf8mb4_unicode_ci') {
 			// 对文字排序进行过滤，避免不合法文字排序进入升级流程。考虑到部分站长自行进行了 utf8mb4 改造，因此额外添加 utf8mb4_general_ci 。
-			if (!in_array($result['Collation'], array('utf8mb4_unicode_ci', 'utf8_general_ci', 'gbk_chinese_ci', 'big5_chinese_ci', 'utf8mb4_general_ci'))) {
+			// 从 MySQL 8.0.28 开始, utf8_general_ci 更名为 utf8mb3_general_ci
+			if (!in_array($result['Collation'], array('utf8mb4_unicode_ci', 'utf8_general_ci', 'utf8mb3_general_ci', 'gbk_chinese_ci', 'big5_chinese_ci', 'utf8mb4_general_ci'))) {
 				logmessage("table ".$table." 's ci ".$result['Collation']." not support, not continue.");
-				show_msg("<font color=\"red\"><b>ไม่สนับสนุนการ Collation ข้อความ ".$result['Collation']." สำหรับตาราง ".$table." นี้ กรุณาแก้ไขด้วยตนเองก่อนดำเนินการต่อ</b></font>", 'คำแนะนำการอัปเกรด');
+				show_msg("<font color=\"red\"><b>ไม่สนับสนุนข้อความที่มี Collation เป็น ".$result['Collation']." ของตาราง ".$table." นี้ กรุณาแก้ไขด้วยตนเองก่อนดำเนินการต่อ</b></font>", 'คำแนะนำการอัปเกรด');
 			}
 			$sql = get_convert_sql('utf8mb4', $table);
 			if (!empty($sql) && $table != 'uc_members') {
@@ -310,19 +341,24 @@ if ($step == 'welcome') {
 		}
 	
 		$configfile = UC_ROOT.'./data/config.inc.php';
+		// 对非 Windows 系统尝试设置 777 权限
+		if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
+			logmessage("set chmod 777 $configfile");
+			chmod($configfile, 0777);
+		}
 		if (is_writable($configfile)) {
 			$config = file_get_contents($configfile);
 			$config = preg_replace("/define\('UC_DBCHARSET',\s*'.*?'\);/i", "define('UC_DBCHARSET', 'utf8mb4');", $config);
 			$config = preg_replace("/define\('UC_CHARSET',\s*'.*?'\);/i", "define('UC_CHARSET', 'utf-8');", $config);
 			if(file_put_contents($configfile, $config, LOCK_EX) === false) {
 				logmessage("config.inc.php modify fail, let user manually modify.");
-				show_msg('<font color="red"><b>โปรแกรมไม่สามารถแก้ไขไฟล์คอนฟิกให้โดยอัตโนมัติได้ เนื่องจากไฟล์คอนฟิกไม่สามารถเขียนได้ คุณต้องแก้ไขไฟล์ data/config.inc.php ด้วยตนเอง เปลี่ยนค่า UC_DBCHARSET เป็น utf8mb4 ด้วยตนเอง เปลี่ยนค่า UC_CHARSET เป็น utf8 ด้วยตนเอง จากนั้น <a href="'.$theurl.'?step=seriallize&start=0&tid=0">คลิกที่นี่</a> เพื่อดำเนินการต่อ</b></font>', 'คำแนะนำการอัปเกรด');
+				show_msg('<font color="red"><b>โปรแกรมไม่สามารถแก้ไขไฟล์คอนฟิกให้โดยอัตโนมัติได้ เนื่องจากไฟล์คอนฟิกไม่สามารถเขียนได้ คุณต้องแก้ไขไฟล์ data/config.inc.php ด้วยตนเอง เปลี่ยนค่า UC_DBCHARSET เป็น utf8mb4 ด้วยตนเอง เปลี่ยนค่า UC_CHARSET เป็น utf8 ด้วยตนเอง จากนั้น <a href="'.$theurl.'?step=serialize&start=0&tid=0">คลิกที่นี่</a> เพื่อดำเนินการต่อ</b></font>', 'คำแนะนำการอัปเกรด');
 			}
 			logmessage("config.inc.php modify ok, continue.");
 			show_msg("ตั้งค่าคอนฟิกการแปลงข้อมูลแบบซีเรียลไลซ์เรียบร้อยแล้ว และกำลังดำเนินการในขั้นตอนต่อไป กรุณารอสักครู่......", 'คำแนะนำการอัปเกรด', 0, "$theurl?step=serialize&start=0&tid=0");
 		} else {
 			logmessage("config.inc.php modify fail, let user manually modify.");
-			show_msg('<font color="red"><b>โปรแกรมไม่สามารถแก้ไขไฟล์คอนฟิกให้โดยอัตโนมัติได้ เนื่องจากไฟล์คอนฟิกไม่สามารถเขียนได้ คุณต้องแก้ไขไฟล์ data/config.inc.php ด้วยตนเอง เปลี่ยนค่า UC_DBCHARSET เป็น utf8mb4 ด้วยตนเอง เปลี่ยนค่า UC_CHARSET เป็น utf8 ด้วยตนเอง จากนั้น <a href="'.$theurl.'?step=seriallize&start=0&tid=0">คลิกที่นี่</a> เพื่อดำเนินการต่อ</b></font>', 'คำแนะนำการอัปเกรด');
+			show_msg('<font color="red"><b>โปรแกรมไม่สามารถแก้ไขไฟล์คอนฟิกให้โดยอัตโนมัติได้ เนื่องจากไฟล์คอนฟิกไม่สามารถเขียนได้ คุณต้องแก้ไขไฟล์ data/config.inc.php ด้วยตนเอง เปลี่ยนค่า UC_DBCHARSET เป็น utf8mb4 ด้วยตนเอง เปลี่ยนค่า UC_CHARSET เป็น utf8 ด้วยตนเอง จากนั้น <a href="'.$theurl.'?step=serialize&start=0&tid=0">คลิกที่นี่</a> เพื่อดำเนินการต่อ</b></font>', 'คำแนะนำการอัปเกรด');
 		}
 
 	}
@@ -348,7 +384,9 @@ if ($step == 'welcome') {
 	$special = $field[3];
 
 	if ($special) {
-		$sql = "SELECT `$sfield`, `$sid` FROM `$stable` WHERE `$sid` > $start ORDER BY `$sid` ASC LIMIT $limit";
+		// 空值不参与序列化转换, 加快数据处理效率
+		// https://www.dismall.com/thread-15293-1-1.html
+		$sql = "SELECT `$sfield`, `$sid` FROM `$stable` WHERE `$sfield`<>'' AND `$sid` > $start ORDER BY `$sid` ASC LIMIT $limit";
 	} else {
 		$sql = "SELECT `$sfield`, `$sid` FROM `$stable`";
 	}
@@ -364,13 +402,16 @@ if ($step == 'welcome') {
 			$nextid = 0;
 		}
 		$data = $values[$sfield];
+		$dataold = $values[$sfield];
 		$id = $values[$sid];
 		$data = preg_replace_callback('/s:([0-9]+?):"([\s\S]*?)";/', '_serialize', $data);
 		$data = addslashes($data);
-		$sql = "UPDATE `$stable` SET `$sfield` = '$data' WHERE `$sid` = '$id';";
-		logmessage("RUNSQL: $sql");
-		$db->query($sql);
-		logmessage("RUNSQL Success");
+		if (strcmp($dataold, $datanew) !== 0) {
+			$sql = "UPDATE `$stable` SET `$sfield` = '$data' WHERE `$sid` = '$id';";
+			logmessage("RUNSQL: $sql");
+			$db->query($sql);
+			logmessage("RUNSQL Success");
+		}
 	}
 
 	if ($nextid) {
@@ -414,29 +455,47 @@ if ($step == 'welcome') {
 
 	logmessage("clear cache dir.");
 	$configfile = UC_ROOT.'./data/config.inc.php';
+	// 对非 Windows 系统尝试设置 777 权限
+	if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
+		logmessage("set chmod 777 $configfile");
+		chmod($configfile, 0777);
+	}
 	if (is_writable($configfile)) {
 		$config = file_get_contents($configfile);
 		$config = preg_replace("/define\('UC_DBCHARSET',\s*'.*?'\);/i", "define('UC_DBCHARSET', 'utf8mb4');", $config);
 		$config = preg_replace("/define\('UC_CHARSET',\s*'.*?'\);/i", "define('UC_CHARSET', 'utf-8');", $config);
+		// 插入 ONLYREMOTEADDR 设置, 并完善 IPGETTER 对 PHP 5.6 的兼容
+		$config = str_replace("define('UC_CHARSET', 'utf-8');", "define('UC_CHARSET', 'utf-8');\r\ndefine('UC_ONLYREMOTEADDR', 1);\r\ndefine('UC_IPGETTER', 'header');\r\n// define('UC_IPGETTER_HEADER', serialize(array('header' => 'HTTP_X_FORWARDED_FOR')));", $config);
 		if(file_put_contents($configfile, $config, LOCK_EX) === false) {
 			logmessage("config.inc.php modify fail, let user manually modify.");
-			show_msg("<font color=\"red\"><b>อัปเกรดเรียบร้อยแล้ว แต่โปรแกรมไม่สามารถแก้ไขไฟล์คอนฟิก UCenter โดยอัตโนมัติให้สำเร็จได้ เนื่องจากไฟล์คอนฟิกไม่สามารถเขียนได้ คุณต้องแก้ไขไฟล์ data/config.inc.php ด้วยตนเอง โดยเปลี่ยนค่า UC_DBCHARSET เป็น utf8mb4 ด้วยตนเอง และเปลี่ยนค่า UC_CHARSET เป็น utf8 ด้วยตนเอง พร้อมทั้งเข้าสู่ระบบ UCenter เพื่อตรวจสอบว่ามีการส่งการแจ้งเตือนการเปลี่ยนชื่อผู้ใช้งานที่ได้รับผลกระทบทั้งหมดหรือไม่ หากการส่งไม่สำเร็จ กรุณาตรวจสอบว่าการเชื่อมต่อระหว่างเว็บไซต์และ UCenter เป็นปกติหรือไม่ หลังจากส่งการแจ้งเตือนทั้งหมดเรียบร้อยแล้ว คุณสามารถดำเนินการอัปเกรดแอปพลิเคชันที่เหลือต่อได้ ขอความกรุณาอย่าเรียกใช้งานขั้นตอนนี้ซ้ำ เพราะอาจทำให้เกิดปัญหาที่ไม่ทราบสาเหตุได้</b></font>", 'คำแนะนำการอัปเกรด');
+			show_msg('<font color="red"><b>โปรแกรมไม่สามารถแก้ไขไฟล์คอนฟิกให้โดยอัตโนมัติได้ เนื่องจากไฟล์คอนฟิกไม่สามารถเขียนได้ คุณต้องแก้ไข data/config.inc.php ด้วยตนเอง โดยเปลี่ยนค่า UC_DBCHARSET เป็น utf8mb4 ด้วยตนเอง และเปลี่ยนค่า UC_CHARSET เป็น utf8 ด้วยตนเอง จากนั้น <a href="'.$theurl.'?step=sendnote">คลิกที่นี่</a> เพื่อดำเนินการต่อ</b></font>', 'คำแนะนำการอัปเกรด');
 		}
 		logmessage("config.inc.php modify ok, continue.");
 	} else {
 		logmessage("config.inc.php modify fail, let user manually modify.");
-		show_msg("<font color=\"red\"><b>อัปเกรดเรียบร้อยแล้ว แต่โปรแกรมไม่สามารถแก้ไขไฟล์คอนฟิก UCenter โดยอัตโนมัติให้สำเร็จได้ เนื่องจากไฟล์คอนฟิกไม่สามารถเขียนได้ คุณต้องแก้ไขไฟล์ data/config.inc.php ด้วยตนเอง โดยเปลี่ยนค่า UC_DBCHARSET เป็น utf8mb4 ด้วยตนเอง และเปลี่ยนค่า UC_CHARSET เป็น utf8 ด้วยตนเอง พร้อมทั้งเข้าสู่ระบบ UCenter เพื่อตรวจสอบว่ามีการส่งการแจ้งเตือนการเปลี่ยนชื่อผู้ใช้งานที่ได้รับผลกระทบทั้งหมดหรือไม่ หากการส่งไม่สำเร็จ กรุณาตรวจสอบว่าการเชื่อมต่อระหว่างเว็บไซต์และ UCenter เป็นปกติหรือไม่ หลังจากส่งการแจ้งเตือนทั้งหมดเรียบร้อยแล้ว คุณสามารถดำเนินการอัปเกรดแอปพลิเคชันที่เหลือต่อได้ ขอความกรุณาอย่าเรียกใช้งานขั้นตอนนี้ซ้ำ เพราะอาจทำให้เกิดปัญหาที่ไม่ทราบสาเหตุได้</b></font>", 'คำแนะนำการอัปเกรด');
+		show_msg('<font color="red"><b>โปรแกรมไม่สามารถแก้ไขไฟล์คอนฟิกให้โดยอัตโนมัติได้ เนื่องจากไฟล์คอนฟิกไม่สามารถเขียนได้ คุณต้องแก้ไข data/config.inc.php ด้วยตนเอง โดยเปลี่ยนค่า UC_DBCHARSET เป็น utf8mb4 ด้วยตนเอง และเปลี่ยนค่า UC_CHARSET เป็น utf8 ด้วยตนเอง จากนั้น <a href="'.$theurl.'?step=sendnote">คลิกที่นี่</a> เพื่อดำเนินการต่อ</b></font>', 'คำแนะนำการอัปเกรด');
 	}
 
-	chgusername_sendallnote();
+	show_msg("อัปเดตแคชเสร็จสมบูรณ์แล้ว กำลังดำเนินการในขั้นตอนต่อไป กรุณารอสักครู่......", 'คำแนะนำการอัปเกรด', 0, "$theurl?step=sendnote");
 
-	show_msg("อัปเดตไฟล์แคชเรียบร้อยแล้ว และกำลังเตรียมการในขั้นตอนต่อไป กรุณารอสักครู่......", 'คำแนะนำการอัปเกรด', 0, "$theurl?lock=1");
+} else if ($step == 'sendnote') {
 
+	$db = new ucserver_db();
+	$db->connect(UC_DBHOST, UC_DBUSER, UC_DBPW, UC_DBNAME, 'utf8mb4');
+
+	// 对于因数据库超时而升级失败的特大站点请看此函数
+	setdbglobal($db);
+
+	$retry = empty($_GET['retry']) ? 0 : (int)$_GET['retry'];
+
+	chgusername_sendallnote($retry);
+
+	show_msg("ส่งการแจ้งเตือนถึงสมาชิกที่ได้รับผลกระทบเรียบร้อยแล้ว และกำลังเตรียมการในขั้นตอนต่อไป กรุณารอสักครู่......", 'คำแนะนำการอัปเกรด', 0, "$theurl?lock=1");
 }
 
 function show_msg($message, $title = 'คำแนะนำการอัปเกรด', $page = 0, $url_forward = '', $time = 1, $noexit = 0, $notice = '') {
 	if ($url_forward) {
-		$message = "<a href=\"$url_forward\">$message (ข้าม......)</a><br />$notice<script>setTimeout(\"window.location.href ='$url_forward';\", $time);</script>";
+		$message = "<a href=\"$url_forward\">$message (กำลังข้าม......)</a><br />$notice<script>setTimeout(\"window.location.href ='$url_forward';\", $time);</script>";
 	}
 
 	if (!$page) {
@@ -675,14 +734,18 @@ function get_serialize_list() {
 	);
 }
 
-function chgusername_sendallnote() {
-	global $db;
+function chgusername_sendallnote($retry) {
+	global $db, $theurl;
+	$retrytimes = $failedstd = 0;
+	$retrytimes = $retry;
 	$sql = "SELECT * FROM ".UC_DBTABLEPRE."notelist WHERE closed='0' AND operation='renameuser' ORDER BY pri DESC, noteid ASC";
 	logmessage("RUNSQL: $sql");
 	$notes = $db->fetch_all($sql);
 	logmessage("RUNSQL Success");
 	if (!empty($notes)) {
 		$apps = $db->fetch_all("SELECT * FROM ".UC_DBTABLEPRE."applications");
+		// 失败标准: 当前所有的未发送通知 * 当前所有的应用个数(发给每个应用) * 3(重试系数), 保底重试 30 次
+		$failedstd = max((int)count($notes) * (int)count($apps) * 3, 30);
 		foreach ((array)$notes as $key => $note) {
 			foreach((array)$apps as $appid => $app) {
 				$appnotes = $note['app'.$app['appid']];
@@ -690,10 +753,22 @@ function chgusername_sendallnote() {
 					logmessage("SendNote: {$app['appid']} ".implode(" ", $note));
 					if (chgusername_sendonenote($app['appid'], 0, $note)) {
 						logmessage("SendNote Success");
+						// 发成功了, 重试次数清 0
+						$retrytimes = 0;
 						continue;
 					} else {
-						logmessage("SendNote Failed");
-						show_msg("<font color=\"red\"><b>อัปเกรดเรียบร้อยแล้ว แต่ไม่สามารถส่งการแจ้งเตือนบางอย่างได้ กรุณาเข้าสู่ระบบ UCenter เพื่อตรวจสอบว่ามีการส่งการแจ้งเตือนการเปลี่ยนชื่อผู้ใช้งานที่ได้รับผลกระทบทั้งหมดหรือไม่ หากการส่งไม่สำเร็จ กรุณาตรวจสอบว่าการเชื่อมต่อระหว่างเว็บไซต์และ UCenter เป็นปกติหรือไม่ หลังจากส่งการแจ้งเตือนทั้งหมดเรียบร้อยแล้ว คุณสามารถดำเนินการอัปเกรดแอปพลิเคชันที่เหลือต่อได้ ขอความกรุณาอย่าเรียกใช้งานขั้นตอนนี้ซ้ำ เพราะอาจทำให้เกิดปัญหาที่ไม่ทราบสาเหตุได้</b></font>", 'คำแนะนำการอัปเกรด');
+						if ($retrytimes > $failedstd) {
+							logmessage("SendNote Failed");
+							show_msg("<font color=\"red\"><b>อัปเกรดเรียบร้อยแล้ว แต่ไม่สามารถส่งการแจ้งเตือนบางรายการถึงสมาชิกบางคนได้ กรุณาเข้าสู่ระบบศูนย์การจัดการผู้ใช้ UCenter และตรวจสอบว่าได้ส่งการแจ้งเตือนทั้งหมดแล้วหรือไม่ โดยดูได้ในแถบรายการการแจ้งเตือนของเมนูรายการข้อมูล หากการส่งล้มเหลว ให้ตรวจสอบว่า การเชื่อมต่อระหว่างเว็บไซต์และ UCenter เป็นปกติหรือไม่ และหลังจากส่งการแจ้งเตือนทั้งหมดเรียบร้อยแล้ว คุณสามารถดำเนินการอัปเกรดแอปพลิเคชันที่เหลือต่อได้ หลังจากที่โปรแกรมอื่น ๆ ได้ดำเนินการเสร็จหมดแล้ว ขอความกรุณาอย่าเรียกใช้งานขั้นตอนนี้ซ้ำ เพราะอาจทำให้เกิดปัญหาที่ไม่ทราบสาเหตุได้</b></font>", 'คำแนะนำการอัปเกรด');
+						} else {
+							logmessage("SendNote Failed, But I Can Retry");
+							// 当刷新重试的时候, 失败标准次数是不准确的, 因此不显示
+							$retrytimes++;
+							if ($retrytimes == 1) {
+								$failedstd = "ไม่ทราบข้อผิดพลาดที่เกิดขึ้น";
+							}
+							show_msg("การส่งการแจ้งเตือนนี้ได้ทำการลองส่งอีก $retrytimes ครั้งแล้ว โดยได้ตั้งค่าการลองส่งซ้ำคือ $failedstd ครั้ง ดังนั้นระบบกำลังจะดำเนินการขั้นตอนถัดไป กรุณารอสักครู่......", 'คำแนะนำการอัปเกรด', 0, "$theurl?step=sendnote&retry=$retrytimes", '8000');
+						}
 					}
 				}
 			}
@@ -957,6 +1032,11 @@ function encode_file($filename) {
 			$encode = mb_detect_encoding($res, array("ASCII", "UTF-8", "GB2312", "GBK", "EUC-CN", "CP936", "GB18030", "BIG-5"));
 			if (in_array($encode, array("GB2312", "GBK", "EUC-CN", "CP936", "GB18030", "BIG-5"))) {
 				$res = mb_convert_encoding($res, "UTF-8", $encode);
+				// 对非 Windows 系统尝试设置 777 权限
+				if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
+					logmessage("set chmod 777 $filename");
+					chmod($filename, 0777);
+				}
 				logmessage("file convert $filename");
 				file_put_contents($filename, $res);
 			}
@@ -1009,4 +1089,10 @@ function setdbglobal($db) {
 	// $db->query('SET GLOBAL connect_timeout=28800');
 	// $db->query('SET GLOBAL wait_timeout=28800');
 	// $db->query('SET GLOBAL interactive_timeout=28800');
+}
+
+function timezone_set($timeoffset = 7) {
+	if(function_exists('date_default_timezone_set')) {
+		@date_default_timezone_set('Etc/GMT'.($timeoffset > 0 ? '-' : '+').(abs($timeoffset)));
+	}
 }

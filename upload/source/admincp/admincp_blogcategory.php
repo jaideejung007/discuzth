@@ -26,9 +26,8 @@ if($operation == 'list') {
 			array('list', 'blogcategory', 1)
 		));
 
-		
 		showformheader('blogcategory');
-		showtableheader();
+		showtableheader('', 'nobottom');
 		showsetting('system_category_stat', 'settingnew[blogcategorystat]', $_G['setting']['blogcategorystat'], 'radio', '', 1);
 		showsetting('system_category_required', 'settingnew[blogcategoryrequired]', $_G['setting']['blogcategoryrequired'], 'radio', '');
 		echo '<tr><td colspan="2">';
@@ -42,7 +41,7 @@ if($operation == 'list') {
 		echo '<tr><td class="td25">&nbsp;</td><td colspan="3"><div><a class="addtr" onclick="addrow(this, 0, 0)" href="###">'.cplang('blogcategory_addcategory').'</a></div></td></tr>';
 		showtablefooter();
 		echo '</td></tr>';
-		
+		showtablefooter();
 
 		showtableheader('', 'notop');
 		showsubmit('editsubmit');

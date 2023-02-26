@@ -115,9 +115,7 @@ EOT;
 			array('usergroups_special', 'specialgroups', $_GET['type'] == 'special'),
 			array('usergroups_system', 'systemgroups', $_GET['type'] == 'system')
 		));
-		
 		showtips('usergroups_tips');
-		
 
 		showformheader('usergroups&type=member');
 		showtableheader('usergroups_member', 'fixpadding', 'id="membergroups"'.($_GET['type'] && $_GET['type'] != 'member' ? ' style="display: none"' : ''));
@@ -528,7 +526,6 @@ EOT;
 		$mgids[] = $gid;
 
 		if(!$multiset && $group['type'] == 'special' && $group['radminid'] < 1) {
-			
 			showtagheader('div', 'system', $anchor == 'system');
 			showtableheader();
 			if($group['system'] == 'private') {
@@ -542,13 +539,11 @@ EOT;
 			showsetting('usergroups_edit_system_minspan', 'system_minspannew', $system['minspan'], 'text');
 			showtablefooter();
 			showtagfooter('div');
-			
 		}
 
-		
 		showmultititle();
 		showtagheader('div', 'basic', $anchor == 'basic');
-		showtableheader();
+		showtableheader('', 'nobottom');
 		showtitle('usergroups_edit_basic');
 		showsetting('usergroups_edit_basic_title', 'grouptitlenew', $group['grouptitle'], 'text');
 		$group['exempt'] = strrev(sprintf('%0'.strlen($group['exempt']).'b', $group['exempt']));
@@ -631,11 +626,9 @@ EOT;
 		showsetting('usergroups_edit_basic_close_ad', 'closeadnew', $group['closead'], 'radio');
 		showtablefooter();
 		showtagfooter('div');
-		
 
-		
 		showtagheader('div', 'special', $anchor == 'special');
-		showtableheader();
+		showtableheader('', 'nobottom');
 		showtitle('usergroups_edit_special');
 		showsetting('usergroups_edit_special_activity', 'allowpostactivitynew', $group['allowpostactivity'], 'radio');
 		showsetting('usergroups_edit_special_poll', 'allowpostpollnew', $group['allowpostpoll'], 'radio');
@@ -658,11 +651,9 @@ EOT;
 		}
 		showtablefooter();
 		showtagfooter('div');
-		
 
-		
 		showtagheader('div', 'post', $anchor == 'post');
-		showtableheader();
+		showtableheader('', 'nobottom');
 		showtitle('usergroups_edit_post');
 		showsetting('usergroups_edit_post_new', 'allowpostnew', $group['allowpost'], 'radio');
 		showsetting('usergroups_edit_post_reply', 'allowreplynew', $group['allowreply'], 'radio');
@@ -709,7 +700,7 @@ EOT;
 		$group['maximagesize'] = intval($group['maximagesize'] / 1024);
 
 		showtagheader('div', 'attach', $anchor == 'attach');
-		showtableheader();
+		showtableheader('', 'nobottom');
 		showtitle('usergroups_edit_attach');
 		showsetting('usergroups_edit_attach_get', 'allowgetattachnew', $group['allowgetattach'], 'radio');
 		showsetting('usergroups_edit_attach_getimage', 'allowgetimagenew', $group['allowgetimage'], 'radio');
@@ -722,11 +713,9 @@ EOT;
 		showsetting('usergroups_edit_attach_ext', 'attachextensionsnew', $group['attachextensions'], 'text');
 		showtablefooter();
 		showtagfooter('div');
-		
 
-		
 		showtagheader('div', 'magic', $anchor == 'magic');
-		showtableheader();
+		showtableheader('', 'nobottom');
 		showtitle('usergroups_edit_magic');
 		showsetting('usergroups_edit_magic_permission', array('allowmagicsnew', array(
 			array(0, $lang['usergroups_edit_magic_unallowed']),
@@ -737,11 +726,9 @@ EOT;
 		showsetting('usergroups_edit_magic_max', 'maxmagicsweightnew', $group['maxmagicsweight'], 'text');
 		showtablefooter();
 		showtagfooter('div');
-		
 
-		
 		showtagheader('div', 'invite', $anchor == 'invite');
-		showtableheader();
+		showtableheader('', 'nobottom');
 		showtitle('usergroups_edit_invite');
 		showsetting('usergroups_edit_invite_permission', 'allowinvitenew', $group['allowinvite'], 'radio');
 		showsetting('usergroups_edit_invite_send_permission', 'allowmailinvitenew', $group['allowmailinvite'], 'radio');
@@ -750,7 +737,6 @@ EOT;
 		showsetting('usergroups_edit_invite_maxinviteday', 'maxinvitedaynew', $group['maxinviteday'], 'text');
 		showtablefooter();
 		showtagfooter('div');
-		
 
 		$raterangearray = array();
 		foreach(explode("\n", $group['raterange']) as $range) {
@@ -760,7 +746,7 @@ EOT;
 
 		if($multiset) {
 			showtagheader('div', 'credit', $anchor == 'credit');
-			showtableheader();
+			showtableheader('', 'nobottom');
 			showtitle('usergroups_edit_credit');
 			showsetting('usergroups_edit_credit_exempt_sendpm', 'exemptnew[0]', $group['exempt'][0], 'radio');
 			showsetting('usergroups_edit_credit_exempt_search', 'exemptnew[1]', $group['exempt'][1], 'radio');
@@ -785,9 +771,8 @@ EOT;
 			showtablefooter();
 			showtagfooter('div');
 		} else {
-			
 			showtagheader('div', 'credit', $anchor == 'credit');
-			showtableheader();
+			showtableheader('', 'nobottom');
 			showtitle('usergroups_edit_credit');
 			showsetting('usergroups_edit_credit_exempt_sendpm', 'exemptnew[0]', $group['exempt'][0], 'radio');
 			showsetting('usergroups_edit_credit_exempt_search', 'exemptnew[1]', $group['exempt'][1], 'radio');
@@ -812,7 +797,7 @@ EOT;
 			echo '<tr><td colspan="2">'.$lang['usergroups_edit_credit_exempt_comment'].'</td></tr>';
 
 			showtablefooter();
-			showtableheader('usergroups_edit_credit_allowrate', '');
+			showtableheader('usergroups_edit_credit_allowrate', 'nobottom');
 
 			$titlecolumn[0] = $lang['name'];
 			for($i = 1; $i <= 8; $i++) {
@@ -843,12 +828,10 @@ EOT;
 			echo '<tr><td class="lineheight" colspan="9">'.$lang['usergroups_edit_credit_rate_tips'].'</td></tr>';
 			showtablefooter();
 			showtagfooter('div');
-			
 		}
 
-		
 		showtagheader('div', 'home', $anchor == 'home');
-		showtableheader();
+		showtableheader('', 'nobottom');
 		showtitle('usergroups_edit_home');
 		showsetting('usergroups_edit_attach_max_space_size', 'maxspacesizenew', $group['maxspacesize'], 'text');
 		showsetting('usergroups_edit_home_allow_blog', 'allowblognew', $group['allowblog'], 'radio', '', 1);
@@ -875,11 +858,9 @@ EOT;
 		showsetting('usergroups_edit_home_allow_space_diy_imgcode', 'allowspacediyimgcodenew', $group['allowspacediyimgcode'], 'radio');
 		showtablefooter();
 		showtagfooter('div');
-		
 
-		
 		showtagheader('div', 'group', $anchor == 'group');
-		showtableheader();
+		showtableheader('', 'nobottom');
 		showtitle('usergroups_edit_group');
 		showsetting('usergroups_edit_group_build', 'allowbuildgroupnew', $group['allowbuildgroup'], 'text');
 		showsetting('usergroups_edit_group_buildcredits', 'buildgroupcreditsnew', $group['buildgroupcredits'], 'text');
@@ -897,11 +878,9 @@ EOT;
 		)), $group['allowgroupposturl'], 'mradio');
 		showtablefooter();
 		showtagfooter('div');
-		
 
-		
 		showtagheader('div', 'portal', $anchor == 'portal');
-		showtableheader();
+		showtableheader('', 'nobottom');
 		showtitle('usergroups_edit_portal');
 		showsetting('usergroups_edit_portal_allow_comment_article', 'allowcommentarticlenew', $group['allowcommentarticle'], 'text');
 		showsetting('usergroups_edit_portal_allow_comment_article_mod', 'allowcommentarticlemodnew', $group['allowcommentarticlemod'], 'radio');
@@ -911,11 +890,10 @@ EOT;
 		showsetting('usergroups_edit_portal_allow_post_article_moderate', 'allowpostarticlemodnew', $group['allowpostarticlemod'], 'radio');
 		showtablefooter();
 		showtagfooter('div');
-		
 
 		if($pluginsetting) {
 			showtagheader('div', 'plugin', $anchor == 'plugin');
-			showtableheader();
+			showtableheader('', 'nobottom');
 			foreach($pluginsetting as $setting) {
 				showtitle($setting['name']);
 				foreach($setting['setting'] as $varid => $var) {

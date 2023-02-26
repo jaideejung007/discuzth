@@ -18,6 +18,7 @@ $aid = intval($_GET['aid']);
 $k = $_GET['k'];
 $t = $_GET['t'];
 $authk = !$requestmode ? substr(md5($aid.md5($_G['config']['security']['authkey']).$t.$_GET['uid']), 0, 8) : md5($aid.md5($_G['config']['security']['authkey']).$t);
+$sameuser = !empty($_GET['uid']) && $_GET['uid'] == $_G['uid'];
 
 if($k !== $authk || $t > TIMESTAMP + 3600) {
     if(!$requestmode) {
@@ -52,7 +53,11 @@ if($_G['setting']['attachexpire']) {
 				dheader('location: '.$_G['siteurl'].'static/image/common/none.gif');
 			} else {
 				if(!$requestmode) {
-					showmessage('attachment_expired', '', array('aid' => aidencode($aid, 0, $attach['tid']), 'pid' => $attach['pid'], 'tid' => $attach['tid']));
+					if($sameuser) {
+						showmessage('attachment_expired', '', array('aid' => aidencode($aid, 0, $attach['tid']), 'pid' => $attach['pid'], 'tid' => $attach['tid']));
+					} else {
+						showmessage('attachment_expired_nosession', '', array('pid' => $attach['pid'], 'tid' => $attach['tid']));
+					}
 				} else {
 					exit;
 				}

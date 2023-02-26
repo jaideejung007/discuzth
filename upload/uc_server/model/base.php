@@ -50,8 +50,8 @@ class base {
 		if (!defined('UC_ONLYREMOTEADDR') || (defined('UC_ONLYREMOTEADDR') && !constant('UC_ONLYREMOTEADDR'))) {
 			require_once UC_ROOT.'./lib/ucip.class.php';
 			if(defined('UC_IPGETTER') && !empty(constant('UC_IPGETTER'))) {
-				$s = defined('UC_IPGETTER_'.constant('UC_IPGETTER')) && is_array(constant('UC_IPGETTER_'.constant('UC_IPGETTER'))) ? constant('UC_IPGETTER_'.constant('UC_IPGETTER')) : array();
-				$c = 'ucip_getter_'.constant('UC_IPGETTER');
+				$s = defined('UC_IPGETTER_'.strtoupper(constant('UC_IPGETTER'))) ? (is_string(constant('UC_IPGETTER_'.strtoupper(constant('UC_IPGETTER')))) ? unserialize(constant('UC_IPGETTER_'.strtoupper(constant('UC_IPGETTER')))) : constant('UC_IPGETTER_'.strtoupper(constant('UC_IPGETTER')))) : array();
+				$c = 'ucip_getter_'.strtolower(constant('UC_IPGETTER'));
 				require_once UC_ROOT.'./lib/'.$c.'.class.php';
 				$r = $c::get($s);
 				$this->onlineip = ucip::validate_ip($r) ? $r : $this->onlineip;
@@ -83,7 +83,7 @@ class base {
 		}
 	}
 
-	function init_input($getagent = '') {
+	function init_input($getagent = '', $secureoperation = true) {
 		$input = getgpc('input', 'R');
 		if($input) {
 			$input = $this->authcode($input, 'DECODE', $this->app['authkey']);
@@ -91,7 +91,11 @@ class base {
 			$this->input = daddslashes($this->input, 1, TRUE);
 			$agent = $getagent ? $getagent : $this->input['agent'];
 
-			if(($getagent && $getagent != $this->input['agent']) || (!$getagent && md5($_SERVER['HTTP_USER_AGENT']) != $agent)) {
+			if($secureoperation && !$this->settings['insecureoperation'] && (getgpc('m') != $this->input['m'] || getgpc('a') != $this->input['a'] || getgpc('appid') != $this->input['appid'])) {
+				exit('Access denied for operation changed');
+			} elseif($this->input('frontend') == 1 && !((getgpc('m') == 'user' && in_array(getgpc('a'), array('uploadavatar', 'rectavatar'))) || getgpc('m') == 'pm_client')) {
+				exit('Access denied for operation changed');
+			} elseif(($getagent && $getagent != $this->input['agent']) || (!$getagent && md5($_SERVER['HTTP_USER_AGENT']) != $agent)) {
 				exit('Access denied for agent changed');
 			} elseif($this->time - $this->input('time') > 3600) {
 				exit('Authorization has expired');

@@ -62,10 +62,9 @@ if(!$operation) {
 	showhiddenfields(array('posttableid' => $posttableid));
 	$checklpp = array();
 	$checklpp[$lpp] = 'selected="selected"';
-	showboxheader($lang['recyclebinpost_list'].
+	showtableheader($lang['recyclebinpost_list'].
 				'&nbsp<select onchange="if(this.options[this.selectedIndex].value != \'\') {window.location=\''.ADMINSCRIPT.'?action=recyclebinpost&lpp=\'+this.options[this.selectedIndex].value }">
 				<option value="20" '.$checklpp[20].'> '.$lang['perpage_20'].' </option><option value="50" '.$checklpp[50].'>'.$lang['perpage_50'].'</option><option value="100" '.$checklpp[100].'>'.$lang['perpage_100'].'</option></select>');
-	showtableheader();
 
 	$postlistcount = C::t('forum_post')->count_by_invisible($posttableid, '-5');
 
@@ -74,7 +73,6 @@ if(!$operation) {
 	}
 	showsubmit('rbsubmit', 'submit', '', '<a href="#rb" onclick="checkAll(\'option\', $(\'rbform\'), \'delete\')">'.cplang('recyclebin_all_delete').'</a> &nbsp;<a href="#rb" onclick="checkAll(\'option\', $(\'rbform\'), \'undelete\')">'.cplang('recyclebin_all_undelete').'</a> &nbsp;<a href="#rb" onclick="checkAll(\'option\', $(\'rbform\'), \'ignore\')">'.cplang('recyclebin_all_ignore').'</a> &nbsp;', $multi);
 	showtablefooter();
-	showboxfooter();
 	showformfooter();
 	echo '<iframe name="rbframe" style="display:none"></iframe>';
 	showtagfooter('div');
@@ -86,8 +84,8 @@ if(!$operation) {
 	$keywords = $_GET['keywords'];
 	$pstarttime = $_GET['pstarttime'];
 	$pendtime = $_GET['pendtime'];
-	
-	$secStatus = false;	
+
+	$secStatus = false;
 
 	$searchsubmit = $_GET['searchsubmit'];
 
@@ -106,7 +104,6 @@ if(!$operation) {
 		array('search', 'recyclebinpost&operation=search', 1),
 		array('clean', 'recyclebinpost&operation=clean', 0)
 	));
-	/*search={"nav_recyclebinpost":"action=recyclebinpost","search":"action=recyclebinpost&operation=search"}*/
 	$staticurl = STATICURL;
 	echo <<<EOT
 <script type="text/javascript" src="{$staticurl}js/calendar.js"></script>
@@ -133,7 +130,6 @@ EOT;
 	showtablefooter();
 	showformfooter();
 	showtagfooter('div');
-	/*search*/
 
 	if(submitcheck('searchsubmit')) {
 
@@ -171,14 +167,12 @@ EOT;
 			array('search', 'recyclebinpost&operation=search', 0),
 			array('clean', 'recyclebinpost&operation=clean', 1)
 		));
-		/*search={"nav_recyclebinpost":"action=recyclebinpost","clean":"action=recyclebinpost&operation=clean"}*/
 		showformheader('recyclebinpost&operation=clean');
 		showtableheader('recyclebinpost_clean');
 		showsetting('recyclebinpost_clean_days', 'days', '30', 'text');
 		showsubmit('cleanrbsubmit');
 		showtablefooter();
 		showformfooter();
-		/*search*/
 
 	} else {
 

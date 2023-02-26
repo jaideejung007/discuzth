@@ -33,10 +33,9 @@ if(!$operation) {
 		$checklpp = array();
 		$checklpp[$lpp] = 'selected="selected"';
 		showformheader('recyclebin');
-		showboxheader($lang['recyclebin_list'].
+		showtableheader($lang['recyclebin_list'].
 				'&nbsp<select onchange="if(this.options[this.selectedIndex].value != \'\') {window.location=\''.ADMINSCRIPT.'?action=recyclebin&lpp=\'+this.options[this.selectedIndex].value }">
 				<option value="20" '.$checklpp[20].'> '.$lang['perpage_20'].' </option><option value="50" '.$checklpp[50].'>'.$lang['perpage_50'].'</option><option value="100" '.$checklpp[100].'>'.$lang['perpage_100'].'</option></select>');
-		showtableheader();
 		showsubtitle(array('', 'thread', 'recyclebin_list_thread', 'recyclebin_list_author', 'recyclebin_list_status', 'recyclebin_list_lastpost', 'recyclebin_list_operation', 'reason'));
 		$fids = $threadlist = array();
 		$threads = C::t('forum_thread')->fetch_all_by_tid_fid_displayorder(0, 0, -1, 'dateline', $start_limit, $lpp, '=');
@@ -82,7 +81,6 @@ if(!$operation) {
 
 		showsubmit('', '', '', '<input type="checkbox" name="chkall" id="chkall" class="checkbox" onclick="checkAll(\'prefix\', this.form, \'threadlist\')" /><label for="chkall">'.cplang('select_all').'</label>&nbsp;&nbsp;<input type="submit" class="btn" name="delsubmit" value="'.cplang('recyclebin_delete').'" />&nbsp;<input type="submit" class="btn" name="undelsubmit" value="'.cplang('recyclebin_undelete').'" />', $multipage);
 		showtablefooter();
-		showboxfooter();
 		showformfooter();
 	} else {
 		$threadlist = $_GET['threadlist'];
@@ -114,8 +112,8 @@ if(!$operation) {
 		$pendtime = $_GET['pendtime'];
 		$mstarttime = $_GET['mstarttime'];
 		$mendtime = $_GET['mendtime'];
-		
-		$secStatus = false;		
+
+		$secStatus = false;
 
 		$searchsubmit = $_GET['searchsubmit'];
 
@@ -134,7 +132,6 @@ if(!$operation) {
 			array('search', 'recyclebin&operation=search', 1),
 			array('clean', 'recyclebin&operation=clean', 0)
 		));
-		/*search={"nav_recyclebin":"action=recyclebin","search":"action=recyclebin&operation=search"}*/
 		$staticurl = STATICURL;
 		echo <<<EOT
 <script type="text/javascript" src="{$staticurl}js/calendar.js"></script>
@@ -164,7 +161,6 @@ EOT;
 		showtablefooter();
 		showformfooter();
 		showtagfooter('div');
-		/*search*/
 
 		if(submitcheck('searchsubmit')) {
 
@@ -284,14 +280,12 @@ EOT;
 			array('search', 'recyclebin&operation=search', 0),
 			array('clean', 'recyclebin&operation=clean', 1)
 		));
-		/*search={"nav_recyclebin":"action=recyclebin","clean":"action=recyclebin&operation=clean"}*/
 		showformheader('recyclebin&operation=clean');
 		showtableheader('recyclebin_clean');
 		showsetting('recyclebin_clean_days', 'days', '30', 'text');
 		showsubmit('rbsubmit');
 		showtablefooter();
 		showformfooter();
-		/*search*/
 
 	} else {
 

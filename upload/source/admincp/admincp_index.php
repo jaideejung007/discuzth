@@ -268,7 +268,7 @@ function show_note() {
 			$note['expiration'] = ceil(($note['expiration'] - $note['dateline']) / 86400);
 			$note['dateline'] = dgmdate($note['dateline'], 'dt');
 			$notemsghtml .= '<div class="dcol"><div class="adminnote">'.'<a'.(isfounder() || $_G['member']['username'] == $note['admin'] ? ' href="'.ADMINSCRIPT.'?action=index&notesubmit=yes&noteid='.$note['id'].'" title="'.cplang('delete').'" class="ndel"' : '').'></a>'.
-				("<div><p><span class=\"bold\"><a href=\"home.php?mod=space&username={$note['adminenc']}\" target=\"_blank\">{$note['admin']}</a></span></p><p>{$note['dateline']}</p><p class=\"marginbot\">(".cplang('validity').": {$note['expiration']} ".cplang('days').")</p><p>{$note['message']}</p>").'</div></div></div>';
+				("<div><p><span class=\"bold\"><a href=\"home.php?mod=space&username={$note['adminenc']}\" target=\"_blank\">{$note['admin']}</a></span></p><p>{$note['dateline']}</p><p class=\"marginbot\">(".cplang('home_notes_add').cplang('validity').": {$note['expiration']} ".cplang('days').")</p><p>{$note['message']}</p>").'</div></div></div>';
 		}
 	}
 
@@ -319,7 +319,7 @@ function show_envcheck() {
 	$now_ver_gd = function_exists('gd_info') ? gd_info() : false;
 	$now_ver = array('PHP' => constant('PHP_VERSION'), 'MySQL' => helper_dbtool::dbversion(), 'XML' => function_exists('xml_parser_create'), 'JSON' => function_exists('json_encode'), 'FileSock Function' => (function_exists('fsockopen') || function_exists('pfsockopen') || function_exists('stream_socket_client') || function_exists('curl_init')), 'GD' => ($now_ver_gd ? preg_replace('/[^0-9.]+/', '', $now_ver_gd['GD Version']) : false));
 	$req_ver = array('PHP' => '5.6.0', 'MySQL' => '5.5.3', 'XML' => true, 'JSON' => true, 'FileSock Function' => true, 'GD' => '1.0');
-	$sug_ver = array('PHP' => '7.3.0', 'MySQL' => '5.7.0', 'XML' => true, 'JSON' => true, 'FileSock Function' => true, 'GD' => '2.0');
+	$sug_ver = array('PHP' => '7.4.0', 'MySQL' => '8.0.0', 'XML' => true, 'JSON' => true, 'FileSock Function' => true, 'GD' => '2.0');
 	foreach ($now_ver as $key => $value) {
 		if($req_ver[$key] === true) {
 			if(!$value) {
@@ -368,7 +368,7 @@ function show_sysinfo() {
 
 	showboxrow('', array('class="dcol lineheight d-14"', 'class="dcol lineheight d-1"'), array(
 		cplang('home_check_newversion'),
-/*jaideejung007*/		($newversion['newversion']['release'] ? ($newversion['newversion']['release'] != DISCUZ_RELEASE ? '<b style="color:red;">' : '').'Discuz! '.$newversion['newversion']['version'].' '.$reldisp_addon.' '.strtoupper(CHARSET).' '.($newversion['newversion']['release'] != DISCUZ_RELEASE ? '</b>' : '') : '<a href="https://discuzthai.com/thread-40670-1-1.html" target="_blank">'.cplang('detect_environment_error').'</a>').
+/*jaideejung007*/		($newversion['newversion']['release'] ? ($newversion['newversion']['release'] != DISCUZ_RELEASE ? '<b style="color:red;">' : '').'Discuz! '.$newversion['newversion']['version'].' '.$reldisp_addon.' '.strtoupper(CHARSET).' '.($newversion['newversion']['release'] != DISCUZ_RELEASE ? '</b>' : '') : '<a href="https://discuzthai.com/thread-41058-1-1.html" target="_blank">'.cplang('detect_environment_error').'</a>').
 		' <a href="'.ADMINSCRIPT.'?action=index&checknewversion&formhash='.$_G['formhash'].'">[ '.cplang('refresh').' ]</a>&nbsp;&nbsp;<br><br>'.
 /*jaideejung007*/		(!empty($downlist) ? implode('&#x3001;', $downlist).($newversion['newversion']['qqqun'] ? '<span class="bold">&nbsp;&nbsp;|&nbsp;&nbsp;'.cplang('qq_group').$newversion['newversion']['qqqun'].'</span>' : '') : '<span class="bold"><a href="https://github.com/jaideejung007/discuzth/releases" target="_blank">'.cplang('download_latest').'</a> | '.cplang('qq_group').'73'.'21'.'03'.'690</span>')
 	));
@@ -558,7 +558,8 @@ function show_forever_thanks() {
 	<a href="https://www.dismall.com/" class="lightlink2" target="_blank">'.cplang('app_discussion').'</a>,&nbsp;
 	<a href="https://www.discuz.net/" class="lightlink2" target="_blank">'.cplang('discussion_area').'</a>, &nbsp;
 	<a href="'.ADMINSCRIPT.'?action=cloudaddons" class="lightlink2" target="_blank">'.cplang('app_center').'</a>, &nbsp;
-<!--jaideejung007-->	<a href="https://discuzthai.com" class="lightlink2" target="_blank">&#xE14;&#xE34;&#xE2A;&#xE04;&#xE31;&#xE2A;&#xE44;&#xE17;&#xE22;!</a>,	
-<!--jaideejung007-->	<a href="https://github.com/jaideejung007/discuzth" class="lightlink2" target="_blank">Discuz! Thai Official Repositories</a>'));
+<!--jaideejung007-->	<a href="https://discuzthai.com" class="lightlink2" target="_blank">&#xE14;&#xE34;&#xE2A;&#xE04;&#xE31;&#xE2A;&#xE44;&#xE17;&#xE22;!</a>, &nbsp;	
+<!--jaideejung007-->	<a href="https://github.com/jaideejung007/discuzth" class="lightlink2" target="_blank">Discuz! Thai Official Repositories</a>, &nbsp;
+<!--jaideejung007-->	<a href="https://discord.gg/faSzs3geux" class="lightlink2" target="_blank">Discord Discuz! Thai Community</a>'));
 	showboxfooter();
 }

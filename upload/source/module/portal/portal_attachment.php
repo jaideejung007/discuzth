@@ -23,6 +23,9 @@ if($operation == 'delete') {
 	if(!$_G['group']['allowmanagearticle'] && ($_G['uid'] != $attach['uid'] || $aid != $attach['aid'])) {
 		showmessage('portal_attachment_nopermission_delete');
 	}
+	if(!isset($_GET['formhash']) || formhash() != $_GET['formhash']) {
+		showmessage('portal_attachment_nopermission_delete');
+	}
 	if($aid) {
 		C::t('portal_article_title')->update($aid, array('pic' => ''));
 	}
@@ -51,7 +54,7 @@ if($operation == 'delete') {
 		showmessage('attachment_nonexistence');
 	}
 
-	$readmod = 2;
+	$readmod = 2;//read local file's function: 1=fread 2=readfile 3=fpassthru 4=fpassthru+multiple
 	$range = 0;
 	if($readmod == 4 && !empty($_SERVER['HTTP_RANGE'])) {
 		list($range) = explode('-',(str_replace('bytes=', '', $_SERVER['HTTP_RANGE'])));
@@ -62,11 +65,8 @@ if($operation == 'delete') {
 	}
 
 	$filesize = $attach['filesize'];
-	
 	$filenameencode = strtolower(CHARSET) == 'utf-8' ? rawurlencode($attach['filename']) : rawurlencode(diconv($attach['filename'], CHARSET, 'UTF-8'));
 
-	
-	
 	$rfc6266blacklist = strexists($_SERVER['HTTP_USER_AGENT'], 'UCBrowser') || strexists($_SERVER['HTTP_USER_AGENT'], 'Quark') || strexists($_SERVER['HTTP_USER_AGENT'], 'SogouM') || strexists($_SERVER['HTTP_USER_AGENT'], 'baidu');
 
 	dheader('Date: '.gmdate('D, d M Y H:i:s', $attach['dateline']).' GMT');
@@ -115,8 +115,8 @@ function getlocalfile($filename, $readmod = 2, $range = 0) {
 			@fseek($fp, $range);
 			if(function_exists('fpassthru') && ($readmod == 3 || $readmod == 4)) {
 				@fpassthru($fp);
-			} else {
-				echo @fread($fp, filesize($filename));
+			} else if(filesize($filename)) {
+				echo fread($fp, filesize($filename));
 			}
 		}
 		@fclose($fp);

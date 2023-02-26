@@ -31,7 +31,6 @@ if($operation == 'manage') {
 			array('nav_threadsplit_manage', 'threadsplit&operation=manage', 1),
 			array('nav_threadsplit_move', 'threadsplit&operation=move', 0),
 		));
-		
 		showtips('threadsplit_manage_tips');
 		showformheader('threadsplit&operation=manage');
 		showtableheader('threadsplit_manage_table_orig');
@@ -50,10 +49,9 @@ if($operation == 'manage') {
 			$table_info = C::t('forum_thread')->gettablestatus($tableid);
 			showtablerow('', array(), array($table_info['Name'], "<input type=\"text\" class=\"txt\" name=\"displayname[$tableid]\" value=\"{$threadtable_info[$tableid]['displayname']}\" />", $table_info['Rows'], $table_info['Data_length'], $table_info['Index_length'], $table_info['Create_time'], "<input type=\"text\" class=\"txt\" name=\"memo[$tableid]\" value=\"{$threadtable_info[$tableid]['memo']}\" />", "<a href=\"?action=threadsplit&operation=droptable&tableid=$tableid\">{$lang['delete']}</a>"));
 		}
-		showtablefooter();
 		showsubmit('threadsplit_update_submit', 'threadsplit_manage_update', '', '<a href="?action=threadsplit&operation=addnewtable" style="border-style: solid; border-width: 1px;" class="btn">'.$lang['threadsplit_manage_table_add'].'</a>&nbsp;<a href="?action=threadsplit&operation=forumarchive" style="border-style: solid; border-width: 1px;" class="btn">'.$lang['threadsplit_manage_forum_update'].'</a>');
+		showtablefooter();
 		showformfooter();
-		
 	} else {
 		$threadtable_info = array();
 		$_GET['memo'] = !empty($_GET['memo']) ? $_GET['memo'] : array();
@@ -155,7 +153,6 @@ EOT;
 			array('nav_threadsplit_manage', 'threadsplit&operation=manage', 0),
 			array('nav_threadsplit_move', 'threadsplit&operation=move', 1),
 		));
-		
 		showtips('threadsplit_move_tips');
 		showtagheader('div', 'threadsearch', !submitcheck('threadsplit_move_search'));
 		showformheader('threadsplit&operation=move', '', 'threadform');
@@ -328,7 +325,6 @@ EOT;
 			}
 			showformfooter();
 			showtagfooter('div');
-			
 
 		}
 	} else {

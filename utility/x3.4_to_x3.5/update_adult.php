@@ -3,6 +3,9 @@
 // 不升级到 InnoDB 开关
 // 仅限极少量特殊场合应用
 define("NO_INNODB_FEATURE", false);
+// 数据表改名开关
+// 仅限极少量特殊场合应用
+define("NO_RENAME_TABLE", true);
 define('UPGRADE_LOG_PATH', __DIR__.'/../data/log/X3.5_upgrade.php');
 empty($_GET['css']) || cssoutput();
 
@@ -40,6 +43,17 @@ $theurl = htmlspecialchars($_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_SERVE
 $lockfile = DISCUZ_ROOT.'./data/update.lock';
 
 timezone_set();
+
+// PHP 8 拦截
+if (version_compare(PHP_VERSION, '8.0.0', '>=')) {
+	show_msg('เวอร์ชัน PHP ที่โปรแกรมอัปเกรดนี้สนับสนุนคือ 5.6 - 7.4 เท่านั้น กรุณาดาวน์เกรด PHP เป็น 7.4 ก่อนอัปเกรดโปรแกรม Discuz! X และหลังจากอัปเกรดเสร็จแล้ว คุณสามารถสลับไปใช้ PHP 8.0 หรือสูงกว่าได้');
+}
+
+// Q004 保证无写入权限时可以正常报错
+// https://www.dismall.com/thread-14718-1-1.html
+if (!@touch(UPGRADE_LOG_PATH) || @!is_writable(UPGRADE_LOG_PATH)) {
+	show_msg('กรุณาเข้าสู่ระบบการจัดการเซิร์ฟเวอร์ เพื่อกำหนดสิทธิ์โฟลเดอร์ data/log ที่อยู่ในโฟลเดอร์ Discuz! X จากนั้นจึงเรียกใช้ไฟล์นี้อีกครั้งเพื่ออัปเกรด');
+}
 
 $tables = array();
 
@@ -83,12 +97,12 @@ if (!empty($_GET['lock'])) {
 	@touch($lockfile);
 	@unlink($theurl);
 	logmessage("upgrade success.");
-	show_msg('ยินดีด้วยนะ คุณอัปเกรดเป็น Discuz! X3.5 เรียบร้อยแล้ว ขอบคุณที่เลือกใช้ผลิตภัณฑ์ของเรา');
+	show_msg('ขอแสดงความยินดี คุณอัปเกรดเป็น Discuz! X3.5 เรียบร้อยแล้ว ขอบคุณที่เลือกใช้ผลิตภัณฑ์ของเรา');
 }
 
 if (file_exists($lockfile)) {
 	logmessage("upgrade locked.");
-	show_msg('กรุณาเข้าสู่ระบบเซิร์ฟเวอร์ จากนั้นลบไฟล์ data/update.lock ออกด้วยตนเอง เสร็จแล้วเรียกใช้ไฟล์นี้อีกครั้งเพื่อเริ่มอัปเกรด');
+	show_msg('กรุณาเข้าสู่ระบบการจัดการเซิร์ฟเวอร์ เพื่อทำการลบไฟล์ data/update.lock ออกด้วยตนเอง เสร็จแล้วเรียกใช้ไฟล์นี้อีกครั้งเพื่อเริ่มอัปเกรด');
 }
 
 if ($step == 'welcome') {
@@ -97,7 +111,7 @@ if ($step == 'welcome') {
 
 } else if ($step == 'tips') {
 
-	show_msg('<p class="lead">ย้ำอีกครั้ง ในขั้นตอนนี้ ก่อนที่จะดำเนินการอัปเกรดจาก Discuz! X3.4 เป็น Discuz! X3.5 เราขอแนะนำให้คุณสำรองข้อมูลเว็บไซต์ทั้งหมด (รวมถึงฐานข้อมูลและไฟล์ที่เกี่ยวข้อง) และดำเนินการอัปเกรดด้วยความระมัดระวัง</p><p class="lead">เนื่องด้วย UCenter 1.7.0 จะดำเนินการอัปเดตการเข้ารหัสฐานข้อมูลใหม่ หากชื่อผู้ใช้งานในฐานข้อมูล UCenter 1.7.0 รายใดไม่สนับสนุนการเข้ารหัส utf8mb4_unicode_ci จะถูกเปลี่ยนเป็นชื่อผู้ใช้งานที่มีอักษรแบบสุ่มใหม่จำนวน 15 ตัวให้โดยอัตโนมัติในระหว่างกระบวนการอัปเกรด หลังจากการดำเนินการเสร็จแล้ว ให้คุณตรวจสอบไฟล์บันทึกการเปลี่ยนชื่อผู้ใช้งานและดูบันทึกการแจ้งเตือนจากระบบหลังบ้านของ UCenter ว่ามีการดำเนินการแจ้งไปยังผู้ใช้งานที่ได้รับผลกระทบตามแอปที่ได้ผูกไว้กับ UCenter หรือไม่ ก่อนที่จะดำเนินการอัปเกรด Discuz! X3.5 ต่อไป และหลังจากอัปเกรดเสร็จสิ้นทั้งหมดแล้ว กรุณาแจ้งผู้ใช้งานที่ได้รับผลกระทบดังกล่าวด้วยตนเองอีกครั้ง โดยอาจจะแจ้งให้ผู้ใช้งานทำการเปลี่ยนชื่อใหม่ด้วยไอเท็มเปลี่ยนชื่อ หรืออื่น ๆ ผ่านประกาศของเว็บไซต์ หรือทางอีเมล หรือทาง SMS ตามแต่ผู้ดูแลระบบสะดวกที่จะดำเนินการแจ้งให้ผู้ใช้งานทราบ หากคุณต้องการให้ผู้ใช้งานที่ได้รับผลกระทบดังกล่าวเปลี่ยนชื่อได้ด้วยตนเองผ่านการใช้ไอเท็มเปลี่ยนชื่อ อย่าลืมตั้งค่าไอเท็มเปลี่ยนชื่อใน AdminCP ของระบบดิสคัสด้วย เพื่อเป็นทางเลือกให้กับผู้ที่ได้รับผลกระทบสามารถเปลี่ยนชื่อผู้ใช้งานใหม่ได้สะดวกมากยิ่งขึ้น</p><p class="lead">เนื่องด้วย UCenter 1.7.0 จะดำเนินการอัปเดตการเข้ารหัสฐานข้อมูลใหม่ หากผู้ใช้งานรายใดตั้งค่าให้ตอบคำถามความปลอดภัยโดยไม่ได้ใช้ข้อความ ASCII (ภาษาอังกฤษและตัวเลข) ก่อนเข้าสู่ระบบ คำตอบของคำถามความปลอดภัยดังกล่าวจะถูกล้างออกโดยอัตโนมัติ กรุณาแจ้งให้ผู้ใช้ทราบจากผลกระทบดังกล่าวและขอให้ผู้ใช้เมื่อจะเข้าสู่ระบบไม่ต้องกรอกคำตอบของคำถามความปลอดภัยใด ๆ</p><p class="lead">เนื่องด้วย UCenter 1.7.0 จะดำเนินการอัปเดตการเข้ารหัสฐานข้อมูลใหม่ หากผู้ใช้งานรายใดตั้งรหัสผ่านไม่ได้เป็นไปตามมาตรฐานของการตั้งรหัสผ่าน (เช่น ใช้รหัสผ่านที่ไม่ใช่ภาษาอังกฤษ อาจจะเป็นภาษาไทยหรือภาษาอื่น ๆ ลงไปในรหัสผ่าน) ผู้ใช้งานดังกล่าวอาจจะเข้าสู่ระบบไม่ได้ เมื่อคุณพบสถานการณ์นี้ กรุณาแจ้งให้ผู้ใช้งานทำการรีเซ็ตรหัสผ่านใหม่ โดยใช้ฟังก์ชันลืมรหัสผ่านในหน้าเข้าสู่ระบบ แล้วดำเนินการตามขั้นตอนที่แจ้ง ผู้ใช้งานดังกล่าวก็จะสามารถเข้าสู่ระบบด้วยรหัสผ่านใหม่ได้อีกครั้ง</p><p class="lead">เนื่องด้วย Discuz! X3.5 ได้อัปเดตวิธีการจัดเก็บการแบนไอพีใหม่ หากคุณตั้งกฎการแบนไอพีเป็นแบบแบนยกชุด (batches) ไว้ การอัปเกรดนี้จะสนับสนุนแค่ไอพีที่เป็นประเภท IPv4 และกฎอื่น ๆ ที่ตั้งค่าเป็นจำนวนเต็ม (integer) ที่มีค่าตั้งแต่ 8 แต่ไม่เกิน 32 เท่านั้น ส่วนกฎอื่น ๆ นอกเหนือจากนี้จะถูกลบออกโดยอัตโนมัติ เราขอแนะนำให้คุณสำรองกฎเดิมของคุณไว้ก่อนการอัปเกรด และเมื่ออัปเกรดเสร็จแล้ว คุณสามารถตั้งค่ากฎเดิมของคุณที่ได้สำรองไว้ก่อนหน้านี้</p><p class="lead">เนื่องด้วย Discuz! X3.5 ได้ปรับปรุงฟีเจอร์การแบน Session และไอพีใหม่ การปรับปรุงฟีเจอร์ดังกล่าวจึงไม่สนับสนุนไลบรารีแคชอื่น ๆ ที่ไม่ใช่ของ Redis เป็นเพราะว่ายังมีการใช้ฟีเจอร์ขั้นสูงบางอย่างของ Redis อยู่ ดังนั้น หากเว็บไซต์ของคุณมีทราฟิกอยู่เป็นจำนวนมาก ขอแนะนำให้คุณถอนการติดตั้งไลบรารีแคชหน่วยความจำเดิมออก แล้วแทนที่ด้วยไลบรารีหน่วยความจำ Redis ใหม่แทน ซึ่งจะช่วยให้การเข้าถึงเว็บไซต์เป็นไปได้อย่างรวดเร็ว โดยไม่ต้องพึ่งพาตาราง HEAP ภายในฐานข้อมูลใด ๆ อีก</p><p class="lead">เนื่องด้วย Discuz! X3.5 ได้ปรับปรุงฟีเจอร์การปิด/เปิดของโมดูลเว็บไซต์ ในระหว่างการอัปเกรด โมดูลเว็บไซต์ที่มีทั้งหมดจะถูกตั้งค่าสถานะเป็นเปิดใช้งานให้โดยอัตโนมัติ กรุณาประเมินความเหมาะสมในการเปิดใช้งานโมดูลของเว็บไซต์ดังกล่าวด้วยตนเอง และสามารถปิดโมดูลเว็บไซต์ได้ หากไม่ต้องการใช้งาน</p><p class="lead">เนื่องด้วย Discuz! X3.5 ได้อัปเดตการเข้ารหัสฐานข้อมูลและเทมเพลทเริ่มต้นใหม่ทั้งหมด โปรแกรมอัปเกรดจะแปลงตารางข้อมูลปลั๊กอิน/เทมเพลทเป็น utf8mb4 และพยายามแปลงการเข้ารหัสไฟล์ปลั๊กอินของคุณด้วย พร้อมทั้งปิดการใช้งานปลั๊กอินที่ไม่ใช่ค่าเริ่มต้นของระบบและคืนค่ากลับไปใช้เทมเพลทเริ่มต้นให้โดยอัตโนมัติเมื่ออัปเกรดเสร็จสมบูรณ์ กรุณาทดสอบการใช้งานปลั๊กอินของคุณหลังจากอัปเกรดอีกครั้งว่ายังสามารถทำงานได้ตามปกติหรือไม่ กรณีปลั๊กอินและเทมเพลทส่วนใหญ่ที่ผ่านการแปลงไฟล์โดยอัตโนมัติ คุณจะสามารถใช้งานได้เหมือนเดิม หรืออาจจะต้องปรับปรุงการตั้งค่าบางอย่างอีกเล็กน้อยเพื่อให้สามารถใช้งานได้สภาพแวดล้อม utf8mb4 ได้สมบูรณ์ ส่วนปลั๊กอินและเทมเพลทบางตัวอาจจะต้องแปลงการเข้ารหัสไฟล์ใหม่ด้วยตนเอง หรืออาจจะต้องปรับปรุงโค้ดภายในปลั๊กอินเพื่อให้สามารถใช้งานใน Discuz! X3.5 ได้อย่างปกติ</p><p class="lead">กรุณาอย่าเรียกใช้งานโปรแกรมอัปเกรดนี้ซ้ำ การเรียกใช้งานซ้ำอาจทำให้เกิดปัญหาที่ไม่คาดคิดได้ หากพบปัญหาระหว่างการอัปเกรด ขอความกรุณาอย่าปิดหน้าเว็บเป็นอันขาด พยายามแก้ไขตามคำแนะนำที่ปรากฎในหน้าเว็บแล้วรีเฟรชหน้าเว็บใหม่ หากยังไม่สามารถแก้ไขปัญหาได้ กรุณาเรียกคืนข้อมูลสำรองและเรียกใช้งานโปรแกรมอัปเกรดนี้ใหม่อีกครั้ง</p><p class="lead">หากคุณอ่านคำแนะนำด้านบนเข้าใจโดยถ่องแท้แล้ว ให้คลิกปุ่ม ถัดไป เพื่อดำเนินการต่อ</p><p><button type="button" class="btn btn-primary" onclick="location.href=\'?step=license\';">ถัดไป ></button> <button type="button" class="btn btn-secondary" onclick="location.href=\'?step=welcome\';">ย้อนกลับ <</button></p>', 'กรุณาอ่านคำแนะนำเกี่ยวกับการอัปเกรด', 1);
+	show_msg('<p class="lead">ย้ำอีกครั้ง ในขั้นตอนนี้ ก่อนที่จะดำเนินการอัปเกรดจาก Discuz! X3.4 เป็น Discuz! X3.5 เราขอแนะนำให้คุณสำรองข้อมูลเว็บไซต์ทั้งหมด (รวมถึงฐานข้อมูลและไฟล์ที่เกี่ยวข้อง) และดำเนินการอัปเกรดด้วยความระมัดระวัง ในขณะเดียวกัน เราขอแนะนำให้อัปเกรด MySQL เป็นเวอร์ชัน 5.7 ขึ้นไปก่อนที่จะอัปเกรดเว็บไซต์ เพื่อหลักเลี่ยงการอัปเกรดหยุดชะงัก เนื่องจากปลั๊กอินบางตัวอาจจะมีดัชนีตารางฐานข้อมูลปริมาณมาก</p><p class="lead">เนื่องด้วย UCenter 1.7.0 จะดำเนินการอัปเดตการเข้ารหัสฐานข้อมูลใหม่ หากชื่อผู้ใช้งานในฐานข้อมูล UCenter 1.7.0 รายใดไม่สนับสนุนการเข้ารหัส utf8mb4_unicode_ci จะถูกเปลี่ยนเป็นชื่อผู้ใช้งานที่มีอักษรแบบสุ่มใหม่จำนวน 15 ตัวให้โดยอัตโนมัติในระหว่างกระบวนการอัปเกรด หลังจากการดำเนินการเสร็จแล้ว ให้คุณตรวจสอบไฟล์บันทึกการเปลี่ยนชื่อผู้ใช้งาน (บนแท็บ บันทึกกิจกรรมระบบ ในเมนู จัดการสมาชิก) และดูบันทึกการแจ้งเตือน (บนแท็บ บันทึกการแจ้งเตือน ในเมนู ไฟล์บันทึกระบบ) จากระบบหลังบ้านของ UCenter ว่ามีการดำเนินการแจ้งไปยังผู้ใช้งานที่ได้รับผลกระทบตามแอปที่ได้ผูกไว้กับ UCenter หรือไม่ ก่อนที่จะดำเนินการอัปเกรด Discuz! X3.5 ต่อไป และหลังจากอัปเกรดเสร็จสิ้นทั้งหมดแล้ว กรุณาแจ้งผู้ใช้งานที่ได้รับผลกระทบดังกล่าวด้วยตนเองอีกครั้ง โดยอาจจะแจ้งให้ผู้ใช้งานทำการเปลี่ยนชื่อใหม่ด้วยไอเท็มเปลี่ยนชื่อ หรืออื่น ๆ ผ่านประกาศของเว็บไซต์ หรือทางอีเมล หรือทาง SMS ตามแต่ผู้ดูแลระบบสะดวกที่จะดำเนินการแจ้งให้ผู้ใช้งานทราบ หากคุณต้องการให้ผู้ใช้งานที่ได้รับผลกระทบดังกล่าวเปลี่ยนชื่อได้ด้วยตนเองผ่านการใช้ไอเท็มเปลี่ยนชื่อ อย่าลืมตั้งค่าไอเท็มเปลี่ยนชื่อใน AdminCP ของระบบดิสคัสด้วย เพื่อเป็นทางเลือกให้กับผู้ที่ได้รับผลกระทบสามารถเปลี่ยนชื่อผู้ใช้งานใหม่ได้สะดวกมากยิ่งขึ้น</p><p class="lead">เนื่องด้วย UCenter 1.7.0 จะดำเนินการอัปเดตการเข้ารหัสฐานข้อมูลใหม่ หากผู้ใช้งานรายใดตั้งค่าให้ตอบคำถามความปลอดภัยโดยไม่ได้ใช้ข้อความ ASCII (ภาษาอังกฤษและตัวเลข) ก่อนเข้าสู่ระบบ คำตอบของคำถามความปลอดภัยดังกล่าวจะถูกล้างออกโดยอัตโนมัติ กรุณาแจ้งให้ผู้ใช้ทราบจากผลกระทบดังกล่าวและขอให้ผู้ใช้เมื่อจะเข้าสู่ระบบไม่ต้องกรอกคำตอบของคำถามความปลอดภัยใด ๆ</p><p class="lead">เนื่องด้วย UCenter 1.7.0 จะดำเนินการอัปเดตการเข้ารหัสฐานข้อมูลใหม่ หากผู้ใช้งานรายใดตั้งรหัสผ่านไม่ได้เป็นไปตามมาตรฐานของการตั้งรหัสผ่าน (เช่น ใช้รหัสผ่านที่ไม่ใช่ภาษาอังกฤษ อาจจะเป็นภาษาไทยหรือภาษาอื่น ๆ ลงไปในรหัสผ่าน) ผู้ใช้งานดังกล่าวอาจจะเข้าสู่ระบบไม่ได้ เมื่อคุณพบสถานการณ์นี้ กรุณาแจ้งให้ผู้ใช้งานทำการรีเซ็ตรหัสผ่านใหม่ โดยใช้ฟังก์ชันลืมรหัสผ่านในหน้าเข้าสู่ระบบ แล้วดำเนินการตามขั้นตอนที่แจ้ง ผู้ใช้งานดังกล่าวก็จะสามารถเข้าสู่ระบบด้วยรหัสผ่านใหม่ได้อีกครั้ง</p><p class="lead">เนื่องด้วย Discuz! X3.5 ได้อัปเดตวิธีการจัดเก็บการแบนไอพีใหม่ หากคุณตั้งกฎการแบนไอพีเป็นแบบแบนยกชุด (batches) ไว้ การอัปเกรดนี้จะสนับสนุนแค่ไอพีที่เป็นประเภท IPv4 และกฎอื่น ๆ ที่ตั้งค่าเป็นจำนวนเต็ม (integer) ที่มีค่าตั้งแต่ 8 แต่ไม่เกิน 32 เท่านั้น ส่วนกฎอื่น ๆ นอกเหนือจากนี้จะถูกลบออกโดยอัตโนมัติ เราขอแนะนำให้คุณสำรองกฎเดิมของคุณไว้ก่อนการอัปเกรด และเมื่ออัปเกรดเสร็จแล้ว คุณสามารถตั้งค่ากฎเดิมของคุณที่ได้สำรองไว้ก่อนหน้านี้</p><p class="lead">เนื่องด้วย Discuz! X3.5 ได้ปรับปรุงฟีเจอร์การแบน Session และไอพีใหม่ การปรับปรุงฟีเจอร์ดังกล่าวจึงไม่สนับสนุนไลบรารีแคชอื่น ๆ ที่ไม่ใช่ของ Redis เป็นเพราะว่ายังมีการใช้ฟีเจอร์ขั้นสูงบางอย่างของ Redis อยู่ ดังนั้น หากเว็บไซต์ของคุณมีทราฟิกอยู่เป็นจำนวนมาก ขอแนะนำให้คุณถอนการติดตั้งไลบรารีแคชหน่วยความจำเดิมออก แล้วแทนที่ด้วยไลบรารีหน่วยความจำ Redis ใหม่แทน ซึ่งจะช่วยให้การเข้าถึงเว็บไซต์เป็นไปได้อย่างรวดเร็ว โดยไม่ต้องพึ่งพาตาราง HEAP ภายในฐานข้อมูลใด ๆ อีก</p><p class="lead">เนื่องด้วย Discuz! X3.5 ได้ปรับปรุงฟีเจอร์การปิด/เปิดของโมดูลเว็บไซต์ ในระหว่างการอัปเกรด โมดูลเว็บไซต์ที่มีทั้งหมดจะถูกตั้งค่าสถานะเป็นเปิดใช้งานให้โดยอัตโนมัติ กรุณาประเมินความเหมาะสมในการเปิดใช้งานโมดูลของเว็บไซต์ดังกล่าวด้วยตนเอง และสามารถปิดโมดูลเว็บไซต์ได้ หากไม่ต้องการใช้งาน</p><p class="lead">เนื่องด้วย Discuz! X3.5 ได้อัปเดตการเข้ารหัสฐานข้อมูลและเทมเพลทเริ่มต้นใหม่ทั้งหมด โปรแกรมอัปเกรดจะแปลงตารางข้อมูลปลั๊กอิน/เทมเพลทเป็น utf8mb4 และพยายามแปลงการเข้ารหัสไฟล์ปลั๊กอินของคุณด้วย พร้อมทั้งปิดการใช้งานปลั๊กอินที่ไม่ใช่ค่าเริ่มต้นของระบบและคืนค่ากลับไปใช้เทมเพลทเริ่มต้นให้โดยอัตโนมัติเมื่ออัปเกรดเสร็จสมบูรณ์ กรุณาทดสอบการใช้งานปลั๊กอินของคุณหลังจากอัปเกรดอีกครั้งว่ายังสามารถทำงานได้ตามปกติหรือไม่ กรณีปลั๊กอินและเทมเพลทส่วนใหญ่ที่ผ่านการแปลงไฟล์โดยอัตโนมัติ คุณจะสามารถใช้งานได้เหมือนเดิม หรืออาจจะต้องปรับปรุงการตั้งค่าบางอย่างอีกเล็กน้อยเพื่อให้สามารถใช้งานได้สภาพแวดล้อม utf8mb4 ได้สมบูรณ์ ส่วนปลั๊กอินและเทมเพลทบางตัวอาจจะต้องแปลงการเข้ารหัสไฟล์ใหม่ด้วยตนเอง หรืออาจจะต้องปรับปรุงโค้ดภายในปลั๊กอินเพื่อให้สามารถใช้งานใน Discuz! X3.5 ได้อย่างปกติ</p><p class="lead">กรุณาอย่าเรียกใช้งานโปรแกรมอัปเกรดนี้ซ้ำ การเรียกใช้งานซ้ำอาจทำให้เกิดปัญหาที่ไม่คาดคิดได้ หากพบปัญหาระหว่างการอัปเกรด ขอความกรุณาอย่าปิดหน้าเว็บเป็นอันขาด พยายามแก้ไขตามคำแนะนำที่ปรากฎในหน้าเว็บแล้วรีเฟรชหน้าเว็บใหม่ หากยังไม่สามารถแก้ไขปัญหาได้ กรุณาเรียกคืนข้อมูลสำรองและเรียกใช้งานโปรแกรมอัปเกรดนี้ใหม่อีกครั้ง</p><p class="lead">หากคุณอ่านคำแนะนำด้านบนเข้าใจโดยถ่องแท้แล้ว ให้คลิกปุ่ม ถัดไป เพื่อดำเนินการต่อ</p><p><button type="button" class="btn btn-primary" onclick="location.href=\'?step=license\';">ถัดไป ></button> <button type="button" class="btn btn-secondary" onclick="location.href=\'?step=welcome\';">ย้อนกลับ <</button></p>', 'กรุณาอ่านคำแนะนำเกี่ยวกับการอัปเกรด', 1);
 
 } else if ($step == 'license') {
 
@@ -179,6 +193,12 @@ if ($step == 'welcome') {
 	logmessage("unlink " . str_replace(DISCUZ_ROOT, '', $tablescachefile) . ".");
 	@unlink($tablescachefile);
 
+	// 对非 Windows 系统尝试设置 777 权限
+	if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
+		logmessage("set chmod 777 $configfile");
+		chmod($configfile, 0777);
+	}
+
 	if (save_config_file($configfile, $_config, $default_config, $deletevar)) {
 		logmessage("config_global_default.php modify ok, continue.");
 		show_msg("ตั้งค่าไฟล์คอนฟิกระบบเสร็จแล้ว และกำลังลุยขั้นตอนต่อไป กรุณารอสักครู่......", 'คำแนะนำการอัปเกรด', 0, "$stepurl");
@@ -197,17 +217,37 @@ if ($step == 'welcome') {
 		if (!empty($sql_check)) {
 			$result = DB::fetch_first($sql_check);
 			// 对文字排序进行过滤，避免不合法文字排序进入升级流程。考虑到部分站长自行进行了 utf8mb4 改造，因此额外添加 utf8mb4_general_ci 。
-			if (!in_array($result['Collation'], array('utf8mb4_unicode_ci', 'utf8_general_ci', 'gbk_chinese_ci', 'big5_chinese_ci', 'utf8mb4_general_ci'))) {
+			// 从 MySQL 8.0.28 开始, utf8_general_ci 更名为 utf8mb3_general_ci
+			if (!in_array($result['Collation'], array('utf8mb4_unicode_ci', 'utf8_general_ci', 'utf8mb3_general_ci', 'gbk_chinese_ci', 'big5_chinese_ci', 'utf8mb4_general_ci'))) {
 				logmessage("table ".$table." 's ci ".$result['Collation']." not support, not continue.");
-				show_msg("<font color=\"red\"><b>ไม่สนับสนุนการ Collation ข้อความ ".$result['Collation']." สำหรับตาราง ".$table." นี้ กรุณาแก้ไขด้วยตนเองก่อนดำเนินการต่อ</b></font>", 'คำแนะนำการอัปเกรด');
+				show_msg("<font color=\"red\"><b>ไม่สนับสนุนข้อความที่มี Collation เป็น ".$result['Collation']." ของตาราง ".$table." นี้ กรุณาแก้ไขด้วยตนเองก่อนดำเนินการต่อ</b></font>", 'คำแนะนำการอัปเกรด');
 			}
 			if (empty($_GET['scheme']) && get_innodb_scheme_update_sql($table, true)) {
 				// 对于因数据库超时而升级失败的特大站点请看此函数
 				setdbglobal();
-				$sql = get_innodb_scheme_update_sql($table);
-				logmessage("RUNSQL ".$sql);
-				DB::query($sql);
-				logmessage("RUNSQL Success");
+				// Q008 好像有些站点存在 gpmid 索引, 这里尝试删除一下
+				// https://www.dismall.com/thread-14718-1-1.html
+				if ($table == 'pre_common_member_grouppm') {
+					logmessage("pre_common_member_grouppm has gpmid index, DROP it first.");
+					$sql = "ALTER TABLE pre_common_member_grouppm DROP INDEX gpmid;";
+					logmessage("RUNSQL ".$sql);
+					DB::query($sql, 'SILENT');
+					logmessage("RUNSQL SILENT Success");
+				}
+				// 帖子分表特殊处理
+				// https://www.dismall.com/thread-15265-1-1.html
+				if (preg_match("/^pre_forum_post_(\\d+)$/i", $table)) {
+					logmessage("$table is special post table, need special alter.");
+					$sql = "ALTER TABLE ".str_replace(' pre_', ' '.$config['tablepre'], $table)." MODIFY COLUMN position INT unsigned NOT NULL DEFAULT \'0\'";
+					logmessage("RUNSQL ".$sql);
+					DB::query($sql);
+					logmessage("RUNSQL Success");
+				} else {
+					$sql = get_innodb_scheme_update_sql($table);
+					logmessage("RUNSQL ".$sql);
+					DB::query($sql);
+					logmessage("RUNSQL Success");
+				}
 				show_msg("กำลังดำเนินการอัปเกรดตารางข้อมูล InnoDB และเตรียมการปรับโครงสร้างตาราง $table เรียบร้อยแล้ว ขณะนี้กำลังดำเนินการในขั้นตอนต่อไป กรุณารอสักครู่......", 'คำแนะนำการอัปเกรด', 0, "$theurl?step=".$step."&table=".$table."&scheme=1");
 			}
 			if ($result['Engine'] != 'InnoDB') {
@@ -238,12 +278,12 @@ if ($step == 'welcome') {
 	@touch(DISCUZ_ROOT.'./data/install.lock');
 	@unlink(DISCUZ_ROOT.'./install/index.php');
 
-	// 测试: 结构升级走原有 X3.4 以前的流程, 避免站点自定义数据结构或版本间数据库结构不匹配的影响
+	// 结构升级走原有 X3.4 以前的流程, 避免站点小规模自定义数据结构或版本间数据库结构不匹配的影响
 	$sqlfile = DISCUZ_ROOT.'./install/data/install.sql';
 
 	if(!file_exists($sqlfile)) {
 		logmessage("install.sql not found, not continue");
-		show_msg('<font color=\"red\"><b>ไม่พบไฟล์ SQL '.$sqlfile.'</b></font>', 'คำแนะนำการอัปเกรด');
+		show_msg('<font color="red"><b>ไม่พบไฟล์ SQL '.$sqlfile.'</b></font>', 'คำแนะนำการอัปเกรด');
 	}
 
 	$sql = implode('', file($sqlfile));
@@ -252,7 +292,7 @@ if ($step == 'welcome') {
 	$newsqls = empty($matches[0])?array():$matches[0];
 	if(empty($newtables) || empty($newsqls)) {
 		logmessage("install.sql is empty, not continue");
-		show_msg('<font color=\"red\"><b>เนื้อหาไฟล์ SQL ว่างเปล่า กรุณาตรวจสอบ!</b></font>', 'คำแนะนำการอัปเกรด');
+		show_msg('<font color="red"><b>เนื้อหาไฟล์ SQL ว่างเปล่า กรุณาตรวจสอบ!</b></font>', 'คำแนะนำการอัปเกรด');
 	}
 
 	$i = empty($_GET['i'])?0:intval($_GET['i']);
@@ -288,7 +328,7 @@ if ($step == 'welcome') {
 
 		if(!DB::query($usql, 'SILENT')) {
 			logmessage("RUNSQL FAILED");
-			show_msg('<font color=\"red\"><b>เกิดข้อผิดพลาดในการเพิ่มตาราง '.DB::table($newtable).' กรุณาเรียกใช้คำสั่ง SQL ต่อไปนี้ด้วยตนเอง แล้วเรียกใช้โปรแกรมอัปเกรดนี้อีกครั้ง:</b></font><br><br>'.dhtmlspecialchars($usql), 'คำแนะนำการอัปเกรด');
+			show_msg('<font color="red"><b>เกิดข้อผิดพลาดในการเพิ่มตาราง '.DB::table($newtable).' กรุณาเรียกใช้คำสั่ง SQL ต่อไปนี้ด้วยตนเอง แล้วเรียกใช้โปรแกรมอัปเกรดนี้อีกครั้ง:</b></font><br><br>'.dhtmlspecialchars($usql), 'คำแนะนำการอัปเกรด');
 		} else {
 			logmessage("RUNSQL Success");
 			$msg = 'เพิ่มตาราง '.DB::table($newtable).' เรียบร้อยแล้ว';
@@ -306,10 +346,18 @@ if ($step == 'welcome') {
 				$nomovetable = array('common_cache', 'common_card', 'common_member_profile_setting', 'common_setting', 'mobile_setting');
 				if($value != $oldcols[$key]) {
 					if(!empty($oldcols[$key]) && !in_array($newtable, $nomovetable)) {
+						// 不再默认对数据表进行更名操作, 如果遇到主键不一致的优先报错处理
+						if(NO_RENAME_TABLE) {
+							logmessage("Table ".$newtable." PRIMARY KEY Define not same as install.sql, not continue.");
+							show_msg("<font color=\"red\"><b>Primary Key ของตาราง ".$newtable." ไม่ตรงกับข้อกำหนดของระบบ และระบบไม่สนับสนุนการอัปเกรดอัตโนมัตินี้ กรุณาแก้ไขด้วยตนเองก่อนดำเนินการต่อ!</b></font>", 'คำแนะนำการอัปเกรด');
+						}
+						logmessage("RUNSQL: ".$usql);
 						$usql = "RENAME TABLE ".DB::table($newtable)." TO ".DB::table($newtable.'_bak');
 						if(!DB::query($usql, 'SILENT')) {
-							show_msg('<font color=\"red\"><b>เกิดข้อผิดพลาดในการอัปเกรดตาราง '.DB::table($newtable).' กรุณาเรียกใช้คำสั่งอัปเกรดต่อไปนี้ด้วยตนเอง แล้วเรียกใช้โปรแกรมอัปเกรดนี้อีกครั้ง:</b></font><br><br><b>คำสั่งอัปเกรด SQL</b>:<div style=\"position:absolute;font-size:11px;font-family:verdana,arial;background:#EBEBEB;padding:0.5em;\">'.dhtmlspecialchars($usql)."</div><br><b>Error</b>: ".DB::error()."<br><b>Errno.</b>: ".DB::errno(), 'คำแนะนำการอัปเกรด');
+							logmessage("Table ".$newtable." Update Failed.");
+							show_msg('<font color="red"><b>พบข้อผิดพลาดในการอัปเกรดตาราง '.DB::table($newtable).' กรุณาเรียกใช้คำสั่ง SQL ต่อไปนี้ด้วยตนเอง แล้วเรียกใช้โปรแกรมอัปเกรดนี้อีกครั้ง:</b></font><br><br><b>คำสั่ง SQL สำหรับอัปเกรด</b>:<div style="position:absolute;font-size:11px;font-family:verdana,arial;background:#EBEBEB;padding:0.5em;">'.dhtmlspecialchars($usql)."</div><br><b>Error</b>: ".DB::error()."<br><b>Errno.</b>: ".DB::errno(), 'คำแนะนำการอัปเกรด');
 						} else {
+							logmessage("RUNSQL: Success");
 							$msg = 'เปลี่ยนชื่อตารางเป็น '.DB::table($newtable).' เรียบร้อยแล้ว';
 							show_msg($msg, 'คำแนะนำการอัปเกรด', 0, $theurl.'?step=scheme&i='.$_GET['i']);
 						}
@@ -360,7 +408,7 @@ if ($step == 'welcome') {
 			logmessage("RUNSQL: ".$usql);
 			if(!DB::query($usql, 'SILENT')) {
 				logmessage("RUNSQL: FAILED");
-				show_msg('<font color=\"red\"><b>เกิดข้อผิดพลาดในการอัปเกรดตาราง '.DB::table($newtable).' กรุณาเรียกใช้คำสั่งอัปเกรดต่อไปนี้ด้วยตนเอง แล้วเรียกใช้โปรแกรมอัปเกรดอีกครั้ง:</b></font><br><br><b>คำสั่งอัปเกรด SQL</b>:<div style=\"position:absolute;font-size:11px;font-family:verdana,arial;background:#EBEBEB;padding:0.5em;\">'.dhtmlspecialchars($usql)."</div><br><b>Error</b>: ".DB::error()."<br><b>Errno.</b>: ".DB::errno(), 'คำแนะนำการอัปเกรด');
+				show_msg('<font color="red"><b>เกิดข้อผิดพลาดในการอัปเกรดตาราง '.DB::table($newtable).' กรุณาเรียกใช้คำสั่งอัปเกรดต่อไปนี้ด้วยตนเอง แล้วเรียกใช้โปรแกรมอัปเกรดอีกครั้ง:</b></font><br><br><b>คำสั่งอัปเกรด SQL</b>:<div style="position:absolute;font-size:11px;font-family:verdana,arial;background:#EBEBEB;padding:0.5em;">'.dhtmlspecialchars($usql)."</div><br><b>Error</b>: ".DB::error()."<br><b>Errno.</b>: ".DB::errno(), 'คำแนะนำการอัปเกรด');
 			} else {
 				logmessage("RUNSQL: Success");
 				$msg = 'อัปเกรดตาราง '.DB::table($newtable).' เรียบร้อยแล้ว';
@@ -379,20 +427,7 @@ if ($step == 'welcome') {
 	} else {
 		$next = $theurl.'?step='.$step.'&i='.($_GET['i']+1)."&myisam=".(empty($_GET['myisam']) ? 0 : 1);
 	}
-	show_msg("[ $i / $count_i ] ".$msg.'กำลังเตรียมการในขั้นตอนต่อไป กรุณารอสักครู่......', 'คำแนะนำการอัปเกรด', 0, $next);
-
-	//$id = empty($_GET['id']) ? 0 : intval($_GET['id']);
-	//$type = empty($_GET['myisam']) ? 'InnoDB' : 'MyISAM';
-
-	//$sql = get_scheme_update_sql($id, $type);
-	//if (!empty($sql)) {
-		// 对于因数据库超时而升级失败的特大站点请看此函数
-		//setdbglobal();
-		//DB::query($sql);
-		//show_msg("数据库结构升级进行中，当前进度 $id / $scheme_count ，即将进行下一步操作，请稍候......", '提示信息', 0, "$theurl?step=".$step."&myisam=".(empty($_GET['myisam']) ? 0 : 1)."&id=".++$id);
-	//} else {
-		//show_msg("数据库结构升级完成，即将进行下一步操作，请稍候......", '提示信息', 0, "$theurl?step=utf8mb4");
-	//}
+	show_msg("[ $i / $count_i ] ".$msg.' กำลังเตรียมการในขั้นตอนต่อไป กรุณารอสักครู่......', 'คำแนะนำการอัปเกรด', 0, $next);
 
 } else if ($step == 'utf8mb4') {
 
@@ -401,9 +436,10 @@ if ($step == 'welcome') {
 		$result = DB::fetch_first($sql_check);
 		if ($result['Collation'] != 'utf8mb4_unicode_ci') {
 			// 对文字排序进行过滤，避免不合法文字排序进入升级流程。考虑到部分站长自行进行了 utf8mb4 改造，因此额外添加 utf8mb4_general_ci 。
-			if (!in_array($result['Collation'], array('utf8mb4_unicode_ci', 'utf8_general_ci', 'gbk_chinese_ci', 'big5_chinese_ci', 'utf8mb4_general_ci'))) {
+			// 从 MySQL 8.0.28 开始, utf8_general_ci 更名为 utf8mb3_general_ci
+			if (!in_array($result['Collation'], array('utf8mb4_unicode_ci', 'utf8_general_ci', 'utf8mb3_general_ci', 'gbk_chinese_ci', 'big5_chinese_ci', 'utf8mb4_general_ci'))) {
 				logmessage("table ".$table." 's ci ".$result['Collation']." not support, not continue.");
-				show_msg("<font color=\"red\"><b>ไม่สนับสนุนการ Collation ข้อความ ".$result['Collation']." สำหรับตาราง ".$table." นี้ กรุณาแก้ไขด้วยตนเองก่อนดำเนินการต่อ</b></font>", 'คำแนะนำการอัปเกรด');
+				show_msg("<font color=\"red\"><b>ไม่สนับสนุนข้อความที่มี Collation เป็น ".$result['Collation']." ของตาราง ".$table." นี้ กรุณาแก้ไขด้วยตนเองก่อนดำเนินการต่อ</b></font>", 'คำแนะนำการอัปเกรด');
 			}
 			$sql = get_convert_sql('utf8mb4', $table);
 			if (!empty($sql)) {
@@ -438,8 +474,23 @@ if ($step == 'welcome') {
 			show_msg("ไม่จำเป็นต้องแปลงข้อมูลแบบซีเรียลไลซ์ กำลังเตรียมการในขั้นตอนต่อไป กรุณารอสักครู่......", 'คำแนะนำการอัปเกรด', 0, "$theurl?step=confirmthaidistrictupgrade");
 		}
 
+		// 针对本地化编码版本转换 UTF-8 版本的情况, 可能前期 InnoDB 或者 UTF8MB4 转换时站长手动删除过不能转换的数据表
+		// 因此这里需要删除表缓存, 避免后续序列化转换尤其是第三方序列化转换时尝试升级之前步骤删除的第三方数据表
+		$tcfile = DISCUZ_ROOT . './data/sysdata/cache_update_tables.php';
+		logmessage("unlink " . str_replace(DISCUZ_ROOT, '', $tcfile) . " for {$config['dbcharset']} version.");
+		@unlink($tcfile);
+
 		$configfile = DISCUZ_ROOT.'./config/config_global.php';
 		$configfile_uc = DISCUZ_ROOT.'./config/config_ucenter.php';
+
+		// 对非 Windows 系统尝试设置 777 权限
+		if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
+			logmessage("set chmod 777 $configfile");
+			chmod($configfile, 0777);
+			logmessage("set chmod 777 $configfile_uc");
+			chmod($configfile_uc, 0777);
+		}
+
 		if (is_writable($configfile) && is_writable($configfile_uc)) {
 			$config = file_get_contents($configfile);
 			$config = preg_replace("/\['dbcharset'\] = \s*'.*?'\;/i", "['dbcharset'] = 'utf8mb4';", $config);
@@ -448,7 +499,7 @@ if ($step == 'welcome') {
 			// logmessage($config);
 			if(file_put_contents($configfile, $config, LOCK_EX) === false) {
 				logmessage("config_global.php modify fail, let user manually modify.");
-				show_msg('<font color="red"><b>โปรแกรมไม่สามารถแก้ไขไฟล์คอนฟิกให้คุณโดยอัตโนมัติได้ เนื่องจากไฟล์คอนฟิกไม่สามารถเขียนได้ คุณต้องแก้ไข config/config_global.php และ config/config_ucenter.php ด้วยตนเอง เปลี่ยนการกำหนดค่า dbcharset และค่า UC_DBCHARSET เป็น utf8mb4 ด้วยตนเอง เปลี่ยนการกำหนดค่าชุดอักขระและค่า UC_CHARSET เป็น utf8 ด้วยตนเอง จากนั้น <a href="'.$theurl.'?step=seriallize&start=0&tid=0">คลิกที่นี่</a> เพื่อดำเนินการต่อ</b></font>', 'คำแนะนำการอัปเกรด');
+				show_msg('<font color="red"><b>โปรแกรมไม่สามารถแก้ไขไฟล์คอนฟิกให้คุณโดยอัตโนมัติได้ เนื่องจากไฟล์คอนฟิกไม่สามารถเขียนได้ คุณต้องแก้ไข config/config_global.php และ config/config_ucenter.php ด้วยตนเอง เปลี่ยนการกำหนดค่า dbcharset และค่า UC_DBCHARSET เป็น utf8mb4 ด้วยตนเอง เปลี่ยนการกำหนดค่าชุดอักขระและค่า UC_CHARSET เป็น utf8 ด้วยตนเอง จากนั้น <a href="'.$theurl.'?step=serialize&start=0&tid=0">คลิกที่นี่</a> เพื่อดำเนินการต่อ</b></font>', 'คำแนะนำการอัปเกรด');
 			}
 			logmessage("config_global.php modify ok, continue.");
 			$config_uc = file_get_contents($configfile_uc);
@@ -458,13 +509,13 @@ if ($step == 'welcome') {
 			// logmessage($config_uc);
 			if(file_put_contents($configfile_uc, $config_uc, LOCK_EX) === false) {
 				logmessage("config_ucenter.php modify fail, let user manually modify.");
-				show_msg('<font color="red"><b>โปรแกรมไม่สามารถแก้ไขไฟล์คอนฟิกให้คุณโดยอัตโนมัติได้ เนื่องจากไฟล์คอนฟิกไม่สามารถเขียนได้ คุณต้องแก้ไข config/config_ucenter.php ด้วยตนเอง เปลี่ยนค่า UC_DBCHARSET เป็น utf8mb4 ด้วยตนเอง เปลี่ยนค่า UC_CHARSET เป็น utf8 ด้วยตนเอง จากนั้น <a href="'.$theurl.'?step=seriallize&start=0&tid=0">คลิกที่นี่</a> เพื่อดำเนินการต่อ</b></font>', 'คำแนะนำการอัปเกรด');
+				show_msg('<font color="red"><b>โปรแกรมไม่สามารถแก้ไขไฟล์คอนฟิกให้คุณโดยอัตโนมัติได้ เนื่องจากไฟล์คอนฟิกไม่สามารถเขียนได้ คุณต้องแก้ไข config/config_ucenter.php ด้วยตนเอง เปลี่ยนค่า UC_DBCHARSET เป็น utf8mb4 ด้วยตนเอง เปลี่ยนค่า UC_CHARSET เป็น utf8 ด้วยตนเอง จากนั้น <a href="'.$theurl.'?step=serialize&start=0&tid=0">คลิกที่นี่</a> เพื่อดำเนินการต่อ</b></font>', 'คำแนะนำการอัปเกรด');
 			}
 			logmessage("config_ucenter.php modify ok, continue.");
 			show_msg("ตั้งค่าคอนฟิกการแปลงข้อมูลแบบซีเรียลไลซ์เรียบร้อยแล้ว และกำลังดำเนินการในขั้นตอนต่อไป กรุณารอสักครู่......", 'คำแนะนำการอัปเกรด', 0, "$theurl?step=serialize&fromcharset={$_config['output']['charset']}&start=0&tid=0");
 		} else {
 			logmessage("config_global.php modify fail, let user manually modify site config and ucenter config.");
-			show_msg('<font color="red"><b>โปรแกรมไม่สามารถแก้ไขไฟล์คอนฟิกให้คุณโดยอัตโนมัติได้ เนื่องจากไฟล์คอนฟิกไม่สามารถเขียนได้ คุณต้องแก้ไข config/config_global.php และ config/config_ucenter.php ด้วยตนเอง โดยเปลี่ยนการกำหนดค่า dbcharset และค่า UC_DBCHARSET เป็น utf8mb4 ด้วยตนเอง เปลี่ยนการกำหนดค่าชุดอักขระและค่า UC_CHARSET เป็น utf8 ด้วยตนเอง จากนั้น <a href="'.$theurl.'?step=seriallize&fromcharset='.$_config['output']['charset'].'&start=0&tid=0">คลิกที่นี่</a> เพื่อดำเนินการต่อ</b></font>', 'คำแนะนำการอัปเกรด');
+			show_msg('<font color="red"><b>โปรแกรมไม่สามารถแก้ไขไฟล์คอนฟิกให้คุณโดยอัตโนมัติได้ เนื่องจากไฟล์คอนฟิกไม่สามารถเขียนได้ คุณต้องแก้ไข config/config_global.php และ config/config_ucenter.php ด้วยตนเอง โดยเปลี่ยนการกำหนดค่า dbcharset และค่า UC_DBCHARSET เป็น utf8mb4 ด้วยตนเอง เปลี่ยนการกำหนดค่าชุดอักขระและค่า UC_CHARSET เป็น utf8 ด้วยตนเอง จากนั้น <a href="'.$theurl.'?step=serialize&fromcharset='.$_config['output']['charset'].'&start=0&tid=0">คลิกที่นี่</a> เพื่อดำเนินการต่อ</b></font>', 'คำแนะนำการอัปเกรด');
 		}
 
 	}
@@ -501,7 +552,9 @@ if ($step == 'welcome') {
 		}
 
 		if ($special && empty($sid2)) {
-			$sql = "SELECT `$sfield`, `$sid` FROM `$stable` WHERE `$sid` > $start ORDER BY `$sid` ASC LIMIT $limit";
+			// 空值不参与序列化转换, 加快数据处理效率
+			// https://www.dismall.com/thread-15293-1-1.html
+			$sql = "SELECT `$sfield`, `$sid` FROM `$stable` WHERE `$sfield`<>'' AND `$sid` > $start ORDER BY `$sid` ASC LIMIT $limit";
 		} else {
 			$sql = "SELECT `$sfield`, `$sid` " . (!empty($sid2) ? ", `$sid2`" : "") . " FROM `$stable`";
 		}
@@ -518,6 +571,7 @@ if ($step == 'welcome') {
 			}
 			$datanew = '';
 			$data = $values[$sfield];
+			$dataold = $values[$sfield];
 			$id = $values[$sid];
 			$id2 = !empty($sid2) && !empty($values[$sid2]) ? $values[$sid2] : '';
 			if ($isblob) {
@@ -540,10 +594,12 @@ if ($step == 'welcome') {
 				$datanew = preg_replace_callback('/s:([0-9]+?):"([\s\S]*?)";/', '_serialize', $data);
 			}
 			$datanew = addslashes($datanew);
-			$sql = "UPDATE `$stable` SET `$sfield` = '$datanew' WHERE `$sid` = '$id'" . (!empty($sid2) ? " AND `$sid2` = '$id2'" : "");
-			logmessage("RUNSQL ".$sql);
-			DB::query($sql);
-			logmessage("RUNSQL Success");
+			if (strcmp($dataold, $datanew) !== 0) {
+				$sql = "UPDATE `$stable` SET `$sfield` = '$datanew' WHERE `$sid` = '$id'" . (!empty($sid2) ? " AND `$sid2` = '$id2'" : "");
+				logmessage("RUNSQL ".$sql);
+				DB::query($sql);
+				logmessage("RUNSQL Success");
+			}
 		}
 	}
 
@@ -587,6 +643,7 @@ if ($step == 'welcome') {
 
 		foreach ($tables_outside as $to) {
 			$fkey = '';
+			$to = str_replace('pre_', $config['tablepre'], $to);
 			$to_result = DB::fetch_all("SHOW COLUMNS FROM $to;");
 			if (!empty($to_result[0]) && strstr($to_result[0]['Type'], 'int') && strstr($to_result[0]['Extra'], 'auto_increment')) {
 				$fkey = $to_result[0]['Field'];
@@ -630,7 +687,9 @@ if ($step == 'welcome') {
 
 	if (!empty($stable) && !empty($sfield)) {
 		if (!empty($skey)) {
-			$sql = "SELECT `$sfield`, `$skey` FROM `$stable` WHERE `$skey` > $start ORDER BY `$skey` ASC LIMIT $limit";
+			// 空值不参与序列化转换, 加快数据处理效率
+			// https://www.dismall.com/thread-15293-1-1.html
+			$sql = "SELECT `$sfield`, `$skey` FROM `$stable` WHERE `$sfield`<>'' AND `$skey` > $start ORDER BY `$skey` ASC LIMIT $limit";
 		} else {
 			$sql = "SELECT `$sfield` FROM `$stable`";
 		}
@@ -667,19 +726,23 @@ if ($step == 'welcome') {
 				if (dunserialize($datanew) !== false) {
 					$datanew = addslashes($datanew);
 					$data = addslashes($data);
-					$sql = "UPDATE `$stable` SET `$sfield` = '$datanew' WHERE `$sfield` = '$data';";
-					logmessage("RUNSQL ".$sql);
-					DB::query($sql);
-					logmessage("RUNSQL Success");
+					if (strcmp($data, $datanew) !== 0) {
+						$sql = "UPDATE `$stable` SET `$sfield` = '$datanew' WHERE `$sfield` = '$data';";
+						logmessage("RUNSQL ".$sql);
+						DB::query($sql);
+						logmessage("RUNSQL Success");
+					}
 				}
 			} elseif (strstr($stype, 'blob')) {
 				$datanew = diconv($data, $fromcharset, 'UTF-8');
 				$datanew = addslashes($datanew);
 				$data = addslashes($data);
-				$sql = "UPDATE `$stable` SET `$sfield` = '$datanew' WHERE `$sfield` = '$data';";
-				logmessage("RUNSQL ".$sql);
-				DB::query($sql);
-				logmessage("RUNSQL Success");
+				if (strcmp($data, $datanew) !== 0) {
+					$sql = "UPDATE `$stable` SET `$sfield` = '$datanew' WHERE `$sfield` = '$data';";
+					logmessage("RUNSQL ".$sql);
+					DB::query($sql);
+					logmessage("RUNSQL Success");
+				}
 			}
 		}
 	}
@@ -709,7 +772,7 @@ if ($step == 'welcome') {
 
 } else if ($step == 'confirmthaidistrictupgrade') { /*jaideejung007*/
 
-	show_msg('<p class="lead" style="color: red;font-weight: bold;">ขั้นตอนนี้จะอัปเกรดฐานข้อมูลรายชื่อจังหวัด อำเภอ ตำบลในประเทศไทยใหม่ล่าสุด (จาก ThepExcel ปรับปรุงปี 2022) พร้อมทั้งรายชื่อ 199 ประเทศและอีก 52 ดินแดน (จากสำนักงานราชบัณฑิตยสภา 29 มิถุนายน 2565)</p><p class="lead" style="color: red;font-weight: bold;">ขอแนะนำให้อัปเกรด เนื่องจาก X3.4 ได้ใช้ฐานข้อมูลเก่าตั้งแต่ปี 2555 (ซึ่งปัจจุบันรายชื่อจังหวัด อำเภอ ตำบลมีการอัปเดตใหม่แล้ว) โดยกระบวนการนี้จะลบข้อมูลเก่าในตาราง pre_common_district ออกแล้วนำเข้าใหม่ทั้งหมด</p><p><button type="button" class="btn btn-primary" onclick="location.href=\'?step=thaidistrictupgrade\';">อัปเกรดฐานข้อมูลรายชื่อจังหวัดฯ ></button> <button type="button" class="btn btn-secondary" onclick="location.href=\'?step=cancelthaidistrictupgrade\';">ข้าม (ไม่แนะนำ)</button></p>', 'อัปเกรดฐานข้อมูลรายชื่อจังหวัด อำเภอ ตำบลในประเทศไทยใหม่ล่าสุด', 1);
+	show_msg('<p class="lead" style="color: red;font-weight: bold;">ขั้นตอนนี้จะอัปเกรดฐานข้อมูลรายชื่อจังหวัด อำเภอ ตำบลในประเทศไทยใหม่ล่าสุด (จาก ThepExcel ปรับปรุงปี 2565) พร้อมทั้งรายชื่อ 199 ประเทศและอีก 52 ดินแดน (จากสำนักงานราชบัณฑิตยสภา 29 มิถุนายน 2565)</p><p class="lead" style="color: red;font-weight: bold;">ขอแนะนำให้อัปเกรด เนื่องจาก X3.4 ได้ใช้ฐานข้อมูลเก่าตั้งแต่ปี 2555 (ซึ่งปัจจุบันรายชื่อจังหวัด อำเภอ ตำบลมีการอัปเดตใหม่แล้ว) โดยกระบวนการนี้จะลบข้อมูลเก่าในตาราง pre_common_district ออกแล้วนำเข้าใหม่ทั้งหมด</p><p><button type="button" class="btn btn-primary" onclick="location.href=\'?step=thaidistrictupgrade\';">อัปเกรดฐานข้อมูลรายชื่อจังหวัดฯ ></button> <button type="button" class="btn btn-secondary" onclick="location.href=\'?step=cancelthaidistrictupgrade\';">ข้าม (ไม่แนะนำ)</button></p>', 'อัปเกรดฐานข้อมูลรายชื่อจังหวัด อำเภอ ตำบลในประเทศไทยใหม่ล่าสุด', 1);
 } else if ($step == 'thaidistrictupgrade') { /*jaideejung007*/
 
 	$sql = thai_district_upgrade_sql('pre_common_district'); // เรียกใช้ TRUNCATE TABLE pre_common_district เพื่อลบข้อมูลในตารางฐานข้อมูลออก
@@ -749,6 +812,15 @@ if ($step == 'welcome') {
 
 	$configfile = DISCUZ_ROOT.'./config/config_global.php';
 	$configfile_uc = DISCUZ_ROOT.'./config/config_ucenter.php';
+
+	// 对非 Windows 系统尝试设置 777 权限
+	if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
+		logmessage("set chmod 777 $configfile");
+		chmod($configfile, 0777);
+		logmessage("set chmod 777 $configfile_uc");
+		chmod($configfile_uc, 0777);
+	}
+
 	if (is_writable($configfile) && is_writable($configfile_uc)) {
 		$config = file_get_contents($configfile);
 		$config = preg_replace("/\['dbcharset'\] = \s*'.*?'\;/i", "['dbcharset'] = 'utf8mb4';", $config);
@@ -790,7 +862,7 @@ function diconv_array($variables, $in_charset, $out_charset) {
 
 function show_msg($message, $title = 'คำแนะนำการอัปเกรด', $page = 0, $url_forward = '', $time = 1, $noexit = 0, $notice = '') {
 	if ($url_forward) {
-		$message = "<a href=\"$url_forward\">$message (ข้าม......)</a><br />$notice<script>setTimeout(\"window.location.href ='$url_forward';\", $time);</script>";
+		$message = "<a href=\"$url_forward\">$message (กำลังข้าม......)</a><br />$notice<script>setTimeout(\"window.location.href ='$url_forward';\", $time);</script>";
 	}
 
 	if (!$page) {
@@ -898,127 +970,6 @@ function get_convert_sql($type, $table) {
 	return $query;
 }
 
-function get_scheme_update_sql($id, $type = "InnoDB") {
-	global $config;
-	global $scheme_count;
-	// 每条数据库处理指令一行
-	$query = array(
-		'TRUNCATE TABLE pre_common_banned;',
-		'TRUNCATE TABLE pre_common_member_secwhite;',
-		'TRUNCATE TABLE pre_common_process;',
-		'TRUNCATE TABLE pre_common_searchindex;',
-		'TRUNCATE TABLE pre_common_seccheck;',
-		'TRUNCATE TABLE pre_common_session;',
-		'TRUNCATE TABLE pre_common_visit;',
-		'TRUNCATE TABLE pre_forum_rsscache;',
-		'TRUNCATE TABLE pre_forum_spacecache;',
-		'TRUNCATE TABLE pre_forum_threaddisablepos;',
-		'ALTER TABLE pre_common_admincp_session MODIFY COLUMN ip VARCHAR(45) NOT NULL DEFAULT \'\';',
-		'ALTER TABLE pre_common_banned ADD COLUMN ip VARCHAR(49) NOT NULL DEFAULT \'\' AFTER id, ADD COLUMN upperip VARBINARY(16) NOT NULL DEFAULT 0x0 AFTER ip,ADD COLUMN lowerip VARBINARY(16) NOT NULL DEFAULT 0x0 AFTER ip, ADD INDEX iprange (lowerip, upperip);',
-		'ALTER TABLE pre_common_block MODIFY COLUMN picwidth mediumint(8) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN picheight mediumint(8) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_common_card MODIFY COLUMN `status` tinyint(3) unsigned NOT NULL DEFAULT \'1\';',
-		'ALTER TABLE pre_common_credit_log MODIFY COLUMN logid INT(10) unsigned NOT NULL AUTO_INCREMENT;',
-		'ALTER TABLE pre_common_district MODIFY COLUMN usetype tinyint(3) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_common_failedip MODIFY COLUMN ip VARCHAR(45) NOT NULL DEFAULT \'\';',
-		'ALTER TABLE pre_common_failedlogin MODIFY COLUMN ip VARCHAR(45) NOT NULL DEFAULT \'\';',
-		'ALTER TABLE pre_common_invite MODIFY COLUMN email varchar(255) NOT NULL DEFAULT \'\', MODIFY COLUMN inviteip VARCHAR(45) NOT NULL DEFAULT \'\';',
-		'ALTER TABLE pre_common_magiclog MODIFY COLUMN credit tinyint(3) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_common_mailcron MODIFY COLUMN email varchar(255) NOT NULL DEFAULT \'\';',
-		'ALTER TABLE pre_common_member MODIFY COLUMN email varchar(255) NOT NULL DEFAULT \'\', ADD COLUMN `secmobile` varchar(12) NOT NULL DEFAULT \'\' AFTER `password`, ADD COLUMN `secmobicc` varchar(3) NOT NULL DEFAULT \'\' AFTER `password`, ADD COLUMN `secmobilestatus` tinyint(1) NOT NULL DEFAULT \'0\' AFTER avatarstatus, ADD KEY secmobile (`secmobile`, `secmobicc`);',
-		'ALTER TABLE pre_common_member_action_log MODIFY COLUMN id INT(10) unsigned NOT NULL AUTO_INCREMENT;',
-		'ALTER TABLE pre_common_member_field_forum MODIFY COLUMN authstr varchar(255) NOT NULL DEFAULT \'\', MODIFY COLUMN customshow tinyint(3) unsigned NOT NULL DEFAULT \'26\';',
-		'ALTER TABLE pre_common_member_field_home ADD COLUMN allowasfollow tinyint(1) NOT NULL DEFAULT \'1\' AFTER addfriend, ADD COLUMN allowasfriend tinyint(1) NOT NULL DEFAULT \'1\' AFTER addfriend;',
-		'ALTER TABLE pre_common_member_profile ADD COLUMN birthcountry varchar(255) NOT NULL DEFAULT \'\' AFTER nationality, ADD COLUMN residecountry varchar(255) NOT NULL DEFAULT \'\' AFTER birthcommunity;',
-		'ALTER TABLE pre_common_member_status MODIFY COLUMN regip VARCHAR(45) NOT NULL DEFAULT \'\', MODIFY COLUMN lastip VARCHAR(45) NOT NULL DEFAULT \'\', ADD COLUMN regport SMALLINT(6) unsigned NOT NULL DEFAULT \'0\' AFTER lastip;',
-		'ALTER TABLE pre_common_plugin MODIFY COLUMN adminid tinyint(3) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_common_regip MODIFY COLUMN ip VARCHAR(45) NOT NULL DEFAULT \'\';',
-		'ALTER TABLE pre_common_searchindex MODIFY COLUMN useip VARCHAR(45) NOT NULL DEFAULT \'\';',
-		'ALTER TABLE pre_common_secquestion MODIFY COLUMN `type` tinyint(3) unsigned NOT NULL;',
-		'ALTER TABLE pre_common_session ADD COLUMN ip VARCHAR(45) NOT NULL DEFAULT \'\' AFTER sid, MODIFY COLUMN `action` tinyint(3) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_common_task ADD COLUMN exclusivetaskid smallint(6) unsigned NOT NULL DEFAULT \'0\' AFTER relatedtaskid, MODIFY COLUMN applicants INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN achievers INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_common_usergroup ADD COLUMN allowfollow tinyint(1) NOT NULL DEFAULT \'0\' AFTER allowmailinvite;',
-		'ALTER TABLE pre_common_usergroup_field ADD COLUMN allowsavenum int(10) unsigned NOT NULL DEFAULT \'0\' AFTER allowat, ADD COLUMN allowsavereply tinyint(1) unsigned NOT NULL DEFAULT \'1\' AFTER allowat, ADD COLUMN allowsave tinyint(1) unsigned NOT NULL DEFAULT \'1\' AFTER allowat, ADD COLUMN allowviewprofile tinyint(1) NOT NULL DEFAULT \'0\' AFTER allowavatarupload, MODIFY COLUMN edittimelimit INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN allowmagics tinyint(3) unsigned NOT NULL, MODIFY COLUMN tradestick tinyint(3) unsigned NOT NULL, MODIFY COLUMN exempt tinyint(3) unsigned NOT NULL, MODIFY COLUMN allowrecommend tinyint(3) unsigned NOT NULL DEFAULT \'1\', MODIFY COLUMN allowbuildgroup tinyint(3) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN allowgroupdirectpost tinyint(3) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN allowgroupposturl tinyint(3) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN allowfollowcollection tinyint(3) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN forcelogin tinyint(3) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_common_visit MODIFY COLUMN ip VARCHAR(45) NOT NULL DEFAULT \'\';',
-		'ALTER TABLE pre_connect_feedlog MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_connect_tthreadlog MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_activity MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN aid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_activityapply MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_attachment MODIFY COLUMN aid INT(10) unsigned NOT NULL AUTO_INCREMENT, MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN tableid tinyint(3) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_attachment_0 MODIFY COLUMN aid INT(10) unsigned NOT NULL, MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN width mediumint(8) unsigned NOT NULL DEFAULT \'0\', ADD COLUMN height mediumint(8) unsigned NOT NULL DEFAULT \'0\' AFTER width;',
-		'ALTER TABLE pre_forum_attachment_1 MODIFY COLUMN aid INT(10) unsigned NOT NULL, MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN width mediumint(8) unsigned NOT NULL DEFAULT \'0\', ADD COLUMN height mediumint(8) unsigned NOT NULL DEFAULT \'0\' AFTER width;',
-		'ALTER TABLE pre_forum_attachment_2 MODIFY COLUMN aid INT(10) unsigned NOT NULL, MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN width mediumint(8) unsigned NOT NULL DEFAULT \'0\', ADD COLUMN height mediumint(8) unsigned NOT NULL DEFAULT \'0\' AFTER width;',
-		'ALTER TABLE pre_forum_attachment_3 MODIFY COLUMN aid INT(10) unsigned NOT NULL, MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN width mediumint(8) unsigned NOT NULL DEFAULT \'0\', ADD COLUMN height mediumint(8) unsigned NOT NULL DEFAULT \'0\' AFTER width;',
-		'ALTER TABLE pre_forum_attachment_4 MODIFY COLUMN aid INT(10) unsigned NOT NULL, MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN width mediumint(8) unsigned NOT NULL DEFAULT \'0\', ADD COLUMN height mediumint(8) unsigned NOT NULL DEFAULT \'0\' AFTER width;',
-		'ALTER TABLE pre_forum_attachment_5 MODIFY COLUMN aid INT(10) unsigned NOT NULL, MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN width mediumint(8) unsigned NOT NULL DEFAULT \'0\', ADD COLUMN height mediumint(8) unsigned NOT NULL DEFAULT \'0\' AFTER width;',
-		'ALTER TABLE pre_forum_attachment_6 MODIFY COLUMN aid INT(10) unsigned NOT NULL, MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN width mediumint(8) unsigned NOT NULL DEFAULT \'0\', ADD COLUMN height mediumint(8) unsigned NOT NULL DEFAULT \'0\' AFTER width;',
-		'ALTER TABLE pre_forum_attachment_7 MODIFY COLUMN aid INT(10) unsigned NOT NULL, MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN width mediumint(8) unsigned NOT NULL DEFAULT \'0\', ADD COLUMN height mediumint(8) unsigned NOT NULL DEFAULT \'0\' AFTER width;',
-		'ALTER TABLE pre_forum_attachment_8 MODIFY COLUMN aid INT(10) unsigned NOT NULL, MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN width mediumint(8) unsigned NOT NULL DEFAULT \'0\', ADD COLUMN height mediumint(8) unsigned NOT NULL DEFAULT \'0\' AFTER width;',
-		'ALTER TABLE pre_forum_attachment_9 MODIFY COLUMN aid INT(10) unsigned NOT NULL, MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN width mediumint(8) unsigned NOT NULL DEFAULT \'0\', ADD COLUMN height mediumint(8) unsigned NOT NULL DEFAULT \'0\' AFTER width;',
-		'ALTER TABLE pre_forum_attachment_exif MODIFY COLUMN aid INT(10) unsigned NOT NULL',
-		'ALTER TABLE pre_forum_attachment_unused MODIFY COLUMN aid INT(10) unsigned NOT NULL, MODIFY COLUMN width mediumint(8) unsigned NOT NULL DEFAULT \'0\', ADD COLUMN height mediumint(8) unsigned NOT NULL DEFAULT \'0\' AFTER width;',
-		'ALTER TABLE pre_forum_collection MODIFY COLUMN lastsubject varchar(255) NOT NULL DEFAULT \'\';',
-		'ALTER TABLE pre_forum_collectioncomment MODIFY COLUMN useip VARCHAR(45) NOT NULL DEFAULT \'\';',
-		'ALTER TABLE pre_forum_collectionteamworker MODIFY COLUMN lastvisit INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_collectionthread MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_debate MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_debatepost MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_filter_post MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_forumfield MODIFY COLUMN livetid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_forumrecommend MODIFY COLUMN tid INT(10) unsigned NOT NULL, MODIFY COLUMN `subject` varchar(255) NOT NULL, MODIFY COLUMN aid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_groupcreditslog MODIFY COLUMN logdate INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_hotreply_member MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_medal MODIFY COLUMN credit tinyint(3) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_memberrecommend MODIFY COLUMN tid INT(10) unsigned NOT NULL;',
-		'ALTER TABLE pre_forum_newthread MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_order MODIFY COLUMN email varchar(255) NOT NULL DEFAULT \'\', MODIFY COLUMN ip VARCHAR(45) NOT NULL DEFAULT \'\', ADD COLUMN `port` SMALLINT(6) unsigned NOT NULL DEFAULT \'0\' AFTER ip;',
-		'ALTER TABLE pre_forum_poll MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_polloption MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_polloption_image MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN width mediumint(8) unsigned NOT NULL DEFAULT \'0\', ADD COLUMN height mediumint(8) unsigned NOT NULL DEFAULT \'0\' AFTER width;',
-		'ALTER TABLE pre_forum_pollvoter MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_post MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN `subject` varchar(255) NOT NULL, MODIFY COLUMN useip VARCHAR(45) NOT NULL DEFAULT \'\', MODIFY COLUMN position INT(10) unsigned NOT NULL, ADD COLUMN repid int(10) unsigned NOT NULL DEFAULT \'0\' AFTER tid, ADD COLUMN premsg text NOT NULL AFTER dateline, ADD COLUMN updateuid mediumint(8) unsigned NOT NULL DEFAULT \'0\' AFTER dateline, ADD COLUMN lastupdate int(10) unsigned NOT NULL DEFAULT \'0\' AFTER dateline;',
-		'ALTER TABLE pre_forum_post_location MODIFY COLUMN tid INT(10) unsigned DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_postcache MODIFY COLUMN `comment` MEDIUMTEXT NOT NULL, MODIFY COLUMN rate MEDIUMTEXT NOT NULL;',
-		'ALTER TABLE pre_forum_postcomment MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN useip VARCHAR(45) NOT NULL DEFAULT \'\';',
-		'ALTER TABLE pre_forum_poststick MODIFY COLUMN tid INT(10) unsigned NOT NULL;',
-		'ALTER TABLE pre_forum_promotion MODIFY COLUMN ip VARCHAR(45) NOT NULL DEFAULT \'\', ADD COLUMN `port` SMALLINT(6) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_ratelog MODIFY COLUMN extcredits tinyint(3) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_relatedthread MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_replycredit MODIFY COLUMN tid INT(10) unsigned NOT NULL, MODIFY COLUMN extcredits INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN times INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN membertimes INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_rsscache MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN `subject` varchar(255) NOT NULL DEFAULT \'\';',
-		'ALTER TABLE pre_forum_sofa MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_thread MODIFY COLUMN tid INT(10) unsigned NOT NULL AUTO_INCREMENT, MODIFY COLUMN `subject` varchar(255) NOT NULL DEFAULT \'\', MODIFY COLUMN maxposition INT(10) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN replycredit INT(10) NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_threadaddviews MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_threadclosed MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_threaddisablepos MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_threadhidelog MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_threadhot MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_threadimage MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_threadlog MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_threadmod MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_threadpartake MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_threadpreview MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_threadrush MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_trade MODIFY COLUMN tid INT(10) unsigned NOT NULL, MODIFY COLUMN aid INT(10) unsigned NOT NULL, MODIFY COLUMN quality tinyint(3) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_tradelog MODIFY COLUMN tid INT(10) unsigned NOT NULL, MODIFY COLUMN paytype tinyint(3) unsigned NOT NULL DEFAULT \'0\', MODIFY COLUMN quality tinyint(3) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_forum_typeoptionvar MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_home_blog MODIFY COLUMN `subject` varchar(255) NOT NULL DEFAULT \'\';',
-		'ALTER TABLE pre_home_comment MODIFY COLUMN ip VARCHAR(45) NOT NULL DEFAULT \'\';',
-		'ALTER TABLE pre_home_docomment MODIFY COLUMN ip VARCHAR(45) NOT NULL DEFAULT \'\', ADD COLUMN `port` SMALLINT(6) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_home_doing MODIFY COLUMN ip VARCHAR(45) NOT NULL DEFAULT \'\', MODIFY COLUMN `status` tinyint(3) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_home_follow_feed MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_home_follow_feed_archiver MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';',
-		'ALTER TABLE pre_home_notification MODIFY COLUMN id BIGINT(20) unsigned NOT NULL AUTO_INCREMENT;',
-		'ALTER TABLE pre_portal_rsscache MODIFY COLUMN `subject` varchar(255) NOT NULL DEFAULT \'\';',
-		'ALTER TABLE pre_security_evilpost MODIFY COLUMN tid INT(10) unsigned NOT NULL DEFAULT \'0\';'
-	);
-	$scheme_count = count($query);
-	if ($id + 1 > $scheme_count) {
-		return '';
-	} else {
-		return str_replace(' pre_', ' '.$config['tablepre'], $query[$id]);
-	}
-}
-
 function get_innodb_scheme_update_sql($table, $statusonly = false) {
 	global $config;
 	// 每条数据库处理指令一行
@@ -1034,6 +985,10 @@ function get_innodb_scheme_update_sql($table, $statusonly = false) {
 		'pre_common_member_secwhite' => 'TRUNCATE TABLE pre_common_member_secwhite;',
 		'pre_common_member_security' => 'ALTER TABLE pre_common_member_security DROP KEY `uid`, ADD KEY `uid` (`uid`, `fieldid`(40));',
 		// 由于不是每个站点都有用户分表, 因此把他放在预调整能节省开发资源
+		'pre_common_member_archive' => 'ALTER TABLE pre_common_member_archive MODIFY COLUMN email varchar(255) NOT NULL DEFAULT \'\', ADD COLUMN `secmobile` varchar(12) NOT NULL DEFAULT \'\' AFTER `password`, ADD COLUMN `secmobicc` varchar(3) NOT NULL DEFAULT \'\' AFTER `password`, ADD COLUMN `secmobilestatus` tinyint(1) NOT NULL DEFAULT \'0\' AFTER avatarstatus, ADD KEY secmobile (`secmobile`, `secmobicc`);',
+		'pre_common_member_field_forum_archive' => 'ALTER TABLE pre_common_member_field_forum_archive MODIFY COLUMN authstr varchar(255) NOT NULL DEFAULT \'\', MODIFY COLUMN customshow tinyint(3) unsigned NOT NULL DEFAULT \'26\';',
+		'pre_common_member_field_home_archive' => 'ALTER TABLE pre_common_member_field_home_archive ADD COLUMN allowasfollow tinyint(1) NOT NULL DEFAULT \'1\' AFTER addfriend, ADD COLUMN allowasfriend tinyint(1) NOT NULL DEFAULT \'1\' AFTER addfriend;',
+		'pre_common_member_profile_archive' => 'ALTER TABLE pre_common_member_profile_archive ADD COLUMN birthcountry varchar(255) NOT NULL DEFAULT \'\' AFTER nationality, ADD COLUMN residecountry varchar(255) NOT NULL DEFAULT \'\' AFTER birthcommunity;',
 		'pre_common_member_status_archive' => 'ALTER TABLE pre_common_member_status_archive MODIFY COLUMN regip VARCHAR(45) NOT NULL DEFAULT \'\', MODIFY COLUMN lastip VARCHAR(45) NOT NULL DEFAULT \'\', ADD COLUMN regport SMALLINT(6) unsigned NOT NULL DEFAULT \'0\' AFTER lastip;',
 		'pre_common_member_stat_field' => 'ALTER TABLE pre_common_member_stat_field DROP KEY `fieldid`, ADD KEY `fieldid` (`fieldid`(40));',
 		'pre_common_process' => 'TRUNCATE TABLE pre_common_process;',
@@ -1127,17 +1082,6 @@ function get_serialize_list() {
 function db_content_update() {
 	// 对于因数据库超时而升级失败的特大站点请看此函数
 	setdbglobal();
-	// 建版本内新增表
-	/*
-	DB::query("CREATE TABLE ".DB::table('common_member_profile_history')." ( hid int(10) unsigned NOT NULL AUTO_INCREMENT, uid mediumint(8) unsigned NOT NULL, realname varchar(255) NOT NULL DEFAULT '', gender tinyint(1) NOT NULL DEFAULT '0', birthyear smallint(6) unsigned NOT NULL DEFAULT '0', birthmonth tinyint(3) unsigned NOT NULL DEFAULT '0', birthday tinyint(3) unsigned NOT NULL DEFAULT '0', constellation varchar(255) NOT NULL DEFAULT '', zodiac varchar(255) NOT NULL DEFAULT '', telephone varchar(255) NOT NULL DEFAULT '', mobile varchar(255) NOT NULL DEFAULT '', idcardtype varchar(255) NOT NULL DEFAULT '', idcard varchar(255) NOT NULL DEFAULT '', address varchar(255) NOT NULL DEFAULT '', zipcode varchar(255) NOT NULL DEFAULT '', nationality varchar(255) NOT NULL DEFAULT '', birthcountry varchar(255) NOT NULL DEFAULT '', birthprovince varchar(255) NOT NULL DEFAULT '', birthcity varchar(255) NOT NULL DEFAULT '', birthdist varchar(20) NOT NULL DEFAULT '', birthcommunity varchar(255) NOT NULL DEFAULT '', residecountry varchar(255) NOT NULL DEFAULT '', resideprovince varchar(255) NOT NULL DEFAULT '', residecity varchar(255) NOT NULL DEFAULT '', residedist varchar(20) NOT NULL DEFAULT '', residecommunity varchar(255) NOT NULL DEFAULT '', residesuite varchar(255) NOT NULL DEFAULT '', graduateschool varchar(255) NOT NULL DEFAULT '', company varchar(255) NOT NULL DEFAULT '', education varchar(255) NOT NULL DEFAULT '', occupation varchar(255) NOT NULL DEFAULT '', position varchar(255) NOT NULL DEFAULT '', revenue varchar(255) NOT NULL DEFAULT '', affectivestatus varchar(255) NOT NULL DEFAULT '', lookingfor varchar(255) NOT NULL DEFAULT '', bloodtype varchar(255) NOT NULL DEFAULT '', height varchar(255) NOT NULL DEFAULT '', weight varchar(255) NOT NULL DEFAULT '', alipay varchar(255) NOT NULL DEFAULT '', icq varchar(255) NOT NULL DEFAULT '', qq varchar(255) NOT NULL DEFAULT '', yahoo varchar(255) NOT NULL DEFAULT '', msn varchar(255) NOT NULL DEFAULT '', taobao varchar(255) NOT NULL DEFAULT '', site varchar(255) NOT NULL DEFAULT '', bio text NOT NULL, interest text NOT NULL, field1 text NOT NULL, field2 text NOT NULL, field3 text NOT NULL, field4 text NOT NULL, field5 text NOT NULL, field6 text NOT NULL, field7 text NOT NULL, field8 text NOT NULL, dateline int(10) unsigned NOT NULL DEFAULT '0', PRIMARY KEY (hid)) ENGINE=InnoDB;");
-	DB::query("CREATE TABLE ".DB::table('common_payment_order')." ( `id` int(10) unsigned NOT NULL AUTO_INCREMENT, `out_biz_no` varchar(64) NOT NULL, `type` varchar(255) NOT NULL, `type_name` varchar(255) DEFAULT NULL, `uid` int(10) unsigned NOT NULL DEFAULT 0, `amount` int(10) unsigned NOT NULL, `amount_fee` int(10) unsigned NOT NULL, `subject` varchar(255) NOT NULL, `description` varchar(255) DEFAULT NULL, `expire_time` int(10) unsigned NOT NULL, `status` tinyint(1) NOT NULL, `return_url` varchar(255) DEFAULT NULL, `data` text DEFAULT NULL, `clientip` varchar(255) NOT NULL DEFAULT '', `remoteport` smallint(6) unsigned NOT NULL DEFAULT 0, `dateline` int(10) unsigned NOT NULL, `trade_no` varchar(255) DEFAULT NULL, `channel` varchar(255) DEFAULT NULL, `payment_time` int(10) unsigned DEFAULT NULL, `callback_status` tinyint(1) DEFAULT 0, PRIMARY KEY (`id`), UNIQUE KEY (`out_biz_no`), KEY (`uid`), KEY (`type`), KEY (`status`)) ENGINE=InnoDB;");
-	DB::query("CREATE TABLE ".DB::table('common_payment_refund')." ( `id` int(10) unsigned NOT NULL AUTO_INCREMENT, `order_id` int(10) unsigned NOT NULL, `out_biz_no` varchar(64) NOT NULL, `amount` int(10) unsigned NOT NULL, `description` varchar(255)    NOT NULL, `status` tinyint(1) NOT NULL, `error` varchar(255) DEFAULT NULL, `refund_time` int(10) DEFAULT NULL, `clientip` varchar(255) NOT NULL DEFAULT '', `remoteport` smallint(6) unsigned NOT NULL DEFAULT 0, `dateline` int(10) NOT NULL, PRIMARY KEY (`id`), UNIQUE KEY (`out_biz_no`), INDEX (`order_id`)) ENGINE=InnoDB;");
-	DB::query("CREATE TABLE ".DB::table('common_payment_transfer')." ( `id` int(10) unsigned NOT NULL AUTO_INCREMENT, `uid` int(10) unsigned NOT NULL, `out_biz_no` varchar(64) NOT NULL, `amount` int(10) unsigned NOT NULL, `subject` varchar(255) NOT NULL, `description` varchar(255) DEFAULT NULL, `realname` varchar(255) NOT NULL, `account` varchar(255) NOT NULL, `channel` varchar(255) DEFAULT NULL, `status` tinyint(3) unsigned NOT NULL, `error` varchar(255) DEFAULT NULL, `trade_no` varchar(255) DEFAULT NULL, `trade_time` int(10) unsigned DEFAULT NULL, `clientip` varchar(255) NOT NULL DEFAULT '', `remoteport` smallint(6) unsigned NOT NULL DEFAULT 0, `dateline` int(10) unsigned NOT NULL, PRIMARY KEY (`id`), UNIQUE KEY (`out_biz_no`), KEY (`uid`), KEY (`status`)) ENGINE=InnoDB;");
-	DB::query("CREATE TABLE ".DB::table('common_smsgw')." ( `smsgwid` int(10) unsigned NOT NULL AUTO_INCREMENT, `available` tinyint(1) NOT NULL DEFAULT '0', `type` int(10) NOT NULL DEFAULT '0', `order` int(10) NOT NULL DEFAULT '0', `name` varchar(255) NOT NULL DEFAULT '', `class` varchar(255) NOT NULL DEFAULT '0', `sendrule` text NOT NULL DEFAULT '', `parameters` text NOT NULL DEFAULT '', PRIMARY KEY (smsgwid)) ENGINE=InnoDB;");
-	DB::query("CREATE TABLE ".DB::table('common_smslog')." ( `smslogid` int(10) unsigned NOT NULL AUTO_INCREMENT, `uid` mediumint(8) unsigned NOT NULL, `smstype` int(10) NOT NULL DEFAULT '0', `svctype` int(10) NOT NULL DEFAULT '0', `smsgw` int(10) NOT NULL DEFAULT '0', `status` int(10) NOT NULL DEFAULT '0', `verify` int(10) NOT NULL DEFAULT '0', `secmobicc` varchar(3) NOT NULL DEFAULT '', `secmobile` varchar(12) NOT NULL DEFAULT '', `ip` varchar(45) NOT NULL DEFAULT '', `port` smallint(6) unsigned NOT NULL DEFAULT '0', `content` text NOT NULL DEFAULT '', `dateline` int(10) unsigned NOT NULL DEFAULT '0', PRIMARY KEY (`smslogid`), KEY dateline (`secmobicc`, `secmobile`, `dateline`), KEY uid (uid)) ENGINE=InnoDB;");
-	DB::query("CREATE TABLE ".DB::table('common_smslog_archive')." ( `smslogid` int(10) unsigned NOT NULL AUTO_INCREMENT, `uid` mediumint(8) unsigned NOT NULL, `smstype` int(10) NOT NULL DEFAULT '0', `svctype` int(10) NOT NULL DEFAULT '0', `smsgw` int(10) NOT NULL DEFAULT '0', `status` int(10) NOT NULL DEFAULT '0', `verify` int(10) NOT NULL DEFAULT '0', `secmobicc` varchar(3) NOT NULL DEFAULT '', `secmobile` varchar(12) NOT NULL DEFAULT '', `ip` varchar(45) NOT NULL DEFAULT '', `port` smallint(6) unsigned NOT NULL DEFAULT '0', `content` text NOT NULL DEFAULT '', `dateline` int(10) unsigned NOT NULL DEFAULT '0', PRIMARY KEY (`smslogid`)) ENGINE=InnoDB;");
-	DB::query("CREATE TABLE ".DB::table('forum_post_history')." ( id int(10) unsigned NOT NULL, pid int(10) unsigned NOT NULL, dateline int(10) unsigned NOT NULL, `subject` varchar(255) NOT NULL DEFAULT '', message mediumtext NOT NULL, PRIMARY KEY (id), KEY pid (pid,dateline)) ENGINE=InnoDB;");
-	*/
 	// 开启程序所有功能
 	logmessage("open all features.");
 	$feats = array('portal', 'forum', 'friend', 'group', 'follow', 'collection', 'guide', 'feed', 'blog', 'doing', 'album', 'share', 'wall', 'homepage', 'ranklist', 'medal', 'task', 'magic', 'favorite');
@@ -1163,6 +1107,15 @@ function db_content_update() {
 	$dir = DB::result_first("SELECT t.directory FROM ".DB::table('common_style')." s LEFT JOIN ".DB::table('common_template')." t ON t.templateid=s.templateid WHERE s.styleid='1'");
 	import_styles(1, $dir, 1, 0, 0);
 	C::t('common_setting')->update('styleid', 1);
+	// 标题最小字数设置为 1 , 标题最大字数设置为 80
+	// https://gitee.com/Discuz/DiscuzX/issues/I69QWB
+	logmessage("update min/maxsubjectsize.");
+	C::t('common_setting')->update('minsubjectsize', 1);
+	C::t('common_setting')->update('maxsubjectsize', 255);
+	// jaideejung007
+	// อัปเดตให้เปิดใช้งานฟังก์ชัน "แสดงความคิดเห็นแบบแทรกลงในโพสต์ได้" และ "ให้ข้อความที่ตอบกลับแล้วปรากฎในส่วนของ "แสดงความคิดเห็น" ได้"
+	logmessage("update allowpostcomment.");
+	C::t('common_setting')->update('allowpostcomment', "a:2:{i:0;s:1:\"1\";i:1;s:1:\"2\";}");
 	// 关闭已经不再支持的前端 MD5 功能
 	logmessage("close pwdsafety");
 	C::t('common_setting')->update('pwdsafety', 0);
@@ -1192,9 +1145,15 @@ function db_content_update() {
 	logmessage("common_district upgrade");
 	DB::query("UPDATE ".DB::table('common_member_profile')." SET birthcountry = 'ไทย' WHERE birthprovince != ''");
 	DB::query("UPDATE ".DB::table('common_member_profile')." SET residecountry = 'ไทย' WHERE resideprovince != ''");
+	DB::query("INSERT INTO ".DB::table('common_member_profile_setting')." VALUES('birthcountry', 1, 0, 0, 'เกิดที่ประเทศ', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', '')");
+	DB::query("INSERT INTO ".DB::table('common_member_profile_setting')." VALUES('residecountry', 1, 0, 0, 'ประเทศที่พำนัก', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', '')");
 	// 允许用户浏览个人资料页
 	logmessage("common_usergroup_field allowviewprofile=1");
 	DB::query("UPDATE ".DB::table('common_usergroup_field')." SET allowviewprofile = '1'");
+	// 允许用户上传头像
+	// https://www.dismall.com/thread-14793-1-1.html
+	logmessage("common_usergroup_field allowavatarupload=1");
+	DB::query("UPDATE ".DB::table('common_usergroup_field')." SET allowavatarupload = '1'");
 	// 老旧系统插件数据清理
 	logmessage("remove old system plugins.");
 	$plugins = array('cloudstat', 'soso_smilies', 'security', 'pcmgr_url_safeguard', 'manyou', 'cloudcaptcha', 'cloudunion', 'qqgroup', 'xf_storage', 'cloudsearch', 'qqconnect');
@@ -1221,6 +1180,8 @@ function cancle_thai_district_upgrade() { /*jaideejung007 ฟังก์ชั�
 	DB::query("UPDATE ".DB::table('common_district')." SET upid = $district_upid, usetype = 0 WHERE level = 1 AND upid = 0");
 	DB::query("UPDATE ".DB::table('common_member_profile')." SET birthcountry = 'ไทย' WHERE birthprovince != ''");
 	DB::query("UPDATE ".DB::table('common_member_profile')." SET residecountry = 'ไทย' WHERE resideprovince != ''");
+	DB::query("INSERT INTO ".DB::table('common_member_profile_setting')." VALUES('birthcountry', 1, 0, 0, 'เกิดที่ประเทศ', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', '')");
+	DB::query("INSERT INTO ".DB::table('common_member_profile_setting')." VALUES('residecountry', 1, 0, 0, 'ประเทศที่พำนัก', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', '')");
 }
 
 function save_config_file($filename, $config, $default, $deletevar) {
@@ -1318,6 +1279,11 @@ function encode_file($filename) {
 			$encode = mb_detect_encoding($res, array("ASCII", "UTF-8", "GB2312", "GBK", "EUC-CN", "CP936", "GB18030", "BIG-5"));
 			if (in_array($encode, array("GB2312", "GBK", "EUC-CN", "CP936", "GB18030", "BIG-5"))) {
 				$res = mb_convert_encoding($res, "UTF-8", $encode);
+				// 对非 Windows 系统尝试设置 777 权限
+				if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
+					logmessage("set chmod 777 $filename");
+					chmod($filename, 0777);
+				}
 				logmessage("file convert $filename");
 				file_put_contents($filename, $res);
 			}
@@ -1403,7 +1369,8 @@ function getcolumn($creatsql) {
 
 function remakesql($value) {
 	$value = trim(preg_replace("/\s+/", ' ', $value));
-	$value = str_replace(array('`',', ', ' ,', '( ' ,' )', 'mediumtext'), array('', ',', ',','(',')','text'), $value);
+	// 去掉 mediumtext 替换为 text 的功能, 避免应设置字段出现问题
+	$value = str_replace(array('`',', ', ' ,', '( ' ,' )'), array('', ',', ',','(',')'), $value);
 	return $value;
 }
 

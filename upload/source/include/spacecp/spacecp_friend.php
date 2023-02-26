@@ -21,7 +21,7 @@ $op = empty($_GET['op'])?'':$_GET['op'];
 $uid = empty($_GET['uid'])?0:intval($_GET['uid']);
 $_GET['from'] = preg_match('/^\w+$/', $_GET['from']) ? $_GET['from'] : '';
 
-$space['key'] = space_key($space['uid']);
+$space['key'] = helper_invite::generate_key($space['uid']);
 
 $actives = array($op=>' class="a"');
 
@@ -44,7 +44,6 @@ if($op == 'add') {
 		showmessage('space_does_not_exist');
 	}
 
-	
 	$fields = C::t('common_member_field_home')->fetch($uid);
 	if(!$fields['allowasfriend']) {
 		showmessage('is_blacklist');
@@ -365,7 +364,7 @@ if($op == 'add') {
 					$ols[$value['uid']] = 1;
 				}
 			}
-		}		
+		}
 	} else {
 
 		dsetcookie('promptstate_'.$space['uid'], $space['newprompt'], 31536000);

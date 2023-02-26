@@ -46,7 +46,9 @@ function getattach($pid, $posttime = 0, $aids = '') {
 	if($pid > 0) {
 		$attachmentns = C::t('forum_attachment_n')->fetch_all_by_id('tid:'.$_G['tid'], 'pid', $pid);
 		foreach(C::t('forum_attachment')->fetch_all_by_id('pid', $pid, 'aid') as $attach) {
-			$attach = array_merge($attach, $attachmentns[$attach['aid']]);
+			if(!empty($attachmentns[$attach['aid']])) {
+				$attach = array_merge($attach, $attachmentns[$attach['aid']]);
+			}
 			$attach['filenametitle'] = $attach['filename'];
 			$attach['ext'] = fileext($attach['filename']);
 			if($allowext && !in_array($attach['ext'], $allowext)) {
@@ -187,6 +189,13 @@ function updateattach($modnewthreads, $tid, $pid, $attachnew, $attachupdate = ar
 			foreach($_GET['albumaid'] as $aid) {
 				if(isset($newattach[$aid])) {
 					$albumattach[$aid] = $newattach[$aid];
+				}
+			}
+			if(!empty($_GET['uploadalbum'])) {
+				$_GET['uploadalbum'] = intval($_GET['uploadalbum']);
+				$albuminfo = C::t('home_album')->fetch_album($_GET['uploadalbum'], $uid);
+				if(empty($albuminfo)) {
+					$_GET['uploadalbum'] = 0;
 				}
 			}
 		}
@@ -599,14 +608,14 @@ function messagecutstr($str, $length = 0, $dot = ' ...') {
 			"/\[\/($bbcodes)\]/i",
 			"/\\\\u/i"
 		), array(
-			"[b]{$language['post_hidden']}[/b]",
+			$language['post_hidden'],
 			'',
 			'',
 			'\\1',
 			'',
 			'',
 			'',
-		        '%u'
+			'%u'
 		), $str));
 	if($length) {
 		$str = cutstr($str, $length, $dot);
@@ -620,6 +629,26 @@ function messagecutstr($str, $length = 0, $dot = ' ...') {
 	return trim($str);
 }
 
+function threadmessagecutstr($thread, $str, $length = 0, $dot = ' ...') {
+	global $_G;
+	if(!empty($thread)) {
+		if(!empty($thread['readperm']) && $thread['readperm'] > 0) {
+			$str = '';
+		}elseif(!empty($thread['price']) && $thread['price'] > 0) {
+			preg_match_all("/\[free\](.+?)\[\/free\]/is", $str, $matches);
+			$str = '';
+			if(!empty($matches[1])) {
+				foreach($matches[1] as $match) {
+					$str .= $match.' ';
+				}
+			} else {
+				$language = lang('forum/misc');
+				$str = $language['post_sold'];
+			}
+		}
+	}
+	return messagecutstr($str, $length, $dot);
+}
 
 function setthreadcover($pid, $tid = 0, $aid = 0, $countimg = 0, $imgurl = '') {
 	global $_G;

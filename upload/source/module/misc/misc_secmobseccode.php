@@ -29,6 +29,12 @@ if($_GET['action'] == 'send') {
 		$length = $_G['setting']['smsdefaultlength'] ? $_G['setting']['smsdefaultlength'] : 4;
 		$secmobseccode = random($length, 1);
 
+		if(empty($secmobicc) || !preg_match('#^(\d){1,3}$#', $secmobicc)) {
+			showmessage('profile_secmobicc_illegal');
+		} else if(empty($secmobile) || !preg_match('#^(\d){1,12}$#', $secmobile)) {
+			showmessage('profile_secmobile_illegal');
+		}
+
 		$result = sms::send($_G['uid'], 0, $svctype, $secmobicc, $secmobile, $secmobseccode, 0);
 
 		if($result >= 0) {

@@ -173,7 +173,11 @@ if(!$operation) {
 		$mgroup = C::t('common_admingroup')->fetch_all_merge_usergroup($gids);
 		if(!$mgroup) {
 			cpmsg('usergroups_nonexistence', '', 'error');
-		}
+		}/* else {
+			while($group = DB::fetch($query)) {
+				$mgroup[] = $group;
+			}
+		}*/
 
 		$grouplist = $gutype = '';
 		foreach(C::t('common_admingroup')->fetch_all_order() as $ggroup) {
@@ -224,9 +228,8 @@ if(!$operation) {
 			$_GET['id'] = $gid = $group['groupid'];
 			$mgids[] = $gid;
 
-			
 			showmultititle();
-			showtableheader();
+			showtableheader('', 'nobottom');
 			showtagheader('tbody', 'threadperm', $_GET['anchor'] == 'threadperm');
 			showtitle('admingroup_edit_threadperm');
 			showsetting('admingroup_edit_stick_thread', array('allowstickthreadnew', array(
@@ -261,9 +264,7 @@ if(!$operation) {
 			showsetting('admingroup_edit_edit_trade', 'allowedittradenew', $group['allowedittrade'], 'radio');
 			showsetting('admingroup_edit_usertag', 'alloweditusertagnew', $group['alloweditusertag'], 'radio');
 			showtagfooter('tbody');
-			
 
-			
 			showtagheader('tbody', 'postperm', $_GET['anchor'] == 'postperm');
 			showtitle('admingroup_edit_postperm');
 			showsetting('admingroup_edit_edit_post', 'alloweditpostnew', $group['alloweditpost'], 'radio');
@@ -273,9 +274,7 @@ if(!$operation) {
 			showsetting('admingroup_edit_stick_post', 'allowstickreplynew', $group['allowstickreply'], 'radio');
 			showsetting('admingroup_edit_manage_tag', 'allowmanagetagnew', $group['allowmanagetag'], 'radio');
 			showtagfooter('tbody');
-			
 
-			
 			showtagheader('tbody', 'modcpperm', $_GET['anchor'] == 'modcpperm');
 			showtitle('admingroup_edit_modcpperm');
 			showsetting('admingroup_edit_mod_post', 'allowmodpostnew', $group['allowmodpost'], 'radio');
@@ -290,9 +289,7 @@ if(!$operation) {
 			showsetting('admingroup_edit_clear_recycle', 'allowclearrecyclenew', $group['allowclearrecycle'], 'radio');
 			showsetting('admingroup_edit_view_log', 'allowviewlognew', $group['allowviewlog'], 'radio');
 			showtagfooter('tbody');
-			
 
-			
 			showtagheader('tbody', 'spaceperm', $_GET['anchor'] == 'spaceperm');
 			showtitle('admingroup_edit_spaceperm');
 			showsetting('admingroup_edit_manage_feed', 'managefeednew', $group['managefeed'], 'radio');
@@ -308,9 +305,7 @@ if(!$operation) {
 			showsetting('admingroup_edit_manage_magic', 'managemagicnew', $group['managemagic'], 'radio');
 			showsetting('admingroup_edit_manage_click', 'manageclicknew', $group['manageclick'], 'radio');
 			showtagfooter('tbody');
-			
 
-			
 			showtagheader('tbody', 'otherperm', $_GET['anchor'] == 'otherperm');
 			showtitle('admingroup_edit_otherperm');
 			showsetting('admingroup_edit_view_ip', 'allowviewipnew', $group['allowviewip'], 'radio');
@@ -318,11 +313,9 @@ if(!$operation) {
 			showsetting('admingroup_edit_allow_make_html', 'allowmakehtmlnew', $group['allowmakehtml'], 'radio');
 			showtagfooter('tbody');
 			showtablefooter();
-			
 
-			
 			showtagheader('div', 'portalperm', $_GET['anchor'] == 'portalperm');
-			showtableheader();
+			showtableheader('', 'nobottom');
 			showtagheader('tbody', '', true);
 			showtitle('admingroup_edit_portalperm');
 			showsetting('admingroup_edit_manage_article', 'allowmanagearticlenew', $group['allowmanagearticle'], 'radio');
@@ -334,10 +327,9 @@ if(!$operation) {
 			showtagfooter('tbody');
 			showtablefooter();
 			showtagfooter('div');
-			
-
+			showtableheader();
 			showsubmit('groupsubmit');
-
+			showtablefooter();
 			$_G['showsetting_multi']++;
 		}
 
