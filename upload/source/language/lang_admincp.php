@@ -649,7 +649,7 @@ $lang = array
 	'makehtml_createtopic' => 'Generate Topic',
 	'makehtml_clear' => 'Clean HTML',
 	'makehtml_tips_all' => '<li>The article HTML file generated after the specified start time released</li><li>HTML files generated after the specified start time publish article channels</li><li>HTML file generated portal Homepage</li>',
-	'makehtml_tips_index' => '<li>Generate the portal home page HTML file, The file name can be specified separately in the set, The default is index</li><li>The server-side set the default access file, Should be generated static file name on the index.php before, I.e.: DirectoryIndex index.html index.php</li><li>Use a static file access, Some of the original without index.php Dynamic access failure, I.e.: http://www.discuz.net/?1</li>',
+	'makehtml_tips_index' => '<li>Generate the portal home page HTML file, The file name can be specified separately in the set, The default is index</li><li>The server-side set the default access file, Should be generated static file name on the index.php before, I.e.: DirectoryIndex index.html index.php</li><li>Use a static file access, Some of the original without index.php Dynamic access failure, I.e.: https://www.discuz.vip/?1</li>',
 	'makehtml_tips_category' => '<li>Generate the specified category Home HTML file</li><li>The Channel Home HTML files generated after the specified start time publish articles</li><li>When use a static file access, Some of the original without index.php dynamic access will fail.</li>',
 	'makehtml_tips_article' => '<li>he article HTML file generated after the specified start time released</li><li>Generate the HTML files of all the articles in the specified channel</li><li>The article HTML file generated after the specified start time released</li>',
 	'makehtml_tips_topic' => '<li>Topics HTML files generated after the specified start time released</li>',
@@ -1349,10 +1349,10 @@ $lang = array
 	'setting_domain_base_tips' => "<li>After the second-level domain name setting is reserved, no one can apply for or use the domain name</li><li>After the second-level domain name of personal space and group is opened, you need to go to <strong>Root Domain Name setting</strong><strong>{$_G['setting']['navs'][3]['navname']}, {$_G['setting']['navs'][4]['navname']}</strong> root domain name</li>",
 	'setting_domain_app' => 'ชื่อโดเมนแอพลิเคชัน',
 	'setting_domain_app_domain' => 'ชื่อโดเมน',
-	'setting_domain_app_tips' => "<li>The respective binding domain could not be the same, the domain is not necessary to add 「<strong>http://</strong>」, do not 「<strong>/</strong>」 endings, such as: portal.comsenz.com</li><li>Arbitrary open a domain name, you need to configure the default domain, otherwise it will create a multi-entrance</li><li>When open multiple domains in the config/config_global.php Modify the cookiedomain value to set the cookie scope</li>",
+	'setting_domain_app_tips' => "<li>The respective binding domain could not be the same, the domain is not necessary to add 「<strong>http://</strong>」, do not 「<strong>/</strong>」 endings, such as: portal.discuz.vip</li><li>Arbitrary open a domain name, you need to configure the default domain, otherwise it will create a multi-entrance</li><li>When open multiple domains in the config/config_global.php Modify the cookiedomain value to set the cookie scope</li>",
 	'setting_domain_app_mobile_tips' => 'การกำหนดค่าโดเมนนี้ ก็ต่อเมื่อมีการเข้าถึงเว็บไซต์ผ่านโทรศัพท์ และหากไม่ใช่เบราวเซอร์ระบบจะทำการรีไดเรกไปยังโดเมนที่ตั้งค่าไว้โดยอัตโนมัติ',
 	'setting_domain_root' => 'ชื่อโดเมนหลัก',
-	'setting_domain_root_tips' => "<li>Can be set for <strong>Personal Space, {$_G['setting']['navs'][3]['navname']}, Section,Topic, Channel</strong> The root domain name of a second-level domain name. For example: when a user applies for XXX.comsenz.com, fill in the root domain name: comsenz.com</li><li><strong>Personal Space, {$_G['setting']['navs'][3]['navname']}</strong>After setting the root of the second-level domain name, it is necessary to turn on the corresponding second-level domain name switch in <strong>Basic Settings</strong>, so that the user can be in the corresponding place Applying for binding a second-level domain name is limited by the length of the second-level domain name of the user group</li><li><strong>Channel</strong> if the second-level domain name is enabled, it needs to be configured in the environment. Related binding operations</li><li>It is not recommended to change different root domains to the same root domain midway</li>",
+	'setting_domain_root_tips' => "<li>Can be set for <strong>Personal Space, {$_G['setting']['navs'][3]['navname']}, Section,Topic, Channel</strong> The root domain name of a second-level domain name. For example: when a user applies for XXX.discuz.vip, fill in the root domain name: discuz.vip</li><li><strong>Personal Space, {$_G['setting']['navs'][3]['navname']}</strong>After setting the root of the second-level domain name, it is necessary to turn on the corresponding second-level domain name switch in <strong>Basic Settings</strong>, so that the user can be in the corresponding place Applying for binding a second-level domain name is limited by the length of the second-level domain name of the user group</li><li><strong>Channel</strong> if the second-level domain name is enabled, it needs to be configured in the environment. Related binding operations</li><li>It is not recommended to change different root domains to the same root domain midway</li>",
 	'setting_domain_allow_space' => 'เปิดใช้งานซับโดเมนสำหรับโปรไฟล์ส่วนตัว',
 	'setting_domain_allow_space_comment' => 'หลังจากที่คุณตั้งชื่อโดเมนหลัก คุณสามารถเปิดใช้งานซับโดเมนสำหรับโปรไฟล์ของสมาชิก',
 	'setting_domain_allow_group' => 'เปิดใช้งานซับโดเมนสำหรับคลับของสมาชิก',
@@ -2834,7 +2834,7 @@ $lang = array
 	'forums_edit_basic_up' => 'บอร์ดหลัก/หมวดหมู่',
 	'forums_edit_basic_up_comment' => 'ย้ายบอร์ดนี้ไปไว้ในหมวดหมู่อื่น',
 	'forums_edit_basic_redirect' => 'URL ถายใน/ภายนอก สำหรับบอร์ด',
-	'forums_edit_basic_redirect_comment' => 'URL ภายใน / ภายนอก สำหรับบอร์ด (ตัวอย่าง เช่น http://www.discuz.com) เมื่อผู้ใช้คลิกที่บอร์ดนี้ จะลิงก์ไปยัง URL ที่ระบุ หากคุณตั้งค่านี้จะไม่สามารถเข้าสู่ลิงก์ปกติของบอร์ดนี้ได้ ให้แน่ใจว่าคุณจำเป็นต้องใช้คุณลักษณะนี้ ปล่อยว่างไว้หากไม่ต้องการตั้งค่า',
+	'forums_edit_basic_redirect_comment' => 'URL ภายใน / ภายนอก สำหรับบอร์ด (ตัวอย่าง เช่น https://www.discuz.vip) เมื่อผู้ใช้คลิกที่บอร์ดนี้ จะลิงก์ไปยัง URL ที่ระบุ หากคุณตั้งค่านี้จะไม่สามารถเข้าสู่ลิงก์ปกติของบอร์ดนี้ได้ ให้แน่ใจว่าคุณจำเป็นต้องใช้คุณลักษณะนี้ ปล่อยว่างไว้หากไม่ต้องการตั้งค่า',
 	'forums_edit_basic_icon' => 'ไอคอนของบอร์ด',
 	'forums_edit_basic_icon_width' => 'ความกว้างของไอคอน (หน่วยเป็น: px)',
 	'forums_edit_basic_banner' => 'รูปภาพด้านบนบอร์ด',
@@ -2933,7 +2933,7 @@ $lang = array
 
 	'forums_edit_posts' => 'ตัวเลือกโพสต์',
 	'forums_edit_posts_modposts' => 'เปิดการตรวจสอบโพสต์โดยผู้ดูแล',
-	'forums_edit_posts_modposts_comment' => 'Select "Yes" for all posts in this forum must be validated by moderator/administrator before it will be visible to others. After setting you can select user groups which posts must be validated, and groups which can make such validation.',
+	'forums_edit_posts_modposts_comment' => 'หากเลือก "ตรวจสอบกระทู้" หรือ "ตรวจสอบโพสต์" จะทำให้ผู้ใช้ต้องรอให้ผู้ดูแลบอร์ดหรือผู้ดูแลระบบอนุมัติกระทู้/โพสต์ที่ผู้ใช้โพสต์ในบอร์ดนั้น ๆ ก่อนจะแสดงผลบนบอร์ด หลังจากเปิดฟีเจอร์นี้แล้ว ถึงจะสามารถกำหนดค่าตัวเลือก "เปิดการตรวจสอบโพสต์โดยผู้ดูแล" ในกลุ่มผู้ใช้ และคุณยังสามารถกำหนดให้กลุ่มผู้ใช้แต่ละกลุ่ม สามารถตรวจสอบโพสต์ของผู้อื่นได้ โดยตั้งค่าเพิ่มเติมในที่ "กลุ่มผู้ดูแลระบบ"',
 	'forums_edit_posts_alloweditpost' => 'อนุญาตให้แก้ไขโพสต์',
 	'forums_edit_posts_alloweditpost_comment' => 'Select "Yes" for allow users to edit their own posts',
 	'forums_edit_posts_modposts_threads' => 'ตรวจสอบกระทู้',
@@ -3394,7 +3394,7 @@ $lang = array
 	'styles_edit_visual_exit' => 'ออกจากระบบ',
 	'styles_edit_visual_menu_current' => 'ปัจจุบัน',
 	'styles_edit_visual_menu' => 'แถบเมนูนำทาง',
-	'styles_edit_visual_text' => '<p id="sp_tabletext" style="margin: 0; line-height: 1.6em; color: #444;"><a id="sp_link" href="http://www.discuz.net" target="_blank" style="color: #09C; text-decoration: none;">Crossday Discuz! Board</a> <span id="sp_midtext" style="color: #666;">(<strong id="sp_notice" style="color: #F60;">Discuz!</strong>)</span>คือการใช้ PHP และ MySQL สร้างหลากหลายโซลูชันฐานข้อมูลของบอร์ดที่มีประสิทธิภาพ </p>',
+	'styles_edit_visual_text' => '<p id="sp_tabletext" style="margin: 0; line-height: 1.6em; color: #444;"><a id="sp_link" href="https://www.discuz.vip/" target="_blank" style="color: #09C; text-decoration: none;">Crossday Discuz! Board</a> <span id="sp_midtext" style="color: #666;">(<strong id="sp_notice" style="color: #F60;">Discuz!</strong>)</span>คือการใช้ PHP และ MySQL สร้างหลากหลายโซลูชันฐานข้อมูลของบอร์ดที่มีประสิทธิภาพ </p>',
 	'styles_edit_visual_footer' => 'ข้อมูลด้านล่างและลิขสิทธิ์',
 	'styles_edit_visual_setting_commonborder' => 'สีเส้นระหว่างบรรทัด',
 	'styles_edit_visual_setting_commonbg' => 'สีพื้นหลังทั่วไป',
@@ -4329,7 +4329,7 @@ $lang = array
 	'usergroups_edit_post_direct_reply' => 'ตอบกระทู้',
 	'usergroups_edit_post_direct_thread' => 'ตั้งกระทู้ใหม่',
 	'usergroups_edit_post_direct_all' => 'ไม่ต้องตรวจสอบ',
-	'usergroups_edit_post_direct_comment' => 'Whether to allow publish thread or reply directly or require a verification. This setting has no effect if the Forum does not require verification.',
+	'usergroups_edit_post_direct_comment' => 'ตั้งค่าว่าจะอนุญาตให้ผู้ใช้งานต้องผ่านตรวจสอบการตอบกลับและกระทู้ก่อนเผยแพร่หรือไม่ โดยฟีเจอร์นี้จะใช้งานได้ก็ต่อเมื่อได้ตั้งค่าในแต่ละเว็บบอร์ดว่า "เปิดการตรวจสอบโพสต์โดยผู้ดูแล:" แล้วเท่านั้น',
 	'usergroups_edit_post_direct_group' => 'Allow direct post',
 	'usergroups_edit_post_url' => 'อนุญาตให้โพสต์ลิงก์ URL ภายนอก',
 	'usergroups_edit_post_url_comment' => 'Whether to allow include URL in a post. This setting can effectively reduce the amount of advertising posts.',
@@ -6156,11 +6156,11 @@ $lang = array
 	'tools_updatecache_data'=>'แคชข้อมูล',
 	'tools_updatecache_tpl'=>'แคชเทมเพลต',
 	'tools_updatecache_blockclass'=>'แคชหมวดหมู่โมดูล DIY',
-	'tools_updatecache_searchindex'=>'แคชดัชนีการค้นหา',
-	'tools_updatecache_waiting'=>'กำลังอัปเดตแคช โปรดรอสักครู่......',
+	'tools_updatecache_searchindex'=>'แคชดัชนีการค้นหาของ AdminCP',
+	'tools_updatecache_waiting'=>'กำลังอัปเดตแคช กรุณารอสักครู่......',
 
 	'fileperms_check_note' => 'ตรวจสอบไฟล์และโฟลเดอร์ของระบบว่ามีสิทธิ์ในการเขียนไฟล์ได้ คลิกที่ปุ่มด้านล่างเพื่อเริ่มทำการตรวจสอบ',
-	'fileperms_check_waiting' => 'กำลังประมวลผลไฟล์ โปรดอดทนรอ...',
+	'fileperms_check_waiting' => 'กำลังประมวลผลไฟล์ กรุณาอดทนรอ...',
 	'fileperms_tips' => '<li>ถ้าหลังจากการตรวจสอบเสร็จแล้ว ไฟล์หรือโฟลเดอร์ที่มีสถานะเป็น "เขียนไม่ได้" (ข้อความสีแดง) ให้คุณดำเนินการ CHMOD ไฟล์หรือโฟลเดอร์ดังกล่าวให้มีค่าเป็น 0777 ด้วยโปรแกรม FTP ของคุณ เพื่อให้เว็บไซต์สามารถทำงานได้เต็มประสิทธิภาพ</li>',
 	'fileperms_check_ok' => 'ไฟล์และโฟลเดอร์ทั้งหมดสามารถเขียน/อ่าน/เข้าถึงได้',
 	'fileperms_unwritable' => 'เขียนไม่ได้',
@@ -7275,7 +7275,7 @@ $lang = array
 # เปิดโหมด RewriteEngine
 RewriteEngine On
 
-# ตัวอย่าง ถ้าเว็บไซต์เป็น www.discuz.net/bbs/ จะต้องตั้งค่าเป็น RewriteBase /bbs/ หากไฟล์ดิสคัสอยู่ในโฟลเดอร์ราก (ROOT) ให้ตั้งค่าเป็น RewriteBase /
+# ตัวอย่าง ถ้าเว็บไซต์เป็น www.discuz.vip/bbs/ จะต้องตั้งค่าเป็น RewriteBase /bbs/ หากไฟล์ดิสคัสอยู่ในโฟลเดอร์ราก (ROOT) ให้ตั้งค่าเป็น RewriteBase /
 RewriteBase {siteroot}
 
 # หากไม่มีความจำเป็น ไม่ควรแก้ไขค่า Rewrite
@@ -7333,11 +7333,12 @@ url.rewrite-once = (
 	'download_latest' => 'ดาวน์โหลด Discuz! X3.5 เวอร์ชันล่าสุด',
 	'org_name' => 'บริษัท เทนเซ็นต์คลาวด์คอมพิวติ้ง (กรุงปักกิ่ง) จำกัด',
 	'dev_manager' => 'ไต้เจอคัง (Kevin \'Crossday\' Day)',
-	'app_discussion' => 'ชุมชนผู้ใช้งานแอปพลิเคชัน Discuz!',
+	'app_discussion' => 'ชุมชนแลกเปลี่ยน/เรียนรู้การใช้งาน Discuz!',
 	'org_site' => 'เว็บไซต์ของบริษัท',
 	'purchase_service' => 'บริการจัดซื้อ',
 	'discussion_area' => 'เว็บไซต์ Discuz! อย่างเป็นทางการ',
 	'app_center' => 'ศูนย์แอปพลิเคชัน Discuz!',
+	'discuz_git' => 'ลิงก์โครงการ Discuz!',
 );
 
 $adminextend = array();

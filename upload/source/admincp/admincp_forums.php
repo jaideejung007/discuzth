@@ -57,7 +57,7 @@ var rowtypedata = [
 		}
 
 		foreach ($groups as $id => $gforum) {
-			$toggle = $forumcount > 50 && count($forums[$id]) > 2;
+			$toggle = $forumcount > 50 && isset($forums[$id]) && is_array($forums[$id]) && count($forums[$id]) > 2;
 			$showed[] = showforum($gforum, 'group', '', $toggle);
 			if(!empty($forums[$id])) {
 				foreach ($forums[$id] as $forum) {
@@ -484,6 +484,7 @@ var rowtypedata = [
 	require_once libfile('function/forumlist');
 	require_once libfile('function/domain');
 	$highlight = getgpc('highlight');
+	$highlight = !empty($highlight) ? dhtmlspecialchars($highlight, ENT_QUOTES) : '';
 	$anchor = getgpc('anchor');
 
 	list($pluginsetting, $pluginvalue) = get_pluginsetting('forums');
@@ -1311,7 +1312,7 @@ EOT;
 		}
 		$forum = $mforum[$k];
 
-		if(strlen($_GET['namenew']) > 50) {
+		if(strlen($_GET['namenew']) > 150) { /*jaideejung007*/
 			cpmsg('forums_name_toolong', '', 'error');
 		}
 

@@ -14,7 +14,6 @@ if(!defined('IN_DISCUZ')) {
 set_time_limit(0);
 function sendmail($toemail, $subject, $message = '', $from = '') {
 	global $_G;
-	
 	if(preg_match("/@m\.invalid$/i", $toemail)){
 		return false;
 	}
@@ -45,7 +44,7 @@ function sendmail($toemail, $subject, $message = '', $from = '') {
 			$smtp = $_G['setting']['mail']['smtp'][$rid];
 			$_G['setting']['mail']['server'] = $smtp['server'];
 			$_G['setting']['mail']['port'] = $smtp['port'];
-			$_G['setting']['mail']['timeout'] = isset($smtp['timeout']) ? intval($smtp['timeout']) : 30;
+			$_G['setting']['mail']['timeout'] = isset($smtp['timeout']) && strlen($smtp['timeout']) ? intval($smtp['timeout']) : 30;
 			$_G['setting']['mail']['auth'] = $smtp['auth'] ? 1 : 0;
 			$_G['setting']['mail']['from'] = $smtp['from'];
 			$_G['setting']['mail']['auth_username'] = $smtp['auth_username'];
@@ -98,7 +97,6 @@ function sendmail($toemail, $subject, $message = '', $from = '') {
 			return false;
 		}
 		stream_set_blocking($fp, true);
-		
 		stream_set_timeout($fp, $_G['setting']['mail']['timeout']);
 
 		$lastmessage = fgets($fp, 512);
@@ -232,7 +230,6 @@ function sendmail($toemail, $subject, $message = '', $from = '') {
 
 function sendmail_cron($toemail, $subject, $message) {
 	global $_G;
-	
 	if(preg_match("/@m\.invalid$/i", $toemail)){
 		return false;
 	}

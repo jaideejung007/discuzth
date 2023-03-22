@@ -353,9 +353,16 @@ template/default/touch/forum/forumdisplay.htm *<!--{hook/forumdisplay_thread_foo
 template/default/touch/forum/forumdisplay.htm *<!--{hook/forumdisplay_bottom_mobile}-->
 template/default/touch/forum/forumdisplay_fastpost.htm *<!--{hook/viewthread_fastpost_button_mobile}-->
 template/default/touch/forum/forumdisplay_subforum.htm *<!--{hook/forumdisplay_subforum_extra_mobile $sub['fid']}-->
+template/default/touch/forum/post.htm *<!--{hook/post_top_mobile}-->
 template/default/touch/forum/post.htm *<!--{hook/post_middle_mobile}-->
 template/default/touch/forum/post.htm *<!--{hook/post_bottom_mobile}-->
+template/default/touch/forum/post_activity.htm *<!--{hook/post_activity_extra}-->
+template/default/touch/forum/post_debate.htm *<!--{hook/post_debate_extra}-->
 template/default/touch/forum/post_editor_attribute.htm *<!--{hook/post_attribute_extra_body}-->
+template/default/touch/forum/post_poll.htm *<!--{hook/post_poll_extra}-->
+template/default/touch/forum/post_reward.htm *<!--{hook/post_reward_extra}-->
+template/default/touch/forum/post_trade.htm *<!--{hook/post_trade_extra}-->
+template/default/touch/forum/trade_info.htm *<!--{hook/viewthread_tradeinfo_extra_mobile}-->
 template/default/touch/forum/viewthread.htm *<!--{hook/viewthread_top_mobile}-->
 template/default/touch/forum/viewthread.htm *<!--{hook/viewthread_posttop_mobile $postcount}-->
 template/default/touch/forum/viewthread.htm *<!--{hook/viewthread_postfooter_mobile $postcount}-->
@@ -363,9 +370,19 @@ template/default/touch/forum/viewthread.htm *<!--{hook/viewthread_postbottom_mob
 template/default/touch/forum/viewthread.htm *<!--{hook/viewthread_bottom_mobile}-->
 template/default/touch/group/group.htm *<!--{hook/forumdisplay_top_mobile}-->
 template/default/touch/group/group_list.htm *<!--{hook/forumdisplay_thread_mobile $key}-->
-template/default/touch/home/spacecp_blog.htm *<!--{hook/spacecp_blog_top}-->
-template/default/touch/home/spacecp_blog.htm *<!--{hook/spacecp_blog_middle}-->
-template/default/touch/home/spacecp_blog.htm *<!--{hook/spacecp_blog_bottom}-->
+template/default/touch/home/spacecp_blog.htm *<!--{hook/spacecp_blog_top_mobile}-->
+template/default/touch/home/spacecp_blog.htm *<!--{hook/spacecp_blog_middle_mobile}-->
+template/default/touch/home/spacecp_blog.htm *<!--{hook/spacecp_blog_bottom_mobile}-->
+template/default/touch/home/spacecp_credit_buy.htm *<!--{hook/spacecp_credit_top}-->
+template/default/touch/home/spacecp_credit_buy.htm *<!--{hook/spacecp_credit_bottom}-->
+template/default/touch/home/spacecp_credit_exchange.htm *<!--{hook/spacecp_credit_top}-->
+template/default/touch/home/spacecp_credit_exchange.htm *<!--{hook/spacecp_credit_bottom}-->
+template/default/touch/home/spacecp_credit_log.htm *<!--{hook/spacecp_credit_top}-->
+template/default/touch/home/spacecp_credit_log.htm *<!--{hook/spacecp_credit_bottom}-->
+template/default/touch/home/spacecp_credit_rule.htm *<!--{hook/spacecp_credit_top}-->
+template/default/touch/home/spacecp_credit_rule.htm *<!--{hook/spacecp_credit_bottom}-->
+template/default/touch/home/spacecp_credit_transfer.htm *<!--{hook/spacecp_credit_top}-->
+template/default/touch/home/spacecp_credit_transfer.htm *<!--{hook/spacecp_credit_bottom}-->
 template/default/touch/home/spacecp_payment_redirect.htm *<!--{hook/spacecp_payment_redirect_extend}-->
 template/default/touch/home/spacecp_privacy.htm *<!--{hook/spacecp_privacy_top}-->
 template/default/touch/home/spacecp_privacy.htm *<!--{hook/spacecp_privacy_base_extra}-->

@@ -20,7 +20,7 @@ $languages = array(
 	'to' => 'ถึง',
 	'menu' => 'เมนู',
 
-	'copyright' => 'Copyright &copy; 2001-'.date('Y').' Tencent Cloud.',
+	'copyright' => '&copy; 2001-'.date('Y').' <a href="https://code.dismall.com/" target="_blank">Discuz! Team</a>.',
 
 	'founder'=>'ผู้ก่อตั้ง UCenter',
 	'login_username'=>'ชื่อสมาชิก',
@@ -350,6 +350,8 @@ $languages = array(
 	'settings_mail_settings_server_comment'		=> 'Set SMTP Server address',
 	'settings_mail_settings_port'			=> 'SMTP Port',
 	'settings_mail_settings_port_comment'		=> 'Set the SMTP Server Port, Default is 25',
+	'settings_mail_settings_timeout' => 'SMTP หมดเวลา',
+	'settings_mail_settings_timeout_comment' => 'ตั้งเวลาหมดเวลา (หน่วยเป็นวินาที) ของเซิร์ฟเวอร์ SMTP ค่าเริ่มต้นคือ 30',
 	'settings_mail_settings_auth'			=> 'SMTP Server need authentication',
 	'settings_mail_settings_auth_comment'		=> 'Choose "Yes" if need',
 	'settings_mail_settings_from'			=> 'Sender Email Address',

@@ -3,12 +3,14 @@
 # Discuz! Thai - ระบบเว็บบอร์ดดิสคัส! ภาษาไทย สำหรับสร้างเว็บไซต์ระดับมืออาชีพ
 
 [![GitHub version](https://img.shields.io/github/v/release/jaideejung007/discuzth.svg)](https://github.com/jaideejung007/discuzth)
-![SE number of downloads](https://img.shields.io/github/downloads/jaideejung007/discuzth/latest/total.svg)
 [![download latest release](https://img.shields.io/badge/Discuz!%20X3.5-Download-success.svg)](https://github.com/jaideejung007/discuzth/releases/latest)
-[![SE](https://img.shields.io/badge/LINE%20OPENCHAT%20Discuz!%20Thai-Join%20Chat-brightgreen.svg)](https://line.me/ti/g2/aQG_0-x6WcphQ4ChUDul9Q "LINE OPENCHAT Discuz! Thai (ดิสคัสภาษาไทย)")
+![GitHub all releases](https://img.shields.io/github/downloads/jaideejung007/discuzth/total?label=Total%20Downloads)
+[![SE](https://img.shields.io/discord/1065259119239495772?color=purple&label=Discord%20Discuz%21%20Thai%20Community&logoColor=purple)](https://discord.gg/faSzs3geux "Discord ของ Discuz! Thai Community อย่างเป็นทางการ")
+[![Discuz! Thai Support](https://img.shields.io/youtube/channel/subscribers/UC3bP2rWm_4rqKBj88smHDgg?label=Discuz%21%20Thai%20Support&style=social)](https://www.youtube.com/@discuzthaisupport)
+
 
 # คำแนะนำ #
-Discuz! คือแพลตฟอร์มชุมชนสำหรับสร้างเว็บไซต์ระดับมืออาชีพ เปิดตัวโดย [เทนเซ็นต์ คลาวด์](http://cloud.tencent.com/) และแปลภาษาไทยโดย [Discuz! Thai](https://discuzthai.com/) เพื่อให้คุณมีเว็บไซต์ที่พร้อมให้บริการครบ จบ ในที่เดียว
+Discuz! เป็นแพลตฟอร์มสร้างเว็บไซต์ที่มุ่งเน้นไปที่การสร้างชุมชนออนไลน์ ช่วยให้เว็บไซต์สามารถให้บริการแบบครบ จบ ในที่เดียว
 
 # ไฮไลท์สำคัญ X3.5 #
 * สนับสนุน PHP8
@@ -60,5 +62,5 @@ Discuz! คือแพลตฟอร์มชุมชนสำหรับส
 ## เว็บไซต์ที่เกี่ยวข้อง 
 * เว็บไซต์ดิสคัส! ภาษาไทยอย่างเป็นทางการ: https://discuzthai.com
 * เว็บไซต์ดิสคัส! ภาษาไทยสำหรับทดสอบ: https://beta.discuzthai.com
-* เว็บไซต์ดิสคัส! ภาษาจีน : https://www.discuz.net/
+* เว็บไซต์ดิสคัส! ภาษาจีน : https://www.discuz.vip/
 * เว็บไซต์ดิสคัส! ภาษาจีน (2): https://www.dismall.com/

@@ -54,9 +54,7 @@ if($operation == 'set') {
 	if(!submitcheck('cardsubmit')) {
 		showformheader('card&operation=set&');
 		showtableheader();
-		
 		showsetting('card_config_open', 'card_config_open', ($card_setting['open'] ? $card_setting['open'] : 0), 'radio');
-		
 		showsubmit('cardsubmit');
 		showtablefooter();
 		showformfooter();
@@ -94,9 +92,7 @@ if($operation == 'set') {
 	$perpage = max(20, empty($_GET['perpage']) ? 20 : intval($_GET['perpage']));
 	echo '<script type="text/javascript" src="' . STATICURL . 'js/calendar.js"></script>';
 
-	
 	showtips('card_manage_tips');
-	
 	$card_type_option = '';
 	foreach(C::t('common_card_type')->range(0, 0, 'ASC') as $result) {
 		$card_type[$result['id']] = $result;
@@ -150,7 +146,7 @@ if($operation == 'set') {
 
 	showformheader('card&operation=manage&');
 	showtableheader('card_manage_title');
-	showsubtitle(array('', cplang('card_number'), cplang('card_log_price'), cplang('card_extcreditsval'), cplang('card_type'), cplang('card_status'), cplang('card_log_used_user'), cplang('card_used_dateline'), cplang('card_make_cleardateline'), cplang('card_maketime'), cplang('card_log_maker')));
+	showsubtitle(array('', cplang('card_number'), cplang('card_log_price'), cplang('card_extcreditsval'), cplang('card_type'), cplang('card_status'), cplang('card_log_used_user'), cplang('card_used_dateline'), cplang('card_make_cleardateline')/*, cplang('card_maketype')*/, cplang('card_maketime'), cplang('card_log_maker')));
 
 
 	$start_limit = ($page - 1) * $perpage;
@@ -211,9 +207,7 @@ if($operation == 'set') {
 			}
 		}
 	}
-	
 	showtips('card_type_tips');
-	
 	showformheader('card&operation=type&');
 	showtableheader();
 	showtablerow('class="header"', array('', ''), array(
@@ -254,13 +248,12 @@ EOT;
 
 		echo '<script type="text/javascript" src="' . STATICURL . 'js/calendar.js"></script>';
 		showformheader('card&operation=make&');
-		
 		showtips('card_make_tips');
 		showtableheader();
 
 		showsetting('card_make_rule', '', '', '<input type="text" name="rule" class="txt" value="'.($card_log['rule']['rule'] ? $card_log['rule']['rule'] : '').'" onkeyup="javascript:checkcardrule(this);"><br /><span id="cardrule_view" class="tips2" style="display:none;"></span>');
 echo <<<EOT
-	<script type="text/javascript" charset="gbk">
+	<script type="text/javascript" charset="{$_G['charset']}">
 		function checkcardrule(obj) {
 			var chrLength = obj.value.length;
 			$('cardrule_view').style.display = "";
@@ -281,7 +274,6 @@ EOT;
 		showsetting('card_make_cleardateline', 'cleardateline', date("Y-m-d", $_G['timestamp']+31536000), 'calendar', '', 0, '');
 
 		showsetting('card_make_description', 'description', $card_log['description'] , 'text');
-		
 		showsubmit('cardsubmit');
 		showtablefooter();
 		showformfooter();

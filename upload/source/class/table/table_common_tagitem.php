@@ -45,13 +45,12 @@ class table_common_tagitem extends discuz_table
 	}
 
 	public function delete($val, $unbuffered = false, $null = '') {
-		
 		if (defined('DISCUZ_DEPRECATED')) {
 			throw new Exception('NotImplementedException');
 			return parent::delete($val, $unbuffered);
 		} else {
 			$unbuffered = $unbuffered === false ? 0 : $unbuffered;
-			return $this->delete_tagitem($val, $unbuffered);
+			return $this->delete_tagitem($val, $unbuffered, $null);
 		}
 	}
 

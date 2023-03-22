@@ -6,7 +6,7 @@ INSERT INTO pre_common_admingroup SET `admingid`='17',`alloweditpost`='1',`allow
 INSERT INTO pre_common_admingroup SET `admingid`='18',`alloweditpost`='0',`alloweditpoll`='0',`allowstickthread`='0',`allowmodpost`='0',`allowdelpost`='0',`allowmassprune`='0',`allowrefund`='0',`allowcensorword`='0',`allowviewip`='1',`allowbanip`='0',`allowedituser`='0',`allowmoduser`='0',`allowbanuser`='0',`allowbanvisituser`='0',`allowpostannounce`='0',`allowviewlog`='0',`allowbanpost`='0',`supe_allowpushthread`='1',`allowhighlightthread`='0',`allowlivethread`='0',`allowdigestthread`='0',`allowrecommendthread`='0',`allowbumpthread`='0',`allowclosethread`='0',`allowmovethread`='0',`allowedittypethread`='0',`allowstampthread`='0',`allowcopythread`='0',`allowmergethread`='0',`allowsplitthread`='0',`allowrepairthread`='0',`allowwarnpost`='0',`allowviewreport`='0',`alloweditforum`='0',`allowremovereward`='0',`allowedittrade`='0',`alloweditactivity`='0',`allowstickreply`='0',`allowmanagearticle`='0',`allowaddtopic`='0',`allowmanagetopic`='0',`allowdiy`='0',`allowclearrecycle`='0',`allowmanagetag`='0',`managefeed`='0',`managedoing`='0',`manageshare`='0',`manageblog`='0',`managealbum`='0',`managecomment`='0',`managemagiclog`='0',`managereport`='0',`managehotuser`='0',`managedefaultuser`='0',`managemagic`='0',`manageclick`='0',`allowstamplist`='0',`allowmanagecollection`='0',`allowmakehtml`='0';
 INSERT INTO pre_common_admingroup SET `admingid`='19',`alloweditpost`='0',`alloweditpoll`='0',`allowstickthread`='0',`allowmodpost`='1',`allowdelpost`='0',`allowmassprune`='0',`allowrefund`='0',`allowcensorword`='0',`allowviewip`='1',`allowbanip`='1',`allowedituser`='0',`allowmoduser`='1',`allowbanuser`='1',`allowbanvisituser`='0',`allowpostannounce`='0',`allowviewlog`='0',`allowbanpost`='0',`supe_allowpushthread`='0',`allowhighlightthread`='0',`allowlivethread`='0',`allowdigestthread`='0',`allowrecommendthread`='0',`allowbumpthread`='0',`allowclosethread`='0',`allowmovethread`='0',`allowedittypethread`='0',`allowstampthread`='0',`allowcopythread`='0',`allowmergethread`='0',`allowsplitthread`='0',`allowrepairthread`='0',`allowwarnpost`='0',`allowviewreport`='0',`alloweditforum`='0',`allowremovereward`='0',`allowedittrade`='0',`alloweditactivity`='0',`allowstickreply`='0',`allowmanagearticle`='0',`allowaddtopic`='0',`allowmanagetopic`='0',`allowdiy`='0',`allowclearrecycle`='0',`allowmanagetag`='0',`managefeed`='0',`managedoing`='0',`manageshare`='0',`manageblog`='0',`managealbum`='0',`managecomment`='0',`managemagiclog`='0',`managereport`='0',`managehotuser`='0',`managedefaultuser`='0',`managemagic`='0',`manageclick`='0',`allowstamplist`='0',`allowmanagecollection`='0',`allowmakehtml`='0';
 
-INSERT INTO pre_common_adminnote VALUES ('1','Discuz','0','0','0','0','ขอขอบคุณสำหรับการติดตั้งและใช้งาน Discuz! X3.5 (ภาษาไทย) นี่คือศูนย์การจัดการของ Discuz! คุณสามารถปรับการตั้งค่าต่าง ๆ ของเว็บไซต์ได้จากที่นี่');
+INSERT INTO pre_common_adminnote VALUES ('1','Discuz','0','0','0','0','ขอขอบคุณสำหรับการติดตั้งและใช้งาน Discuz! X3.5 (ภาษาไทย) นี่คือศูนย์กลางจัดการของ Discuz! คุณสามารถปรับการตั้งค่าต่าง ๆ ของเว็บไซต์ได้จากที่นี่');
 
 INSERT INTO pre_common_credit_rule VALUES ('1','ตั้งกระทู้','post','4','0','0','0','0','2','0','0','0','0','0','0','');
 INSERT INTO pre_common_credit_rule VALUES ('2','ตอบกระทู้','reply','4','0','0','0','0','1','0','0','0','0','0','0','');
@@ -59,10 +59,10 @@ INSERT INTO pre_common_cron VALUES ('19','1','system','อัปเดตกร�
 INSERT INTO pre_common_cron VALUES ('20','1','system','อัปเดตระบบโพสต์ล่าสุด (รวมไปถึงความปลอดภัยทั่วไป)','cron_security_cleanup_lastpost.php','1269746623','1269792000','-1','-1','7','0');
 INSERT INTO pre_common_cron VALUES ('21','1','system','บันทึกการส่ง SMS ประจำสัปดาห์','cron_smslog_daily.php','1269746639','1269792000','-1','-1','03','0');
 
-INSERT INTO pre_common_friendlink VALUES ('1','0','เว็บบอร์ด Discuz! อย่างเป็นทางการ','https://www.discuz.net','ติดตามข่าวสารความเคลื่อนไหวของดิสคัส! รวมไปถึงการดาวน์โหลดและแลกเปลี่ยนข้อมูลทางเทคนิค','static/image/common/logo_88_31.gif','2');
-INSERT INTO pre_common_friendlink VALUES ('2','1','แอปสโตร์','https://addon.dismall.com/','','','2');
-INSERT INTO pre_common_friendlink VALUES ('3','2','ดิสคัสไทย!','https://discuzthai.com','กลุ่มผู้ใช้งานกระดานข่าว ดิสคัส! ในประเทศไทย!','static/image/common/logo_discuzthai_88_31.gif','2');
-INSERT INTO pre_common_friendlink VALUES ('4','3','Discuz! TH Official Repositories','https://github.com/jaideejung007/discuzth','ดาวน์โหลดและติดตามการอัปเดต Discuz! ภาษาไทยล่าสุด','static/image/common/logo_discuzth_repositories_88_31.gif','2');
+INSERT INTO pre_common_friendlink VALUES ('1','0','เว็บไซต์ Discuz! อย่างเป็นทางการ','https://www.discuz.vip/','นำเสนอข่าวสารเกี่ยวกับผลิตภัณฑ์ Discuz! รวมไปถึงการดาวน์โหลดซอฟต์แวร์และการแลกเปลี่ยนข้อมูลเทคโนโลยีใหม่ล่าสุด','static/image/common/logo_88_31.gif','2');
+INSERT INTO pre_common_friendlink VALUES ('2','1','ศูนย์ดาวน์โหลดแอป Discuz!','https://addon.dismall.com/','','','2');
+INSERT INTO pre_common_friendlink VALUES ('3','2','เว็บไซต์ Discuz! Thai อย่างเป็นทางการ','https://discuzthai.com','กลุ่มผู้ใช้งานกระดานข่าว ดิสคัส! ในประเทศไทย!','static/image/common/logo_discuzthai_88_31.gif','2');
+INSERT INTO pre_common_friendlink VALUES ('4','3','Discuz! TH Official Repositories','https://github.com/jaideejung007/discuzth','ขอเชิญร่วมพัฒนา Discuz! เวอร์ชันภาษาไทยกับเราได้ที่นี่','static/image/common/logo_discuzth_repositories_88_31.gif','2');
 INSERT INTO pre_common_friendlink VALUES ('5','4','Discord Discuz! Thai Community','https://discord.gg/faSzs3geux','แชทสด/พูดคุย/แลกเปลี่ยน พร้อมอัปเดตความเคลื่อนไหวดิสคัสภาษาไทย','static/image/common/logo_discord_discuzthai_88_31.gif','2');
 
 INSERT INTO pre_common_member_profile_setting VALUES('realname', 1, 0, 0, 'ชื่อจริง', '', 0, 0, 0, 0, 0, 0, 1, 'text', 0, '', '');
@@ -70,22 +70,22 @@ INSERT INTO pre_common_member_profile_setting VALUES('gender', 1, 0, 0, 'เพ�
 INSERT INTO pre_common_member_profile_setting VALUES('birthyear', 1, 0, 0, 'ปีเกิด', '', 0, 0, 0, 0, 0, 0, 1, 'select', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('birthmonth', 1, 0, 0, 'เดือนเกิด', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('birthday', 1, 0, 0, 'วันเกิด', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', '');
-INSERT INTO pre_common_member_profile_setting VALUES('constellation', 1, 1, 0, 'หมู่ดาว', 'หมู่ดาว (คำนวณตามวันเกิดได้โดยอัตโนมัติ)', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
-INSERT INTO pre_common_member_profile_setting VALUES('zodiac', 1, 1, 0, 'ราศี', 'ราศี (คำนวณตามวันเกิดได้โดยอัตโนมัติ)', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
+INSERT INTO pre_common_member_profile_setting VALUES('constellation', 1, 1, 0, 'ราศีเกิด', 'ราศีเกิด (คำนวณตามวันเกิดโดยอัตโนมัติ)', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
+INSERT INTO pre_common_member_profile_setting VALUES('zodiac', 1, 1, 0, 'ปีนักษัตร', 'ปีนักษัตร (คำนวณตามวันเกิดโดยอัตโนมัติ)', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('telephone', 1, 1, 0, 'โทรศัพท์บ้าน', '', 0, 0, 0, 0, 0, 0, 0, 'text', 10, '', '/^[0]{1}+[\d]+$/');
-INSERT INTO pre_common_member_profile_setting VALUES('mobile', 1, 1, 0, 'อุปกรณ์พกพา', '', 0, 0, 0, 0, 0, 0, 0, 'text', 9, '', '/^[0]{1}+[\d]+$/');
+INSERT INTO pre_common_member_profile_setting VALUES('mobile', 1, 1, 0, 'มือถือ', '', 0, 0, 0, 0, 0, 0, 0, 'text', 9, '', '/^[0]{1}+[\d]+$/');
 INSERT INTO pre_common_member_profile_setting VALUES('idcardtype', 1, 1, 0, 'ประเภทของการ์ด', 'รหัสของการ์ด หนังสือเดินทาง ใบขับขี่ ฯลฯ', 0, 0, 0, 0, 0, 0, 0, 'select', 0, 'รหัสของการ์ด\nหนังสือเดินทาง\nใบขับขี่', '');
-INSERT INTO pre_common_member_profile_setting VALUES('idcard', 1, 1, 0, 'รหัสของการ์ด', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
+INSERT INTO pre_common_member_profile_setting VALUES('idcard', 1, 1, 0, 'หมายเลขการ์ด', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('address', 1, 1, 0, 'ที่อยู่', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('zipcode', 1, 1, 0, 'รหัสไปรษณีย์', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('nationality', 0, 0, 0, 'สัญชาติ', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('birthcountry', 1, 0, 0, 'เกิดที่ประเทศ', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('birthprovince', 1, 0, 0, 'เกิดที่จังหวัด', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', '');
-INSERT INTO pre_common_member_profile_setting VALUES('birthcity', 1, 0, 0, 'บ้านเกิด', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', '');
+INSERT INTO pre_common_member_profile_setting VALUES('birthcity', 1, 0, 0, 'สถานที่เกิด', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('birthdist', 1, 0, 0, 'เกิดที่ตำบล/เขต', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('birthcommunity', 1, 0, 0, 'เกิดที่อำเภอ', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', '');
-INSERT INTO pre_common_member_profile_setting VALUES('residecountry', 1, 0, 0, 'ประเทศที่พำนัก', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', '');
-INSERT INTO pre_common_member_profile_setting VALUES('resideprovince', 1, 0, 0, 'อาศัยอยู่ในจังหวัด', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', '');
+INSERT INTO pre_common_member_profile_setting VALUES('residecountry', 1, 0, 0, 'พำนักที่ประเทศ', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', '');
+INSERT INTO pre_common_member_profile_setting VALUES('resideprovince', 1, 0, 0, 'อาศัยอยู่ที่จังหวัด', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('residecity', 1, 0, 0, 'ที่อยู่ปัจจุบัน', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('residedist', 1, 0, 0, 'อาศัยอยู่ในเขต', 'เขตที่อยู่อาศัย/เขต', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('residecommunity', 1, 0, 0, 'ชุมชนที่อยู่อาศัย', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, '', '');
@@ -97,17 +97,17 @@ INSERT INTO pre_common_member_profile_setting VALUES('occupation', 1, 0, 0, 'อ
 INSERT INTO pre_common_member_profile_setting VALUES('position', 1, 0, 0, 'ตำแหน่ง', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('revenue', 1, 1, 0, 'รายได้', 'ไม่จำเป็นต้องกรอก', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('affectivestatus', 1, 1, 0, 'ความรู้สึก', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
-INSERT INTO pre_common_member_profile_setting VALUES('lookingfor', 1, 0, 0, 'ความต้องการ', 'เช่น ต้องการค้นหาเพื่อนในเว็บไซต์', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
+INSERT INTO pre_common_member_profile_setting VALUES('lookingfor', 1, 0, 0, 'จุดมุ่งหมาย', 'เพื่อนประเภทใดที่คุณคาดหวังว่าจะพบบนเว็บไซต์', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('bloodtype', 1, 1, 0, 'หมู่เลือด', '', 0, 0, 0, 0, 0, 0, 0, 'select', 0, 'A\nB\nAB\nO\nอื่น ๆ', '');
-INSERT INTO pre_common_member_profile_setting VALUES('height', 0, 1, 0, 'ความสูง', 'หน่วยเป็น ซม.', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
+INSERT INTO pre_common_member_profile_setting VALUES('height', 0, 1, 0, 'ส่วนสูง', 'หน่วยเป็น ซม.', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('weight', 0, 1, 0, 'น้ำหนัก', 'หน่วยเป็น กก.', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('alipay', 1, 1, 0, 'Alipay', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('icq', 0, 1, 0, 'ICQ', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('qq', 1, 1, 0, 'QQ', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('yahoo', 0, 1, 0, 'YAHOO', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('msn', 1, 1, 0, 'MSN', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
-INSERT INTO pre_common_member_profile_setting VALUES('taobao', 1, 1, 0, 'Taobao', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
-INSERT INTO pre_common_member_profile_setting VALUES('site', 1, 0, 0, 'เว็บบล็อก/เว็บไซต์ส่วนตัว', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
+INSERT INTO pre_common_member_profile_setting VALUES('taobao', 1, 1, 0, 'Aliwangwang', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
+INSERT INTO pre_common_member_profile_setting VALUES('site', 1, 0, 0, 'เว็บไซต์ส่วนตัว', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('bio', 1, 1, 0, 'ข้อความแนะนำตัว', '', 0, 0, 0, 0, 0, 0, 0, 'textarea', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('interest', 1, 0, 0, 'งานอดิเรก', '', 0, 0, 0, 0, 0, 0, 0, 'textarea', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('field1', 0, 1, 0, 'กำหนดเอง 1', '', 0, 0, 0, 0, 0, 0, 0, 'text', 0, '', '');
@@ -555,7 +555,7 @@ INSERT INTO pre_common_setting VALUES ('simplemode','0');
 INSERT INTO pre_common_setting VALUES ('sitemessage','a:5:{s:4:\"time\";s:1:\"3\";s:8:\"register\";s:0:\"\";s:5:\"login\";s:0:\"\";s:9:\"newthread\";s:0:\"\";s:5:\"reply\";s:0:\"\";}');
 INSERT INTO pre_common_setting VALUES ('sitename','Discuz! X');
 INSERT INTO pre_common_setting VALUES ('siteuniqueid','KD1Q6Vbd03ALJ34u');
-INSERT INTO pre_common_setting VALUES ('siteurl','https://www.discuz.net/');
+INSERT INTO pre_common_setting VALUES ('siteurl','https://www.discuz.vip/');
 INSERT INTO pre_common_setting VALUES ('site_qq','');
 INSERT INTO pre_common_setting VALUES ('smcols','8');
 INSERT INTO pre_common_setting VALUES ('smrows','5');
@@ -581,7 +581,7 @@ INSERT INTO pre_common_setting VALUES ('sphinxport', '');
 INSERT INTO pre_common_setting VALUES ('sphinxrank', '');
 INSERT INTO pre_common_setting VALUES ('sphinxsubindex', 'threads,threads_minute');
 INSERT INTO pre_common_setting VALUES ('srchcensor','1');
-INSERT INTO pre_common_setting VALUES ('srchhotkeywords','Discuz! X3.5 (ภาษาไทย)\r\nดิสคัสภาษาไทย\r\nดิสคัสไทย\r\ndiscuz');
+INSERT INTO pre_common_setting VALUES ('srchhotkeywords','สังสรรค์\r\nหาเพื่อน\r\ndiscuz');
 INSERT INTO pre_common_setting VALUES ('stamplistlevel','3');
 INSERT INTO pre_common_setting VALUES ('starthreshold','2');
 INSERT INTO pre_common_setting VALUES ('statcode','');
@@ -658,7 +658,7 @@ INSERT INTO pre_common_setting VALUES ('watermarktrans', 'a:3:{s:6:\"portal\";s:
 INSERT INTO pre_common_setting VALUES ('watermarktype', 'a:3:{s:6:\"portal\";s:3:\"png\";s:5:\"forum\";s:3:\"png\";s:5:\"album\";s:3:\"png\";}');
 INSERT INTO pre_common_setting VALUES ('welcomemsg','1');
 INSERT INTO pre_common_setting VALUES ('welcomemsgtitle','สวัสดี {username} ขอขอบคุณที่ลงทะเบียนกับเว็บของเรา โปรดอ่านรายละเอียดเพิ่มเติมด้านล่างนี้');
-INSERT INTO pre_common_setting VALUES ('welcomemsgtxt','สวัสดี {username} คุณได้ลงทะเบียนกับทางเว็บไซต์ {sitename}\r\nก่อนการใช้งานกรุณาอ่านข้อตกลงการใช้งานเว็บอีกครั้ง\r\nพบปัญหาในการใช้งาน กรุณาติดต่อไปยังผู้ดูแลด้วยอีเมลนี้: {adminemail}\r\n\r\n\r\n{bbname}\r\n{time}');
+INSERT INTO pre_common_setting VALUES ('welcomemsgtxt','สวัสดี {username} คุณได้ลงทะเบียนกับทางเว็บไซต์ {sitename}\r\nก่อนการใช้งานกรุณาอ่านข้อตกลงการใช้งานเว็บอีกครั้ง\r\nหากพบปัญหาในการใช้งาน กรุณาติดต่อผู้ดูแลระบบที่อีเมลนี้: {adminemail}\r\n\r\n\r\n{bbname}\r\n{time}');
 INSERT INTO pre_common_setting VALUES ('whosonlinestatus','3');
 INSERT INTO pre_common_setting VALUES ('whosonline_contract','0');
 INSERT INTO pre_common_setting VALUES ('zoomstatus','1	600');
@@ -755,7 +755,7 @@ INSERT INTO pre_common_statuser VALUES ('1','0','login');
 
 
 
-INSERT INTO pre_common_style VALUES ('1','สไตล์มาตรฐาน','1','1', 't1	t2	t3	t4	t5|');
+INSERT INTO pre_common_style VALUES ('1','สไตล์เริ่มต้น','1','1', 't1	t2	t3	t4	t5|');
 
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'menuhoverbgcolor', '#004FA0');
 INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (1, 'menucurbgcolor', '#005AB4');
@@ -808,7 +808,7 @@ INSERT INTO `pre_common_stylevar` (`styleid`, `variable`, `substitute`) VALUES (
 
 
 
-INSERT INTO pre_common_template VALUES ('1','เทมเพลตมาตรฐาน','./template/default','บริษัท เทนเซ็นต์คลาวด์คอมพิวติ้ง (กรุงปักกิ่ง) จำกัด');
+INSERT INTO pre_common_template VALUES ('1','ชุดเทมเพลตเริ่มต้น','./template/default','Discuz!');
 
 
 
@@ -1117,4 +1117,4 @@ INSERT INTO `pre_common_admincp_perm` (`cpgroupid`, `perm`) VALUES (5, 'usergrou
 INSERT INTO `pre_common_admincp_perm` (`cpgroupid`, `perm`) VALUES (5, '_allowpost');
 INSERT INTO `pre_common_admincp_perm` (`cpgroupid`, `perm`) VALUES (5, 'verify_verify');
 
-INSERT INTO `pre_forum_threadprofile` (`id`, `name`, `template`, `global`) VALUES (1, 'รูปแบบโปรไฟล์มาตรฐาน', 'a:2:{s:4:\"left\";s:399:\"{numbercard}\r\n{groupicon}<p>{*}</p>{/groupicon}\r\n{authortitle}<p><em>{*}</em></p>{/authortitle}\r\n{customstatus}<p class=\"xg1\">{*}</p>{/customstatus}\r\n{star}<p>{*}</p>{/star}\r\n{upgradeprogress}<p>{*}</p>{/upgradeprogress}\r\n<dl class=\"pil cl\">\r\n\t<dt>{baseinfo=credits,1}</dt><dd>{baseinfo=credits,0}</dd>\r\n</dl>\r\n{medal}<p class=\"md_ctrl\">{*}</p>{/medal}\r\n<dl class=\"pil cl\">{baseinfo=field_qq,0}</dl>\";s:3:\"top\";s:82:\"<dl class=\"cl\">\r\n<dt>{baseinfo=credits,1}</dt><dd>{baseinfo=credits,0}</dd>\r\n</dl>\";}', 1);
+INSERT INTO `pre_forum_threadprofile` (`id`, `name`, `template`, `global`) VALUES (1, 'รูปแบบโปรไฟล์เริ่มต้น', 'a:2:{s:4:\"left\";s:399:\"{numbercard}\r\n{groupicon}<p>{*}</p>{/groupicon}\r\n{authortitle}<p><em>{*}</em></p>{/authortitle}\r\n{customstatus}<p class=\"xg1\">{*}</p>{/customstatus}\r\n{star}<p>{*}</p>{/star}\r\n{upgradeprogress}<p>{*}</p>{/upgradeprogress}\r\n<dl class=\"pil cl\">\r\n\t<dt>{baseinfo=credits,1}</dt><dd>{baseinfo=credits,0}</dd>\r\n</dl>\r\n{medal}<p class=\"md_ctrl\">{*}</p>{/medal}\r\n<dl class=\"pil cl\">{baseinfo=field_qq,0}</dl>\";s:3:\"top\";s:82:\"<dl class=\"cl\">\r\n<dt>{baseinfo=credits,1}</dt><dd>{baseinfo=credits,0}</dd>\r\n</dl>\";}', 1);

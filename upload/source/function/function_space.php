@@ -39,7 +39,6 @@ function getblockhtml($blockname,$parameters = array()) {
 			$privacy = $space['privacy']['profile'] ? $space['privacy']['profile'] : array();
 
 			foreach($_G['cache']['profilesetting'] as $fieldid=>$field) {
-				
 				if($_G['setting']['nsprofiles']) {
 					break;
 				}
@@ -488,7 +487,7 @@ function getblockhtml($blockname,$parameters = array()) {
 					$html .= '<div class="d">'.$value['body_template'].'</div>';
 					if ($value['type'] == 'video') {
 						if(!empty($value['body_data']['imgurl'])) {
-							$html .= '<table class="mtm" title="'.lang('space', 'click_play').'" onclick="javascript:showFlash(\''.$value['body_data']['host'].'\', \''.$value['body_data']['flashvar'].'\', this, \''.$value['sid'].'\');"><tr><td class="vdtn hm" style="background: url('.$value['body_data']['imgurl'].') no-repeat"><img src="'.STATICURL.'/image/common/vds.png" alt="'.lang('space', 'click_play').'" /></td></tr></table>';
+							$html .= '<table class="mtm" title="'.lang('space', 'click_play').'" onclick="javascript:showFlash(\''.$value['body_data']['host'].'\', \''.$value['body_data']['flashvar'].'\', this, \''.$value['sid'].'\');"><tr><td class="vdtn hm" style="background: url('.$value['body_data']['imgurl'].') no-repeat"><img src="'.STATICURL.'image/common/vds.png" alt="'.lang('space', 'click_play').'" /></td></tr></table>';
 						} else {
 							$html .= "<img src=\"".STATICURL."/image/common/vd.gif\" alt=\"".lang('space', 'click_play')."\" onclick=\"javascript:showFlash('{$value['body_data']['host']}', '{$value['body_data']['flashvar']}', this, '{$value['sid']}');\" class=\"tn\" />";
 						}
@@ -661,7 +660,7 @@ function mkfeedhtml($value) {
 
 	if (!empty($value['body_data']['flashvar'])) {
 		if(!empty($value['body_data']['imgurl'])) {
-			$html .= '<table class="mtm" title="'.lang('space', 'click_play').'" onclick="javascript:showFlash(\''.$value['body_data']['host'].'\', \''.$value['body_data']['flashvar'].'\', this, \''.$value['sid'].'\');"><tr><td class="vdtn hm" style="background: url('.$value['body_data']['imgurl'].') no-repeat"><img src="'.STATICURL.'/image/common/vds.png" alt="'.lang('space', 'click_play').'" /></td></tr></table>';
+			$html .= '<table class="mtm" title="'.lang('space', 'click_play').'" onclick="javascript:showFlash(\''.$value['body_data']['host'].'\', \''.$value['body_data']['flashvar'].'\', this, \''.$value['sid'].'\');"><tr><td class="vdtn hm" style="background: url('.$value['body_data']['imgurl'].') no-repeat"><img src="'.STATICURL.'image/common/vds.png" alt="'.lang('space', 'click_play').'" /></td></tr></table>';
 		} else {
 			$html .= "<img src=\"".STATICURL."/image/common/vd.gif\" alt=\"".lang('space', 'click_play')."\" onclick=\"javascript:showFlash('{$value['body_data']['host']}', '{$value['body_data']['flashvar']}', this, '{$value['sid']}');\" class=\"tn\" />";
 		}

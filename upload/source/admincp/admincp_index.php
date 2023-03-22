@@ -90,8 +90,8 @@ echo '</div>';
 $now = date('Y');
 echo <<<EOT
 <div class="copyright">
-<p>Powered by <a href="http://www.discuz.net/" target="_blank" class="lightlink2">Discuz!</a> {$_G['setting']['version']}</p>
-<p>Copyright &copy; 2001-$now Tencent Cloud.</p>
+<p>Powered by <a href="https://www.discuz.vip/" target="_blank" class="lightlink2">Discuz!</a> {$_G['setting']['version']}</p>
+<p>&copy; 2001-$now <a href="https://code.dismall.com/" target="_blank">Discuz! Team</a>.</p>
 </div>
 EOT;
 
@@ -200,7 +200,7 @@ function show_todo() {
 }
 
 function show_releasetips() {
-	global $reldisp, $_G;
+	global $_G, $reldisp, $newversion;
 
 	$siteuniqueid = C::t('common_setting')->fetch_setting('siteuniqueid');
 	if(empty($siteuniqueid) || strlen($siteuniqueid) < 16) {
@@ -227,6 +227,14 @@ function show_releasetips() {
 		C::t('common_setting')->update('siterelease', $releasehash);
 		C::t('common_setting')->update('sitereleasetips', 1);
 		$sitereleasetips = 1;
+		require_once libfile('function/cloudaddons');
+		$newversion = json_decode(cloudaddons_open_jdz('&mod=app&ac=upgrade'), true); /*jaideejung007*/
+		if(!empty($newversion['newversion'])) {
+			$newversion['updatetime'] = $_G['timestamp'];
+			C::t('common_setting')->update_setting('cloudaddons_newversion', ((CHARSET == 'utf-8') ? $newversion : json_encode($newversion)));
+		} else {
+			$newversion = array();
+		}
 		require_once libfile('function/cache');
 		updatecache('setting');
 	}
@@ -475,7 +483,7 @@ function show_forever_thanks() {
 		'&#xE1A;&#xE23;&#xE34;&#xE29;&#xE31;&#xE17; &#xE40;&#xE17;&#xE19;&#xE40;&#xE0B;&#xE47;&#xE19;&#xE15;&#xE4C;&#xE04;&#xE25;&#xE32;&#xE27;&#xE14;&#xE4C;&#xE04;&#xE2D;&#xE21;&#xE1E;&#xE34;&#xE27;&#xE15;&#xE34;&#xE49;&#xE07; (&#xE01;&#xE23;&#xE38;&#xE07;&#xE1B;&#xE31;&#xE01;&#xE01;&#xE34;&#xE48;&#xE07;) &#xE08;&#xE33;&#xE01;&#xE31;&#xE14;',
 		'&#xE1C;&#xE39;&#xE49;&#xE23;&#xE31;&#xE1A;&#xE1C;&#xE34;&#xE14;&#xE0A;&#xE2D;&#xE1A;&#xE01;&#xE32;&#xE23;&#xE14;&#xE33;&#xE40;&#xE19;&#xE34;&#xE19;&#xE07;&#xE32;&#xE19;',
 		'&#xE1A;&#xE23;&#xE34;&#xE29;&#xE31;&#xE17; &#xE40;&#xE19;&#xE47;&#xE15;&#xE40;&#xE27;&#xE34;&#xE23;&#xE4C;&#xE04;&#xE40;&#xE17;&#xE04;&#xE42;&#xE19;&#xE42;&#xE25;&#xE22;&#xE35;&#xE40;&#xE2B;&#xE2D;&#xE40;&#xE1F;&#xE22;&#xE40;&#xE2D;&#xE49;&#xE2D;&#xE23;&#xE4C;&#xE40;&#xE15;&#xE4B;&#xE32; &#xE08;&#xE33;&#xE01;&#xE31;&#xE14;',
-	);
+	);/*jaideejung007*/
 	$gitTeamStr = '';
 	$gitTeam = array(
 		'laozhoubuluo' => '&#x8001;&#x5468;&#x90E8;&#x843D;',
@@ -507,7 +515,7 @@ function show_forever_thanks() {
 		'875919' => 'Jie \'tom115701\' Zhang',
 	);
 	foreach ($devTeam as $id => $name) {
-		$devTeamStr .= '<a href="http://www.discuz.net/home.php?mod=space&uid='.$id.'" class="lightlink2 smallfont" target="_blank">'.$name.'</a>';
+		$devTeamStr .= '<a href="https://discuz.dismall.com/home.php?mod=space&uid='.$id.'" class="lightlink2 smallfont" target="_blank">'.$name.'</a>';
 	}
 	$devSkins = array(
 		'294092' => 'Fangming \'Lushnis\' Li',
@@ -516,7 +524,7 @@ function show_forever_thanks() {
 	);
 	$devSkinsStr = '';
 	foreach ($devSkins as $id => $name) {
-		$devSkinsStr .= '<a href="http://www.discuz.net/home.php?mod=space&uid='.$id.'" class="lightlink2 smallfont" target="_blank">'.$name.'</a>';
+		$devSkinsStr .= '<a href="https://discuz.dismall.com/home.php?mod=space&uid='.$id.'" class="lightlink2 smallfont" target="_blank">'.$name.'</a>';
 	}
 	$devThanksStr = '';
 	$devThanks = array(
@@ -541,7 +549,7 @@ function show_forever_thanks() {
 		'7155' => 'Gregry',
 	);
 	foreach ($devThanks as $id => $name) {
-		$devThanksStr .= '<a href="http://www.discuz.net/home.php?mod=space&uid='.$id.'" class="lightlink2 smallfont" target="_blank">'.$name.'</a>';
+		$devThanksStr .= '<a href="https://discuz.dismall.com/home.php?mod=space&uid='.$id.'" class="lightlink2 smallfont" target="_blank">'.$name.'</a>';
 	}
 
 	showboxheader('home_dev', 'fixpadding', 'id="home_dev"');
@@ -549,14 +557,14 @@ function show_forever_thanks() {
 	showboxrow('', array('class="dcol d-1 lineheight"', 'class="dcol lineheight team"'), array($copyRightMessage[2], '<span class="bold">'.$copyRightMessage[3].'</span>'));
 	showboxrow('', array('class="dcol d-1 lineheight"', 'class="dcol lineheight team"'), array(cplang('contributors'), $gitTeamStr));
 	showboxrow('', array('class="dcol d-1 lineheight"', 'class="dcol lineheight team"'), array('', '<a href="https://gitee.com/Discuz/DiscuzX/contributors?ref=master" class="lightlink2" target="_blank">'.cplang('contributors_see').'</a>'));
-	showboxrow('', array('class="dcol d-1 lineheight"', 'class="dcol lineheight team"'), array(cplang('home_dev_manager'), '<a href="http://www.discuz.net/home.php?mod=space&uid=1" class="lightlink2 smallfont" target="_blank">'.cplang('dev_manager').'</a>'));
+	showboxrow('', array('class="dcol d-1 lineheight"', 'class="dcol lineheight team"'), array(cplang('home_dev_manager'), '<a href="https://discuz.dismall.com/home.php?mod=space&uid=1" class="lightlink2 smallfont" target="_blank">'.cplang('dev_manager').'</a>'));
 	showboxrow('', array('class="dcol d-1 lineheight"', 'class="dcol lineheight team"'), array(cplang('home_dev_team'), $devTeamStr));
 	showboxrow('', array('class="dcol d-1 lineheight"', 'class="dcol lineheight team"'), array(cplang('home_dev_skins'), $devSkinsStr));
 	showboxrow('', array('class="dcol d-1 lineheight"', 'class="dcol lineheight team"'), array(cplang('home_dev_thanks'), $devThanksStr));
 	showboxrow('', array('class="dcol d-1 lineheight"', 'class="dcol lineheight team tm"'), array(cplang('home_dev_links'), '
-	<a href="https://gitee.com/Discuz/DiscuzX" class="lightlink2" target="_blank">Discuz! X Git</a>,&nbsp;
+	<a href="https://code.dismall.com/" class="lightlink2" target="_blank">'.cplang('discuz_git').'</a>,&nbsp;
+	<a href="https://www.discuz.vip/" class="lightlink2" target="_blank">'.cplang('discussion_area').'</a>, &nbsp;
 	<a href="https://www.dismall.com/" class="lightlink2" target="_blank">'.cplang('app_discussion').'</a>,&nbsp;
-	<a href="https://www.discuz.net/" class="lightlink2" target="_blank">'.cplang('discussion_area').'</a>, &nbsp;
 	<a href="'.ADMINSCRIPT.'?action=cloudaddons" class="lightlink2" target="_blank">'.cplang('app_center').'</a>, &nbsp;
 <!--jaideejung007-->	<a href="https://discuzthai.com" class="lightlink2" target="_blank">&#xE14;&#xE34;&#xE2A;&#xE04;&#xE31;&#xE2A;&#xE44;&#xE17;&#xE22;!</a>, &nbsp;	
 <!--jaideejung007-->	<a href="https://github.com/jaideejung007/discuzth" class="lightlink2" target="_blank">Discuz! Thai Official Repositories</a>, &nbsp;

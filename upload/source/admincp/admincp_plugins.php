@@ -600,6 +600,8 @@ if(!$operation) {
 
 			if(is_array($checkresult) && isset($checkresult[$addonid])) {
 				list($return, $newver, $sysver) = explode(':', $checkresult[$addonid]);
+			} else {
+				$newver = $sysver = '';
 			}
 
 			cloudaddons_installlog($pluginarray['plugin']['identifier'].'.plugin');
@@ -948,6 +950,8 @@ if(!$operation) {
 			$pluginlist .= '<option value="'.$plugin['pluginid'].'">'.$plugin['name'].'</option>';
 		}
 		$pluginlist .= '</select>';
+		$highlight = getgpc('highlight');
+		$highlight = !empty($highlight) ? dhtmlspecialchars($highlight, ENT_QUOTES) : '';
 		cpmsg('plugins_nonexistence', 'action=plugins&operation=edit'.(!empty($highlight) ? "&highlight=$highlight" : ''), 'form', $pluginlist);
 	} else {
 		$condition = !empty($uid) ? "uid='$uid'" : "username='$username'";

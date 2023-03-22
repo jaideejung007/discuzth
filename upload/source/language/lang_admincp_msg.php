@@ -63,6 +63,7 @@ $lang = array (
   'members_mobile_duplicate' => 'เบอร์มือถือนี้มีการลงทะเบียนแล้ว',
   'members_mobicc_illegal' => 'รูปแบบรหัสประเทศของเบอร์มือถือไม่ถูกต้อง',
   'members_mobile_illegal' => 'รูปแบบเบอร์มือถือไม่ถูกต้อง',
+  'members_edit_protectedmembers' => 'ผู้ใช้งานที่ได้รับการป้องกันจาก UCenter จะไม่สามารถแก้ไขข้อมูลโดยตรงได้',
   'members_edit_succeed' => 'อัปเดตสมาชิกสำเร็จ ',
   'members_profile_edit_succeed' => 'อัปเดตโปรไฟล์สมาชิกสำเร็จ ',
   'members_stat_update_data_succeed' => 'อัปเดตสถิติสำเร็จ ',

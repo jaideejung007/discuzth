@@ -405,6 +405,8 @@ if($operation == 'admin') {
 				$stylelist .= "<option value=\"{$style['styleid']}\">{$style['name']}</option>\n";
 			}
 			$stylelist .= '</select>';
+			$highlight = getgpc('highlight');
+			$highlight = !empty($highlight) ? dhtmlspecialchars($highlight, ENT_QUOTES) : '';
 			cpmsg('styles_nonexistence', 'action=styles&operation=edit'.(!empty($highlight) ? "&highlight=$highlight" : ''), 'form', array(), $stylelist);
 		}
 
@@ -467,7 +469,7 @@ if($operation == 'admin') {
 
 		$adv = !empty($_GET['adv']) ? 1 : 0;
 
-		shownav('style', 'styles_edit');
+		shownav('template', 'styles_edit');
 
 		showsubmenu(cplang('styles_admin').' - '.$style['name'], array(
 			array('admin', 'styles', 0),

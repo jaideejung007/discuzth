@@ -6,7 +6,7 @@
 		<item id="templateid"><![CDATA[1]]></item>
 		<item id="tplname"><![CDATA[ชุดเทมเพลตเริ่มต้น]]></item>
 		<item id="directory"><![CDATA[./template/default]]></item>
-		<item id="copyright"><![CDATA[บริษัท เทนเซ็นต์คลาวด์คอมพิวติ้ง (กรุงปักกิ่ง) จำกัด]]></item>
+		<item id="copyright"><![CDATA[Discuz!]]></item>
 		<item id="style">
 			<item id="smfont"><![CDATA[Tahoma,Helvetica,sans-serif]]></item>
 			<item id="threadtitlefontsize"><![CDATA[14px]]></item>

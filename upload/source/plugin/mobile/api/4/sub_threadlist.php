@@ -13,6 +13,7 @@ if (!defined('IN_MOBILE_API')) {
 
 $_G['wechat']['setting'] = dunserialize($_G['setting']['mobilewechat']);
 
+require_once libfile('function/post');
 $tids = array();
 foreach ($_G['forum_threadlist'] as $k => $thread) {
 	$tids[] = $_G['forum_threadlist'][$k]['tid'] = $thread['icontid'];
@@ -35,6 +36,37 @@ foreach ($_G['forum_threadlist'] as $k => $thread) {
 		$_G['forum_threadlist'][$k]['authorid'] = 0;
 	}
 	$userids[] = $thread['authorid'];
+	$firstpost = C::t('forum_post')->fetch_threadpost_by_tid_invisible($thread['tid']);
+
+	if($thread['readperm'] < $_G['group']['readaccess'] && $firstpost['invisible'] == 0){
+		$firstPostMessage = $firstpost['message'];
+		preg_match_all('/\[attach\](\d+)\[\/attach\]/i', $firstPostMessage, $matches, PREG_SET_ORDER);
+		$_G['forum_threadlist'][$k]['attachmentImageNumber'] = count($matches);
+		$cnt = 0;
+
+		$aidList = array();
+		foreach ($matches as $i => $match){
+			if($cnt > 3){
+				break;
+			}
+			$cnt += 1;
+			$aidList[] = $match[1];
+		}
+		$attachmentImageList = array();
+		$attachments = C::t('forum_attachment')->fetch_all($aidList);
+
+		foreach($attachments as $aid => $attach) {
+			$attachment = C::t('forum_attachment_n')->fetch_attachment($attach["tableid"], $attach["aid"], true);
+			$attachmentImageList[] = $attachment;
+		}
+		$_G['forum_threadlist'][$k]['attachmentImagePreviewList'] = $attachmentImageList;
+		$attach_img_text = lang('forum/misc', 'attach_img');
+		$attach_words = '['.$attach_img_text.']';
+		$firstPostMessage = preg_replace('/\[attach\](\d+)\[\/attach\]/i', $attach_words, $firstPostMessage);
+		$firstPostMessage = preg_replace('/<\/*.*?>|&nbsp;|\r\n|\[attachimg\].*?\[\/attachimg\]|\[quote\].*?\[\/quote\]|\[(?!'.$attach_words.')\/*.*?\]/ms', '', $firstPostMessage);
+		$firstPostMessage = trim(threadmessagecutstr($thread, $firstPostMessage, 500));
+		$_G['forum_threadlist'][$k]['message'] = $firstPostMessage;
+	}
 }
 
 foreach(C::t('common_member')->fetch_all($userids) as $user) {
@@ -75,14 +107,14 @@ if($_G['forum']['icon']) {
 $_G['forum']['threadcount'] = $_G['forum_threadcount'];
 
 $variable = array(
-    'forum' => mobile_core::getvalues($_G['forum'], array('fid', 'fup', 'name', 'threads', 'posts', 'rules', 'autoclose', 'password', 'icon', 'threadcount', 'picstyle', 'description')),
-    'group' => mobile_core::getvalues($_G['group'], array('groupid', 'grouptitle')),
-    'forum_threadlist' => mobile_core::getvalues(array_values(is_array($_G['forum_threadlist']) ? $_G['forum_threadlist'] : array()), array('/^\d+$/'), array('tid', 'author', 'special', 'authorid', 'subject', 'subject', 'dbdateline', 'dateline', 'dblastpost', 'lastpost', 'lastposter', 'attachment', 'replies', 'readperm', 'views', 'digest', 'cover', 'recommend', 'recommend_add', 'reply', 'avatar', 'displayorder', 'coverpath', 'typeid', 'rushreply', 'replycredit', 'price')),
-    'groupiconid' => $groupiconIds,
-    'sublist' => mobile_core::getvalues($GLOBALS['sublist'], array('/^\d+$/'), array('fid', 'name', 'threads', 'todayposts', 'posts', 'icon')),
-    'tpp' => $_G['tpp'],
-    'page' => $GLOBALS['page'],
-    'reward_unit' => $_G['setting']['extcredits'][$_G['setting']['creditstransextra'][2]]['unit'].$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][2]]['title'],
+	'forum' => mobile_core::getvalues($_G['forum'], array('fid', 'fup', 'name', 'threads', 'posts', 'rules', 'autoclose', 'password', 'icon', 'threadcount', 'picstyle', 'description')),
+	'group' => mobile_core::getvalues($_G['group'], array('groupid', 'grouptitle')),
+	'forum_threadlist' => mobile_core::getvalues(array_values(is_array($_G['forum_threadlist']) ? $_G['forum_threadlist'] : array()), array('/^\d+$/'), array('tid', 'author', 'special', 'authorid', 'subject', 'subject', 'dbdateline', 'dateline', 'dblastpost', 'lastpost', 'lastposter', 'attachment', 'replies', 'readperm', 'views', 'digest', 'cover', 'recommend', 'recommend_add', 'reply', 'avatar', 'displayorder', 'coverpath', 'typeid', 'rushreply', 'replycredit', 'price', 'message', 'attachmentImageNumber', 'attachmentImagePreviewList')),
+	'groupiconid' => $groupiconIds,
+	'sublist' => mobile_core::getvalues($GLOBALS['sublist'], array('/^\d+$/'), array('fid', 'name', 'threads', 'todayposts', 'posts', 'icon')),
+	'tpp' => $_G['tpp'],
+	'page' => $GLOBALS['page'],
+	'reward_unit' => $_G['setting']['extcredits'][$_G['setting']['creditstransextra'][2]]['unit'].$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][2]]['title'],
 );
 if (!empty($_G['forum']['threadtypes']) || !empty($_GET['debug'])) {
 	$variable['threadtypes'] = $_G['forum']['threadtypes'];

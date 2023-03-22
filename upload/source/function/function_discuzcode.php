@@ -518,7 +518,7 @@ function parsemedia($params, $url) {
 	$height = defined('IN_MOBILE') ? 'auto' : $height;
 
 	$url = addslashes($url);
-        if(!in_array(strtolower(substr($url, 0, 6)), array('http:/', 'https:', 'ftp://', 'rtsp:/', 'mms://')) && !preg_match('/^static\//', $url) && !preg_match('/^data\//', $url)) {
+	if(!in_array(strtolower(substr($url, 0, 6)), array('http:/', 'https:', 'ftp://', 'rtsp:/', 'mms://')) && !preg_match('/^static\//', $url) && !preg_match('/^data\//', $url)) {
 		return dhtmlspecialchars($url);
 	}
 

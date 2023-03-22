@@ -595,8 +595,7 @@ function transfer_ucinfo(&$post) {
 function createtable($sql, $dbver) {
 	$type = strtoupper(preg_replace("/^\s*CREATE TABLE\s+.+\s+\(.+?\).*(ENGINE|TYPE)\s*=\s*([a-z]+?).*$/isU", "\\2", $sql));
 	$type = in_array($type, array('INNODB', 'MYISAM', 'HEAP', 'MEMORY')) ? $type : 'INNODB';
-	return
-		preg_replace("/^\s*(CREATE TABLE\s+.+\s+\(.+?\)).*$/isU", "\\1", $sql) .
+	return preg_replace("/^\s*(CREATE TABLE\s+.+\s+\(.+?\)).*$/isU", "\\1", $sql) .
 		" ENGINE=$type DEFAULT CHARSET=" . DBCHARSET .
 		(DBCHARSET === 'utf8mb4' ? " COLLATE=utf8mb4_unicode_ci" : "");
 }
@@ -979,6 +978,21 @@ function show_db_install() {
 						add_instfail();
 						return;
 					}
+					request_do_db_data_init();
+				});
+			}
+
+			function request_do_db_data_init() {
+				ajax.get('index.php?<?= http_build_query(array('method' => 'do_db_data_init', 'allinfo' => $allinfo)) ?>', function(data) {
+					if(data.indexOf('Discuz! Database Error') !== -1 || data.indexOf('Discuz! System Error') !== -1 || data.indexOf('Fatal error') !== -1) {
+						var p = document.createElement('p');
+						p.innerText = '<?= lang('failed') ?> ' + data;
+						p.className = 'red';
+						append_notice(p.outerHTML);
+						append_notice('<p class="red"><?= lang('error_quit_msg') ?></p>');
+						add_instfail();
+						return;
+					}
 					request_do_initsys();
 				});
 			}
@@ -1025,7 +1039,7 @@ function show_db_install() {
 						add_instfail();
 						return;
 					}
-					if(data.indexOf('<?= lang('initdbresult_succ') ?>') === -1) {
+					if(data.indexOf('<?= lang('initdbdataresult_succ') ?>') === -1) {
 						setTimeout(request_log, 200);
 					}
 				});
@@ -1037,7 +1051,7 @@ function show_db_install() {
 					document.getElementById('laststep').value = '<?= lang('error_quit_msg') ?>';
 					return;
 				}
-				if(resultDiv.innerHTML.indexOf('<?= lang('initdbresult_succ') ?>') !== -1) {
+				if(resultDiv.innerHTML.indexOf('<?= lang('initdbdataresult_succ') ?>') !== -1) {
 					append_notice("<p><?= lang('initsys') ?> ... </p>");
 					refresh_lastmsg();
 					ajax.get('../misc.php?mod=initsys', function(callback, status) {

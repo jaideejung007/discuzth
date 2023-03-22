@@ -9,6 +9,10 @@ function $(id) {
 	return !id ? null : document.getElementById(id);
 }
 
+function getID(id) {
+	return !id ? null : document.getElementById(id);
+}
+
 function $C(classname, ele, tag) {
 	var returns = [];
 	ele = ele || document;
@@ -819,7 +823,9 @@ function showMenu(v) {
 				if(_all.length) {
 					for(j = 0; j < _all.length; j++) {
 						if((!_all[j]['type'] || _all[j]['type'] != 'hidden') && hasshow(_all[j])) {
-							_all[j].className += ' hidefocus';
+							if(_all[j].className.indexOf('hidefocus') == -1) {
+								_all[j].className += ' hidefocus';
+							}
 							_all[j].focus();
 							focused = true;
 							var cobj = _all[j];
@@ -1358,7 +1364,6 @@ function simulateSelect(selectId, widthvalue) {
 		if(e.keyCode == 40 || e.keyCode == 38) doane(e);
 	};
 	var selectwidth = (selectObj.getAttribute('width', i) ? selectObj.getAttribute('width', i) : widthvalue) + 'px';
-	var tabindex = selectObj.getAttribute('tabindex', i) ? selectObj.getAttribute('tabindex', i) : 1;
 
 	for(var i = 0; i < selectObj.options.length; i++) {
 		var li = document.createElement('li');
@@ -1391,7 +1396,7 @@ function simulateSelect(selectId, widthvalue) {
 	selectObj.options.length = 0;
 	selectObj.options[0]= new Option('', defaultv);
 	selectObj.style.display = 'none';
-	selectObj.outerHTML += '<a href="javascript:;" id="' + selectId + '_ctrl" style="width:' + selectwidth + '" tabindex="' + tabindex + '">' + defaultopt + '</a>';
+	selectObj.outerHTML += '<a href="javascript:;" id="' + selectId + '_ctrl" style="width:' + selectwidth + '">' + defaultopt + '</a>';
 
 	menuObj.id = selectId + '_ctrl_menu';
 	menuObj.className = 'sltm';
