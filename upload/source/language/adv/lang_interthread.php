@@ -17,8 +17,8 @@ $lang = array
 	'interthread_desc' => 'Display the Adv between first and second posts of a thread. In general, it is 960x60 or other size images and Flash.',
 	'interthread_fids' => 'Target Forums',
 	'interthread_fids_comment' => 'Set forums to diplay the Adv',
-	'interthread_groups' => 'Target Groups',
-	'interthread_groups_comment' => 'Set the groups to show advertising. Take effect only when ads included in the scope of &quot;group&quot;.',
+	'interthread_groups' => 'Target Circles',
+	'interthread_groups_comment' => 'Set the Circles to show advertising. Take effect only when ads included in the scope of &quot;Circle&quot;.',
 	'interthread_pnumber' => 'Advertizing at post',
 	'interthread_pnumber_comment' => 'Set the post number: #1 #2 #3... You can hold down the CTRL for multiple choice, default is the first post.',
 );

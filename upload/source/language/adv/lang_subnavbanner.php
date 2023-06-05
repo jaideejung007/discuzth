@@ -18,8 +18,8 @@ $lang = array
 	'subnavbanner_index' => 'Home',
 	'subnavbanner_fids' => 'Target Forums',
 	'subnavbanner_fids_comment' => 'Set forums to diplay the Adv',
-	'subnavbanner_groups' => 'Target Groups',
-	'subnavbanner_groups_comment' => 'Set the groups to show advertising. Take effect only when ads included in the scope of &quot;group&quot;.',
+	'subnavbanner_groups' => 'Target Circles',
+	'subnavbanner_groups_comment' => 'Set the Circles to show advertising. Take effect only when ads included in the scope of &quot;Circle&quot;.',
 	'subnavbanner_category' => 'Portal Category',
 	'subnavbanner_category_comment' => 'Set a portal category for show the SubNav Banner. This take effect only when Ads is assigned to the Portal',
 );

@@ -15,9 +15,9 @@ $lang = array
 (
 	'stat_option' => 'ตัวเลือกสถิติ',
 	'stat_option_posts' => 'จำนวนบทความ',
-	'stat_option_groups' => 'จำนวนคลับ',
+	'stat_option_groups' => 'จำนวนวงใน',
 	'stat_option_members' => 'จำนวนสมาชิก',
-	'stat_option_groupnewposts' => 'โพสต์จากคลับวันนี้',
+	'stat_option_groupnewposts' => 'โพสต์จากวงในวันนี้',
 	'stat_option_bbsnewposts' => 'โพสต์ใหม่จากบอร์ดวันนี้',
 	'stat_option_bbslastposts' => 'โพสต์จากบอร์ดเมื่อวานนี้',
 	'stat_option_onlinemembers' => 'จำนวนสมาชิกออนไลน์ในขณะนี้',
@@ -32,9 +32,9 @@ $lang = array
 	'stat_edit_showtitle_detail' => 'คุณสามารถแก้ไขชื่อที่ใช้แสดงให้สอดคล้องกับสถิติ',
 
 	'stat_posts' => 'โพสต์',
-	'stat_groups' => 'คลับ',
+	'stat_groups' => 'วงใน',
 	'stat_members' => 'สมาชิก',
-	'stat_groupnewposts' => 'โพสต์จากคลับวันนี้',
+	'stat_groupnewposts' => 'โพสต์จากวงในวันนี้',
 	'stat_bbsnewposts' => 'โพสต์วันนี้',
 	'stat_bbslastposts' => 'โพสต์เมื่อวานนี้',
 	'stat_onlinemembers' => 'สมาชิกออนไลน์ปัจจุบัน',

@@ -13,10 +13,10 @@ if(!defined('IN_DISCUZ')) {
 
 $lang = array
 (
-	'groupthread_fids' => 'ID ของคลับ',
-	'groupthread_fids_comment' => 'กำหนด ID ของคลับ หากมีมากกว่าหนึ่ง ID กรุณาใช้เครื่องหมายคอมม่า “,” เพื่อเป็นตัวคั่นหรือแยกแต่ละ ID',
-	'groupthread_gtids' => 'หมวดหมู่ของคลับ',
-	'groupthread_gtids_comment' => 'กำหนดหมวดหมู่ของคลับ',
+	'groupthread_fids' => 'ID ของวงใน',
+	'groupthread_fids_comment' => 'กำหนด ID ของวงใน หากมีมากกว่าหนึ่ง ID กรุณาใช้เครื่องหมายคอมม่า “,” เพื่อเป็นตัวคั่นหรือแยกแต่ละ ID',
+	'groupthread_gtids' => 'หมวดหมู่ของวงใน',
+	'groupthread_gtids_comment' => 'กำหนดหมวดหมู่ของวงใน',
 	'groupthread_uids' => 'UID เจ้าของ',
 	'groupthread_uids_comment' => 'กำหนด  UID เจ้าของ หากมีมากกว่าหนึ่ง UID กรุณาใช้เครื่องหมายคอมม่า “,” เพื่อเป็นตัวคั่นหรือแยกแต่ละ UID',
 	'groupthread_keyword' => 'Keywords',
@@ -103,7 +103,7 @@ $lang = array
 	'groupthread_lastpost_week' => '7 วัน',
 	'groupthread_lastpost_month' => '1 เดือน',
 	'groupthread_orderby_displayorder' => 'จัดเรียงตามค่าเริ่มต้น',
-	'groupthread_gviewperm' => 'สิทธิ์ในการเรียกดู',
+	'groupthread_gviewperm' => 'สิทธิ์ในการเรียกดูวงใน',
 	'groupthread_gviewperm_nolimit' => 'ไม่จำกัด',
 	'groupthread_gviewperm_only_member' => 'เฉพาะสมาชิก',
 	'groupthread_gviewperm_all_member' => 'ทั้งหมด',

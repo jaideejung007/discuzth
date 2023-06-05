@@ -14,12 +14,12 @@ if(!defined('IN_DISCUZ')) {
 $lang = array
 (
 	'text_name' => 'ตารางด้านบนใต้เมนูหลัก',
-	'text_desc' => 'Display the Adv at page of forum or group with table style. In general, it is a text, also you can use small image and Flash.',
+	'text_desc' => 'Display the Adv at page of forum or Circle with table style. In general, it is a text, also you can use small image and Flash.',
 	'text_index' => 'Home',
 	'text_fids' => 'Target Forums',
 	'text_fids_comment' => 'Set forums to diplay the Adv',
-	'text_groups' => 'Target Groups',
-	'text_groups_comment' => 'Set the groups to show advertising. Take effect only when ads included in the scope of &quot;group&quot;.',
+	'text_groups' => 'Target Circles',
+	'text_groups_comment' => 'Set the Circles to show advertising. Take effect only when ads included in the scope of &quot;Circle&quot;.',
 	'text_category' => 'Target Category',
 	'text_category_comment' => 'Set the category to show the Adv',
 );

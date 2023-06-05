@@ -170,20 +170,20 @@
 							</div>
 						<!--{else}-->
 							<!--{if (($_G['forum']['ismoderator'] && $_G['group']['alloweditpost'] && (!in_array($post['adminid'], array(1, 2, 3)) || $_G['adminid'] <= $post['adminid'])) || ($_G['forum']['alloweditpost'] && $_G['uid'] && ($post['authorid'] == $_G['uid'] && $_G['forum_thread']['closed'] == 0) && !(!$alloweditpost_status && $edittimelimit && TIMESTAMP - $post['dbdateline'] > $edittimelimit)))}-->
-								<em class="mgl"><a href="forum.php?mod=post&action=edit&fid={$_G['fid']}&tid={$_G['tid']}&pid={$post['pid']}{if !empty($_GET['modthreadkey'])}&modthreadkey={$_GET['modthreadkey']}{/if}&page={$page}" class="popup"><!--{if $_G['forum_thread']['special'] == 2 && !$post['message']}-->{lang post_add_aboutcounter}<!--{else}-->{lang edit}<!--{/if}--></a></em>
+								<em class="mgl"><a href="forum.php?mod=post&action=edit&fid={$_G['fid']}&tid={$_G['tid']}&pid={$post['pid']}{if !empty($_GET['modthreadkey'])}&modthreadkey={$_GET['modthreadkey']}{/if}&page={$page}"><!--{if $_G['forum_thread']['special'] == 2 && !$post['message']}-->{lang post_add_aboutcounter}<!--{else}-->{lang edit}<!--{/if}--></a></em>
 							<!--{elseif $_G['uid'] && $post['authorid'] == $_G['uid'] && $_G['setting']['postappend']}-->
-								<em class="mgl"><a href="forum.php?mod=misc&action=postappend&tid={$post['tid']}&pid={$post['pid']}&extra={$_GET['extra']}&page={$page}" class="popup">{lang postappend}</a></em>
+								<em class="mgl"><a href="forum.php?mod=misc&action=postappend&tid={$post['tid']}&pid={$post['pid']}&extra={$_GET['extra']}&page={$page}">{lang postappend}</a></em>
 							<!--{/if}-->
 						<!--{/if}-->
 					$post['dateline']
 				</li>
 				<!--{if !$post['first'] && $_G['forum_thread']['special'] == 5}-->
 				<li class="mtime">
-					<!--{if $post[stand] == 1}--><em class="f_g"><a class="f_g" href="forum.php?mod=viewthread&tid=$_G['tid']&extra=$_GET['extra']&filter=debate&stand=1">{lang debate_square}</a></em>
-					<!--{elseif $post[stand] == 2}--><em class="f_b"><a class="f_b" href="forum.php?mod=viewthread&tid=$_G['tid']&extra=$_GET['extra']&filter=debate&stand=2">{lang debate_opponent}</a></em>
-					<!--{else}--><a href="forum.php?mod=viewthread&tid=$_G[tid]&extra=$_GET[extra]&filter=debate&stand=0">{lang debate_neutral}</a><!--{/if}-->
-					<!--{if $post[stand]}-->
-						<a class="dialog" href="forum.php?mod=misc&action=debatevote&tid=$_G['tid']&pid=$post['pid']" id="voterdebate_$post['pid']">{lang debate_support} $post[voters]</a>
+					<!--{if $post['stand'] == 1}--><em class="f_g"><a class="f_g" href="forum.php?mod=viewthread&tid=$_G['tid']&extra=$_GET['extra']&filter=debate&stand=1">{lang debate_square}</a></em>
+					<!--{elseif $post['stand'] == 2}--><em class="f_b"><a class="f_b" href="forum.php?mod=viewthread&tid=$_G['tid']&extra=$_GET['extra']&filter=debate&stand=2">{lang debate_opponent}</a></em>
+					<!--{else}--><a href="forum.php?mod=viewthread&tid=$_G['tid']&extra=$_GET['extra']&filter=debate&stand=0">{lang debate_neutral}</a><!--{/if}-->
+					<!--{if $post['stand']}-->
+						<a class="dialog" href="forum.php?mod=misc&action=debatevote&tid=$_G['tid']&pid=$post['pid']" id="voterdebate_$post['pid']">{lang debate_support} $post['voters']</a>
 					<!--{/if}-->
 				</li>
 				<!--{/if}-->
@@ -217,11 +217,11 @@
 							<!--{if $threadsortshow['optionlist'] == 'expire'}-->
 								{lang has_expired}
 							<!--{else}-->
-								<div class="box_ex2 viewsort">
+								<div class="box_ex2 viewsort b_b mb10">
 									<h4>$_G['forum']['threadsorts']['types'][$_G['forum_thread']['sortid']]</h4>
 								<!--{loop $threadsortshow['optionlist'] $option}-->
 									<!--{if $option['type'] != 'info'}-->
-										$option['title']: <!--{if $option['value']}-->$option['value'] $option['unit']<!--{else}--><span class="grey">--</span><!--{/if}--><br />
+										$option['title']: <!--{if $option['value']}-->$option['value'] $option['unit']<!--{else}--><span class="fc-s">--</span><!--{/if}--><br />
 									<!--{/if}-->
 								<!--{/loop}-->
 								</div>
@@ -428,16 +428,16 @@ $multipage
 <div class="foot foot_reply flex-box cl">
 	<a href="forum.php?mod=post&action=reply&fid={$_G['fid']}&tid={$_G['tid']}&reppost={$_G['forum_firstpid']}&page={$page}" class="flex"><i class="dm-chat-s"></i>{lang reply}</a>
 	<!--{if helper_access::check_module('favorite')}-->
-		<a href="home.php?mod=spacecp&ac=favorite&type=thread&id={$_G['tid']}" class="dialog flex mx"><i class="dm-star"></i><!--{if $_G['forum_thread']['favtimes']}-->{$_G['forum_thread']['favtimes']}<!--{/if}-->{lang favorite}</a>
+		<a href="home.php?mod=spacecp&ac=favorite&type=thread&id={$_G['tid']}" class="dialog flex mx"><i class="dm-star"></i><!--{if $_G['forum_thread']['favtimes']}-->{$_G['forum_thread']['favtimes']} <!--{/if}-->{lang favorite}</a><!--jaideejung007-->
 	<!--{/if}-->
 	<!--{if helper_access::check_module('follow')}-->
-		<a href="home.php?mod=spacecp&ac=follow&op=relay&tid={$_G['tid']}&from=forum" class="dialog flex mx"><i class="fico-launch"></i><!--{if $_G['forum_thread']['relay']}-->{$_G['forum_thread']['relay']}<!--{/if}-->{lang thread_realy}</a>
+		<a href="home.php?mod=spacecp&ac=follow&op=relay&tid={$_G['tid']}&from=forum" class="dialog flex mx"><i class="fico-launch"></i><!--{if $_G['forum_thread']['relay']}-->{$_G['forum_thread']['relay']} <!--{/if}-->{lang thread_realy}</a><!--jaideejung007-->
 	<!--{/if}-->
 	<!--{if helper_access::check_module('share')}-->
-		<a href="home.php?mod=spacecp&ac=share&type=thread&id={$_G['tid']}" class="dialog flex mx"><i class="dm-star"></i><!--{if $_G['forum_thread']['sharetimes']}-->{$_G['forum_thread']['sharetimes']}<!--{/if}-->{lang thread_share}</a>
+		<a href="home.php?mod=spacecp&ac=share&type=thread&id={$_G['tid']}" class="dialog flex mx"><i class="dm-star"></i><!--{if $_G['forum_thread']['sharetimes']}-->{$_G['forum_thread']['sharetimes']} <!--{/if}-->{lang thread_share}</a><!--jaideejung007-->
 	<!--{/if}-->
 	<!--{if !$_G['forum']['disablecollect'] && helper_access::check_module('collection')}-->
-		<a href="forum.php?mod=collection&action=edit&op=addthread&tid={$_G['tid']}" class="dialog flex mx"><i class="fico-collection"></i><!--{if $post['releatcollectionnum']}-->{$post['releatcollectionnum']}<!--{/if}-->{lang collection}</a>
+		<a href="forum.php?mod=collection&action=edit&op=addthread&tid={$_G['tid']}" class="dialog flex mx"><i class="fico-collection"></i><!--{if $post['releatcollectionnum']}-->{$post['releatcollectionnum']} <!--{/if}-->{lang collection}</a><!--jaideejung007-->
 	<!--{/if}-->
 </div>
 <div class="foot_height_view"></div>

@@ -664,6 +664,7 @@ function show_header() {
 </script>
 <meta content="Comsenz Inc." name="Copyright" />
 </head>
+<body>
 <div class="container{$nostep}">
 	<div class="header">
 		<h1>$titlehtml</h1>
@@ -695,9 +696,6 @@ EOT;
 function showjsmessage($message) {
 	if(VIEW_OFF) return;
 	append_to_install_log_file($message);
-	echo ' ';
-	flush();
-	ob_flush();
 }
 
 function random($length, $numeric = 0) {
@@ -1478,7 +1476,7 @@ function show_setting($setname, $varname = '', $value = '', $type = 'text|passwo
 		if(strpos($type, 'oldbtn') !== FALSE) {
 			echo "<input type=\"button\" name=\"oldbtn\" value=\"".lang('old_step')."\" class=\"btn oldbtn\" onclick=\"history.back();\">\n";
 		}
-		$value = empty($value) ? 'next_step' : $value;
+		$value = empty($value) ? 'new_step' : $value;
 		echo "<input type=\"submit\" name=\"$varname\" value=\"".lang($value)."\" class=\"btn\">\n";
 	} elseif($type == 'checkbox') {
 		if(!is_array($varname) && !is_array($value)) {

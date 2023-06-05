@@ -62,10 +62,10 @@ $lang = array(
   'ranklist_title_forum_post_30' => ' อันดับโพสต์ในช่วง 30 วันที่ผ่านมา',
   'ranklist_title_forum_post_24' => 'อันดับโพสต์ในช่วง 24 ชั่วโมงที่ผ่านมา',
 
-  'ranklist_title_group_credit' => 'อันดับคลับที่มีเครดิตเยอะที่สุด',
-  'ranklist_title_group_member' => 'อันดับคลับที่มีสมาชิกเยอะที่สุด',
-  'ranklist_title_group_thread' => 'อันดับคลับที่มีกระทู้เยอะที่สุด',
-  'ranklist_title_group_post' => 'อันดับคลับที่มีการตอบกลับเยอะที่สุด',
+  'ranklist_title_group_credit' => 'อันดับวงในที่มีเครดิตเยอะที่สุด',
+  'ranklist_title_group_member' => 'อันดับวงในที่มีสมาชิกเยอะที่สุด',
+  'ranklist_title_group_thread' => 'อันดับวงในที่มีกระทู้เยอะที่สุด',
+  'ranklist_title_group_post' => 'อันดับวงในที่มีการตอบกลับเยอะที่สุด',
   'ranklist_title_group_post_30' => 'อันดับโพสต์ในช่วง 30 วันที่ผ่านมา',
   'ranklist_title_group_post_24' => 'อันดับโพสต์ในช่วง 24 ชั่วโมงที่ผ่านมา',
 

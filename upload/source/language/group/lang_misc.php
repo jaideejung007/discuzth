@@ -14,10 +14,10 @@ if(!defined('IN_DISCUZ')) {
 $lang = array
 (
 	'group_normal_member' => 'สมาชิกทั่วไป',
-	'group_goaway' => 'ไล่ออกจากคลับ',
+	'group_goaway' => 'ลบออกจากวงใน',
 	'group_demise_message_title' => '{$_G[\'setting\'][\'navs\'][3][\'navname\']}{forum}ของคุณ ถูกโอนย้ายเรียบร้อย',
 	'group_demise_message_body' => '{$_G[\'setting\'][\'navs\'][3][\'navname\']}{forum}ของฉัน ถูกโอนย้ายเรียบร้อย [url={siteurl}forum.php?mod=group&fid={fid}]คลิกที่นี่เพื่อดู{$_G[\'setting\'][\'navs\'][3][\'navname\']}[/url]',
-	'group_join' => 'เข้าร่วมคลับ{groupname}',
+	'group_join' => 'เข้าร่วมวงใน{groupname}',
 );
 
 ?>

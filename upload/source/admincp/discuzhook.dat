@@ -356,9 +356,11 @@ template/default/touch/forum/forumdisplay_subforum.htm *<!--{hook/forumdisplay_s
 template/default/touch/forum/post.htm *<!--{hook/post_top_mobile}-->
 template/default/touch/forum/post.htm *<!--{hook/post_middle_mobile}-->
 template/default/touch/forum/post.htm *<!--{hook/post_bottom_mobile}-->
+template/default/touch/forum/post.htm *<!--{hook/post_btn_extra_mobile}-->
 template/default/touch/forum/post_activity.htm *<!--{hook/post_activity_extra}-->
 template/default/touch/forum/post_debate.htm *<!--{hook/post_debate_extra}-->
-template/default/touch/forum/post_editor_attribute.htm *<!--{hook/post_attribute_extra_body}-->
+template/default/touch/forum/post_editor_attribute.htm *<!--{hook/post_attribute_extra_mobile}-->
+template/default/touch/forum/post_editor_attribute.htm *<!--{hook/post_attribute_extra_body_mobile}-->
 template/default/touch/forum/post_poll.htm *<!--{hook/post_poll_extra}-->
 template/default/touch/forum/post_reward.htm *<!--{hook/post_reward_extra}-->
 template/default/touch/forum/post_trade.htm *<!--{hook/post_trade_extra}-->
@@ -402,6 +404,8 @@ template/default/touch/home/spacecp_usergroup.htm *<!--{hook/spacecp_usergroup_t
 template/default/touch/home/spacecp_usergroup.htm *<!--{hook/spacecp_usergroup_bottom}-->
 template/default/touch/home/spacecp_usergroup.htm *<!--{hook/spacecp_usergroup_top}-->
 template/default/touch/home/spacecp_usergroup.htm *<!--{hook/spacecp_usergroup_bottom}-->
+template/default/touch/home/space_comment_li.htm *<!--{hook/global_space_comment_op_mobile $k}-->
+template/default/touch/home/space_comment_li.htm *<!--{hook/global_comment_bottom_mobile}-->
 template/default/touch/home/space_favorite.htm *<!--{hook/space_favorite_nav_extra_mobile}-->
 template/default/touch/home/space_profile.htm *<!--{hook/space_profile_top_mobile}-->
 template/default/touch/home/space_profile.htm *<!--{hook/space_profile_nav_extra_mobile}-->
@@ -414,7 +418,11 @@ template/default/touch/member/login.htm *<!--{hook/logging_bottom_mobile}-->
 template/default/touch/member/register.htm *<!--{hook/register_top_mobile}-->
 template/default/touch/member/register.htm *<!--{hook/register_input_mobile}-->
 template/default/touch/member/register.htm *<!--{hook/register_bottom_mobile}-->
+template/default/touch/portal/index.htm *<!--{hook/portal_index_top_mobile}-->
+template/default/touch/portal/index.htm *<!--{hook/portal_index_middle_mobile}-->
+template/default/touch/portal/index.htm *<!--{hook/portal_index_bottom_mobile}-->
 template/default/touch/portal/view.htm *<!--{hook/view_article_top_mobile}-->
+template/default/touch/portal/view.htm *<!--{hook/view_article_subtitle_mobile}-->
 template/default/touch/portal/view.htm *<!--{hook/view_article_summary_mobile}-->
 template/default/touch/portal/view.htm *<!--{hook/view_article_content_mobile}-->
 template/default/touch/ranklist/side_top.htm *<!--{hook/ranklist_nav_extra}-->

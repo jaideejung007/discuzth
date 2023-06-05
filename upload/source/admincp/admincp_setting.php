@@ -2426,6 +2426,8 @@ EOT;
 
 		showtableheader('setting_mobile_portal', '', 'id="portal"'.($_GET['anchor'] != 'portal' ? ' style="display: none"' : ''));
 		showsetting('setting_mobile_portal_catnav', 'settingnew[mobile][portal][catnav]', $setting['mobile']['portal']['catnav'], 'radio');
+		showsetting('setting_mobile_portal_wzpicture', 'settingnew[mobile][portal][wzpicture]', $setting['mobile']['portal']['wzpicture'], 'radio');
+		showsetting('setting_mobile_portal_wzlist', 'settingnew[mobile][portal][wzlist]', $setting['mobile']['portal']['wzlist'], 'radio');
 		showsubmit('settingsubmit');
 		showformfooter();
 		showtablefooter();
@@ -2445,6 +2447,7 @@ EOT;
 				array(1, $lang['pack']),
 				array(0, $lang['unwind'])
 			)), $setting['mobile']['forum']['forumview'] ? $setting['mobile']['forum']['forumview'] : 0, 'mradio');
+		showsetting('setting_mobile_forum_iconautowidth', 'settingnew[mobile][forum][iconautowidth]', $setting['mobile']['forum']['iconautowidth'], 'radio');
 		showsubmit('settingsubmit');
 		showformfooter();
 		showtablefooter();
@@ -2831,7 +2834,7 @@ EOT;
 			}
 		}
 
-		for($si = 0; $si < 12; $si++) {
+		for($si = 0; $si < 13; $si++) {
 			$creditstransi = $si > 0 && !$settingnew['creditstrans'][$si] ? $settingnew['creditstrans'][0] : $settingnew['creditstrans'][$si];
 			if($creditstransi && empty($settingnew['extcredits'][$creditstransi]['available']) && $settingnew['creditstrans'][$si] != -1) {
 				cpmsg('setting_creditstrans_invalid', '', 'error');
@@ -3325,6 +3328,8 @@ EOT;
 		$settingnew['mobile_arr']['wml'] = 0;
 
 		$settingnew['mobile_arr']['portal']['catnav'] = intval($settingnew['mobile']['portal']['catnav']);
+		$settingnew['mobile_arr']['portal']['wzpicture'] = intval($settingnew['mobile']['portal']['wzpicture']);
+		$settingnew['mobile_arr']['portal']['wzlist'] = intval($settingnew['mobile']['portal']['wzlist']);
 
 		$settingnew['mobile_arr']['forum']['index'] = intval($settingnew['mobile']['forum']['index']);
 		$settingnew['mobile_arr']['forum']['statshow'] = intval($settingnew['mobile']['forum']['statshow']);
@@ -3332,6 +3337,7 @@ EOT;
 		$settingnew['mobile_arr']['forum']['topicperpage'] = intval($settingnew['mobile']['forum']['topicperpage']) > 0 ? intval($settingnew['mobile']['forum']['topicperpage']) : 1 ;
 		$settingnew['mobile_arr']['forum']['postperpage'] = intval($settingnew['mobile']['forum']['postperpage']) > 0 ? intval($settingnew['mobile']['forum']['postperpage']) : 1 ;
 		$settingnew['mobile_arr']['forum']['forumview'] = intval($settingnew['mobile']['forum']['forumview']);
+		$settingnew['mobile_arr']['forum']['iconautowidth'] = intval($settingnew['mobile']['forum']['iconautowidth']);
 
 		$settingnew['mobile'] = $settingnew['mobile_arr'];
 		unset($settingnew['mobile_arr']);

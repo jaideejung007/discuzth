@@ -398,7 +398,7 @@ EOF;
 		$urladd = '';
 		if(!empty($_GET['username'])) {
 			$uid = C::t('common_member')->fetch_uid_by_username($_GET['username']);
-			$searchmember = $uid ? C::t('common_member_status')->fetch($uid) : '';
+			$searchmember = $uid ? C::t('common_member_status')->fetch($uid) : array();
 			$searchmember['username'] = $_GET['username'];
 			$urladd .= '&username='.$_GET['username'];
 		} elseif(!empty($_GET['uid'])) {
@@ -2491,7 +2491,6 @@ EOF;
 				}
 			}
 
-			updatecache('ipbanned');
 			cpmsg('members_ipban_succeed', 'action=members&operation=ipban', 'succeed');
 
 		}
@@ -2585,7 +2584,6 @@ EOF;
 				C::t('common_banned')->insert($data, false, true);
 			}
 
-			updatecache('ipbanned');
 			cpmsg('members_ipban_succeed', 'action=members&operation=ipban&ipact=input', 'succeed');
 		}
 	} elseif($_GET['ipact'] == 'output') {
@@ -2834,7 +2832,7 @@ EOF;
 			$tdstyle = array('class="td22"', 'class="td28" width="100"', 'class="td28" width="100"', 'class="td28" width="100"', 'class="td28" width="100"', 'class="td28"', 'class="td28"');
 			showsubtitle(array('members_profile_edit_name', 'members_profile_edit_display_order', 'members_profile_edit_available', 'members_profile_edit_profile_view', 'members_profile_edit_card_view', 'members_profile_edit_reg_view', ''), 'header tbm', $tdstyle);
 			showtablefooter();
-			showtableheader('members_profile', 'nobottom', 'id="porfiletable"');
+			showtableheader('members_profile', '', 'id="porfiletable"');
 			showsubtitle(array('members_profile_edit_name', 'members_profile_edit_display_order', 'members_profile_edit_available', 'members_profile_edit_profile_view', 'members_profile_edit_card_view', 'members_profile_edit_reg_view', ''), 'header', $tdstyle);
 			foreach($list as $fieldid => $value) {
 				$value['available'] = '<input type="checkbox" class="checkbox" name="available['.$fieldid.']" '.($value['available'] ? 'checked="checked" ' : '').'value="1">';

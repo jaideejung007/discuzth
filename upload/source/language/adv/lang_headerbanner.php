@@ -18,8 +18,8 @@ $lang = array
 	'headerbanner_index' => 'Home',
 	'headerbanner_fids' => 'Target Forums',
 	'headerbanner_fids_comment' => 'Set forums to diplay the Adv',
-	'headerbanner_groups' => 'Target Groups',
-	'headerbanner_groups_comment' => 'Set the groups to show advertising. Take effect only when ads included in the scope of &quot;group&quot;.',
+	'headerbanner_groups' => 'Target Circles',
+	'headerbanner_groups_comment' => 'Set the Circles to show advertising. Take effect only when ads included in the scope of &quot;Circle&quot;.',
 	'headerbanner_category' => 'Portal Category',
 	'headerbanner_category_comment' => 'Set a portal category for show the Header Banner. This take effect only when Ads is assigned to the Portal',
 );

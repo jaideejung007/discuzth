@@ -153,6 +153,10 @@ class discuz_error
 							$fun .= (defined('DISCUZ_DEBUG') && DISCUZ_DEBUG) ? $arg : '%d';
 						} elseif(is_float($arg)) {
 							$fun .= (defined('DISCUZ_DEBUG') && DISCUZ_DEBUG) ? $arg : '%f';
+						} elseif(is_resource($arg)) {
+							$fun .= (defined('DISCUZ_DEBUG') && DISCUZ_DEBUG) ? 'Resource' : '%f';
+						} elseif(is_object($arg)) {
+							$fun .= (defined('DISCUZ_DEBUG') && DISCUZ_DEBUG) ? 'Object' : '%f';
 						} else {
 							$arg = (string)$arg;
 							$fun .= (defined('DISCUZ_DEBUG') && DISCUZ_DEBUG) ? '\''.dhtmlspecialchars(substr(self::clear($arg), 0, 10)).(strlen($arg) > 10 ? ' ...' : '').'\'' : '%s';
@@ -265,7 +269,7 @@ class discuz_error
 <h1>Discuz! $title Error</h1>
 EOT;
 
-		echo '<p>Time: ' . dgmdate(time(), 'Y-m-d H:i:s') .' IP: ' . getglobal('clientip') . ' BackTraceID: ' . $backtraceid . '</p>';
+		echo '<p>Time: ' . date('Y-m-d H:i:s O') .' IP: ' . getglobal('clientip') . ' BackTraceID: ' . $backtraceid . '</p>';
 
 		if(!empty($errormsg) && (!isset($_G['config']['security']['error']['showerror']) || !empty($_G['config']['security']['error']['showerror']))) {
 			echo '<div class="info">'.$errormsg.'</div>';

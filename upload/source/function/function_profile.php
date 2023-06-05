@@ -79,17 +79,17 @@ function profile_setting($fieldid, $space=array(), $showstatus=false, $ignoreunc
 			$selectstr = $i == $space['birthday']?' selected':'';
 			$birthdayhtml .= "<option value=\"$i\"$selectstr>$i</option>";
 		}
-		$html = '<select name="birthyear" id="birthyear" class="ps" onchange="showbirthday();">'
+		$html = '<select name="birthyear" id="birthyear" class="ps'.(defined('IN_MOBILE') ? ' sort_sel' : '').'" onchange="showbirthday();">'
 				.'<option value="">'.lang('space', 'year').'</option>'
 				.$birthyeayhtml
 				.'</select>'
 				.'&nbsp;&nbsp;'
-				.'<select name="birthmonth" id="birthmonth" class="ps" onchange="showbirthday();">'
+				.'<select name="birthmonth" id="birthmonth" class="ps'.(defined('IN_MOBILE') ? ' sort_sel' : '').'" onchange="showbirthday();">'
 				.'<option value="">'.lang('space', 'month').'</option>'
 				.$birthmonthhtml
 				.'</select>'
 				.'&nbsp;&nbsp;'
-				.'<select name="birthday" id="birthday" class="ps">'
+				.'<select name="birthday" id="birthday" class="ps'.(defined('IN_MOBILE') ? ' sort_sel' : '').'">'
 				.'<option value="">'.lang('space', 'day').'</option>'
 				.$birthdayhtml
 				.'</select>';
@@ -99,7 +99,7 @@ function profile_setting($fieldid, $space=array(), $showstatus=false, $ignoreunc
 			return '<span>'.lang('space', 'gender_'.intval($space[$fieldid])).'</span>';
 		}
 		$selected = array($space[$fieldid]=>' selected="selected"');
-		$html = '<select name="gender" id="gender" class="ps">';
+		$html = '<select name="gender" id="gender" class="ps'.(defined('IN_MOBILE') ? ' sort_sel' : '').'">';
 		if($field['unchangeable']) {
 			$html .= '<option value="">'.lang('space', 'gender').'</option>';
 		} else {
@@ -137,7 +137,7 @@ function profile_setting($fieldid, $space=array(), $showstatus=false, $ignoreunc
 			$html = '<p id="residedistrictbox">'.showdistrict($values, $elems, 'residedistrictbox', 1, 'reside').'</p>';
 		}
 	} elseif($fieldid=='qq') {
-		$html = "<input type=\"text\" name=\"$fieldid\" id=\"$fieldid\" class=\"px\" value=\"$space[$fieldid]\" /><p><a href=\"\" class=\"xi2\" onclick=\"this.href='//wp.qq.com/set.html?from=discuz&uin='+$('$fieldid').value\" target=\"_blank\">".lang('spacecp', 'qq_set_status')."</a></p>";
+		$html = "<input type=\"text\" name=\"$fieldid\" id=\"$fieldid\" class=\"px\" value=\"$space[$fieldid]\" placeholder=\"\" /><p><a href=\"\" class=\"xi2\" onclick=\"this.href='//wp.qq.com/set.html?from=discuz&uin='+$('$fieldid').value\" target=\"_blank\">".lang('spacecp', 'qq_set_status')."</a></p>";
 	} else {
 		if($field['unchangeable'] && $space[$fieldid]!='') {
 			if($field['formtype']=='file') {
@@ -186,7 +186,7 @@ function profile_setting($fieldid, $space=array(), $showstatus=false, $ignoreunc
 				$html .= "&nbsp;<label><input type=\"checkbox\" class=\"checkbox\" name=\"deletefile[$fieldid]\" id=\"$fieldid\" value=\"yes\" />".lang('spacecp', 'delete')."</label><br /><a href=\"$url\" target=\"_blank\"><img src=\"$url\" width=\"200\" class=\"mtm\" /></a>";
 			}
 		} else {
-			$html = "<input type=\"text\" name=\"$fieldid\" id=\"$fieldid\" class=\"px\" value=\"$space[$fieldid]\" />";
+			$html = "<input type=\"text\" name=\"$fieldid\" id=\"$fieldid\" class=\"px\" value=\"$space[$fieldid]\" placeholder=\"".$field['title']."\" />";
 		}
 	}
 	$html .= !$ignoreshowerror ? "<div class=\"rq mtn\" id=\"showerror_$fieldid\"></div>" : '';
@@ -443,7 +443,7 @@ function countprofileprogress($uid = 0) {
 				$complete++;
 			}
 		}
-		$progress = floor($complete / count($fields) * 100);
+		$progress = empty($fields) ? 0 : floor($complete / count($fields) * 100);
 		C::t('common_member_status')->update($uid, array('profileprogress' => $progress > 100 ? 100 : $progress), 'UNBUFFERED');
 		return $progress;
 	}
@@ -467,5 +467,9 @@ function get_zodiac($birthyear) {
 	$birthyear = intval($birthyear);
 	$idx = (($birthyear - 1900) % 12) + 1;
 	return $idx > 0 && $idx <= 12 ? lang('space', 'zodiac_'. $idx) : '';
+}
+
+function isprofileimage($file) {
+	return is_file(getglobal('setting/attachdir').'./profile/'.$file) && strpos(realpath(getglobal('setting/attachdir').'./profile/'.$file), realpath(getglobal('setting/attachdir').'./profile/').DIRECTORY_SEPARATOR) === 0 && in_array(fileext($file), array('jpg', 'jpeg', 'gif', 'png', 'bmp', 'webp'));
 }
 ?>

@@ -305,7 +305,7 @@ function build_cache_setting() {
 	$data['creditstrans'] = $creditstranssi[0];
 	unset($creditstranssi[0]);
 	$data['creditstransextra'] = $creditstranssi;
-	for($i = 1;$i < 11;$i++) {
+	for($i = 1; $i < 13; $i++) {
 		$data['creditstransextra'][$i] = $data['creditstrans'] ? (!$data['creditstransextra'][$i] ? $data['creditstrans'] : $data['creditstransextra'][$i]) : 0;
 	}
 	$data['exchangestatus'] = $allowexchangein && $allowexchangeout;
@@ -340,7 +340,7 @@ function build_cache_setting() {
 
 	list($data['plugins'], $data['pluginlinks'], $data['hookscript'], $data['hookscriptmobile'], $data['threadplugins'], $data['specialicon']) = get_cachedata_setting_plugin();
 
-	if(empty($data['defaultindex'])) $data['defaultindex'] = array();
+	if(empty($data['defaultindex'])) $data['defaultindex'] = '';
 	list($data['navs'], $data['subnavs'], $data['menunavs'], $data['navmns'], $data['navmn'], $data['navdms'], $data['navlogos']) = get_cachedata_mainnav();
 
 	$data['footernavs'] = get_cachedata_footernav();
@@ -790,7 +790,7 @@ function get_cachedata_mainnav() {
 				continue;
 			}
 		}
-		if($nav['identifier'] == 8 && $nav['type'] == 0 && !$_G['setting']['ranklist']['status']) {
+		if($nav['identifier'] == 8 && $nav['type'] == 0 && !helper_access::check_module('ranklist')) {
 			$nav['available'] = 0;
 		}
 		$nav['style'] = parsehighlight($nav['highlight']);

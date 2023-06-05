@@ -134,7 +134,7 @@ var rowtypedata = [
 
 				foreach($forums as $key => $forumname) {
 
-					if(empty($forumname) || strlen($forumname) > 50) continue;
+					if(empty($forumname) || mb_strlen($forumname, 'UTF-8') > 150) continue; /*jaideejung007*/
 
 					$forum = $forumfields = array();
 					$inheritedid = !empty($_GET['inherited'][$fup]) ? $fup : (!empty($_GET['newinherited'][$fup][$key]) ? $_GET['newinherited'][$fup][$key] : '');
@@ -1312,7 +1312,7 @@ EOT;
 		}
 		$forum = $mforum[$k];
 
-		if(strlen($_GET['namenew']) > 150) { /*jaideejung007*/
+		if(mb_strlen($_GET['namenew'], 'UTF-8') > 150) { /*jaideejung007*/
 			cpmsg('forums_name_toolong', '', 'error');
 		}
 

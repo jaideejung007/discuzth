@@ -97,7 +97,7 @@ function addpolloption() {
 		curoptions++;
 		curnumber++;
 	} else {
-		popup.open('ขณะนี้คุณได้โหวตถึงจำนวนสูงสุดถึง' + maxoptions +' แล้ว', 'alert');
+		popup.open('{lang post_poll_exceed}' + maxoptions, 'alert');
 	}
 }
 function delpolloption(obj) {

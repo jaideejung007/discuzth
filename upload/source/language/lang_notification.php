@@ -28,7 +28,7 @@ $lang = array
 	'type_system' => 'ระบบ',
 	'type_thread' => 'กระทู้',
 	'type_task' => 'ภารกิจ',
-	'type_group' => 'คลับ',
+	'type_group' => 'วงใน',
 
 	'mail_to_user' => 'ข้อความใหม่',
 	'showcredit' => '{actor} เสนอ {credit} เครดิต เพื่อจัดอันดับให้กับคุณ สนับสนุนการจัดอันดับได้ที่ <a href="misc.php?mod=ranklist&type=member" target="_blank">รายการจัดอันดับ</a>',
@@ -56,10 +56,10 @@ $lang = array
 	'show_out' => '{actor} เยี่ยมชมโปรไฟล์ของคุณ และได้รับเครดิตสุดท้ายไปแล้ว',
 	'puse_article' => 'ขอแสดงความยินดี กระทู้<a href="{url}" target="_blank">{subject}</a>ของคุณถูกนำไปเป็นบทความ <a href="{newurl}" target="_blank">คลิกเพื่อดู</a>',
 
-	'group_member_join' => '{actor} ได้เข้าร่วมคลับ <a href="forum.php?mod=group&fid={fid}" target="_blank">{groupname}</a> ของคุณ กรุณาไปที่<a href="{url}" target="_blank">การตั้งค่า</a>คลับ เพื่อตรวจสอบ',
-	'group_member_invite' => '{actor} เชิญคุณเข้าร่วมคลับ <a href="forum.php?mod=group&fid={fid}" target="_blank">{groupname}</a> <a href="{url}" target="_blank">คลิกที่นี่เพื่อเข้าร่วม</a>',
-	'group_member_check' => 'คุณได้ผ่านการตรวจสอบและสามารถเข้าร่วมคลับ <a href="{url}" target="_blank">{groupname}</a> ได้แล้ว กรุณา <a href="{url}" target="_blank">คลิกเพื่อเข้าชม</a>',
-	'group_member_check_failed' => 'คุณไม่ผ่านการตรวจสอบไม่สามารถเข้าร่วมคลับ <a href="{url}" target="_blank">{groupname}</a>',
+	'group_member_join' => '{actor} ได้เข้าร่วมวงใน <a href="forum.php?mod=group&fid={fid}" target="_blank">{groupname}</a> ของคุณ กรุณาไปที่<a href="{url}" target="_blank">การตั้งค่า</a>วงใน เพื่อตรวจสอบ',
+	'group_member_invite' => '{actor} เชิญคุณเข้าร่วมวงใน <a href="forum.php?mod=group&fid={fid}" target="_blank">{groupname}</a> <a href="{url}" target="_blank">คลิกที่นี่เพื่อเข้าร่วม</a>',
+	'group_member_check' => 'คุณได้ผ่านการตรวจสอบและสามารถเข้าร่วมวงใน <a href="{url}" target="_blank">{groupname}</a> ได้แล้ว กรุณา <a href="{url}" target="_blank">คลิกเพื่อเข้าชม</a>',
+	'group_member_check_failed' => 'คุณไม่ผ่านการตรวจสอบไม่สามารถเข้าร่วมวงใน <a href="{url}" target="_blank">{groupname}</a>',
 	'group_mod_check' => 'สร้างกลุ่มของคุณ <a href="{url}" target="_blank">{groupname}</a> อนุมัติแล้ว กรุณา<a href="{url}" target="_blank">คลิกที่นี่เพื่อเยี่ยมชม</a>',
 
 	'reason_moderate' => '{actor} {modaction} กระทู้ <a href="forum.php?mod=viewthread&tid={tid}" target="_blank">{subject}</a> ของคุณ <div class="quote"><blockquote>{reason}</blockquote></div>',
@@ -172,11 +172,11 @@ $lang = array
 
 	'user_usergroup' => 'กลุ่มสมาชิกของคุณได้อัปเกรดเป็น {usergroup} &nbsp; <a href="home.php?mod=spacecp&ac=usergroup" target="_blank" class="lit">ดูระดับการใช้งานของกลุ่มนี้ &rsaquo;</a>',
 
-	'grouplevel_update' => 'ขอแสดงความยินดี กลุ่มของคุณ {groupname} ได้รับการอัปเกรดไปยัง {newlevel}',
+	'grouplevel_update' => 'ขอแสดงความยินดี วงในของคุณ {groupname} ได้รับการอัปเกรดไปยัง {newlevel}',
 
 	'thread_invite' => '{actor} เชิญชวนคุณ {invitename} <a href="forum.php?mod=viewthread&tid={tid}" target="_blank">{subject}</a> &nbsp; <a href="forum.php?mod=viewthread&tid={tid}" target="_blank" class="lit">ดูรายละเอียด &rsaquo;</a>',
 	'blog_invite' => '{actor} เชิญคุณให้ดูบล็อก <a href="home.php?mod=space&uid={uid}&do=blog&id={blogid}" target="_blank">{subject}</a> &nbsp; <a href="home.php?mod=space&uid={uid}&do=blog&id={blogid}" target="_blank" class="lit">ดูรายละเอียด &rsaquo;</a>',
-	'article_invite' => '{actor} เชิญคุณให้ดูบทความ <a href="portal.php?mod=view&aid={aid}" target="_blank">{subject}</a> &nbsp; <a href="portal.php?mod=view&aid={aid}" target="_blank" class="lit">ดูรายละเอียด &rsaquo;</a>',
+	'article_invite' => '{actor} เชิญคุณให้ดูบทความ <a href="{url}" target="_blank">{subject}</a> &nbsp; <a href="{url}" target="_blank" class="lit">ดูรายละเอียด &rsaquo;</a>',
 	'invite_friend' => 'ขอแสดงความยินดีชวนเพื่อนสำเร็จ {actor} และคุณเป็นเพื่อนกันแล้ว',
 
 	'poke_request' => '<a href="{fromurl}" class="xi2">{fromusername}</a>: <span class="xw0">{pokemsg}&nbsp;</span><a href="home.php?mod=spacecp&ac=poke&op=reply&uid={fromuid}&from=notice" id="a_p_r_{fromuid}" class="xw1" onclick="showWindow(this.id, this.href, \'get\', 0);">ตอบกลับการสะกิด</a><span class="pipe">|</span><a href="home.php?mod=spacecp&ac=poke&op=ignore&uid={fromuid}&from=notice" id="a_p_i_{fromuid}" onclick="showWindow(\'pokeignore\', this.href, \'get\', 0);">ไม่สนใจ</a>',
