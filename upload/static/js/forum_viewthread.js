@@ -28,9 +28,9 @@ function attachimgshow(pid, onlyinpost) {
 			continue;
 		}
 		if(onlyinpost && !obj.getAttribute('inpost')) {
-			aimgcomplete++; 
+			aimgcomplete++;
 			continue;
-		}        
+		}
 		if(onlyinpost && obj.getAttribute('inpost') || !onlyinpost) {
 			if(!obj.status) {
 				obj.status = 1;
@@ -233,7 +233,8 @@ function succeedhandle_fastpost(locationhref, message, param) {
 	var pid = param['pid'];
 	var tid = param['tid'];
 	var from = param['from'];
-	if(pid) {
+	var reply_mod = param['reply_mod'];
+	if(!reply_mod) {
 		ajaxget('forum.php?mod=viewthread&tid=' + tid + '&viewpid=' + pid + '&from=' + from, 'post_new', 'ajaxwaitid', '', null, 'fastpostappendreply()');
 		if(replyreload) {
 			var reloadpids = replyreload.split(',');
@@ -244,7 +245,7 @@ function succeedhandle_fastpost(locationhref, message, param) {
 		$('fastpostreturn').className = '';
 	} else {
 		if(!message) {
-			message = 'โพสต์ของคุณต้องรอการตรวจสอบจากผู้ดูแลระบบก่อน ถึงจะแสดงผลได้';
+			message = 'การตอบกระทู้ในส่วนนี้จำเป็นต้องผ่านกระบวนการตรวจสอบก่อน โพสต์ของคุณจะปรากฏหลังจากผ่านการตรวจสอบเรียบร้อยแล้ว';
 		}
 		$('post_new').style.display = $('fastpostmessage').value = $('fastpostreturn').className = '';
 		$('fastpostreturn').innerHTML = message;
@@ -734,7 +735,7 @@ function changecontentdivid(tid) {
 }
 
 function showmobilebbs(obj) {
-	var content = '<h3 class="flb" style="cursor:move;"><em>ดาวน์โหลดแอพฯสำหรับอุปกรณ์พกพา</em><span><a href="javascript:;" class="flbc" onclick="hideWindow(\'mobilebbs\')" title="{lang close}">{lang close}</a></span></h3><div class="c"><h4>สำหรับ Andriod สแกน QR โค้ดจะสามารถดาวน์โหลดโดยตรงไปยังอุปกรณ์</h4><p class="mtm mbm vm"><span class="code_bg"><img src="'+ STATICURL +'image/common/zslt_andriod.png" alt="" /></span><img src="'+ STATICURL +'image/common/andriod.png" alt="โทรศัพท์มือถือหรืออุปกรณ์พกพา ที่มีระบบปฏิบัติการเป็นแอนดรอยด์ ทุกรุ่น ทุกยี่ห้อ" /></p><h4>สำหรับ iPhone สแกน QR โค้ดจะสามารถดาวน์โหลดโดยตรงไปยังอุปกรณ์</h4><p class="mtm mbm vm"><span class="code_bg"><img src="'+ STATICURL +'image/common/zslt_ios.png" alt="" /></span><img src="'+ STATICURL +'image/common/ios.png" alt="สามารถใช้งานได้ทั้ง ไอโฟน และ ไอแพด" /></p></div>';
+	var content = '<h3 class="flb" style="cursor:move;"><em>แอปพลิเคชันการโพสต์ในเว็บบอร์ดบนมือถือ</em><span><a href="javascript:;" class="flbc" onclick="hideWindow(\'mobilebbs\')" title="{lang close}">{lang close}</a></span></h3><div class="c"><h4>สำหรับ Andriod สแกน QR โค้ดจะสามารถดาวน์โหลดโดยตรงไปยังอุปกรณ์</h4><p class="mtm mbm vm"><span class="code_bg"><img src="'+ STATICURL +'image/common/zslt_andriod.png" alt="" /></span><img src="'+ STATICURL +'image/common/andriod.png" alt="โทรศัพท์มือถือหรืออุปกรณ์พกพา ที่มีระบบปฏิบัติการเป็นแอนดรอยด์ ทุกรุ่น ทุกยี่ห้อ" /></p><h4>สำหรับ iPhone สแกน QR โค้ดจะสามารถดาวน์โหลดโดยตรงไปยังอุปกรณ์</h4><p class="mtm mbm vm"><span class="code_bg"><img src="'+ STATICURL +'image/common/zslt_ios.png" alt="" /></span><img src="'+ STATICURL +'image/common/ios.png" alt="สามารถใช้งานได้ทั้ง ไอโฟน และ ไอแพด" /></p></div>';
 	showWindow('mobilebbs', content, 'html');
 }
 
@@ -745,7 +746,7 @@ function succeedhandle_vfastpost(url, message, param) {
 }
 
 function vmessage() {
-	var vf_tips = '#ตอบกลับด่วนกระทู้นี้#';
+	var vf_tips = '#ตอบกลับแบบด่วนที่นี่#';
 	$('vmessage').value = vf_tips;
 	$('vmessage').style.color = '#CDCDCD';
 	$('vmessage').onclick = function() {

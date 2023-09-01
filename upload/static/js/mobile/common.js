@@ -27,6 +27,7 @@ var page = {
 		var nextpage = qSel('div.pg .nxt') ? qSel('div.pg .nxt').href : undefined;
 		var lastpage = qSel('div.pg label span') ? (qSel('div.pg label span').innerText.replace(/[^\d]/g, '') || 0) : 0;
 		var curpage = qSel('div.pg input') ? qSel('div.pg input').value : 1;
+		var multipage_url = getID('multipage_url') ? getID('multipage_url').value : undefined;
 
 		if(!lastpage) {
 			prevpage = qSel('div.pg .pgb a') ? qSel('div.pg .pgb a').href : undefined;
@@ -61,7 +62,14 @@ var page = {
 		pgobj.innerHTML = '<a href="'+ prevpagehref +'">หน้าที่แล้ว</a>'+ selector +'<a href="'+ nextpagehref +'">หน้าถัดไป</a>';
 		qSel('#dumppage').addEventListener('change', function() {
 			var href = (prevpage || nextpage);
-			window.location.href = href.replace(/page=\d+/, 'page=' + this.value);
+			var newhref = href.replace(/page=\d+/, 'page=' + this.value);
+			if (newhref == href) {
+				newhref = href.replace(/(forum|thread|article|group|blog)-(\d+)-(\d+)(-(\d+))?\.html/i, '$1-$2-' + this.value + '$4.html');
+				if (newhref == href && multipage_url != undefined) {
+					newhref = multipage_url.replace(/{page}/i, this.value);
+				}
+			}
+			window.location.href = newhref;
 		});
 	},
 };
@@ -148,7 +156,7 @@ var img = {
 		if(is_err_t) {
 			var parentnode = obj.parent();
 			parentnode.find('.loading').remove();
-			parentnode.append('<div class="error_text">รีโหลดใหม่</div>');
+			parentnode.append('<div class="error_text">แตะเพื่อดึงข้อมูลใหม่</div>');
 			parentnode.find('.error_text').one('click', function() {
 				obj.attr('load', 0).find('.error_text').remove();
 				parentnode.append('<div class="loading" style="background:url('+ IMGDIR +'/imageloading.gif) no-repeat center center;width:'+parentnode.width()+'px;height:'+parentnode.height()+'px"></div>');
@@ -260,7 +268,7 @@ var formdialog = {
 				evalscript(s.lastChild.firstChild.nodeValue);
 			})
 			.error(function() {
-				popup.open('พบความผิดปกติจากการส่งข้อมูล ไม่สามารถดำเนินการตามคำขอของคุณได้', 'alert');
+				popup.open('เกิดข้อผิดพลาดในการส่งแบบฟอร์ม ไม่สามารถทำคำขอของคุณเสร็จสมบูรณ์ได้', 'alert');
 			});
 			return false;
 		});

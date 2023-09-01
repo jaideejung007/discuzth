@@ -18,12 +18,6 @@ class model_forum_post extends discuz_model {
 
 	public $post;
 
-
-
-
-
-
-
 	public $pid = 0;
 
 	public $feed = array();
@@ -46,7 +40,7 @@ class model_forum_post extends discuz_model {
 
 	protected function _init_parameters($parameters) {
 		$varname = array(
-			'member', 'group', 'forum', 'thread', 'extramessage', 'special',
+			'member', 'group', 'forum', 'thread', 'extramessage', 'special',//'nauthorid' 'modnewreplies' 'tid'
 			'message','clientip', 'invisible', 'isanonymous', 'usesig',
 			'htmlon', 'bbcodeoff', 'smileyoff', 'parseurloff', 'pstatus',
 			'noticetrimstr', 'noticeauthor', 'from', 'sechash', 'geoloc',
@@ -221,7 +215,7 @@ class model_forum_post extends discuz_model {
 
 		if($this->param['modnewreplies']) {
 			updatemoderate('pid', $this->pid);
-			unset($this->param['showmsgparam']['pid']);
+			$this->param['showmsgparam']['reply_mod'] = 1;
 			if($this->param['updatethreaddata']) {
 				C::t('forum_thread')->update($this->thread['tid'], $this->param['updatethreaddata'], false, false, 0, true);
 			}
@@ -412,7 +406,7 @@ class model_forum_post extends discuz_model {
 
 			$displayorder = (empty($this->param['save']) || $this->thread['displayorder'] != -4 ) ? ($this->thread['displayorder'] == -4 ? -4 : $this->thread['displayorder']) : -4;
 			$this->param['typeid'] = isset($this->param['typeid']) && isset($this->forum['threadtypes']['types'][$this->param['typeid']]) && (!$this->forum['threadtypes']['moderators'][$this->param['typeid']] || $this->forum['ismoderator']) ? $this->param['typeid'] : 0;
-			$this->param['sortid'] = $this->param['special'] || !$this->forum['threadsorts']['types'][$this->param['sortid']] ? 0 : $this->param['sortid'];			
+			$this->param['sortid'] = $this->param['special'] || !$this->forum['threadsorts']['types'][$this->param['sortid']] ? 0 : $this->param['sortid'];
 
 
 			$this->param['threadupdatearr']['typeid'] = $this->param['typeid'];
@@ -472,7 +466,7 @@ class model_forum_post extends discuz_model {
 			}
 			if(!$isfirstpost) {
 				C::t('forum_thread')->increase($this->thread['tid'], array('replies' => 1));
-			} 
+			}
 			updatemodworks('MOD', 1);
 			updatemodlog($this->thread['tid'], 'MOD');
 		}

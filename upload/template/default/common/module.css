@@ -446,6 +446,7 @@ Created & Modified by Alice, Monkey, Lushnis, Pony, Dfox & DragonLee.
 		.fl_g dl { margin-left: 31px; padding-left: 10px; }
 			.fl_g dt { font-weight: 700; }
 	.fl_row td { border-top: 1px dashed {COMMONBORDER}; }
+	.fl_icn img, .fl_icn svg , .fl_icn_g img, .fl_icn_g svg { vertical-align: middle; }
 
 /* 圈子分类列表 */
 	.flt {}
@@ -1959,7 +1960,7 @@ body { background: none !important; }
 		.pbw strong { font-weight: 400; }
 			.pbw p { color: #000; }
 		.p_pop span { display: none; }
-#nv_search #ft { margin: 20px; text-align: center; }
+#nv_search #ft.w { margin: 20px; text-align: center; }
 .pg { float: none; }
 #myspace_menu li a, #navs_menu li a { background-repeat: no-repeat; background-position: -200px 0; }
 /** end **/

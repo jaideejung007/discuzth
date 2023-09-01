@@ -3380,7 +3380,7 @@ $lang = array
 	'styles_edit_tpl' => 'เทมเพลตของรูปแบบสไตล์',
 	'styles_edit_tpl_comment' => 'เลือกชื่อเทมเพลตให้กับรูปแบบสไตล์ชุดนี้',
 	'styles_edit_logo' => 'โลโก้ {BOARDIMG},{BOARDLOGO}',
-	'styles_edit_logo_comment' => 'สามารถใส่ Flash ภาพเคลื่อนไหว ใช้เครื่องหมายคอมม่าเป็นตัวคั่นต่อท้าย URL ความกว้างและความสูง ตัวอย่าง เช่น [logo.swf,80,40]',
+	'styles_edit_logo_comment' => 'คุณสามารถอัปโหลดรูปภาพหรือกรอกชื่อไฟล์รูปภาพโดยตรงได้ (ระบุเส้นทางรูปภาพตามไดเร็กทอรีรากของบอร์ด, โฟลเดอร์รูปภาพขยาย, หรือโฟลเดอร์รูปภาพพื้นฐานของเทมเพลตได้)',
 	'styles_edit_searchlogo' => 'Logo สำหรับหน้าค้นหา {SEARCHIMG},{SEARCHLOGO}',
 	'styles_edit_touchlogo' => 'Logo สำหรับโหมดมือถือ {TOUCHIMG},{TOUCHLOGO}',
 	'styles_edit_imgdir' => 'โฟลเดอร์หลักที่ใช้เก็บรูปภาพของรูปแบบสไตล์ {IMGDIR}',
@@ -3670,10 +3670,10 @@ $lang = array
 	'members_ban_reason_comment' => 'A reason of ban/unban the user',
 
 	'members_unarchive' => 'Remove',
-	'members_chgusername' => 'Initiate a name change',
-	'members_chgusername_tips' => '<li>This operation requires relevant permissions to be enabled in the management group</li><li>This operation can take effect for applications that support such notifications under UCenter to which the site belongs, but it will cause such notifications not to be supported and the user name will be used as the user name. The application of foreign keys is abnormal. Please note that this request will be sent to UCenter for processing after submission. Due to the time required for data interaction, this operation will generally take effect within a few minutes. If the timeout does not take effect, please update Cache or check if UCenter and site communicate properly</li>',
-	'members_chgusername_oldusername' => 'User\'s username in this application',
-	'members_chgusername_newusername' => 'New user name',
+	'members_chgusername' => 'เปลี่ยนชื่อผู้ใช้',
+	'members_chgusername_tips' => '<li>การดำเนินการนี้ต้องมีการเปิดใช้สิทธิที่เกี่ยวข้องในกลุ่มการจัดการก่อน</li><li>การดำเนินการนี้จะมีผลต่อแอป/โปรแกรมที่รองรับการแจ้งเตือนประเภทนี้ใน UCenter ของเว็บไซต์เท่านั้น แต่อาจทำให้แอป/โปรแกรมที่ไม่รองรับประเภทนี้และใช้ชื่อผู้ใช้เป็นตัวเชื่อมกันมีปัญหาได้ กรุณาระมัดระวังถึงปัญหานี้</li><li>เมื่อคุณกดส่งคำขอนี้ไปยัง UCenter เพื่อทำการดำเนินการ จะใช้เวลาสักครู่ในการส่งข้อมูลไปมา โดยปกติแล้วการดำเนินการจะเริ่มมีผลในไม่กี่นาที ถ้าเวลาผ่านไปแล้วแต่ยังไม่มีผล กรุณาลองอัปเดตไฟล์แคชหรือตรวจสอบการเชื่อมต่อระหว่าง UCenter และเว็บไซต์ว่ามีปัญหาหรือไม่</li>',
+	'members_chgusername_oldusername' => 'ชื่อผู้ใช้งานเดิมในโปรแกรมนี้',
+	'members_chgusername_newusername' => 'ชื่อผู้ใช้ใหม่',
 
 	'members_search' => 'ค้นหาสมาชิก',
 	'members_delete' => 'ลบสมาชิก',

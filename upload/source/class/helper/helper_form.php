@@ -19,7 +19,6 @@ class helper_form {
 			return FALSE;
 		} else {
 			global $_G;
-			
 			if(($allowget && ($allowget !== 2 || (!empty($_GET['formhash']) && $_GET['formhash'] == formhash()))) || ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_GET['formhash']) && $_GET['formhash'] == formhash() && empty($_SERVER['HTTP_X_FLASH_VERSION']) && (empty($_SERVER['HTTP_REFERER']) ||
 				strncmp($_SERVER['HTTP_REFERER'], 'http://wsq.discuz.com/', 22) === 0 || preg_replace("/https?:\/\/([^\:\/]+).*/i", "\\1", $_SERVER['HTTP_REFERER']) == preg_replace("/([^\:]+).*/", "\\1", $_SERVER['HTTP_HOST'])))) {
 				if(checkperm('seccode')) {
@@ -41,8 +40,6 @@ class helper_form {
 		global $_G;
 		$censor = discuz_censor::instance();
 		$censor->check($message, $modword);
-		
-		
 		if(($censor->modbanned() && empty($_G['group']['ignorecensor'])) || (($modasban && !empty($_G['setting']['modasban'])) && $censor->modmoderated() && empty($_G['group']['ignorecensor']))) {
 			$wordbanned = implode(', ', $censor->words_found);
 			if($return) {
@@ -54,33 +51,21 @@ class helper_form {
 				cpmsg(lang('message', 'word_banned'), '', 'error', array('wordbanned' => $wordbanned));
 			}
 		}
-		if($_G['group']['allowposturl'] == 0 || $_G['group']['allowposturl'] == 2) {
+		if($_G['group']['allowposturl'] == 0) {
 			$urllist = self::get_url_list($message);
-			if(is_array($urllist[1])) foreach($urllist[1] as $key => $val) {
-				if(!$val = trim($val)) continue;
-				if(!iswhitelist($val)) {
-					if($_G['group']['allowposturl'] == 0) {
+			if(is_array($urllist[1])) {
+				foreach($urllist[1] as $key => $val) {
+					if(!$val = trim($val)) continue;
+					if(!iswhitelist($val)) {
 						if($return) {
 							return array('message' => 'post_url_nopermission');
 						}
 						showmessage('post_url_nopermission');
-					} elseif($_G['group']['allowposturl'] == 2) {
-						$message = str_replace('[url]'.$urllist[0][$key].'[/url]', $urllist[0][$key], $message);
-						$message = preg_replace(
-							array(
-								"@\[url=[^\]]*?".preg_quote($urllist[0][$key],'@')."[^\]]*?\](.*?)\[/url\]@is",
-								"@href=('|\")".preg_quote($urllist[0][$key],'@')."\\1@is",
-								"@\[url\]([^\]]*?".preg_quote($urllist[0][$key],'@')."[^\]]*?)\[/url\]@is",
-							),
-							array(
-								'\\1',
-								'',
-								'\\1',
-							),
-							$message);
 					}
 				}
 			}
+		} elseif($_G['group']['allowposturl'] == 2) {
+			$message = preg_replace("/\[url(=((https?|ftp|gopher|news|telnet|rtsp|mms|callto|bctp|thunder|qqdl|synacast){1}:\/\/|www\.|mailto:|tel:|magnet:)?([^\r\n\[\"']+?))?\](.+?)\[\/url\]/is", '\\5', $message);
 		}
 		return $message;
 	}

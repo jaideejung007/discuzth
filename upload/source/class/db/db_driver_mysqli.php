@@ -79,7 +79,7 @@ class db_driver_mysqli
 
 	function _dbconnect($dbhost, $dbuser, $dbpw, $dbcharset, $dbname, $pconnect, $halt = true) {
 		mysqli_report(MYSQLI_REPORT_OFF);
-		if (intval($pconnect) === 1) $dbhost = 'p:' . $dbhost; 
+		if (intval($pconnect) === 1) $dbhost = 'p:' . $dbhost;
 		$link = new mysqli();
 		if(!$link->real_connect($dbhost, $dbuser, $dbpw, $dbname, null, null, MYSQLI_CLIENT_COMPRESS)) {
 			$halt && $this->halt('notconnect', $this->errno());
@@ -141,7 +141,7 @@ class db_driver_mysqli
 		if(!($query = $this->curlink->query($sql, $resultmode))) {
 			if(in_array($this->errno(), array(2006, 2013)) && substr($silent, 0, 5) != 'RETRY') {
 				$this->connect();
-				return $this->curlink->query($sql, 'RETRY'.$silent);
+				return $this->query($sql, 'RETRY'.$silent);
 			}
 			if(!$silent) {
 				$this->halt($this->error(), $this->errno(), $sql);
