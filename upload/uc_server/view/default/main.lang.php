@@ -3,8 +3,8 @@
 $lang = array(
 
 	'other' => 'อื่น ๆ',
-	'app_connent_ok' => 'เชื่อมต่อได้',
-	'app_connent_false' => 'เชื่อมต่อไม่ได้',
+	'app_connect_ok' => 'เชื่อมต่อได้',
+	'app_connect_false' => 'เชื่อมต่อไม่ได้',
 
 	'note_deleteuser' => 'ลบสมาชิก',
 	'note_renameuser' => 'เปลี่ยนชื่อสมาชิก',

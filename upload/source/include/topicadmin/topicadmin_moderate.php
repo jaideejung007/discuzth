@@ -104,7 +104,7 @@ if(!submitcheck('modsubmit')) {
 			$stylecheck[$i] = $stylestr[$i - 1] ? 1 : 0;
 		}
 		$colorcheck = $string[1];
-		$highlight_bgcolor = $threadlist[$_G['tid']]['bgcolor'];		
+		$highlight_bgcolor = $threadlist[$_G['tid']]['bgcolor'];
 		$_G['forum']['modrecommend'] = is_array($_G['forum']['modrecommend']) ? $_G['forum']['modrecommend'] : array();
 		$expirationstick = get_expiration($_G['tid'], 'EST');
 		$expirationdigest = get_expiration($_G['tid'], 'EDI');
@@ -115,7 +115,7 @@ if(!submitcheck('modsubmit')) {
 		$forumselect = forumselect(FALSE, 0, $threadlist[$_G['tid']]['fid'], $_G['adminid']==1 ? TRUE : FALSE);
 		$typeselect = typeselect($single ? $threadlist[$_G['tid']]['typeid'] : 0);
 	} elseif($_GET['optgroup'] == 4 && $single) {
-		empty($threadlist[$_G['tid']]['closed']) ? $closecheck[0] = 'checked="checked"' : $closecheck[1] = 'checked="checked"';
+		!empty($threadlist[$_G['tid']]['closed']) ? $closecheck[0] = 'checked="checked"' : $closecheck[1] = 'checked="checked"';
 		if($threadlist[$_G['tid']]['closed']) {
 			$expirationclose = get_expiration($_G['tid'], 'ECL');
 		}
@@ -139,7 +139,7 @@ if(!submitcheck('modsubmit')) {
 			$selectattach = $imgattach[$keys[0]]['aid'];
 			$selectposition[0] = ' selected="selected"';
 		}
-		$expirationrecommend = get_expiration($_G['tid'], 'REC');		
+		$expirationrecommend = get_expiration($_G['tid'], 'REC');
 	}
 	include template('forum/topicadmin');
 
@@ -274,7 +274,7 @@ if(!submitcheck('modsubmit')) {
 				$modaction = $isrecommend ? 'REC' : 'URE';
 				$thread = daddslashes($thread, 1);
 				$selectattach = $_GET['selectattach'];
-				$position = $_GET['position'];				
+				$position = $_GET['position'];
 
 				C::t('forum_threadmod')->update_by_tid_action($tidsarr, array('REC'), array('status' => 0));
 				if($isrecommend) {
@@ -707,7 +707,6 @@ if(!submitcheck('modsubmit')) {
 				set_stamp($stampstatus, $stampaction, $threadlist, $expiration);
 			}
 
-			// 当进行管理操作后, 更新相关板块的板块缓存
 			$fidarr = array();
 			foreach ($threadlist as $thread) {
 				$fidarr[] = $thread['fid'];
