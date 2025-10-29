@@ -12,7 +12,7 @@ Crossday Discuz! Board (เรียกสั้น ๆ ว่า Discuz! ซึ
 +----------------------------------+
 คุณสามารถดาวน์โหลดเวอร์ชันล่าสุดและแพตช์ต่าง ๆ ได้ตลอดเวลาจากเว็บไซต์ดาวน์โหลดอย่างเป็นทางการของเรา
 https://www.discuz.vip/ เวอร์ชันภาษาจีน
-https://www.discuzthai.com/ เวอร์ชันภาษาไทย
+https://www.discuzth.com/ เวอร์ชันภาษาไทย
 
 +----------------------------------+
  การสนับสนุนทางเทคนิคสำหรับซอฟต์แวร์ Discuz! X
@@ -20,8 +20,8 @@ https://www.discuzthai.com/ เวอร์ชันภาษาไทย
 หากคุณพบปัญหาในระหว่างการติดตั้ง การอัปเกรด หรือการใช้งานประจำวัน กรุณาเยี่ยมชมเว็บไซต์ต่อไปนี้เพื่อรับการสนับสนุนทางเทคนิค
 
 เว็บบอร์ด Discuz! ภาษาจีน： https://www.dismall.com
-เว็บบอร์ด Discuz! ภาษาไทย： https://www.discuzthai.com
+เว็บบอร์ด Discuz! ภาษาไทย： https://www.discuzth.com
 คลังข้อมูล Discuz! ภาษาจีน： https://discuz.dismall.com/library/library
-คลังข้อมูล Discuz! วิดีโอภาษาไทย： https://www.youtube.com/@discuzthaisupport
+คลังข้อมูล Discuz! วิดีโอภาษาไทย： https://www.youtube.com/@discuzthsupport
 บทช่วยสอน Discuz!： https://www.dismall.com/forum-51-1.html
 ศูนย์แอปพลิเคชัน Discuz!： https://addon.dismall.com

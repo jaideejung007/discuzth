@@ -76,22 +76,9 @@
 	</div>
 </div>
 <!--{subtemplate common/upload}-->
+<!--{if empty($_G['setting']['pluginhooks']['post_upload_extend']) && empty($_G['setting']['pluginhooks']['post_poll_upload_extend'])}-->
 <script type="text/javascript" reload="1">
-var maxoptions = parseInt('$_G[setting][maxpolloptions]');
-<!--{if $_GET[action] == 'newthread'}-->
-	var curoptions = 0;
-	var curnumber = 1;
-	addpolloption();
-	addpolloption();
-	addpolloption();
-<!--{else}-->
-	var curnumber = curoptions = <!--{echo count($poll['polloption'])}-->;
-	for(var i=0; i < curnumber; i++) {
-		addUploadEvent('newpoll_'+i, 'pollUploadProgress_'+i);
-	}
-<!--{/if}-->
-function addUploadEvent(imgid, pollstr) {
-	<!--{if empty($_G['setting']['pluginhooks']['post_upload_extend']) && empty($_G['setting']['pluginhooks']['post_poll_upload_extend'])}-->
+    function addUploadEvent(imgid, pollstr) {
 		new SWFUpload({
 			upload_url: SITEURL + 'misc.php?mod=swfupload&action=swfupload&operation=poll&fid=$_G[fid]',
 			post_params: {"uid":"$_G[uid]", "hash":"$swfconfig[hash]"},
@@ -129,8 +116,23 @@ function addUploadEvent(imgid, pollstr) {
 
 			debug: false
 		});
-	<!--{else}-->
-		<!--{hook/post_poll_upload_extend}-->
-	<!--{/if}-->
 }
+</script>
+<!--{else}-->
+	<!--{hook/post_poll_upload_extend}-->
+<!--{/if}-->
+<script type="text/javascript" reload="1">
+var maxoptions = parseInt('$_G[setting][maxpolloptions]');
+<!--{if $_GET[action] == 'newthread'}-->
+	var curoptions = 0;
+	var curnumber = 1;
+	addpolloption();
+	addpolloption();
+	addpolloption();
+<!--{else}-->
+	var curnumber = curoptions = <!--{echo count($poll['polloption'])}-->;
+	for(var i=0; i < curnumber; i++) {
+		addUploadEvent('newpoll_'+i, 'pollUploadProgress_'+i);
+	}
+<!--{/if}-->
 </script>

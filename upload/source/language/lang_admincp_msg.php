@@ -397,7 +397,7 @@ $lang = array (
   'members_chgusername_name_exists' => 'Username already exists',
   'members_chgusername_change_failed' => 'Failed to submit username modification operation',
   'members_chgusername_change_success' => 'Username modification operation submitted successfully',
-		
+
   'membersplit_split_in_backstage' => 'User split in progress, please try again later...',
   'membersplit_split_check_table' => 'Data table consistency check is in progress...',
   'membersplit_split_succeed' => 'User table is divided, and there are no users who can continue to move to the archive table',
@@ -647,6 +647,7 @@ $lang = array (
   'usertag_add_error' => 'Failed to add users or label error, please re-fill out',
 
   'members_verify_add_user_succeed' => 'สมาชิกที่ตรวจสอบได้ถูกเพิ่มเรียบร้อยแล้ว',
+  'members_verify_add_user_failure' => 'เพิ่มผู้ใช้ที่ยืนยันแล้วไม่สำเร็จ',
   'members_verify_update_title_error' => 'Authentication enabled name cannot be empty, please return.',
   'members_verify_title_invalid' => 'You do not enable authentication set authentication name',
 

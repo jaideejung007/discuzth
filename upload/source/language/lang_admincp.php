@@ -139,6 +139,7 @@ $lang = array
 	'rmb' => 'บาท',
 	'rmb_yuan' => '฿',
 	'posts' => 'โพสต์',
+	'threadsnum' => 'จำนวนกระทู้',
 	'blogid' =>'บล็อก ID',
 	'view' => 'ดู',
 	'reply' => 'ตอบกลับ',
@@ -1368,7 +1369,7 @@ $lang = array
 	'setting_profile_permission_basic_status' => 'Custom Title',
 	'setting_profile_personal_signature' => 'Personal signature',
 	'setting_profile_time_zone' => 'Time Zone',
-	'setting_profile_tips'=> '<li>Must enable at least part of users groups. If not enabled, the default is all enabled</li>',
+	'setting_profile_tips' => '<li>Must enable at least part of users groups. If not enabled, the default is all enabled</li>',
 
 	'setting_threadprofile_tpl_tpls' => '<li>{<b>tag</b>} Use a TAG without parameters.</li><li>{<b>tag</b>=<b>parameter</b>} Use a TAG with parameters. Separate multiple parameters with a comma &quot;,&quot;.</li><li>{<b>tag</b>}HTML{<b>*</b>}HTML{/<b>tag</b>} Display HTML content before and after {*} when there is a value for the calling content</li><li>&quot;<b>plugin:Plugin_ID</b>&quot; this format of a <b>tag</b> is used to display the info from a plugin. Plug-in developers must read carefully the &laquo;<a href="https://open.dismall.com/?!devdoc" target="_blank">Discuz! Technical Documentation</a>&raquo; before designing a new user defined tag.</li>',
 
@@ -1789,7 +1790,7 @@ $lang = array
 	'setting_functions_comment_commentitem_threadplugin' => 'Preset points of view comments',
 	'setting_functions_comment_commentitem_threadplugin_comment' => 'ข้อความนี้จะแสดงที่หน้าแถบการจัดอันดับ(รูปดาว &#x2606;) ในกล่องแสดงความคิดเห็น หนึ่งบรรทัด ต่อ หนังข้อความ หรือ หนึ่งอันดับ<br>เช่น บรรที่ 1 กำหนดเป็น ดี บรรทัที่ 2 กำหนดเป็น ไม่ดี การแสดงผลในกล่องแสดงความคิดเห็นก็จะเป็น<br>ดี &#x2606;&#x2606;&#x2606;&#x2606;&#x2606;  ไม่ดี &#x2606;&#x2606;&#x2606;&#x2606;&#x2606;<br>รูปดาว &#x2606; ในสถานะปกติจะเป็นสีเทา เมื่อนำเม้าส์ไปชี้จะเปลี่ยนเป็นสีอื่น เช่น สีส้ม',
 
-	'setting_functions_threadexp'=> 'Post replies',
+	'setting_functions_threadexp' => 'Post replies',
 	'setting_functions_threadexp_repliesrank' => 'Enable reply to poll',
 	'setting_functions_threadexp_repliesrank_comment' => 'If turned on, users can reply to a poll like &quot;Support&quot;, &quot;Disagree&quot;',
 	'setting_functions_threadexp_blacklist' => 'Enable to hide blacklisted users',
@@ -1848,7 +1849,7 @@ $lang = array
 	'setting_functions_other_rssttl_comment' => 'TTL (Time to Live) is a property of RSS 2.0, and used to control the automatic refresh time of subscription. The shorter TTL give more real-time information, but increase the server loading. Recommended value: 30 ~ 180.',
 	'setting_functions_other_oltimespan' => '<span class="spectitle">Users online time update time (minutes)</span>',
 	'setting_functions_other_oltimespan_comment' => 'Discuz! Available statistics for each user, and total online time of the month, updated the setting to set the time and frequency users online time. For example, set to 10, the user updated every 10 minutes every record online. The smaller the value of this setting, the more precise statistics, but the greater the consumption of resources. Recommended setting is 5 to 30 range, 0 to not record user online time ',
-	'setting_functions_other_debug'=> 'Show Runtime Info',
+	'setting_functions_other_debug' => 'Show Runtime Info',
 	'setting_functions_other_debug_comment' => 'Select "Yes" for display an execution time and a number of database queries in the footer.',
 	'setting_functions_other_onlyacceptfriendpm' => 'Full stop is the default short message only accept friends',
 	'setting_functions_other_onlyacceptfriendpm_comment' => 'Select "Yes"to the short message in the personal settings, the default receive only friend a short message',
@@ -1878,7 +1879,7 @@ $lang = array
 	'setting_functions_activity_field_comment' => 'Client-initiated events, choose the data item',
 	'setting_functions_activity_extnum' => 'Number of extended fields',
 	'setting_functions_activity_extnum_comment' => 'Client-initiated event, the number of custom data items, 0 to not allow custom data entry.',
-	'setting_functions_activity_pp'=> 'List of users',
+	'setting_functions_activity_pp' => 'List of users',
 	'setting_functions_activity_pp_comment' => 'Number of participants shown at the user list page',
 	'setting_functions_activity_credit' => 'Use the points',
 	'setting_functions_activity_credit_comment' => 'Participation in the event will consume with this number of points',
@@ -2262,8 +2263,8 @@ $lang = array
 	'setting_sec_reginput_password2_comment' => 'ค่าเริ่มต้นคือ password2 เฉพาะตัวอักษรและตัวเลขเท่านั้น จะต้องเริ่มต้นด้วยตัวอักษร  แบบฟอร์มจะมีผลทันทีหลังจากการแก้ไข',
 	'setting_sec_reginput_email' => 'แบบฟอร์มอีเมล',
 	'setting_sec_reginput_email_comment' => 'ค่าเริ่มต้นคือ email เฉพาะตัวอักษรและตัวเลขเท่านั้น จะต้องเริ่มต้นด้วยตัวอักษร  แบบฟอร์มจะมีผลทันทีหลังจากการแก้ไข',
-	'setting_sec_postperiodtime' => 'Post time restriction',
-	'setting_sec_accountguard' => 'Account bodyguard',
+	'setting_sec_postperiodtime'=> 'Post time restriction',
+	'setting_sec_accountguard'=> 'Account bodyguard',
 
 	'setting_datetime' => 'ตั้งค่ารูปแบบเวลา',
 
@@ -2336,7 +2337,7 @@ $lang = array
 	'setting_sec_accountguard_loginpwcheck_prompt' => 'Enable and prompt',
 	'setting_sec_accountguard_loginpwcheck_force' => 'Enable and force to modify the weak password',
 	'setting_sec_accountguard_loginoutofdate' => 'Abnormal log in detecting',
-	'setting_sec_accountguard_loginoutofdate_comment'	=> 'When the user has logged in for more than a certain period of time, the account will enter the unaudited group, and the user can unfreeze the account by verifying the mailbox or appealing, and the QQ login user will not be affected by this feature. <a href="'.ADMINSCRIPT.'?action=moderate&operation=members">Audit users</a>',
+	'setting_sec_accountguard_loginoutofdate_comment' => 'When the user has logged in for more than a certain period of time, the account will enter the unaudited group, and the user can unfreeze the account by verifying the mailbox or appealing, and the QQ login user will not be affected by this feature. <a href="'.ADMINSCRIPT.'?action=moderate&operation=members">Audit users</a>',
 	'setting_sec_accountguard_loginoutofdatenum' => 'Number of days for abnormal login detection',
 	'setting_sec_accountguard_loginoutofdatenum_comment' => 'Configure the number of days for abnormal login detection, the default value is 90 days',
 
@@ -2666,8 +2667,8 @@ $lang = array
 	'setting_mobile_cachetime_comment' => 'Set a time to store visited by phone pages, Set empty or 0 for no cache.<br />Unit: seconds.',
 	'setting_mobile_come_from' => 'Mark Mobile posts',
 	'setting_mobile_come_from_comment' => 'Default is blank. If completed, a post will be marked by "From mobile phone". You can add a custom text or icon<br />Such as: &lt;a href=\'http://m.x.com\'&gt;Mobile Channel&lt;/a&gt;<br />HTML tags supported: &lt;a&gt;&lt;font&gt;&lt;span&gt;&lt;strong&gt;&lt;b&gt;&lt;img&gt;<br />If you use the icon, Please ensure the image height is 16px (pixels) or less',
+	'setting_mobile_portal_catnav' => 'เปิดใช้งานการนำทางหมวดหมู่หน้าแรก',
 	'setting_mobile_portal_catnav_comment' => 'When opened, the portal homepage will display a first-level channel as navigation',
-	'setting_mobile_portal_catnav_comment' => 'After opening, the homepage of the portal will display the first-level channel as a navigation',
 	'setting_mobile_portal_wzpicture' => 'Displaying Article Slideshow on the Homepage',
 	'setting_mobile_portal_wzpicture_comment' => 'Selecting “Yes” will display a slideshow of aggregated images from articles on the portal channel',
 	'setting_mobile_portal_wzlist' => 'Displaying Article List on the Homepage',
@@ -2936,7 +2937,7 @@ $lang = array
 	'forums_edit_extend_recommend_dateline_comment' => 'Set the time period (in hours) from the thread recommend moment, when the recommended thread must present in a recommended list. Set to 0 for use all time.',
 	'forums_edit_extend_recommend_top' => 'Allow global stick',
 	'forums_edit_extend_recommend_top_comment' => 'Marked as global stick threads will be displayed in the global top and sub-top',
-	'forums_edit_sub_multi_tips'=> '<span class="lightfont">No need to modify sub-forum</span>',
+	'forums_edit_sub_multi_tips' => '<span class="lightfont">No need to modify sub-forum</span>',
 
 	'forums_edit_posts' => 'ตัวเลือกโพสต์',
 	'forums_edit_posts_modposts' => 'เปิดการตรวจสอบโพสต์โดยผู้ดูแล',
@@ -3381,7 +3382,7 @@ $lang = array
 	'styles_edit_tpl' => 'เทมเพลตของรูปแบบสไตล์',
 	'styles_edit_tpl_comment' => 'เลือกชื่อเทมเพลตให้กับรูปแบบสไตล์ชุดนี้',
 	'styles_edit_logo' => 'โลโก้ {BOARDIMG},{BOARDLOGO}',
-	'styles_edit_logo_comment' => 'คุณสามารถอัปโหลดรูปภาพหรือกรอกชื่อไฟล์รูปภาพโดยตรงได้ (ระบุเส้นทางรูปภาพตามไดเร็กทอรีรากของบอร์ด, โฟลเดอร์รูปภาพขยาย, หรือโฟลเดอร์รูปภาพพื้นฐานของเทมเพลตได้)',
+	'styles_edit_logo_comment' => 'สามารถอัปโหลดรูปภาพ หรือกรอกชื่อไฟล์รูปภาพโดยตรง (ระบบจะจดจำเส้นทางรูปภาพตามไดเรกทอรีรากของเว็บบอร์ด ไดเรกทอรีรูปภาพส่วนขยาย และไดเรกทอรีรูปภาพพื้นฐานของอินเทอร์เฟซ)<br/>หากต้องการตั้งค่าโลโก้ที่กำหนดเองสำหรับการนำทางโมดูล สามารถไปที่ฟังก์ชัน <a href="'.ADMINSCRIPT.'?action=nav&operation=headernav&frames=yes" target="_blank" style="color: #09C;">ส่วนแสดงผล - ตั้งค่าการนำทาง - แก้ไขการนำทาง</a> เพื่อตั้งค่า',
 	'styles_edit_searchlogo' => 'Logo สำหรับหน้าค้นหา {SEARCHIMG},{SEARCHLOGO}',
 	'styles_edit_touchlogo' => 'Logo สำหรับโหมดมือถือ {TOUCHIMG},{TOUCHLOGO}',
 	'styles_edit_imgdir' => 'โฟลเดอร์หลักที่ใช้เก็บรูปภาพของรูปแบบสไตล์ {IMGDIR}',
@@ -3696,6 +3697,7 @@ $lang = array
 	'members_search_email_comment' => 'You can use the wildcard *',
 	'members_search_friendsrange' => 'Number of friends range',
 	'members_search_postsrange' => 'Number of Posts in range',
+	'members_search_threadsrange' => 'จำนวนกระทู้ระหว่าง',
 	'members_search_regip' => 'Register IP begin with',
 	'members_search_regip_comment' => 'Such as the 192.168, you can use a wildcard *',
 	'members_search_lastip' => 'Last visit IP begin with',
@@ -4711,7 +4713,7 @@ $lang = array
 	'specialuser_defaultuser_add_tips' => '<li>Fill the user name and the reason.</li><li>Do not duplicate added friend names.</li>',
 	'specialuser_hotuser' => 'Hot Members',
 	'specialuser_hotuser_tips' => '<li>The following is a hot members list. You can add hot members. Leave empty for not add members.</li><li>Display order: the smaller value cause a higher priority.</li>',
-	'specialuser_order' => 'Recommended priority',
+	'specialuser_order' =>'Recommended priority',
 
 	'doing_tips' => '<li>Doing management is usefull for batch delete doings together with the corresponding replies.</li><li>Keyword qualifier {x} can be used to limit between two adjacent characters of text can be ignored, where "x" is a numer of ignored characters. For example the mask "a{1}s{2}s" (without quotation marks) can search the "<b>ass</b>" and also "<b>a</b>x<b>s</b>x<b>s</b>" and "<b>a</b>x<b>s</b>xx<b>s</b>" and so on.</li><li>Reminder: click the <b>Delete</b> button  on the search results page will delete the relevant information directly!</li>',
 	'doing' => 'Doing Management',
@@ -5321,6 +5323,7 @@ $lang = array
 
 	'faq' => 'ตั้งค่าคู่มือการใช้งาน',
 	'faq_thread' => 'หัวข้อการใช้งาน',
+	'faq_sortup' => 'หัวข้อย่อย',
 	'faq_list_update' => 'อัปเดตรายการ การใช้งาน',
 	'faq_detail' => 'รายละเอียดการใช้งาน',
 	'faq_edit' => 'แก้ไขรายละเอียด',
@@ -5331,7 +5334,6 @@ $lang = array
 	'faq_keywords_comment' => 'กำหนดแท็กของการใช้งาน เพื่อให้ง่ายต่อการค้นหา',
 	'faq_content' => 'เนื้อหาของการใช้งาน',
 	'faq_content_comment' => 'เนื้อหาของการใช้งาน สามารถใช้งานโค้ด HTML ได้',
-	'faq_sortup' => 'หัวข้อย่อย',
 	'faq_additem' => 'เพิ่มหัวข้อการใช้งานใหม่',
 	'faq_addcat' => 'เพิ่มประเภทการใช้งานใหม่',
 
@@ -5527,15 +5529,15 @@ $lang = array
 	'smsgw_admin' => 'SMS service',
 	'smsgw_admin_setting' => 'Setting',
 	'smsgw_admin_list' => 'List',
-			
+
 	'smsgw_edit' => 'Edit',
 	'smsgw_edit_name' => 'Interface name',
 	'smsgw_edit_order' => 'Interface order',
 	'smsgw_edit_sendrule' => 'Supported International Telephone Area Codes',
-			
+
 	'smsgw_type_message' => 'Literal gateway',
 	'smsgw_type_template' => 'Template class gateway',
-			
+
 	'smsgw_setting_smsstatus' => 'SMS function switch',
 	'smsgw_setting_smsdefaultcc' => 'Default international dialing code',
 	'smsgw_setting_smsdefaultlength' => 'Default SMS verification code length',
@@ -5811,7 +5813,7 @@ $lang = array
 	'ec_alipay_alipay_root_cert' => '(Required) RSA2 (SHA256) Alipay root certificate',
 	'ec_alipay_alipay_root_cert_comment' => 'For details about the public key certificate mode, please refer to <a href="https://opendocs.alipay.com/open/291/105971#%E5%85%AC%E9%92%A5%E8%AF%81%E4%B9%A6%E6%96%B9%E5%BC%8F" target="_blank">Get public key certificate</a>; alipayRootCert.crt, open this file with Notepad, select all and copy the content here',
 	'ec_alipay_check' => 'Pay for the test',
-			
+
 	'ec_wechat' => 'WeChat payment settings',
 	'ec_wechat_tips' => '<li>WeChat Pay (https://pay.weixin.qq.com) is a leading third-party payment platform in China under the Tencent Group. It has been committed to providing users and enterprises with safe, convenient and professional online payment services. With the core concept of "WeChat payment, more than payment", it has created a variety of convenient services and application scenarios for individual users, and provided professional collection capabilities, operational capabilities, fund settlement solutions, and security for various enterprises and small and micro merchants. Assure. Enterprises, commodities, stores, and users have been connected through WeChat, making smart life a reality. </li><li><b>Because cash transactions are involved, in order to avoid capital loss caused by improper operation, please read the "Users" Use For the part related to e-commerce in the manual, please make relevant settings after confirming that you fully understand and accept the relevant procedures and usage methods. </b></li><li>Your use of the WeChat payment service is based on a completely voluntary basis. Except for the financial loss caused by Discuz!\'s subjective malicious factors, Tencent Cloud is not responsible for any loss caused by the use of this function. Take responsibility. </li><li>The WeChat Pay customer service number is 95017. </li>',
 	'ec_wechat_on' => 'Whether to enable WeChat payment',
@@ -5837,7 +5839,7 @@ $lang = array
 	'ec_wechat_check' => 'Pay for the test',
 	'ec_wechat_checklink_credit' => 'Points recharge order test',
 	'ec_wechat_php_version_low' => 'PHP version is too low',
-			
+
 	'ec_qpay' => 'QQ wallet settings',
 	'ec_qpay_tips' => '<li>QQ Wallet is a third-party payment platform under Tencent Group Tenpay. It has been committed to providing users and enterprises with safe, convenient and professional online payment services. </li><li><b>Because cash transactions are involved, in order to avoid capital losses due to improper operations, please read the User For the part related to e-commerce in the User\'s Manual, please make relevant settings after confirming that you fully understand and accept the relevant procedures and usage methods. </b></li><li>You can set up a method that allows users to pay online by cash to recharge their transaction points account, which can be used to purchase post content, purchase user group permissions, point transfer or user group upgrades and other functions. Please be sure to set your payment information correctly, otherwise, the points will not be credited to the account in real time after the user pays, resulting in a lot of order information that needs to be processed manually. </li><li>Your use of the QQ Wallet service is based on a completely voluntary basis. Except for the loss of funds caused by Discuz!\'s subjective malicious factors, Tencent Cloud is not responsible for any loss caused by the use of this function. </li><li>Tenpay service hotline: 0755-83762288-2 (24-hour service hotline), QQ wallet customer service email is qpay@tencent.com. </li>',
 	'ec_qpay_on' => 'Whether to enable QQ wallet payment',
@@ -5909,7 +5911,7 @@ $lang = array
 	'ec_paymentorders_op_refund' => 'Refund',
 	'ec_paymentorders_detail' => 'Order details',
 	'ec_paymentorders_query_submit_tips' => 'If the order payment is successful, the corresponding business operation will be performed',
-			
+
 	'ec_transferorders_search' => 'Payment order inquiry',
 	'ec_transferorders_user' => 'Paying user',
 	'ec_transferorders_channel' => 'Payment channel',
@@ -6166,7 +6168,7 @@ $lang = array
 	'tools_updatecache_waiting'=>'กำลังอัปเดตแคช กรุณารอสักครู่......',
 
 	'fileperms_check_note' => 'ตรวจสอบไฟล์และโฟลเดอร์ของระบบว่ามีสิทธิ์ในการเขียนไฟล์ได้ คลิกที่ปุ่มด้านล่างเพื่อเริ่มทำการตรวจสอบ',
-	'fileperms_check_waiting' => 'กำลังประมวลผลไฟล์ กรุณาอดทนรอ...',
+	'fileperms_check_waiting'=>'กำลังประมวลผลไฟล์ กรุณาอดทนรอ...',
 	'fileperms_tips' => '<li>ถ้าหลังจากการตรวจสอบเสร็จแล้ว ไฟล์หรือโฟลเดอร์ที่มีสถานะเป็น "เขียนไม่ได้" (ข้อความสีแดง) ให้คุณดำเนินการ CHMOD ไฟล์หรือโฟลเดอร์ดังกล่าวให้มีค่าเป็น 0777 ด้วยโปรแกรม FTP ของคุณ เพื่อให้เว็บไซต์สามารถทำงานได้เต็มประสิทธิภาพ</li>',
 	'fileperms_check_ok' => 'ไฟล์และโฟลเดอร์ทั้งหมดสามารถเขียน/อ่าน/เข้าถึงได้',
 	'fileperms_unwritable' => 'เขียนไม่ได้',
@@ -7007,10 +7009,10 @@ $lang = array
 	'blockxml_edit' => 'Edit third-party block',
 	'blockxml_add' => 'Add third-party block',
 	'blockxml_import_ignore_version' => 'Allow to add the old version of Discuz! third-party blocks (easy to produce an error!!)',
-	'blockxml_xmlurl_add_succeed' => ' Third-party blocks added successfully ',
 	'blockxml_xmlurl_update_succeed' => 'XML block is updated successfully',
 	'blockxml_xmlurl_delete_confirm' => 'Want to delete this XML block?',
 	'blockxml_xmlurl_delete_succeed' => ' XML blocke deleted successfully',
+	'blockxml_xmlurl_add_succeed' => ' Third-party blocks added successfully ',
 	'blockxml_import_version_invalid' => 'Version numbers do not match, the current version: {cur_version}, system version: {set_version}',
 	'CLIENT_NOT_EXISTS' => 'Client does not exist',
 	'SIGN_ERROR' => 'ข้อมูลลายเซ็นไม่ถูกต้อง',

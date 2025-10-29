@@ -1,0 +1,93 @@
+<!--{template common/header}-->
+<!--{if $type != 'countitem'}-->
+<div class="header cl">
+	<div class="mz"><a href="javascript:history.back();"><i class="dm-c-left"></i></a></div>
+	<h2><a href="misc.php?mod=tag">{lang tag}</a></h2>
+	<div class="my"><a href="index.php"><i class="dm-house"></i></a></div>
+</div>
+
+<form class="searchform" method="post" autocomplete="off" action="misc.php?mod=tag">
+	<input type="hidden" name="formhash" value="{FORMHASH}" />
+	<div class="search flex-box">
+		<input value="$keyword" autocomplete="off" class="mtxt flex" name="name" id="scform_srchtxt" value="" placeholder="{lang mobsearchtxt}">
+		<input type="submit" value="{lang search}" class="mbtn" id="scform_submit">
+	</div>
+</form>
+
+<div class="bodybox p10 cl">
+	<div class="wordcloud-container" id="wordcloud"></div>
+</div>
+
+<script>
+	// 关键词数据 - 包含文本和权重(影响大小)
+	const keywords = [
+		<!--{loop $tagarray $tag}-->
+		{ text: "{$tag['tagname']}", weight: '{$tag['related_count']}', url: 'misc.php?mod=tag&id={$tag['tagid']}' },
+		<!--{/loop}-->
+	];
+
+    // 颜色方案
+    const colors = [
+        '#0071e3', '#34c759', '#ff9500', '#ff2d55', '#5856d6',
+        '#af52de', '#ffcc00', '#5ac8fa', '#ff9500', '#32ade6'
+    ];
+
+    // URL编码函数
+    function encodeSpecialChars(url) {
+        let urlParts = url.split('?');
+        let baseUrl = urlParts[0];
+        let queryString = urlParts.length > 1 ? urlParts[1] : '';
+
+        if (queryString) {
+            let params = queryString.split('&');
+            let encodedParams = [];
+
+            for (let i = 0; i < params.length; i++) {
+                let param = params[i].split('=');
+                let key = param[0];
+                let value = param.length > 1 ? param[1] : '';
+                encodedParams.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+            }
+
+            return baseUrl + '?' + encodedParams.join('&');
+        }
+
+        return url;
+    }
+
+    // 生成无重叠字云（网格布局）
+    function generateNonOverlappingWordCloud() {
+        const container = document.getElementById('wordcloud');
+        container.innerHTML = '';
+
+        // 按权重排序（可选）
+        const sortedKeywords = [...keywords].sort((a, b) => b.weight - a.weight);
+
+        sortedKeywords.forEach(keyword => {
+            const wordElement = document.createElement('a');
+            wordElement.className = 'word';
+            wordElement.textContent = keyword.text;
+            wordElement.href = encodeSpecialChars(keyword.url);
+            wordElement.target = "";
+
+            // 根据权重设置字体大小
+            const fontSize = 12 + (keyword.weight / 15);
+            wordElement.style.fontSize = fontSize + 'px';
+
+            // 随机颜色
+            const colorIndex = Math.floor(Math.random() * colors.length);
+            wordElement.style.color = colors[colorIndex];
+
+            container.appendChild(wordElement);
+        });
+    }
+
+    // 初始生成
+    generateNonOverlappingWordCloud();
+</script>
+
+<!--{else}-->
+$num
+<!--{/if}-->
+
+<!--{template common/footer}-->

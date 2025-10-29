@@ -501,6 +501,7 @@ $lang = array (
   'crime_record' => 'ระเบียน',
   'crime_sightml' => 'ลบลายเซ็น',
   'crime_warnpost' => 'แจ้งเตือนโพสต์',
+  'members_ban_none' => 'สถานะปกติ',
   'expiry' => 'สิ้นสุด',
   'ip_location' => 'ที่อยู่ไอพี',
   'mod_member_ban' => 'แบนสมาชิก',

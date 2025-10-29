@@ -916,10 +916,10 @@ code {font-size: 80%;}
 <a class="nav-link" href="https://www.discuz.net/" target="_blank">เว็บไซต์ Discuz! X อย่างเป็นทางการ</a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="https://github.com/jaideejung007/discuzth" target="_blank">GitHub ของดิสคัสไทยอย่างเป็นทางการ</a>
+<a class="nav-link" href="https://github.com/jaideejung007/discuzth" target="_blank">GitHub ของดิสคัส! ทีเอช อย่างเป็นทางการ</a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="https://discuzthai.com/" target="_blank">เว็บไซต์ ดิสคัสไทย อย่างเป็นทางการ</a>
+<a class="nav-link" href="https://discuzth.com/" target="_blank">เว็บไซต์ ดิสคัส! ทีเอช อย่างเป็นทางการ</a>
 </li>
 </ul>
 </div>

@@ -203,6 +203,10 @@
 					<div class="quote">{lang message_ishidden_hiddenreplies}</div>
 				<!--{elseif $post['first'] && $_G['forum_threadpay']}-->
 					<!--{template forum/viewthread_pay}-->
+				<!--{elseif $_G['forum_discuzcode']['passwordlock'][$post['pid']]}-->
+					<script type="text/javascript" src="{$_G['setting']['jspath']}md5.js?{VERHASH}"></script>
+					<div class="locked">{lang message_password_exists} {lang pleaseinputpw}<input type="text" id="postpw_$post[pid]" class="px pl5" /></div>
+					<button class="pn vm" type="button" onclick="submitpostpw($post[pid]{if $_GET['from'] == 'preview'},{$post[tid]}{else}{/if})"><strong>{lang submit}</strong></button>
 				<!--{else}-->
 					<!--{if $_G['setting']['bannedmessages'] & 1 && (($post['authorid'] && !$post['username']) || ($post['groupid'] == 4 || $post['groupid'] == 5))}-->
 						<div class="quote">{lang admin_message_banned}</div>
@@ -266,7 +270,20 @@
 				<!--{/if}-->
 			<!--{/if}-->
 			<!--{/if}-->
-			<!--{if $post['first']}-->
+			<!--{if $post['first'] && ($post['tags'] || $relatedkeywords) && $_GET['from'] != 'preview'}-->
+			<div class="mt10 mb10 cl">
+				<!--{if $post['tags']}-->
+				<div class="tags xg1">
+					<i class="fico-tag"></i>
+				<!--{eval $tagi = 0;}-->
+				<!--{loop $post['tags'] $var}-->
+				<!--{if $tagi}-->, <!--{/if}--><a class="tag-item" title="$var[1]" href="misc.php?mod=tag&id=$var[0]" target="_blank">$var[1]</a>
+				<!--{eval $tagi++;}-->
+				<!--{/loop}-->
+				</div>
+				<!--{/if}-->
+				<!--{if $relatedkeywords}--><span>$relatedkeywords</span><!--{/if}-->
+			</div>
 			<!--{/if}-->
 			<div id="comment_$post['pid']">
 			<!--{if $_GET['from'] != 'preview' && $_G['setting']['commentnumber'] && !empty($comments[$post['pid']])}-->
@@ -390,6 +407,9 @@
 					<!--{/if}-->
 				<!--{/if}-->
 			<!--{/if}-->
+			<!--{if $_G['forum_thread']['special'] == 3 && ($_G['forum']['ismoderator'] && (!$_G['setting']['rewardexpiration'] || $_G['setting']['rewardexpiration'] > 0 && ($_G[timestamp] - $_G['forum_thread']['dateline']) / 86400 > $_G['setting']['rewardexpiration']) || $_G['forum_thread']['authorid'] == $_G['uid']) && $post['authorid'] != $_G['forum_thread']['authorid'] && $post['first'] == 0 && $_G['uid'] != $post['authorid'] && $_G['forum_thread']['price'] > 0}-->
+				<li><a href="javascript:;" onclick="setanswer($post['tid'], $post['pid'], '{$_GET['from']}','{$_G['formhash']}')"><i class="dm-tag"></i>{lang reward_set_bestanswer}</a></li>
+			<!--{/if}-->
 			<!--{hook/viewthread_postfooter_mobile $postcount}-->
 			</ul>
 		</div>
@@ -426,16 +446,16 @@ $multipage
 <div class="foot foot_reply flex-box cl">
 	<a href="forum.php?mod=post&action=reply&fid={$_G['fid']}&tid={$_G['tid']}&reppost={$_G['forum_firstpid']}&page={$page}" class="flex"><i class="dm-chat-s"></i>{lang reply}</a>
 	<!--{if helper_access::check_module('favorite')}-->
-		<a href="home.php?mod=spacecp&ac=favorite&type=thread&id={$_G['tid']}" class="dialog flex mx"><i class="dm-star"></i><!--{if $_G['forum_thread']['favtimes']}-->{$_G['forum_thread']['favtimes']} <!--{/if}-->{lang favorite}</a><!--jaideejung007-->
+		<a href="home.php?mod=spacecp&ac=favorite&type=thread&id={$_G['tid']}" class="dialog flex mx"><i class="dm-star"></i><!--{if $_G['forum_thread']['favtimes']}-->{$_G['forum_thread']['favtimes']}<!--{/if}-->{lang favorite}</a>
 	<!--{/if}-->
 	<!--{if helper_access::check_module('follow')}-->
-		<a href="home.php?mod=spacecp&ac=follow&op=relay&tid={$_G['tid']}&from=forum" class="dialog flex mx"><i class="fico-launch"></i><!--{if $_G['forum_thread']['relay']}-->{$_G['forum_thread']['relay']} <!--{/if}-->{lang thread_realy}</a><!--jaideejung007-->
+		<a href="home.php?mod=spacecp&ac=follow&op=relay&tid={$_G['tid']}&from=forum" class="dialog flex mx"><i class="fico-launch"></i><!--{if $_G['forum_thread']['relay']}-->{$_G['forum_thread']['relay']}<!--{/if}-->{lang thread_realy}</a>
 	<!--{/if}-->
 	<!--{if helper_access::check_module('share')}-->
-		<a href="home.php?mod=spacecp&ac=share&type=thread&id={$_G['tid']}" class="dialog flex mx"><i class="dm-star"></i><!--{if $_G['forum_thread']['sharetimes']}-->{$_G['forum_thread']['sharetimes']} <!--{/if}-->{lang thread_share}</a><!--jaideejung007-->
+		<a href="home.php?mod=spacecp&ac=share&type=thread&id={$_G['tid']}" class="dialog flex mx"><i class="dm-star"></i><!--{if $_G['forum_thread']['sharetimes']}-->{$_G['forum_thread']['sharetimes']}<!--{/if}-->{lang thread_share}</a>
 	<!--{/if}-->
 	<!--{if !$_G['forum']['disablecollect'] && helper_access::check_module('collection')}-->
-		<a href="forum.php?mod=collection&action=edit&op=addthread&tid={$_G['tid']}" class="dialog flex mx"><i class="fico-collection"></i><!--{if $post['releatcollectionnum']}-->{$post['releatcollectionnum']} <!--{/if}-->{lang collection}</a><!--jaideejung007-->
+		<a href="forum.php?mod=collection&action=edit&op=addthread&tid={$_G['tid']}" class="dialog flex mx"><i class="fico-collection"></i><!--{if $post['releatcollectionnum']}-->{$post['releatcollectionnum']}<!--{/if}-->{lang collection}</a>
 	<!--{/if}-->
 </div>
 <div class="foot_height_view"></div>

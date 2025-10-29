@@ -85,7 +85,7 @@ $lang = array(
 	'step_app_reg_title' => 'ตั้งค่าระบบ',
 	'step_app_reg_desc' => 'ทดสอบระบบเซิร์ฟเวอร์และตั้งค่า UCenter',
 	'tips_ucenter' => 'กรุณากรอกข้อมูลของ UCenter ที่กำหนดไว้',
-	'tips_ucenter_comment' => 'UCenter เป็นผลิตภัณฑ์หลักของบริษัทฯ Comsenz ซึ่ง Discuz! Board ต้องติดตั้งและพึ่งพาการทำงานของโปรแกรมนี้ หากคุณติดตั้ง UCenter ไว้แล้ว กรุณากรอกข้อมูลด้านล่าง หากคุณยังไม่มีและยังไม่ได้ติดตั้ง UCenter กรุณาไปที่ <a href="https://www.discuzthai.com/" target="blank">DiscuzThai</a> เพื่อดาวน์โหลด UCenter เวอร์ชันภาษาไทย แล้วทำการติดตั้งเพื่อดำเนินการต่อไป',
+	'tips_ucenter_comment' => 'UCenter เป็นผลิตภัณฑ์หลักของบริษัทฯ Comsenz ซึ่ง Discuz! Board ต้องติดตั้งและพึ่งพาการทำงานของโปรแกรมนี้ หากคุณติดตั้ง UCenter ไว้แล้ว กรุณากรอกข้อมูลด้านล่าง หากคุณยังไม่มีและยังไม่ได้ติดตั้ง UCenter กรุณาไปที่ <a href="https://discuzth.com/" target="blank">Discuz! TH</a> เพื่อดาวน์โหลด UCenter เวอร์ชันภาษาไทย แล้วทำการติดตั้งเพื่อดำเนินการต่อไป',
 
 	'advice_mysqli_connect' => 'กรุณาตรวจสอบว่าโมดูล mysqli มีการโหลดอย่างถูกต้องแล้ว',
 	'advice_xml_parser_create' => 'ฟังก์ชันนี้ต้องใช้ PHP เพื่อรองรับ XML กรุณาติดต่อผู้ให้บริการเพื่อตรวจสอบให้แน่ใจว่าฟีเจอร์นี้เปิดใช้งานอยู่',
@@ -175,7 +175,7 @@ $lang = array(
 	'tagtemplates_dateline' => 'วันที่',
 	'tagtemplates_url' => 'ที่อยู่หัวเรื่อง',
 
-	'uc_version_incorrect' => 'เวอร์ชันเซิร์ฟเวอร์ UCenter ของคุณต่ำเกินไป กรุณาอัปเกรดเซิร์ฟเวอร์ UCenter เป็นเวอร์ชันล่าสุดก่อน สามารถดาวน์โหลดได้ที่: http://discuzthai.com/',
+	'uc_version_incorrect' => 'เวอร์ชันเซิร์ฟเวอร์ UCenter ของคุณต่ำเกินไป กรุณาอัปเกรดเซิร์ฟเวอร์ UCenter เป็นเวอร์ชันล่าสุดก่อน สามารถดาวน์โหลดได้ที่: http://discuzth.com/',
 	'config_unwriteable' => 'ตัวช่วยการติดตั้งไม่สามารถเขียนไฟล์ config.inc.php ให้กำหนดสิทธิ์ไฟล์นี้เป็น (777)',
 
 	'install_in_processed' => 'กำลังติดตั้ง...',

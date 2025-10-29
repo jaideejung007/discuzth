@@ -1,0 +1,50 @@
+<!--{template common/header}-->
+<div class="header cl">
+	<div class="mz"></div><h2></h2><div class="my"></div>
+</div>
+<div class="header_toplogo">
+	{$_G['style']['touchlogo']}
+	<p>{lang invite_friends}</p>
+</div>
+<div class="bodybox cl">
+	<div class="dzcell-group-inset pt10 mb10 cl">
+		<div class="dzcell-item p10 cl">
+			<h1 class="xs3 mb5">{lang welcome}<a href="home.php?mod=space&uid=$uid" target="_blank">{$space[username]}</a> {lang invite_you_to_friends}</h1>
+		</div>
+		<div class="dzcell-item p10 cl">
+			<div class="f_c xs1 cl">{lang become_friend}</div>
+		</div>
+		<hr class="b_t mt5 mb5" />
+		<div class="dzcell-item p5">
+			<div class="flex-box">
+				<div class="avt m15 ml0 cl">
+					<a href="home.php?mod=space&uid=$uid" class="mlm"><!--{avatar($space['uid'], 'big')}--></a>
+				</div>
+				<div class="flex">
+					<h4 class="xs3"><a href="home.php?mod=space&$url_plus">{$space[username]}</a></h4>
+					<!--{if !empty($space['residecountry'])&&!empty($space['resideprovince'])&&!empty($space['residecity'])}-->
+					<p class="fc-9">{lang comefrom} $space[residecountry] $space[resideprovince] $space[residecity]</p>
+					<!--{/if}-->
+					<p class="fc-9">{lang friend_information}</p>
+					<!--{if $space[recentnote]}-->
+					<div class="quote p5 b_a mb5">
+						<blockquote class="fc-9">$space[recentnote]</blockquote>
+					</div>
+					<!--{/if}-->
+					<div class="flex-box justify-content-between mt10 f_f cl">
+						<!--{if $_G['uid']}-->
+						<a href="home.php?mod=invite&accept=yes" class="btn_pn_blue flex-1 mr5">{lang accept_invitation}</a>
+						<a href="home.php?mod=invite&accept=no" class="btn_pn_blue btn_pn_red flex-1 ml5">{lang lgnore_invitation}</a>
+						<!--{else}-->
+						<!--{if $_G['setting']['regstatus']}-->
+						<a href="member.php?mod={$_G[setting][regname]}&referer=$jumpurl" class="btn_pn_blue btn_pn_green flex-1 mr5">{lang want_to_register}</a>
+						<!--{/if}-->
+						<a href="member.php?mod=logging&action=login&referer=$jumpurl" class="btn_pn_blue flex-1 ml5">{lang register_immediately}</a>
+						<!--{/if}-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--{template common/footer}-->

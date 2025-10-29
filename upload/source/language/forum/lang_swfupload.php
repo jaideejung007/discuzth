@@ -28,7 +28,7 @@ $lang = "
 <uploadMsg2>อัปโหลดไปแล้ว</uploadMsg2>
 <uploadMsg3>ไฟล์</uploadMsg3>
 <bigFile>ใหญ่ไป</bigFile>
-<uploaderror>อัปโหลดล้มเหลว</uploaderror>
+<uploaderror>อัปโหลดไม่สำเร็จ</uploaderror>
 ";
 
 ?>

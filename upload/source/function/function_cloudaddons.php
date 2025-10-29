@@ -17,7 +17,7 @@ $addon = $addonsource ?
 	array(
 		'website_url' => 'https://addon.dismall.com',
 		'download_url' => 'https://addon.dismall.com/index.php',
-		'download_url_jdz' => 'https://logs.discuzthai.com/index.php', /*jaideejung007*/
+		'download_url_jdz' => 'https://logs.discuzth.com/index.php', /*jaideejung007*/
 		'download_ip' => '',
 		'check_url' => 'https://addon1.dismall.com/md5/',
 		'check_ip' => '',
@@ -145,6 +145,8 @@ function cloudaddons_upgradecheck($addonids) {
 		$array = cloudaddons_getmd5($addonid);
 		if($array) {
 			$post[] = 'rid['.$addonid.']='.$array['RevisionID'].'&sn['.$addonid.']='.$array['SN'].'&rd['.$addonid.']='.$array['RevisionDateline'];
+		} else {
+			$post[] = 'rid['.$addonid.']=&sn['.$addonid.']=&rd['.$addonid.']=';
 		}
 	}
 	return cloudaddons_open('&mod=app&ac=validator&ver=2', implode('&', $post), 15);
@@ -154,7 +156,11 @@ function cloudaddons_recommendaddon($addonids) {
 	$post = array();
 	foreach($addonids as $addonid) {
 		$array = cloudaddons_getmd5($addonid);
-		$post[] = 'rid['.$addonid.']='.$array['RevisionID'].'&sn['.$addonid.']='.$array['SN'].'&rd['.$addonid.']='.$array['RevisionDateline'];
+		if($array) {
+			$post[] = 'rid['.$addonid.']='.$array['RevisionID'].'&sn['.$addonid.']='.$array['SN'].'&rd['.$addonid.']='.$array['RevisionDateline'];
+		} else {
+			$post[] = 'rid['.$addonid.']=&sn['.$addonid.']=&rd['.$addonid.']=';
+		}
 	}
 	return cloudaddons_open('&mod=app&ac=newaddon&ver=2', implode('&', $post), 15);
 }

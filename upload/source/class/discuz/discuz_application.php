@@ -735,10 +735,6 @@ class discuz_application extends discuz_base{
 
 		!empty($this->cachelist) && loadcache($this->cachelist);
 
-		if(!is_array($this->var['setting']) && !is_a($this->var['setting'], 'memory_setting_array')) {
-			$this->var['setting'] = array();
-		}
-
 	}
 
 	public function _init_style() {

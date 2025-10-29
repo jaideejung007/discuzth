@@ -89,7 +89,7 @@ $lang = array
 	'trade_syspayseller' => 'ผู้ซื้อยืนยันการรับของสินค้า, รอชำระเงินให้ผู้ขาย',
 	'trade_finished' => '<font color="green">การซื้อขายได้เสร็จสมบูรณ์</font>',
 	'trade_closed' => '<font color="gray">ระงับการซื้อขาย (ไม่สมบูรณ์)</font>',
-	'trade_waitselleragree' => 'รอให้ผู้ขายตกลงที่จะคืนเงิน',
+	'trade_waitselleragree'  => 'รอให้ผู้ขายตกลงที่จะคืนเงิน',
 	'trade_sellerrefusebuyer' => 'ผู้ซื้อปฏิเสธเงื่อนไขของผู้ขาย, รอการปรับเปลี่ยนเงื่อนไขการซื้อขาย',
 	'trade_waitbuyerreturn' => 'ผู้ขายตกลงที่จะคืนเงิน, รอคืนเงินให้ผู้ซื้อ',
 	'trade_waitsellerconfirmgoods' => 'รอการยืนยันจากผู้ขาย',

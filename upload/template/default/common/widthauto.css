@@ -21,7 +21,7 @@ Created & Modified by Pony.
 .ct3_a { padding: 0 240px 0 160px; }
 	.ct3_a .appl { margin-left: -160px; }
 	.ct3_a .sd { margin-right: -240px; }
-	.ct3_a .mn { margin: 0; width: 100%; }
+	.ct3_a .mn { margin: 0 0 0 20px;width: calc(100% - 30px);}
 
 #nv { background-repeat: repeat-x; background-position: 0 -33px; }
 

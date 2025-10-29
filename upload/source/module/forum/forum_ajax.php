@@ -630,9 +630,6 @@ EOF;
 	$feed = $thread = array();
 	if($tid) {
 		$thread = C::t('forum_thread')->fetch_thread($tid);
-		if(empty($_G['setting']['followforumid']) || $thread['fid'] != $_G['setting']['followforumid']) {
-			$flag = 0;
-		}
 		if($flag) {
 			$post = C::t('forum_post')->fetch_post($thread['posttableid'], $pid);
 			if($thread['tid'] != $post['tid']) {

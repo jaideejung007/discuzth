@@ -488,7 +488,7 @@ function cloudaddons_getversion($instid) {
 	$param .= '&md5hash='.substr(md5($data.$timestamp), 8, 8).'&timestamp='.$timestamp;
 	$param .= '&mod=app&ac=installcheck';
 
-	$url = 'https://logs.discuzthai.com/index.php?'.$param; /*jaideejung007*/
+	$url = 'https://logs.discuzth.com/index.php?'.$param; /*jaideejung007*/
 
 	$return = dfopen($url, 0, '', '', FALSE, '', 3);
 

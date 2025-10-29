@@ -71,6 +71,7 @@ a.button {color:var(--dz-FC-fff)}
 .btn_pn_red {background-color:var(--dz-BG-2);color:var(--dz-FC-fff)}
 .btn_pn_orange {background-color:var(--dz-BG-3);color:var(--dz-FC-fff)}
 .btn_pn_green {background-color:var(--dz-BG-4);color:var(--dz-FC-fff)}
+.btn_pn_cancel {background-color:var(--dz-BG-6);color:var(--dz-FC-fff)}
 input[type="reset"]::-moz-focus-inner,
 input[type="button"]::-moz-focus-inner,
 input[type="submit"]::-moz-focus-inner,
@@ -244,6 +245,9 @@ select {-moz-appearance:none;}
 .f_c, .f_c a {color: var(--dz-FC-ccc);}
 .f_d, .f_d a {color: var(--dz-FC-ddd);}
 .f_9, .f_9 a {color: var(--dz-FC-999);}
+.txt_a_l {text-align:left;}
+.txt_a_c {text-align:center;}
+.txt_a_r {text-align:right;}
 .b_t {border-top:1px solid var(--dz-BOR-ed) !important;}
 .b_b {border-bottom:1px solid var(--dz-BOR-ed) !important}
 .b_a {border:1px solid var(--dz-BOR-ed) !important;}
@@ -440,7 +444,8 @@ select {-moz-appearance:none;}
 .jump_c {padding:100px 15px;background-color:var(--dz-BG-0);border-top:1px solid var(--dz-BOR-ed);border-bottom:1px solid var(--dz-BOR-ed);margin-top:10px;font-size:15px}
 .jump_c p {line-height:26px}
 .jump_c p .grey {color:var(--dz-FC-999)}
-.tip {width:300px;text-align:center;background-color:var(--dz-BG-0);border:1px solid var(--dz-BOR-ed);border-radius:6px}
+.tip {width:300px;margin:auto;text-align:center;background-color:var(--dz-BG-0);border:1px solid var(--dz-BOR-ed);border-radius:6px}
+.tip .tit {font-weight: 700;}
 .tip dt {padding:25px 20px;line-height:30px;font-size:14px}
 .tip dt.mpt {margin:15px;padding:10px;background-color:var(--dz-BG-5);border-radius:4px}
 .tip dt.mpt .pt {min-height:96px}
@@ -496,6 +501,7 @@ select {-moz-appearance:none;}
 .medallist .mg_tit span { display: block;height: 18px;line-height: 18px;font-size: 12px;color: var(--dz-FC-999);}
 .medallist .mg_tit span .xi1 { font-size: 14px;}
 .medallist .medal_msg {margin-bottom: 5px;margin-left: 32px;line-height: 22px;font-size: 14px;color: var(--dz-FC-999);}
+.medallist .medal_btn_large {position: absolute;top: 15px;right: 13px; text-align: center;}
 .medallist .medal_btn { position: absolute;top: 20px;right: 13px;height: 30px;line-height: 30px;background-color: var(--dz-BG-color);font-size: 12px;border-radius: 3px;text-align: center;}
 .medallist .medal_btn span {color: var(--dz-FC-fff);padding: 0 12px;}
 .medallist .medal_btn span.hui {display:block;background: var(--dz-BG-5); color: var(--dz-FC-999);}
@@ -572,7 +578,7 @@ select {-moz-appearance:none;}
 .magic_log_list .dt { background: var(--dz-BG-0); border-top: 1px solid var(--dz-BOR-ed); }
 .magic_log_list .dt th, .magic_log_list .dt td { padding: 11px 10px 9px 10px; height: 24px; line-height: 24px; font-size: 13px; overflow: hidden; }
 .medal_tip_box ul { padding: 12px 15px; }
-.medal_tip_box ul input.px.p_fre{ text-align:center;}
+.medal_tip_box ul input.px.p_fre{ text-align:center; border:1px solid var(--dz-BOR-ed);}
 .medal_tip_box ul p {margin: 2px 0;line-height: 22px;overflow: hidden;}
 .medal_tip_box ul li { display: flex; position: relative; line-height: 22px; padding: 8px 12px; background: var(--dz-BG-0); font-size: 15px; overflow: hidden; }
 .medal_tip_box ul li span {display: flex; flex-shrink: 0; margin-right: 15px; color: var(--dz-FC-999);}
@@ -752,7 +758,7 @@ a.flw_readfull {color: var(--dz-BG-2);}
 .threadlist_top .muser h3 .mmc {font-size:15px}
 .threadlist_top .muser .mtime {display:block;height:18px;line-height:18px;font-size:12px;color:var(--dz-FC-ccc)}
 .threadlist_tit {line-height:26px;font-size:18px;margin-bottom:5px;font-weight:400}
-.threadlist_tit .micon {float:left;width:30px;height:18px;line-height:18px;text-align:center;font-size:12px;background-color:var(--dz-BG-color);color:var(--dz-FC-fff);margin-top:4px;margin-right:5px;border-radius:2px;overflow:hidden}
+.threadlist_tit .micon {float:left;padding:0 3px;height:18px;line-height:18px;text-align:center;font-size:12px;background-color:var(--dz-BG-color);color:var(--dz-FC-fff);margin-top:4px;margin-right:5px;border-radius:2px;overflow:hidden}
 .threadlist_tit .top {background-color:var(--dz-BG-3)}
 .threadlist_tit .digest {background-color:var(--dz-BG-4)}
 .threadlist_tit .lock {background-color:var(--dz-BG-2)}
@@ -1348,3 +1354,21 @@ body.pg_logging, body.pg_register {background-color:var(--dz-BG-0)}
 		.pll .c { margin: 0 84px 0 74px; }
 		.pll ol { margin: 5px 0 0 20px; }
 			.pll ol li { list-style-type: decimal; padding: 0; border-bottom: none; }
+
+/*----- 词云网格布局容器 -----*/
+.wordcloud-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+}
+.wordcloud-container .word {
+    text-decoration: none;
+    transition: transform 0.2s;
+    text-align: center;
+    padding: 5px 10px;
+}
+.wordcloud-container .word:hover {
+    transform: scale(1.1);
+}

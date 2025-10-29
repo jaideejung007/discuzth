@@ -19,7 +19,10 @@
 		</div>
 
 		<div class="album_inof">
-			<p id="a_set_title" class="albim_pic_title"><!--{if $pic['title']}-->$pic['title']<!--{else}--><!--{eval echo substr($pic['filename'], 0, strrpos($pic['filename'], '.'));}--><!--{/if}--></p>
+			<p id="a_set_title" class="albim_pic_title">
+				<a href="home.php?mod=spacecp&ac=album&op=editpic&albumid=$pic['albumid']&picid=$pic['picid']" class="y">{lang manage_pic}</a>
+				<!--{if $pic['title']}-->$pic['title']<!--{else}--><!--{eval echo substr($pic['filename'], 0, strrpos($pic['filename'], '.'));}--><!--{/if}-->
+			</p>
 			<p class="album_at">
 				{lang upload_at} <!--{date($pic['dateline'])}--> ($pic['size'])
 			</p>

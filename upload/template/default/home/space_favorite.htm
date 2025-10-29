@@ -35,7 +35,7 @@
 				<h1 class="mt">{lang favorite}</h1>
 <!--{/if}-->
 			<!--{if $list}-->
-			<form method="post" autocomplete="off" name="delform" id="delform" action="home.php?mod=spacecp&ac=favorite&op=delete&type=$_GET[type]&checkall=1" onsubmit="showDialog('{lang del_select_favorite_confirm}', 'confirm', '', '$(\'delform\').submit();'); return false;">
+			<form method="post" autocomplete="off" name="delform" id="delform" action="home.php?mod=spacecp&ac=favorite&op=delete&type=$_GET[type]&checkall=1">
 			<input type="hidden" name="formhash" value="{FORMHASH}" />
 			<input type="hidden" name="delfavorite" value="true" />
 			<ul id="favorite_ul" class="">
@@ -55,7 +55,7 @@
 			</ul>
 			<p class="mtm pns">
 				<label for="chkall" onclick="checkall(this.form, 'favorite')"><input type="checkbox" name="chkall" id="chkall" class="pc vm" />{lang select_all}</label>
-				<button type="submit" name="delsubmit" value="true" class="pn vm"><em>{lang del_favorite}</em></button>
+				<button type="button" onclick="delall_favorite()" name="delsubmit" value="true" class="pn vm"><em>{lang del_favorite}</em></button>
 				<!--{if $_GET[type] == "thread"}-->
 					<button type="button" name="collectionsubmit" value="true" class="pn pnc vm" onclick="collection_favorite()"><em>{lang collection_favorite}</em></button>
 				<!--{/if}-->
@@ -101,6 +101,24 @@
 		if(el) {
 			el.style.display = "none";
 		}
+	}
+	function delall_favorite() {
+		var form = $('delform');
+		var prefix = '^favorite';
+		var tids = '';
+		for(var i = 0; i < form.elements.length; i++) {
+			var e = form.elements[i];		
+			if(e.name.match(prefix) && e.checked) {
+				tids += 'tids[]=' + e.getAttribute('vid') + '&';
+			}
+		}
+		if(tids) {
+			showDialog('{lang del_select_favorite_confirm}', 'confirm', '', '$(\'delform\').submit();'); 
+		} else {
+			showDialog('{lang no_select_favorite}');
+			return false;
+		}
+		
 	}
 	<!--{if $_GET[type] == "thread"}-->
 	function collection_favorite() {

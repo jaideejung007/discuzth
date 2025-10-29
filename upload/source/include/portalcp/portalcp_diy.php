@@ -417,7 +417,7 @@ function category_checkperm($category) {
 
 	if($_G['group']['allowdiy']) return true;
 
-	if(!$_G['group']['allowdiy'] && (!$_G['group']['allowaddtopic'] || $_G['uid'] != $topic['uid'])) {
+	if(!$_G['group']['allowdiy'] && (!$_G['group']['allowaddtopic'] || $_G['uid'] != $category['uid'])) {
 		showmessage('topic_edit_nopermission');
 	}
 

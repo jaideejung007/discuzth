@@ -81,7 +81,7 @@ class logging_ctl {
 
 			$loginhash = !empty($_GET['loginhash']) && preg_match('/^\w+$/', $_GET['loginhash']) ? $_GET['loginhash'] : '';
 
-			if(!($_G['member_loginperm'] = logincheck($_GET['username']))) {				
+			if(!($_G['member_loginperm'] = logincheck($_GET['username']))) {
 				showmessage('login_strike');
 			}
 			if($_GET['fastloginfield']) {
@@ -362,7 +362,6 @@ class register_ctl {
 				}
 			} elseif(!$this->setting['regstatus']) {
 				if($this->setting['regconnect']) {
-					
 					if(CURMODULE != 'connect'){
 						dheader('location:connect.php?mod=login&op=init&referer=forum.php&statfrom=login_simple');
 					}
@@ -930,7 +929,7 @@ class register_ctl {
 
 class crime_action_ctl {
 
-	static $actions = array('all', 'crime_delpost', 'crime_warnpost', 'crime_banpost', 'crime_banspeak', 'crime_banvisit', 'crime_banstatus', 'crime_avatar', 'crime_sightml', 'crime_customstatus');
+	static $actions = array('all', 'crime_delpost', 'crime_warnpost', 'crime_banpost', 'crime_banspeak', 'crime_banvisit', 'crime_banstatus', 'crime_avatar', 'crime_sightml', 'crime_customstatus', 'members_ban_none');
 
 	function __construct() {}
 

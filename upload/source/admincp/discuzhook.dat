@@ -398,6 +398,7 @@ template/default/touch/home/spacecp_profile.htm *<!--{hook/spacecp_profile_extra
 template/default/touch/home/spacecp_profile.htm *<!--{hook/spacecp_profile_bottom}-->
 template/default/touch/home/spacecp_promotion.htm *<!--{hook/spacecp_promotion_top}-->
 template/default/touch/home/spacecp_promotion.htm *<!--{hook/spacecp_promotion_bottom}-->
+template/default/touch/home/spacecp_upload.htm *<!--{hook/spacecp_upload_extend}-->
 template/default/touch/home/spacecp_usergroup.htm *<!--{hook/spacecp_usergroup_top}-->
 template/default/touch/home/spacecp_usergroup.htm *<!--{hook/spacecp_usergroup_top}-->
 template/default/touch/home/spacecp_usergroup.htm *<!--{hook/spacecp_usergroup_top}-->

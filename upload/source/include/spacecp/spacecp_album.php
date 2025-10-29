@@ -104,7 +104,7 @@ if($_GET['op'] == 'edit') {
 
 		$categoryselect = '';
 		if($category) {
-			$categoryselect = "<select id=\"catid\" name=\"catid\" width=\"120\"><option value=\"0\">------</option>";
+			$categoryselect = defined('IN_MOBILE') ? "<select id=\"catid\" name=\"catid\" class=\"sort_sel\"><option value=\"0\">------</option>" : "<select id=\"catid\" name=\"catid\" width=\"120\"><option value=\"0\">------</option>";
 			foreach ($category as $value) {
 				if($value['level'] == 0) {
 					$selected = $album['catid'] == $value['catid']?' selected':'';

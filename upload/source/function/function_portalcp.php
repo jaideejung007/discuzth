@@ -549,7 +549,7 @@ function getframeblock($data) {
 			foreach ((array)$content as $colid => $coldata) {
 				list($colflag, $colname) = explode('`', $colid);
 				if ($colflag == 'column') {
-					getframeblock($coldata,$framename);
+					getframeblock($coldata);
 				}
 			}
 			$_G['curtplframe'][$name] = array('type'=>$flag,'name'=>$name);

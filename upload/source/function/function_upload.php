@@ -92,7 +92,7 @@ function getuploadconfig($uid=0, $fid=0, $limit=true) {
 		}
 		if($_G['group']['maxsizeperday']) {
 			$todayattachsize = getuserprofile('todayattachsize');
-			$config['maxsizeperday'] = $_G['group']['maxsizeperday'] - $todayattachsize;
+			$config['maxsizeperday'] = (int)$_G['group']['maxsizeperday'] - (int)$todayattachsize;
 			$config['maxsizeperday'] = $config['maxsizeperday'] > 0 ? $config['maxsizeperday'] : -1;
 		}
 	}

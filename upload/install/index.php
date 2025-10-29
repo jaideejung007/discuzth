@@ -371,7 +371,7 @@ if($method == 'show_license') {
 		echo '<a href="'.$default_appurl.'/admin.php" class="btn">'.$lang['finish_btn_admin'].'</a>';
 		echo '<a href="'.$default_appurl.'/admin.php?action=cloudaddons&frame=no&from=newinstall" class="btn">'.$lang['finish_btn_cloudaddon'].'</a>';
 		echo '<a href="'.$default_appurl.'" class="btn finish">'.$lang['finish_btn_direct'].'</a>';
-/*jaideejung007*/		echo '<iframe frameborder="0" width="0" height="0" allowTransparency="true" src="https://logs.discuzthai.com/outer.php?id=installed&siteurl='.urlencode($default_appurl).'&platform=Discuz&version='.DISCUZ_VERSION.'&release='.DISCUZ_RELEASE.'&threvision='.DISCUZ_TH_REVISION.'"></iframe>';
+/*jaideejung007*/		echo '<iframe frameborder="0" width="0" height="0" allowTransparency="true" src="https://logs.discuzth.com/outer.php?id=installed&siteurl='.urlencode($default_appurl).'&platform=Discuz&version='.DISCUZ_VERSION.'&release='.DISCUZ_RELEASE.'&threvision='.DISCUZ_TH_REVISION.'"></iframe>';
 		show_footer();
 	}
 

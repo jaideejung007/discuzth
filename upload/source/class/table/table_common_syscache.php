@@ -80,17 +80,7 @@ class table_common_syscache extends discuz_table
 		$data = array();
 		$cachenames = is_array($cachenames) ? $cachenames : array($cachenames);
 		if ($this->_allowmem) {
-			if (($index = array_search('setting', $cachenames)) !== FALSE) {
-				if (memory('exists', 'setting')) {
-					unset($cachenames[$index]);
-					$settings = new memory_setting_array();
-				}
-			}
-
 			$data = memory('get', $cachenames);
-			if (isset($settings)) {
-				$data['setting'] = $settings;
-			}
 			$newarray = $data !== false ? array_diff($cachenames, array_keys($data)) : $cachenames;
 			if (empty($newarray)) {
 				return $data;
@@ -119,11 +109,7 @@ class table_common_syscache extends discuz_table
 		while($syscache = DB::fetch($query)) {
 			$data[$syscache['cname']] = $syscache['ctype'] ? dunserialize($syscache['data']) : $syscache['data'];
 			if ($this->_allowmem) {
-				if ($syscache['cname'] === 'setting') {
-					memory_setting_array::save($data[$syscache['cname']]);
-				} else {
-					memory('set', $syscache['cname'], $data[$syscache['cname']]);
-				}
+				memory('set', $syscache['cname'], $data[$syscache['cname']]);
 			}
 			if($this->_isfilecache) {
 				$cachedata = '$data[\''.$syscache['cname'].'\'] = '.var_export($data[$syscache['cname']], true).";\n\n";
@@ -157,11 +143,7 @@ class table_common_syscache extends discuz_table
 		), false, true);
 
 		if ($this->_allowmem && memory('exists', $cachename) !== false) {
-			if ($cachename === 'setting') {
-				memory_setting_array::save($data);
-			} else {
-				memory('set', $cachename, $data);
-			}
+			memory('set', $cachename, $data);
 		}
 		$this->_isfilecache && @unlink(DISCUZ_ROOT.'./data/cache/cache_'.$cachename.'.php');
 	}

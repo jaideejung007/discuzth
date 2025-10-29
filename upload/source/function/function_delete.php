@@ -339,6 +339,10 @@ function deletethread($tids, $membercount = false, $credit = false, $ponly = fal
 					}
 				}
 			}
+			if($post['authorid'] > 0 && $post['first']) {
+				$feed_counts = C::t('home_follow_feed')->delete_by_uid_tid($post['authorid'], $post['tid']);
+				C::t('common_member_count')->increase($post['authorid'], array('feeds'=>-$feed_counts));
+			}
 		}
 
 		if($credit) {
@@ -988,7 +992,7 @@ function deletecollection($ctid) {
 
 	$collectionteamworker = C::t('forum_collectionteamworker')->fetch_all_by_ctid($ctid);
 	foreach ($collectionteamworker as $worker) {
-		notification_add($worker['uid'], "system", 'collection_removed', array('ctid'=>$collectiondata['ctid'], 'collectionname'=>$collectiondata['name']), 1);
+		notification_add($worker['uid'], "system", 'collection_removed', array('ctid'=>$worker['ctid'], 'collectionname'=>$worker['name']), 1);
 	}
 
 	C::t('forum_collectionthread')->delete_by_ctid($ctid);

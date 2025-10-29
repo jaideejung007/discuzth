@@ -61,9 +61,9 @@ INSERT INTO pre_common_cron VALUES ('21','1','system','บันทึกกา�
 
 INSERT INTO pre_common_friendlink VALUES ('1','0','เว็บไซต์ Discuz! อย่างเป็นทางการ','https://www.discuz.vip/','นำเสนอข่าวสารเกี่ยวกับผลิตภัณฑ์ Discuz! รวมไปถึงการดาวน์โหลดซอฟต์แวร์และการแลกเปลี่ยนข้อมูลเทคโนโลยีใหม่ล่าสุด','static/image/common/logo_88_31.gif','2');
 INSERT INTO pre_common_friendlink VALUES ('2','1','ศูนย์ดาวน์โหลดแอป Discuz!','https://addon.dismall.com/','','','2');
-INSERT INTO pre_common_friendlink VALUES ('3','2','เว็บไซต์ Discuz! Thai อย่างเป็นทางการ','https://discuzthai.com','กลุ่มผู้ใช้งานกระดานข่าว ดิสคัส! ในประเทศไทย!','static/image/common/logo_discuzthai_88_31.gif','2');
+INSERT INTO pre_common_friendlink VALUES ('3','2','เว็บไซต์ Discuz! TH อย่างเป็นทางการ','https://discuzth.com','กลุ่มผู้ใช้งานเว็บบอร์ดดิสคัส! ทีเอช ในประเทศไทย!','static/image/common/logo_discuzth_88_31.gif','2');
 INSERT INTO pre_common_friendlink VALUES ('4','3','Discuz! TH Official Repositories','https://github.com/jaideejung007/discuzth','ขอเชิญร่วมพัฒนา Discuz! เวอร์ชันภาษาไทยกับเราได้ที่นี่','static/image/common/logo_discuzth_repositories_88_31.gif','2');
-INSERT INTO pre_common_friendlink VALUES ('5','4','Discord Discuz! Thai Community','https://discord.gg/faSzs3geux','แชทสด/พูดคุย/แลกเปลี่ยน พร้อมอัปเดตความเคลื่อนไหวดิสคัสภาษาไทย','static/image/common/logo_discord_discuzthai_88_31.gif','2');
+INSERT INTO pre_common_friendlink VALUES ('5','4','Discord Discuz! TH Community','https://go.discuzth.com/discuzth-discord-invite','แชทสด/พูดคุย/แลกเปลี่ยน พร้อมอัปเดตความเคลื่อนไหวดิสคัสภาษาไทย','static/image/common/logo_discord_discuzth_88_31.gif','2');
 
 INSERT INTO pre_common_member_profile_setting VALUES('realname', 1, 0, 0, 'ชื่อจริง', '', 0, 0, 0, 0, 0, 0, 1, 'text', 0, '', '');
 INSERT INTO pre_common_member_profile_setting VALUES('gender', 1, 0, 0, 'เพศ', '', 0, 0, 0, 0, 0, 0, 1, 'select', 0, '', '');
@@ -317,7 +317,7 @@ INSERT INTO pre_common_setting VALUES ('ec_mincredits','0');
 INSERT INTO pre_common_setting VALUES ('ec_ratio','0');
 INSERT INTO pre_common_setting VALUES ('editedby','1');
 INSERT INTO pre_common_setting VALUES ('editoroptions','6');
-INSERT INTO pre_common_setting VALUES ('editperdel', '1');
+INSERT INTO pre_common_setting VALUES ('editperdel', '0');
 INSERT INTO pre_common_setting VALUES ('edittimelimit','');
 INSERT INTO pre_common_setting VALUES ('exchangemincredits','100');
 INSERT INTO pre_common_setting VALUES ('extcredits','');

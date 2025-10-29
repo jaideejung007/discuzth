@@ -13,6 +13,7 @@
 			<div class="albumname z">$album['albumname']</div>
 			<span><!--{if $album['picnum']}-->{lang total} $album['picnum'] {lang album_pics}<!--{/if}--></span>
 			<!--{if ($_G['uid'] == $album['uid'] || checkperm('managealbum')) && $album['albumid'] > 0}-->
+			<a href="home.php?mod=spacecp&ac=album&op=edit&albumid=$album['albumid']" class="pl5 y">{lang edit}</a>
 			<a href="home.php?mod=spacecp&ac=album&op=delete&albumid=$album['albumid']&uid=$album['uid']&handlekey=delalbumhk_{$album['albumid']}" id="album_delete_$album['albumid']" class="dialog y">{lang delete}</a>
 			<!--{/if}-->
 		</div>

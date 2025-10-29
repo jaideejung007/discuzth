@@ -639,7 +639,7 @@ function showboxrow($trstyle = '', $tdstyle = array(), $tdtext = array(), $retur
 	echo $cells;
 }
 function showboxbody($class = '', $text = '', $extra = '') {
-	echo '<div class="boxbody'.($style ? (' '.$style) : '').'" '.$extra.'>'.$text.'</div>';
+	echo '<div class="boxbody'.($class ? (' '.$class) : '').'" '.$extra.'>'.$text.'</div>';
 }
 
 function showsetting($setname, $varname, $value, $type = 'radio', $disabled = '', $hidden = 0, $comment = '', $extra = '', $setid = '', $nofaq = false, $inbox = 0) {
@@ -692,7 +692,7 @@ function showsetting($setname, $varname, $value, $type = 'radio', $disabled = ''
 	} elseif($type == 'text' || $type == 'password' || $type == 'number') {
 		$s .= '<input name="'.$varname.'" value="'.dhtmlspecialchars($value).'" type="'.$type.'" class="txt" '.$check['disabled'].' '.$extra.' />';
 	} elseif($type == 'htmltext') {
-		$id .= 'html'.random(2);
+		$id = 'html'.random(2);
 		$s .= '<div id="'.$id.'">'.$value.'</div><input id="'.$id.'_v" name="'.$varname.'" value="'.dhtmlspecialchars($value).'" type="hidden" /><script type="text/javascript">sethtml(\''.$id.'\')</script>';
 	} elseif($type == 'file') {
 		$s .= '<input name="'.$varname.'" value="" type="file" class="txt uploadbtn marginbot" '.$check['disabled'].' '.$extra.' />';
@@ -1484,7 +1484,7 @@ function siteftp_check($siteftp, $dir) {
 	if(!file_exists(DISCUZ_ROOT.'./'.$dir.'/discuz_version.php')) {
 		cpmsg('cloudaddons_ftp_path_error', '', 'error');
 	}
-	$ftp->ftp_delete($typedir.'/discuz_version.php');
+	$ftp->ftp_delete($dir.'/discuz_version.php');
 	$_G['siteftp'] = $ftp;
 }
 

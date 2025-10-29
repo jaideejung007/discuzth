@@ -100,7 +100,8 @@ function build_cache_setting() {
 	$data['buyusergroupexists'] = C::t('common_usergroup')->buyusergroup_exists();
 
 	if($data['srchhotkeywords']) {
-		$data['srchhotkeywords'] = explode("\n", $data['srchhotkeywords']);
+		$data['srchhotkeywords'] = explode("\n", str_replace("\r",'',$data['srchhotkeywords']));
+		$data['srchhotkeywords'] = array_filter($data['srchhotkeywords']);
 	}
 
 	if($data['search']) {
@@ -551,6 +552,7 @@ function get_cachedata_setting_creditspolicy() {
 
 function get_cachedata_setting_plugin($method = '') {
 	global $_G;
+	require_once libfile('function/admincp');
 	$hookfuncs = array('common', 'discuzcode', 'template', 'deletemember', 'deletethread', 'deletepost', 'avatar', 'savebanlog', 'cacheuserstats', 'undeletethreads', 'recyclebinpostundelete', 'threadpubsave', 'profile_node');
 	$data = $adminmenu = array();
 	$data['plugins'] = $data['pluginlinks'] = $data['hookscript'] = $data['hookscriptmobile'] = $data['threadplugins'] = $data['specialicon'] = array();
@@ -564,6 +566,14 @@ function get_cachedata_setting_plugin($method = '') {
 			$data['plugins']['version'][$plugin['identifier']] = $plugin['version'];
 		}
 		$plugin['directory'] = $plugin['directory'].((!empty($plugin['directory']) && substr($plugin['directory'], -1) != '/') ? '/' : '');
+		if(!isplugindir($plugin['directory'])) {
+			if(ispluginkey($plugin['identifier'])) {
+				$plugin['directory'] = $plugin['identifier'].'/';
+				C::t('common_plugin')->update($plugin['pluginid'], array('directory' => $plugin['directory']));
+			} else {
+				continue;
+			}
+		}
 		if(is_array($plugin['modules'])) {
 			unset($plugin['modules']['extra']);
 			foreach($plugin['modules'] as $k => $module) {

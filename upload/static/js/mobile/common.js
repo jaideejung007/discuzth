@@ -949,3 +949,91 @@ function setCopy(text, msg) {
 function copycode(obj) {
 	setCopy(obj.textContent, 'โค้ดถูกคัดลอกไปที่คลิปบอร์ดแล้ว');
 }
+
+function setanswer(tid, pid, from, formhash){
+	popup.open('คุณแน่ใจหรือไม่ว่าต้องการเลือกการตอบกลับนี้เป็น "คำตอบที่ดีที่สุด"','confirm','forum.php?mod=misc&action=bestanswer&tid=' + tid + '&pid=' + pid + '&from=' + from + '&bestanswersubmit=yes&formhash='+formhash)
+}
+
+function submitpostpw(pid, tid) {
+	var obj = document.getElementById('postpw_' + pid);
+	setcookie('postpw_' + pid, hex_md5(obj.value));
+	if(!tid) {
+		location.href = location.href;
+	} else {
+		location.href = 'forum.php?mod=viewthread&tid='+tid;
+	}
+}
+
+function initdhnav(containerSelector = '#dhnavs_li', activeClass = 'mon', customOptions = {}) {
+    const container = document.querySelector(containerSelector);
+    if (!container) {
+        console.warn('Swiper คอนเทนเนอร์ไม่มีอยู่:', containerSelector);
+        return null;
+    }
+
+    const activeElement = container.querySelector('.' + activeClass);
+    let initialSlide = 0;
+
+    if (activeElement) {
+        const rect = activeElement.getBoundingClientRect();
+        const elementLeft = rect.left;
+        const elementWidth = activeElement.offsetWidth;
+        const windowWidth = window.innerWidth;
+
+        const siblings = Array.from(container.getElementsByClassName(activeClass));
+        const elementIndex = siblings.indexOf(activeElement);
+
+        initialSlide = (elementLeft + elementWidth >= windowWidth) ? elementIndex : 0;
+    }
+
+    const swiperOptions = {
+        freeMode: true,
+        slidesPerView: 'auto',
+        initialSlide: initialSlide,
+        onTouchMove: () => { Discuz_Touch_on = 0; },
+        onTouchEnd: () => { Discuz_Touch_on = 1; },
+        ...customOptions
+    };
+
+    return new Swiper(containerSelector, swiperOptions);
+}
+
+function home_passwordShow(value) {
+    const spanPassword = document.getElementById('span_password');
+    const tbSelectgroup = document.getElementById('tb_selectgroup');
+    if(value == 4) {
+        spanPassword.style.display= '';
+        tbSelectgroup.style.display = 'none';
+    } else if(value == 2) {
+        spanPassword.style.display = 'none';
+        tbSelectgroup.style.display = '';
+    } else {
+        spanPassword.style.display = 'none';
+        tbSelectgroup.style.display = 'none';
+    }
+}
+
+function home_getgroup(gid) {
+    if (gid) {
+        const url = `home.php?mod=spacecp&ac=privacy&inajax=1&op=getgroup&gid=${encodeURIComponent(gid)}`;
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(s => {
+                const targetNames = document.getElementById('target_names');
+                if (targetNames) {
+                    targetNames.innerHTML += s + ',';
+                } else {
+                    console.warn('ไม่พบองค์ประกอบที่มี ID เป็น target_names');
+                }
+            })
+            .catch(error => {
+                console.error('การร้องขอไม่สำเร็จ:', error);
+            });
+    }
+}

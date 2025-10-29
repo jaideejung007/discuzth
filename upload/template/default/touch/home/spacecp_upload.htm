@@ -1,0 +1,322 @@
+<!--{template common/header}-->
+<script type="text/javascript" src="{STATICURL}js/mobile/buildfileupload.js?{VERHASH}"></script>
+<div class="header cl">
+	<div class="mz"><a href="javascript:history.back();"><i class="dm-c-left"></i></a></div>
+	<h2>
+		<a href="home.php?mod=space&do=album">
+			{lang album}{lang upload_pic}
+		</a>
+	</h2>
+	<div class="my"><a href="index.php"><i class="dm-house"></i></a></div>
+</div>
+
+<div class="bodybox p10 cl">
+	<div class="dhnavs_box">
+		<div id="dhnavs">
+			<div id="dhnavs_li">
+				<ul class="swiper-wrapper">
+					<!--{if $albumid}-->
+					<li class="swiper-slide"><a href="home.php?mod=spacecp&ac=album&op=edit&albumid=$albumid">{lang edit_album_information}</a></li>
+					<li class="swiper-slide"><a href="home.php?mod=spacecp&ac=album&op=editpic&albumid=$albumid">{lang edit_pic}</a></li>
+					<!--{/if}-->
+					<li class="swiper-slide mon"><a href="home.php?mod=spacecp&ac=upload&albumid=$albumid">{lang common_upload}</a></li>
+					<li class="swiper-slide"><a id="a_doodle" href="home.php?mod=magic&mid=doodle&showid=album_doodle&target=album_message&from=album" class="dialog">{$_G[setting][magics][doodle]}</a></li>
+					<li class="swiper-slide"><a href="home.php?mod=space&uid=$space[uid]&do=album&view=me">{lang back_to_my_album}</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!--{if $haveattachsize}-->
+	<div class="quote">
+		<p class="mb5">{lang hava_attach_size} <strong>$haveattachsize</strong> (<a href="home.php?mod=spacecp&ac=upload&op=recount">{lang recount}</a>)</p>
+		<!--{if $_G['setting']['magicstatus'] && $_G['setting']['magics']['attachsize']}-->
+		<img src="{STATICURL}image/magic/attachsize.small.gif" alt="attachsize" class="vm" />
+		<a id="a_magic_attachsize" href="home.php?mod=magic&mid=attachsize" class="dialog">{lang i_want_more_space}</a>
+		({lang you_can_buy_magictools})
+		<!--{/if}-->
+	</div>
+	<!--{/if}-->
+	<form method="post" autocomplete="off" id="albumform" action="home.php?mod=spacecp&ac=upload" onsubmit="return validate(this);">
+	<input type="hidden" name="albumsubmit" id="albumsubmit" value="true" />
+	<input type="hidden" name="formhash" value="{FORMHASH}" />
+	<div class="post_box mt10 mb10 cl">
+		<li class="mtxt cl">
+			<a href="javascript:;" class="post_imgbtn p10"><i class="dm-image"></i>{lang upload_pic}<input type="file" name="Filedata" id="filedata" multiple="multiple" accept=".jpg,.jpeg,.gif,.png,.bmp,image/jpeg,image/gif,image/png,image/bmp" /></a>
+		</li>
+		<li class="mtxt cl"><ul id="imglist" class="post_imglist cl"></ul></li>
+		<li class="mt15 mtit xs2 cl">{lang select_album}</li>
+		<!--{if $albums}-->
+		<li class="mli flex-box cl">
+			<label for="albumop_selectalbum" class="lb flex"><input type="radio" name="albumop" id="albumop_selectalbum" class="pr" value="selectalbum" checked="checked" onclick="album_op(this.value);" />{lang add_to_existing_album}</label>
+			<label for="albumop_creatalbum" class="lb flex"><input type="radio" name="albumop" id="albumop_creatalbum" class="pr" value="creatalbum" onclick="album_op(this.value);" />{lang create_new_album}</label>
+		</li>
+		<!--{else}-->
+		<input type="hidden" name="albumop" value="creatalbum" />
+		<!--{/if}-->
+		<div class="setbox cl">
+		<li class="mli flex-box cl" id="selectalbum" <!--{if $albums}--><!--{else}--> style="display:none;"<!--{/if}-->>
+			<div class="tit">{lang select_album}</div>
+			<div class="flex-3 input">
+				<select name="albumid" id="uploadalbumid" class="sort_sel">
+					<!--{loop $albums $value}-->
+					<!--{if $value['albumid'] == $_GET['albumid']}-->
+					<option value="$value[albumid]" selected="selected">$value[albumname]</option>
+					<!--{else}-->
+					<option value="$value[albumid]">$value[albumname]</option>
+					<!--{/if}-->
+					<!--{/loop}-->
+				</select>
+			</div>
+		</li>
+		</div>
+		<div id="creatalbum" class="setbox cl" <!--{if $albums}--> style="display:none;"<!--{else}--><!--{/if}-->>
+		<li class="mli flex-box cl">
+			<div class="tit">{lang album_name}</div>
+			<div class="flex-3 input"><input type="text" name="albumname" id="albumname" class="px" size="20" value="{lang my_album}" /></div>
+		</li>
+		<li class="mli flex-box cl">
+			<div class="tit">{lang album_depict}</div>
+		</li>
+		<li class="mtext cl">
+			<div class="flex"><textarea name="depict" class="pt" cols="40" rows="3"></textarea></div>
+		</li>
+		<!--{if $_G['setting']['albumcategorystat'] && $categoryselect}-->
+		<li class="mli flex-box cl">
+			<div class="tit">{lang site_categories}</div>
+			<div class="flex-3 input">$categoryselect</div>
+		</li>
+		<li class="mtit cl">{lang select_site_album_categories}</li>
+		<!--{/if}-->
+		<li class="mli flex-box cl">
+			<div class="tit">{lang privacy_settings}</div>
+			<div class="flex-3">
+				<select name="friend" id="uploadfriend" onchange="home_passwordShow(this.value);" class="sort_sel">
+					<option value="0">{lang friendname_0}</option>
+					<option value="1">{lang friendname_1}</option>
+					<option value="2">{lang friendname_2}</option>
+					<option value="3">{lang friendname_3}</option>
+					<option value="4">{lang friendname_4}</option>
+				</select>
+			</div>
+		</li>
+		<li class="mli flex-box cl" id="span_password" style="display:none;">
+			<div class="tit">{lang password}</div>
+			<div class="flex-3 input"><input type="text" name="password" id="uploadpassword" class="px" value="" size="10" /></div>
+		</li>
+		<div class="cl" id="tb_selectgroup" style="display:none;">
+			<li class="mli flex-box cl">
+				<div class="tit">{lang specified_friends}</div>
+				<div class="flex-3">
+					<select name="selectgroup" onchange="home_getgroup(this.value);" class="sort_sel">
+						<option value="">{lang from_friends_group}</option>
+						<!--{loop $groups $key $value}-->
+						<option value="$key">$value</option>
+						<!--{/loop}-->
+					</select>
+				</div>
+			</li>
+			<li class="mtit cl">{lang choices_following_friends_list}</li>
+			<li class="mtxt cl">
+				<textarea name="target_names" id="target_names" class="pt" rows="3"></textarea>
+			</li>
+			<li class="mtit cl">{lang friend_name_space}</li>
+		</div>
+		</div>
+	</div>
+	<button type="submit" name="albumsubmit_btn" id="albumsubmit_btn" class="pn pnc" value="true"{if $_G['setting']['albumcategoryrequired']} onclick="return validate(this);"{/if}><strong>{lang upload_start}</strong></button>
+	</form>
+</div>
+
+<div class="discuz_x cl"></div>
+<script type="text/javascript">
+	initdhnav('#dhnavs_li', 'mon');
+</script>
+<!--{if empty($_G['setting']['pluginhooks']['spacecp_upload_extend'])}-->
+	<script type="text/javascript">
+	var imgexts = typeof imgexts == 'undefined' ? 'jpg, jpeg, gif, png' : imgexts;
+	var STATUSMSG = {
+		'-1' : '{lang uploadstatusmsgnag1}',
+		'0' : '{lang uploadstatusmsg0}',
+		'1' : '{lang uploadstatusmsg1}',
+		'2' : '{lang uploadstatusmsg2}',
+		'3' : '{lang uploadstatusmsg3}',
+		'4' : '{lang uploadstatusmsg4}',
+		'5' : '{lang uploadstatusmsg5}',
+		'6' : '{lang uploadstatusmsg6}',
+		'7' : '{lang uploadstatusmsg7}(' + imgexts + ')',
+		'8' : '{lang uploadstatusmsg8}',
+		'9' : '{lang uploadstatusmsg9}',
+		'10' : '{lang uploadstatusmsg10}',
+		'11' : '{lang uploadstatusmsg11}',
+		'12' : '{lang uploadstatusmsg12}',
+		'13' : '{lang uploadstatusmsg13}'
+	};
+	$(document).on('change', '#filedata', function() {
+		// 从PHP获取最大文件大小限制(KB)，转换为字节
+		var maxFileSizeKB = $swfconfig['max'];
+		var maxFileSizeBytes = maxFileSizeKB * 1024; // 转换为字节
+
+		// 存储超出大小的文件名
+		var oversizedFiles = [];
+		// 计数已完成的上传
+		var completedUploads = 0;
+		// 符合要求的文件总数
+		var validFileCount = 0;
+
+		// 显示加载动画
+		popup.open('<img src="' + IMGDIR + '/imageloading.gif">');
+
+		// 上传成功回调函数
+		uploadsuccess = function(data) {
+			completedUploads++;
+
+			if(data == '') {
+				popup.open('{lang uploadpicfailed}', 'alert');
+			} else {
+				try {
+					const dataobj = JSON.parse(data);
+					const dataarr = Object.entries(dataobj);
+					console.log(dataobj.picid);
+					console.log(2);
+
+					if(dataobj.picid > 0 && dataobj.url) {
+						// 添加图片到列表
+						$('#imglist').append('<li><div><span class="p_img"><a href="javascript:;"><img style="max-height:54px;max-width:54px;" id="aimg_'+dataobj.picid+'" src="'+dataobj.url+'" /></a></span><input type="hidden" name="title[' + dataobj.picid + ']" value="'+dataobj.title+'" /><div></li>');
+					} else {
+						var sizelimit = '';
+						if(dataarr[7] == 'ban') {
+							sizelimit = '{lang uploadpicatttypeban}';
+						} else if(dataarr[7] == 'perday') {
+							sizelimit = '{lang donotcross}'+Math.ceil(dataarr[8]/1024)+'K)';
+						} else if(dataarr[7] > 0) {
+							sizelimit = '{lang donotcross}'+Math.ceil(dataarr[7]/1024)+'K)';
+						}
+						popup.open(STATUSMSG[dataarr[2]] + sizelimit, 'alert');
+					}
+				} catch(e) {
+					console.error('วิเคราะห์ผลการอัปโหลดไม่สำเร็จ:', e);
+					popup.open('{lang uploadpicfailed}', 'alert');
+				}
+			}
+
+			// 检查是否所有有效文件都已上传完成
+			if(completedUploads >= validFileCount) {
+				popup.close();
+				// 提示超出大小的文件
+				if(oversizedFiles.length > 0) {
+					var message = STATUSMSG[0] + "：\n";
+					message += STATUSMSG[3] + "(" + maxFileSizeKB + "KB): \n";
+					message += oversizedFiles.join("\n");
+					popup.open(message, 'alert');
+				}
+			}
+		};
+
+		// 检查浏览器是否支持FileReader API
+		if(typeof FileReader != 'undefined' && this.files && this.files.length > 0) {
+			// 先筛选出所有符合大小要求的文件
+			var validFiles = [];
+			for (let i = 0; i < this.files.length; i++) {
+				const file = this.files[i];
+				// 检查文件大小（file.size单位是字节）
+				if(file.size > maxFileSizeBytes) {
+					oversizedFiles.push(file.name);
+				} else {
+					validFiles.push(file);
+				}
+			}
+
+			validFileCount = validFiles.length;
+
+			// 如果没有符合要求的文件，直接提示并关闭弹窗
+			if(validFileCount === 0) {
+				popup.close();
+				popup.open(STATUSMSG[3], 'alert');
+				return;
+			}
+
+			// 上传所有符合要求的文件
+			for (let i = 0; i < validFiles.length; i++) {
+				const file = validFiles[i];
+				$.buildfileupload({
+					uploadurl: 'misc.php?mod=swfupload&action=swfupload&operation=album',
+					files: [file],
+					uploadformdata: {
+						uid: "$_G['uid']",
+						hash: "<!--{eval echo md5(substr(md5($_G['config']['security']['authkey']), 8).$_G['uid'])}-->"
+					},
+					uploadinputname: 'Filedata',
+					maxfilesize: "$swfconfig['max']",
+					success: uploadsuccess,
+					error: function() {
+						completedUploads++;
+						popup.open('{lang uploadpicfailed}', 'alert');
+
+						// 检查是否所有文件都已处理完毕
+						if(completedUploads >= validFileCount) {
+							popup.close();
+							// 提示超出大小的文件
+							if(oversizedFiles.length > 0) {
+								var message = '{lang uploadpartsuccess}：\n';
+								message += '{lang uploadfilesizeover} ' + maxFileSizeKB + 'K: \n';
+								message += oversizedFiles.join('\n');
+								popup.open(message, 'alert');
+							}
+						}
+					}
+				});
+			}
+		}
+	});
+</script>
+<!--{else}-->
+	<!--{hook/spacecp_upload_extend}-->
+<!--{/if}-->
+<script type="text/javascript">
+	var check = false;
+	no_insert = 1;
+	function a_addOption() {
+		// 原生JS通过id获取元素，替代$(id)
+		var obj = document.getElementById('uploadalbum');
+		obj.value = 'addoption';
+		addOption(obj);
+	}
+
+	function album_op(id) {
+		// 替换所有jQuery选择器为原生getElementById
+		document.getElementById('selectalbum').style.display = 'none';
+		document.getElementById('creatalbum').style.display = 'none';
+		document.getElementById(id).style.display = '';
+		check = false;
+		if(id == 'creatalbum') {
+			check = true;
+			// 原生JS的select()方法与jQuery行为一致
+			document.getElementById('albumname').select();
+		}
+	}
+</script>
+<script type="text/javascript">
+	<!--{if empty($albums)}-->
+	if(typeof getID('albumname') == 'object') {
+		getID('albumname').select();
+	}
+	<!--{/if}-->
+	function validate(obj) {
+		if(!getID('imglist').getElementsByTagName('li').length) {
+			popup.open('{lang select_upload_pic}', 'notice', '{lang reminder}', null, 0);
+			return false;
+		}
+		<!--{if $_G['setting']['albumcategorystat'] && $_G['setting']['albumcategoryrequired']}-->
+		var catObj = getID("catid");
+		if(catObj && check) {
+			if (catObj.value < 1) {
+				showDialog('{lang select_system_cat}', 'notice', '{lang reminder}', null, 0);
+				catObj.focus();
+				return false;
+			}
+		}
+		<!--{/if}-->
+		return true;
+	}
+</script>
+<!--{template common/footer}-->

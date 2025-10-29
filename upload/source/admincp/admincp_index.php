@@ -372,7 +372,7 @@ function show_sysinfo() {
 
 /*jaideejung007*/ showboxrow('', array('class="dcol lineheight d-14"', 'class="dcol lineheight d-1"'), array(
 /*jaideejung007*/	'&#3648;&#3623;&#3629;&#3619;&#3660;&#3594;&#3633;&#3609;&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618;',
-/*jaideejung007*/	'<a href="https://discuzthai.com" target="_blank">Discuz! &#xE20;&#xE32;&#xE29;&#xE32;&#xE44;&#xE17;&#xE22;</a>, Rev: '.DISCUZ_TH_REVISION
+/*jaideejung007*/	'<a href="https://discuzth.com" target="_blank">&#xE14;&#xE34;&#xE2A;&#xE04;&#xE31;&#xE2A;! &#xE17;&#xE35;&#xE40;&#xE2D;&#xE0A; (Discuz! TH)</a>, Rev: '.DISCUZ_TH_REVISION
 /*jaideejung007*/));
 
 	$newversion['newversion'] = !empty($newversion['newversion']) ? $newversion['newversion'] : array();
@@ -385,9 +385,9 @@ function show_sysinfo() {
 
 	showboxrow('', array('class="dcol lineheight d-14"', 'class="dcol lineheight d-1"'), array(
 		cplang('home_check_newversion'),
-/*jaideejung007*/		($newversion['newversion']['release'] ? ($newversion['newversion']['release'] != DISCUZ_RELEASE ? '<b style="color:red;">' : '').'Discuz! '.$newversion['newversion']['version'].' '.$reldisp_addon.' '.strtoupper(CHARSET).' '.($newversion['newversion']['release'] != DISCUZ_RELEASE ? '</b>' : '') : '<a href="https://discuzthai.com/thread-41058-1-1.html" target="_blank">'.cplang('detect_environment_error').'</a>').
+/*jaideejung007*/		($newversion['newversion']['release'] ? ($newversion['newversion']['release'] != DISCUZ_RELEASE ? '<b style="color:red;">' : '').'Discuz! '.$newversion['newversion']['version'].' '.$reldisp_addon.' '.strtoupper(CHARSET).' '.($newversion['newversion']['release'] != DISCUZ_RELEASE ? '</b>' : '') : '<a href="https://go.discuzth.com/dzx35-th-official-release" target="_blank">'.cplang('detect_environment_error').'</a>').
 		' <a href="'.ADMINSCRIPT.'?action=index&checknewversion&formhash='.$_G['formhash'].'">[ '.cplang('refresh').' ]</a>&nbsp;&nbsp;<br><br>'.
-/*jaideejung007*/		(!empty($downlist) ? implode('&#x3001;', $downlist).($newversion['newversion']['qqqun'] ? '<span class="bold">&nbsp;&nbsp;|&nbsp;&nbsp;'.cplang('qq_group').$newversion['newversion']['qqqun'].'</span>' : '') : '<span class="bold"><a href="https://github.com/jaideejung007/discuzth/releases" target="_blank">'.cplang('download_latest').'</a> | '.cplang('qq_group').'73'.'21'.'03'.'690</span>')
+/*jaideejung007*/		(!empty($downlist) ? implode('&#x3001;', $downlist).($newversion['newversion']['qqqun'] ? '<span class="bold">&nbsp;&nbsp;|&nbsp;&nbsp;'.cplang('qq_group').$newversion['newversion']['qqqun'].'</span>' : '') : '<span class="bold"><a href="https://go.discuzth.com/dzx35-th-github-release" target="_blank">'.cplang('download_latest').'</a> | '.cplang('qq_group').'73'.'21'.'03'.'690</span>')
 	));
 	showboxrow('', array('class="dcol lineheight d-14"', 'class="dcol lineheight d-1"'), array(
 		cplang('home_ucclient_version'),
@@ -395,7 +395,7 @@ function show_sysinfo() {
 	));
 	showboxrow('', array('class="dcol lineheight d-14"', 'class="dcol lineheight d-1"'), array(
 		cplang('home_environment'),
-		PHP_OS.' / PHP v'.PHP_VERSION
+		PHP_OS.'('.PHP_OS_FAMILY.') / PHP '.PHP_VERSION.(PHP_ZTS ? ' TS' : '').(PHP_DEBUG ? ' DEBUG' : '').' / '.PHP_SAPI
 	));
 	showboxrow('', array('class="dcol lineheight d-14"', 'class="dcol lineheight d-1"'), array(
 		cplang('home_serversoftware'),
@@ -448,11 +448,11 @@ function show_news() {
 		}
 	} else {
 		showboxrow('', array('class="dcol d-1"', 'class="dcol td21" style="text-align:right;"'), array(
-/*jaideejung007*/			'<a href="https://discuzthai.com/" target="_blank">'.cplang('log_in_to_update').'</a>',
+/*jaideejung007*/			'<a href="https://discuzth.com/" target="_blank">'.cplang('log_in_to_update').'</a>',
 			'',
 		));
 		showboxrow('', array('class="dcol d-1"', 'class="dcol td21" style="text-align:right;"'), array(
-/*jaideejung007*/			'<a href="https://github.com/jaideejung007/discuzth/releases" target="_blank">'.cplang('download_latest').'</a>',
+/*jaideejung007*/			'<a href="https://go.discuzth.com/dzx35-th-github-release" target="_blank">'.cplang('download_latest').'</a>',
 			'',
 		));
 	}
@@ -489,9 +489,9 @@ function show_widgets() {
 function show_forever_thanks() {
 	$copyRightMessage = array(
 		'&#xE40;&#xE08;&#xE49;&#xE32;&#xE02;&#xE2D;&#xE07;&#xE25;&#xE34;&#xE02;&#xE2A;&#xE34;&#xE17;&#xE18;&#xE34;&#xE4C;',
-		'&#xE1A;&#xE23;&#xE34;&#xE29;&#xE31;&#xE17; &#xE40;&#xE17;&#xE19;&#xE40;&#xE0B;&#xE47;&#xE19;&#xE15;&#xE4C;&#xE04;&#xE25;&#xE32;&#xE27;&#xE14;&#xE4C;&#xE04;&#xE2D;&#xE21;&#xE1E;&#xE34;&#xE27;&#xE15;&#xE34;&#xE49;&#xE07; (&#xE01;&#xE23;&#xE38;&#xE07;&#xE1B;&#xE31;&#xE01;&#xE01;&#xE34;&#xE48;&#xE07;) &#xE08;&#xE33;&#xE01;&#xE31;&#xE14;',
+		'&#xE1A;&#xE23;&#xE34;&#xE29;&#xE31;&#xE17; &#xE40;&#xE17;&#xE19;&#xE40;&#xE0B;&#xE47;&#xE19;&#xE15;&#xE4C; &#xE04;&#xE25;&#xE32;&#xE27;&#xE14;&#xE4C; &#xE04;&#xE2D;&#xE21;&#xE1E;&#xE34;&#xE27;&#xE15;&#xE34;&#xE49;&#xE07; (&#xE1B;&#xE31;&#xE01;&#xE01;&#xE34;&#xE48;&#xE07;) &#xE08;&#xE33;&#xE01;&#xE31;&#xE14;',
 		'&#xE1C;&#xE39;&#xE49;&#xE23;&#xE31;&#xE1A;&#xE1C;&#xE34;&#xE14;&#xE0A;&#xE2D;&#xE1A;&#xE01;&#xE32;&#xE23;&#xE14;&#xE33;&#xE40;&#xE19;&#xE34;&#xE19;&#xE07;&#xE32;&#xE19;',
-		'&#xE1A;&#xE23;&#xE34;&#xE29;&#xE31;&#xE17; &#xE40;&#xE19;&#xE47;&#xE15;&#xE40;&#xE27;&#xE34;&#xE23;&#xE4C;&#xE04;&#xE40;&#xE17;&#xE04;&#xE42;&#xE19;&#xE42;&#xE25;&#xE22;&#xE35;&#xE40;&#xE2B;&#xE2D;&#xE40;&#xE1F;&#xE22;&#xE40;&#xE2D;&#xE49;&#xE2D;&#xE23;&#xE4C;&#xE40;&#xE15;&#xE4B;&#xE32; &#xE08;&#xE33;&#xE01;&#xE31;&#xE14;',
+		'&#xE1A;&#xE23;&#xE34;&#xE29;&#xE31;&#xE17; &#xE40;&#xE2B;&#xE2D;&#xE40;&#xE1D;&#xE22; &#xE40;&#xE2D;&#xE49;&#xE2D;&#xE40;&#xE15;&#xE49;&#xE32; &#xE40;&#xE19;&#xE47;&#xE15;&#xE40;&#xE27;&#xE34;&#xE23;&#xE4C;&#xE04; &#xE40;&#xE17;&#xE04;&#xE42;&#xE19;&#xE42;&#xE25;&#xE22;&#xE35; &#xE08;&#xE33;&#xE01;&#xE31;&#xE14;',
 	);/*jaideejung007*/
 	$gitTeamStr = '';
 	$gitTeam = array(
@@ -575,8 +575,8 @@ function show_forever_thanks() {
 	<a href="https://www.discuz.vip/" class="lightlink2" target="_blank">'.cplang('discussion_area').'</a>, &nbsp;
 	<a href="https://www.dismall.com/" class="lightlink2" target="_blank">'.cplang('app_discussion').'</a>,&nbsp;
 	<a href="'.ADMINSCRIPT.'?action=cloudaddons" class="lightlink2" target="_blank">'.cplang('app_center').'</a>, &nbsp;
-<!--jaideejung007-->	<a href="https://discuzthai.com" class="lightlink2" target="_blank">&#xE14;&#xE34;&#xE2A;&#xE04;&#xE31;&#xE2A;&#xE44;&#xE17;&#xE22;!</a>, &nbsp;	
-<!--jaideejung007-->	<a href="https://github.com/jaideejung007/discuzth" class="lightlink2" target="_blank">Discuz! Thai Official Repositories</a>, &nbsp;
-<!--jaideejung007-->	<a href="https://discord.gg/faSzs3geux" class="lightlink2" target="_blank">Discord Discuz! Thai Community</a>'));
+<!--jaideejung007-->	<a href="https://discuzth.com" class="lightlink2" target="_blank">&#xE14;&#xE34;&#xE2A;&#xE04;&#xE31;&#xE2A;! &#xE17;&#xE35;&#xE40;&#xE2D;&#xE0A; (Discuz! TH)</a>, &nbsp;	
+<!--jaideejung007-->	<a href="https://go.discuzth.com/discuzth-github-project" class="lightlink2" target="_blank">Discuz! TH Official Repositories</a>, &nbsp;
+<!--jaideejung007-->	<a href="https://go.discuzth.com/discuzth-discord-invite" class="lightlink2" target="_blank">Discord Discuz! TH Community</a>'));
 	showboxfooter();
 }

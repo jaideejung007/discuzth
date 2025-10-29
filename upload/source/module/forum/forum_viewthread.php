@@ -34,7 +34,7 @@ if($page === 1 && !empty($_G['setting']['antitheft']['allow']) && empty($_G['set
 	helper_antitheft::check($_G['forum_thread']['tid'], 'tid');
 }
 
-if($_G['setting']['cachethreadlife'] && $_G['forum']['threadcaches'] && !$_G['uid'] && $page == 1 && !$_G['forum']['special'] && empty($_GET['action']) && empty($_GET['do']) && empty($_GET['from']) && empty($_GET['threadindex']) && !defined('IN_ARCHIVER') && !defined('IN_MOBILE') && !IS_ROBOT) {
+if($_G['setting']['cachethreadlife'] && $_G['forum']['threadcaches'] && !$_G['uid'] && $page == 1 && !$_G['forum']['special'] && empty($_GET['ordertype']) && empty($_GET['authorid']) && empty($_GET['action']) && empty($_GET['do']) && empty($_GET['from']) && empty($_GET['threadindex']) && !defined('IN_ARCHIVER') && !defined('IN_MOBILE') && !IS_ROBOT) {
 	viewthread_loadcache();
 }
 
@@ -500,14 +500,14 @@ if(empty($_GET['viewpid'])) {
 			$_G['forum_numpost'] = $_G['forum_thread']['replies'] + 2 - $_G['forum_numpost'];
 		}
 	}
-	$multipageparam = ($_G['forum_thread']['is_archived'] ? '&archive='.$_G['forum_thread']['archiveid'] : '').
-		'&amp;extra='.$_GET['extra'].
-		($ordertype && $ordertype != getstatus($_G['forum_thread']['status'], 4) ? '&amp;ordertype='.$ordertype : '').
-		(isset($_GET['highlight']) ? '&amp;highlight='.rawurlencode($_GET['highlight']) : '').
-		(!empty($_GET['authorid']) ? '&amp;authorid='.$_GET['authorid'] : '').
-		(!empty($_GET['from']) ? '&amp;from='.$_GET['from'] : '').
-		(!empty($_GET['checkrush']) ? '&amp;checkrush='.$_GET['checkrush'] : '').
-		(!empty($_GET['modthreadkey']) ? '&amp;modthreadkey='.rawurlencode($_GET['modthreadkey']) : '').
+	$multipageparam = ($_G['forum_thread']['is_archived'] ? '&archive=' . $_G['forum_thread']['archiveid'] : '') .
+		'&extra=' . $_GET['extra'] .
+		($ordertype && $ordertype != getstatus($_G['forum_thread']['status'], 4) ? '&ordertype=' . $ordertype : '') .
+		(isset($_GET['highlight']) ? '&highlight=' . rawurlencode($_GET['highlight']) : '') .
+		(!empty($_GET['authorid']) ? '&authorid=' . $_GET['authorid'] : '') .
+		(!empty($_GET['from']) ? '&from=' . $_GET['from'] : '') .
+		(!empty($_GET['checkrush']) ? '&checkrush=' . $_GET['checkrush'] : '') .
+		(!empty($_GET['modthreadkey']) ? '&modthreadkey=' . rawurlencode($_GET['modthreadkey']) : '') .
 		$specialextra;
 	$multipage = multi($_G['forum_thread']['replies'] + ($ordertype != 1 ? 1 : 0), $_G['ppp'], $page, 'forum.php?mod=viewthread&tid='.$_G['tid'].$multipageparam);
 } else {
@@ -911,7 +911,8 @@ if($_G['forum_cachepid']) {
 	}
 
 	if($_G['forum_cachepid'] && $_G['setting']['commentnumber']) {
-		list($comments, $postcache, $commentcount, $totalcomment) = C::t('forum_postcomment')->fetch_postcomment_by_pid($_G['forum_cachepid'], $postcache, $commentcount, $totalcomment, $_G['setting']['commentnumber']);
+		list($commentsnew, $postcache, $commentcount, $totalcomment) = C::t('forum_postcomment')->fetch_postcomment_by_pid($_G['forum_cachepid'], $postcache, $commentcount, $totalcomment, $_G['setting']['commentnumber']);
+		$comments = $commentsnew + $comments;
 	}
 
 	foreach($postcache as $pid => $data) {
@@ -1252,7 +1253,7 @@ function viewthread_procpost($post, $lastvisit, $ordertype, $maxposition = 0) {
 						$post['message'] = preg_replace("/\s?\[page\]\s?/is", '', $post['message']);
 					}
 					if($_GET['cp'] != 'all' && strpos($post['message'], '[/index]') === FALSE && empty($_GET['threadindex']) && !$messageindex) {
-						$_G['forum_posthtml']['footer'][$post['pid']] .= '<div id="threadpage"></div><script type="text/javascript" reload="1">show_threadpage('.$post['pid'].', '.$cp.', '.count($messagearray).', '.($_GET['from'] == 'preview' ? '1' : '0').');</script>';
+						$_G['forum_posthtml']['footer'][$post['pid']] .= '<div id="threadpage"></div><script type="text/javascript" reload="1">show_threadpage(' . $post['pid'] . ', ' . $cp . ', ' . count($messagearray) . ', ' . ($_GET['from'] == 'preview' ? '1' : '0') . ', \'' . (isset($_GET['modthreadkey']) ? $_GET['modthreadkey'] : '') . '\');</script>';
 					}
 				}
 			}
