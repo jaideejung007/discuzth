@@ -23,7 +23,11 @@ function build_cache_diytemplatename() {
 			$datarow['name'] = $nullname;
 		}
 		$data[$datarow['targettplname']] = dhtmlspecialchars($datarow['name']);
-		$curscript = substr($datarow['targettplname'], 0, strpos($datarow['targettplname'], '/'));
+		$targettplname = $datarow['targettplname'];
+		if(str_starts_with($targettplname, 'touch/')) {
+			$targettplname = substr($targettplname, 6);
+		}
+		$curscript = substr($targettplname, 0, strpos($targettplname, '/'));
 		if(in_array($curscript, $apps)) {
 			$scriptarr[$curscript][$datarow['targettplname']] = true;
 		}

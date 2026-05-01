@@ -21,9 +21,12 @@ if($_GET['downPatch'] && $_GET['formhash'] == formhash()) {
 	if(!file_exists($patchFile)) {
 		cpmsg('upgrade_patch_not_found', '', 'error');
 	}
+	define('FOOTERDISABLED', true);
 	ob_end_clean();
 	header('Content-Type: application/zip');
 	header('Content-Disposition: attachment; filename="'.basename($patchFile).'"');
+	header('Pragma: no-cache');
+	header('Expires: 0');
 	readfile($patchFile);
 	$u->clearEvent();
 	exit;

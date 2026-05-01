@@ -59,7 +59,7 @@ class forum_portal_threadlist {
 			</tr>
 		</table>
 	</div>
-	<div class="bm_c threadlist">
+	<div class="bm_c threadlist" id="threadlistAppend">
 		<!--Ajax:InnerStart-->
 		<table cellspacing="0" cellpadding="0">
 			{cell forum/threadlist/loop_start}		  
@@ -86,9 +86,7 @@ class forum_portal_threadlist {
 			</tbody>
 			{cell forum/threadlist/loop_end}
 		</table>
-		<div id="threadlistAppend">
-			<!--Ajax:Clear-->{cell forum/threadlist/nextpage}<!--Ajax:/Clear-->
-		</div>
+		<!--Ajax:Clear-->{cell forum/threadlist/nextpage}<!--Ajax:/Clear-->
 		<!--Ajax:InnerEnd-->
 	</div>
 </div>

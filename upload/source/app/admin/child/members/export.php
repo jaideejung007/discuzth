@@ -46,6 +46,7 @@ foreach($title as $k => $v) {
 $detail = 'UID,'.$lang['username'].','.$lang['members_edit_regdate'].','.$subject."\n".$detail;
 $filename = date('Ymd', TIMESTAMP).'.csv';
 
+define('FOOTERDISABLED', true);
 ob_end_clean();
 header('Content-Encoding: none');
 header('Content-Type: application/octet-stream');

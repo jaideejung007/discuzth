@@ -1617,7 +1617,7 @@ function footlink() {
 			mfootlink[i].classList.remove('mon');
 		}
 	};
-	if(mlast !== '') {
+	if(mlast !== '' && mfootlink[mlast]) {
 		mfootlink[mlast].classList.add("mon");
 	}
 

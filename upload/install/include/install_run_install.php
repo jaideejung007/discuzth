@@ -581,7 +581,7 @@ if($method == 'show_license') {
 	} else {
 		mysqli_report(MYSQLI_REPORT_OFF);
 
-		$link = new mysqli($dbhost, $dbuser, $dbpw);
+		$link = new mysqli($dbhost, $dbuser, $dbpw, $dbname);
 		if($link->connect_errno) {
 			$errno = $link->connect_errno;
 			$error = $link->connect_error;
@@ -596,6 +596,13 @@ if($method == 'show_license') {
 
 		if($link->errno) {
 			show_msg('database_errno_1044', $link->error, 0);
+		}
+
+		if(!$link->query("SELECT svalue FROM {$tablepre}common_setting WHERE skey='bbclosed'")->fetch_row()[0]) {
+			show_msg('status_bbclosed_invalid', $link->error, 0);
+		}
+		if($link->query("SELECT COUNT(*) FROM {$tablepre}common_plugin WHERE available=1")->fetch_row()[0] > 0) {
+			show_msg('status_plugin_available', $link->error, 0);
 		}
 
 		$link->close();

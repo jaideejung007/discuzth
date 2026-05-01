@@ -53,6 +53,8 @@ $lang = [
 	'database_errno_1044' => '无法创建新的数据库，请检查数据库名称填写是否正确',
 	'database_errno_1045' => '无法连接数据库，请检查数据库用户名或者密码是否正确',
 	'database_connect_error' => '数据库连接错误',
+	'status_bbclosed_invalid' => '您的站点尚未关闭，请先关闭站点后再进行升级',
+	'status_plugin_available' => '您的插件尚未关闭，请先关闭所有插件后再进行升级',
 	'run_sql_error' => 'Discuz! Database Error',
 
 	'step_title_1' => '检查安装环境',

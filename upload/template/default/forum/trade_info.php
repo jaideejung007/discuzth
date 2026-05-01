@@ -167,7 +167,7 @@
 	</div>
 	<div class="cl mtw">
 		<div class="c pbm">
-			<!--{echo $post[message] == 'json_content' ? $json_content : $post['message']}-->
+			{$post['message']}
 		</div>
 		<!--{if $post['attachment']}-->
 			<div class="notice postattach">{lang attachment}: <em>{lang attach_nopermission}</em></div>

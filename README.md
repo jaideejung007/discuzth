@@ -1,55 +1,55 @@
-![25 年产品历史](https://img.shields.io/badge/Years-25-red?style=plastic)
-![MitFrame! 1.0 框架体系](https://img.shields.io/badge/MitFrame-1.0-%23155BD5?style=plastic)
-![Discuz! X5 内核](https://img.shields.io/badge/Discuz!-X5-%23F4A62F?style=plastic)
-![支持 PHP 8.0](https://img.shields.io/badge/PHP-8-%237A86B8?style=plastic)
-![支持 MySQL 8.0](https://img.shields.io/badge/MySQL-8-%233E6E93?style=plastic)
+![ตำนานซอฟต์แวร์กว่า 25 ปี](https://img.shields.io/badge/Years-25-red?style=plastic)
+![ระบบโครงสร้าง MitFrame! 1.0](https://img.shields.io/badge/MitFrame-1.0-%23155BD5?style=plastic)
+![Discuz! X5 Kernel](https://img.shields.io/badge/Discuz!-X5-%23F4A62F?style=plastic)
+![รองรับ PHP 8.0](https://img.shields.io/badge/PHP-8-%237A86B8?style=plastic)
+![รองรับ MySQL 8.0](https://img.shields.io/badge/MySQL-8-%233E6E93?style=plastic)
 
 ![Star](https://gitee.com/Discuz/DiscuzX/badge/star.svg?theme=dark)
 ![Fork](https://gitee.com/Discuz/DiscuzX/badge/fork.svg?theme=dark)
 
-### 简介
-Discuz! X5 官方 Git (https://gitee.com/Discuz/DiscuzX/tree/MitFrame) 中文版
+### บทนำ
+Discuz! X5 Official Git (https://gitee.com/Discuz/DiscuzX/tree/MitFrame) เวอร์ชันภาษาจีน
 
-### 关于 X5
-- 从 X5.0 起 Discuz! 默认不再包含 UCenter 服务端，如需站群方式部署请自行下载 [UCenter](https://gitee.com/Discuz/UCenter)
-- 从 X5.0 起安装程序默认内置升级程序，请先升级到 X3.5 版本
-- 从 X5.0 起安装程序默认内置工具箱程序，请修改 install/index.php 文件名后启用
-- 从 X5.0 起将不再兼容 PHP 7 环境，安装、升级前请自行准备 PHP 8 环境
-- X5 兼容 X3.5 应用的运行，但是，是否兼容 PHP 8 环境下运行请咨询应用的开发者
-- 欢迎 D 粉们积极 PR，Discuz! 25 年，开源产品少不了大家的支持
+### สิ่งที่ควรรู้เกี่ยวกับ X5
+- **ยกเลิก UCenter Server ในตัว:** ตั้งแต่เวอร์ชัน X5.0 เป็นต้นไป ระบบจะไม่รวม UCenter Server มาให้เป็นค่าเริ่มต้น หากต้องการใช้งานในรูปแบบเครือข่ายเว็บไซต์ (Stand-alone/Master-Slave) กรุณาดาวน์โหลด [UCenter](https://gitee.com/Discuz/UCenter) แยกต่างหาก
+- **ระบบอัปเกรดในตัว:** ตัวติดตั้งเวอร์ชัน X5.0 มาพร้อมกับระบบอัปเกรด โดยแนะนำให้อัปเกรดจากเวอร์ชัน X3.5 ขึ้นมา
+- **กล่องเครื่องมือ (Toolbox):** ตั้งแต่ X5.0 มีระบบเครื่องมือช่วยเหลือติดตั้งมาให้ในตัว กรุณาเปลี่ยนชื่อไฟล์ `install/index.php` ก่อนเริ่มใช้งาน
+- **ต้องการ PHP 8 เท่านั้น:** X5.0 ไม่รองรับการทำงานบน PHP 7 อีกต่อไป กรุณาเตรียมสภาพแวดล้อม PHP 8 ให้พร้อมก่อนทำการติดตั้งหรืออัปเกรด
+- **การรองรับแอปพลิเคชัน:** X5 รองรับการรันแอปจาก X3.5 ได้ แต่ควรตรวจสอบกับผู้พัฒนาแอปอีกครั้งว่ารองรับการทำงานบน PHP 8 หรือไม่
+- **ยินดีรับ PR:** ร่วมเป็นส่วนหนึ่งของ Discuz! ตลอด 25 ปี ผลิตภัณฑ์โอเพนซอร์สจะพัฒนาต่อไปได้ด้วยแรงสนับสนุนจากทุกคน
 
-### 额外目录说明
+### คำอธิบายโฟลเดอร์เพิ่มเติม
 
-Git 版以下目录默认为空，如需要请自行单独下载覆盖
+สำหรับเวอร์ชัน Git โฟลเดอร์ต่อไปนี้จะเป็นโฟลเดอร์ว่าง หากจำเป็นต้องใช้งานกรุณาดาวน์โหลดมาวางทับแยกต่างหาก
 
-| 文件名            | 含义              | Git 仓库地址                                 |
+| ชื่อโฟลเดอร์ | ความหมาย | ที่อยู่ Git สำหรับดาวน์โหลด |
 |----------------|-----------------|--------------------------------------------|
-| /vendor         | Discuz! X5 Vendor 库 | https://gitee.com/Discuz/vendor            |
-| /source/data/ip | Discuz! X5 IP 库 | https://gitee.com/Discuz/IP            |
+| /vendor | คลังไลบรารี (Vendor) ของ Discuz! X5 | https://gitee.com/Discuz/vendor |
+| /source/data/ip | ฐานข้อมูล IP ของ Discuz! X5 | https://gitee.com/Discuz/IP |
 
-### 更新说明
-- 基于 MitFrame® 内核的全新框架体系重构，既是社区又是框架，全面开拓更广泛的开放视角
-- 从前台到后台，开放更加彻底
-- 轻重兼顾的多功能一体化社区
-- 全新 JSON 编辑器
-- 版块、用户组、积分全面加强
-- 全面拥抱 OAuth2.0 的 RESTful API 接口，开发者可随意自定义自己的接口
-- [点击了解更多...](https://www.dismall.com/thread-27135-1-1.html)
+### รายละเอียดการอัปเดต
+- **โครงสร้างใหม่บน MitFrame®:** ปรับปรุงระบบใหม่ทั้งหมดด้วย Kernel MitFrame® ที่เป็นทั้งคอมมูนิตี้และเฟรมเวิร์กในตัวเดียว เปิดมุมมองการพัฒนาที่กว้างกว่าเดิม
+- **เปิดกว้างยิ่งขึ้น:** ปลดล็อกข้อจำกัดทั้งส่วนหน้าเว็บ (Front-end) และหลังบ้าน (Back-end)
+- **คอมมูนิตี้ครบวงจร:** เน้นความเบาแต่ทรงพลัง รองรับการทำงานแบบ All-in-one
+- **JSON Editor ใหม่:** ระบบแก้ไขข้อมูลรูปแบบ JSON ใหม่ทั้งหมด
+- **ปรับปรุงระบบหลัก:** เพิ่มประสิทธิภาพระบบบอร์ด, กลุ่มผู้ใช้งาน และระบบคะแนนให้แข็งแกร่งขึ้น
+- **รองรับ OAuth2.0 และ RESTful API:** นักพัฒนาสามารถสร้างและปรับแต่ง API Interface ของตัวเองได้อย่างอิสระ
+- [คลิกเพื่อดูรายละเอียดเพิ่มเติม...](https://www.dismall.com/thread-27135-1-1.html)
 
-### X5 特性应用列表
-- [插件](https://addon.dismall.com/plugins/list-2-210-0-0-1.html)
-- [模板](https://addon.dismall.com/templates/list-2-212-0-0-1.html)
+### รายการแอปพลิเคชันสำหรับ X5
+- [ปลั๊กอิน (Plugins)](https://addon.dismall.com/plugins/list-2-210-0-0-1.html)
+- [เทมเพลต (Templates)](https://addon.dismall.com/templates/list-2-212-0-0-1.html)
 
-### 关于商业版
-- X5.1 是目前 X5 系列产品的商业版本，不提供开源版，[如您想了解报价请点击这里](https://www.discuz.vip/buy)
-- 原生多端生态、原生队列、原生 AI、原生流程、万象智能
-- 内置多种对象存储、内置多种企业登录平台、内置 ES 全文搜索
-- [点击了解更多...](https://www.dismall.com/thread-27964-1-1.html)
+### เกี่ยวกับเวอร์ชันเชิงพาณิชย์ (Commercial)
+- **X5.1** คือเวอร์ชันสำหรับการใช้งานเชิงพาณิชย์ในปัจจุบัน (ไม่มีเวอร์ชันโอเพนซอร์ส) [หากต้องการตรวจสอบราคาคลิกที่นี่](https://www.discuz.vip/buy)
+- **ฟีเจอร์เด่น:** รองรับระบบ Multi-terminal (หลายอุปกรณ์), ระบบ Queue ในตัว, AI Native, ระบบ Workflow อัจฉริยะ
+- **การเชื่อมต่อภายนอก:** รองรับ Object Storage หลากหลายรูปแบบ, ระบบ Login สำหรับองค์กร และระบบค้นหาแบบ ES (Elasticsearch) ในตัว
+- [คลิกเพื่อดูรายละเอียดเพิ่มเติม...](https://www.dismall.com/thread-27964-1-1.html)
 
-### 声明
-您可以 Fork 本站代码，但未经许可 **禁止** 在本产品的整体或任何部分基础上以发展任何派生版本、修改版本或第三方版本用于 **重新分发** 
+### ประกาศและข้อตกลง
+คุณสามารถทำการ Fork โค้ดชุดนี้ได้ แต่ **ไม่อนุญาต** ให้ใช้โค้ดส่วนหนึ่งส่วนใดหรือทั้งหมดเพื่อพัฒนาเป็นเวอร์ชันแยก (Derivatives), เวอร์ชันดัดแปลง หรือเวอร์ชันบุคคลที่สามเพื่อ **นำไปแจกจ่ายใหม่ (Redistribute)** โดยไม่ได้รับอนุญาต
 
-### DxGit Forker 交流群
-参与本项目 PR 的小伙伴，可以私信 [@zoewho](https://gitee.com/zoewho) 、[@DiscuzX](https://gitee.com/3dming) 并提供 QQ 号码进行审核，在审核通过后加入 DxGit Forker QQ 群与开发者团队共同交流。
+### กลุ่มพูดคุย DxGit Forker
+สำหรับนักพัฒนาที่ช่วยส่ง PR ให้กับโปรเจกต์นี้ สามารถส่งข้อความส่วนตัว (PM) หา [@zoewho](https://gitee.com/zoewho) หรือ [@DiscuzX](https://gitee.com/3dming) พร้อมแจ้งหมายเลข QQ เพื่อรับการตรวจสอบเข้ากลุ่ม DxGit Forker เพื่อแลกเปลี่ยนข้อมูลกับทีมพัฒนาโดยตรง
 
-[点击查看如何提交代码到本项目](https://gitee.com/Discuz/DiscuzX/wikis/%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E5%88%B0%E6%9C%AC%E9%A1%B9%E7%9B%AE?sort_id=3466289)
+[คลิกดูวิธีส่ง Code (Contribute) ให้กับโปรเจกต์นี้](https://gitee.com/Discuz/DiscuzX/wikis/%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E5%88%B0%E6%9C%AC%E9%A1%B9%E7%9B%AE?sort_id=3466289)

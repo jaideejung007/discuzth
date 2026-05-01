@@ -56,8 +56,12 @@ class extend_thread_trade extends extend_thread_base {
 			}
 		}
 
-		$this->trademessage = !empty($parameters['content']) ? 'json_content' : $parameters['message'];
-		$this->tradecontent = !empty($parameters['content']) ? $parameters['content'] : '{}';
+		$contentType = $parameters['contentType'] ?? 'text';
+		$contentEditor = $parameters['contentEditor'] ?? 'default';
+		$content = generate_content_json($contentType, $contentEditor, (!empty($parameters['content']) ? $parameters['content'] : '{}'));
+
+		$this->trademessage = $parameters['message'];
+		$this->tradecontent = $content;
 		$this->param['message'] = '';
 		$this->param['content'] = '{}';
 	}

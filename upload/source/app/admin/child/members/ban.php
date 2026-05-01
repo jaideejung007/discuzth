@@ -314,9 +314,9 @@ EOF;
 			$query = table_home_pic::t()->fetch_all_by_uid($member['uid']);
 			foreach($query as $value) {
 				$picids[] = $value['picid'];
-				deletepicfiles($value);
 			}
 			if(!empty($picids)) {
+				deletepicfiles($query);
 				table_common_moderate::t()->delete_moderate($picids, 'picid');
 			}
 			table_home_pic::t()->delete_by_uid($member['uid']);

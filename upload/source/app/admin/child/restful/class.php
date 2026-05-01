@@ -373,7 +373,7 @@ class rp {
 		$graph = [];
 		for($i = TIMESTAMP - 30 * 86400; $i <= TIMESTAMP; $i += 86400) {
 			$xaxis .= "<value xid='$count'>".dgmdate($i, 'md').'</value>';
-			$graph['request'] .= "<value xid='$count'>".($statdata[dgmdate($i, 'Ymd')] + 0).'</value>';
+			$graph['request'] .= "<value xid='$count'>".($statdata[intval(dgmdate($i, 'Ymd'))] + 0).'</value>';
 			$count++;
 		}
 

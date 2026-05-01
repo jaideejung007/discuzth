@@ -66,8 +66,8 @@ formula: 按照权限公式表达式方式显示
 	margin-left: 5px;
 	width: 80px;
 }
-.component_perm.formula .search {
-	margin-left: 0;
+.component_perm .formula .search {
+	margin-left: 0 !important;
 }
 .component_perm .ppreview {
 	float: left;
@@ -130,7 +130,7 @@ formula: 按照权限公式表达式方式显示
 			foreach($data as $type => $items) {
 				$perms .= '<div><label><b>'.$type.'</b></label>';
 				if(isset($items['_'])) {
-					$perms .= '<label>'.$items['_'].'</label>';
+					$perms .= $items['_'];
 					unset($items['_']);
 				}
 				foreach($items as $item) {
@@ -211,25 +211,24 @@ formula: 按照权限公式表达式方式显示
 
 	private function _gen_tag(&$data, $value, $variable, $extra) {
 		static $tags = null;
-		if(empty($extra['formula'])) {
-			if($tags === null) {
-				$tags = \table_common_tag::t()->fetch_all_by_status(3);
-			}
-			foreach($tags as $tag) {
-				if(!empty($extra['hide']['tag']) && in_array($tag['tagid'], $extra['hide']['tag'])) {
-					continue;
-				}
-				if(str_contains(' '.$value.' ', " t$tag[tagid] ")) {
-					$data[cplang('forums_edit_perm_usertag')][] = ['t'.$tag['tagid'], $tag['tagname'], true];
-				}
-			}
+		if($tags === null) {
+			$tags = \table_common_tag::t()->fetch_all_by_status(3);
 		}
 		if(!$tags) {
 			return;
 		}
+		foreach($tags as $tag) {
+			if(!empty($extra['hide']['tag']) && in_array($tag['tagid'], $extra['hide']['tag'])) {
+				continue;
+			}
+			if(str_contains(' '.$value.' ', " t$tag[tagid] ")) {
+				$data[cplang('forums_edit_perm_usertag')][] = ['t'.$tag['tagid'], $tag['tagname'], true];
+			}
+		}
 		$id = 'st'.random(4);
-		$data[cplang('forums_edit_perm_usertag')]['_'] = '<a id="'.$id.'" class="search" href="javascript:;" style="vertical-align: middle" onclick="perm_search(\'tag/'.$variable.'\', \''.$id.'\')">'.cplang('add').'</a>';
+		$data[cplang('forums_edit_perm_usertag')]['_'] = '<a id="'.$id.'" class="search" href="javascript:;" onclick="perm_search(\'tag/'.$variable.'\', \''.$id.'\')">'.cplang('add').'</a>';
 	}
+
 
 	private function _gen_plugin(&$data, $value, $variable, $extra) {
 		global $_G;

@@ -77,6 +77,8 @@ function showsearchform($operation = '') {
 	if(empty($usertagselect)) {
 		$usertagselect = '<option value="">'.cplang('members_search_noneusertags').'</option>';
 	}
+
+	showsetting('members_search_group', '', '', '<select name="groupid[]" multiple="multiple" size="10">'.$groupselect.'</select>');
 	showsetting('members_search_medal', '', '', '<select name="medalid[]" multiple="multiple" size="10">'.$medalselect.'</select>');
 	showsetting('members_search_usertag', '', '', '<select name="tagid[]" multiple="multiple" size="10">'.$usertagselect.'</select>');
 	showsetting('members_search_online', ['sid_noempty', [

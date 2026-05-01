@@ -128,23 +128,26 @@ if(empty($_GET['do']) || $_GET['do'] == 'tradeinfo') {
 		}
 
 		
-		if($post['content'] && !in_array($post['content'], ['{}', null, 'null', ''])) {
-			list($parserData, $styleData) = editor::parser($post['content']);
-			if($_G['setting']['editor_global_css']) {
-				$styleData .= $_G['setting']['editor_global_css'];
-			}
-			if(!defined('IN_RESTFUL')) {
-				$post['message'] = $json_content = $parserData.$styleData;
-			} else {
-				$post['message'] = $json_content = $parserData;
-				if($_REQUEST['removestyle']) {
-					$pattern = '/\<style(\s+.*?)?\>/s';
-					$styleData = preg_replace($pattern, '', $styleData);
-					$pattern = '/\<\/style(\s+.*?)?\>/s';
-					$styleData = preg_replace($pattern, '', $styleData);
+		if(is_valid_non_empty_json($post['content'], true)) {
+			$content = json_decode($post['content'], true);
+			if($content['type'] == 'json' && $content['editor'] == 'jsonEditor' && !empty($content['content'])) {
+				list($parserData, $styleData) = editor::parser($content['content']);
+				if($_G['setting']['editor_global_css']) {
+					$styleData .= $_G['setting']['editor_global_css'];
 				}
-				$styleData = str_replace(["\r", "\n", "\t"], '', $styleData);
-				$post['style'] = $styleData;
+				if(!defined('IN_RESTFUL')) {
+					$post['message'] = $parserData.$styleData;
+				} else {
+					$post['message'] = $parserData;
+					if($_REQUEST['removestyle']) {
+						$pattern = '/\<style(\s+.*?)?\>/s';
+						$styleData = preg_replace($pattern, '', $styleData);
+						$pattern = '/\<\/style(\s+.*?)?\>/s';
+						$styleData = preg_replace($pattern, '', $styleData);
+					}
+					$styleData = str_replace(["\r", "\n", "\t"], '', $styleData);
+					$post['style'] = $styleData;
+				}
 			}
 		}
 		

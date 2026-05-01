@@ -784,13 +784,24 @@ function checktplrefresh($maintpl, $subtpl, $timecompare, $templateid, $cachefil
 	return FALSE;
 }
 
-function _checkDiyTpl($diypath, $file) {
+function _checkDiyTpl($diypath, $file, &$diytemplatename) {
 	global $_G;
 	if(defined('IN_MOBILE') && constant('IN_MOBILE') == 2) {
 		$file = $_G['mobiletpl'][IN_MOBILE].'/'.$file;
 	}
+	if(!isset($diytemplatename[$file])) {
+		return false;
+	}
 	if(file_exists($diypath.$file.'.htm')) {
-		return true;
+		static $tplrefresh;
+		if($tplrefresh === null) {
+			$tplrefresh = getglobal('config/output/tplrefresh');
+		}
+		if(($tplrefresh == 1 || ($tplrefresh > 1 && !($_G['timestamp'] % $tplrefresh))) &&
+			filemtime($diypath.$file.'.htm') < tplfile::filemtime(DISCUZ_ROOT.$_G['style']['tpldirectory'].'/'.$file.'.php')) {
+		} else {
+			return true;
+		}
 	}
 	updatediytemplate($file, $_G['style']['tpldirectory']);
 	return file_exists($diypath.$file.'.htm');
@@ -851,7 +862,7 @@ function template($file, $templateid = 0, $tpldir = '', $gettplfile = 0, $primal
 				$diytemplatename = &$_G['cache']['diytemplatename'];
 			}
 			$tplsavemod = 0;
-			if(isset($diytemplatename[$file]) && _checkDiyTpl($diypath, $file) && ($tplsavemod = 1) || empty($_G['forum']['styleid']) && ($file = $primaltpl ? $primaltpl : $oldfile) && isset($diytemplatename[$file]) && _checkDiyTpl($diypath, $file)) {
+			if(_checkDiyTpl($diypath, $file, $diytemplatename) && ($tplsavemod = 1) || empty($_G['forum']['styleid']) && ($file = $primaltpl ? $primaltpl : $oldfile) && _checkDiyTpl($diypath, $file, $diytemplatename)) {
 				$tpldir = 'data/diy/'.$_G['style']['tpldirectory'].'/';
 				!$gettplfile && $_G['style']['tplsavemod'] = $tplsavemod;
 				$curtplname = $file;
@@ -866,13 +877,6 @@ function template($file, $templateid = 0, $tpldir = '', $gettplfile = 0, $primal
 				$indiy = true;
 			} else {
 				$file = $primaltpl ? $primaltpl : $oldfile;
-			}
-			$tplrefresh = $_G['config']['output']['tplrefresh'];
-			if($indiy && ($tplrefresh == 1 || ($tplrefresh > 1 && !($_G['timestamp'] % $tplrefresh))) && filemtime($diypath.$file.'.htm') < tplfile::filemtime(DISCUZ_ROOT.$_G['style']['tpldirectory'].'/'.($primaltpl ? $primaltpl : $oldfile).'.php')) {
-				if(!updatediytemplate($file, $_G['style']['tpldirectory'])) {
-					unlink($diypath.$file.'.htm');
-					$tpldir = '';
-				}
 			}
 
 			if(!$gettplfile && empty($_G['style']['tplfile'])) {

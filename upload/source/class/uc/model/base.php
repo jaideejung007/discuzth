@@ -91,7 +91,7 @@ class base {
 
 	function init_db() {
 		require_once UC_ROOT.'lib/dbi.class.php';
-		if(defined('UC_STANDALONE') && UC_STANDALONE) {
+		if(defined('UC_STANDALONE') && UC_STANDALONE && class_exists('DB')) {
 			$this->db = DB::object();
 		} else {
 			$this->db = new ucclient_db();
