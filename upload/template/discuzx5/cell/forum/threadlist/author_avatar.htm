@@ -1,0 +1,5 @@
+<!--{if $thread['authorid'] && $thread['author']}-->
+	<a href="home.php?mod=space&uid=$thread['authorid']" c="1" class="kmimg" target="_blank"><!--{avatar($thread['authorid'],'middle')}--></a>
+<!--{else}-->
+	<a href="javascript:;" class="kmimg"><!--{avatar(0,'middle')}--></a>
+<!--{/if}-->

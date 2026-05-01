@@ -1,0 +1,33 @@
+<!--{if $_G['basescript'] != 'group' && CURMODULE != 'group' && !$thread['forumstick'] && ($thread['isgroup'] == 1 || $thread['fid'] != $_G['fid'])}-->
+	<!--{if $thread['related_group'] == 0 && $thread['closed'] > 1}-->
+		<!--{eval $thread['tid']=$thread['closed'];}-->
+	<!--{/if}-->
+	<!--{if $groupnames[$thread['tid']]}-->
+		<a href="forum.php?mod={if $groupnames[$thread['tid']]['status'] == 3}group{else}forumdisplay{/if}&fid={$groupnames[$thread['tid']]['fid']}" target="_blank" class="kmbg kmico_bk">{$groupnames[$thread['tid']]['name']}</a>
+	<!--{elseif $thread['forumname']}-->
+		<a href="forum.php?mod=forumdisplay&fid={$thread['fid']}" target="_blank" class="kmbg kmico_bk">{$thread['forumname']}</a>
+	<!--{else}-->
+		{if $_G['cache']['forums'][$thread['fid']]['name']}<a href="forum.php?mod=forumdisplay&fid={$thread['fid']}" target="_blank" class="kmbg kmico_bk">{$_G['cache']['forums'][$thread['fid']]['name']}</a>{/if}
+	<!--{/if}-->
+<!--{elseif $thread['typehtml'] || $thread['sorthtml']}-->
+	{echo str_replace(array('<em>[', ']</em>', '">'), array('', '', '" class="kmbg kmico_bk" target="_blank">'), $thread['typehtml'].$thread['sorthtml']);}
+<!--{elseif $_G['cache']['forums'][$thread['fid']]['name']}-->
+	<a href="forum.php?mod=forumdisplay&fid={$thread['fid']}" target="_blank" class="kmbg kmico_bk">{$_G['cache']['forums'][$thread['fid']]['name']}</a>
+<!--{elseif $thread['forumname']}-->
+	<a href="forum.php?mod=forumdisplay&fid={$thread['fid']}" target="_blank" class="kmbg kmico_bk">{$thread['forumname']}</a>
+<!--{/if}-->
+<!--{if $stemplate && $sortid}--><span class="kmbga kmico_xs">$stemplate[$sortid][$thread['tid']]</span><!--{/if}-->
+<!--{if $thread['readperm']}--><span class="kmbgb kmico_qx">{lang readperm} <strong>{$thread['readperm']}</strong></span><!--{/if}-->	
+<!--{if $thread['price'] > 0}-->
+	<!--{if $thread['special'] == '3'}-->
+		<a href="forum.php?mod=forumdisplay&fid=$_G['fid']&filter=specialtype&specialtype=reward$forumdisplayadd['specialtype']{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}&rewardtype=1" title="{lang show_rewarding_only}" class="kmbga kmico_xs">{lang thread_reward} <strong>$thread['price']</strong> {$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][2]]['unit']}{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][2]]['title']}</a>
+	<!--{else}-->
+		<span class="kmbga kmico_xs">{lang price} <strong>$thread['price']</strong> {$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]]['unit']}{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]]['title']}</span>
+	<!--{/if}-->
+<!--{elseif $thread['special'] == '3' && $thread['price'] < 0}-->
+	<a href="forum.php?mod=forumdisplay&fid=$_G['fid']&filter=specialtype&specialtype=reward$forumdisplayadd['specialtype']{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}&rewardtype=2" title="{lang show_rewarded_only}" class="kmbga kmico_xs">{lang reward_solved}</a>
+<!--{/if}-->
+<!--{if $thread['replycredit'] > 0}-->
+	<span class="kmbga kmico_xs">{lang replycredit} <strong>$thread['replycredit']</strong></span>
+<!--{/if}-->						
+<!--{if $thread['mobile']}--><span class="kmtxt">{lang post_mobile}</span><!--{/if}-->

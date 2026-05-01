@@ -1,0 +1,22 @@
+/*
+Popup Calendar CSS file for Discuz! X
+(C) Discuz! Team
+https://www.discuz.vip
+*/
+/*Popup Calendar*/
+#calendar { padding: 5px; text-align: left; border: 1px solid {DROPMENUBORDER}; background: {WRAPBG}; margin-bottom: 0.8em; box-shadow: 2px 4px 4px rgba(0,0,0,0.2); margin-top: 10px;}
+	#calendar td { padding: 7px; font-weight: 700; text-align: revert-layer; }
+	#calendar_week td { height: 2em; line-height: 2em; border-bottom: 1px solid {SPECIALBORDER};}
+		#calendar_week a { color: #155BD5; }
+	#hourminute td {padding: 4px 2px; border-top: 1px solid {SPECIALBORDER};}
+		.calendar_expire, .calendar_expire a:link, .calendar_expire a:visited {	color: {MIDTEXT}; font-weight: normal; }
+		.calendar_default, .calendar_default a:link, .calendar_default a:visited { color: #155BD5;}
+		.calendar_checked, .calendar_checked a:link, .calendar_checked a:visited { color: #fff; font-weight: bold;}
+		td.calendar_checked, span.calendar_checked{ background: #155BD5;}
+		.calendar_today, .calendar_today a:link, .calendar_today a:visited { color: {TABLETEXT}; font-weight: bold; }
+	#calendar_header td{ width: 30px; height: 20px; border-bottom: 1px solid {SPECIALBORDER}; font-weight: normal; }
+	#calendar_year { display: none;	line-height: 130%; background: {WRAPBG}; position: absolute; z-index: 10; }
+		#calendar_year .col { float: left; background: {WRAPBG}; margin-left: 1px; border: 1px solid #eeeeee; padding: 4px; }
+	#calendar_month { display: none; background: {WRAPBG}; line-height: 130%; border: 1px solid #DDD; padding: 4px; position: absolute; z-index: 11; }
+
+	#calendar_header td, #hourminute td, #calendar_week td, .slideouter{border-color:#eeeeee !important;}

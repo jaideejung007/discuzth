@@ -1,0 +1,13 @@
+<?php exit('Access Denied');?>
+<!--{template common/header}-->
+<!--{template home/spacecp_header}-->
+<!--{if $op == 'credit'}-->
+	<!--{template home/spacecp_credit_header}-->
+<!--{/if}-->
+<!--{eval include(template($_GET['id']));}-->
+</div></div>
+<div class="appl">
+	<!--{template home/spacecp_footer}-->
+</div></div>
+
+<!--{template common/footer}-->

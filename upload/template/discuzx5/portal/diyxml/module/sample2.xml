@@ -1,0 +1,129 @@
+<!--[name]Sample2[/name]-->
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="spacecss"><![CDATA[#portal_block_232 { margin-top:0px !important;margin-right:15px !important;margin-bottom:15px !important;margin-left:0px !important;}]]></item>
+	<item id="layoutdata">
+		<item id="comiis-3-ct">
+			<item id="frame`frameyXauUJ">
+				<item id="attr">
+					<item id="name"><![CDATA[frameyXauUJ]]></item>
+					<item id="moveable"><![CDATA[true]]></item>
+					<item id="className"><![CDATA[cl_frame_bm frame move-span cl frame-1]]></item>
+					<item id="titles"><![CDATA[]]></item>
+				</item>
+				<item id="column`frameyXauUJ_left">
+					<item id="attr">
+						<item id="name"><![CDATA[frameyXauUJ_left]]></item>
+						<item id="className"><![CDATA[column frame-1-c]]></item>
+					</item>
+					<item id="block`portal_block_232">
+						<item id="attr">
+							<item id="name"><![CDATA[portal_block_232]]></item>
+							<item id="className"><![CDATA[cl_block_bm block move-span]]></item>
+							<item id="titles"><![CDATA[]]></item>
+						</item>
+					</item>
+				</item>
+			</item>
+		</item>
+	</item>
+	<item id="blockdata">
+		<item id="block">
+			<item id="232">
+				<item id="bid"><![CDATA[232]]></item>
+				<item id="blockclass"><![CDATA[forum_thread]]></item>
+				<item id="blocktype"><![CDATA[0]]></item>
+				<item id="name"><![CDATA[幻灯片]]></item>
+				<item id="title"><![CDATA[]]></item>
+				<item id="classname"><![CDATA[cl_block_bm]]></item>
+				<item id="summary"><![CDATA[]]></item>
+				<item id="uid"><![CDATA[1]]></item>
+				<item id="username"><![CDATA[夕阳渔民]]></item>
+				<item id="styleid"><![CDATA[120]]></item>
+				<item id="blockstyle"><![CDATA[]]></item>
+				<item id="picwidth"><![CDATA[700]]></item>
+				<item id="picheight"><![CDATA[293]]></item>
+				<item id="target"><![CDATA[blank]]></item>
+				<item id="dateformat"><![CDATA[Y-m-d]]></item>
+				<item id="dateuformat"><![CDATA[0]]></item>
+				<item id="script"><![CDATA[thread]]></item>
+				<item id="param">
+					<item id="tids"><![CDATA[]]></item>
+					<item id="uids"><![CDATA[]]></item>
+					<item id="keyword"><![CDATA[]]></item>
+					<item id="tagkeyword"><![CDATA[]]></item>
+					<item id="fids">
+						<item id="0"><![CDATA[0]]></item>
+					</item>
+					<item id="typeids"><![CDATA[]]></item>
+					<item id="reply"><![CDATA[0]]></item>
+					<item id="recommend"><![CDATA[0]]></item>
+					<item id="viewmod"><![CDATA[0]]></item>
+					<item id="rewardstatus"><![CDATA[0]]></item>
+					<item id="picrequired"><![CDATA[1]]></item>
+					<item id="orderby"><![CDATA[dateline]]></item>
+					<item id="postdateline"><![CDATA[0]]></item>
+					<item id="lastpost"><![CDATA[0]]></item>
+					<item id="highlight"><![CDATA[0]]></item>
+					<item id="titlelength"><![CDATA[40]]></item>
+					<item id="summarylength"><![CDATA[80]]></item>
+					<item id="startrow"><![CDATA[0]]></item>
+					<item id="items"><![CDATA[5]]></item>
+				</item>
+				<item id="shownum"><![CDATA[5]]></item>
+				<item id="cachetime"><![CDATA[3600]]></item>
+				<item id="cachetimerange"><![CDATA[]]></item>
+				<item id="punctualupdate"><![CDATA[0]]></item>
+				<item id="hidedisplay"><![CDATA[0]]></item>
+				<item id="dateline"><![CDATA[1728615093]]></item>
+				<item id="notinherited"><![CDATA[0]]></item>
+				<item id="isblank"><![CDATA[0]]></item>
+			</item>
+		</item>
+		<item id="style">
+			<item id="120">
+				<item id="styleid"><![CDATA[120]]></item>
+				<item id="blockclass"><![CDATA[forum_thread]]></item>
+				<item id="name"><![CDATA[企飞版-通用幻灯片A]]></item>
+				<item id="template">
+					<item id="raw"><![CDATA[<div class="module cl slidebox comiis_slidebox_a">
+<ul class="slideshow">
+[loop]
+<li style="width: {picwidth}px; height: {picheight}px;"><a href="{url}"{target}><img src="{pic}" width="{picwidth}" height="{picheight}" alt="{title}" /></a><span class="title">{title}</span></li>
+[/loop]
+</ul>
+<a href="javascript:;" class="slidebarup">‹</a>
+<a href="javascript:;" class="slidebardown">›</a>
+</div>
+<script type="text/javascript">
+runslideshow();
+</script>]]></item>
+					<item id="footer"><![CDATA[]]></item>
+					<item id="header"><![CDATA[]]></item>
+					<item id="indexplus"><![CDATA[
+					]]></item>
+					<item id="index"><![CDATA[
+					]]></item>
+					<item id="orderplus"><![CDATA[
+					]]></item>
+					<item id="order"><![CDATA[
+					]]></item>
+					<item id="loopplus"><![CDATA[
+					]]></item>
+					<item id="loop"><![CDATA[<li style="width: {picwidth}px; height: {picheight}px;"><a href="{url}"{target}><img src="{pic}" width="{picwidth}" height="{picheight}" alt="{title}" /></a><span class="title">{title}</span></li>]]></item>
+				</item>
+				<item id="hash"><![CDATA[4bf30f2c]]></item>
+				<item id="getpic"><![CDATA[1]]></item>
+				<item id="getsummary"><![CDATA[0]]></item>
+				<item id="makethumb"><![CDATA[1]]></item>
+				<item id="settarget"><![CDATA[1]]></item>
+				<item id="fields">
+					<item id="0"><![CDATA[url]]></item>
+					<item id="1"><![CDATA[pic]]></item>
+					<item id="2"><![CDATA[title]]></item>
+				</item>
+				<item id="moreurl"><![CDATA[0]]></item>
+			</item>
+		</item>
+	</item>
+</root>

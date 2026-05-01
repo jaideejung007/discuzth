@@ -1,0 +1,15 @@
+<?php exit('Access Denied');?>
+<ul class="tb cl">
+	<!--{if !empty($usergroups)}-->
+		<li class="y{$activegs[my] or ''} showmenu" id="gmy" onmouseover="showMenu(this.id)"><a href="home.php?mod=spacecp&ac=usergroup">{lang my_usergroups}</a></li>
+		<!--{loop $upgroups $upgid $v}-->
+		<li class="y{$activegs['up'.$upgid] or ''} showmenu" id="ug{$upgid}" onmouseover="showMenu(this.id)"><a>{$v}</a></li>
+		<!--{/loop}-->
+		<li class="y{$activegs[upgrade] or ''} showmenu" id="gupgrade" onmouseover="showMenu(this.id)"><a>{lang usergroup_group2}</a></li>
+		<li class="y{$activegs[user] or ''} showmenu" id="guser" onmouseover="showMenu(this.id)"><a>{lang usergroup_group1}</a></li>
+		<li class="y{$activegs[admin] or ''} showmenu"id="gadmin" onmouseover="showMenu(this.id)"><a>{lang usergroup_group3}</a></li>
+	<!--{/if}-->
+	<li{$activeus[usergroup] or ''}><a href="home.php?mod=spacecp&ac=usergroup">{lang my_usergroups}</a></li>
+	<li{$activeus[list] or ''} {$activeus[expiry] or ''}><a href="home.php?mod=spacecp&ac=usergroup&do=list">{lang usergroups_joinbuy}</a></li>
+	<li{$activeus[forum] or ''}><a href="home.php?mod=spacecp&ac=usergroup&do=forum">{lang my}{$_G['setting']['navs'][2]['navname']}{lang rights}</a></li>
+</ul>

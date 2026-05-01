@@ -1,0 +1,339 @@
+{
+  "Title": "Discuz! Style",
+  "Version": "X5.0",
+  "From": "Discuz! (Discuz! https://www.discuz.vip)",
+  "Data": {
+    "styleid": "1",
+    "name": "默认模板",
+    "available": "1",
+    "templateid": "1",
+    "extstyle": "t1\tt2\tt3\tt4\tt5|",
+    "version": "X5.0",
+    "tplname": "默认模板套系",
+    "directory": "./template/default",
+    "copyright": "Discuz! https://www.discuz.vip",
+    "style": {
+      "smfont": "Tahoma,Helvetica,sans-serif",
+      "threadtitlefontsize": "14px",
+      "threadtitlefont": "Tahoma,Helvetica,'Microsoft Yahei',sans-serif",
+      "smfontsize": "0.83em",
+      "tabletext": "#444",
+      "midtext": "#666",
+      "lighttext": "#999",
+      "link": "#333",
+      "highlightlink": "#369",
+      "noticetext": "#F26C4F",
+      "bgcolor": "#FFF",
+      "msgfontsize": "14px",
+      "sidebgcolor": "#E8F0F7",
+      "headerborder": "0",
+      "headerbgcolor": "",
+      "inputborderdarkcolor": "#848484",
+      "stypeid": "5",
+      "inputbg": "#FFF",
+      "commonborder": "#CDCDCD",
+      "commonbg": "#F2F2F2",
+      "specialborder": "#C2D5E3",
+      "specialbg": "#E5EDF2",
+      "dropmenuborder": "#DDD",
+      "floatmaskbgcolor": "#000",
+      "dropmenubgcolor": "#FEFEFE",
+      "floatbgcolor": "#FFF",
+      "lightlink": "#FFF",
+      "menuhoverbgcolor": "#004FA0",
+      "menucurbgcolor": "#005AB4",
+      "titlebgcolor": "#E5EDF2",
+      "fontsize": "12px/1.5",
+      "font": "Tahoma,Helvetica,'Microsoft Yahei',sans-serif",
+      "styleimgdir": "",
+      "imgdir": "",
+      "boardimg": "logo.svg",
+      "searchimg": "logo_sc.svg",
+      "touchimg": "logo_m.svg",
+      "available": "",
+      "headertext": "#444",
+      "footertext": "#666",
+      "menubgcolor": "#2B7ACD",
+      "menutext": "#FFF",
+      "menuhovertext": "#FFF",
+      "wrapbg": "#FFF",
+      "wrapbordercolor": "#CCC",
+      "contentwidth": "630px",
+      "contentseparate": "#C2D5E3",
+      "inputborder": "#E0E0E0",
+      "version": "v1.0"
+    },
+    "var": {
+      "touch_style": {
+        "displayorder": "0",
+        "title": "手机版配色",
+        "description": "",
+        "variable": "touch_style",
+        "type": "stylePage",
+        "value": "",
+        "extra": ""
+      },
+      "touch_style_color": {
+        "displayorder": "2",
+        "title": "模板主色调",
+        "description": "模板主色调颜色, 默认值 #2B7ACD",
+        "variable": "touch_style_color",
+        "type": "color",
+        "value": "#2B7ACD",
+        "extra": ""
+      },
+      "touch_style_bg2": {
+        "displayorder": "3",
+        "title": "常规高亮色",
+        "description": "常规高亮文字或背景颜色, 默认值 #FF5656",
+        "variable": "touch_style_bg2",
+        "type": "color",
+        "value": "#FF5656",
+        "extra": ""
+      },
+      "touch_style_border": {
+        "displayorder": "4",
+        "title": "常规边框色",
+        "description": "常规边框颜色, 默认值 #EDEDED",
+        "variable": "touch_style_border",
+        "type": "color",
+        "value": "#EDEDED",
+        "extra": ""
+      },
+      "touch_style_bgs": {
+        "displayorder": "8",
+        "title": "常规背景颜色",
+        "description": "",
+        "variable": "touch_style_bgs",
+        "type": "styleTitle",
+        "value": "",
+        "extra": ""
+      },
+      "touch_style_bodybg": {
+        "displayorder": "11",
+        "title": "页面背景",
+        "description": "全局页面背景色, 默认值 #EEEEEE",
+        "variable": "touch_style_bodybg",
+        "type": "color",
+        "value": "#EEEEEE",
+        "extra": ""
+      },
+      "touch_style_bg0": {
+        "displayorder": "12",
+        "title": "模块背景",
+        "description": "常规模块背景色, 默认值 #FFFFFF",
+        "variable": "touch_style_bg0",
+        "type": "color",
+        "value": "#FFFFFF",
+        "extra": ""
+      },
+      "touch_style_bg1": {
+        "displayorder": "13",
+        "title": "深色背景",
+        "description": "常规深色背景色, 默认值 #333333",
+        "variable": "touch_style_bg1",
+        "type": "color",
+        "value": "#333333",
+        "extra": ""
+      },
+      "touch_style_bg3": {
+        "displayorder": "14",
+        "title": "辅助背景",
+        "description": "辅助背景色, 主要用于排行榜或置顶图标等背景使用, 默认值  #FF9C00",
+        "variable": "touch_style_bg3",
+        "type": "color",
+        "value": "#FF9900",
+        "extra": ""
+      },
+      "touch_style_bg4": {
+        "displayorder": "15",
+        "title": "辅助背景",
+        "description": "辅助背景色, 主要用于排行榜或置顶图标等背景使用, 默认值 #B3CC0D",
+        "variable": "touch_style_bg4",
+        "type": "color",
+        "value": "#B3CC0D",
+        "extra": ""
+      },
+      "touch_style_bg5": {
+        "displayorder": "16",
+        "title": "辅助背景",
+        "description": "辅助背景色, 主要用于一些图标或按钮的背景使用, 默认值 #F3F3F3",
+        "variable": "touch_style_bg5",
+        "type": "color",
+        "value": "#F3F3F3",
+        "extra": ""
+      },
+      "touch_style_bg6": {
+        "displayorder": "17",
+        "title": "辅助背景",
+        "description": "辅助背景色, 主要用于一些图标或按钮的背景使用, 默认值 #CCCCCC",
+        "variable": "touch_style_bg6",
+        "type": "color",
+        "value": "#CCCCCC",
+        "extra": ""
+      },
+      "touch_style_bgn": {
+        "displayorder": "18",
+        "title": "辅助背景",
+        "description": "辅助背景色, 主要用于一些图标或按钮的背景使用, 默认值 #A0C8EA",
+        "variable": "touch_style_bgn",
+        "type": "color",
+        "value": "#A0C8EA",
+        "extra": ""
+      },
+      "touch_style_text": {
+        "displayorder": "20",
+        "title": "常规文字颜色",
+        "description": "",
+        "variable": "touch_style_text",
+        "type": "styleTitle",
+        "value": "",
+        "extra": ""
+      },
+      "touch_style_tfff": {
+        "displayorder": "21",
+        "title": "白色文字色",
+        "description": "白色文字颜色, 默认值 #FFFFFF",
+        "variable": "touch_style_tfff",
+        "type": "color",
+        "value": "#FFFFFF",
+        "extra": ""
+      },
+      "touch_style_t333": {
+        "displayorder": "22",
+        "title": "常规文字色",
+        "description": "常规文字颜色, 默认值 #333333",
+        "variable": "touch_style_t333",
+        "type": "color",
+        "value": "#333333",
+        "extra": ""
+      },
+      "touch_style_t666": {
+        "displayorder": "23",
+        "title": "中等文字色",
+        "description": "中等文字颜色, 默认值 #666666",
+        "variable": "touch_style_t666",
+        "type": "color",
+        "value": "#666666",
+        "extra": ""
+      },
+      "touch_style_t999": {
+        "displayorder": "24",
+        "title": "浅色文字色",
+        "description": "浅色文字颜色, 默认值 #999999",
+        "variable": "touch_style_t999",
+        "type": "color",
+        "value": "#999999",
+        "extra": ""
+      },
+      "touch_style_t777": {
+        "displayorder": "25",
+        "title": "辅助文字色",
+        "description": "辅助文字颜色, 默认值 #777777",
+        "variable": "touch_style_t777",
+        "type": "color",
+        "value": "#777777",
+        "extra": ""
+      },
+      "touch_style_t888": {
+        "displayorder": "26",
+        "title": "辅助文字色",
+        "description": "辅助文字颜色, 默认值 #888888",
+        "variable": "touch_style_t888",
+        "type": "color",
+        "value": "#888888",
+        "extra": ""
+      },
+      "touch_style_taaa": {
+        "displayorder": "27",
+        "title": "辅助文字色",
+        "description": "辅助文字颜色, 默认值 #AAAAAA",
+        "variable": "touch_style_taaa",
+        "type": "color",
+        "value": "#AAAAAA",
+        "extra": ""
+      },
+      "touch_style_tbbb": {
+        "displayorder": "28",
+        "title": "辅助文字色",
+        "description": "辅助文字颜色, 默认值 #BBBBBB",
+        "variable": "touch_style_tbbb",
+        "type": "color",
+        "value": "#BBBBBB",
+        "extra": ""
+      },
+      "touch_style_tccc": {
+        "displayorder": "29",
+        "title": "辅助文字色",
+        "description": "辅助文字颜色, 默认值 #CCCCCC",
+        "variable": "touch_style_tccc",
+        "type": "color",
+        "value": "#CCCCCC",
+        "extra": ""
+      },
+      "touch_style_tddd": {
+        "displayorder": "30",
+        "title": "辅助文字色",
+        "description": "辅助文字颜色, 默认值 #DDDDDD",
+        "variable": "touch_style_tddd",
+        "type": "color",
+        "value": "#DDDDDD",
+        "extra": ""
+      },
+      "touch_style_tnnn": {
+        "displayorder": "31",
+        "title": "辅助文字色",
+        "description": "辅助文字颜色, 默认值 #7DA0CC",
+        "variable": "touch_style_tnnn",
+        "type": "color",
+        "value": "#7DA0CC",
+        "extra": ""
+      },
+      "touch_style_tlight": {
+        "displayorder": "32",
+        "title": "辅助文字色",
+        "description": "辅助文字颜色, 默认值 #FF9C00",
+        "variable": "touch_style_tlight",
+        "type": "color",
+        "value": "#FF9C00",
+        "extra": ""
+      },
+      "touch_style_ta": {
+        "displayorder": "33",
+        "title": "辅助文字色",
+        "description": "辅助文字颜色, 默认值 #FF5656",
+        "variable": "touch_style_ta",
+        "type": "color",
+        "value": "#FF5656",
+        "extra": ""
+      },
+      "touch_style_tv": {
+        "displayorder": "34",
+        "title": "辅助文字色",
+        "description": "辅助文字颜色, 默认值 #7CBE00",
+        "variable": "touch_style_tv",
+        "type": "color",
+        "value": "#7CBE00",
+        "extra": ""
+      },
+      "touch_style_add": {
+        "displayorder": "35",
+        "title": "自定义CSS",
+        "description": "",
+        "variable": "touch_style_add",
+        "type": "styleTitle",
+        "value": "",
+        "extra": ""
+      },
+      "touch_style_addcss": {
+        "displayorder": "36",
+        "title": "附加自定义CSS",
+        "description": "附加自定义CSS对页面进行个性化设置",
+        "variable": "touch_style_addcss",
+        "type": "textarea",
+        "value": "",
+        "extra": ""
+      }
+    }
+  }
+}

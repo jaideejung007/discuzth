@@ -1,0 +1,33 @@
+<?php exit('Access Denied');?>
+<!--{eval $friendsname = array(1 => '{lang friendname_1}',2 => '{lang friendname_2}',3 => '{lang friendname_3}',4 => '{lang friendname_4}');}-->
+<!--{template common/header}-->
+<div class="header cl">
+	<div class="mz"><a href="javascript:history.back();"><i class="dm-c-left"></i></a></div>
+	<h2>$sequence / $album['picnum']</h2>
+	<div class="my"><a href="index.php"><i class="dm-house"></i></a></div>
+</div>
+<!--[diy=diy1]--><div id="diy1" class="area"></div><!--[/diy]-->
+<div class="album_tbmu">
+	<div class="album_tbmu_box pic">
+		<div id="photo_pic" class="c{if $pic['magicframe']} magicframe magicframe$pic['magicframe']{/if}">
+			<a href="home.php?mod=space&uid=$pic['uid']&do=$do&picid=$nextid"><img src="$pic['pic']" id="pic" class="vm" /></a>
+			<div class="tbmu" id="pic_block">
+				<a href="home.php?mod=space&uid=$pic['uid']&do=$do&picid=$upid" class="z">{lang previous_pic}</a>
+				<a href="home.php?mod=space&uid=$pic['uid']&do=$do&picid=$nextid" id="nextlink" class="y">{lang next_pic}</a>
+			</div>
+		</div>
+		<!--[diy=diy2]--><div id="diy2" class="area"></div><!--[/diy]-->
+		<div class="album_inof">
+			<p id="a_set_title" class="albim_pic_title">
+				<a href="home.php?mod=spacecp&ac=album&op=editpic&albumid=$pic['albumid']&picid=$pic['picid']" class="y">{lang manage_pic}</a>
+				<!--{if $pic['title']}-->$pic['title']<!--{else}--><!--{eval echo substr($pic['filename'], 0, strrpos($pic['filename'], '.'));}--><!--{/if}-->
+			</p>
+			<p class="album_at">
+				{lang upload_at} <!--{date($pic['dateline'])}--> ($pic['size'])
+			</p>
+		</div>
+		<a href="home.php?mod=space&uid={$pic['uid']}&do=album&id={$pic['albumid']}" class="mt10 cl"><button class="mt10 pn btn_pn_red">{lang return_pic_list}</button></a>
+	</div>
+</div>
+<!--[diy=diy3]--><div id="diy3" class="area"></div><!--[/diy]-->
+<!--{template common/footer}-->

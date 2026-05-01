@@ -1,0 +1,22 @@
+<!--{if $thread['images']}-->
+    <!--{eval $all_image_num = count($thread['images']);}-->
+		<!--{if $all_image_num == 1}-->
+		<div class="kmimg_onebox">
+		<!--{else}-->
+		<div class="kmimg_box {if $all_image_num == 4} km_4img{/if}">
+		<!--{/if}-->		
+    <!--{eval $attach_on = 0; $list_attach_num = 9}-->
+    <!--{loop $thread['images'] $dz_n $image}-->
+      <!--{if $all_image_num == 1}-->
+        <a href="forum.php?mod=viewthread&tid={$thread['tid']}" class="kmimg" target="_blank"><img src="$image"></a>
+      <!--{else}-->
+        <!--{eval $attach_on++; if($attach_on > $list_attach_num) break;}-->
+        <a href="forum.php?mod=viewthread&tid=$thread['tid']&{if $_GET['archiveid']}archiveid={$_GET['archiveid']}&{/if}extra=$extra" class="kmshowimg {if $all_image_num > $list_attach_num && $attach_on == $list_attach_num} kmmunbg{/if}"><img src="$image" class="vm">
+          <!--{if $all_image_num > $list_attach_num && $attach_on == $list_attach_num}-->
+          <em class="kmmun">+{echo $all_image_num - $list_attach_num}</em>
+          <!--{/if}-->
+        </a>
+      <!--{/if}-->
+    <!--{/loop}-->
+    </div>
+<!--{/if}-->

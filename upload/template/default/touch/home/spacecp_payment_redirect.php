@@ -1,0 +1,18 @@
+<?php exit('Access Denied');?>
+<!--{template common/header}-->
+
+<!--{if $pay_channel == 'wechat'}-->
+<script type="text/javascript">
+    window.location.href = '{$pay_url}';
+</script>
+
+<!--{elseif $pay_channel == 'alipay'}-->
+
+<script type="text/javascript">
+    window.location.href = '{$pay_url}';
+</script>
+<!--{else}-->
+<!--{hook/spacecp_payment_redirect_extend}-->
+<!--{/if}-->
+
+<!--{template common/footer}-->

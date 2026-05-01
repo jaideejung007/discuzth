@@ -1,0 +1,8 @@
+<?php exit('Access Denied');?>
+<!--{template common/header}-->
+<!--{if !empty($groupselect['second'])}-->
+<select id="fup" name="fup" class="ps">
+	$groupselect[second]
+</select>
+<!--{/if}-->
+<!--{template common/footer}-->

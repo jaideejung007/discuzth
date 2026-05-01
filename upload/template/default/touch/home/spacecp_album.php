@@ -1,0 +1,249 @@
+<?php exit('Access Denied');?>
+<!--{eval $_G['home_tpl_titles'] = array($album['albumname'], '{lang album}');}-->
+<!--{template common/header}-->
+
+
+<!--{if $_GET['op']=='edit'}-->
+<div class="header cl">
+	<div class="mz"><a href="javascript:history.back();"><i class="dm-c-left"></i></a></div>
+	<h2>
+		<a href="home.php?mod=space&do=album">{lang album}</a>
+		 -
+		<a href="home.php?mod=space&uid=$album['uid']&do=album&view=me">{lang edit_album}</a>
+	</h2>
+	<div class="my"><a href="index.php"><i class="dm-house"></i></a></div>
+</div>
+<form method="post" autocomplete="off" id="theform" name="theform" action="home.php?mod=spacecp&ac=album&op=edit&albumid=$albumid">
+<input type="hidden" name="referer" value="{echo dreferer()}" />
+<input type="hidden" name="editsubmit" value="true" />
+<input type="hidden" name="formhash" value="{FORMHASH}" />
+<div class="bodybox p10 cl">
+	<div class="setbox post_box mt10 mb10 cl">
+		<ul class="cl">
+			<li class="mli flex-box cl">
+				<div class="tit"><label for="albumname">{lang album_name}</label></div>
+				<div class="flex"><input type="text" id="albumname" name="albumname" value="$album['albumname']" size="20" class="px" /></div>
+			</li>
+			<li class="mtxt">
+				{lang album_depict}
+			</li>
+			<li class="mtxt">
+				<textarea name="depict" id="depict" class="pt" cols="40" rows="3">$album[depict]</textarea>
+			</li>
+			<!--{if $categoryselect}-->
+			<li class="mli flex-box cl">
+				<div class="tit">{lang site_categories}</div>
+				<div class="flex">$categoryselect</div>
+			</li>
+			<li class="mtit">
+				({lang select_site_album_categories})
+			</li>
+			<!--{/if}-->
+			<li class="mli flex-box cl">
+				<div class="tit">{lang privacy_settings}</div>
+				<div class="flex">
+					<select name="friend" onchange="home_passwordShow(this.value);" class="sort_sel">
+						<option value="0"$friendarr[0]>{lang friendname_0}</option>
+						<option value="1"$friendarr[1]>{lang friendname_1}</option>
+						<option value="2"$friendarr[2]>{lang friendname_2}</option>
+						<option value="3"$friendarr[3]>{lang friendname_3}</option>
+						<option value="4"$friendarr[4]>{lang friendname_4}</option>
+					</select>
+				</div>
+			</li>
+			<li class="mli flex-box cl" id="span_password" style="display:none;">
+				<div class="tit">{lang password}</div>
+				<div class="flex-3 input"><input type="text" name="password" id="uploadpassword" class="px" value="{$album['password']}" size="10" /></div>
+			</li>
+			<div class="cl" id="tb_selectgroup" style="display:none;">
+				<li class="mli flex-box cl">
+					<div class="tit">{lang specified_friends}</div>
+					<div class="flex-3">
+						<select name="selectgroup" onchange="home_getgroup(this.value);" class="sort_sel">
+							<option value="">{lang from_friends_group}</option>
+							<!--{loop $groups $key $value}-->
+							<option value="$key">$value</option>
+							<!--{/loop}-->
+						</select>
+					</div>
+				</li>
+				<li class="mtit cl">{lang choices_following_friends_list}</li>
+				<li class="mtxt cl">
+					<textarea name="target_names" id="target_names" class="pt" rows="3">{$album['target_names']}</textarea>
+				</li>
+				<li class="mtit cl">{lang friend_name_space}</li>
+			</div>
+		</ul>
+	</div>
+	<button name="submit" type="submit" class="pn" value="true"><strong>{lang determine}</strong></button>
+	<button href="home.php?mod=spacecp&ac=album&op=delete&albumid=$album['albumid']&handlekey=delalbumhk_{$album['albumid']}" id="album_delete_$album['albumid']" class="pn btn_pn_red mt10 dialog">{lang delete_album}</button>
+</div>
+</form>
+<!--{elseif $_GET['op'] == 'editpic'}-->
+<div class="header cl">
+	<div class="mz"><a href="javascript:history.back();"><i class="dm-c-left"></i></a></div>
+	<h2>
+		<a href="home.php?mod=space&do=album">{lang album}</a>
+		-
+		<a href="home.php?mod=space&uid=$album['uid']&do=album&view=me">{lang edit_album}</a>
+	</h2>
+	<div class="my"><a href="index.php"><i class="dm-house"></i></a></div>
+</div>
+<div class="bodybox p10 cl">
+	<div class="quote">
+		{lang album_cover_notice}
+	</div>
+	<!--{if $list}-->
+		<form method="post" autocomplete="off" id="theform" name="theform" action="home.php?mod=spacecp&ac=album&op=editpic&albumid=$albumid">
+			<table cellspacing="0" cellpadding="0" class="tfm">
+				<!--{eval $common = '';}-->
+				<!--{loop $list $value}-->
+					<tr>
+						<td width="20"><input type="checkbox" name="ids[{$value['picid']}]" value="{$value['picid']}" {$value['checked']} class="pc"></td>
+						<td width="150" align="center" class="gt">
+							<a href="$value['bigpic']" target="_blank"><img src="$value['pic']" alt="" width="140" /></a>
+							<!--{eval $ids .= $common.$value['picid'].':'.$value['picid'];}-->
+							<!--{eval $common = ',';}-->
+							<!--{if $album['albumname']}--><p><a href="home.php?mod=spacecp&ac=album&op=setpic&albumid=$value['albumid']&picid=$value['picid']&handlekey=setpichk" id="a_picid_$value['picid']" class="dialog">{lang set_to_conver}</a></p><!--{/if}-->
+						</td>
+						<td><textarea name="title[{$value['picid']}]" rows="4" cols="70" class="pt">$value['title']</textarea><input type="hidden" name="oldtitle[{$value['picid']}]" value="$value[title]"></td>
+					</tr>
+				<!--{/loop}-->
+				<tr>
+					<td colspan="3">
+					</td>
+				</tr>
+			</table>
+				<li class="flex-box p10 mt10 mb10 cl">
+					<div class="flex"><button type="submit" name="editpicsubmit" value="true" class="flex pns" onclick="this.form.action+='&subop=update';"><strong>{lang update_explain}</strong></button></div>
+					<div class="flex"><button type="submit" name="editpicsubmit" value="true" class="flex pns" onclick="this.form.action+='&subop=delete';return ischeck('theform', 'ids')"><strong>{lang delete}</strong></button></div>
+				</li>
+				<!--{if $albumlist}-->
+				<div class="post_box mt10 mb10 cl">
+				<li class="mli p10 flex-box">
+					<div class="flex"><button type="submit" name="editpicsubmit" value="true" class="flex pns" onclick="this.form.action+='&subop=move';return ischeck('theform', 'ids')"><strong>{lang move_to}</strong></button></div>
+					<div class="flex">
+						<select name="newalbumid" class="sort_sel">
+							<!--{loop $albumlist $key $value}-->
+							<!--{if $albumid != $value['albumid']}--><option value="$value['albumid']">$value['albumname']</option><!--{/if}-->
+							<!--{/loop}-->
+							<!--{if $albumid>0}--><option value="0">{lang default_album}</option><!--{/if}-->
+						</select>
+					</div>
+				</li>
+				</div>
+				<!--{/if}-->
+			<div class="quote">{lang delete_pic_notice}</div>
+			<input type="hidden" name="page" value="$page" />
+			<input type="hidden" name="editpicsubmit" value="true" />
+			<input type="hidden" name="formhash" value="{FORMHASH}" />
+		</form>
+		<!--{if $multi}--><div class="pgs cl">$multi</div><!--{/if}-->
+	<!--{else}-->
+		<div class="emp">{lang no_pics}</div>
+	<!--{/if}-->
+</div>
+
+<!--{elseif $_GET['op'] == 'delete'}-->
+	<div class="tip">
+		<form method="post" autocomplete="off" id="theform" name="theform" action="home.php?mod=spacecp&ac=album&op=delete&albumid=$albumid&uid=$_GET[uid]">
+			<input type="hidden" name="referer" value="{echo dreferer()}" />
+			<input type="hidden" name="deletesubmit" value="true" />
+			<input type="hidden" name="formhash" value="{FORMHASH}" />
+			<div class="medal_tip_top">
+				<a href="javascript:;" class="author">
+					<p>{lang delete_album_message}</p>
+				</a>
+			</div>
+
+			<div class="medal_tip_box album_tip">
+				<ul>
+					<li>
+						<span>{lang the_album_pic}</span>
+						<div class="medal_tip_input">
+							<select name="moveto" class="ps">
+								<option value="-1">{lang completely_remove}</option>
+								<option value="0">{lang move_to_default_album}</option>
+								<!--{loop $albums $value}-->
+									<option value="$value['albumid']">{lang move_to} $value['albumname']</option>
+								<!--{/loop}-->
+							</select>
+						</div>
+						<i class="dm-c-right icon-arrow"></i>
+					</li>
+				</ul>
+			</div>
+			<div class="tip_btn">
+				<button type="submit" name="submit" class="pn pnc" value="true"><span>{lang determine}</span></button>
+			</div>
+		</form>
+	</div>
+<!--{elseif $_GET['op'] == 'edittitle'}-->
+	<h3 class="flb">
+		<em id="return_$_GET['handlekey']">{lang edit_description}</em>
+		<!--{if $_G[inajax]}--><span><a href="javascript:;" onclick="hideWindow('$_GET['handlekey']');" class="flbc" title="{lang close}">{lang close}</a></span><!--{/if}-->
+	</h3>
+	<form id="titleform" name="titleform" action="home.php?mod=spacecp&ac=album&op=editpic&subop=update&albumid=$pic['albumid']" method="post" autocomplete="off" {if $_G[inajax]}onsubmit="ajaxpost(this.id, 'return_$_GET['handlekey']');"{/if}>
+		<input type="hidden" name="referer" value="{echo dreferer()}" />
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<input type="hidden" name="editpicsubmit" value="true" />
+		<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET['handlekey']" /><!--{/if}-->
+		<div class="c">
+			<textarea name="title[{$pic['picid']}]" cols="50" rows="7" class="pt">$pic[title]</textarea>
+		</div>
+		<p class="o pns">
+			<button type="submit" name="editpicsubmit_btn" class="pn pnc" value="true"><strong>{lang update}</strong></button>
+		</p>
+	</form>
+	<script type="text/javascript">
+		function succeedhandle_$_GET['handlekey'] (url, message, values) {
+			$('$_GET['handlekey']').innerHTML = values['title'];
+		}
+	</script>
+<!--{elseif $_GET[op] == 'edithot'}-->
+	<h3 class="flb">
+		<em>{lang adjust_hot}</em>
+		<!--{if $_G[inajax]}--><span><a href="javascript:;" onclick="hideWindow('$_GET['handlekey']');" class="flbc" title="{lang close}">{lang close}</a></span><!--{/if}-->
+	</h3>
+	<form method="post" autocomplete="off" action="home.php?mod=spacecp&ac=album&op=edithot&picid=$picid">
+		<input type="hidden" name="referer" value="{echo dreferer()}" />
+		<input type="hidden" name="hotsubmit" value="true" />
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<div class="c">
+			{lang new_hot}:<input type="text" name="hot" value="$pic['hot']" size="10" class="px" />
+		</div>
+		<p class="o pns">
+			<button type="submit" name="btnsubmit" value="true" class="pn pnc"><strong>{lang determine}</strong></button>
+		</p>
+	</form>
+<!--{elseif $_GET[op] == 'saveforumphoto'}-->
+	<h3 class="flb">
+		<em id="return_$_GET['handlekey']">{lang save_to_album}</em>
+		<!--{if $_G[inajax]}--><span><a href="javascript:;" onclick="hideWindow('$_GET['handlekey']');" class="flbc" title="{lang close}">{lang close}</a></span><!--{/if}-->
+	</h3>
+	<form id="saveforumphoto" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=album&op=saveforumphoto&aid=$_GET['aid']" {if $_G[inajax]}onsubmit="ajaxpost(this.id, 'return_$_GET['handlekey']');return false;"{/if}>
+		<input type="hidden" name="referer" value="{echo dreferer()}" />
+		<input type="hidden" name="savephotosubmit" value="true" />
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<input type="hidden" name="aid" value="$_GET['aid']" />
+		<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET['handlekey']" /><!--{/if}-->
+		<div class="c">
+			{lang save_to}: <select name="albumid" class="ps vm">
+			<!--{loop $albumlist $key $value}-->
+				<option value="$value['albumid']">$value['albumname']</option>
+			<!--{/loop}-->
+			<option value="0">{lang default_album}</option>
+			</select>
+		</div>
+		<p class="o pns">
+			<button type="submit" name="btnsubmit" value="true" class="pn pnc"><strong>{lang determine}</strong></button>
+		</p>
+	</form>
+	<script type="text/javascript">
+		function succeedhandle_$_GET['handlekey'] (url, message, values) {
+			
+		}
+	</script>
+<!--{/if}-->
+
+<!--{template common/footer}-->

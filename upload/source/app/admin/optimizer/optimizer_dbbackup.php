@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * [Discuz!] (C)2001-2099 Discuz! Team
+ * This is NOT a freeware, use is subject to license terms
+ * https://license.discuz.vip
+ */
+
+namespace admin;
+use table_common_cache;
+
+if(!defined('IN_DISCUZ')) {
+	exit('Access Denied');
+}
+
+class optimizer_dbbackup {
+
+	public function __construct() {
+
+	}
+
+	public function check() {
+		global $_G;
+		$dateline = table_common_cache::t()->fetch('db_export');
+		$dateline = dunserialize($dateline['cachevalue']);
+		$dateline = $dateline['dateline'];
+		if(($_G['timestamp'] - $dateline) > 86400 * 90) {
+			$return = ['status' => 1, 'type' => 'header', 'lang' => lang('optimizer', 'optimizer_dbbackup_advice')];
+		} else {
+			$return = ['status' => 0, 'type' => 'header', 'lang' => lang('optimizer', 'optimizer_dbbackup_lastback').dgmdate($dateline)];
+		}
+		return $return;
+	}
+
+	public function optimizer() {
+		global $_G;
+		$adminfile = defined(ADMINSCRIPT) ? ADMINSCRIPT : 'admin.php';
+		dheader('Location: '.$_G['siteurl'].$adminfile.'?action=db&operation=export');
+	}
+}
+

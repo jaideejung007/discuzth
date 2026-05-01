@@ -1,0 +1,12 @@
+<!--{if $thread['images']}-->
+    {eval $attach_on = 0;$attach_count = count($thread['images']);}
+    <a href="forum.php?mod=viewthread&tid=$thread['tid']">
+        <div class="{if $attach_count == 1}threadlist_imgs1 {elseif $attach_count == 2} threadlist_imgs threadlist_imgs2{else} threadlist_imgs{/if} cl">
+        <ul>
+            <!--{loop $thread['images'] $image}-->
+                <!--{eval $attach_on++; if($attach_on > 9) break;}-->
+                <li><!--{if $attach_count > 9 && $attach_on == 9}--><em>{$attach_count}{lang mobtu}</em><!--{/if}--><img src="$image" class="vm"></li>
+            <!--{/loop}-->
+        </ul>
+        </div>
+<!--{/if}-->

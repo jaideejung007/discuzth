@@ -1,0 +1,78 @@
+/*
+* @Author: layui-2
+* @Date:   2018-08-31 11:40:53
+* @Last Modified by:   hi916
+* @Last Modified time: 2021-04-15 15:52:12
+*/
+em{
+    font-style: normal;
+}
+.tags
+{
+    border: 1px solid #eee;
+    background-color: #fff;
+}
+.tags span{
+    /* font-size: 12px; */
+    line-height: 20px;
+    position: relative;
+    display: inline-block;
+    margin: 0px 3px 3px 3px;
+    padding: 4px 5px 5px 9px;
+    cursor: pointer;
+    transition: all .2s ease 0s;
+    white-space: nowrap;
+    color: rgb(255 255 255);
+    font-weight: bolder;
+    background-color: rgb(30 159 255);
+    height: 20px;
+    vertical-align: middle;
+    border-radius: 5px;
+}
+.tags .close{
+    font-size: 25px;
+    line-height: 20px;
+    float: none;
+    /* width: 18px; */
+    padding: 0px 0px 0px 5px;
+    cursor: pointer;
+    text-align: center;
+    opacity: 1;
+    color: #f5f5f5;
+    border: 0 none;
+    background: transparent none repeat scroll 0 0;
+    text-shadow: none;
+    vertical-align: middle;
+}
+.tags .close .icon {
+    color: #ffffff;
+    width: 13px;
+    top: -5px;
+    position: relative;
+}
+.tags .close:hover{
+    /* background: #ffb800; */
+}
+.tags [type='text'],
+.tags [type='text']:focus{
+    line-height: 25px;
+    display: inline;
+    width: 50%;
+    margin: 0;
+    padding: 0 6px;
+    border: 0 none;
+    outline: 0 none;
+    box-shadow: none;
+}
+
+.albtn{
+    line-height: 30px;
+    display: none;
+    width: 100px;
+    height: 30px;
+    margin: 0 auto;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    background: #ffb800;
+}

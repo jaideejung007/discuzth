@@ -1,0 +1,11 @@
+<!--{if !empty($_G['setting']['i18n']) && !empty($_G['setting']['i18nLang'])}-->
+    <li><a id="i18n-switch" href="#moption_i18n" class="popup blue"><i class="dm-person-fill"></i>Language</a></li>
+    <div id="moption_i18n" popup="true" class="i18n_box" style="display:none;">
+        <ul>
+            <li><a href="misc.php?mod=i18n&key=" class="xi2">{lang default}</a></li>
+            <!--{loop $_G['setting']['i18nLang'] $_k $_v}-->
+            <li><a href="misc.php?mod=i18n&key=$_k" class="xi2">$_v</a></li>
+            <!--{/loop}-->
+        </ul>
+    </div>
+<!--{/if}-->

@@ -1,0 +1,56 @@
+{
+  "Title": "Discuz! Plugin",
+  "Data": {
+    "plugin": {
+      "available": "1",
+      "adminid": "1",
+      "name": "我的马甲",
+      "identifier": "myrepeats",
+      "description": "",
+      "datatables": "",
+      "directory": "myrepeats/",
+      "copyright": "Discuz! Team",
+      "version": "2.5",
+      "__modules": [
+        {
+          "name": "memcp",
+          "menu": "我的马甲",
+          "url": "",
+          "type": "7",
+          "adminid": "0",
+          "displayorder": "0"
+        },
+        {
+          "name": "myrepeats",
+          "menu": "",
+          "url": "",
+          "type": "11",
+          "adminid": "0",
+          "displayorder": "0"
+        },
+        {
+          "name": "admincp",
+          "menu": "管理",
+          "url": "",
+          "type": "3",
+          "adminid": "1",
+          "displayorder": "0"
+        }
+      ]
+    },
+    "version": "X5.0",
+    "var": [
+      {
+        "displayorder": "0",
+        "title": "允许使用马甲",
+        "description": "设置哪些用户组可以使用马甲切换功能",
+        "variable": "usergroups",
+        "type": "groups",
+        "extra": ""
+      }
+    ],
+    "intro": "本插件方便用户快速的在自己的多个账户间自由切换",
+    "installfile": "install.php",
+    "uninstallfile": "uninstall.php"
+  }
+}

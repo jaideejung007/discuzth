@@ -1,0 +1,27 @@
+<a href="forum.php?mod=viewthread&tid=$thread['tid']&extra=$extra">
+    <div class="threadlist_tit cl">
+        <!--{if $thread['folder'] == 'lock'}-->
+        <span class="micon lock">{lang closed_thread}</span>
+        <!--{elseif $thread['special'] == 1}-->
+        <span class="micon">{lang thread_poll}</span>
+        <!--{elseif $thread['special'] == 2}-->
+        <span class="micon">{lang thread_trade}</span>
+        <!--{elseif $thread['special'] == 3}-->
+        <span class="micon">{lang thread_reward}</span>
+        <!--{elseif $thread['special'] == 4}-->
+        <span class="micon">{lang thread_activity}</span>
+        <!--{elseif $thread['special'] == 5}-->
+        <span class="micon">{lang thread_debate}</span>
+        <!--{/if}-->
+        <!--{if $thread['attachment'] == 2 && $_G['setting']['mobile']['mobilesimpletype'] == 1}-->
+        <span class="micon">{lang mobtu}</span>
+        <!--{/if}-->
+        <!--{if in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
+        <span class="micon top">{lang thread_sticky}</span>
+        <!--{/if}-->
+        <!--{if $thread['digest'] > 0}-->
+        <span class="micon digest">{lang thread_digest}</span>
+        <!--{/if}-->
+        <em $thread['highlight']>{$thread['subject']}</em>
+    </div>
+</a>

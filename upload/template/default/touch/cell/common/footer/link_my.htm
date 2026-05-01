@@ -1,0 +1,10 @@
+<a href="{if $_G['uid']}home.php?mod=space&uid={$_G['uid']}&do=profile&mycenter=1{else}member.php?mod=logging&action=login{/if}" class="flex{if $_G['basescript'] == 'home' && CURMODULE == 'space' && $_GET['mycenter'] == 1} mon{/if}">
+	<span class="foot-ico">
+		<img src="{STATICURL}image/mobile/touch/space.svg" />
+	</span>
+	<span class="foot-txt">{lang mobmy}
+		<!--{if strpos('forum.php', $_G['setting']['defaultindex']) === false || helper_access::check_module('portal') || helper_access::check_module('group') || helper_access::check_module('feed')}-->
+		<!--{if $_G['uid'] && ($_G['member']['newpm'] || $_G['member']['newprompt'])}--><i class="ico_msg"></i><!--{/if}-->
+		<!--{/if}-->
+	</span>
+</a>

@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * [Discuz!] (C)2001-2099 Discuz! Team
+ * This is NOT a freeware, use is subject to license terms
+ * https://license.discuz.vip
+ */
+
+if(!defined('IN_DISCUZ')) {
+	exit('Access Denied');
+}
+
+class table_forum_threadpartake extends discuz_table {
+	public static function t() {
+		static $_instance;
+		if(!isset($_instance)) {
+			$_instance = new self();
+		}
+		return $_instance;
+	}
+
+	public function __construct() {
+
+		$this->_table = 'forum_threadpartake';
+		$this->_pk = '';
+
+		parent::__construct();
+	}
+
+	public function delete($val, $unbuffered = false) {
+		if(defined('DISCUZ_DEPRECATED')) {
+			throw new Exception('NotImplementedException');
+			return parent::delete($val, $unbuffered);
+		} else {
+			return $this->delete_threadpartake($val);
+		}
+	}
+
+	public function fetch($id, $force_from_db = false) {
+		if(defined('DISCUZ_DEPRECATED')) {
+			throw new Exception('NotImplementedException');
+			return parent::fetch($id, $force_from_db);
+		} else {
+			return $this->fetch_threadpartake($id, $force_from_db);
+		}
+	}
+
+	public function delete_threadpartake($dateline) {
+		return DB::query('DELETE FROM %t WHERE dateline<%d', [$this->_table, $dateline], false, true);
+	}
+
+	public function fetch_threadpartake($tid, $uid) {
+		return DB::fetch_first('SELECT * FROM %t WHERE tid=%d AND uid=%d', [$this->_table, $tid, $uid]);
+	}
+
+}
+

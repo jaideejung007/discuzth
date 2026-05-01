@@ -1,0 +1,72 @@
+<a href="javascript:;" id="content_$thread[tid]" class="showcontent y" title="{lang content_actions}" onclick="CONTENT_TID='$thread[tid]';CONTENT_ID='$thread[id]';showMenu({'ctrlid':this.id,'menuid':'content_menu'})"></a>
+<!--{if !$thread['forumstick'] && $thread['closed'] > 1 && ($thread['isgroup'] == 1 || $thread['fid'] != $_G['fid'])}-->
+<!--{eval $thread['tid']=$thread['closed'];}-->
+<!--{/if}-->
+<!--{if !$_G['setting']['forumdisplaythreadpreview'] && !($thread['readperm'] && $thread['readperm'] > $_G['group']['readaccess'] && !$_G['forum']['ismoderator'] && $thread['authorid'] != $_G['uid'])}-->
+<!--{/if}-->
+$thread[typehtml] $thread[sorthtml]
+<!--{if $thread['moved']}-->
+{lang thread_moved}:<!--{eval $thread['tid']=$thread['closed'];}-->
+<!--{/if}-->
+<a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra"$thread[highlight]{if $thread['isgroup'] == 1 || $thread['forumstick']} target="_blank"{else} onclick="atarget(this)"{/if} class="s xst">$thread[subject]</a>
+<!--{if $_G['setting']['threadhidethreshold'] && $thread['hidden'] >= $_G['setting']['threadhidethreshold']}--><span class="xg1">{lang hidden}</span>&nbsp;<!--{/if}-->
+<!--{if $thread[icon] >= 0}-->
+<img src="{STATICURL}image/stamp/{$_G[cache][stamps][$thread[icon]][url]}" alt="{$_G[cache][stamps][$thread[icon]][text]}" class="vm" />
+<!--{/if}-->
+<!--{if $thread['rushreply']}-->
+<span class="tbox rushrep">{lang rushreply}</span>
+<!--{if $rushinfo[$thread[tid]]}-->
+<span id="rushtimer_$thread[tid]"> {lang havemore_special} <span id="rushtimer_body_$thread[tid]"></span> <script language="javascript">settimer($rushinfo[$thread[tid]]['timer'], 'rushtimer_body_$thread[tid]');</script>{if $rushinfo[$thread[tid]]['timertype'] == 'start'} {lang header_start} {else} {lang over} {/if} {lang right_special}</span>
+<!--{/if}-->
+<!--{/if}-->
+<!--{if $thread['readperm']}--> - [{lang readperm} <span class="xw1">$thread[readperm]</span>]<!--{/if}-->
+<!--{if $thread['price'] > 0}-->
+<!--{if $thread['special'] == '3'}-->
+- <a href="forum.php?mod=forumdisplay&fid=$_G[fid]&filter=specialtype&specialtype=reward$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}&rewardtype=1" title="{lang show_rewarding_only}"><span class="xi1">[{lang thread_reward} <span class="xw1">$thread[price]</span> {$_G[setting][extcredits][$_G['setting']['creditstransextra'][2]][unit]}{$_G[setting][extcredits][$_G['setting']['creditstransextra'][2]][title]}]</span></a>
+<!--{else}-->
+- [{lang price} <span class="xw1">$thread[price]</span> {$_G[setting][extcredits][$_G['setting']['creditstransextra'][1]][unit]}{$_G[setting][extcredits][$_G['setting']['creditstransextra'][1]][title]}]
+<!--{/if}-->
+<!--{elseif $thread['special'] == '3' && $thread['price'] < 0}-->
+- <a href="forum.php?mod=forumdisplay&fid=$_G[fid]&filter=specialtype&specialtype=reward$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}&rewardtype=2" title="{lang show_rewarded_only}">[{lang reward_solved}]</a>
+<!--{/if}-->
+<!--{if $thread['attachment'] == 2}-->
+<i class="fico-image fic4 fc-p fnmr vm" title="{lang attach_img}"></i>
+<!--{elseif $thread['attachment'] == 1}-->
+<i class="fico-attachment fic4 fc-p fnmr vm" title="{lang attachment}"></i>
+<!--{/if}-->
+<!--{if $thread['mobile']}-->
+<img src="{IMGDIR}/mobile-attach-$thread['mobile'].png" alt="{lang post_mobile}" class="vm" />
+<!--{/if}-->
+<!--{if $thread['digest'] > 0 && $filter != 'digest'}-->
+<span class="tbox tdigest">{lang thread_digest}$thread[digest]</span>
+<!--{/if}-->
+<!--{if $thread['displayorder'] == 0}-->
+<!--{if $thread[recommendicon] && $filter != 'recommend'}-->
+<span class="tbox trecic" title="{lang thread_recommend} $thread[recommends]">{lang thread_recommend_icon}</span>
+<!--{/if}-->
+<!--{if $thread[heatlevel]}-->
+<span class="tbox theatlevel" title="{lang heats}: {$thread[heats]}">{lang heats_icon}{if $thread[heatlevel]>1}..{/if}{if $thread[heatlevel]>2}.{/if}</span>
+<!--{/if}-->
+<!--{if $thread['rate'] > 0}-->
+<i class="fico-thumbup fic4 fc-l fnmr vm" title="{lang rate_credit_add}"></i>
+<!--{elseif $thread['rate'] < 0}-->
+<i class="fico-thumbdown fic4 fc-a fnmr vm" title="{lang posts_deducted}"></i>
+<!--{/if}-->
+<!--{/if}-->
+<!--{if $thread['replycredit'] > 0}-->
+- <span class="xi1">[{lang replycredit} <strong> $thread['replycredit']</strong> ]</span>
+<!--{/if}-->
+<!--{if $thread[multipage]}-->
+<span class="tps">$thread[multipage]</span>
+<!--{/if}-->
+<!--{if $thread['weeknew']}-->
+<a href="forum.php?mod=redirect&tid=$thread[tid]&goto=lastpost#lastpost" class="xi1">New</a>
+<!--{/if}-->
+<!--{if !$thread['forumstick'] && ($thread['isgroup'] == 1 || $thread['fid'] != $_G['fid'])}-->
+<!--{if $thread['related_group'] == 0 && $thread['closed'] > 1}-->
+<!--{eval $thread['tid']=$thread['closed'];}-->
+<!--{/if}-->
+<!--{if $groupnames[$thread[tid]]}-->
+<span class="fromg xg1"> [{lang from}: <a href="forum.php?mod={if $groupnames[$thread['tid']]['status'] == 3}group{else}forumdisplay{/if}&fid={$groupnames[$thread[tid]][fid]}" target="_blank" class="xg1">{$groupnames[$thread[tid]][name]}</a>]</span>
+<!--{/if}-->
+<!--{/if}-->

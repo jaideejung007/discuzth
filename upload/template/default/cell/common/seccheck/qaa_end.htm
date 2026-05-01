@@ -1,0 +1,8 @@
+<script type="text/javascript">
+    function updatesecqaa_{$sechash}() {
+        ajaxget('misc.php?mod=secqaa&action=update&idhash={$sechash}&{$ran}', 'imgsecqaaspan_{$sechash}');
+    }
+    updatesecqaa_{$sechash}();
+    setInterval(updatesecqaa_{$sechash}, 60000);
+</script>
+<!--{/if}-->

@@ -1,0 +1,11 @@
+<!--{if !empty($_G['setting']['i18n']) && !empty($_G['setting']['i18nLang'])}-->
+    <a href="javascript:;" id="i18n-switch" class="xi1 xw1 showmenu" onmouseover="showMenu({'ctrlid':'i18n-switch','pos':'34!'})">Language</a>
+    <div id="i18n-switch_menu" style="display: none;">
+        <ul>
+            <li><a href="misc.php?mod=i18n&key=" class="xi2">{lang default}</a></li>
+            <!--{loop $_G['setting']['i18nLang'] $_k $_v}-->
+            <li><a href="misc.php?mod=i18n&key=$_k" class="xi2">$_v</a></li>
+            <!--{/loop}-->
+        </ul>
+    </div>
+<!--{/if}-->

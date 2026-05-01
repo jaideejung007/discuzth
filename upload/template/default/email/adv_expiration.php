@@ -1,0 +1,7 @@
+<?php exit('Access Denied');?>
+<!--{subtemplate email/header}-->
+<body>{$subject}<br />
+{lang adv_expiration_msg}<br /><br />
+{$var['advs']}
+</body>
+</html>

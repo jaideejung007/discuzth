@@ -1,0 +1,80 @@
+<a href="javascript:;" id="content_$thread['tid']" class="showcontent y" title="{lang content_actions}" onclick="CONTENT_TID='$thread['tid']';CONTENT_ID='$thread['id']';showMenu({'ctrlid':this.id,'menuid':'content_menu'})"></a>
+<!--{if !$_GET['archiveid'] && $_G['forum']['ismoderator']}-->
+<div class="km_moderate">
+	<!--{if $thread['fid'] == $_G['fid']}-->
+		<!--{if $thread['displayorder'] <= 3 || $_G['adminid'] == 1}-->
+			<input onclick="tmodclick(this)" type="checkbox" name="moderate[]" value="$thread['tid']" />
+		<!--{else}-->
+			<input type="checkbox" disabled="disabled" />
+		<!--{/if}-->
+	<!--{else}-->
+		<input type="checkbox" disabled="disabled" />
+	<!--{/if}-->
+</div>
+<!--{elseif $permission}-->
+	<div class="km_moderate"><input type="checkbox" value="$thread['tid']" name="delthread[]" class="pc" /></div>
+<!--{/if}-->
+<!--{if $_G['basescript'] != 'group' && CURMODULE != 'group' && !$thread['forumstick'] && $thread['closed'] > 1 && ($thread['isgroup'] == 1 || $thread['fid'] != $_G['fid'])}-->
+		<!--{eval $thread['tid']=$thread['closed'];}-->
+<!--{/if}-->
+<a href="forum.php?mod=viewthread&tid=$thread['tid']&{if $_GET['archiveid']}archiveid={$_GET['archiveid']}&{/if}extra=$extra" $thread['highlight'] target="_blank" title="{if $thread['displayorder'] == 1}{lang thread_type1}{/if}
+		{if $thread['displayorder'] == 2}{lang thread_type2}{/if}
+		{if $thread['displayorder'] == 3}{lang thread_type3}{/if}
+		{if $thread['displayorder'] == 4}{lang thread_type4}{/if}
+		{if $thread['folder'] == 'lock'}{lang closed_thread}{/if}
+		{if $thread['special'] == 1}{lang thread_poll}{lang forum_threads}{/if}
+		{if $thread['special'] == 2}{lang thread_trade}{lang forum_threads}{/if}
+		{if $thread['special'] == 3}{lang thread_reward}{lang forum_threads}{/if}
+		{if $thread['special'] == 4}{lang thread_activity}{lang forum_threads}{/if}
+		{if $thread['special'] == 5}{lang thread_debate}{lang forum_threads}{/if}
+		{if $thread['rushreply']}{lang rushreply}{lang forum_threads}{/if}
+		{if $thread['folder'] == "new"}{lang have_newreplies}{lang forum_threads}{/if}" class="kmtit">
+	<!--{if $thread['folder'] == 'lock'}-->
+		<img src="{STYLEIMGDIR}/svg/dz_ico_folder_lock.svg" alt="" class="kmimgico" />
+	<!--{elseif $thread['special'] == 1}-->
+		<img src="{STYLEIMGDIR}/svg/dz_ico_pollsmall.svg" alt="{lang thread_poll}" class="kmimgico" />
+	<!--{elseif $thread['special'] == 2}-->
+		<img src="{STYLEIMGDIR}/svg/dz_ico_tradesmall.svg" alt="{lang thread_trade}" class="kmimgico" />
+	<!--{elseif $thread['special'] == 3}-->
+		<img src="{STYLEIMGDIR}/svg/dz_ico_rewardsmall.svg" alt="{lang thread_reward}" class="kmimgico" />
+	<!--{elseif $thread['special'] == 4}-->
+		<img src="{STYLEIMGDIR}/svg/dz_ico_activitysmall.svg" alt="{lang thread_activity}" class="kmimgico" />
+	<!--{elseif $thread['special'] == 5}-->
+		<img src="{STYLEIMGDIR}/svg/dz_ico_debatesmall.svg" alt="{lang thread_debate}" class="kmimgico" />
+	<!--{/if}-->
+	<!--{if $thread['rushreply']}-->
+		<img src="{STYLEIMGDIR}/svg/dz_ico_rushreply_s.svg" alt="{lang rushreply}" class="kmimgico" />
+	<!--{/if}-->
+	<!--{if in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
+		<span class="kmico kmding">{lang thread_stick}</span>
+	<!--{/if}-->
+	<!--{if $thread['digest'] > 0 && $filter != 'digest'}--><span class="kmico kmjing">{lang thread_digest}</span><!--{/if}-->
+	<!--{if !empty($thread['icon']) && $thread['icon'] >= 0}--><span class="kmico kmicotxt">{$_G['cache']['stamps'][$thread['icon']]['text']}</span><!--{/if}-->									
+	<!--{if $thread['displayorder'] == 0}-->
+		<!--{if $thread['recommendicon'] && $filter != 'recommend'}-->
+			<span class="kmico kmding" title="{lang thread_recommend} $thread['recommends']">{lang thread_recommend_icon}</span>
+		<!--{/if}-->
+	<!--{/if}-->
+	<!--{if $_G['basescript'] != 'group' && CURMODULE != 'group' && $thread['moved']}-->
+		<span class="kmico kmding">{lang thread_moved}</span><!--{eval $thread['tid']=$thread['closed'];}-->
+	<!--{/if}-->
+	<!--{if $_G['setting']['threadhidethreshold'] && $thread['hidden'] >= $_G['setting']['threadhidethreshold']}-->><span class="kmico kmding">{lang hidden}</span><!--{/if}-->
+	<!--{hook/forumdisplay_thread $key}-->
+	<span class="km_subject">$thread['subject']</span>
+	<!--{hook/forumdisplay_thread_subject $key}-->
+	<!--{if $thread['weeknew']}-->
+		<em class="kmnew xi1">New</em>
+	<!--{/if}-->
+	<!--{if $thread['attachment'] == 2}-->
+		<i class="fico-image fnmr vm" title="{lang attach_img}"></i>
+	<!--{elseif $thread['attachment'] == 1}-->
+		<i class="fico-attachment fnmr vm" title="{lang attachment}"></i>
+	<!--{/if}-->
+	<!--{if $thread['displayorder'] == 0}-->
+		<!--{if $thread['rate'] > 0}-->
+			<i class="fico-thumbup fc-l fnmr vm" title="{lang rate_credit_add}"></i>
+		<!--{elseif $thread['rate'] < 0}-->
+			<i class="fico-thumbdown fc-a fnmr vm" title="{lang posts_deducted}"></i>
+		<!--{/if}-->
+	<!--{/if}-->						
+</a>

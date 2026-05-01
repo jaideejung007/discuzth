@@ -1,0 +1,14 @@
+<?php exit('Access Denied');?>
+<!--{template common/header}-->
+<!--{template home/spacecp_header}-->
+<!--{if $op == 'profile'}-->
+	<!--{template home/spacecp_profile_nav}-->
+<!--{/if}-->
+<!--{if $op == 'credit'}-->
+	<!--{template home/spacecp_credit_header}-->
+<!--{/if}-->
+<!--{eval include(template($_GET['id']));}-->
+
+</div>
+
+<!--{template common/footer}-->

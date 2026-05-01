@@ -1,0 +1,271 @@
+{
+    "Title": "Discuz! Style",
+    "Version": "X5.0",
+    "Time": "2025-07-14 09:05",
+    "From": "Discuz!",
+    "Data": {
+        "styleid": "2",
+        "name": "X5模版",
+        "available": "1",
+        "templateid": "2",
+        "extstyle": "",
+        "version": "X5.0",
+        "tplname": "X5模版",
+        "directory": ".\/template\/discuzx5",
+        "copyright": "Discuz!",
+        "style": {
+            "menuhoverbgcolor": "#0051cc",
+            "menucurbgcolor": "#0051cc",
+            "lightlink": "#ccc",
+            "floatbgcolor": "#FFF",
+            "dropmenubgcolor": "#FEFEFE",
+            "floatmaskbgcolor": "#000",
+            "dropmenuborder": "#eeeeee",
+            "specialbg": "#d6e4ff",
+            "specialborder": "#d6e4ff",
+            "commonbg": "#F9f9f9",
+            "commonborder": "#eeeeee",
+            "inputbg": "#FFF",
+            "stypeid": "1",
+            "inputborderdarkcolor": "#e3e3e3",
+            "headerbgcolor": "",
+            "headerborder": "0",
+            "sidebgcolor": "#E8F0F7",
+            "msgfontsize": "14px",
+            "bgcolor": "#f7f9fa",
+            "noticetext": "#F26C4F",
+            "highlightlink": "#0066ff",
+            "link": "#333",
+            "lighttext": "#999",
+            "midtext": "#666",
+            "tabletext": "#333",
+            "smfontsize": "0.83em",
+            "threadtitlefont": "Tahoma,Helvetica,'Microsoft Yahei',sans-serif",
+            "threadtitlefontsize": "16px",
+            "smfont": "Tahoma,Helvetica,sans-serif",
+            "titlebgcolor": "#E5EDF2",
+            "fontsize": "12px\/1.5",
+            "font": "Tahoma,Helvetica,'Microsoft Yahei',sans-serif",
+            "styleimgdir": "template\/discuzx5\/static\/",
+            "imgdir": "",
+            "boardimg": "logo.png",
+            "searchimg": "logo_sc.svg",
+            "touchimg": "logo_m.svg",
+            "available": "",
+            "headertext": "#444",
+            "footertext": "#666",
+            "menubgcolor": "#0066ff",
+            "menutext": "#0066ff",
+            "menuhovertext": "#FFF",
+            "wrapbg": "#FFF",
+            "wrapbordercolor": "#CCC",
+            "contentwidth": "630px",
+            "contentseparate": "#d6e4ff",
+            "inputborder": "#e3e3e3",
+            "btnbg": "#d6e4ff",
+            "btntxt": "#0066ff",
+            "btnbga": "#0066ff",
+            "btntxta": "#ffffff"
+        },
+        "var": {
+            "template": {
+                "displayorder": "0",
+                "title": "界面设置",
+                "description": "",
+                "variable": "template",
+                "type": "stylePage",
+                "value": "",
+                "extra": ""
+            },
+            "template_top": {
+                "displayorder": "10",
+                "title": "模版头部",
+                "description": "",
+                "variable": "template_top",
+                "type": "styleTitle",
+                "value": "",
+                "extra": ""
+            },
+            "is_search": {
+                "displayorder": "11",
+                "title": "搜索框",
+                "description": "定义顶部搜索框的开关",
+                "variable": "is_search",
+                "type": "radio",
+                "value": "1",
+                "extra": ""
+            },
+            "is_fixtop": {
+                "displayorder": "12",
+                "title": "顶部导航固定",
+                "description": "当向上滚动屏幕时，主导航将即时出现在屏幕的顶部",
+                "variable": "is_fixtop",
+                "type": "radio",
+                "value": "1",
+                "extra": ""
+            },
+            "top_navnum": {
+                "displayorder": "13",
+                "title": "导航显示数量",
+                "description": "导航最多显示几个后显示“更多”",
+                "variable": "top_navnum",
+                "type": "number",
+                "value": "8",
+                "extra": ""
+            },
+            "top_nav_widthauto": {
+                "displayorder": "14",
+                "title": "导航自由宽度",
+                "description": "选择“是”导航显示自由宽度，选择“否”导航显示固定宽度",
+                "variable": "top_nav_widthauto",
+                "type": "radio",
+                "value": "0",
+                "extra": ""
+            },
+            "top_nav_bgc": {
+                "displayorder": "15",
+                "title": "导航背景颜色",
+                "description": "配色导航背景颜色，留空为默认的白色",
+                "variable": "top_nav_bgc",
+                "type": "color",
+                "value": "",
+                "extra": ""
+            },
+            "top_nav_dark": {
+                "displayorder": "16",
+                "title": "导航背景深色",
+                "description": "跟上面的导航背景颜色一起使用，如果设置的是深色背景颜色，并选择了“导航背景深色”为是，导航文字颜色则会显示为白色",
+                "variable": "top_nav_dark",
+                "type": "radio",
+                "value": "0",
+                "extra": ""
+            },
+            "top_fastnav": {
+                "displayorder": "17",
+                "title": "快捷导航",
+                "description": "是否显示用户名下拉中的快捷导航",
+                "variable": "top_fastnav",
+                "type": "radio",
+                "value": "1",
+                "extra": ""
+            },
+            "sider_tool": {
+                "displayorder": "20",
+                "title": "侧边工具栏",
+                "description": "",
+                "variable": "sider_tool",
+                "type": "styleTitle",
+                "value": "",
+                "extra": ""
+            },
+            "sider_wechat": {
+                "displayorder": "22",
+                "title": "微信客服",
+                "description": "",
+                "variable": "sider_wechat",
+                "type": "radio",
+                "value": "1",
+                "extra": ""
+            },
+            "sider_wechat_qrcode": {
+                "displayorder": "23",
+                "title": "微信客服二维码",
+                "description": "",
+                "variable": "sider_wechat_qrcode",
+                "type": "uploadimage",
+                "value": "template\/discuzx5\/static\/images\/wechat.jpg",
+                "extra": ""
+            },
+            "sider_wechat_txt": {
+                "displayorder": "24",
+                "title": "微信客服文字说明",
+                "description": "",
+                "variable": "sider_wechat_txt",
+                "type": "text",
+                "value": "关注公众号",
+                "extra": ""
+            },
+            "sider_fastpost": {
+                "displayorder": "25",
+                "title": "快速发帖",
+                "description": "",
+                "variable": "sider_fastpost",
+                "type": "radio",
+                "value": "1",
+                "extra": ""
+            },
+            "template_bottom": {
+                "displayorder": "30",
+                "title": "模版底部",
+                "description": "",
+                "variable": "template_bottom",
+                "type": "styleTitle",
+                "value": "",
+                "extra": ""
+            },
+            "bottom_bgc": {
+                "displayorder": "31",
+                "title": "底部背景颜色",
+                "description": "设置底部的背景颜色",
+                "variable": "bottom_bgc",
+                "type": "color",
+                "value": "#333333",
+                "extra": ""
+            },
+            "bottom_dark": {
+                "displayorder": "32",
+                "title": "底部背景深色",
+                "description": "跟上面的底部背景颜色一起使用，如果设置的是深色背景颜色，并选择了“底部背景深色”为是，底部文字颜色则会显示为白色",
+                "variable": "bottom_dark",
+                "type": "radio",
+                "value": "1",
+                "extra": ""
+            },
+            "bottom_qrcode": {
+                "displayorder": "33",
+                "title": "二维码",
+                "description": "不设置将显示默认图片，如果二维码和二维码文字都不设置，将不显示",
+                "variable": "bottom_qrcode",
+                "type": "uploadimage",
+                "value": "template\/discuzx5\/static\/images\/ewm_a.jpg",
+                "extra": ""
+            },
+            "bottom_qrcodetxt": {
+                "displayorder": "34",
+                "title": "二维码文字",
+                "description": "不设置将显示默认文字，如果二维码和二维码文字都不设置，将不显示",
+                "variable": "bottom_qrcodetxt",
+                "type": "text",
+                "value": "关注公众号",
+                "extra": ""
+            },
+            "bottom_txt": {
+                "displayorder": "35",
+                "title": "底部文字信息",
+                "description": "",
+                "variable": "bottom_txt",
+                "type": "text",
+                "value": "相关侵权、举报、投诉及建议等，请发 E-mail：admin@discuz.vip",
+                "extra": ""
+            },
+            "admin": {
+                "displayorder": "100",
+                "title": "后台设置",
+                "description": "",
+                "variable": "admin",
+                "type": "stylePage",
+                "value": "",
+                "extra": ""
+            },
+            "admin_color": {
+                "displayorder": "101",
+                "title": "后台主色调",
+                "description": "",
+                "variable": "admin_color",
+                "type": "color",
+                "value": "#00b96b",
+                "extra": ""
+            }
+        }
+    }
+}

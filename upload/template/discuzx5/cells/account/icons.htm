@@ -1,0 +1,7 @@
+<!--{if $_G['account_icons']}-->
+    {lang third_login_method}
+    <script type="text/javascript" src="{$_G[setting][iconfont]}?{VERHASH}"></script>
+    <!--{loop $_G['account_icons'] $key $value}-->
+        <a style="margin-left: 5px" href="login.php?method={$value[0]}&formhash={FORMHASH}" title="{$value[1]}">{cell account/icon}</a>
+    <!--{/loop}-->
+<!--{/if}-->

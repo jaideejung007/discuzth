@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * [Discuz!] (C)2001-2099 Discuz! Team
+ * This is NOT a freeware, use is subject to license terms
+ * https://license.discuz.vip
+ */
+
+if(!defined('IN_DISCUZ')) {
+	exit('Access Denied');
+}
+
+class table_common_domain extends discuz_table {
+	public static function t() {
+		static $_instance;
+		if(!isset($_instance)) {
+			$_instance = new self();
+		}
+		return $_instance;
+	}
+
+	public function __construct() {
+
+		$this->_table = 'common_domain';
+		$this->_pk = '';
+
+		parent::__construct();
+	}
+
+	public function update_by_idtype($idtype, $data) {
+		if($idtype && !empty($data) && is_array($data)) {
+			return DB::update($this->_table, $data, DB::field('idtype', $idtype));
+		}
+		return 0;
+	}
+
+	public function fetch_all_by_idtype($idtype) {
+		if(!empty($idtype)) {
+			return DB::fetch_all('SELECT * FROM %t WHERE '.DB::field('idtype', $idtype), [$this->_table]);
+		}
+		return [];
+	}
+
+	public function fetch_by_domain_domainroot($domain, $droot) {
+		return DB::fetch_first('SELECT * FROM %t WHERE domain=%s AND domainroot=%s', [$this->_table, $domain, $droot]);
+	}
+
+	public function delete_by_id_idtype($id, $idtype) {
+		$parameter = [$this->_table, $id, $idtype];
+		$wherearr = [];
+		$wherearr[] = is_array($id) ? 'id IN(%n)' : 'id=%d';
+		$wherearr[] = is_array($idtype) ? 'idtype IN(%n)' : 'idtype=%s';
+		$wheresql = !empty($wherearr) && is_array($wherearr) ? ' WHERE '.implode(' AND ', $wherearr) : '';
+		return DB::query("DELETE FROM %t $wheresql", $parameter);
+	}
+
+	public function count_by_domain_domainroot($domain, $droot) {
+		return DB::result_first('SELECT COUNT(*) FROM %t WHERE domain=%s AND domainroot=%s', [$this->_table, $domain, $droot]);
+	}
+
+}
+

@@ -1,0 +1,43 @@
+<!--{template common/header}-->
+
+<style id="diy_style" type="text/css"></style>
+<!--[diy=diynavtop]--><div id="diynavtop" class="area"></div><!--[/diy]-->
+
+<!--{ad/text/wp a_t}-->
+
+<div class="wp">
+	<!--[diy=diy1]--><div id="diy1" class="area"></div><!--[/diy]-->
+</div>
+
+
+<div class="portal_container">
+	<div class="portal_container_wrap">
+		
+		<div class="timeline_container">
+			<div id="threadlist"  class="timeline_content">
+
+				{cells forum/portal/navlist}
+				
+				{cells forum/portal/threadlist threadlist}
+				
+			</div>
+
+		</div>
+		<div class="portal_side">
+			<div class="drag">
+				<!--[diy=diy2]--><div id="diy2" class="area"></div><!--[/diy]-->
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="wp mtn">
+	<!--[diy=diy3]--><div id="diy3" class="area"></div><!--[/diy]-->
+</div>
+
+<script>
+	ajaxupdateevents($('threadlist'));
+</script>
+
+<!--{template common/footer}-->

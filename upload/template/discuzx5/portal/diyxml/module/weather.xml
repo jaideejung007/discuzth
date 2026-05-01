@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="spacecss"><![CDATA[]]></item>
+	<item id="layoutdata">
+		<item id="diy_chart">
+			<item id="frame`frame98Frp5">
+				<item id="attr">
+					<item id="name"><![CDATA[frame98Frp5]]></item>
+					<item id="moveable"><![CDATA[true]]></item>
+					<item id="className"><![CDATA[frame move-span cl frame-1]]></item>
+					<item id="titles">
+						<item id="className">
+							<item id="0"><![CDATA[title frame-title]]></item>
+						</item>
+						<item id="style"><![CDATA[]]></item>
+						<item id="first">
+							<item id="text"><![CDATA[1框架]]></item>
+							<item id="href"><![CDATA[]]></item>
+							<item id="color"><![CDATA[]]></item>
+							<item id="float"><![CDATA[]]></item>
+							<item id="margin"><![CDATA[]]></item>
+							<item id="font-size"><![CDATA[]]></item>
+							<item id="className"><![CDATA[titletext]]></item>
+							<item id="src"><![CDATA[]]></item>
+						</item>
+					</item>
+				</item>
+				<item id="column`frame98Frp5_left">
+					<item id="attr">
+						<item id="name"><![CDATA[frame98Frp5_left]]></item>
+						<item id="className"><![CDATA[column frame-1-c]]></item>
+					</item>
+					<item id="block`portal_block_138">
+						<item id="attr">
+							<item id="name"><![CDATA[portal_block_138]]></item>
+							<item id="className"><![CDATA[block move-span]]></item>
+							<item id="titles"><![CDATA[]]></item>
+						</item>
+					</item>
+				</item>
+			</item>
+		</item>
+	</item>
+	<item id="blockdata">
+		<item id="block">
+			<item id="138">
+				<item id="bid"><![CDATA[138]]></item>
+				<item id="blockclass"><![CDATA[html_html]]></item>
+				<item id="blocktype"><![CDATA[0]]></item>
+				<item id="name"><![CDATA[weather]]></item>
+				<item id="title"><![CDATA[]]></item>
+				<item id="classname"><![CDATA[]]></item>
+				<item id="summary"><![CDATA[<iframe scrolling="no" src="https://widget.tianqiapi.com/?style=yf&skin=pitaya" frameborder="0" width="320" height="320" allowtransparency="true"></iframe>]]></item>
+				<item id="uid"><![CDATA[1]]></item>
+				<item id="username"><![CDATA[admin]]></item>
+				<item id="styleid"><![CDATA[0]]></item>
+				<item id="blockstyle"><![CDATA[]]></item>
+				<item id="picwidth"><![CDATA[0]]></item>
+				<item id="picheight"><![CDATA[0]]></item>
+				<item id="target"><![CDATA[blank]]></item>
+				<item id="dateformat"><![CDATA[Y-m-d]]></item>
+				<item id="dateuformat"><![CDATA[0]]></item>
+				<item id="script"><![CDATA[blank]]></item>
+				<item id="param">
+					<item id="content"><![CDATA[<iframe scrolling=\"no\" src=\"https://widget.tianqiapi.com/?style=yf&skin=pitaya\" frameborder=\"0\" width=\"320\" height=\"320\" allowtransparency=\"true\"></iframe>]]></item>
+					<item id="items"><![CDATA[10]]></item>
+				</item>
+				<item id="shownum"><![CDATA[10]]></item>
+				<item id="cachetime"><![CDATA[3600]]></item>
+				<item id="cachetimerange"><![CDATA[]]></item>
+				<item id="punctualupdate"><![CDATA[0]]></item>
+				<item id="hidedisplay"><![CDATA[0]]></item>
+				<item id="dateline"><![CDATA[1730252662]]></item>
+				<item id="notinherited"><![CDATA[0]]></item>
+				<item id="isblank"><![CDATA[0]]></item>
+			</item>
+		</item>
+		<item id="style">
+		</item>
+	</item>
+</root>
