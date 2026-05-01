@@ -65,7 +65,7 @@ if(!submitcheck('editsubmit')) {
 		$groups['member'] = '<option value="'.$group['groupid'].'" gtype="member">'.$group['grouptitle'].'</option>';
 	}
 
-	
+	/*search={"members_group":"action=members&operation=group"}*/
 	shownav('user', 'members_group');
 	showchildmenu([['nav_members', 'members&operation=list'],
 		[$member['username'].' ', 'members&operation=edit&uid='.$member['uid']]], cplang('members_group'));
@@ -95,7 +95,7 @@ if(!submitcheck('editsubmit')) {
 	showtablefooter();
 
 	showformfooter();
-	
+	/*search*/
 
 } else {
 

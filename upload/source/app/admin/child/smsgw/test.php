@@ -32,7 +32,7 @@ if(!submitcheck('testsubmit')) {
 
 	$secmobicc = $_GET['secmobicc'];
 	$secmobile = $_GET['secmobile'];
-	
+	// 短信发送前先校验安全手机号是否正确, 避免错误安全手机号送往短信网关
 	if(empty($secmobicc) || !preg_match('#^(\d){1,3}$#', $secmobicc)) {
 		cpmsg_error('smsgw_send_test_secmobicc_error');
 	} else if(empty($secmobile) || !preg_match('#^(\d){1,12}$#', $secmobile)) {
@@ -41,8 +41,8 @@ if(!submitcheck('testsubmit')) {
 
 	$result = sms::send($_G['uid'], 0, 1, $secmobicc, $secmobile, random(6, 1), 0);
 
-	
-	
+	// 发送时间短于设置返回 -1, 单号码发送次数风控规则不通过返回 -2, 万号段风控规则不通过返回 -3, 全局风控规则不通过返回 -4, 无可用网关返回 -5, 网关接口文件不存在返回 -6,
+	// 网关接口类不存在返回 -7, 短信功能已被关闭返回 -8, 短信网关私有异常返回 -9
 	if(is_string($result)) {
 		cpmsg('smsgw_send_test_failure', '', [$result]);
 	} else if($result >= 0) {

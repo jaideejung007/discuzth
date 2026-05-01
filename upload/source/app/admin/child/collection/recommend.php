@@ -25,7 +25,7 @@ if(is_numeric($_GET['recommentctid'])) {
 	}
 	cpmsg('collection_admin_updated', 'action=collection&operation=recommend', 'succeed');
 }
-
+/*search={"collection":"action=collection"}*/
 if(!submitcheck('submit', 1)) {
 	$ctidarray = [];
 	$collectionrecommend = dunserialize($_G['setting']['collectionrecommend']);
@@ -84,5 +84,5 @@ if(!submitcheck('submit', 1)) {
 	savecache('collection_index', []);
 	cpmsg('collection_admin_updated', 'action=collection&operation=recommend', 'succeed');
 }
-
+/*search*/
 	

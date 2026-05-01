@@ -30,9 +30,9 @@ if(!submitcheck('linksubmit')) {
 
 	shownav('extended', 'misc_relatedlink');
 	showsubmenu('nav_misc_relatedlink');
-	
+	/*search={"misc_relatedlink":"action=misc&operation=relatedlink"}*/
 	showtips('misc_relatedlink_tips');
-	
+	/*search*/
 	$tdstyle = ['width="80"', 'width="120"', 'width="330"', 'width="75"', 'width="105"', 'width="105"', ''];
 	showformheader('misc&operation=relatedlink');
 	showtableheader();

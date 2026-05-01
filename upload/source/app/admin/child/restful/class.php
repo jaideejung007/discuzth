@@ -114,10 +114,10 @@ class rp {
 
 			showformheader('restful&operation=appAdd');
 			showtableheader('restful_app_add', 'tb2');
-			
+			/*search={"founder":"action=restful&operation=appAdd"}*/
 			showsetting('restful_app_name', 'name', '', 'text');
 			showsubmit('submit');
-			
+			/*search*/
 			showtablefooter();
 			showformfooter();
 		} else {

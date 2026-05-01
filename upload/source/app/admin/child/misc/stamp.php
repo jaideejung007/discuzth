@@ -21,9 +21,9 @@ if(!submitcheck('stampsubmit')) {
 	]);
 
 	showtagheader('div', 'list', $anchor == 'list');
-	
+	/*search={"nav_thread_stamp":"action=misc&operation=stamp","misc_stamp_thread":"action=misc&operation=stamp&anchor=list"}*/
 	showtips('misc_stamp_listtips');
-	
+	/*search*/
 	showformheader('misc&operation=stamp');
 	showhiddenfields(['anchor' => 'list']);
 	showtableheader();
@@ -70,9 +70,9 @@ if(!submitcheck('stampsubmit')) {
 	showtagfooter('div');
 
 	showtagheader('div', 'llist', $anchor == 'llist');
-	
+	/*search={"nav_thread_stamp":"action=misc&operation=stamp","misc_stamp_list":"action=misc&operation=stamp&anchor=llist"}*/
 	showtips('misc_stamp_listtips');
-	
+	/*search*/
 	showformheader('misc&operation=stamp&type=list');
 	showhiddenfields(['anchor' => 'llist']);
 	showtableheader();
@@ -96,9 +96,9 @@ if(!submitcheck('stampsubmit')) {
 
 	showtagheader('div', 'add', $anchor == 'add');
 	showformheader('misc&operation=stamp');
-	
+	/*search={"nav_thread_stamp":"action=misc&operation=stamp","add":"action=misc&operation=stamp&anchor=add"}*/
 	showtips('misc_stamp_addtips');
-	
+	/*search*/
 	showtableheader();
 	showsubtitle(['add', 'misc_stamp_type', 'misc_stamp_id', 'misc_stamp_imagename', 'smilies_edit_image', 'smilies_edit_filename']);
 

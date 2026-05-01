@@ -188,7 +188,7 @@ if(!submitcheck('detailsubmit') && !submitcheck('multijssubmit')) {
 
 	if(count($mforum) == 1 && $mforum[0]['type'] == 'group') {
 		$mforum[0]['extra'] = dunserialize($mforum[0]['extra']);
-		
+		/*search={"forums_admin":"action=forums","forums_edit_basic":"action=forums&operation=edit&anchor=basic"}*/
 		showtagheader('div', 'basic', $anchor == 'basic');
 		showtableheader();
 		showsetting('forums_edit_basic_cat_name', 'namenew', $mforum[0]['name'], 'text');
@@ -212,9 +212,9 @@ if(!submitcheck('detailsubmit') && !submitcheck('multijssubmit')) {
 		showsubmit('detailsubmit');
 		showtablefooter();
 		showtagfooter('div');
-		
+		/*search*/
 
-		
+		/*search={"forums_admin":"action=forums","forums_edit_perm_forum":"action=forums&operation=edit&anchor=perm"}*/
 		showtagheader('div', 'perm', $anchor == 'perm');
 		showtableheader('', '');
 
@@ -228,7 +228,7 @@ if(!submitcheck('detailsubmit') && !submitcheck('multijssubmit')) {
 		showsubmit('detailsubmit');
 		showtablefooter();
 		showtagfooter('div');
-		
+		/*search*/
 
 	} else {
 
@@ -358,7 +358,7 @@ if(!submitcheck('detailsubmit') && !submitcheck('multijssubmit')) {
 
 			$_G['multisetting'] = $multiset ? 1 : 0;
 			showmultititle();
-			
+			/*search={"forums_admin":"action=forums","forums_edit_basic":"action=forums&operation=edit&anchor=basic"}*/
 			showtagheader('div', 'basic', $anchor == 'basic');
 			if(!$multiset) {
 				showtips('forums_edit_tips');
@@ -414,9 +414,9 @@ if(!submitcheck('detailsubmit') && !submitcheck('multijssubmit')) {
 			showsetting('forums_edit_basic_seodescription', 'seodescriptionnew', dhtmlspecialchars($forum['seodescription']), 'textarea');
 			showtablefooter();
 			showtagfooter('div');
-			
+			/*search*/
 
-			
+			/*search={"forums_admin":"action=forums","forums_edit_extend":"action=forums&operation=edit&anchor=extend"}*/
 			showtagheader('div', 'extend', $anchor == 'extend');
 			if(!$multiset) {
 				showtips('forums_edit_tips');
@@ -504,9 +504,9 @@ if(!submitcheck('detailsubmit') && !submitcheck('multijssubmit')) {
 			showsetting('forums_edit_extend_recommend_dateline', 'modrecommendnew[dateline]', $forum['modrecommend']['dateline'], 'text');
 			showtablefooter();
 			showtagfooter('div');
-			
+			/*search*/
 
-			
+			/*search={"forums_admin":"action=forums","forums_edit_posts":"action=forums&operation=edit&anchor=posts"}*/
 			showtagheader('div', 'posts', $anchor == 'posts');
 			if(!$multiset) {
 				showtips('forums_edit_tips');
@@ -568,10 +568,10 @@ if(!submitcheck('detailsubmit') && !submitcheck('multijssubmit')) {
 
 			showtablefooter();
 			showtagfooter('div');
-			
+			/*search*/
 
 			if(!$multiset) {
-				
+				/*search={"forums_admin":"action=forums","forums_edit_attachtype":"action=forums&operation=edit&anchor=attachtype"}*/
 				showtagheader('div', 'attachtype', $anchor == 'attachtype');
 				showtips('forums_edit_attachtype_tips');
 				showtableheader('', 'nobottom');
@@ -580,9 +580,9 @@ if(!submitcheck('detailsubmit') && !submitcheck('multijssubmit')) {
 				echo '<tr><td></td><td colspan="2"><div><a href="###" onclick="addrow(this, 1)" class="addtr">'.$lang['misc_attachtype_add'].'</a></div></tr>';
 				showtablefooter();
 				showtagfooter('div');
-				
+				/*search*/
 
-				
+				/*search={"forums_admin":"action=forums","forums_edit_credits_policy":"action=forums&operation=edit&anchor=credits"}*/
 				showtagheader('div', 'credits', $anchor == 'credits');
 				if(!$multiset) {
 					showtips('forums_edit_tips');
@@ -624,7 +624,7 @@ if(!submitcheck('detailsubmit') && !submitcheck('multijssubmit')) {
 					</script>
 EOF;
 				showtagfooter('div');
-				
+				/*search*/
 			}
 
 			if($allowthreadtypes && !$multiset) {
@@ -650,7 +650,7 @@ EOF;
 		];
 	</script>
 EOT;
-				
+				/*search={"forums_admin":"action=forums","forums_edit_threadtypes_config":"action=forums&operation=edit&anchor=threadtypes"}*/
 				showtagheader('div', 'threadtypes', $anchor == 'threadtypes');
 				if(!$multiset) {
 					showtips('forums_edit_tips');
@@ -685,9 +685,9 @@ EOT;
 				showtablefooter();
 				showtagfooter('div');
 				showtagfooter('div');
-				
+				/*search*/
 
-				
+				/*search={"forums_admin":"action=forums","forums_edit_threadsorts":"action=forums&operation=edit&anchor=threadsorts"}*/
 				showtagheader('div', 'threadsorts', $anchor == 'threadsorts');
 				if(!$multiset) {
 					showtips('forums_edit_tips');
@@ -711,10 +711,10 @@ EOT;
 				showtablefooter();
 				showtagfooter('div');
 				showtagfooter('div');
-				
+				/*search*/
 			}
 
-			
+			/*search={"forums_admin":"action=forums","forums_edit_perm_forum":"action=forums&operation=edit&anchor=perm"}*/
 			showtagheader('div', 'perm', $anchor == 'perm');
 			if(!$multiset) {
 				showtips('forums_edit_tips');
@@ -1082,7 +1082,7 @@ EOT;
 										$threadtypes_newicon = trim($_GET['newicon'][$key]);
 										$newtypeid = table_forum_threadclass::t()->insert(['fid' => $fid, 'name' => $val, 'displayorder' => $threadtypes_newdisplayorder, 'icon' => $threadtypes_newicon, 'moderators' => intval($_GET['newmoderators'][$key])], true);
 									} else {
-										$threadtypes_newicon = $newtypearr['icon'];
+										$threadtypes_newicon = $newtypearr['icon'];// 已存在的分类,使用原来属性
 										$threadtypes_newdisplayorder = $newtypearr['displayorder'];
 										$_GET['newmoderators'][$key] = $newtypearr['moderators'];
 									}

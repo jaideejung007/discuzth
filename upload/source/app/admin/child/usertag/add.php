@@ -48,7 +48,7 @@ if(submitcheck('submit')) {
 	}
 
 }
-
+/*search={"usertag":"action=usertag"}*/
 showsubmenu('usertag', [
 	['usertag_list', 'usertag', 0],
 	['usertag_add', 'usertag&operation=add', 1],
@@ -61,5 +61,5 @@ showsetting('usertag_add_usernames', 'usernames', '', 'textarea');
 showsubmit('submit', 'submit');
 showtablefooter();
 showformfooter();
-
+/*search*/
 	

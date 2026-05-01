@@ -305,21 +305,6 @@ function show_sysinfo() {
 		} else {
 			$msg .= ' , JIT: Off';
 		}
-		if(!empty($value['preload_statistics'])) {
-			$count = [];
-			if(!empty($value['preload_statistics']['functions'])) {
-				$count[] = count($value['preload_statistics']['functions']).' functions';
-			}
-			if(!empty($value['preload_statistics']['classes'])) {
-				$count[] = count($value['preload_statistics']['classes']).' classes';
-			}
-			if(!empty($value['preload_statistics']['scripts'])) {
-				$count[] = count($value['preload_statistics']['scripts']).' scripts';
-			}
-			$msg .= ' , Preload: On ['.implode('/', $count).']';
-		} else {
-			$msg .= ' , Preload: Off';
-		}
 	} else {
 		$msg = 'OPcache: Off';
 	}

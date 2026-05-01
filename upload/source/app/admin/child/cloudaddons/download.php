@@ -246,7 +246,7 @@ if($step == 0) {
 		$v = reset($batch);
 		dheader('location: '.$v[0]);
 	} else {
-		
+		//插件已经是最新版或者扩展没有安装文件，才可能进入这里
 		list($_GET['key'], $_GET['type'], $_GET['rid']) = explode('.', $addonids[0]);
 		if($_GET['type'] == 'plugin') {
 			dheader('location: '.ADMINSCRIPT.'?action=plugins&operation=upgrade&pluginid='.$plugin['pluginid']);

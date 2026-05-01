@@ -161,11 +161,11 @@ if($do == 'export') {
 		['misc_censor_batch_add', 'import', $anchor == 'import'],
 		['misc_censor_wordtype_edit', 'wordtype', $anchor == 'wordtype'],
 	]);
-	
+	/*search={"nav_posting_censor":"action=misc&operation=censor"}*/
 	showtips('misc_censor_tips', 'list_tips', $anchor == 'list');
 	showtips('misc_censor_batch_add_tips', 'import_tips', $anchor == 'import');
 	showtips('misc_censor_wordtype_tips', 'wordtype_tips', $anchor == 'wordtype');
-	
+	/*search*/
 
 	showtagheader('div', 'list', $anchor == 'list');
 	showformheader("misc&operation=censor&page=$page", '', 'keywordsearch');

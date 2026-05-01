@@ -390,11 +390,13 @@ function pic_upload($FILES, $type = 'album', $thumb_width = 0, $thumb_height = 0
 				ftpcmd('upload', $type.'/'.getimgthumbname($upload->attach['attachment']));
 			}
 			ftpcmd('close');
+			@unlink($upload->attach['target']);
+			@unlink(getglobal('setting/attachdir').$type.'/'.getimgthumbname($upload->attach['target']));
 			$result['remote'] = 1;
 		} else {
 			if(getglobal('setting/ftp/mirror')) {
 				@unlink($upload->attach['target']);
-				@unlink(getimgthumbname($upload->attach['target']));
+				@unlink(getglobal('setting/attachdir').$type.'/'.getimgthumbname($upload->attach['target']));
 				return [];
 			}
 		}

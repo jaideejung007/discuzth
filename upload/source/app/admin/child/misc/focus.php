@@ -32,7 +32,7 @@ if(!$do) {
 			['add', 'misc&operation=focus&do=add'],
 			['config', 'misc&operation=focus&do=config', 0],
 		]);
-		
+		/*search={"misc_focus":"action=misc&operation=focus","admin":"action=misc&operation=focus"}*/
 		showtips('misc_focus_tips');
 		showformheader('misc&operation=focus');
 		showtableheader('admin', 'fixpadding');
@@ -51,7 +51,7 @@ if(!$do) {
 		showsubmit('focussubmit', 'submit', 'del');
 		showtablefooter();
 		showformfooter();
-		
+		/*search*/
 
 	} else {
 
@@ -88,7 +88,7 @@ if(!$do) {
 			['add', 'misc&operation=focus&do=add', 1],
 			['config', 'misc&operation=focus&do=config', 0],
 		]);
-		
+		/*search={"misc_focus":"action=misc&operation=focus","add":"action=misc&operation=focus&do=add"}*/
 		showformheader('misc&operation=focus&do=add');
 		showtableheader('misc_focus_handadd', 'fixpadding');
 		showsetting('misc_focus_handurl', 'focus_url', '', 'text');
@@ -100,7 +100,7 @@ if(!$do) {
 		showsubmit('addsubmit', 'submit', '', '');
 		showtablefooter();
 		showformfooter();
-		
+		/*search*/
 
 	} else {
 
@@ -193,7 +193,7 @@ if(!$do) {
 			['add', 'misc&operation=focus&do=add', 0],
 			['config', 'misc&operation=focus&do=config', 1],
 		]);
-		
+		/*search={"misc_focus":"action=misc&operation=focus","config":"action=misc&operation=focus&do=config"}*/
 		showformheader('misc&operation=focus&do=config');
 		showtableheader('config', 'fixpadding');
 		showsetting('misc_focus_area_title', 'focus_title', empty($focus['title']) ? cplang('misc_focus') : $focus['title'], 'text');
@@ -201,7 +201,7 @@ if(!$do) {
 		showsubmit('confsubmit', 'submit');
 		showtablefooter();
 		showformfooter();
-		
+		/*search*/
 
 	} else {
 

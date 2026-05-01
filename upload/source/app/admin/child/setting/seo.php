@@ -57,7 +57,7 @@ if(submitcheck('settingsubmit')) {
 	$rewritedata = rewritedata();
 	$setting['rewritestatus'] = isset($setting['rewritestatus']) ? dunserialize($setting['rewritestatus']) : [];
 	$setting['rewriterule'] = isset($setting['rewriterule']) ? dunserialize($setting['rewriterule']) : '';
-	
+	/*search={"setting_optimize":"action=setting&operation=seo","setting_seo":"action=setting&operation=seo"}*/
 	echo '<div id="rewrite"'.($_GET['anchor'] != 'rewrite' ? ' style="display: none"' : '').'>';
 	showtips('setting_tips', 'tips_rewrite');
 	showboxheader('<em class="right">'.cplang('setting_seo_rewritestatus_viewrule').'</em>'.cplang('setting_seo_rewritestatus'), 'nobottom');
@@ -222,7 +222,7 @@ EOF;
 		echo '</div>';
 	}
 	showtagfooter('tbody');
-	
+	/*search*/
 
 	showsubmit('settingsubmit', 'submit', '', $extbutton.(!empty($from) ? '<input type="hidden" name="from" value="'.$from.'">' : ''));
 	showformfooter();

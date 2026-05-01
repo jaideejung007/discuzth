@@ -10,7 +10,7 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 	exit('Access Denied');
 }
 
-
+// 图片标题重新审核
 
 $nextlink = "action=remoderate&current=$next&pertask=$pertask&picsubmit=yes";
 $processed = 0;

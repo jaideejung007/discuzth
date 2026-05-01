@@ -99,7 +99,7 @@ if(!submitcheck('editsubmit')) {
 	}
 
 	shownav('user', 'members_edit');
-	
+	/*search={"members_edit":"action=members&operation=edit"}*/
 	showchildmenu([['nav_members', 'members&operation=list']], $member['username'], [
 		['connect_member_info', 'members&operation=edit&uid='.$uid, 1],
 		['account', 'members&operation=edit&do=account&uid='.$uid, 0],
@@ -164,14 +164,14 @@ if(!submitcheck('editsubmit')) {
 	}
 
 	showsetting('members_edit_fields', 'fieldsnew', $member['fields'], 'textarea');
-	
+	// 用户历史资料下载 开始
 	showsetting('members_edit_exphistory', '', '', "<a href=\"".ADMINSCRIPT."?action=members&operation=exphistory&uid={$member['uid']}\" class=\"act\">{$lang['members_edit_exphistory']}</a>");
-	
+	// 用户历史资料下载 结束
 
 	showsubmit('editsubmit');
 	showtablefooter();
 	showformfooter();
-	
+	/*search*/
 
 } else {
 
@@ -183,10 +183,10 @@ if(!submitcheck('editsubmit')) {
 	$secmobile = $_GET['secmobilenew'];
 
 	if(!empty($secmobile) && $secmobicc === '') {
-		
+		//安全手机号非空，区号为空时，使用默认区号
 		$secmobicc = $_G['setting']['smsdefaultcc'];
 	} elseif($secmobicc === '') {
-		
+		//空字符串代表没传递这个参数，传递0时，代表清空这个数据
 		$secmobicc = 0;
 	} elseif(!preg_match('#^(\d){1,3}$#', $secmobicc)) {
 		cpmsg('members_mobicc_illegal', '', 'error');
@@ -242,7 +242,7 @@ if(!submitcheck('editsubmit')) {
 			}
 		}
 	}
-	
+	// 判断更多自定义字段是否符合预设结构
 	$fieldsnew = trim($_GET['fieldsnew']);
 	if(!empty($fieldsnew) && !in_array($fieldsnew, ['{}', 'null'])) {
 		$field = $_G['cache']['profilesetting']['fields'];
@@ -320,7 +320,7 @@ if(!submitcheck('editsubmit')) {
 		table_common_member_validate::t()->delete($uid);
 	}
 
-	
+	// 将安全手机号同步给account表
 	if(!empty($secmobile)) {
 		require_once libfile('class/account');
 		if(table_common_member_account::t()->fetch_by_uid($uid, account::aType_phone)) {

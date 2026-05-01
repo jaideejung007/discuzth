@@ -85,7 +85,7 @@ if(submitcheck('settingsubmit')) {
 		];
 		</script>
 	EOT;
-	
+	/*search={"setting_seccheck":"action=setting&operation=sec","setting_sec_secqaa":"action=setting&operation=sec"}*/
 	showtips('setting_sec_qaa_tips', 'secqaa_tips');
 	showtableheader('', 'nobottom', 'style="width: 500px"');
 
@@ -151,7 +151,7 @@ if(submitcheck('settingsubmit')) {
 		}
 	}
 	echo '<tr><td><div><a href="###" onclick="addrow(this, 0)" class="addtr">'.$lang['setting_sec_secqaa_add'].'</a></div></td><td></td></tr>';
-	
+	/*search*/
 	showtablefooter();
 
 	showtableheader();

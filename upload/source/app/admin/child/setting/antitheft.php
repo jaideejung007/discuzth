@@ -29,7 +29,7 @@ if(submitcheck('settingsubmit')) {
 } else {
 	$_GET['anchor'] = $_GET['anchor'] === 'iplist' ? $_GET['anchor'] : '';
 
-	
+	/*search={"setting_antitheft":"action=setting&operation=antitheft"}*/
 	if($_GET['anchor'] == 'iplist') {
 
 		if(submitcheck('antitheftsubmit', true)) {
@@ -131,5 +131,5 @@ if(submitcheck('settingsubmit')) {
 		showsubmit('settingsubmit');
 		showtablefooter();
 	}
-	
+	/*search*/
 }

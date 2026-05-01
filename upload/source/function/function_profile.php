@@ -365,9 +365,6 @@ function showdistrict($values, $elems = [], $container = 'districtbox', $showlev
 	$options = [0 => [], 1 => [], 2 => [], 3 => [], 4 => []];
 	if($upids && is_array($upids)) {
 		foreach(table_common_district::t()->fetch_all_by_upid($upids, 'displayorder', 'ASC') as $value) {
-			if($value['level'] == 0 && ($value['id'] != $values[0] && ($value['usetype'] == 0 || !(($containertype == 'birth' && in_array($value['usetype'], [1, 3])) || ($containertype != 'birth' && in_array($value['usetype'], [2, 3])))))) {
-				continue;
-			}
 			$options[$value['level']][] = [$value['id'], $value['name']];
 		}
 	}

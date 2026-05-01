@@ -28,7 +28,7 @@ if($operation == 'article' || $operation == 'topic') {
 			['comment_article_comment', 'comment&operation=article', $operation == 'article' ? 1 : 0],
 			['comment_topic_comment', 'comment&operation=topic', $operation == 'topic' ? 1 : 0]
 		]);
-		
+		/*search={"nav_comment":"action=comment","comment_article_comment":"action=comment&operation=article","comment_topic_comment":"action=comment&operation=topic"}*/
 		showtips('comment_'.$operation.'_tips');
 		$staticurl = STATICURL;
 		echo <<<EOT
@@ -55,7 +55,7 @@ EOT;
 		showtablefooter();
 		showformfooter();
 		showtagfooter('div');
-		
+		/*search*/
 
 	} else {
 

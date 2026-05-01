@@ -12,7 +12,7 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 
 if(empty($_GET['uid']) && empty($_GET['username']) && empty($_GET['ip'])) {
 
-	
+	/*search={"nav_repeat":"action=members&operation=repeat"}*/
 	shownav('user', 'nav_members');
 	showsubmenu('nav_members', [
 		['search', 'members&operation=search', 0],
@@ -29,7 +29,7 @@ if(empty($_GET['uid']) && empty($_GET['username']) && empty($_GET['ip'])) {
 	showsubmit('submit', 'submit');
 	showtablefooter();
 	showformfooter();
-	
+	/*search*/
 
 } else {
 

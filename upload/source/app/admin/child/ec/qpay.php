@@ -23,7 +23,7 @@ if(!empty($checktype)) {
 
 if(!submitcheck('qpaysubmit')) {
 
-	
+	/*search={"nav_ec":"action=ec&operation=base","nav_ec_qpay":"action=ec&operation=qpay"}*/
 	showtips('ec_qpay_tips');
 	showformheader('ec&operation=qpay');
 
@@ -49,7 +49,7 @@ if(!submitcheck('qpaysubmit')) {
 	showsetting('ec_qpay_check', '', '',
 		'<a href="'.ADMINSCRIPT.'?action=ec&operation=qpay&checktype=credit" target="_blank">'.$lang['ec_qpay_checklink_credit'].'</a><br />'
 	);
-	
+	/*search*/
 	showtableheader('', 'notop');
 	showsubmit('qpaysubmit');
 	showtablefooter();

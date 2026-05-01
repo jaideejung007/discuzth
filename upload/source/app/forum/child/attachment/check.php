@@ -54,11 +54,11 @@ if(!$requestmode) {
 	}
 }
 
-$isimage = $attach['isimage'];
+$isimage = $attach['isimage'] == 1;
 $_G['setting']['ftp']['hideurl'] = $_G['setting']['ftp']['hideurl'] || ($isimage && !empty($_GET['noupdate']) && $_G['setting']['attachimgpost'] && strtolower(substr($_G['setting']['ftp']['attachurl'], 0, 3)) == 'ftp');
 
 
-if(empty($_GET['nothumb']) && $attach['isimage'] && $attach['thumb']) {
+if(empty($_GET['nothumb']) && $isimage && $attach['thumb']) {
 	$db = DB::object();
 	$db->close();
 	!$_G['config']['output']['gzip'] && ob_end_clean();

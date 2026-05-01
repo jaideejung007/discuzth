@@ -45,7 +45,7 @@ if(!submitcheck('editsubmit')) {
 			foreach($forums[$id] as $forum) {
 				$showed[] = showgroup($forum);
 				$lastfid = 0;
-				if(!empty($subs[$forum['fid']])) {
+				if(!empty($subs[$forum['fid']])) {//群组不展示了  废弃代码
 					foreach($subs[$forum['fid']] as $sub) {
 						$showed[] = showgroup($sub, 'sub');
 						$lastfid = $sub['fid'];

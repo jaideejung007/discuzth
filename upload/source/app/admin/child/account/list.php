@@ -29,7 +29,7 @@ if(!submitcheck('submit')) {
 		'.atable .t {width:80px;text-align:center} .atable .c {text-align:center} .atable .l { border-left:1px dotted #DEEFFB !important} .atable .r {border-right:1px dotted #DEEFFB !important;}'.
 		'.iconfont { width: 1.5em; height: 1.5em; vertical-align: middle; fill: currentColor; overflow: hidden; margin-right: 5px;}</style>';
 	showformheader('account');
-	
+	/*search={"account":"action=account"}*/
 	showtableheader('', 'atable');
 	$header = showtablerow('class="header"', [
 		'rowspan="2" style="width:230px"',
@@ -42,6 +42,7 @@ if(!submitcheck('submit')) {
 	$header .= showtablerow('class="header"', [
 		'class="l t"',
 		'class="t"',
+		'class="l t"',
 		'class="l t"',
 		'class="t"',
 		'class="t"',
@@ -137,7 +138,7 @@ if(!submitcheck('submit')) {
 	]);
 	showsubmit('submit');
 	showtablefooter();
-	
+	/*search*/
 	showformfooter();
 } else {
 	$settings = [

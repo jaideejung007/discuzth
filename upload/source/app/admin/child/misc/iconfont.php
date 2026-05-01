@@ -10,12 +10,12 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 	exit('Access Denied');
 }
 
-
+// 扫描woff文件函数
 function scan_woff_files() {
     $woff_files = array();
     $base_path = DISCUZ_ROOT;
     
-    
+    // 检查默认电脑版模板字体文件
     $default_pc_font = $base_path . '/static/image/common/dzicon.woff';
     if (file_exists($default_pc_font)) {
         $woff_files[] = array(
@@ -25,7 +25,7 @@ function scan_woff_files() {
         );
     }
     
-    
+    // 检查默认手机版模板字体文件
     $default_mobile_font = $base_path . '/static/image/mobile/font/dzmicon.woff';
     if (file_exists($default_mobile_font)) {
         $woff_files[] = array(
@@ -35,13 +35,13 @@ function scan_woff_files() {
         );
     }
     
-    
+    // 扫描模板目录
     $template_path = $base_path . '/template';
     if (is_dir($template_path)) {
         $dir = dir($template_path);
         while (($file = $dir->read()) !== false) {
             if ($file != '.' && $file != '..' && is_dir($template_path . '/' . $file)) {
-                
+                // 扫描每个模板目录下的woff文件
                 $template_woff_files = glob($template_path . '/' . $file . '/**/*.woff', GLOB_BRACE);
                 foreach ($template_woff_files as $woff_file) {
                     $relative_path = str_replace($base_path, '', $woff_file);
@@ -59,14 +59,14 @@ function scan_woff_files() {
     return $woff_files;
 }
 
-
+// 获取所有woff文件
 $woff_files = scan_woff_files();
 
-
+// 设置页面标题
 showsubmenu('misc_iconfont_title', array());
-
+// 显示提示信息
 showtips('misc_iconfont_tips');
-
+// 显示字体文件列表盒子
 showboxheader('misc_iconfont_scanned_files');
 if (!empty($woff_files)) {
     foreach ($woff_files as $file) {
@@ -80,7 +80,7 @@ if (!empty($woff_files)) {
 }
 showboxfooter();
 
-
+// 显示字体文件输入表格
 showtableheader('misc_iconfont_input');
 showtablerow('', array('class="td21"', 'class="vtop rowform"'), array(cplang('misc_iconfont_online_url'), 
 	'<input type="text" id="font-url" class="txt" style="width: 400px;" placeholder="' . cplang('misc_iconfont_online_url_tip') . '">
@@ -90,7 +90,7 @@ showtablerow('', array('class="td21"', 'class="vtop rowform"'), array(cplang('mi
 	<input type="button" class="btn" id="load-local-btn" value="' . cplang('misc_iconfont_parse_local') . '">'));
 showtablefooter();
 
-
+// 显示操作按钮
 showtableheader('misc_iconfont_operation');
 showtablerow('', array('colspan="2"'), '<div class="operation-buttons" id="operation-buttons" style="display: none; margin: 15px 0;">
 	<button class="btn" id="copy-type-btn">' . cplang('misc_iconfont_copy_value') . '</button>
@@ -101,7 +101,7 @@ showtablerow('', array('colspan="2"'), '<div class="operation-buttons" id="opera
 </div>');
 showtablefooter();
 
-
+// 显示解析结果
 showboxheader('misc_iconfont_result', '', 'id="icon-result" style="display: none; margin-top: 10px;"');
 showboxrow('', '', '<div id="icon-list" class="icon-list"></div>');
 showboxfooter();

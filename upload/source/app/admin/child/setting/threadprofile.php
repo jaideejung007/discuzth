@@ -89,14 +89,14 @@ if(submitcheck('settingsubmit')) {
 		showformheader('setting&edit=yes', 'enctype');
 		showhiddenfields(['operation' => $operation]);
 
-		
+		/*search={"setting_styles":"action=setting&operation=threadprofile&do=add"}*/
 		showtips('setting_threadprofile_tpl_tpls');
 		showtableheader('');
 		showhiddenfields(['do' => 'add']);
 		showsetting('setting_styles_threadprofile_name', 'namenew', '', 'text');
 		showsetting_threadprfile($authorinfoitems);
 		showtagfooter('tbody');
-		
+		/*search*/
 	} elseif($_GET['do'] == 'edit') {
 		$id = intval($_GET['id']);
 		$threadprofile = table_forum_threadprofile::t()->fetch($id);

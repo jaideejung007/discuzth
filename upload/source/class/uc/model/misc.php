@@ -99,7 +99,6 @@ class miscmodel {
 			$data = curl_exec($ch);
 			$status = curl_getinfo($ch);
 			$errno = curl_errno($ch);
-			curl_close($ch);
 			if($errno || $status['http_code'] != 200) {
 				return;
 			} else {

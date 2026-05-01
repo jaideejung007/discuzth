@@ -17,9 +17,9 @@ showsubmenu('nav_click', [
 	['click_edit_picid', 'click&idtype=picid', $idtype == 'picid' ? 1 : 0],
 	['click_edit_aid', 'click&idtype=aid', $idtype == 'aid' ? 1 : 0],
 ]);
-
+/*search={"nav_click":"action=click"}*/
 showtips('click_edit_tips');
-
+/*search*/
 showformheader('click&idtype='.$idtype);
 showtableheader();
 showsubtitle(['', 'display_order', '', 'available', 'name', 'click_edit_image', 'click_edit_type']);

@@ -23,7 +23,7 @@ if(!empty($checktype)) {
 
 if(!submitcheck('wechatsubmit')) {
 
-	
+	/*search={"nav_ec":"action=ec&operation=base","nav_ec_wechat":"action=ec&operation=wechat"}*/
 	showtips('ec_wechat_tips');
 	showformheader('ec&operation=wechat');
 
@@ -70,7 +70,7 @@ if(!submitcheck('wechatsubmit')) {
 	showsetting('ec_wechat_check', '', '',
 		'<a href="'.ADMINSCRIPT.'?action=ec&operation=wechat&checktype=credit" target="_blank">'.$lang['ec_wechat_checklink_credit'].'</a><br />'
 	);
-	
+	/*search*/
 	showtableheader('', 'notop');
 	showsubmit('wechatsubmit');
 	showtablefooter();

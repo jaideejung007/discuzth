@@ -26,7 +26,7 @@ if(!submitcheck('commentsubmit')) {
 		['comment_article_comment', 'comment&operation=article', 0],
 		['comment_topic_comment', 'comment&operation=topic', 0]
 	]);
-	
+	/*search={"nav_comment":"action=comment","comment_comment":"action=comment"}*/
 	showtips('comment_tips');
 	$staticurl = STATICURL;
 	echo <<<EOT
@@ -63,7 +63,7 @@ EOT;
 	showtablefooter();
 	showformfooter();
 	showtagfooter('div');
-	
+	/*search*/
 
 } else {
 	$cids = authcode($cids, 'DECODE');

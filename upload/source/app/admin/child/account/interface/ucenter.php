@@ -23,7 +23,7 @@ switch($operation) {
 	default:
 		if(!submitcheck('submit')) {
 			showformheader('account&method=ucenter');
-			
+			/*search={"ucenter":"action=account&method=ucenter","ucenter_base":"action=account&method=ucenter"}*/
 			showtableheader();
 			showtitle('ucenter_baseSetting');
 			$ucenter['secret'] = $ucenter['secret'] ?
@@ -44,7 +44,7 @@ switch($operation) {
 
 			showsubmit('submit');
 			showtablefooter();
-			
+			/*search*/
 			showformfooter();
 
 		} else {

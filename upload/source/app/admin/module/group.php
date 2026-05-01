@@ -94,7 +94,7 @@ function searchgroups($submit) {
 		$dayselect .= "<option value=\"$d\" ".($birthday == $d ? 'selected' : '').">$d</option>\n";
 	}
 
-	
+	/*search={"nav_group_manage":"action=group&operation=manage"}*/
 	showtagheader('div', 'searchgroups', !$submit);
 	echo '<script src="'.STATICURL.'js/calendar.js" type="text/javascript"></script>';
 	showformheader('group&operation=manage');
@@ -115,7 +115,7 @@ function searchgroups($submit) {
 	showtablefooter();
 	showformfooter();
 	showtagfooter('div');
-	
+	/*search*/
 }
 
 function countgroups() {

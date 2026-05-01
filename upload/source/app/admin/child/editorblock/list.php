@@ -42,7 +42,7 @@ if(!submitcheck('editorblocksubmit')) {
 				unset($avaliableeditorblock[$key]);
 			} else {
 				table_common_editorblock::t()->delete($editorblock['blockid']);
-				
+				// table_common_editorblock::t()->update($editorblock['blockid'], array('available' => 0));
 				$flag = true;
 				continue;
 			}
@@ -54,7 +54,7 @@ if(!submitcheck('editorblocksubmit')) {
 				unset($avaliableeditorblock[$key]);
 			} else {
 				table_common_editorblock::t()->delete($editorblock['blockid']);
-				
+				// table_common_editorblock::t()->update($editorblock['blockid'], array('available' => 0));
 				$flag = true;
 				continue;
 			}
@@ -73,7 +73,7 @@ if(!submitcheck('editorblocksubmit')) {
 			}
 		}
 	}
-	
+	// 如果有新增加的文件, 需要添加到列表内
 	if(count($avaliableeditorblock) > 0) {
 		foreach($avaliableeditorblock as $editorblock) {
 			$arr = [
@@ -108,7 +108,7 @@ if(!submitcheck('editorblocksubmit')) {
 		}
 	}
 	if($flag) {
-		
+		//header("Location: ".ADMINSCRIPT."?action=editorblock&operation=$operation");
 	}
 
 	$blocks = [];

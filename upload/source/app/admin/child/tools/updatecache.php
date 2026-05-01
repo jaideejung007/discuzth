@@ -18,9 +18,9 @@ showsubmenusteps('nav_updatecache', [
 	['nav_updatecache_completed', $step == 3]
 ]);
 
-
+/*search={"nav_updatecache":"action=tools&operation=updatecache"}*/
 showtips('tools_updatecache_tips');
-
+/*search*/
 
 if($step == 1) {
 	$extra = [];

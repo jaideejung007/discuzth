@@ -22,12 +22,12 @@ if(!submitcheck('settingsubmit')) {
 	showhiddenfields(['operation' => $operation]);
 
 	require_once libfile('function/forumlist');
-	
+	/*search={"setting_follow":"action=setting&operation=follow","setting_follow_base":"action=setting&operation=follow&anchor=base"}*/
 	showtableheader('', 'nobottom', 'id="base"'.($_GET['anchor'] != 'base' ? ' style="display: none"' : ''));
 	showsetting('setting_follow_base_default_follow_retain_day', 'settingnew[followretainday]', $setting['followretainday'], 'text');
 	showsetting('setting_follow_base_default_follow_add_notice', 'settingnew[followaddnotice]', $setting['followaddnotice'], 'radio');
 	showsetting('setting_follow_base_default_view_profile', 'settingnew[allowquickviewprofile]', $setting['allowquickviewprofile'], 'radio');
-	
+	/*search*/
 
 	showsubmit('settingsubmit', 'submit', '', $extbutton.(!empty($from) ? '<input type="hidden" name="from" value="'.$from.'">' : ''));
 	showtablefooter();

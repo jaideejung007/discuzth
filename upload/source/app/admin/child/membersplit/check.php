@@ -12,9 +12,9 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 
 shownav('founder', 'nav_membersplit');
 showsubmenu('membersplit');
-
+/*search={"nav_membersplit":"action=membersplit","nav_membersplit":"action=membersplit&operation=check"}*/
 showtips('membersplit_check_tips');
-
+/*search*/
 showformheader('membersplit&operation=manage');
 showtableheader('membersplit_table_orig');
 $membercount = $_G['cache']['userstats']['totalmembers'];

@@ -64,7 +64,7 @@ if(submitcheck('settingsubmit')) {
 	$setting['mail'] = dunserialize($setting['mail']);
 	$passwordmask = $setting['mail']['auth_password'] ? $setting['mail']['auth_password'][0].'********'.substr($setting['mail']['auth_password'], -2) : '';
 
-	
+	/*search={"setting_mail":"action=setting&operation=mail","setting_mail_setting":"action=setting&operation=mail&anchor=setting"}*/
 	showtableheader('', '', 'id="mailsetting"'.($_GET['anchor'] != 'setting' ? ' style="display: none"' : ''));
 
 	showsetting('setting_mail_setting_send', ['settingnew[mail][mailsend]', [
@@ -185,17 +185,17 @@ EOF;
 	showsetting('setting_mail_setting_silent', 'settingnew[mail][sendmail_silent]', $setting['mail']['sendmail_silent'], 'radio');
 	showsubmit('settingsubmit');
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_mail":"action=setting&operation=mail","setting_mail_check":"action=setting&operation=mail&anchor=check"}*/
 	showtableheader('', '', 'id="mailcheck"'.($_GET['anchor'] != 'check' ? ' style="display: none"' : ''));
 	showsetting('setting_mail_check_test_from', 'test_from', '', 'text');
 	showsetting('setting_mail_check_test_to', 'test_to', '', 'textarea');
 	showsubmit('', '', '<input type="submit" class="btn" name="mailcheck" value="'.cplang('setting_mail_check_submit').'" onclick="this.form.operation.value=\'mailcheck\';this.form.action=\''.ADMINSCRIPT.'?action=checktools&operation=mailcheck&frame=no\';this.form.target=\'mailcheckiframe\';">', '<iframe name="mailcheckiframe" style="display: none"></iframe>');
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_mail":"action=setting&operation=mail","setting_mail_seccode":"action=setting&operation=mail&anchor=seccode"}*/
 	showtableheader('', '', 'id="mailseccode"'.($_GET['anchor'] != 'seccode' ? ' style="display: none"' : ''));
 	echo <<<EOF
 		<tr>
@@ -220,7 +220,7 @@ EOF;
 	showtagfooter('tbody');
 	showsubmit('settingsubmit');
 	showtablefooter();
-	
+	/*search*/
 
 	showformfooter();
 }

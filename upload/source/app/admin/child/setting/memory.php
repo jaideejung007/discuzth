@@ -40,7 +40,7 @@ if(submitcheck('settingsubmit')) {
 	showformheader('setting&edit=yes', 'enctype');
 	showhiddenfields(['operation' => $operation]);
 
-	
+	/*search={"setting_optimize":"action=setting&operation=seo","setting_memory":"action=setting&operation=memory"}*/
 	showtips('setting_memory_tips');
 	showtableheader('setting_memory_status', 'fixpadding');
 	showsubtitle(['setting_memory_state_interface', 'setting_memory_state_extension', 'setting_memory_state_config', 'setting_memory_clear', '']);
@@ -95,7 +95,7 @@ if(submitcheck('settingsubmit')) {
 			'<input type="text" class="txt" name="settingnew[memory]['.$skey.'][ttl]" value="'.$ttl.'">', cplang('setting_memory_func_'.$skey.'_comment'),
 		]);
 	}
-	
+	/*search*/
 
 	showsubmit('settingsubmit', 'submit', '', $extbutton.(!empty($from) ? '<input type="hidden" name="from" value="'.$from.'">' : ''));
 	showtablefooter();

@@ -23,7 +23,7 @@ if(!submitcheck('ordersubmit')) {
 
 	echo '<script type="text/javascript" src="'.STATICURL.'js/calendar.js"></script>';
 
-	
+	/*search={"nav_ec":"action=ec&operation=base","nav_ec_orders":"action=ec&operation=orders"}*/
 	showtips('ec_orders_tips');
 	showtagheader('div', 'ordersearch', !submitcheck('searchsubmit', 1));
 	showformheader('ec&operation=orders');
@@ -44,7 +44,7 @@ if(!submitcheck('ordersubmit')) {
 	showtablefooter();
 	showformfooter();
 	showtagfooter('div');
-	
+	/*search*/
 
 	if(submitcheck('searchsubmit', 1)) {
 

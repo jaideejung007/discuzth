@@ -135,45 +135,45 @@ if(!$_GET['ipact']) {
 				continue;
 			}
 			if(str_contains($banipaddr, '/')) {
-				
+				// 对于 CIDR 需要校验其合法性, 并判断是否有设置 CIDR 的权限
 				if($_G['adminid'] != 1 || !ip::validate_cidr($banipaddr, $banipaddr)) {
 					continue;
 				}
 			} else if(str_contains($banipaddr, '*')) {
-				
-				
+				// 对于带 * 的旧版规则的处理, 只支持转换为标准的 CIDR 网段, 不支持凑段
+				// * 与 CIDR 一样, 需要判断权限
 				if($_G['adminid'] != 1) {
 					continue;
 				}
-				
+				// 设置掩码并分解 IP 地址为四段, 如果分解失败或不是四段则忽略
 				$mask = 0;
 				$ipnew = explode('.', $banipaddr);
 				if(!is_array($ipnew) || count($ipnew) != 4) {
 					continue;
 				}
-				
+				// 只支持能够转化为标准 ABC 类的地址, 否则忽略
 				for($i = 0; $i < 4; $i++) {
 					if(strcmp($ipnew[$i], '*') === 0) {
 						if($i == 0) {
-							
+							// * 开头不是合法 IP , 忽略
 							break;
 						} else if($mask) {
-							
+							// 如果子网掩码存在, 则更新本段为 0
 							$ipnew[$i] = 0;
 						} else {
-							
+							// 如果子网掩码不存在, 则更新本段为 0 , 并生成子网掩码
 							$ipnew[$i] = 0;
 							$mask = $i * 8;
 						}
 					} else {
-						
+						// 如果 * 后面跟数字, 或者不是合法的 IP, 则此条不做转换
 						if($mask || !is_numeric($ipnew[$i]) || $ipnew[$i] < 0 || $ipnew[$i] > 255) {
 							$mask = 0;
 							break;
 						}
 					}
 				}
-				
+				// 如果生成了子网掩码, 则尝试拼接 CIDR 并送校验, 忽略无法通过校验的规则
 				if($mask) {
 					$banipaddr = implode('.', $ipnew);
 					$banipaddr = $banipaddr.'/'.$mask;
@@ -184,7 +184,7 @@ if(!$_GET['ipact']) {
 					continue;
 				}
 			} else if(!ip::validate_ip($banipaddr)) {
-				
+				// 忽略不合法的 IP 地址
 				continue;
 			}
 

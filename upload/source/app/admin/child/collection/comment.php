@@ -29,7 +29,7 @@ if(submitcheck('submit') && !empty($_GET['cidarray']) && is_array($_GET['cidarra
 	}
 	cpmsg('collection_admin_updated', 'action=collection&operation=comment&searchsubmit=yes&perpage='.$_GET['perpage'].'&page='.$_GET['page'], 'succeed');
 }
-
+/*search={"collection":"action=collection"}*/
 if(!submitcheck('searchsubmit', 1)) {
 	showformheader('collection&operation=comment');
 	showtableheader();
@@ -100,5 +100,5 @@ if(!submitcheck('searchsubmit', 1)) {
 	showtablefooter();
 	showformfooter();
 }
-
+/*search*/
 	

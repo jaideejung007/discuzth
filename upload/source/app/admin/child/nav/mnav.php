@@ -58,12 +58,12 @@ EOT;
 			table_common_nav::t()->delete_by_navtype_id(6, $_GET['delete']);
 		}
 
-		
+		// 先将所有导航项的identifier设为空
 		foreach($navlist as $nav) {
 			table_common_nav::t()->update($nav['id'], ['identifier' => '']);
 		}
 
-		
+		// 处理现有导航项
 		if(is_array($_GET['namenew'])) {
 			foreach($_GET['namenew'] as $id => $name) {
 				$name = trim(dhtmlspecialchars($name));
@@ -90,7 +90,7 @@ EOT;
 			}
 		}
 
-		
+		// 处理新添加的导航项
 		if(is_array($_GET['newname'])) {
 			foreach($_GET['newname'] as $k => $v) {
 				$v = dhtmlspecialchars(trim($v));
@@ -111,7 +111,7 @@ EOT;
 						'navtype' => 6
 					];
 					$new_id = table_common_nav::t()->insert($data);
-					
+					// 如果新添加的是发布按钮，更新其identifier
 					if($newis_post) {
 						table_common_nav::t()->update($new_id, ['identifier' => 'post']);
 					}

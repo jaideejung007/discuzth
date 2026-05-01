@@ -99,7 +99,7 @@ class fp {
 
 	private static function _showForum($setting = []) {
 		showhiddenfields(['s[display_order]' => $setting['display_order']]);
-		
+		/*search={"menu_forums_portal":"action=forumportal"}*/
 		showsetting('subject', 's[name]', $setting['name'], 'text');
 		showsetting('available', 's[allow]', $setting['allow'], 'radio');
 		showsetting('forumportal_adminid', ['s[adminid]', [
@@ -168,7 +168,7 @@ class fp {
 			[5, cplang('forumportal_recommends')],
 		]], $setting['order'] ?? 0, 'mradio');
 		showsubmit('submit');
-		
+		/*search*/
 	}
 
 	private static function _addSubmit($data) {

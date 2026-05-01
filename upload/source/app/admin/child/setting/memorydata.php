@@ -10,7 +10,7 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 	exit('Access Denied');
 }
 
-
+/*search={"setting_optimize":"action=setting&operation=seo","setting_memorydata":"action=setting&operation=memorydata"}*/
 $cache_keys = getmemorycachekeys();
 if(submitcheck('memorydatasubmit')) {
 	$flag = 0;
@@ -75,7 +75,7 @@ if(submitcheck('memorydatasubmit')) {
 	showsubmit('memorydatasubmit');
 	showtablefooter();
 	showtagfooter('div');
-	
+	/*search*/
 	showformfooter();
 
 }

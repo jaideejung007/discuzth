@@ -75,7 +75,7 @@ if(!submitcheck('submit')) {
 		$plugin['modules'] = dunserialize($plugin['modules']);
 		$submenuitem = [];
 		if(isset($_G['cache']['plugin'][$plugin['identifier']])) {
-			
+			//为配合插件完全接管变量设置功能，当插件第一个后台设置模块为config时，插件列表不显示默认的设置
 			$configexists = FALSE;
 			if(is_array($plugin['modules'])) {
 				foreach($plugin['modules'] as $k => $module) {

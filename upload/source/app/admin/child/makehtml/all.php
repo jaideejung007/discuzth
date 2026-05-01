@@ -10,7 +10,7 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 	exit('Access Denied');
 }
 
-
+/*search={"nav_makehtml":"action=makehtml&operation=all"}*/
 showtips('makehtml_tips_all');
 
 showformheader('makehtml&operation=all');
@@ -98,5 +98,5 @@ function make_html_article(starttime) {
 EOT;
 showtablefooter();
 showformfooter();
-
+/*search*/
 	

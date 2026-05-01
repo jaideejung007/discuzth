@@ -26,7 +26,7 @@ if(!submitcheck('addsubmit')) {
 		($groupselect['special'] ? '<optgroup label="'.$lang['usergroups_special'].'">'.$groupselect['special'].'</optgroup>' : '').
 		($groupselect['specialadmin'] ? '<optgroup label="'.$lang['usergroups_specialadmin'].'">'.$groupselect['specialadmin'].'</optgroup>' : '').
 		'<optgroup label="'.$lang['usergroups_system'].'">'.$groupselect['system'].'</optgroup>';
-	
+	/*search={"nav_members_add":"action=members&operation=add"}*/
 	shownav('user', 'nav_members');
 	showsubmenu('nav_members', [
 		['search', 'members&operation=search', 0],
@@ -44,7 +44,7 @@ if(!submitcheck('addsubmit')) {
 	showsubmit('addsubmit');
 	showtablefooter();
 	showformfooter();
-	
+	/*search*/
 
 } else {
 

@@ -12,9 +12,9 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 
 shownav('tools', 'nav_updatecounters');
 showsubmenu('nav_updatecounters');
-
+/*search={"nav_updatecounters":"action=counter"}*/
 showtips('counter_tips');
-
+/*search*/
 showformheader('counter');
 showtableheader();
 showsubtitle(['', 'counter_amount']);

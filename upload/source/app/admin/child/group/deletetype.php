@@ -57,7 +57,7 @@ if($ajax && $_GET['formhash'] == formhash()) {
 
 	} else {
 
-		$threads = table_forum_thread::t()->count_by_fid($fid);
+		$threads = table_forum_thread::t()->count_by_fid($fid);//群组不展示了  废弃代码
 		$formhash = formhash();
 		cpmsg('grouptype_delete_alarm', "action=group&operation=deletetype&fid=$fid&confirmed=1&formhash=$formhash", 'loadingform', [], '<div id="percent">0%</div>', FALSE);
 		echo "

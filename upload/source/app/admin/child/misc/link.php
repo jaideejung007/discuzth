@@ -33,9 +33,9 @@ if(!submitcheck('linksubmit')) {
 
 	shownav('extended', 'misc_link');
 	showsubmenu('nav_misc_links');
-	
+	/*search={"misc_link":"action=misc&operation=link"}*/
 	showtips('misc_link_tips');
-	
+	/*search*/
 	showformheader('misc&operation=link');
 	showtableheader();
 	showsubtitle(['', 'display_order', 'misc_link_edit_name', 'misc_link_edit_url', 'misc_link_edit_description', 'misc_link_edit_logo', 'misc_link_group1', 'misc_link_group2', 'misc_link_group3', 'misc_link_group4']);

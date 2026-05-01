@@ -38,7 +38,7 @@ if(!submitcheck('rbsubmit')) {
 		['search', 'recyclebin&operation=search', 1],
 		['clean', 'recyclebin&operation=clean', 0]
 	]);
-	
+	/*search={"nav_recyclebin":"action=recyclebin","search":"action=recyclebin&operation=search"}*/
 	$staticurl = STATICURL;
 	echo <<<EOT
 <script type="text/javascript" src="{$staticurl}js/calendar.js"></script>
@@ -64,7 +64,7 @@ EOT;
 	showtablefooter();
 	showformfooter();
 	showtagfooter('div');
-	
+	/*search*/
 
 	if(submitcheck('searchsubmit')) {
 

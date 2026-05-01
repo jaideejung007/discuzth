@@ -18,14 +18,14 @@ if(!submitcheck('rbsubmit', 1)) {
 		['search', 'recyclebin&operation=search', 0],
 		['clean', 'recyclebin&operation=clean', 1]
 	]);
-	
+	/*search={"nav_recyclebin":"action=recyclebin","clean":"action=recyclebin&operation=clean"}*/
 	showformheader('recyclebin&operation=clean');
 	showtableheader('recyclebin_clean');
 	showsetting('recyclebin_clean_days', 'days', '30', 'text');
 	showsubmit('rbsubmit');
 	showtablefooter();
 	showformfooter();
-	
+	/*search*/
 
 } else {
 

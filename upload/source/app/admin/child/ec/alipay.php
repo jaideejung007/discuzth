@@ -24,7 +24,7 @@ if(!empty($checktype)) {
 
 if(!submitcheck('alipaysubmit')) {
 
-	
+	/*search={"nav_ec":"action=ec&operation=base","nav_ec_alipay":"action=ec&operation=alipay"}*/
 	showtips('ec_alipay_tips');
 	showformheader('ec&operation=alipay');
 
@@ -68,7 +68,7 @@ if(!submitcheck('alipaysubmit')) {
 	showsetting('ec_alipay_check', '', '',
 		'<a href="'.ADMINSCRIPT.'?action=ec&operation=alipay&checktype=credit" target="_blank">'.$lang['ec_alipay_checklink_credit'].'</a><br />'
 	);
-	
+	/*search*/
 	showtableheader('', 'notop');
 	showsubmit('alipaysubmit');
 	showtablefooter();

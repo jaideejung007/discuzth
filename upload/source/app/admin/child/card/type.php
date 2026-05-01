@@ -24,9 +24,9 @@ if(submitcheck('cardsubmit')) {
 		}
 	}
 }
-
+/*search={"card_type_tips":"action=card&operation=type"}*/
 showtips('card_type_tips');
-
+/*search*/
 showformheader('card&operation=type&');
 showtableheader();
 showtablerow('class="header"', ['', ''], [

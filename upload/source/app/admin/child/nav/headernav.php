@@ -222,7 +222,7 @@ EOT;
 		}
 
 		updatecache('setting');
-		
+		// 删除cache_domain.php文件
 		$cache_domain_file = DISCUZ_DATA.'./sysdata/cache_domain.php';
 		if(file_exists($cache_domain_file)) {
 			@unlink($cache_domain_file);

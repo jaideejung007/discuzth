@@ -38,9 +38,9 @@ foreach($_GET as $key => $val) {
 $perpage = max(20, empty($_GET['perpage']) ? 20 : intval($_GET['perpage']));
 echo '<script type="text/javascript" src="'.STATICURL.'js/calendar.js"></script>';
 
-
+/*search={"card_manage_tips":"action=card&operation=manage"}*/
 showtips('card_manage_tips');
-
+/*search*/
 $card_type_option = '';
 foreach(table_common_card_type::t()->range(0, 0, 'ASC') as $result) {
 	$card_type[$result['id']] = $result;
@@ -94,7 +94,7 @@ showformfooter();
 
 showformheader('card&operation=manage&');
 showtableheader('card_manage_title');
-showsubtitle(['', cplang('card_number'), cplang('card_log_price'), cplang('card_extcreditsval'), cplang('card_type'), cplang('card_status'), cplang('card_log_used_user'), cplang('card_used_dateline'), cplang('card_make_cleardateline'), cplang('card_maketime'), cplang('card_log_maker')]);
+showsubtitle(['', cplang('card_number'), cplang('card_log_price'), cplang('card_extcreditsval'), cplang('card_type'), cplang('card_status'), cplang('card_log_used_user'), cplang('card_used_dateline'), cplang('card_make_cleardateline')/*, cplang('card_maketype')*/, cplang('card_maketime'), cplang('card_log_maker')]);
 
 
 $start_limit = ($page - 1) * $perpage;

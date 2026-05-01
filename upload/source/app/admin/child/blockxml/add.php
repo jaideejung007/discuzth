@@ -22,7 +22,7 @@ if(submitcheck('addsubmit')) {
 		['add', 'blockxml&operation=add', 1]
 	]);
 
-	
+	/*search={"blockxml":"action=blockxml","search":"action=blockxml&operation=add"}*/
 	showtips('blockxml_tips');
 	showformheader('blockxml&operation=add');
 	showtableheader('blockxml_add');
@@ -34,6 +34,6 @@ if(submitcheck('addsubmit')) {
 	showsubmit('addsubmit');
 	showtablefooter();
 	showformfooter();
-	
+	/*search*/
 }
 	

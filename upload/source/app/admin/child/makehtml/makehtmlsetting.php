@@ -11,7 +11,7 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 }
 
 if(!submitcheck('makehtmlsetting')) {
-	
+	/*search={"nav_makehtml":"action=makehtml","setting_functions_makehtml":"action=makehtml&operation=makehtmlsetting"}*/
 	$setting = $_G['setting'];
 	showformheader('makehtml&operation=makehtmlsetting');
 	showtableheader('', 'nobottom', 'id="makehtml"'.($operation != 'makehtmlsetting' ? ' style="display: none"' : ''));
@@ -31,7 +31,7 @@ if(!submitcheck('makehtmlsetting')) {
 	showsubmit('makehtmlsetting', 'submit');
 	showtablefooter();
 	showformfooter();
-	
+	/*search*/
 } else {
 	$settingnew = $_GET['settingnew'];
 	if(isset($settingnew['makehtml'])) {

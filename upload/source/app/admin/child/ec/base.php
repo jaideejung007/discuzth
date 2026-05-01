@@ -40,14 +40,14 @@ if(submitcheck('settingsubmit')) {
 
 	showformheader('ec&operation=base', 'enctype');
 
-	
+	/*search={"nav_ec":"action=ec&operation=base","nav_ec_config":"action=ec&operation=base"}*/
 	showtableheader();
 	showtitle('setting_ec_credittrade');
 	showsetting('setting_ec_ratio', 'settingnew[ec_ratio]', $setting['ec_ratio'], 'text', norelatedlink: true);
 	showsetting('setting_ec_mincredits', 'settingnew[ec_mincredits]', $setting['ec_mincredits'], 'text');
 	showsetting('setting_ec_maxcredits', 'settingnew[ec_maxcredits]', $setting['ec_maxcredits'], 'text');
 	showsetting('setting_ec_maxcreditspermonth', 'settingnew[ec_maxcreditspermonth]', $setting['ec_maxcreditspermonth'], 'text');
-	
+	/*search*/
 
 	showsubmit('settingsubmit', 'submit', '', $extbutton.(!empty($from) ? '<input type="hidden" name="from" value="'.$from.'">' : ''));
 	showtablefooter();

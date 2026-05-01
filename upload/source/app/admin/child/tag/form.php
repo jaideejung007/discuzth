@@ -10,7 +10,7 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 	exit('Access Denied');
 }
 
-
+/*search={"tag":"action=tag"}*/
 $tagname = trim($_GET['tagname']);
 $status = $_GET['status'];
 if(!$status) {
@@ -52,5 +52,5 @@ showtablerow('', ['class="td25"', 'colspan="2"'], [
 showsubmit('submit', 'submit', '', '', $multipage);
 showtablefooter();
 showformfooter();
-
+/*search*/
 		

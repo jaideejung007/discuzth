@@ -60,7 +60,7 @@ if(submitcheck('querysubmit')) {
 } else {
 	$start_limit = ($page - 1) * $_G['tpp'];
 
-	
+	/*search={"nav_ec":"action=ec&operation=base","nav_ec_orders":"action=ec&operation=paymentorders"}*/
 	echo '<style type="text/css">.order-status-0 td { color: #555; } .order-status-1 td { color: green; } .order-status-1 td a { color: #fe8080; } .order-status-2 td, .order-status-2 td a { color: #ccc; } .order-status-3 td { color: red; }</style>';
 	echo '<script src="static/js/calendar.js" type="text/javascript"></script>';
 	$queryparams = [
@@ -115,7 +115,7 @@ if(submitcheck('querysubmit')) {
 	showtableheader('', 'notop');
 	showsubmit('searchsubmit');
 	showtablefooter();
-	
+	/** list */
 	if($queryparams['user']) {
 		if(preg_match('/^\d+$/', $queryparams['user'])) {
 			$queryparams['uid'] = $queryparams['user'];
@@ -187,6 +187,6 @@ if(submitcheck('querysubmit')) {
 	}
 	showtablefooter();
 	showformfooter();
-	
+	/*search*/
 }
 	

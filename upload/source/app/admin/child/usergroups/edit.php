@@ -142,7 +142,7 @@ if(!submitcheck('detailsubmit') && !submitcheck('multijssubmit')) {
 		$mgids[] = $gid;
 
 		if(!$multiset && $group['type'] == 'special' && $group['radminid'] < 1) {
-			
+			/*search={"nav_usergroups":"action=usergroups","usergroups_edit_basic":"action=usergroups&operation=edit&anchor=system"}*/
 			showtagheader('div', 'system', $anchor == 'system');
 			showtableheader();
 			if($group['system'] == 'private') {
@@ -247,10 +247,10 @@ EOF;
 			showsetting('usergroups_edit_system_minspan', 'system_minspannew', $system['minspan'], 'text');
 			showtablefooter();
 			showtagfooter('div');
-			
+			/*search*/
 		}
 
-		
+		/*search={"nav_usergroups":"action=usergroups","usergroups_edit_basic":"action=usergroups&operation=edit&anchor=basic"}*/
 		showmultititle();
 		showtagheader('div', 'basic', $anchor == 'basic');
 		showtableheader('', 'nobottom');
@@ -336,9 +336,9 @@ EOF;
 		showsetting('usergroups_edit_post_tag', 'allowposttagnew', $group['allowposttag'], 'radio');
 		showtablefooter();
 		showtagfooter('div');
-		
+		/*search*/
 
-		
+		/*search={"nav_usergroups":"action=usergroups","usergroups_edit_special":"action=usergroups&operation=edit&anchor=special"}*/
 		showtagheader('div', 'special', $anchor == 'special');
 		showtableheader('', 'nobottom');
 		showtitle('usergroups_edit_special');
@@ -363,9 +363,9 @@ EOF;
 		}
 		showtablefooter();
 		showtagfooter('div');
-		
+		/*search*/
 
-		
+		/*search={"nav_usergroups":"action=usergroups","usergroups_edit_post":"action=usergroups&operation=edit&anchor=post"}*/
 		showtagheader('div', 'post', $anchor == 'post');
 		showtableheader('', 'nobottom');
 		showtitle('usergroups_edit_post');
@@ -407,14 +407,14 @@ EOF;
 		showsetting('usergroups_edit_post_allowimgcontent', 'allowimgcontentnew', $group['allowimgcontent'], 'radio');
 		showtablefooter();
 		showtagfooter('div');
-		
+		/*search*/
 
 		$group['maxattachsize'] = intval($group['maxattachsize'] / 1024);
 		$group['maxsizeperday'] = intval($group['maxsizeperday'] / 1024);
 		$group['maximagesize'] = intval($group['maximagesize'] / 1024);
 		$group['maxspacesize'] = intval($group['maxspacesize'] / 1024);
 
-		
+		/*search={"nav_usergroups":"action=usergroups","usergroups_edit_attach":"action=usergroups&operation=edit&anchor=attach"}*/
 		showtagheader('div', 'attach', $anchor == 'attach');
 		showtableheader('', 'nobottom');
 		showtitle('usergroups_edit_attach');
@@ -429,9 +429,9 @@ EOF;
 		showsetting('usergroups_edit_attach_ext', 'attachextensionsnew', $group['attachextensions'], 'text');
 		showtablefooter();
 		showtagfooter('div');
-		
+		/*search*/
 
-		
+		/*search={"nav_usergroups":"action=usergroups","usergroups_edit_magic":"action=usergroups&operation=edit&anchor=magic"}*/
 		showtagheader('div', 'magic', $anchor == 'magic');
 		showtableheader('', 'nobottom');
 		showtitle('usergroups_edit_magic');
@@ -444,9 +444,9 @@ EOF;
 		showsetting('usergroups_edit_magic_max', 'maxmagicsweightnew', $group['maxmagicsweight'], 'text');
 		showtablefooter();
 		showtagfooter('div');
-		
+		/*search*/
 
-		
+		/*search={"nav_usergroups":"action=usergroups","usergroups_edit_invite":"action=usergroups&operation=edit&anchor=invite"}*/
 		showtagheader('div', 'invite', $anchor == 'invite');
 		showtableheader('', 'nobottom');
 		showtitle('usergroups_edit_invite');
@@ -457,7 +457,7 @@ EOF;
 		showsetting('usergroups_edit_invite_maxinviteday', 'maxinvitedaynew', $group['maxinviteday'], 'text', norelatedlink: true);
 		showtablefooter();
 		showtagfooter('div');
-		
+		/*search*/
 
 		$raterangearray = [];
 		foreach(explode("\n", $group['raterange']) as $range) {
@@ -492,7 +492,7 @@ EOF;
 			showtablefooter();
 			showtagfooter('div');
 		} else {
-			
+			/*search={"nav_usergroups":"action=usergroups","usergroups_edit_credit":"action=usergroups&operation=edit&anchor=credit"}*/
 			showtagheader('div', 'credit', $anchor == 'credit');
 			showtableheader('', 'nobottom');
 			showtitle('usergroups_edit_credit');
@@ -551,10 +551,10 @@ EOF;
 			echo '<tr><td class="lineheight" colspan="9">'.$lang['usergroups_edit_credit_rate_tips'].'</td></tr>';
 			showtablefooter();
 			showtagfooter('div');
-			
+			/*search*/
 		}
 
-		
+		/*search={"nav_usergroups":"action=usergroups","usergroups_edit_home":"action=usergroups&operation=edit&anchor=home"}*/
 		showtagheader('div', 'home', $anchor == 'home');
 		showtableheader('', 'nobottom');
 		showtitle('usergroups_edit_home');
@@ -583,9 +583,9 @@ EOF;
 		showsetting('usergroups_edit_home_allow_space_diy_imgcode', 'allowspacediyimgcodenew', $group['allowspacediyimgcode'], 'radio');
 		showtablefooter();
 		showtagfooter('div');
-		
+		/*search*/
 
-		
+		/*search={"nav_usergroups":"action=usergroups","usergroups_edit_group":"action=usergroups&operation=edit&anchor=group"}*/
 		showtagheader('div', 'group', $anchor == 'group');
 		showtableheader('', 'nobottom');
 		showtitle('usergroups_edit_group');
@@ -605,9 +605,9 @@ EOF;
 		]], $group['allowgroupposturl'], 'mradio');
 		showtablefooter();
 		showtagfooter('div');
-		
+		/*search*/
 
-		
+		/*search={"nav_usergroups":"action=usergroups","usergroups_edit_portal":"action=usergroups&operation=edit&anchor=portal"}*/
 		showtagheader('div', 'portal', $anchor == 'portal');
 		showtableheader('', 'nobottom');
 		showtitle('usergroups_edit_portal');
@@ -619,7 +619,7 @@ EOF;
 		showsetting('usergroups_edit_portal_allow_post_article_moderate', 'allowpostarticlemodnew', $group['allowpostarticlemod'], 'radio');
 		showtablefooter();
 		showtagfooter('div');
-		
+		/*search*/
 
 		if($pluginsetting) {
 			showtagheader('div', 'plugin', $anchor == 'plugin');

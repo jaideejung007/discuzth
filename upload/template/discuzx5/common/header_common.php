@@ -2,19 +2,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<meta charset="{CHARSET}" />
-	<meta name="renderer" content="webkit" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title><!--{if !empty($navtitle)}-->$navtitle - <!--{/if}--><!--{if empty($nobbname)}--> $_G['setting']['bbname'] - <!--{/if}--> Powered by Discuz!</title>
 	$_G['setting']['seohead']
-
-	<meta name="keywords" content="{if !empty($metakeywords)}{echo dhtmlspecialchars($metakeywords)}{/if}" />
-	<meta name="description" content="{if !empty($metadescription)}{echo dhtmlspecialchars($metadescription)} {/if}{if empty($nobbname)},$_G['setting']['bbname']{/if}" />
-	<meta name="generator" content="Discuz! $_G['setting']['version']" />
-	<meta name="author" content="Discuz! Team" />
-	<meta name="copyright" content="{lang copyright_s}" />
-	<meta name="MSSmartTagsPreventParsing" content="True" />
-	<meta http-equiv="MSThemeCompatible" content="Yes" />
 	<!--{hook/global_meta}-->
 	<base href="{$_G['siteurl']}" />
 	<!--{csstemplate}-->

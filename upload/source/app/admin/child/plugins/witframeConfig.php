@@ -37,7 +37,7 @@ if(!submitcheck('editsubmit')) {
 		cpmsg('plugin_not_found', '', 'error');
 	}
 
-	
+	//
 	shownav('plugin', $plugin['appName']);
 	showsubmenu($plugin['appName'], $submenus);
 

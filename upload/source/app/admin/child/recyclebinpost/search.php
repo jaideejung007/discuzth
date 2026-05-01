@@ -33,7 +33,7 @@ showsubmenu('nav_recyclebinpost', [
 	['search', 'recyclebinpost&operation=search', 1],
 	['clean', 'recyclebinpost&operation=clean', 0]
 ]);
-
+/*search={"nav_recyclebinpost":"action=recyclebinpost","search":"action=recyclebinpost&operation=search"}*/
 $staticurl = STATICURL;
 echo <<<EOT
 <script type="text/javascript" src="{$staticurl}js/calendar.js"></script>
@@ -57,7 +57,7 @@ showsubmit('searchsubmit');
 showtablefooter();
 showformfooter();
 showtagfooter('div');
-
+/*search*/
 
 if(submitcheck('searchsubmit')) {
 

@@ -61,7 +61,7 @@ if(submitcheck('settingsubmit')) {
 	$settingnew['oss']['oss_subtype'] = $subValue;
 
 	if($settingnew['allowattachurl'] && !in_array($_G['config']['download']['readmod'], [1, 4])) {
-		
+		// 如需附件URL地址、媒体附件播放，需选择支持Range参数的读取模式1或4，其他模式会导致部分浏览器下视频播放异常
 		cpmsg('attach_readmod_error', '', 'error');
 	}
 	$settingnew['thumbwidth'] = intval($settingnew['thumbwidth']) > 0 ? intval($settingnew['thumbwidth']) : 200;
@@ -94,7 +94,7 @@ if(submitcheck('settingsubmit')) {
 	showformheader('setting&edit=yes', 'enctype');
 	showhiddenfields(['operation' => $operation]);
 
-	
+	/*search={"setting_attach":"action=setting&operation=attach","setting_attach_basic":"action=setting&operation=attach&anchor=basic"}*/
 	showtableheader('', '', 'id="basic"'.($_GET['anchor'] != 'basic' ? ' style="display: none"' : ''));
 	showsetting('setting_attach_basic_dir', 'settingnew[attachdir]', $setting['attachdir'], 'text');
 	showsetting('setting_attach_basic_url', 'settingnew[attachurl]', $setting['attachurl'], 'text');
@@ -109,9 +109,9 @@ if(submitcheck('settingsubmit')) {
 	showtagfooter('tbody');
 	showsubmit('settingsubmit');
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_attach":"action=setting&operation=attach","setting_attach_forumattach":"action=setting&operation=attach&anchor=forumattach"}*/
 	showtableheader('', '', 'id="forumattach"'.($_GET['anchor'] != 'forumattach' ? ' style="display: none"' : ''));
 	showsetting('setting_attach_basic_imgpost', 'settingnew[attachimgpost]', $setting['attachimgpost'], 'radio');
 	showsetting('setting_attach_basic_allowattachurl', 'settingnew[allowattachurl]', $setting['allowattachurl'], 'radio');
@@ -129,7 +129,7 @@ if(submitcheck('settingsubmit')) {
 	showsetting('setting_attach_antileech_expire', 'settingnew[attachexpire]', $setting['attachexpire'], 'text');
 	showsetting('setting_attach_antileech_refcheck', 'settingnew[attachrefcheck]', $setting['attachrefcheck'], 'radio');
 	showtagfooter('tbody');
-	
+	/*search*/
 
 	showsubmit('settingsubmit');
 	showtablefooter();
@@ -208,7 +208,7 @@ if(submitcheck('settingsubmit')) {
 				'</div>';
 		}
 
-		
+		/*search={"setting_attach":"action=setting&operation=attach","setting_attach_remote":"action=setting&operation=attach&anchor=remote"}*/
 		showtableheader('', '', 'id="remote"'.($_GET['anchor'] != 'remote' ? ' style="display: none"' : ''));
 		showsetting('setting_attach_remote_enabled', ['settingnew[ftp][on]', [
 			$oss_langs ? [2, $lang['setting_attach_remote_cos'], ['ossext' => '', 'ftpext' => 'none', 'ftpcheckbutton' => '']] : null,
@@ -249,23 +249,23 @@ if(submitcheck('settingsubmit')) {
 
 		showsubmit('settingsubmit');
 		showtablefooter();
-		
+		/*search*/
 	}
 
-	
+	/*search={"setting_attach":"action=setting&operation=attach","setting_attach_album":"action=setting&operation=attach&anchor=albumattach"}*/
 	showtableheader('', '', 'id="albumattach"'.($_GET['anchor'] != 'albumattach' ? ' style="display: none"' : ''));
 	showsetting('setting_attach_album_maxtimage', ['settingnew[maxthumbwidth]', 'settingnew[maxthumbheight]'], [intval($setting['maxthumbwidth']), intval($setting['maxthumbheight'])], 'multiply');
 	showsubmit('settingsubmit');
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_attach":"action=setting&operation=attach","setting_attach_portal_article_attach":"action=setting&operation=attach&anchor=portalarticle"}*/
 	showtableheader('', '', 'id="portalarticle"'.($_GET['anchor'] != 'portalarticle' ? ' style="display: none"' : ''));
 	showsetting('setting_attach_portal_article_img_thumb_closed', 'settingnew[portalarticleimgthumbclosed]', !$setting['portalarticleimgthumbclosed'], 'radio');
 	showsetting('setting_attach_portal_article_imgsize', ['settingnew[portalarticleimgthumbwidth]', 'settingnew[portalarticleimgthumbheight]'], [intval($setting['portalarticleimgthumbwidth']), intval($setting['portalarticleimgthumbheight'])], 'multiply');
 	showsubmit('settingsubmit');
 	showtablefooter();
-	
+	/*search*/
 
 	showformfooter();
 }

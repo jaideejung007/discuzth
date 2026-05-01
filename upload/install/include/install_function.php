@@ -1075,7 +1075,7 @@ function show_db_install($upgrade = false) {
 
 		function refresh_progress() {
 			// 进度条的总数，需要跟进实际安装情况修改
-			var total = <?php echo !$upgrade ? 338 : 103; ?>;
+			var total = <?php echo !$upgrade ? 338 : 107; ?>;
 			var percent = document.querySelectorAll('#notice>p').length * 95 / total;
 			percent = (percent > 95) ? 95 : percent;
 			document.getElementById('pgb').style.width = percent + '%';
@@ -1399,7 +1399,6 @@ function dfopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE, $
 		$data = curl_exec($ch);
 		$status = curl_getinfo($ch);
 		$errno = curl_errno($ch);
-		curl_close($ch);
 		if($errno || $status['http_code'] != 200) {
 			return;
 		} else {

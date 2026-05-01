@@ -25,7 +25,16 @@ class menu_default {
 
 		$menu = [];
 
-		
+		/**
+		 * array(
+		 *      'menu_setting_optimize',            // 菜单标题文本
+		 *      'setting_cachethread',              // 菜单 Key，系统: [action]_[operation]_[do]，插件: plugin_[identifier]_[pmod]，URL: 跳转链接
+		 *      0,                                  // 0: 无，1: 分割区域开始，2: 分割区域结束，_blank: 新窗口打开
+		 *      '',                                 // $_G['setting']['xxx']、menu_loader::xxx、plugin::xxx 返回为真时显示菜单
+		 *      '',                                 // 将 menu_loader::xxx、plugin::xxx 返回的菜单列表替换此条菜单
+		 *      array('setting_serveropti')         // 此菜单项目包含的其他菜单 Key，用于权限
+		 * )
+		 */
 
 		$menu['index'] = [
 			['menu_home', 'index'],

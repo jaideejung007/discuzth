@@ -36,13 +36,13 @@ if(!submitcheck('creditsubmit')) {
 		'rank' => $defaultrank
 	];
 
-	
+	/*search={"nav_ec":"action=ec&operation=base","nav_ec_credit":"action=ec&operation=credit"}*/
 	showtips('ec_credit_tips');
 	showformheader('ec&operation=credit');
 	showtableheader('ec_credit', 'nobottom');
 	showsetting('ec_credit_maxcreditspermonth', 'ec_creditnew[maxcreditspermonth]', $ec_credit['maxcreditspermonth'], 'text');
 	showtablefooter('</tbody>');
-	
+	/*search*/
 
 	showtableheader('ec_credit_rank', 'notop fixpadding');
 	showsubtitle(['ec_credit_rank', 'ec_credit_between', 'ec_credit_sellericon', 'ec_credit_buyericon']);

@@ -10,7 +10,6 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-const OSS_DEBUG = false;
 class oss {
 
 	const basePath = DISCUZ_ROOT.'source/class/oss/';
@@ -97,7 +96,6 @@ abstract class oss_base {
 			$data = curl_exec($ch);
 			$status = curl_getinfo($ch);
 			$errno = curl_errno($ch);
-			curl_close($ch);
 			if($errno || $status['http_code'] != 200) {
 				return;
 			} else {

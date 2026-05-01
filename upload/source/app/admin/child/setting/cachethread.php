@@ -36,7 +36,7 @@ if(submitcheck('settingsubmit')) {
 
 	include_once libfile('function/forumlist');
 	$forumselect = '<select name="fids[]" multiple="multiple" size="10"><option value="all">'.$lang['all'].'</option><option value="">&nbsp;</option>'.forumselect(FALSE, 0, 0, TRUE).'</select>';
-	
+	/*search={"setting_optimize":"action=setting&operation=seo","setting_cachethread":"action=setting&operation=cachethread"}*/
 	showtableheader();
 	showtitle('setting_cachethread');
 	showsetting('setting_cachethread_indexlife', 'settingnew[cacheindexlife]', $setting['cacheindexlife'], 'text');
@@ -46,7 +46,7 @@ if(submitcheck('settingsubmit')) {
 	showtitle('setting_cachethread_coefficient_set');
 	showsetting('setting_cachethread_coefficient', 'settingnew[threadcaches]', '', "<input type=\"text\" class=\"txt\" size=\"30\" name=\"settingnew[threadcaches]\" value=\"{$setting['threadcaches']}\">");
 	showsetting('setting_cachethread_coefficient_forum', '', '', $forumselect);
-	
+	/*search*/
 
 	showsubmit('settingsubmit', 'submit', '', $extbutton.(!empty($from) ? '<input type="hidden" name="from" value="'.$from.'">' : ''));
 	showtablefooter();

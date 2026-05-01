@@ -38,7 +38,7 @@ if(!submitcheck('sqlsubmit')) {
 		['nav_db_optimize', 'db&operation=optimize', 0],
 		['nav_db_dbcheck', 'db&operation=dbcheck', 0]
 	]);
-	
+	/*search={"nav_db":"action=db&operation=export","nav_db_runquery":"action=db&operation=runquery"}*/
 	showtips('db_runquery_tips');
 	showtableheader();
 	showformheader('db&operation=runquery&option=simple');
@@ -56,7 +56,7 @@ if(!submitcheck('sqlsubmit')) {
 	}
 
 	showtablefooter();
-	
+	/*search*/
 
 } else {
 	$queries = $_GET['queries'];

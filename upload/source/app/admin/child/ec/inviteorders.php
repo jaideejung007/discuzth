@@ -20,7 +20,7 @@ if(!submitcheck('ordersubmit')) {
 	$ordercount = table_forum_order::t()->count_by_search(0, $_GET['orderstatus'], $_GET['orderid'], $_GET['email']);
 	$multipage = multi($ordercount, $_G['tpp'], $page, ADMINSCRIPT."?action=ec&operation=inviteorders&orderstatus={$_GET['orderstatus']}&orderid={$_GET['orderid']}&email={$_GET['email']}");
 
-	
+	/*search={"nav_ec":"action=ec&operation=base","nav_ec_config":"action=ec&operation=inviteorders"}*/
 	showtagheader('div', 'orderlist', TRUE);
 	showformheader('ec&operation=inviteorders');
 	showtableheader('ec_inviteorders_search');
@@ -71,7 +71,7 @@ if(!submitcheck('ordersubmit')) {
 	showtablefooter();
 	showformfooter();
 	showtagfooter('div');
-	
+	/*search*/
 } else {
 	if($_GET['validate']) {
 		if(table_forum_order::t()->fetch_all_order($_GET['validate'], '1')) {

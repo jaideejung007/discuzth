@@ -32,7 +32,7 @@ if($_GET['op'] == 'query') {
 } else {
 	$start_limit = ($page - 1) * $_G['tpp'];
 
-	
+	/*search={"nav_ec":"action=ec&operation=base","nav_ec_qpay":"action=ec&operation=transferorders"}*/
 	echo '<style type="text/css">.order-status-1 td { color: #555; } .order-status-2 td { color: green; } .order-status-3 td { color: red; }</style>';
 	echo '<script src="static/js/calendar.js" type="text/javascript"></script>';
 	$queryparams = [
@@ -79,7 +79,7 @@ if($_GET['op'] == 'query') {
 	showtableheader('', 'notop');
 	showsubmit('searchsubmit');
 	showtablefooter();
-	
+	/** list */
 	if($queryparams['user']) {
 		if(preg_match('/^\d+$/', $queryparams['user'])) {
 			$queryparams['uid'] = $queryparams['user'];
@@ -137,6 +137,6 @@ if($_GET['op'] == 'query') {
 	}
 	showtablefooter();
 	showformfooter();
-	
+	/*search*/
 }
 	

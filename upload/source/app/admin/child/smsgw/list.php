@@ -71,7 +71,7 @@ if(!submitcheck('smsgwsubmit')) {
 			"<a href=\"".ADMINSCRIPT."?action=smsgw&operation=edit&smsgwid={$smsgw['smsgwid']}\" class=\"act\">{$lang['edit']}</a>"
 		]);
 	}
-	
+	// 如果有新增加的文件, 需要添加到列表内
 	if(count($avaliablesmsgw) > 0) {
 		foreach($avaliablesmsgw as $smsgw) {
 			$arr = ['type' => $smsgw['type'], 'class' => $smsgw['class'], 'order' => 0, 'name' => $smsgw['name'], 'sendrule' => $smsgw['sendrule']];

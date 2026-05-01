@@ -55,7 +55,7 @@ if(submitcheck('settingsubmit')) {
 	showformheader('setting&edit=yes', 'enctype');
 	showhiddenfields(['operation' => $operation]);
 
-	
+	/*search={"setting_mobile":"action=setting&operation=mobile","setting_mobile_status":"action=setting&operation=mobile&anchor=status"}*/
 	$setting['mobile'] = dunserialize($setting['mobile']);
 	showtips('setting_mobile_status_tips');
 	showtableheader('setting_mobile_status', '', 'id="status"'.($_GET['anchor'] != 'status' ? ' style="display: none"' : ''));
@@ -72,18 +72,18 @@ if(submitcheck('settingsubmit')) {
 	showtagfooter('tbody');
 	showsubmit('settingsubmit');
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_mobile":"action=setting&operation=mobile","setting_mobile_portal":"action=setting&operation=mobile&anchor=portal"}*/
 	showtableheader('setting_mobile_portal', '', 'id="portal"'.($_GET['anchor'] != 'portal' ? ' style="display: none"' : ''));
 	showsetting('setting_mobile_portal_catnav', 'settingnew[mobile][portal][catnav]', $setting['mobile']['portal']['catnav'], 'radio');
 	showsetting('setting_mobile_portal_wzpicture', 'settingnew[mobile][portal][wzpicture]', $setting['mobile']['portal']['wzpicture'], 'radio');
 	showsetting('setting_mobile_portal_wzlist', 'settingnew[mobile][portal][wzlist]', $setting['mobile']['portal']['wzlist'], 'radio');
 	showsubmit('settingsubmit');
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_mobile":"action=setting&operation=mobile","setting_mobile_forum":"action=setting&operation=mobile&anchor=forum"}*/
 	showtableheader('setting_mobile_forum', '', 'id="forum"'.($_GET['anchor'] != 'forum' ? ' style="display: none"' : ''));
 	showsetting('setting_mobile_forum_forumindex', ['settingnew[mobile][forum][index]', [
 		[1, $lang['setting_mobile_forum_forumindex_guide']],
@@ -102,5 +102,5 @@ if(submitcheck('settingsubmit')) {
 	showsetting('setting_mobile_forum_iconautowidth', 'settingnew[mobile][forum][iconautowidth]', $setting['mobile']['forum']['iconautowidth'], 'radio');
 	showsubmit('settingsubmit');
 	showtablefooter();
-	
+	/*search*/
 }

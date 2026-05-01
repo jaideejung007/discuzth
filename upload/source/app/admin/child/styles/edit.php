@@ -125,7 +125,7 @@ if(!submitcheck('editsubmit')) {
 
 	shownav('template', 'styles_edit');
 
-	showchildmenu([['styles_admin', 'styles']], $style['name'], $submenuitem, $id == 1 ? '<a href="'.ADMINSCRIPT.'?action=tplfile&id='.$id.'" target="_blank">'.$lang['styles_edit_file'].'</a>' : '', true);
+	showchildmenu([['styles_admin', 'styles']], $style['name'], $submenuitem, '', true);
 
 	?>
 	<script type="text/JavaScript">
@@ -172,7 +172,7 @@ if(!submitcheck('editsubmit')) {
 	</script>
 	<?php
 
-	
+	//是否有自定义配置文件
 	$configflag = false;
 	if(preg_match('/^.?\/template\/([a-z]+[a-z0-9_]*)$/', $style['directory'], $a)) {
 		$configfile = DISCUZ_TEMPLATE($a[1]).'/config.inc.php';
@@ -184,13 +184,13 @@ if(!submitcheck('editsubmit')) {
 
 	if(!$configflag) {
 
-		
+		/*search={"styles_admin":"action=styles&operation=edit"}*/
 		showformheader("styles&operation=edit&id=$id", 'enctype');
 
 		echo '<div id="_default"'.(empty($_GET['anchor']) ? '' : ' style="display:none"').'>';
 
-		
-		
+		//echo '<iframe class="preview" frameborder="0" src="'.ADMINSCRIPT.'?action=styles&preview=yes&styleid='.$id.'"></iframe>';
+		//showtips('styles_tips');
 
 		showtableheader($lang['styles_edit'], 'nobottom');
 		showsetting('styles_edit_name', 'namenew', $style['name'], 'text');
@@ -299,7 +299,7 @@ if(!submitcheck('editsubmit')) {
 				echo '</div>';
 			}
 		}
-		
+		/*search*/
 
 		showformfooter();
 	}
@@ -309,7 +309,7 @@ if(!submitcheck('editsubmit')) {
 		cpmsg('style_not_found', '', 'error');
 	}
 
-	
+	//是否有自定义配置文件
 	$configflag = false;
 	if(preg_match('/^.?\/template\/([a-z]+[a-z0-9_]*)$/', $style['directory'], $a)) {
 		$configfile = DISCUZ_TEMPLATE($a[1]).'/config.inc.php';

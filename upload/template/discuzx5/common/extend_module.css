@@ -315,3 +315,7 @@ div.mtm.mbm.pnpost {padding-top:5px;line-height:34px}
 .rnk1 .bigpic img {max-width:100%;max-height:100%}
 
 /** end **/
+
+/** home::space,home::spacecp,misc::tag **/
+.comment-form-actions .pn { color: white !important;}
+/** end **/

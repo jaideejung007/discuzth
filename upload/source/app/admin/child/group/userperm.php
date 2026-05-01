@@ -17,7 +17,7 @@ if(!submitcheck('permsubmit')) {
 	shownav('group', 'nav_group_userperm');
 	$varname = ['newgroup_userperm', [], 'isfloat'];
 	showsubmenu(cplang('nav_group_userperm').' - '.cplang('group_userperm_moderator'));
-	
+	/*search={"newgroup_userperm":"action=group&operation=userperm"}*/
 	showformheader("group&operation=userperm&id=$id");
 	showtableheader();
 	$varname[1] = [
@@ -64,7 +64,7 @@ if(!submitcheck('permsubmit')) {
 	showsubmit('permsubmit', 'submit');
 	showtablefooter();
 	showformfooter();
-	
+	/*search*/
 } else {
 	$default_perm = ['allowstickthread' => 0, 'allowbumpthread' => 0, 'allowhighlightthread' => 0, 'allowlivethread' => 0, 'allowstampthread' => 0, 'allowclosethread' => 0, 'allowmergethread' => 0, 'allowsplitthread' => 0, 'allowrepairthread' => 0, 'allowrefund' => 0, 'alloweditpoll' => 0, 'allowremovereward' => 0, 'alloweditactivity' => 0, 'allowedittrade' => 0, 'allowdigestthread' => 0, 'alloweditpost' => 0, 'allowwarnpost' => 0, 'allowbanpost' => 0, 'allowdelpost' => 0, 'allowupbanner' => 0, 'disablepostctrl' => 0, 'allowviewip' => 0];
 	if(empty($_GET['newgroup_userperm']) || !is_array($_GET['newgroup_userperm'])) {

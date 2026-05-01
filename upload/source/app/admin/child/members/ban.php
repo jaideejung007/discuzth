@@ -388,23 +388,23 @@ EOF;
 		}
 
 		if(in_array('others', $_GET['clear'])) {
-			
+			// 家园访客记录清理
 			table_home_clickuser::t()->delete_by_uid($member['uid']);
 			table_home_visitor::t()->delete_by_uid_or_vuid($member['uid']);
-			
+			// 家园关注关系清理
 			table_home_follow::t()->delete_by_uid($member['uid']);
 			table_home_follow::t()->delete_by_followuid($member['uid']);
-			
+			// 好友关系以及好友请求清理
 			table_home_friend::t()->delete_by_uid_fuid($member['uid']);
 			table_home_friend_request::t()->delete_by_uid_or_fuid($member['uid']);
-			
+			// 动态清理
 			table_home_feed::t()->delete_by_uid($member['uid']);
-			
+			// 通知清理
 			table_home_notification::t()->delete_by_uid($member['uid']);
-			
+			// 打招呼清理
 			table_home_poke::t()->delete_by_uid_or_fromuid($member['uid']);
 			table_home_pokearchive::t()->delete_by_uid_or_fromuid($member['uid']);
-			
+			// 论坛推广清理
 			table_forum_promotion::t()->delete_by_uid($member['uid']);
 		}
 

@@ -62,7 +62,7 @@ if(!submitcheck('threadsplit_move_submit') && !$_GET['moving']) {
 		['nav_threadsplit_manage', 'threadsplit&operation=manage', 0],
 		['nav_threadsplit_move', 'threadsplit&operation=move', 1],
 	]);
-	
+	/*search={"nav_threadsplit":"action=threadsplit","nav_threadsplit_move":"action=threadsplit&operation=move"}*/
 	showtips('threadsplit_move_tips');
 	showtagheader('div', 'threadsearch', !submitcheck('threadsplit_move_search'));
 	showformheader('threadsplit&operation=move', '', 'threadform');
@@ -235,7 +235,7 @@ if(!submitcheck('threadsplit_move_submit') && !$_GET['moving']) {
 		}
 		showformfooter();
 		showtagfooter('div');
-		
+		/*search*/
 
 	}
 } else {

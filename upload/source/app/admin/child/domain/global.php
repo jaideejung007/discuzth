@@ -12,7 +12,7 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 
 if(!submitcheck('domainsubmit')) {
 
-	
+	/*search={"setting_domain":"action=domain","setting_domain_base":"domain&operation=base"}*/
 	showtips('setting_domain_base_tips');
 	showformheader('domain');
 	showtableheader();
@@ -30,7 +30,7 @@ if(!submitcheck('domainsubmit')) {
 	showsubmit('domainsubmit');
 	showtablefooter();
 	showformfooter();
-	
+	/*search*/
 } else {
 
 	$settings = $_GET['settingnew'];

@@ -26,7 +26,7 @@ if(submitcheck('submit') && $_GET['tagids']) {
 		cpmsg('usertag_merge_succeed', 'action=usertag'.$addurl, 'succeed');
 	}
 }
-
+/*search={"usertag":"action=usertag"}*/
 showsubmenu('usertag', [
 	['usertag_list', 'usertag', 1],
 	['usertag_add', 'usertag&operation=add', 0],
@@ -58,5 +58,5 @@ if($tagcount) {
 
 showtablefooter();
 showformfooter();
-
+/*search*/
 	

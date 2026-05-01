@@ -10,7 +10,7 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 	exit('Access Denied');
 }
 
-
+/*search={"tag":"action=tag"}*/
 showformheader('tag&operation=admin');
 showtableheader();
 showsetting('tagname', 'tagname', $tagname, 'text');
@@ -24,5 +24,5 @@ showsubmit('searchsubmit');
 showtablefooter();
 showformfooter();
 showtagfooter('div');
-
+/*search*/
 		

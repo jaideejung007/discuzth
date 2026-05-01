@@ -13,9 +13,9 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 shownav('founder', 'nav_membersplit');
 if(!submitcheck('membersplit_split_submit', 1)) {
 	showsubmenu('membersplit');
-	
+	/*search={"nav_membersplit":"action=membersplit","nav_membersplit":"action=membersplit&operation=check"}*/
 	showtips('membersplit_tips');
-	
+	/*search*/
 	showformheader('membersplit&operation=manage');
 	showtableheader('membersplit_table_orig');
 
@@ -24,7 +24,7 @@ if(!submitcheck('membersplit_split_submit', 1)) {
 	} else {
 		$zombiecount = table_common_member::t()->count_zombie();
 		if($zombiecount >= 1) {
-			$zombiecount--;
+			$zombiecount--;// 考虑到用户分表操作的最后一个用户可能也是数据库中最后一个用户，因此在此固定扣除一个用户，保证最后一个用户不会被移动到归档表，从而避免最后一个用户被移动到归档表导致用户主表自增值异常的问题
 		}
 		savecache('membersplitdata', ['zombiecount' => $zombiecount, 'dateline' => TIMESTAMP]);
 	}

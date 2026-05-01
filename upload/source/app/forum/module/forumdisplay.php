@@ -674,7 +674,7 @@ foreach($threadlist as $thread) {
 			if($thread['closed'] > 1) {
 				$thread['moved'] = $thread['tid'];
 				$thread['allreplies'] = $thread['replies'] = '-';
-				$thread['views'] = '-';
+				$thread['views'] = 0;
 			}
 			$thread['folder'] = 'lock';
 		}

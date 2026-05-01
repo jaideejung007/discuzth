@@ -63,7 +63,7 @@ if(submitcheck('settingsubmit')) {
 	showformheader('setting&edit=yes', 'enctype');
 	showhiddenfields(['operation' => $operation]);
 
-	
+	/*search={"setting_functions":"action=setting&operation=functions","setting_functions_mod":"action=setting&operation=functions&anchor=mod"}*/
 	showtips('setting_tips', 'mod_tips', $_GET['anchor'] == 'mod');
 	showtableheader('', 'nobottom', 'id="mod"'.($_GET['anchor'] != 'mod' ? ' style="display: none"' : ''));
 	showsetting('setting_functions_mod_updatestat', 'settingnew[updatestat]', $setting['updatestat'], 'radio');
@@ -86,7 +86,7 @@ if(submitcheck('settingsubmit')) {
 	showsetting('setting_functions_mod_rewardexpiration', 'settingnew[rewardexpiration]', $setting['rewardexpiration'], 'text');
 	showsetting('setting_functions_mod_moddetail', 'settingnew[moddetail]', $setting['moddetail'], 'radio');
 	showtablefooter();
-	
+	/*search*/
 
 	$setting['heatthread'] = dunserialize($setting['heatthread']);
 	$setting['recommendthread'] = dunserialize($setting['recommendthread']);
@@ -110,15 +110,15 @@ if(submitcheck('settingsubmit')) {
 		}
 	}
 
-	
+	/*search={"setting_functions":"action=setting&operation=functions","setting_functions_heatthread":"action=setting&operation=functions&anchor=heatthread"}*/
 	showtips('setting_functions_heatthread_tips', 'heatthread_tips', $_GET['anchor'] == 'heatthread');
 	showtableheader('', 'nobottom', 'id="heatthread"'.($_GET['anchor'] != 'heatthread' ? ' style="display: none"' : ''));
 	showsetting('setting_functions_heatthread_period', 'settingnew[heatthread][period]', $setting['heatthread']['period'], 'text');
 	showsetting('setting_functions_heatthread_iconlevels', '', '', '<input name="settingnew[heatthread][iconlevels]" class="txt" type="text" value="'.$setting['heatthread']['iconlevels'].'" /><br />'.$heatthreadicons);
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_functions":"action=setting&operation=functions","setting_functions_recommend":"action=setting&operation=functions&anchor=recommend"}*/
 	showtips('setting_functions_recommend_tips', 'recommend_tips', $_GET['anchor'] == 'recommend');
 	showtableheader('', 'nobottom', 'id="recommend"'.($_GET['anchor'] != 'recommend' ? ' style="display: none"' : ''));
 	showsetting('setting_functions_recommend_status', 'settingnew[recommendthread][status]', $setting['recommendthread']['status'], 'radio', 0, 1);
@@ -128,9 +128,9 @@ if(submitcheck('settingsubmit')) {
 	showsetting('setting_functions_recommend_ownthread', 'settingnew[recommendthread][ownthread]', $setting['recommendthread']['ownthread'], 'radio');
 	showsetting('setting_functions_recommend_iconlevels', '', '', '<input name="settingnew[recommendthread][iconlevels]" class="txt" type="text" value="'.$setting['recommendthread']['iconlevels'].'" /><br />'.$recommendicons);
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_functions":"action=setting&operation=functions","setting_functions_comment":"action=setting&operation=functions&anchor=comment"}*/
 	showtableheader('', 'nobottom', 'id="comment"'.($_GET['anchor'] != 'comment' ? ' style="display: none"' : ''));
 	showsetting('setting_functions_comment_allow', ['settingnew[allowpostcomment]', [
 		[1, $lang['setting_functions_comment_allow_1'], 'commentextra'],
@@ -150,9 +150,9 @@ if(submitcheck('settingsubmit')) {
 		showsetting($data['name'].cplang('setting_functions_comment_commentitem_threadplugin'), 'settingnew[commentitem]['.$tpid.']', $setting['commentitem'][$tpid], 'textarea', '', 0, cplang('setting_functions_comment_commentitem_threadplugin_comment'));
 	}
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_functions":"action=setting&operation=functions","setting_functions_threadexp":"action=setting&operation=functions&anchor=threadexp"}*/
 	showtableheader('', 'nobottom', 'id="threadexp"'.($_GET['anchor'] != 'threadexp' ? ' style="display: none"' : ''));
 	showsetting('setting_functions_threadexp_repliesrank', 'settingnew[repliesrank]', $setting['repliesrank'], 'radio');
 	showsetting('setting_functions_threadexp_blacklist', 'settingnew[threadblacklist]', $setting['threadblacklist'], 'radio');
@@ -162,9 +162,9 @@ if(submitcheck('settingsubmit')) {
 	showsetting('setting_functions_threadexp_hidefilteredpost', 'settingnew[hidefilteredpost]', $setting['hidefilteredpost'], 'radio');
 	showsetting('setting_functions_threadexp_filterednovote', 'settingnew[filterednovote]', $setting['filterednovote'], 'radio');
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_functions":"action=setting&operation=avatar","setting_avatar":"action=setting&operation=functions&anchor=avatar"}*/
 	showtableheader('', 'nobottom', 'id="avatar"'.($_GET['anchor'] != 'avatar' ? ' style="display: none"' : ''));
 	showsetting('setting_uc_avatarmethod', ['settingnew[avatarmethod]', [
 		[0, $lang['setting_uc_avatarmethod_0']],
@@ -177,18 +177,18 @@ if(submitcheck('settingsubmit')) {
 		[2, $lang['setting_uc_dynavt_2']],
 	]], $setting['dynavt'], 'mradio');
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_functions":"action=setting&operation=functions","setting_functions_login":"action=setting&operation=functions&anchor=login"}*/
 	showtableheader('', 'nobottom', 'id="login"'.($_GET['anchor'] != 'login' ? ' style="display: none"' : ''));
 	showsetting('setting_functions_other_uidlogin', 'settingnew[uidlogin]', $setting['uidlogin'], 'radio');
 	showsetting('setting_functions_other_secmobilelogin', 'settingnew[secmobilelogin]', $setting['secmobilelogin'], 'radio');
 	showsetting('setting_functions_other_autoidselect', 'settingnew[autoidselect]', $setting['autoidselect'], 'radio');
 	showsetting('setting_functions_other_disableipnotice', 'settingnew[disableipnotice]', $setting['disableipnotice'], 'radio');
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_functions":"action=setting&operation=functions","setting_functions_other":"action=setting&operation=functions&anchor=other"}*/
 	showtips('setting_tips', 'other_tips', $_GET['anchor'] == 'other');
 	showtableheader('', 'nobottom', 'id="other"'.($_GET['anchor'] != 'other' ? ' style="display: none"' : ''));
 	showsetting('setting_functions_other_submitlock', 'settingnew[submitlock]', $setting['submitlock'], 'radio');
@@ -206,9 +206,9 @@ if(submitcheck('settingsubmit')) {
 	showsetting('setting_functions_other_darkroom', 'settingnew[darkroom]', $setting['darkroom'], 'radio');
 	showsetting('setting_functions_other_global_sign', 'settingnew[globalsightml]', $setting['globalsightml'], 'textarea');
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_functions":"action=setting&operation=functions","setting_functions_guide":"action=setting&operation=functions&anchor=guide"}*/
 	$setting['guide'] = dunserialize($setting['guide']);
 	showtableheader('', 'nobottom', 'id="guide"'.($_GET['anchor'] != 'guide' ? ' style="display: none"' : ''));
 	showsetting('setting_functions_heatthread_guidelimit', 'settingnew[heatthread][guidelimit]', $setting['heatthread']['guidelimit'], 'text');
@@ -232,9 +232,9 @@ if(submitcheck('settingsubmit')) {
 	showsetting('setting_functions_guide_hotdt', ['settingnew[guide][hotdt]', $dtarray], $setting['guide']['hotdt'], 'select');
 	showsetting('setting_functions_guide_digestdt', ['settingnew[guide][digestdt]', $dtarray], $setting['guide']['digestdt'], 'select');
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_functions":"action=setting&operation=functions","setting_functions_activity":"action=setting&operation=functions&anchor=activity"}*/
 	showtableheader('', 'nobottom', 'id="activity"'.($_GET['anchor'] != 'activity' ? ' style="display: none"' : ''));
 	showsetting('setting_functions_activity_type', 'settingnew[activitytype]', $setting['activitytype'], 'textarea');
 	$varname = ['settingnew[activityfield]', [], 'isfloat'];
@@ -254,7 +254,7 @@ if(submitcheck('settingsubmit')) {
 	showsetting('setting_functions_activity_credit', '', '', '<select name="settingnew[activitycredit]">'.$_G['setting']['creditstrans'].'</select>');
 	showsetting('setting_functions_activity_pp', 'settingnew[activitypp]', $setting['activitypp'], 'text');
 	showtablefooter();
-	
+	/*search*/
 
 	showtableheader('', 'notop');
 	if($_GET['anchor'] != 'curscript') {

@@ -27,13 +27,13 @@ if(submitcheck('settingsubmit')) {
 	showformheader('setting&edit=yes', 'enctype');
 	showhiddenfields(['operation' => $operation]);
 
-	
+	/*search={"setting_ranklist":"action=setting&operation=ranklist"}*/
 	$setting['ranklist'] = dunserialize($setting['ranklist']);
 	showtableheader('', 'nobottom', 'id="all"');
 	showsetting('setting_ranklist_index_cache_time', 'settingnew[ranklist][cache_time]', $setting['ranklist']['cache_time'], 'text');
 	showsetting('setting_ranklist_index_select', ['settingnew[ranklist][index_select]', [['all', cplang('dateline_all')], ['thismonth', cplang('thismonth')], ['thisweek', cplang('thisweek')], ['today', cplang('today')]]], $setting['ranklist']['index_select'], 'select');
 	showsetting('setting_ranklist_ignorefid', 'settingnew[ranklist][ignorefid]', $setting['ranklist']['ignorefid'], 'text');
-	
+	// 新增 竞价排名开关和公告信息
 	showsetting('setting_ranklist_member_show', 'settingnew[ranklist][membershow]', $setting['ranklist']['membershow'], 'radio', 0, 1);
 	showsetting('setting_ranklist_member_show_announcement', 'settingnew[ranklist][membershowannouncement]', $setting['ranklist']['membershowannouncement'], 'textarea');
 	showtablefooter();
@@ -74,7 +74,7 @@ if(submitcheck('settingsubmit')) {
 	showhiddenfields(['updateranklistcache' => 0]);
 	showsubmit('', '', '<input type="submit" class="btn" name="settingsubmit" value="'.cplang('setting_ranklist_update_cache').'" onclick="this.form.updateranklistcache.value=1">');
 	showtablefooter();
-	
+	/*search*/
 
 	showformfooter();
 }

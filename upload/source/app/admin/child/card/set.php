@@ -13,9 +13,9 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 if(!submitcheck('cardsubmit')) {
 	showformheader('card&operation=set&');
 	showtableheader();
-	
+	/*search={"card_config_open":"action=card"}*/
 	showsetting('card_config_open', 'card_config_open', ($card_setting['open'] ? $card_setting['open'] : 0), 'radio');
-	
+	/*search*/
 	showsubmit('cardsubmit');
 	showtablefooter();
 	showformfooter();

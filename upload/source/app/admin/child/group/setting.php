@@ -28,7 +28,7 @@ if($group_postpolicy['autoclose']) {
 if(!submitcheck('updategroupsetting')) {
 	shownav('group', 'nav_group_setting');
 	showsubmenu('nav_group_setting');
-	
+	/*search={"nav_group_setting":"action=group&operation=setting"}*/
 	showformheader('group&operation=setting');
 	showtableheader();
 	showtitle('groups_setting_basic');
@@ -47,7 +47,7 @@ if(!submitcheck('updategroupsetting')) {
 	showsubmit('updategroupsetting');
 	showtablefooter();
 	showformfooter();
-	
+	/*search*/
 } else {
 
 	require_once libfile('function/group');

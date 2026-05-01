@@ -187,7 +187,7 @@ if(!submitcheck('editsubmit')) {
 		if(count($fids) != count($showed)) {
 			foreach($fids as $fid) {
 				if(!in_array($fid, $showed)) {
-					
+					//	table_forum_forum::t()->update($fid, array('fup' => '0', 'type' => 'forum'));
 				}
 			}
 		}

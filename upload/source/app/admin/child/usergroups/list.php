@@ -181,9 +181,9 @@ EOT;
 		['usergroups_special', 'specialgroups', $_GET['type'] == 'special'],
 		['usergroups_system', 'systemgroups', $_GET['type'] == 'system']
 	]);
-	
+	/*search={"nav_usergroups":"action=usergroups"}*/
 	showtips('usergroups_tips');
-	
+	/*search*/
 
 	showformheader('usergroups&type=member');
 	showtableheader('usergroups_member', 'fixpadding', 'id="membergroups"'.($_GET['type'] && $_GET['type'] != 'member' ? ' style="display: none"' : ''));

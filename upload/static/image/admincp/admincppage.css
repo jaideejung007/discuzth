@@ -250,7 +250,7 @@ textarea {font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 	.d-23 { flex-basis: 100%; }
 }
 
-.cpcontainer { background:  var(--admincp-bgf); padding:5px 10px; color: var(--admincp-fa); font-size: 12px; background-clip: border-box; border-radius: 0px 0px 8px 8px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);}
+.cpcontainer { background:  var(--admincp-bgf); padding:5px 10px;margin-bottom: 50px; color: var(--admincp-fa); font-size: 12px; background-clip: border-box; border-radius: 0px 0px 8px 8px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);}
 #cpcontainer{ background:  var(--admincp-bgf); padding: 0 10px; border: none;box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);border-radius:8px 8px  0px 0px ; margin-bottom: 10px; }
 .copyright { width: 100%; background:  var(--admincp-bgf); color: #999; padding: 26px 16px 16px; font-size: 12px; text-align: center; margin-bottom: 10px; border-top: 1px solid var(--admincp-borderd); }
     .copyright #dzlogo::before{ font-family: dzicon;content: "\e61f";font-size: 16px; }

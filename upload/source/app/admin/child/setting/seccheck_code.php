@@ -71,7 +71,7 @@ if(submitcheck('settingsubmit')) {
 
 	$seccodetypearray = array_merge($seccodetypearray, getseccodes($seccodesettings));
 
-	
+	/*search={"setting_seccheck":"action=setting&operation=sec","setting_sec_seccode":"action=setting&operation=sec&anchor=seccode"}*/
 	showtips('setting_sec_code_tips', 'seccode_tips');
 
 	showtableheader();
@@ -97,6 +97,6 @@ if(submitcheck('settingsubmit')) {
 
 	showsubmit('settingsubmit');
 	showtablefooter();
-	
+	/*search*/
 
 }

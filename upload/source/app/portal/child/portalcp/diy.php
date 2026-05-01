@@ -46,6 +46,8 @@ if(submitcheck('uploadsubmit')) {
 					ftpcmd('upload', 'portal/'.getimgthumbname($attach['attachment']));
 				}
 				$attach['remote'] = 1;
+				@unlink($_G['setting']['attachdir'].'/portal/'.$attach['attachment']);
+				@unlink($_G['setting']['attachdir'].'/portal/'.getimgthumbname($attach['attachment']));
 			} else {
 				if(getglobal('setting/ftp/mirror')) {
 					@unlink($attach['target']);

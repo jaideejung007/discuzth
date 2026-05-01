@@ -32,11 +32,11 @@ empty($newlist) && showsubmenusteps('', [
 	['album_search', !$searchsubmit],
 	['nav_album', $searchsubmit]
 ]);
-
+/*search={"nav_album":"action=album","newlist":"action=album"}*/
 if($muticondition) {
 	showtips('album_tips');
 }
-
+/*search*/
 $staticurl = STATICURL;
 echo <<<EOT
 <script type="text/javascript" src="{$staticurl}js/calendar.js"></script>
@@ -48,7 +48,7 @@ function page(number) {
 </script>
 EOT;
 showtagheader('div', 'searchposts', !$searchsubmit && empty($newlist));
-
+/*search={"nav_album":"action=album","search":"action=album&search=true"}*/
 showformheader('album'.(!empty($_GET['search']) ? '&search=true' : ''), '', 'albumforum');
 showhiddenfields(['page' => $page, 'pp' => $_GET['pp'] ? $_GET['pp'] : $_GET['perpage']]);
 showtableheader();
@@ -67,5 +67,5 @@ showsubmit('searchsubmit');
 showtablefooter();
 showformfooter();
 showtagfooter('div');
-
+/*search*/
 	

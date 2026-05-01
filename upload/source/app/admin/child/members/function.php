@@ -50,7 +50,7 @@ function showsearchform($operation = '') {
 		}
 	}
 
-	
+	/*search={"nav_members":"action=members&operation=search"}*/
 	showtagheader('div', 'searchmembers', !$_GET['submit']);
 	echo '<script src="'.STATICURL.'js/calendar.js" type="text/javascript"></script>';
 	echo '<style type="text/css">#residedistrictbox select, #birthdistrictbox select{width: auto;}</style>';
@@ -200,7 +200,7 @@ function showsearchform($operation = '') {
 	showtablefooter();
 	showformfooter();
 	showtagfooter('div');
-	
+	/*search*/
 }
 
 function searchcondition($condition) {
@@ -541,9 +541,9 @@ function notifymembers($operation, $variable) {
 					runlog('sendmail', "{$member['email']} sendmail failed.");
 				}
 			} elseif($_GET['notifymembers'] == 'sms') {
-				
-				
-				
+				// 用户 UID : $member['uid'], 短信类型: 通知类短信, 服务类型: 系统级短消息通知业务
+				// 国际电话区号: $member['secmobicc'], 手机号: $member['secmobile'], 内容: "[$subject]$message$addmsg", 强制发送: true
+				// 短信发送前先校验安全手机号是否正确, 避免错误安全手机号送往短信网关
 				if(!empty($member['secmobicc']) && !empty($member['secmobile']) && preg_match('#^(\d){1,3}$#', $member['secmobicc']) && preg_match('#^(\d){1,12}$#', $member['secmobile'])) {
 					sms::send($member['uid'], 1, 2, $member['secmobicc'], $member['secmobile'], "[$subject]$message$addmsg", 1);
 				}
@@ -592,8 +592,8 @@ function notifymembers($operation, $variable) {
 function banlog($username, $origgroupid, $newgroupid, $expiration, $reason, $status = 0) {
 	global $_G, $_POST;
 	$cloud_apps = dunserialize($_G['setting']['cloud_apps']);
-	
-	
+	//writelog('banlog', dhtmlspecialchars("{$_G['timestamp']}\t{$_G['member']['username']}\t{$_G['groupid']}\t{$_G['clientip']}\t$username\t$origgroupid\t$newgroupid\t$expiration\t$reason\t$status"));
+	// logger start
 	if($_G['setting']['log']['ban']) {
 		$errorlog = [
 			'timestamp' => TIMESTAMP,
@@ -610,7 +610,7 @@ function banlog($username, $origgroupid, $newgroupid, $expiration, $reason, $sta
 		$member_log = table_common_member::t()->fetch_by_username($username);
 		logger('ban', $member_log, $_G['member']['uid'], $errorlog);
 	}
-	
+	// logger end
 }
 
 function selectday($varname, $dayarray) {

@@ -200,15 +200,19 @@ if($step == 3) {
 					$tempvalue = str_replace('mediumtext', 'text', $value);
 					$discuzdbnew[$dbtable][$key] = str_replace('mediumtext', 'text', $discuzdbnew[$dbtable][$key]);
 					if($tempvalue != $discuzdbnew[$dbtable][$key]) {
-						
-						if((str_contains($tempvalue['Type'], 'int(')) && !empty($discuzdbnew[$dbtable][$key]['Type']) && (!str_contains($discuzdbnew[$dbtable][$key]['Type'], '('))) {
-							$tempvalue['Type'] = preg_replace('/\(\d+\)/', '', $tempvalue['Type']);
-							if($tempvalue != $discuzdbnew[$dbtable][$key]) {
-								$modifylist[] = $value;
+						if(str_contains($tempvalue['Type'], 'int') && !empty($discuzdbnew[$dbtable][$key]['Type']) && str_contains($discuzdbnew[$dbtable][$key]['Type'], '(')) {
+							$discuzdbnew[$dbtable][$key]['Type'] = preg_replace('/\(\d+\)/', '', $discuzdbnew[$dbtable][$key]['Type']);
+							if($tempvalue == $discuzdbnew[$dbtable][$key]) {
+								continue;
 							}
-						} else {
-							$modifylist[] = $value;
 						}
+						if(str_contains($tempvalue['Extra'], 'DEFAULT_GENERATED')) {
+							$tempvalue['Extra'] = str_replace('DEFAULT_GENERATED ', '', $tempvalue['Extra']);
+							if($tempvalue == $discuzdbnew[$dbtable][$key]) {
+								continue;
+							}
+						}
+						$modifylist[] = $value;
 					}
 				}
 			}

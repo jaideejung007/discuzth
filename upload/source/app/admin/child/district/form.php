@@ -10,9 +10,9 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 	exit('Access Denied');
 }
 
-
+/*search={"district":"action=district"}*/
 showtips('district_tips');
-
+/*search*/
 
 showformheader('district&countryid='.$values[0].'&pid='.$values[1].'&cid='.$values[2].'&did='.$values[3]);
 showboxheader();

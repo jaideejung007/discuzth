@@ -32,7 +32,7 @@ if(submitcheck('settingsubmit')) {
 	loadcache('usergroups');
 	$setting['accountguard'] = dunserialize($setting['accountguard']);
 	$usergroups = table_common_usergroup_field::t()->fetch_all(array_keys($_G['cache']['usergroups']));
-	
+	/*search={"setting_accountguard":"action=setting&operation=sec","setting_sec_reginput":"action=setting&operation=sec&anchor=accountguard"}*/
 	showtableheader('', 'nobottom');
 	$forcelogin = '<tr class="header"><td></td><td>'.cplang('usergroups_edit_basic_forcelogin_none').'</td><td>'.cplang('usergroups_edit_basic_forcelogin_mail').'</td></tr>';
 	ksort($_G['cache']['usergroups']);
@@ -56,7 +56,7 @@ if(submitcheck('settingsubmit')) {
 	showtableheader('', 'nobottom');
 	echo $forcelogin;
 	showtablefooter();
-	
+	/*search*/
 	showtableheader();
 	showsubmit('settingsubmit', 'submit', '', $extbutton.(!empty($from) ? '<input type="hidden" name="from" value="'.$from.'">' : ''));
 	showtablefooter();

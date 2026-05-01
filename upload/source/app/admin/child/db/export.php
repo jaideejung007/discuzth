@@ -58,7 +58,7 @@ if(!submitcheck('exportsubmit')) {
 		['nav_db_optimize', 'db&operation=optimize', 0],
 		['nav_db_dbcheck', 'db&operation=dbcheck', 0]
 	]);
-	
+	/*search={"nav_db":"action=db&operation=export","nav_db_export":"action=db&operation=export"}*/
 	showtips($db_export_tips);
 	showformheader('db&operation=export&setup=1');
 	showtableheader();
@@ -100,7 +100,7 @@ if(!submitcheck('exportsubmit')) {
 	showsubmit('exportsubmit', 'submit', '', 'more_options');
 	showtablefooter();
 	showformfooter();
-	
+	/*search*/
 
 } else {
 

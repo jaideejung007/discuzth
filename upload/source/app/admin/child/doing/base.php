@@ -48,7 +48,7 @@ if(submitcheck('settingsubmit')) {
 
 	require_once libfile('function/forumlist');
 
-	
+	/*search={"setting_doing":"action=doing&operation=base","setting_doing_base":"action=doing&operation=base"}*/
 	showtableheader('', 'nobottom', 'id="base"');
 	showsetting('setting_home_base_default_doing', 'settingnew[defaultdoing]', $setting['defaultdoing'], 'textarea');
 	loadcache('forums');
@@ -71,7 +71,7 @@ if(submitcheck('settingsubmit')) {
 	showsetting('setting_doing_dynamic_fname', 'settingnew[doing_dynamic_fname]', $setting['doing_dynamic_fname'], 'radio');
 
 	showtablefooter();
-	
+	/*search*/
 	showtableheader();
 
 	showsubmit('settingsubmit', 'submit', '', $extbutton.(!empty($from) ? '<input type="hidden" name="from" value="'.$from.'">' : ''));

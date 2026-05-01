@@ -43,7 +43,7 @@ if(!submitcheck('editorupdatesubmit')) {
 	if(class_exists($editorblockclass)) {
 		$editorblock = new $editorblockclass();
 		$script = substr($editorblockclass, 12);
-		
+		// $script = ($plugin ? $plugin.':' : '').$script;
 		$editorblockdata = [
 			'class' => $script,
 			'name' => lang('editorblock/'.$script, $editorblock->name),

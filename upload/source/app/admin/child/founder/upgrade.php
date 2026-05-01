@@ -21,6 +21,7 @@ if($_GET['downPatch'] && $_GET['formhash'] == formhash()) {
 	if(!file_exists($patchFile)) {
 		cpmsg('upgrade_patch_not_found', '', 'error');
 	}
+	ob_end_clean();
 	header('Content-Type: application/zip');
 	header('Content-Disposition: attachment; filename="'.basename($patchFile).'"');
 	readfile($patchFile);
@@ -55,7 +56,7 @@ if($step == 1) {
 	$u->createPatch();
 	$diff = $u->getCurrentDiff();
 	if($diff) {
-		$s = '<h4 class="infotitle3">'.cplang('upgrade_diff_notice').'</h4><br /><div style="text-align:left">';
+		$s = '<h4 class="infotitle3">'.cplang('upgrade_diff_notice').'</h4><br /><div style="text-align:left;max-height:400px;overflow-y:auto;">';
 		$s .= implode('<br>', $diff);
 		$s .= '</div>';
 	}
@@ -157,7 +158,7 @@ class discuzUpgrade {
 			$this->clearEvent();
 			cpmsg('upgrade_patch_create_failed', '', 'error');
 		}
-		$this->_zip($zip, $this->pPath, $this->pPath.'/');
+		$this->_zip($zip, $this->pPath, strlen($this->pPath.'/'));
 		$zip->close();
 	}
 
@@ -175,19 +176,18 @@ class discuzUpgrade {
 		return !empty($data['ver']) && !empty($data['release']) && !empty($data['url']) && !empty($data['md5']) ? $data : false;
 	}
 
-	private function _zip(&$zip, $path, $basePath) {
+	private function _zip(&$zip, $path, $basePathLen) {
 		$handler = opendir($path);
 		while(($filename = readdir($handler)) !== false) {
 			if($filename == '.' || $filename == '..') {
 				continue;
 			}
 			$f = $path.'/'.$filename;
+			$lpath = substr($f, $basePathLen);
 			if(is_dir($f)) {
-				$this->_zip($zip, $f, $basePath);
-			} else {
-				if(!$zip->addFile($f, str_replace($basePath, '', $f))) {
-					cpmsg('upgrade_patch_create_failed', '', 'error');
-				}
+				$this->_zip($zip, $f, $basePathLen);
+			} elseif(!$zip->addFile($f, $lpath)) {
+				cpmsg('upgrade_patch_create_failed', '', 'error');
 			}
 		}
 		@closedir($handler);

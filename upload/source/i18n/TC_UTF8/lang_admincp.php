@@ -2073,6 +2073,7 @@ $lang =
 	'setting_permissions_nsprofiles_comment' => '啓用後個人空間內將不展現個人資訊',
 	'setting_permissions_modasban' => '不忽略審核關鍵詞',
 	'setting_permissions_modasban_comment' => '啓用後在不支持審核關鍵詞的模塊內發現此類關鍵詞將拒絕提交，關閉則允許提交',
+	'setting_permissions_editpost' => '帖子編輯',
 
 	'setting_credits' => '積分設置',
 	'setting_credits_base' => '基本設置',
@@ -3608,7 +3609,7 @@ $lang =
 	'styles_admin_tips' => '<li>如果把導出的風格文件放置在模板目錄下，則可以通過風格管理直接安裝風格</li>',
 	'styles_admin_name' => '方案名稱',
 	'styles_admin_template' => '所用模板',
-	'styles_home_tips' => '<li>手機版模板需要開啓手機版以後才能生效，<a href="?action=setting&operation=mobile">前往手機版設置</a></li><li>如果您是模板開發者，請閲讀《<a href="https://open.dismall.com/?ac=document&amp;page=dev_template" target="_blank">Discuz! 技術文檔</a>》中的內容，並開啓設計模式。</li>',
+	'styles_home_tips' => '<li>手機版模板需要開啓手機版以後才能生效，<a href="?app=admin&platform=system?action=setting&operation=mobile">前往手機版設置</a></li><li>如果您是模板開發者，請閲讀《<a href="https://open.dismall.com/?ac=document&amp;page=dev_template" target="_blank">Discuz! 技術文檔</a>》中的內容，並開啓設計模式。</li>',
 	'styles_tips' => '<li>由於擴展配色會重定義某些風格變量，因此某些風格變量可能只對默認配色有效</li>',
 
 	'styles_edit' => '編輯風格',

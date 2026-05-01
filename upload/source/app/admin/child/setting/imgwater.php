@@ -98,7 +98,7 @@ if(submitcheck('settingsubmit')) {
 	$checkwm['portal'] = [$setting['watermarkstatus']['portal'] => 'checked'];
 	$checkwm['forum'] = [$setting['watermarkstatus']['forum'] => 'checked'];
 	$checkwm['album'] = [$setting['watermarkstatus']['album'] => 'checked'];
-	
+	/*search={"setting_imgwater":"action=setting&operation=imgwater","setting_imgwater_portal":"action=setting&operation=imgwater&anchor=portal"}*/
 	showtableheader('setting_imgwater_image_watermarks_portal', 'nobottom', 'id="portal"'.($_GET['anchor'] != 'portal' ? ' style="display: none"' : ''));
 	$fontlist['portal'] = '<select name="settingnew[watermarktext][fontpath][portal]">'.$fontlist['portal'];
 	showhiddenfields(['imagelib' => $_G['setting']['imagelib']]);
@@ -127,9 +127,9 @@ if(submitcheck('settingsubmit')) {
 	showtagfooter('tbody');
 	showsetting('setting_imgwater_preview', '', '', cplang('setting_imgwater_preview_portal'));
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_imgwater":"action=setting&operation=imgwater","setting_imgwater_forum":"action=setting&operation=imgwater&anchor=forum"}*/
 	showtableheader('setting_imgwater_image_watermarks_forum', 'nobottom', 'id="forum"'.($_GET['anchor'] != 'forum' ? ' style="display: none"' : ''));
 	$fontlist['forum'] = '<select name="settingnew[watermarktext][fontpath][forum]">'.$fontlist['forum'];
 	showsetting('setting_imgwater_image_watermarkstatus', '', '', '<table style="margin-bottom: 3px; margin-top:3px;"><tr><td colspan="3"><input class="radio" type="radio" name="settingnew[watermarkstatus][forum]" value="0" '.$checkwm['forum'][0].'>'.$lang['setting_imgwater_image_watermarkstatus_none'].'</td></tr><tr><td><input class="radio" type="radio" name="settingnew[watermarkstatus][forum]" value="1" '.$checkwm['forum'][1].'> #1</td><td><input class="radio" type="radio" name="settingnew[watermarkstatus][forum]" value="2" '.$checkwm['forum'][2].'> #2</td><td><input class="radio" type="radio" name="settingnew[watermarkstatus][forum]" value="3" '.$checkwm['forum'][3].'> #3</td></tr><tr><td><input class="radio" type="radio" name="settingnew[watermarkstatus][forum]" value="4" '.$checkwm['forum'][4].'> #4</td><td><input class="radio" type="radio" name="settingnew[watermarkstatus][forum]" value="5" '.$checkwm['forum'][5].'> #5</td><td><input class="radio" type="radio" name="settingnew[watermarkstatus][forum]" value="6" '.$checkwm['forum'][6].'> #6</td></tr><tr><td><input class="radio" type="radio" name="settingnew[watermarkstatus][forum]" value="7" '.$checkwm['forum'][7].'> #7</td><td><input class="radio" type="radio" name="settingnew[watermarkstatus][forum]" value="8" '.$checkwm['forum'][8].'> #8</td><td><input class="radio" type="radio" name="settingnew[watermarkstatus][forum]" value="9" '.$checkwm['forum'][9].'> #9</td></tr></table>');
@@ -157,9 +157,9 @@ if(submitcheck('settingsubmit')) {
 	showtagfooter('tbody');
 	showsetting('setting_imgwater_preview', '', '', cplang('setting_imgwater_preview_forum'));
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_imgwater":"action=setting&operation=imgwater","setting_imgwater_album":"action=setting&operation=imgwater&anchor=album"}*/
 	showtableheader('setting_imgwater_image_watermarks_album', 'nobottom', 'id="album"'.($_GET['anchor'] != 'album' ? ' style="display: none"' : ''));
 	$fontlist['album'] = '<select name="settingnew[watermarktext][fontpath][album]">'.$fontlist['album'];
 	showsetting('setting_imgwater_image_watermarkstatus', '', '', '<table style="margin-bottom: 3px; margin-top:3px;"><tr><td colspan="3"><input class="radio" type="radio" name="settingnew[watermarkstatus][album]" value="0" '.$checkwm['album'][0].'>'.$lang['setting_imgwater_image_watermarkstatus_none'].'</td></tr><tr><td><input class="radio" type="radio" name="settingnew[watermarkstatus][album]" value="1" '.$checkwm['album'][1].'> #1</td><td><input class="radio" type="radio" name="settingnew[watermarkstatus][album]" value="2" '.$checkwm['album'][2].'> #2</td><td><input class="radio" type="radio" name="settingnew[watermarkstatus][album]" value="3" '.$checkwm['album'][3].'> #3</td></tr><tr><td><input class="radio" type="radio" name="settingnew[watermarkstatus][album]" value="4" '.$checkwm['album'][4].'> #4</td><td><input class="radio" type="radio" name="settingnew[watermarkstatus][album]" value="5" '.$checkwm['album'][5].'> #5</td><td><input class="radio" type="radio" name="settingnew[watermarkstatus][album]" value="6" '.$checkwm['album'][6].'> #6</td></tr><tr><td><input class="radio" type="radio" name="settingnew[watermarkstatus][album]" value="7" '.$checkwm['album'][7].'> #7</td><td><input class="radio" type="radio" name="settingnew[watermarkstatus][album]" value="8" '.$checkwm['album'][8].'> #8</td><td><input class="radio" type="radio" name="settingnew[watermarkstatus][album]" value="9" '.$checkwm['album'][9].'> #9</td></tr></table>');
@@ -187,13 +187,13 @@ if(submitcheck('settingsubmit')) {
 	showtagfooter('tbody');
 	showsetting('setting_imgwater_preview', '', '', cplang('setting_imgwater_preview_album'));
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_imgwater":"action=setting&operation=imgwater","setting_imgwater_upload":"action=setting&operation=imgwater&anchor=upload"}*/
 	showtableheader('setting_imgwater_upload', 'nobottom', 'id="upload"'.($_GET['anchor'] != 'upload' ? ' style="display: none"' : ''));
 	showsetting('setting_imgwater_upload_title', 'watermarkimg', '', 'file', '', 0, cplang('setting_imgwater_upload_comment'));
 	showtablefooter();
-	
+	/*search*/
 	showsubmit('settingsubmit', 'submit', '', $extbutton.(!empty($from) ? '<input type="hidden" name="from" value="'.$from.'">' : ''));
 	showtablefooter();
 	showformfooter();

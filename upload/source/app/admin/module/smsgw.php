@@ -10,7 +10,7 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 	exit('Access Denied');
 }
 
-
+// list 表示短信网关列表, edit 表示编辑短信网关, setting 表示短信网关全局配置
 $operation = $operation ? $operation : 'setting';
 
 cpheader();

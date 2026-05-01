@@ -41,7 +41,7 @@ function geteditorblocks() {
 				if(class_exists($editorblockclass)) {
 					$editorblock = new $editorblockclass();
 					$script = substr($editorblockclass, 12);
-					
+					//$script = ($key ? $key.':' : '').$script;
 					$editorblocks[$entry] = [
 						'class' => $script,
 						'name' => lang('editorblock/'.$script, $editorblock->name),

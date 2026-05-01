@@ -24,9 +24,9 @@ if($tableid && $tablename != 'forum_post' || !$tableid) {
 
 		if(!submitcheck('splitsubmit')) {
 			showsubmenu('nav_postsplit_manage');
-			
+			/*search={"nav_postsplit":"action=postsplit&operation=manage","nav_postsplit_manage":"action=postsplit&operation=manage"}*/
 			showtips('postsplit_manage_tips');
-			
+			/*search*/
 			showformheader('postsplit&operation=split&tableid='.$tableid);
 			showtableheader();
 			showsetting('postsplit_from', '', '', getposttable($tableid, true).(!empty($posttable_info[$tableid]['memo']) ? '('.$posttable_info[$tableid]['memo'].')' : ''));

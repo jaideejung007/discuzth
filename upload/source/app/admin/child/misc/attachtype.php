@@ -37,9 +37,9 @@ if(!submitcheck('typesubmit')) {
 
 	shownav('global', 'nav_posting_attachtype');
 	showsubmenu('nav_posting_attachtype');
-	
+	/*search={"nav_posting_attachtype":"action=misc&operation=attachtype"}*/
 	showtips('misc_attachtype_tips');
-	
+	/*search*/
 	showformheader('misc&operation=attachtype');
 	showtableheader('', 'nomargin');
 	showtablerow('class="partition"', ['class="td25"', 'class="td24"'], ['', cplang('misc_attachtype_ext'), cplang('misc_attachtype_maxsize')]);

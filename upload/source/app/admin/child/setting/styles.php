@@ -177,7 +177,7 @@ if(submitcheck('settingsubmit')) {
 	$setting['guestviewthumb'] = dunserialize($setting['guestviewthumb']);
 	$setting['guesttipsinthread'] = dunserialize($setting['guesttipsinthread']);
 
-	
+	/*search={"setting_styles":"action=setting&operation=styles","setting_styles_global":"action=setting&operation=styles&anchor=global"}*/
 	showtips('setting_tips', 'global_tips', $_GET['anchor'] == 'global');
 	showtableheader('setting_styles_global', 'nobottom', 'id="global"'.($_GET['anchor'] != 'global' ? ' style="display: none"' : ''));
 	showsetting('setting_styles_global_home_style', ['settingnew[homestyle]', [
@@ -207,9 +207,9 @@ if(submitcheck('settingsubmit')) {
 	showsetting('setting_styles_global_showiplocation', 'settingnew[showiplocation]', $setting['showiplocation'], 'radio');
 	showsetting('setting_styles_global_anonymoustext', 'settingnew[anonymoustext]', $setting['anonymoustext'], 'text');
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_styles":"action=setting&operation=styles","setting_styles_index":"action=setting&operation=styles&anchor=index"}*/
 	showtableheader('setting_styles_index', 'nobottom', 'id="index"'.($_GET['anchor'] != 'index' ? ' style="display: none"' : ''));
 	showsetting('setting_styles_index_indexhot_status', 'settingnew[indexhot][status]', $setting['indexhot']['status'], 'radio', 0, 1);
 	showsetting('setting_styles_index_indexhot_limit', 'settingnew[indexhot][limit]', $setting['indexhot']['limit'], 'text');
@@ -232,9 +232,9 @@ if(submitcheck('settingsubmit')) {
 	showsetting('setting_styles_index_showfollowcollection', 'settingnew[showfollowcollection]', $setting['showfollowcollection'], 'text');
 	showsetting('setting_styles_index_disfixednv', 'settingnew[disfixednv_forumindex]', !empty($setting['disfixednv_forumindex']), 'radio');
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_styles":"action=setting&operation=styles","setting_styles_forumdisplay":"action=setting&operation=styles&anchor=forumdisplay"}*/
 	showtips('setting_tips', 'forumdisplay_tips', $_GET['anchor'] == 'forumdisplay');
 	showtableheader('setting_styles_forumdisplay', 'nobottom', 'id="forumdisplay"'.($_GET['anchor'] != 'forumdisplay' ? ' style="display: none"' : ''));
 	showsetting('setting_styles_forumdisplay_tpp', 'settingnew[topicperpage]', $setting['topicperpage'], 'text');
@@ -262,9 +262,9 @@ if(submitcheck('settingsubmit')) {
 	showsetting('setting_styles_forumdisplay_disfixednv_forumdisplay', 'settingnew[disfixednv_forumdisplay]', !empty($setting['disfixednv_forumdisplay']), 'radio');
 	showsetting('setting_styles_forumdisplay_threadpreview', 'settingnew[forumdisplaythreadpreview]', !empty($setting['forumdisplaythreadpreview']), 'radio');
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_styles":"action=setting&operation=styles","setting_styles_viewthread":"action=setting&operation=styles&anchor=viewthread"}*/
 	showtagheader('div', 'viewthread', $_GET['anchor'] == 'viewthread');
 	showtableheader('nav_setting_viewthread', 'nobottom');
 	showsetting('setting_styles_viewthread_ppp', 'settingnew[postperpage]', $setting['postperpage'], 'text');
@@ -330,9 +330,9 @@ if(submitcheck('settingsubmit')) {
 	$setting['msgforward'] = !empty($setting['msgforward']) ? dunserialize($setting['msgforward']) : [];
 	$setting['msgforward']['messages'] = !empty($setting['msgforward']['messages']) ? implode("\n", $setting['msgforward']['messages']) : '';
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_styles":"action=setting&operation=styles","setting_styles_threadprofile":"action=setting&operation=styles&anchor=threadprofile"}*/
 	loadcache('usergroups');
 	$threadprofiles = table_forum_threadprofile::t()->fetch_all_threadprofile();
 	$threadprofile_group = table_forum_threadprofile_group::t()->fetch_all_threadprofile();
@@ -388,7 +388,7 @@ if(submitcheck('settingsubmit')) {
 	echo '</div></div>';
 
 	showtagfooter('div');
-	
+	/*search*/
 
 	showtips('members_profile_numbercard_tips', 'numbercard_tips', $_GET['anchor'] == 'numbercard');
 	showtableheader('members_profile_numbercard', 'nobottom', 'id="numbercard"'.($_GET['anchor'] != 'numbercard' ? ' style="display: none"' : ''));
@@ -411,16 +411,16 @@ if(submitcheck('settingsubmit')) {
 	}
 	showtablefooter();
 
-	
+	/*search={"setting_styles":"action=setting&operation=styles","setting_styles_refresh":"action=setting&operation=styles&anchor=refresh"}*/
 	showtableheader('setting_styles_refresh', 'nobottom', 'id="refresh"'.($_GET['anchor'] != 'refresh' ? ' style="display: none"' : ''));
 	showsetting('setting_styles_refresh_refreshtime', 'settingnew[msgforward][refreshtime]', $setting['msgforward']['refreshtime'], 'text');
 	showsetting('setting_styles_refresh_quick', 'settingnew[msgforward][quick]', $setting['msgforward']['quick'], 'radio', '', 1);
 	showsetting('setting_styles_refresh_messages', 'settingnew[msgforward][messages]', $setting['msgforward']['messages'], 'textarea');
 	showtagfooter('tbody');
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_styles":"action=setting&operation=styles","setting_styles_sitemessage":"action=setting&operation=styles&anchor=sitemessage"}*/
 	showtableheader('setting_styles_sitemessage', 'nobottom', 'id="sitemessage"'.($_GET['anchor'] != 'sitemessage' ? ' style="display: none"' : ''));
 	showsetting('setting_styles_sitemessage_time', 'settingnew[sitemessage][time]', $setting['sitemessage']['time'], 'text');
 	showsetting('setting_styles_sitemessage_register', 'settingnew[sitemessage][register]', $setting['sitemessage']['register'], 'textarea');
@@ -429,7 +429,7 @@ if(submitcheck('settingsubmit')) {
 	showsetting('setting_styles_sitemessage_reply', 'settingnew[sitemessage][reply]', $setting['sitemessage']['reply'], 'textarea');
 	showtagfooter('tbody');
 	showtablefooter();
-	
+	/*search*/
 
 	showtableheader('', 'notop');
 	showsubmit('settingsubmit');

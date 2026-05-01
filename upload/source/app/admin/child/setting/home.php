@@ -24,7 +24,7 @@ if(!submitcheck('settingsubmit')) {
 
 	require_once libfile('function/forumlist');
 
-	
+	/*search={"setting_home":"action=setting&operation=home","setting_home_base":"action=setting&operation=home&anchor=base"}*/
 	showtableheader('', 'nobottom', 'id="base"'.($_GET['anchor'] != 'base' ? ' style="display: none"' : ''));
 	showsetting('setting_home_base_feedday', 'settingnew[feedday]', $setting['feedday'], 'text');
 	showsetting('setting_home_base_feedmaxnum', 'settingnew[feedmaxnum]', $setting['feedmaxnum'], 'text');
@@ -57,12 +57,12 @@ if(!submitcheck('settingsubmit')) {
 
 	showsetting('setting_home_base_default_doing', 'settingnew[defaultdoing]', $setting['defaultdoing'], 'textarea');
 	showtablefooter();
-	
+	/*search*/
 
 	if(isset($setting['privacy'])) {
 		$setting['privacy'] = dunserialize($setting['privacy']);
 	}
-	
+	/*search={"setting_home":"action=setting&operation=home","setting_home_privacy":"action=setting&operation=home&anchor=privacy"}*/
 	showtableheader('', 'nobottom', 'id="privacy"'.($_GET['anchor'] != 'privacy' ? ' style="display: none"' : ''));
 	showtitle('setting_home_privacy_new_user');
 	showsetting('setting_home_privacy_view_index', ['settingnew[privacy][view][index]', [
@@ -135,7 +135,7 @@ if(!submitcheck('settingsubmit')) {
 		['newreply', $lang['setting_home_privacy_default_feed_newreply'], '1'],
 	]], $setting['privacy']['feed'], 'omcheckbox');
 	showtablefooter();
-	
+	/*search*/
 	showtableheader();
 
 	showsubmit('settingsubmit', 'submit', '', $extbutton.(!empty($from) ? '<input type="hidden" name="from" value="'.$from.'">' : ''));

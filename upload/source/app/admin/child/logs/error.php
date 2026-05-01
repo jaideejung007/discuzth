@@ -13,7 +13,7 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 showformheader('logs&operation=error', null, null, 'post');
 showtableheader('', 'fixpadding');
 
-
+//search[field]=data&search[key]=backtraceid
 $staticurl = STATICURL;
 print <<<SEARCH
 		<input type="hidden" name="search[field]" value="data">

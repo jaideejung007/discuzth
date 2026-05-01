@@ -23,7 +23,7 @@ switch($operation) {
 	default:
 		if(!submitcheck('submit')) {
 			showformheader('account&method=discuz');
-			
+			/*search={"discuz":"action=account&method=discuz","discuz_base":"action=account&method=discuz"}*/
 			showtableheader();
 			showtitle('discuz_baseSetting');
 			$discuz['secret'] = $discuz['secret'] ?
@@ -44,7 +44,7 @@ switch($operation) {
 
 			showsubmit('submit');
 			showtablefooter();
-			
+			/*search*/
 			showformfooter();
 
 		} else {

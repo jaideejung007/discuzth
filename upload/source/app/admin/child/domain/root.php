@@ -18,9 +18,9 @@ $roottype = [
 	'channel' => $lang['channel'],
 ];
 if(!submitcheck('submit')) {
-	
+	/*search={"setting_domain":"action=domain","setting_domain_root":"domain&operation=root"}*/
 	showtips('setting_domain_root_tips');
-	
+	/*search*/
 	showformheader('domain&operation=root');
 	showboxheader();
 	showtableheader();

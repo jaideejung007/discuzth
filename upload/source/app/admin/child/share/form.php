@@ -32,9 +32,9 @@ empty($newlist) && showsubmenusteps('', [
 	['share_search', !$searchsubmit],
 	['nav_share', $searchsubmit]
 ]);
-
+/*search={"nav_share":"action=share"}*/
 showtips('share_tips');
-
+/*search*/
 $staticurl = STATICURL;
 echo <<<EOT
 <script type="text/javascript" src="{$staticurl}js/calendar.js"></script>
@@ -46,7 +46,7 @@ function page(number) {
 </script>
 EOT;
 showtagheader('div', 'searchposts', !$searchsubmit && empty($newlist));
-
+/*search={"nav_share":"action=share","search":"action=share&search=true"}*/
 showformheader('share'.(!empty($_GET['search']) ? '&search=true' : ''), '', 'shareforum');
 showhiddenfields(['page' => $page, 'pp' => $_GET['pp'] ? $_GET['pp'] : $_GET['perpage']]);
 showtableheader();
@@ -67,5 +67,5 @@ showsubmit('searchsubmit');
 showtablefooter();
 showformfooter();
 showtagfooter('div');
-
+/*search*/
 	

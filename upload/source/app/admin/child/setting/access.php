@@ -132,7 +132,7 @@ if(submitcheck('settingsubmit')) {
 		$taskarray[] = [$task['taskid'], $task['name']];
 	}
 
-	
+	/*search={"setting_access":"action=setting&operation=access","setting_access_register":"action=setting&operation=access&anchor=register"}*/
 	showtableheader('', 'nobottom', 'id="register"'.($_GET['anchor'] != 'register' ? ' style="display: none"' : ''));
 	$regstatus = [];
 	if($setting['regstatus'] == 1 || $setting['regstatus'] == 3) {
@@ -219,16 +219,16 @@ if(submitcheck('settingsubmit')) {
 	showsetting('setting_access_register_bbruleforce', 'settingnew[bbrulesforce]', $setting['bbrulesforce'], 'radio');
 	showsetting('setting_access_register_bbrulestxt', 'settingnew[bbrulestxt]', $setting['bbrulestxt'], 'textarea');
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_access":"action=setting&operation=access","setting_access_access":"action=setting&operation=access&anchor=access"}*/
 	showtableheader('', 'nobottom', 'id="access"'.($_GET['anchor'] != 'access' ? ' style="display: none"' : ''));
 	showsetting('setting_access_access_newbiespan', 'settingnew[newbiespan]', $setting['newbiespan'], 'text');
 	showsetting('setting_access_access_ipaccess', 'settingnew[ipaccess]', $setting['ipaccess'], 'textarea');
 	showsetting('setting_access_access_adminipaccess', 'settingnew[adminipaccess]', $setting['adminipaccess'], 'textarea');
 	showsetting('setting_access_access_domainwhitelist', 'settingnew[domainwhitelist]', '', '<textarea class="tarea" cols="50" id="settingnew[domainwhitelist]" name="settingnew[domainwhitelist]" onkeydown="textareakey(this, event)" onkeyup="textareasize(this, 0)" ondblclick="textareasize(this, 1)" rows="6">'.$setting['domainwhitelist'].'</textarea><br><input class="checkbox" type="checkbox" value="1" name="settingnew[domainwhitelist_affectimg]" '.($setting['domainwhitelist_affectimg'] ? 'checked' : '').'>'.cplang('setting_access_access_domainwhitelist_affectimg'));
 	showtablefooter();
-	
+	/*search*/
 
 	showtableheader('', 'notop');
 	showsubmit('settingsubmit');

@@ -24,7 +24,7 @@ if(submitcheck('submit') && !empty($_GET['ctidarray']) && is_array($_GET['ctidar
 	}
 	cpmsg('collection_admin_updated', 'action=collection&operation=admin&searchsubmit=yes&perpage='.$_GET['perpage'].'&page='.$_GET['page'], 'succeed');
 }
-
+/*search={"collection":"action=collection"}*/
 if(!submitcheck('searchsubmit', 1)) {
 	showformheader('collection&operation=admin');
 	showtableheader();
@@ -72,5 +72,5 @@ if(!submitcheck('searchsubmit', 1)) {
 	showtablefooter();
 	showformfooter();
 }
-
+/*search*/
 	

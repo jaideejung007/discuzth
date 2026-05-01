@@ -16,9 +16,9 @@ if(empty($_GET['edit']) && empty($_GET['run'])) {
 
 		shownav('tools', 'misc_cron');
 		showsubmenu('nav_misc_cron');
-		
+		/*search={"misc_cron":"action=misc&operation=cron"}*/
 		showtips('misc_cron_tips');
-		
+		/*search*/
 		showformheader('misc&operation=cron');
 		showtableheader('', 'fixpadding');
 		showsubtitle(['', 'name', 'available', 'type', 'time', 'misc_cron_last_run', 'misc_cron_next_run', '']);

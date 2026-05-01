@@ -177,3 +177,4 @@ $forum['spviewperm'] = explode("\t", $forum['spviewperm']);
 showsetting('forums_edit_perm_spview', ['spviewpermnew', $spviewgroup], $forum['spviewperm'], 'mcheckbox');
 showsetting('forums_edit_perm_formulapermmessage', 'formulapermmessagenew', $forum['formulapermmessage'], 'textarea');
 showtablefooter();
+/*search*/

@@ -35,7 +35,7 @@ if(submitcheck('settingsubmit')) {
 	showformheader('setting&edit=yes', 'enctype');
 	showhiddenfields(['operation' => $operation]);
 
-	
+	/*search={"setting_basic":"action=setting&operation=basic"}*/
 	showtableheader('', 'nobottom');
 	showsetting('setting_basic_bbname', 'settingnew[bbname]', $setting['bbname'], 'text');
 	showsetting('setting_basic_sitename', 'settingnew[sitename]', $setting['sitename'], 'text');
@@ -53,7 +53,7 @@ if(submitcheck('settingsubmit')) {
 	showsetting('setting_basic_closedreason', 'settingnew[closedreason]', $setting['closedreason'], 'textarea');
 	showsetting('setting_basic_bbclosed_activation', 'settingnew[closedallowactivation]', $setting['closedallowactivation'], 'radio');
 	showtagfooter('tbody');
-	
+	/*search*/
 
 	showsubmit('settingsubmit', 'submit', '', $extbutton.(!empty($from) ? '<input type="hidden" name="from" value="'.$from.'">' : ''));
 	showtablefooter();

@@ -467,7 +467,7 @@ EOF;
 							];
 							$note_lang = 'profile_verify_error';
 						} else {
-							
+							// 用户信息变更记录
 							if($_G['setting']['profilehistory']) {
 								table_common_member_profile_history::t()->insert(array_merge(table_common_member_profile::t()->fetch(intval($value['uid'])), ['dateline' => time()]));
 							}

@@ -10,7 +10,7 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 	exit('Access Denied');
 }
 
-
+// 主题/帖子标题及内容重新审核
 
 $nextlink = "action=remoderate&current=$next&pertask=$pertask&threadsubmit=yes";
 $processed = 0;

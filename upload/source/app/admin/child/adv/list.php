@@ -16,9 +16,9 @@ showsubmenu('adv_admin', [
 	['adv_admin_listall', 'adv&operation=ad', 0],
 	['adv_admin_setting', 'adv&operation=setting', 0],
 ]);
-
+/*search={"adv_admin":"action=adv","adv_admin_list":"action=adv&operation=list"}*/
 showtips('adv_list_tip');
-
+/*search*/
 
 $advs = getadvs();
 showtableheader('', 'fixpadding');

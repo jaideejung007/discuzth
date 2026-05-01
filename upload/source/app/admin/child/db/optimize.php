@@ -21,9 +21,9 @@ showsubmenu('nav_db', [
 	['nav_db_optimize', 'db&operation=optimize', 1],
 	['nav_db_dbcheck', 'db&operation=dbcheck', 0]
 ]);
-
+/*search={"nav_db":"action=db&operation=export","nav_db_optimize":"action=db&operation=optimize"}*/
 showtips('db_optimize_tips');
-
+/*search*/
 showformheader('db&operation=optimize');
 showtableheader('db_optimize_tables');
 showsubtitle(['', 'db_optimize_table_name', 'type', 'db_optimize_rows', 'db_optimize_data', 'db_optimize_index', 'db_optimize_frag']);

@@ -10,7 +10,7 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 	exit('Access Denied');
 }
 
-
+// 用户历史资料下载
 if(!isset($_GET['uid'])) {
 	cpmsg('members_no_find_user', '', 'error');
 }

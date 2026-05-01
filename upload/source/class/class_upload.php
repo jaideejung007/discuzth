@@ -108,6 +108,9 @@ class upload {
 			$fileInfo['isimage'] = $upload->attach['isimage'];
 			$fileInfo['remote'] = $upload->remote;
 			$upload->attach['imageinfo'] && $fileInfo['imageinfo'] = $upload->attach['imageinfo'];
+			if(getglobal('setting/ftp/on') == 2) {
+				@unlink($upload->attach['target']);
+			}
 		}
 		$fileInfo['error'] = $upload->errorcode;
 		return $fileInfo;

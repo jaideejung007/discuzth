@@ -59,6 +59,10 @@ if(!empty($ftp['on']) && $ftp['on'] == 2 && $oss['oss_avatar']) {
 	ftpcmd('upload', $middleavatarfile);
 	ftpcmd('upload', $smallavatarfile);
 
+	@unlink(UC_DATADIR.$bigavatarfile);
+	@unlink(UC_DATADIR.$middleavatarfile);
+	@unlink(UC_DATADIR.$smallavatarfile);
+
 	if(!$_G['member']['avatarstatus']) {
 		table_common_member::t()->update($_G['uid'], ['avatarstatus' => '1']);
 	}

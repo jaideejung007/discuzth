@@ -21,7 +21,7 @@ if(!submitcheck('mediacodesubmit')) {
 		['setting_editor_block', 'editorblock&operation=list', 0]
 	]);
 
-	
+	/*search={"setting_editor":"action=setting&operation=editor","setting_editor_code":"action=setting&operation=mediacode"}*/
 	showtips('misc_mediacode_edit_tips');
 	showformheader('misc&operation=mediacode');
 	showtableheader('', 'fixpadding');
@@ -36,7 +36,7 @@ if(!submitcheck('mediacodesubmit')) {
 	showsubmit('mediacodesubmit', 'submit');
 	showtablefooter();
 	showformfooter();
-	
+	/*search*/
 
 } else {
 

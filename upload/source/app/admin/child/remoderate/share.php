@@ -10,7 +10,7 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 	exit('Access Denied');
 }
 
-
+// 分享内容重新审核
 
 $nextlink = "action=remoderate&current=$next&pertask=$pertask&sharesubmit=yes";
 $processed = 0;

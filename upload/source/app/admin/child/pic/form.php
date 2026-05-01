@@ -32,11 +32,11 @@ empty($newlist) && showsubmenusteps('', [
 	['pic_search', !$searchsubmit],
 	['nav_pic', $searchsubmit]
 ]);
-
+/*search={"nav_pic":"action=pic"}*/
 if($muticondition) {
 	showtips('pic_tips');
 }
-
+/*search*/
 $staticurl = STATICURL;
 echo <<<EOT
 <script type="text/javascript" src="{$staticurl}js/calendar.js"></script>
@@ -48,7 +48,7 @@ function page(number) {
 </script>
 EOT;
 showtagheader('div', 'searchposts', !$searchsubmit && empty($newlist));
-
+/*search={"nav_pic":"action=pic","search":"action=pic&search=true"}*/
 showformheader('pic'.(!empty($_GET['search']) ? '&search=true' : ''), '', 'picforum');
 showhiddenfields(['page' => $page, 'pp' => $_GET['pp'] ? $_GET['pp'] : $_GET['perpage']]);
 showtableheader();
@@ -68,5 +68,5 @@ showsubmit('searchsubmit');
 showtablefooter();
 showformfooter();
 showtagfooter('div');
-
+/*search*/
 	

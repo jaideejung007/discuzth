@@ -765,6 +765,7 @@ function upload_icon_banner(&$data, $file, $type) {
 	}
 	if($_G['setting']['ftp']['on'] == 2) {
 		ftpcmd('upload', $uploadtype.'/'.$upload->attach['attachment']);
+		@unlink($upload->attach['target']);
 	}
 	return $upload->attach['attachment'];
 }
@@ -1071,6 +1072,20 @@ function stringtopic($value, $key = '', $force = false, $rlength = 0) {
 	if(!$force && file_exists($basedir.'/'.$target.$targetname)) {
 		return $url.$target.$targetname;
 	}
+	if(getglobal('setting/ftp/on')) {
+		$c = new filesock_curl();
+		$c->unsafe = true;
+		$c->returnbody = false;
+		$c->conntimeout = 2;
+		$c->timeout = 2;
+		$c->header = [
+			'referer' => getglobal('siteurl')
+		];
+		$c->request(['url' => $url.$target.$targetname]);
+		if(in_array($c->curlstatus['http_code'], [200, 301, 302])) {
+			return $url.$target.$targetname;
+		}
+	}
 	$value = str_replace("\n", '', $value);
 	$fontfile = $fontname = '';
 	$ttfenabled = false;
@@ -1146,6 +1161,10 @@ function stringtopic($value, $key = '', $force = false, $rlength = 0) {
 	}
 	imagepng($im, $basedir.'/'.$target.$targetname);
 	imagedestroy($im);
+	if(getglobal('setting/ftp/on')) {
+		ftpcmd('upload', $target.$targetname);
+		@unlink($basedir.'/'.$target.$targetname);
+	}
 	return $url.$target.$targetname;
 }
 

@@ -82,7 +82,7 @@ if(submitcheck('settingsubmit')) {
 		$tcsspath['custom'] = 'checked="checked"';
 	}
 
-	
+	/*search={"setting_optimize":"action=setting&operation=seo","setting_serveropti":"action=setting&operation=serveropti"}*/
 	showtips('setting_tips');
 	showtableheader();
 	showtitle('setting_serveropti');
@@ -119,7 +119,7 @@ if(submitcheck('settingsubmit')) {
 	showsetting('setting_serveropti_sessionclose', 'settingnew[sessionclose]', $setting['sessionclose'], 'radio', '', 1);
 	showsetting('setting_serveropti_onlineguestsmultiple', 'settingnew[onlineguestsmultiple]', $setting['onlineguestsmultiple'] ? $setting['onlineguestsmultiple'] : 10, 'text');
 	showtagfooter('tbody');
-	
+	/*search*/
 
 	showsubmit('settingsubmit', 'submit', '', $extbutton.(!empty($from) ? '<input type="hidden" name="from" value="'.$from.'">' : ''));
 	showtablefooter();

@@ -12,9 +12,9 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 
 if(!submitcheck('importsubmit')) {
 
-	
+	/*search={"district":"action=district&operation=import"}*/
 	showtips('district_import_tips');
-	
+	/*search*/
 
 	showformheader('district&operation=import', 'enctype');
 	showtableheader('');

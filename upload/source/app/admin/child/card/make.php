@@ -21,7 +21,7 @@ if(!submitcheck('cardsubmit', 1)) {
 
 	echo '<script type="text/javascript" src="'.STATICURL.'js/calendar.js"></script>';
 	showformheader('card&operation=make&');
-	
+	/*search={"card_make_tips":"admin.php?action=card&operation=make"}*/
 	showtips('card_make_tips');
 	showtableheader();
 
@@ -48,7 +48,7 @@ EOT;
 	showsetting('card_make_cleardateline', 'cleardateline', date('Y-m-d', $_G['timestamp'] + 31536000), 'calendar', '', 0, '');
 
 	showsetting('card_make_description', 'description', $card_log['description'], 'text');
-	
+	/*search*/
 	showsubmit('cardsubmit');
 	showtablefooter();
 	showformfooter();

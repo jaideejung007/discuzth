@@ -30,7 +30,7 @@ if(submitcheck('settingsubmit')) {
 	$setting['userdateformat'] = dateformat($setting['userdateformat']);
 	$setting['dateformat'] = dateformat($setting['dateformat']);
 
-	
+	/*search={"setting_datetime":"action=setting&operation=datetime"}*/
 	showtableheader();
 	showtitle('setting_datetime_format');
 	showsetting('setting_datetime_dateformat', 'settingnew[dateformat]', $setting['dateformat'], 'text');
@@ -50,7 +50,7 @@ if(submitcheck('settingsubmit')) {
 	showsetting('setting_datetime_visitbanperiods', 'settingnew[visitbanperiods]', $setting['visitbanperiods'], 'textarea');
 	showsetting('setting_datetime_ban_downtime', 'settingnew[attachbanperiods]', $setting['attachbanperiods'], 'textarea');
 	showsetting('setting_datetime_searchbanperiods', 'settingnew[searchbanperiods]', $setting['searchbanperiods'], 'textarea');
-	
+	/*search*/
 
 	showsubmit('settingsubmit', 'submit', '', $extbutton.(!empty($from) ? '<input type="hidden" name="from" value="'.$from.'">' : ''));
 	showtablefooter();

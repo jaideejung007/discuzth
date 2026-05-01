@@ -15,7 +15,7 @@ if(!empty($setting['flag'])) {
 	cpmsg('admincp_makehtml_cleanhtml_error', 'action=makehtml&operation=makehtmlsetting', 'error');
 } else {
 	if(!submitcheck('cleanhtml')) {
-		
+		/*search={"nav_makehtml":"action=makehtml","makehtml_clear":"action=makehtml&operation=cleanhtml"}*/
 
 		showformheader('makehtml&operation=cleanhtml');
 		showtableheader();
@@ -24,7 +24,7 @@ if(!empty($setting['flag'])) {
 		showsubmit('cleanhtml', 'submit');
 		showtablefooter();
 		showformfooter();
-		
+		/*search*/
 	} else {
 		if(isset($_GET['cleandata'])) {
 			$cleandata = $_GET['cleandata'];

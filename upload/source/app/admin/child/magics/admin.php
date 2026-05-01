@@ -17,7 +17,7 @@ if(!submitcheck('magicsubmit')) {
 		['admin', 'magics&operation=admin', 1],
 		['nav_magics_confer', 'members&operation=confermagic', 0]
 	]);
-	
+	/*search={"nav_magics":"action=magics"}*/
 	showtips('magics_tips');
 
 	$settings = table_common_setting::t()->fetch_all_setting(['magicdiscount']);
@@ -25,7 +25,7 @@ if(!submitcheck('magicsubmit')) {
 	showtableheader();
 	showsetting('magics_config_discount', 'settingsnew[magicdiscount]', $settings['magicdiscount'], 'text');
 	showtablefooter();
-	
+	/*search*/
 
 	showtableheader('magics_list', 'fixpadding');
 	$newmagics = getmagics();

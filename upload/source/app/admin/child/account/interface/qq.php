@@ -23,7 +23,7 @@ switch($operation) {
 	default:
 		if(!submitcheck('submit')) {
 			showformheader('account&method=qq');
-			
+			/*search={"qq":"action=account&method=qq","qq_base":"action=account&method=qq"}*/
 			showtableheader();
 			showtitle('qq_baseSetting');
 			$qq['clientSecret'] = $qq['clientSecret'] ?
@@ -40,7 +40,7 @@ switch($operation) {
 
 			showsubmit('submit');
 			showtablefooter();
-			
+			/*search*/
 			showformfooter();
 
 		} else {

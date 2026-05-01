@@ -107,7 +107,6 @@ class filesock_curl extends filesock_base {
 		$this->curlstatus = curl_getinfo($ch);
 		$this->errno = curl_errno($ch);
 		$this->errstr = curl_error($ch);
-		curl_close($ch);
 		if($usetmpfile && $dh = opendir(DISCUZ_DATA.'./attachment/temp')) {
 			while(($fil = readdir($dh)) !== false) {
 				if(str_starts_with($fil, 'cU')) {

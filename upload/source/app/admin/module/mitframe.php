@@ -26,7 +26,7 @@ echo "<style>.td25 { width: 60px; } .light { margin-top: 2px; }".
 	".apps .hover:hover img.close { opacity: 0.6 } ".
 	"</style>";
 
-
+/*search={"setting_functions":"action=mitframe"}*/
 
 $apps = [];
 
@@ -47,7 +47,7 @@ foreach($apps as $orderid => $oapps) {
 	}
 }
 showboxfooter();
-
+/*search*/
 
 function getapps(&$apps) {
 	global $_G;

@@ -114,7 +114,7 @@ EOF;
 			$rule['cycletime'] = 0;
 			$rule['rewardnum'] = 1;
 		}
-		
+		// 验证积分策略是否重复 开始
 		if($rule['usecustom']) {
 			list($mainAction, $sub) = explode('/', $ruleinfo['action']);
 			if($ruleinfo['cycletype'] != $rule['cycletype']) {
@@ -134,7 +134,7 @@ EOF;
 				}
 			}
 		}
-		
+		// 验证积分策略是否重复 结束
 
 		$havecredit = $rule['usecustom'];
 		for($i = 1; $i <= 8; $i++) {

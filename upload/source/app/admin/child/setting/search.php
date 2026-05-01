@@ -24,7 +24,7 @@ if(submitcheck('settingsubmit')) {
 	showformheader('setting&edit=yes', 'enctype');
 	showhiddenfields(['operation' => $operation]);
 
-	
+	/*search={"setting_search":"action=setting&operation=search"}*/
 	$setting['search'] = dunserialize($setting['search']);
 	showtableheader('setting_search_status', 'fixpadding');
 	showsubtitle(['setting_search_onoff', 'search_item_name', 'setting_serveropti_searchctrl', 'setting_serveropti_maxspm', 'setting_serveropti_maxsearchresults']);
@@ -115,7 +115,7 @@ if(submitcheck('settingsubmit')) {
 	$selectspxrank .= '</select>';
 	showsetting('settings_sphinx_sphinxrank', '', '', $selectspxrank);
 	showtablefooter();
-	
+	/*search*/
 	showtableheader();
 
 	showsubmit('settingsubmit', 'submit', '', $extbutton.(!empty($from) ? '<input type="hidden" name="from" value="'.$from.'">' : ''));

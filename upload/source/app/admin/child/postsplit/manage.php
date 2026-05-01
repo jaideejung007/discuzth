@@ -14,9 +14,9 @@ shownav('founder', 'nav_postsplit');
 if(!submitcheck('postsplit_manage')) {
 
 	showsubmenu('nav_postsplit_manage');
-	
+	/*search={"nav_postsplit":"action=postsplit&operation=manage","nav_postsplit_manage":"action=postsplit&operation=manage"}*/
 	showtips('postsplit_manage_tips');
-	
+	/*search*/
 	showformheader('postsplit&operation=manage');
 	showtableheader();
 

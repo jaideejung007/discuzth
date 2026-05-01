@@ -83,6 +83,7 @@ if(is_array($temp) && !empty($temp)) {
 				$remote = 0;
 				if(ftpperm($attach['extension'], $attach['size'])) {
 					ftpcmd('upload', 'forum/'.$attach['attachment']);
+					@unlink($attach['target']);
 					$remote = 1;
 				}
 
@@ -112,6 +113,7 @@ if(is_array($temp) && !empty($temp)) {
 					}
 					if($thumb && $remote && $_G['setting']['ftp']['on'] == 2) {
 						ftpcmd('upload', 'forum/'.getimgthumbname($upload->attach['attachment']));
+						@unlink(getglobal('setting/attachdir').'forum/'.getimgthumbname($upload->attach['attachment']));
 					}
 				}
 				$aids[] = $aid = getattachnewaid();

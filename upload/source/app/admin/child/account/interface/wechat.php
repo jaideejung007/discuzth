@@ -24,7 +24,7 @@ switch($operation) {
 		if(!submitcheck('submit')) {
 			showtips('wechat_tips');
 			showformheader('account&method=wechat');
-			
+			/*search={"wechat":"action=account&method=wechat","wechat_base":"action=account&method=wechat"}*/
 			showtableheader();
 			showtitle('wechat_baseSetting');
 			$wechat['appSecret'] = $wechat['appSecret'] ?
@@ -41,7 +41,7 @@ switch($operation) {
 
 			showsubmit('submit');
 			showtablefooter();
-			
+			/*search*/
 			showformfooter();
 
 		} else {

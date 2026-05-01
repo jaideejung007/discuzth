@@ -55,23 +55,6 @@ foreach($alltemplate = table_common_template::t()->range() as $template) {
 	}
 }
 
-$dir = '/portal';
-$l = strlen($dir);
-$tpldirectory = './template/default';
-$dFiles = table_common_template_file::t()->fetch_files(1);
-foreach($dFiles as $dFile) {
-	if(substr($dFile['file'], 0, $l) != $dir) {
-		continue;
-	}
-	$f = basename($dFile['file']);
-	if(!isportalfile($dir, $f, 'topic')) {
-		continue;
-	}
-	$file = substr($dFile['file'], $l + 1);
-	$key = $tpldirectory.':portal/'.substr($file, 0, -4);
-	$tpls[$key] = getprimaltplname($tpldirectory.':portal/'.$file);
-}
-
 if(empty($tpls)) showmessage('topic_has_on_template', dreferer());
 
 if(submitcheck('editsubmit')) {

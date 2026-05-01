@@ -277,7 +277,6 @@ class account_base {
 					'avatar3' => base64_encode(file_get_contents($tmpavatarsmall)),
 				]);
 				curl_exec($ch);
-				curl_close($ch);
 			}
 		}
 

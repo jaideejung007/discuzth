@@ -68,7 +68,7 @@ if(submitcheck('settingsubmit')) {
 
 	$setting['reginput'] = dunserialize($setting['reginput']);
 
-	
+	/*search={"setting_sec":"action=setting&operation=sec","setting_sec_base":"action=setting&operation=sec&anchor=base"}*/
 	showtableheader('', 'nobottom', 'id="base"'.($_GET['anchor'] != 'base' ? ' style="display: none"' : ''));
 	showsetting('setting_sec_floodctrl', 'settingnew[floodctrl]', $setting['floodctrl'], 'text');
 	showsetting('setting_sec_base_need_email', 'settingnew[need_email]', $setting['need_email'], 'radio');
@@ -81,29 +81,29 @@ if(submitcheck('settingsubmit')) {
 		showsetting('uc_setting_login_failedtime', 'ucsettingnew[login_failedtime]', $ucsetting['login_failedtime'], 'text');
 	}
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_sec":"action=setting&operation=sec","setting_sec_reginput":"action=setting&operation=sec&anchor=reginput"}*/
 	showtableheader('setting_sec_reginput', 'nobottom', 'id="reginput"'.($_GET['anchor'] != 'reginput' ? ' style="display: none"' : ''));
 	showsetting('setting_sec_reginput_username', 'settingnew[reginput][username]', $setting['reginput']['username'], 'text');
 	showsetting('setting_sec_reginput_password', 'settingnew[reginput][password]', $setting['reginput']['password'], 'text');
 	showsetting('setting_sec_reginput_password2', 'settingnew[reginput][password2]', $setting['reginput']['password2'], 'text');
 	showsetting('setting_sec_reginput_email', 'settingnew[reginput][email]', $setting['reginput']['email'], 'text');
 	showtablefooter();
-	
+	/*search*/
 
-	
+	/*search={"setting_sec":"action=setting&operation=sec","setting_sec_reginput":"action=setting&operation=sec&anchor=postperiodtime"}*/
 	showtableheader('setting_sec_postperiodtime', 'nobottom', 'id="postperiodtime"'.($_GET['anchor'] != 'postperiodtime' ? ' style="display: none"' : ''));
 	showsetting('setting_datetime_postbanperiods', 'settingnew[postbanperiods]', $setting['postbanperiods'], 'textarea');
 	showsetting('setting_datetime_postmodperiods', 'settingnew[postmodperiods]', $setting['postmodperiods'], 'textarea');
 	showsetting('setting_datetime_postignorearea', 'settingnew[postignorearea]', $setting['postignorearea'], 'textarea');
 	showsetting('setting_datetime_postignoreip', 'settingnew[postignoreip]', $setting['postignoreip'], 'textarea');
 	showtablefooter();
-	
+	/*search*/
 	showtableheader();
 
 	if(UC_STANDALONE) {
-		
+		/*search={"setting_sec":"action=setting&operation=sec","uc_setting_pm":"action=setting&operation=sec&anchor=pm"}*/
 		showtableheader('', 'nobottom', 'id="pm"'.($_GET['anchor'] != 'pm' ? ' style="display: none"' : ''));
 		showsetting('uc_setting_pmsendregdays', 'ucsettingnew[pmsendregdays]', $ucsetting['pmsendregdays'], 'text');
 		showsetting('uc_setting_login_privatepmthreadlimit', 'ucsettingnew[privatepmthreadlimit]', $ucsetting['privatepmthreadlimit'], 'text');
@@ -111,7 +111,7 @@ if(submitcheck('settingsubmit')) {
 		showsetting('uc_setting_chatpmmemberlimit', 'ucsettingnew[chatpmmemberlimit]', $ucsetting['chatpmmemberlimit'], 'text');
 		showsetting('uc_setting_pmfloodctrl', 'ucsettingnew[pmfloodctrl]', $ucsetting['pmfloodctrl'], 'text');
 		showtablefooter();
-		
+		/*search*/
 	}
 
 	showsubmit('settingsubmit', 'submit', '', $extbutton.(!empty($from) ? '<input type="hidden" name="from" value="'.$from.'">' : ''));

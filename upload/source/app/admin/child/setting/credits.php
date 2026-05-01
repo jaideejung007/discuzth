@@ -126,7 +126,7 @@ if(submitcheck('settingsubmit')) {
 
 	echo '<div id="base"'.($_GET['anchor'] != 'base' ? ' style="display: none"' : '').'>';
 
-	
+	/*search={"setting_credits":"action=setting&operation=credits","setting_credits_base":"action=setting&operation=credits&anchor=base"}*/
 	$setting['extcredits'] = dunserialize($setting['extcredits']);
 	$setting['initcredits'] = explode(',', $setting['initcredits']);
 	$extcreditsbtn = '';
@@ -264,7 +264,7 @@ EOF;
 	showtablefooter();
 	echo '</div>';
 	showtableheader();
-	
+	/*search*/
 
 	showsubmit('settingsubmit', 'submit', '', $extbutton.(!empty($from) ? '<input type="hidden" name="from" value="'.$from.'">' : ''));
 	showtablefooter();

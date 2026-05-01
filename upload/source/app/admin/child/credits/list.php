@@ -106,16 +106,16 @@ if(!submitcheck('rulesubmit')) {
 			}
 			if($diff) {
 				if(isset($grouprules[$groupid][$rules[$rid]['action']])) {
-					
+					//debug([$grouprules[$groupid][$rules[$rid]['action']]['rid'], $rule]);
 					table_common_credit_rule::t()->update($grouprules[$groupid][$rules[$rid]['action']]['rid'], $rule);
 				} else {
 					$rule['action'] = $groupid.'#'.$rules[$rid]['action'];
-					
+					//debug($rule);
 					table_common_credit_rule::t()->insert($rule);
 				}
 			} else {
 				if(isset($grouprules[$groupid][$rules[$rid]['action']])) {
-					
+					//debug('del='.$grouprules[$groupid][$rules[$rid]['action']]['rid']);
 					table_common_credit_rule::t()->delete($grouprules[$groupid][$rules[$rid]['action']]['rid']);
 				}
 			}

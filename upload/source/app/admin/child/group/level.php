@@ -43,9 +43,9 @@ var rowtypedata = [
 EOT;
 		shownav('group', 'nav_group_level');
 		showsubmenu('nav_group_level');
-		
+		/*search={"nav_group_level":"action=group&operation=level"}*/
 		showtips('group_level_tips');
-		
+		/*search*/
 
 		showformheader('group&operation=level');
 		showtableheader('group_level', 'fixpadding', 'id="grouplevel"');

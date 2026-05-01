@@ -62,6 +62,7 @@ function getremotefile($file) {
 	} else {
 		$str = dfsockopen($file);
 		if(empty($str)) {
+			require_once DISCUZ_ROOT.'./source/class/class_oss.php';
 			$str = oss_base::check_file($file);
 		}
 	}

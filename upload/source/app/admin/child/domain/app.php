@@ -19,9 +19,9 @@ if(!submitcheck('submit')) {
 		'mobile' => $lang['mobile'],
 		'default' => $lang['default']
 	];
-	
+	/*search={"setting_domain":"action=domain","setting_domain_app":"domain&operation=app"}*/
 	showtips('setting_domain_app_tips');
-	
+	/*search*/
 
 	showformheader('domain&operation=app');
 	showboxheader();

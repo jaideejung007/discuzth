@@ -17,9 +17,9 @@ if(!submitcheck('smiliessubmit')) {
 		['smilies_type', 'smilies', 1],
 		['smilies_import', 'smilies&operation=import', 0],
 	]);
-	
+	/*search={"nav_smilies":"action=smilies","smilies_type":"action=smilies"}*/
 	showtips('smilies_tips_smileytypes');
-	
+	/*search*/
 	showformheader('smilies');
 	showboxheader();
 	showtableheader();
