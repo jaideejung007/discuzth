@@ -15,7 +15,7 @@ $modules = dunserialize($plugin['modules']);
 $dir = substr($plugin['directory'], 0, -1);
 
 if(!$_GET['confirmed']) {
-	cloudaddons_validator($dir.'.plugin');
+	//cloudaddons_validator($dir.'.plugin'); // discuzth
 	$file = getimportfilename(DISCUZ_PLUGIN().$dir.'/discuz_plugin_'.$dir.($modules['extra']['installtype'] ? '_'.$modules['extra']['installtype'] : ''));
 	$upgrade = false;
 	if($file) {

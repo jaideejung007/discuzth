@@ -19,7 +19,7 @@ class editorblock_emoji {
 	var $identifier = 'emoji';
 	var $description = 'Emoji';
 	var $filename = 'emoji';
-	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">云诺</a>';
+	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">Yunnuo</a>';
 	var $type = '0'; 
 
 	function __construct() {
@@ -49,39 +49,39 @@ EOF;
 		class: EmojiInlineTool,
 		config: {
 		    'editorid': 'editorjs',
-		    'title': '插入Emoji',
+		    'title': 'แทรกอิโมจิ',
 		    'defaultLocale': 'zh-CN',
 		    'locales': {
-		      'zh-CN': { name: '简体中文', status: true },
-		      'zh-TW': { name: '繁體中文', status: true },
+		      'zh-CN': { name: 'จีนตัวย่อ', status: true },
+		      'zh-TW': { name: 'จีนตัวเต็ม', status: true },
 		      'en': { name: 'English', status: true },
-		      'demo': { name: 'Demo语言', status: false }
+		      'demo': { name: 'ภาษา Demo', status: false }
 		    },
 		    i18n: {
 		       messages: {
 		          'demo': {
 			        categories: {
-			          'smileys-emotion': 'Demo 表情与情感',
-			          'people-body': 'Demo 人物与身体',
-			          'animals-nature': 'Demo 动物与自然',
-			          'food-drink': 'Demo 食物与饮料',
-			          'travel-places': 'Demo 旅行与地点',
-			          'activities': 'Demo 活动',
-			          'objects': 'Demo 物品',
-			          'symbols': 'Demo 符号',
-			          'flags': 'Demo 旗帜'
+			          'smileys-emotion': 'Demo อีโมจิและความรู้สึก',
+			          'people-body': 'Demo บุคคลและร่างกาย',
+			          'animals-nature': 'Demo สัตว์และธรรมชาติ',
+			          'food-drink': 'Demo อาหารและเครื่องดื่ม',
+			          'travel-places': 'Demo สถานที่และการเดินทาง',
+			          'activities': 'Demo กิจกรรม',
+			          'objects': 'Demo สิ่งของ',
+			          'symbols': 'Demo สัญลักษณ์',
+			          'flags': 'Demo ธง'
 			        },
 			        skinTones: {
-			          'default': 'Demo 默认',
-			          'light': 'Demo 浅色',
-			          'medium-light': 'Demo 中浅色',
-			          'medium': 'Demo 中等',
-			          'medium-dark': 'Demo 中深色',
-			          'dark': 'Demo 深色'
+			          'default': 'Demo เริ่มต้น',
+			          'light': 'Demo ผิวขาว',
+			          'medium-light': 'Demo ผิวขาวเหลือง',
+			          'medium': 'Demo ผิวสองสี',
+			          'medium-dark': 'Demo ผิวแทน',
+			          'dark': 'Demo ผิวเข้ม'
 			        },
 			        statusMessages: {
-			          loading: 'Demo 加载中...',
-			          noEmoji: 'Demo 该分类下没有表情'
+			          loading: 'Demo กำลังโหลด...',
+			          noEmoji: 'Demo ไม่มีอีโมจิในหมวดหมู่นี้'
 			        }
 			  },
 		       },

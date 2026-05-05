@@ -8,14 +8,14 @@ if(!defined('IN_DISCUZ')) {
 
 class forum_portal_navlist {
 
-	public static $name = '聚合首页导航';
+	public static $name = 'เมนูนำทางพอร์ทัลหน้าแรก';
 	public static $useage = '{cells forum/portal/navlist}';
 	public static $cellList = array(
-		'forum/portal/navlist/loop_start' => '循环体开始 (必须包含)',
-		'forum/portal/navlist/loop_end' => '循环体结束 (必须包含)',
-		'forum/portal/navlist/name' => '导航文字',
-		'forum/portal/navlist/url' => '导航链接',
-		'forum/portal/navlist/current_class' => '当前导航样式',
+		'forum/portal/navlist/loop_start' => 'เริ่มต้นส่วนการวนซ้ำ (ต้องมี)',
+		'forum/portal/navlist/loop_end' => 'สิ้นสุดส่วนการวนซ้ำ (ต้องมี)',
+		'forum/portal/navlist/name' => 'ข้อความเมนูนำทาง',
+		'forum/portal/navlist/url' => 'ลิงก์เมนูนำทาง',
+		'forum/portal/navlist/current_class' => 'สไตล์เมนูนำทางปัจจุบัน',
 	);
 	public static $requireList = array(
 		'forum/portal/navlist/loop_start',

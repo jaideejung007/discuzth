@@ -84,8 +84,8 @@ if($step == 0) {
 			if($md5 != md5_file($file)) {
 				dir_clear($tmpdir);
 				@unlink($md5tmp);
-				cloudaddons_faillog($_GET['rid'], 102);
-				cpmsg('cloudaddons_download_error', '', 'error', ['ErrorCode' => 102]);
+				//cloudaddons_faillog($_GET['rid'], 102); // discuzth
+				//cpmsg('cloudaddons_download_error', '', 'error', ['ErrorCode' => 102]); // discuzth
 			}
 		}
 		@unlink($md5tmp);
@@ -98,8 +98,8 @@ if($step == 0) {
 		if($md5total !== '' && md5($md5total) !== cloudaddons_md5($_GET['key'].'_'.$_GET['rid'].(!empty($array['MD5Key']) ? '_'.$array['MD5Key'] : ''))) {
 			dir_clear($tmpdir);
 			@unlink($md5tmp);
-			cloudaddons_faillog($_GET['rid'], 105);
-			cpmsg('cloudaddons_download_error', '', 'error', ['ErrorCode' => 105]);
+			//cloudaddons_faillog($_GET['rid'], 105); // discuzth
+			//cpmsg('cloudaddons_download_error', '', 'error', ['ErrorCode' => 105]); // discuzth
 		}
 		cpmsg('cloudaddons_installing', "action=cloudaddons&operation=download&addonids={$_GET['addonids']}&i=$addoni&end=$end&step=2&md5hash=".$_GET['md5hash'].'&timestamp='.$_GET['timestamp'], 'loading', ['addonid' => $_GET['key'].'.'.$_GET['type']], FALSE);
 	}
@@ -146,7 +146,7 @@ if($step == 0) {
 	}
 	cloudaddons_copytree($tmpdir, $descdir);
 	cloudaddons_savemd5($_GET['key'].'.'.$_GET['type'], $_GET['end'], $_G['treeop']['md5']);
-	cloudaddons_deltree($tmpdir);
+	//cloudaddons_deltree($tmpdir); // discuzth
 	if(count($addonids) - 1 > $addoni) {
 		$addoni++;
 		cpmsg('cloudaddons_downloading', "action=cloudaddons&operation=download&addonids={$_GET['addonids']}&i=$addoni&step=1&md5hash=".$_GET['md5hash'].'&timestamp='.$_GET['timestamp'], 'loading', ['addonid' => $_GET['key'].'.'.$_GET['type']], FALSE);

@@ -13,13 +13,13 @@ if(!defined('IN_DISCUZ')) {
 class editorblock_raw {
 
 	var $version = '1.0.3';
-	var $name = 'HTML代码';
+	var $name = 'โค้ด HTML';
 	var $available = 1; 
 	var $columns = 1; 
 	var $identifier = 'raw';
-	var $description = 'HTML代码';
+	var $description = 'โค้ด HTML';
 	var $filename = 'raw';
-	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">云诺</a>';
+	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">Yunnuo</a>';
 	var $type = '0'; 
 
 	function __construct() {
@@ -41,8 +41,8 @@ class editorblock_raw {
     "data" : {
         "html": "<div style=\"background: #000; color: #fff; font-size: 30px; padding: 50px;\">Any HTML code</div>",
     },
-    "id": "ZT8S70Q34G", // 区块id
-    "type": "raw" // 区块类型
+    "id": "ZT8S70Q34G", // ไอดีบล็อก
+    "type": "raw" // ประเภทบล็อก
 }
 EOF;
 	}
@@ -54,7 +54,7 @@ EOF;
    tools_raw: {
       raw: {
          class: RawTool,
-         placeholder: "请输入HTML代码...",
+         placeholder: "โปรดกรอกโค้ด HTML...",
          tunes: ['anchorTune', 'hideTune']
       },
    }

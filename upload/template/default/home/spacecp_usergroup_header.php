@@ -11,5 +11,5 @@
 	<!--{/if}-->
 	<li{$activeus[usergroup] or ''}><a href="home.php?mod=spacecp&ac=usergroup">{lang my_usergroups}</a></li>
 	<li{$activeus[list] or ''} {$activeus[expiry] or ''}><a href="home.php?mod=spacecp&ac=usergroup&do=list">{lang usergroups_joinbuy}</a></li>
-	<li{$activeus[forum] or ''}><a href="home.php?mod=spacecp&ac=usergroup&do=forum">{lang my}{$_G['setting']['navs'][2]['navname']}{lang rights}</a></li>
+	<li{$activeus[forum] or ''}><a href="home.php?mod=spacecp&ac=usergroup&do=forum">{lang rights}{$_G['setting']['navs'][2]['navname']}{lang my}</a></li><!--discuzth-->
 </ul>

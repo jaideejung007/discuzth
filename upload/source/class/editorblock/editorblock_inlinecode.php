@@ -13,14 +13,14 @@ if(!defined('IN_DISCUZ')) {
 class editorblock_inlinecode {
 
 	var $version = '1.0.1';
-	var $name = '行内代码';
+	var $name = 'โค้ดในแถว';
 	var $available = 1; 
 	var $columns = 1; 
 	var $global_css = 1; 
 	var $identifier = 'inlinecode';
-	var $description = '行内代码';
+	var $description = 'โค้ดในแถว';
 	var $filename = 'inline-code';
-	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">云诺</a>';
+	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">Yunnuo</a>';
 	var $type = '0'; 
 
 	function __construct() {
@@ -51,7 +51,7 @@ EOF;
    i18n: {
 	    messages: {
 	        toolNames: {
-	           'Inlinecode': '行内代码',
+	           'Inlinecode': 'โค้ดในแถว',
 	        }
 	    },
    },

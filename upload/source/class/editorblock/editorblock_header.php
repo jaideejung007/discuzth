@@ -13,13 +13,13 @@ if(!defined('IN_DISCUZ')) {
 class editorblock_header {
 
 	var $version = '2.7.7';
-	var $name = '标题区块 Header';
+	var $name = 'บล็อกหัวข้อ (Header)';
 	var $available = 1; 
 	var $columns = 1; 
 	var $identifier = 'header';
-	var $description = '用于添加标题类区块，如 h1、h2、h3等。';
+	var $description = 'ใช้สำหรับเพิ่มบล็อกประเภทหัวข้อ เช่น h1, h2, h3';
 	var $filename = 'editorjs-header-with-alignment';
-	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">云诺</a>';
+	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">Yunnuo</a>';
 	var $type = '0'; 
 
 	function __construct() {
@@ -39,12 +39,12 @@ class editorblock_header {
 		return <<<EOF
 {
     "data": {
-        "alignment": "left", // 对齐方式
+        "alignment": "left", // การจัดตำแหน่ง
         "level": 5, // h1、h2...h6
-        "text": "content" // 内容
+        "text": "เนื้อหา" // เนื้อหา
     },
-    "id": "0co08uxJK4", // 区块id
-    "type": "header" // 区块类型
+    "id": "0co08uxJK4", // ไอดีบล็อก
+    "type": "header" // ประเภทบล็อก
 }
 EOF;
 	}
@@ -57,7 +57,7 @@ EOF;
       header: {
          class: Header,
          config: {
-            placeholder: '请输入标题...',
+            placeholder: 'โปรดกรอกหัวข้อ...',
             levels: [1, 2, 3, 4, 5, 6],
             defaultLevel: 3,
             defaultAlignment: 'left'

@@ -49,10 +49,10 @@
 	<div class="myinfo_list_ico cl">
 		<ul>
 		<!--{if helper_access::check_module('forum')}-->
-			<li><a href="home.php?mod=space&uid={$space['uid']}&do=thread<!--{if $_G['uid'] == $space['uid']}-->&view=me<!--{/if}-->"><i class="dm-chat-s-fill"></i><!--{if $_G['uid'] == $space['uid']}-->{lang mythread}<!--{else}-->{lang mobta}{lang mobthread}<!--{/if}--></a></li>
+			<li><a href="home.php?mod=space&uid={$space['uid']}&do=thread<!--{if $_G['uid'] == $space['uid']}-->&view=me<!--{/if}-->"><i class="dm-chat-s-fill"></i><!--{if $_G['uid'] == $space['uid']}-->{lang mythread}<!--{else}-->{lang mobthread}{lang mobta}<!--{/if}--></a></li><!--discuzth-->
 		<!--{/if}-->
 		<!--{if helper_access::check_module('blog')}-->
-			<li><a href="home.php?mod=space&uid={$space['uid']}&do=blog<!--{if $_G['uid'] == $space['uid']}-->&view=me<!--{/if}-->"><i class="dm-chat-s-fill"></i><!--{if $_G['uid'] == $space['uid']}-->{lang my}{lang blog}<!--{else}-->{lang mobta}{lang blog}<!--{/if}--></a></li>
+			<li><a href="home.php?mod=space&uid={$space['uid']}&do=blog<!--{if $_G['uid'] == $space['uid']}-->&view=me<!--{/if}-->"><i class="dm-chat-s-fill"></i><!--{if $_G['uid'] == $space['uid']}-->{lang blog}{lang my}<!--{else}-->{lang blog}{lang mobta}<!--{/if}--></a></li><!--discuzth-->
 		<!--{/if}-->
 		<!--{if helper_access::check_module('favorite') && $_G['uid'] == $space['uid']}-->
 			<li><a href="home.php?mod=space&uid={$space['uid']}&do=favorite&view=me&type=thread"><i class="dm-star-fill"></i>{lang myfavorite}</a></li>

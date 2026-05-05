@@ -274,7 +274,7 @@ function attachinpost($attach, $post) {
 						<!--{/if}-->
 					</p>
 					<!--{if $attach[description]}--><p>$attach[description]</p><!--{/if}-->
-					<p class="xg1 y">$attach[dateline] {lang upload}</p>
+					<p class="xg1 y">{lang upload} $attach[dateline]</p><!--discuzth-->
 		<!--{else}-->
 			<!--{if $attach['description']}--><p>{$attach[description]}</p><!--{/if}-->
 			<img src="{if $attach[refcheck]}forum.php?mod=attachment{$is_archive}&aid=$aidencode&noupdate=yes{else}{$attach[url]}$attach[attachment]{/if}" alt="$attach[imgalt]" title="$attach[imgalt]" />
@@ -294,7 +294,7 @@ function attachinpost($attach, $post) {
 		</span>
 		<div class="tip tip_4" id="attach_$attach[aid]_menu" style="position: absolute; display: none" disautofocus="true">
 			<div class="tip_c xs0">
-				<div class="y">$attach[dateline] {lang upload}</div>
+				<div class="y">{lang upload} $attach[dateline]</div><!--discuzth-->
 				{lang clicktodownload}
 				<!--{if $attach['description']}--><br />$attach[description]<!--{/if}-->
 				<!--{if $attach['readperm']}--><br />{lang readperm}: $attach[readperm]<!--{/if}-->

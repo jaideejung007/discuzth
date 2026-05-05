@@ -84,11 +84,11 @@ if(!empty($_GET['js'])) {
 	echo '$(\'retheader_menu\').innerHTML = \''.addslashes('<ul id="jsmenu">'.$leftmenus.'</ul>').'\';';
 	exit;
 } else {
-	$sitevip = '';
+	/*$sitevip = '';
 	if(isfounder() && $_G['setting']['siteuniqueid'] && !empty($_G['setting']['sitevipkey'])) {
 		@include_once DISCUZ_ROOT.'./source/discuz_version.php';
 		$sitevip = base64_encode($_G['setting']['siteuniqueid'].','.$_G['setting']['sitevipkey'].','.DISCUZ_VERSION.'/'.DISCUZ_SUBVERSION.'/'.DISCUZ_RELEASE);
-	}
+	}*/ // discuzth
 	require_once template('admin/main');
 }
 

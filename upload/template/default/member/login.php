@@ -64,7 +64,7 @@
 							<th>
 								<!--{if $this->setting['autoidselect']}--><label for="username_$loginhash">{lang login_id}:</label><!--{else}-->
 									<span class="login_slct">
-										<select name="loginfield" style="float: left;" width="45" id="loginfield_$loginhash">
+										<select name="loginfield" style="float: left;" width="55" id="loginfield_$loginhash"><!--discuzth-->
 											<option value="username">{lang username}</option>
 											<!--{if getglobal('setting/uidlogin')}-->
 											<option value="uid">{lang uid}</option>

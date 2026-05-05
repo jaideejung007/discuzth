@@ -33,12 +33,12 @@
 				<item id="bid"><![CDATA[232]]></item>
 				<item id="blockclass"><![CDATA[forum_thread]]></item>
 				<item id="blocktype"><![CDATA[0]]></item>
-				<item id="name"><![CDATA[幻灯片]]></item>
+				<item id="name"><![CDATA[สไลด์โชว์]]></item>
 				<item id="title"><![CDATA[]]></item>
 				<item id="classname"><![CDATA[cl_block_bm]]></item>
 				<item id="summary"><![CDATA[]]></item>
 				<item id="uid"><![CDATA[1]]></item>
-				<item id="username"><![CDATA[夕阳渔民]]></item>
+				<item id="username"><![CDATA[ชาวประมงยามเย็น]]></item>
 				<item id="styleid"><![CDATA[120]]></item>
 				<item id="blockstyle"><![CDATA[]]></item>
 				<item id="picwidth"><![CDATA[700]]></item>
@@ -84,7 +84,7 @@
 			<item id="120">
 				<item id="styleid"><![CDATA[120]]></item>
 				<item id="blockclass"><![CDATA[forum_thread]]></item>
-				<item id="name"><![CDATA[企飞版-通用幻灯片A]]></item>
+				<item id="name"><![CDATA[รุ่น QiFei - สไลด์โชว์ทั่วไป A]]></item>
 				<item id="template">
 					<item id="raw"><![CDATA[<div class="module cl slidebox comiis_slidebox_a">
 <ul class="slideshow">

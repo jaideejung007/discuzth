@@ -13,13 +13,13 @@ if(!defined('IN_DISCUZ')) {
 class editorblock_embed {
 
 	var $version = '1.0.3';
-	var $name = '多媒体资源嵌入';
+	var $name = 'ฝังมัลติมีเดีย';
 	var $available = 1; 
 	var $columns = 0; 
 	var $identifier = 'embed';
-	var $description = '支持外部媒体资源嵌入，在段落中粘贴视频页面链接，自动转换为iframe嵌入方式。暂不支持多列使用。可在配置文件中自定义解析规则，目前内置支持：Bilibili、优酷、腾讯视频';
+	var $description = 'รองรับการฝังทรัพยากรภายนอก เพียงวางลิงก์วิดีโอลงในย่อหน้า ระบบจะเปลี่ยนเป็น iframe โดยอัตโนมัติ (ยังไม่รองรับในโหมดหลายคอลัมน์) สามารถกำหนดกฎการวิเคราะห์เองได้ ปัจจุบันรองรับ: Bilibili, Youku, Tencent Video';
 	var $filename = 'embed';
-	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">云诺</a>';
+	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">Yunnuo</a>';
 	var $type = '0'; 
 
 	function __construct() {

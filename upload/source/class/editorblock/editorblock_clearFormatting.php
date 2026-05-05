@@ -13,13 +13,13 @@ if(!defined('IN_DISCUZ')) {
 class editorblock_clearFormatting {
 
 	var $version = '1.0.0';
-	var $name = '清理格式';
+	var $name = 'ล้างรูปแบบ';
 	var $available = 1; 
 	var $columns = 1; 
 	var $identifier = 'clearFormatting';
-	var $description = '用于清理文本格式';
+	var $description = 'ใช้สำหรับล้างรูปแบบข้อความ';
 	var $filename = 'clear-formatting';
-	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">云诺</a>';
+	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">Yunnuo</a>';
 	var $type = '0'; 
 
 	function __construct() {
@@ -57,7 +57,7 @@ EOF;
    i18n: {
        messages: {
           toolNames: {
-                'ClearFormatting': '清除格式',
+                'ClearFormatting': 'ล้างรูปแบบ',
           }
         },
     },

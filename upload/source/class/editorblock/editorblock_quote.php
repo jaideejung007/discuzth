@@ -13,13 +13,13 @@ if(!defined('IN_DISCUZ')) {
 class editorblock_quote {
 
 	var $version = '1.0.5';
-	var $name = '引言';
+	var $name = 'คำอ้างอิง';
 	var $available = 1; 
 	var $columns = 1; 
 	var $identifier = 'quote';
-	var $description = '引言';
+	var $description = 'คำอ้างอิง';
 	var $filename = 'quote';
-	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">云诺</a>';
+	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">Yunnuo</a>';
 	var $type = '0'; 
 
 	function __construct() {
@@ -39,12 +39,12 @@ class editorblock_quote {
 		return <<<EOF
 {
     "data" : {
-        "text" : "引言内容.",
-        "caption" : "引言描述",
+        "text" : "เนื้อหาคำอ้างอิง",
+        "caption" : "คำอธิบายคำอ้างอิง",
         "alignment" : "left"
     }
-    "id": "ZT8S70Q34G", // 区块id
-    "type": "quote" // 区块类型
+    "id": "ZT8S70Q34G", // ไอดีบล็อก
+    "type": "quote" // ประเภทบล็อก
 }
 EOF;
 	}
@@ -59,8 +59,8 @@ EOF;
 		  inlineToolbar: true,
 		  shortcut: 'CMD+SHIFT+O',
 		  config: {
-			quotePlaceholder: '请输入引言内容',
-			captionPlaceholder: '请输入引言说明',
+			quotePlaceholder: 'โปรดกรอกเนื้อหาคำอ้างอิง',
+			captionPlaceholder: 'โปรดกรอกคำอธิบายคำอ้างอิง',
 		  },
                   tunes: ['anchorTune', 'hideTune']
 	},
@@ -69,9 +69,9 @@ EOF;
        messages: {
           tools: {
             'quote': {
-                  'Align Left': '引言说明 居左 显示',
-                  'Align Center': '引言说明 居中 显示',
-                  'Align Right': '引言说明 居右 显示',
+                  'Align Left': 'แสดงคำอธิบาย ชิดซ้าย',
+                  'Align Center': 'แสดงคำอธิบาย กึ่งกลาง',
+                  'Align Right': 'แสดงคำอธิบาย ชิดขวา',
             }
           }
         },

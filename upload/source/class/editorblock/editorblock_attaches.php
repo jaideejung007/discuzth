@@ -13,13 +13,13 @@ if(!defined('IN_DISCUZ')) {
 class editorblock_attaches {
 
 	var $version = '1.3.3';
-	var $name = '附件';
+	var $name = 'ไฟล์แนบ';
 	var $available = 1; 
 	var $columns = 1; 
 	var $identifier = 'attaches';
-	var $description = '附件上传区块';
+	var $description = 'บล็อกสำหรับอัปโหลดไฟล์แนบ';
 	var $filename = 'attaches';
-	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">云诺</a>';
+	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">Yunnuo</a>';
 	var $type = '2'; 
 
 	function __construct() {
@@ -74,8 +74,8 @@ EOF;
                 remote_attachurl: editor_remote_attachurl,
                 attachurl: editor_attachurl,
                 additionalRequestHeaders: {},
-                errorMessage: '文件上传失败，请重试',
-                buttonText: '请选择需要上传的文件',
+                errorMessage: 'อัปโหลดไฟล์ไม่สำเร็จ โปรดลองอีกครั้ง',
+                buttonText: 'โปรดเลือกไฟล์ที่ต้องการอัปโหลด',
             },
             tunes: ['anchorTune', 'hideTune']
         },
@@ -84,11 +84,11 @@ EOF;
        messages: {
           tools: {
             'attaches': {
-        	  'Unsupported file type': '不支持的文件类型',
-        	  'File has exceptions': '文件存在异常',
-        	  'File size cannot exceed ': '文件大小不可超过 ',
-        	  'User group does not support uploading this type of file': '用户组不支持上传该类型的文件',
-        	  'Couldn’t upload attachment. Please try another.': '无法上传附件，请尝试另一个。',
+        	  'Unsupported file type': 'ประเภทไฟล์ไม่รองรับ',
+        	  'File has exceptions': 'ไฟล์มีความผิดปกติ',
+        	  'File size cannot exceed ': 'ขนาดไฟล์ต้องไม่เกิน ',
+        	  'User group does not support uploading this type of file': 'กลุ่มผู้ใช้ไม่รองรับการอัปโหลดไฟล์ประเภทนี้',
+        	  'Couldn’t upload attachment. Please try another.': 'ไม่สามารถอัปโหลดไฟล์แนบได้ โปรดลองไฟล์อื่น',
             }
           }
         },

@@ -817,7 +817,7 @@ EOT;
 		}
 		$forum = $mforum[$k];
 
-		if(strlen($_GET['namenew']) > 50) {
+		if(mb_strlen($_GET['namenew'], 'UTF-8') > 150) { /*discuzth*/
 			cpmsg('forums_name_toolong', '', 'error', ['frame' => $multiset]);
 		}
 

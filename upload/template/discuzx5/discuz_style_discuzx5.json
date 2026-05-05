@@ -5,12 +5,12 @@
     "From": "Discuz!",
     "Data": {
         "styleid": "2",
-        "name": "X5模版",
+        "name": "เทมเพลต X5",
         "available": "1",
         "templateid": "2",
         "extstyle": "",
         "version": "X5.0",
-        "tplname": "X5模版",
+        "tplname": "เทมเพลต X5",
         "directory": ".\/template\/discuzx5",
         "copyright": "Discuz!",
         "style": {
@@ -70,7 +70,7 @@
         "var": {
             "template": {
                 "displayorder": "0",
-                "title": "界面设置",
+                "title": "การแสดงผล",
                 "description": "",
                 "variable": "template",
                 "type": "stylePage",
@@ -79,7 +79,7 @@
             },
             "template_top": {
                 "displayorder": "10",
-                "title": "模版头部",
+                "title": "ส่วนหัวเทมเพลต",
                 "description": "",
                 "variable": "template_top",
                 "type": "styleTitle",
@@ -88,8 +88,8 @@
             },
             "is_search": {
                 "displayorder": "11",
-                "title": "搜索框",
-                "description": "定义顶部搜索框的开关",
+                "title": "ช่องค้นหา",
+                "description": "กำหนดการเปิดใช้งานช่องค้นหาที่ด้านบน",
                 "variable": "is_search",
                 "type": "radio",
                 "value": "1",
@@ -97,8 +97,8 @@
             },
             "is_fixtop": {
                 "displayorder": "12",
-                "title": "顶部导航固定",
-                "description": "当向上滚动屏幕时，主导航将即时出现在屏幕的顶部",
+                "title": "ตรึงเมนูนำทางด้านบน",
+                "description": "เมื่อเลื่อนหน้าจอขึ้น เมนูนำทางหลักจะปรากฏที่ด้านบนของหน้าจอทันที",
                 "variable": "is_fixtop",
                 "type": "radio",
                 "value": "1",
@@ -106,8 +106,8 @@
             },
             "top_navnum": {
                 "displayorder": "13",
-                "title": "导航显示数量",
-                "description": "导航最多显示几个后显示“更多”",
+                "title": "จำนวนเมนูนำทางที่แสดง",
+                "description": "จำนวนเมนูนำทางสูงสุดที่จะแสดงก่อนจะแสดงเมนู “เพิ่มเติม”",
                 "variable": "top_navnum",
                 "type": "number",
                 "value": "8",
@@ -115,8 +115,8 @@
             },
             "top_nav_widthauto": {
                 "displayorder": "14",
-                "title": "导航自由宽度",
-                "description": "选择“是”导航显示自由宽度，选择“否”导航显示固定宽度",
+                "title": "ความกว้างเมนูนำทางแบบอิสระ",
+                "description": "เลือก “ใช่” เพื่อแสดงความกว้างแบบอิสระ เลือก “ไม่” เพื่อแสดงความกว้างแบบคงที่",
                 "variable": "top_nav_widthauto",
                 "type": "radio",
                 "value": "0",
@@ -124,8 +124,8 @@
             },
             "top_nav_bgc": {
                 "displayorder": "15",
-                "title": "导航背景颜色",
-                "description": "配色导航背景颜色，留空为默认的白色",
+                "title": "สีพื้นหลังเมนูนำทาง",
+                "description": "กำหนดสีพื้นหลังของเมนูนำทาง เว้นว่างไว้เพื่อใช้สีขาวเริ่มต้น",
                 "variable": "top_nav_bgc",
                 "type": "color",
                 "value": "",
@@ -133,8 +133,8 @@
             },
             "top_nav_dark": {
                 "displayorder": "16",
-                "title": "导航背景深色",
-                "description": "跟上面的导航背景颜色一起使用，如果设置的是深色背景颜色，并选择了“导航背景深色”为是，导航文字颜色则会显示为白色",
+                "title": "พื้นหลังเมนูนำทางสีเข้ม",
+                "description": "ใช้งานร่วมกับสีพื้นหลังเมนูนำทางด้านบน หากตั้งค่าเป็นสีเข้มและเลือก “ใช่” สีตัวอักษรจะเปลี่ยนเป็นสีขาวอัตโนมัติ",
                 "variable": "top_nav_dark",
                 "type": "radio",
                 "value": "0",
@@ -142,8 +142,8 @@
             },
             "top_fastnav": {
                 "displayorder": "17",
-                "title": "快捷导航",
-                "description": "是否显示用户名下拉中的快捷导航",
+                "title": "เมนูทางลัด",
+                "description": "แสดงเมนูทางลัดในรายการดรอปดาวน์ของชื่อผู้ใช้หรือไม่",
                 "variable": "top_fastnav",
                 "type": "radio",
                 "value": "1",
@@ -151,7 +151,7 @@
             },
             "sider_tool": {
                 "displayorder": "20",
-                "title": "侧边工具栏",
+                "title": "แถบเครื่องมือด้านข้าง",
                 "description": "",
                 "variable": "sider_tool",
                 "type": "styleTitle",
@@ -160,7 +160,7 @@
             },
             "sider_wechat": {
                 "displayorder": "22",
-                "title": "微信客服",
+                "title": "ฝ่ายบริการลูกค้า WeChat",
                 "description": "",
                 "variable": "sider_wechat",
                 "type": "radio",
@@ -169,7 +169,7 @@
             },
             "sider_wechat_qrcode": {
                 "displayorder": "23",
-                "title": "微信客服二维码",
+                "title": "QR Code ฝ่ายบริการลูกค้า WeChat",
                 "description": "",
                 "variable": "sider_wechat_qrcode",
                 "type": "uploadimage",
@@ -178,16 +178,16 @@
             },
             "sider_wechat_txt": {
                 "displayorder": "24",
-                "title": "微信客服文字说明",
+                "title": "ข้อความอธิบายฝ่ายบริการลูกค้า WeChat",
                 "description": "",
                 "variable": "sider_wechat_txt",
                 "type": "text",
-                "value": "关注公众号",
+                "value": "ติดตามบัญชีทางการ",
                 "extra": ""
             },
             "sider_fastpost": {
                 "displayorder": "25",
-                "title": "快速发帖",
+                "title": "โพสต์ด่วน",
                 "description": "",
                 "variable": "sider_fastpost",
                 "type": "radio",
@@ -196,7 +196,7 @@
             },
             "template_bottom": {
                 "displayorder": "30",
-                "title": "模版底部",
+                "title": "ส่วนท้ายเทมเพลต",
                 "description": "",
                 "variable": "template_bottom",
                 "type": "styleTitle",
@@ -205,8 +205,8 @@
             },
             "bottom_bgc": {
                 "displayorder": "31",
-                "title": "底部背景颜色",
-                "description": "设置底部的背景颜色",
+                "title": "สีพื้นหลังส่วนท้าย",
+                "description": "ตั้งค่าสีพื้นหลังของพื้นที่ส่วนท้าย",
                 "variable": "bottom_bgc",
                 "type": "color",
                 "value": "#333333",
@@ -214,8 +214,8 @@
             },
             "bottom_dark": {
                 "displayorder": "32",
-                "title": "底部背景深色",
-                "description": "跟上面的底部背景颜色一起使用，如果设置的是深色背景颜色，并选择了“底部背景深色”为是，底部文字颜色则会显示为白色",
+                "title": "พื้นหลังส่วนท้ายสีเข้ม",
+                "description": "ใช้งานร่วมกับสีพื้นหลังส่วนท้ายด้านบน หากตั้งค่าเป็นสีเข้มและเลือก “ใช่” สีตัวอักษรส่วนท้ายจะเปลี่ยนเป็นสีขาวอัตโนมัติ",
                 "variable": "bottom_dark",
                 "type": "radio",
                 "value": "1",
@@ -223,8 +223,8 @@
             },
             "bottom_qrcode": {
                 "displayorder": "33",
-                "title": "二维码",
-                "description": "不设置将显示默认图片，如果二维码和二维码文字都不设置，将不显示",
+                "title": "QR Code",
+                "description": "หากไม่ตั้งค่าจะแสดงรูปภาพเริ่มต้น หากไม่ตั้งค่าทั้ง QR Code และข้อความ ส่วนนี้จะไม่แสดงผล",
                 "variable": "bottom_qrcode",
                 "type": "uploadimage",
                 "value": "template\/discuzx5\/static\/images\/ewm_a.jpg",
@@ -232,25 +232,25 @@
             },
             "bottom_qrcodetxt": {
                 "displayorder": "34",
-                "title": "二维码文字",
-                "description": "不设置将显示默认文字，如果二维码和二维码文字都不设置，将不显示",
+                "title": "ข้อความ QR Code",
+                "description": "หากไม่ตั้งค่าจะแสดงข้อความเริ่มต้น หากไม่ตั้งค่าทั้ง QR Code และข้อความ ส่วนนี้จะไม่แสดงผล",
                 "variable": "bottom_qrcodetxt",
                 "type": "text",
-                "value": "关注公众号",
+                "value": "ติดตามบัญชีทางการ",
                 "extra": ""
             },
             "bottom_txt": {
                 "displayorder": "35",
-                "title": "底部文字信息",
+                "title": "ข้อมูลข้อความส่วนท้าย",
                 "description": "",
                 "variable": "bottom_txt",
                 "type": "text",
-                "value": "相关侵权、举报、投诉及建议等，请发 E-mail：admin@discuz.vip",
+                "value": "หากพบการละเมิดลิขสิทธิ์ รายงานปัญหา ร้องเรียน หรือมีข้อเสนอแนะ โปรดส่งอีเมลไปที่: support@discuzth.com",
                 "extra": ""
             },
             "admin": {
                 "displayorder": "100",
-                "title": "后台设置",
+                "title": "การตั้งค่าหลังบ้าน",
                 "description": "",
                 "variable": "admin",
                 "type": "stylePage",
@@ -259,7 +259,7 @@
             },
             "admin_color": {
                 "displayorder": "101",
-                "title": "后台主色调",
+                "title": "โทนสีหลักของระบบหลังบ้าน",
                 "description": "",
                 "variable": "admin_color",
                 "type": "color",

@@ -99,7 +99,7 @@ function show_releasetips() {
 		table_common_setting::t()->update('sitereleasetips', 1);
 		$sitereleasetips = 1;
 		require_once libfile('function/cloudaddons');
-		$newversion = json_decode(cloudaddons_open('&mod=app&ac=upgrade'), true);
+		$newversion = json_decode(cloudaddons_open_dzth('&mod=app&ac=upgrade'), true); /*discuzth*/
 		if(!empty($newversion['newversion'])) {
 			$newversion['updatetime'] = $_G['timestamp'];
 			table_common_setting::t()->update_setting('cloudaddons_newversion', ((CHARSET == 'utf-8') ? $newversion : json_encode($newversion)));
@@ -343,7 +343,7 @@ function show_news() {
 			$downlist[] = '<a href="'.diconv($value['url'], 'utf-8', CHARSET).'" target="_blank">'.discuzcode(strip_tags(diconv($value['title'], 'utf-8', CHARSET)), 1, 0).'</a>';
 		}
 
-		$tips .= cplang('download_latest').': <a href="https://gitee.com/Discuz/DiscuzX/attach_files" target="_blank"'.($newver ? ' style="font-weight: bold;color:red"' : '').'>Discuz! '.$newversion['newversion']['version'].' '.$newversion['newversion']['release'].'</a>';
+		$tips .= cplang('download_latest').': <a href="https://go.discuzth.com/dzx5-th-github-release" target="_blank"'.($newver ? ' style="font-weight: bold;color:red"' : '').'>Discuz! '.$newversion['newversion']['version'].' '.$newversion['newversion']['release'].'</a>';
 		if($newver && isfounder()) {
 			$tips .= '&#x3001;<a style="font-weight: bold;color:red" href="'.ADMINSCRIPT.'?action=founder&operation=upgrade">'.cplang('menu_upgrade').'</a>';
 		}
@@ -370,11 +370,11 @@ function show_news() {
 		}
 	} else {
 		showboxrow('', ['class="dcol d-1"', 'class="dcol td21" style="text-align:right;"'], [
-			'<a href="https://www.dismall.com/" target="_blank">'.cplang('log_in_to_update').'</a>',
+			'<a href="https://www.discuzth.com/" target="_blank">'.cplang('log_in_to_update').'</a>', /*discuzth*/
 			'',
 		]);
 		showboxrow('', ['class="dcol d-1"', 'class="dcol td21" style="text-align:right;"'], [
-			'<a href="https://gitee.com/3dming/DiscuzL/attach_files" target="_blank">'.cplang('download_latest').'</a>',
+			'<a href="https://go.discuzth.com/dzx5-th-github-release" target="_blank">'.cplang('download_latest').'</a>', /*discuzth*/
 			'',
 		]);
 	}
@@ -498,7 +498,7 @@ function show_forever_thanks() {
 	showboxheader('home_dev', 'listbox fixpadding', 'id="home_dev"');
 	showboxrow('', ['class="dcol d-1 lineheight"', 'class="dcol lineheight team"'], [$copyRightMessage[0], '<span class="bold">'.$copyRightMessage[1].', '.$copyRightMessage[2].'</span>']);
 	showboxrow('', ['class="dcol d-1 lineheight"', 'class="dcol lineheight team"'], [cplang('contributors'), $gitTeamStr]);
-	showboxrow('', ['class="dcol d-1 lineheight"', 'class="dcol lineheight team"'], [cplang('home_forever'), '<a href="javascript:display(\'history\')">点击查看</a>']);
+	showboxrow('', ['class="dcol d-1 lineheight"', 'class="dcol lineheight team"'], [cplang('home_forever'), '<a href="javascript:display(\'history\')">คลิกเพื่อดู</a>']);
 	showtagheader('div', 'history');
 	showboxrow('', ['class="dcol d-1 lineheight"', 'class="dcol lineheight team"'], [cplang('home_dev_manager'), '<a href="https://discuz.dismall.com/home.php?mod=space&uid=1" class="lightlink2" target="_blank">'.cplang('dev_manager').'</a>']);
 	showboxrow('', ['class="dcol d-1 lineheight"', 'class="dcol lineheight team"'], [cplang('home_dev_team'), $devTeamStr]);

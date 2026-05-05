@@ -1,0 +1,86 @@
+<?php
+
+/**
+ * [Discuz!] (C)2001-2099 Discuz! Team
+ * This is NOT a freeware, use is subject to license terms
+ * https://license.discuz.vip
+ */
+
+if(!defined('IN_DISCUZ')) {
+	exit('Access Denied');
+}
+
+$lang =
+	[
+	'categorylist_fids' => 'บอร์ดที่เกี่ยวข้อง',
+	'categorylist_fids_comment' => 'ตั้งค่าบอร์ดที่อนุญาตให้ดึงข้อมูลกระทู้ใหม่มาแสดงผล สามารถกด CTRL ค้างไว้เพื่อเลือกหลายรายการ หรือไม่เลือกเลยเพื่อไม่จำกัด',
+	'categorylist_startrow' => 'แถวเริ่มต้นของข้อมูล',
+	'categorylist_startrow_comment' => 'ระบุแถวข้อมูลที่ต้องการเริ่มแสดงผล โดยเลข 0 คือเริ่มจากแถวแรก',
+	'categorylist_showitems' => 'จำนวนรายการที่แสดง',
+	'categorylist_showitems_comment' => 'กำหนดจำนวนรายการกระทู้ที่จะแสดงผลในแต่ละครั้ง โดยระบุเป็นจำนวนเต็มที่มากกว่า 0',
+	'categorylist_titlelength' => 'ความยาวหัวข้อสูงสุด',
+	'categorylist_titlelength_comment' => 'กำหนดความยาวสูงสุดของหัวข้อกระทู้ หากยาวเกินจะถูกย่อให้อัตโนมัติ โดยเลข 0 คือไม่จำกัด',
+	'categorylist_fnamelength' => 'ความยาวหัวข้อรวมชื่อบอร์ด',
+	'categorylist_fnamelength_comment' => 'ตั้งค่าว่าจะนำความยาวของชื่อบอร์ดมาคำนวณรวมกับความยาวหัวข้อด้วยหรือไม่',
+	'categorylist_summarylength' => 'ความยาวเนื้อหาเรื่องย่อ',
+	'categorylist_summarylength_comment' => 'กำหนดจำนวนตัวอักษรของเนื้อหาเรื่องย่อที่จะแสดง โดยเลข 0 คือใช้ค่าเริ่มต้น 255',
+	'categorylist_tids' => 'ระบุกระทู้',
+	'categorylist_tids_comment' => 'ระบุไอดีกระทู้ (tid) ที่ต้องการแสดง หากมีหลายไอดีให้ใช้เครื่องหมายคอมมาแยก โดยเว้นว่างไว้หากไม่คัดกรอง',
+	'categorylist_keyword' => 'คำค้นหาหัวข้อ',
+	'categorylist_keyword_comment' => 'ระบุคำสำคัญที่ต้องการค้นหาในหัวข้อ โดยเว้นว่างไว้หากไม่คัดกรอง สามารถใช้ * แทนคำใด ๆ ได้ หรือใช้ AND/OR เพื่อระบุเงื่อนไข',
+	'categorylist_sortids' => 'หมวดหมู่ข้อมูล',
+	'categorylist_sortids_comment' => 'เลือกหมวดหมู่ข้อมูลที่ต้องการดึงข้อมูล หากไม่เลือกเลยจะถือว่าไม่จำกัด',
+	'categorylist_styleids' => 'เทมเพลตหมวดหมู่',
+	'categorylist_styleids_comment' => 'เลือกรูปแบบเทมเพลตที่ตั้งค่าไว้ในส่วนหมวดหมู่ข้อมูลในระบบหลังบ้าน',
+	'categorylist_styleids_style1' => 'รูปแบบ 1',
+	'categorylist_styleids_style2' => 'รูปแบบ 2',
+	'categorylist_styleids_style3' => 'รูปแบบ 3',
+	'categorylist_styleids_style4' => 'รูปแบบ 4',
+	'categorylist_styleids_style5' => 'รูปแบบ 5',
+	'categorylist_typeids_all' => 'หมวดหมู่กระทู้ทั้งหมด',
+	'categorylist_categoryids' => 'หมวดหมู่ข้อมูล',
+	'categorylist_categoryids_comment' => 'เลือกดึงข้อมูลจากหมวดหมู่ข้อมูลที่กำหนด หากไม่เลือกเลยจะถือว่าไม่จำกัด',
+	'categorylist_categoryids_all' => 'หมวดหมู่ข้อมูลทั้งหมด',
+	'categorylist_digest' => 'คัดกรองกระทู้สำคัญ',
+	'categorylist_digest_comment' => 'กำหนดระดับความสำคัญของกระทู้ที่ต้องการดึงข้อมูล หากไม่เลือกเลยจะถือว่าไม่คัดกรอง',
+	'categorylist_digest_0' => 'กระทู้ทั่วไป',
+	'categorylist_digest_1' => 'สำคัญ ระดับ I',
+	'categorylist_digest_2' => 'สำคัญ ระดับ II',
+	'categorylist_digest_3' => 'สำคัญ ระดับ III',
+	'categorylist_stick' => 'คัดกรองกระทู้ปักหมุด',
+	'categorylist_stick_comment' => 'กำหนดขอบเขตของการปักหมุดกระทู้ หากไม่เลือกเลยจะถือว่าไม่คัดกรอง',
+	'categorylist_stick_0' => 'กระทู้ทั่วไป',
+	'categorylist_stick_1' => 'ปักหมุด ระดับ I',
+	'categorylist_stick_2' => 'ปักหมุด ระดับ II',
+	'categorylist_stick_3' => 'ปักหมุด ระดับ III',
+	'categorylist_special' => 'คัดกรองกระทู้พิเศษ',
+	'categorylist_special_comment' => 'กำหนดประเภทกระทู้พิเศษที่ต้องการดึงข้อมูล หากไม่เลือกเลยจะถือว่าไม่คัดกรอง',
+	'categorylist_special_1' => 'กระทู้แบบสำรวจ',
+	'categorylist_special_2' => 'กระทู้ค้าขาย',
+	'categorylist_special_3' => 'กระทู้รางวัล',
+	'categorylist_special_4' => 'กระทู้กิจกรรม',
+	'categorylist_special_5' => 'กระทู้โต้วาที',
+	'categorylist_special_0' => 'กระทู้ทั่วไป',
+	'categorylist_special_reward' => 'คัดกรองกระทู้รางวัล',
+	'categorylist_special_reward_comment' => 'ตั้งค่าการคัดกรองประเภทของกระทู้รางวัล',
+	'categorylist_special_reward_0' => 'ทั้งหมด',
+	'categorylist_special_reward_1' => 'แก้ปัญหาแล้ว',
+	'categorylist_special_reward_2' => 'ยังไม่แก้ปัญหา',
+	'categorylist_recommend' => 'คัดกรองกระทู้แนะนำ',
+	'categorylist_recommend_comment' => 'เลือกว่าจะแสดงเฉพาะกระทู้ที่ได้รับการแนะนำเท่านั้นหรือไม่',
+	'categorylist_orderby' => 'รูปแบบการจัดเรียงกระทู้',
+	'categorylist_orderby_comment' => 'ตั้งค่าฟิลด์หรือรูปแบบที่ใช้ในการจัดเรียงกระทู้',
+	'categorylist_orderby_lastpost' => 'เรียงตามเวลาการตอบกลับล่าสุด',
+	'categorylist_orderby_dateline' => 'เรียงตามเวลาที่เผยแพร่',
+	'categorylist_orderby_replies' => 'เรียงตามจำนวนการตอบกลับ',
+	'categorylist_orderby_views' => 'เรียงตามจำนวนการเข้าชม',
+	'categorylist_orderby_heats' => 'เรียงตามยอดนิยม',
+	'categorylist_orderby_recommends' => 'เรียงตามการประเมินกระทู้',
+	'categorylist_orderby_hourviews' => 'เรียงตามยอดการเข้าชมในรอบเวลาที่กำหนด',
+	'categorylist_orderby_todayviews' => 'เรียงตามยอดการเข้าชมในวันนี้',
+	'categorylist_orderby_weekviews' => 'เรียงตามยอดการเข้าชมในสัปดาห์นี้',
+	'categorylist_orderby_monthviews' => 'เรียงตามยอดการเข้าชมในเดือนนี้',
+	'categorylist_orderby_hours' => 'ระยะเวลาย้อนหลัง (ชั่วโมง)',
+	'categorylist_orderby_hours_comment' => 'ระบุจำนวนชั่วโมงย้อนหลังเพื่อคำนวณยอดการเข้าชมสำหรับการจัดเรียง',
+	];
+

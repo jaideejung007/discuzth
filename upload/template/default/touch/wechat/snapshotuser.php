@@ -38,10 +38,10 @@
 <div class="container">
     <div>
         <img src="<!--{if $_G['style']['boardimg']}-->{$_G['style']['boardimg']}<!--{else}-->static/image/common/logo.png<!--{/if}-->" alt="Discuz！" style="width: 150px;height: auto;">
-        <h2>温馨提示</h2>
-        <p>为保证您的使用体验</p>
-        <p>请您点击下方"<span style="color: green;"><strong>使用完整服务</strong></span>"进行授权</p>
-        <p>本次授权将获取您的<span style="color: blue;">微信昵称、头像</span></p>
+        <h2>ข้อแนะนำ</h2>
+        <p>เพื่อประสบการณ์การใช้งานที่ดีที่สุดของคุณ</p>
+        <p>กรุณาคลิกที่ "<span style="color: green;"><strong>ใช้งานบริการเต็มรูปแบบ</strong></span>" ด้านล่างเพื่ออนุญาตสิทธิ์</p>
+        <p>การอนุญาตสิทธิ์นี้จะเข้าถึง <span style="color: blue;">ชื่อเล่นและรูปโปรไฟล์ WeChat</span> ของคุณ</p>
     </div>
     <div>
         <img src="static/image/wechat/tip.png" alt="Discuz！" class="footer-tip">

@@ -12,7 +12,7 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 
 $style = table_common_style::t()->fetch_by_styleid($id);
 if(ispluginkey(basename($style['directory']))) {
-	cloudaddons_validator(basename($style['directory']).'.template');
+	//cloudaddons_validator(basename($style['directory']).'.template'); // discuzth
 }
 $style['name'] .= '_'.random(4);
 $styleidnew = table_common_style::t()->insert(['name' => $style['name'], 'available' => $style['available'], 'templateid' => $style['templateid']], true);

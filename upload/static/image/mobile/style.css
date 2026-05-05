@@ -825,7 +825,8 @@ body.pg_logging, body.pg_register, body.pg_lostpasswd_mobile, body.pg_lostpasswd
 .myinfo_list li b {color:var(--dz-FC-color)}
 .myinfo_list_ico {margin:0 15px 10px;padding:10px;background-color:var(--dz-BG-0);border:1px solid var(--dz-BOR-ed);overflow:hidden;border-radius:6px}
 .myinfo_list_ico li {float:left;width:50%;box-sizing:border-box}
-.myinfo_list_ico li a {display:block;background-color:var(--dz-BG-body);margin:5px;padding:10px;height:26px;line-height:26px;font-size:14px;overflow:hidden;border-radius:6px}
+/*discuzth*/
+.myinfo_list_ico li a {display:block;background-color:var(--dz-BG-body);margin:5px;padding:10px;font-size:14px;overflow:hidden;border-radius:6px}
 .myinfo_list_ico li a i {float:left;width:26px;height:26px;line-height:26px;font-size:14px;text-align:center;margin-right:8px;background-color:var(--dz-BG-4);color:var(--dz-FC-fff);overflow:hidden;border-radius:50%}
 .myinfo_list_ico li:nth-child(5n-4) a i {background-color:var(--dz-BG-4)}
 .myinfo_list_ico li:nth-child(5n-3) a i {background-color:var(--dz-BG-2)}

@@ -156,7 +156,7 @@
 			<div class="comment-footer">
 				<span class="comment-time">{:dateline_formatted:}</span>
 				<div class="comment-actions">
-					<a href="home.php?mod=spacecp&ac=doing&op=docomment&handlekey=msg_{:doid:}&doid={:doid:}&docid={:docid:}&key={:key:}" class="comment-action comment-action-reply dialog" onclick="return false;">回复</a>
+					<a href="home.php?mod=spacecp&ac=doing&op=docomment&handlekey=msg_{:doid:}&doid={:doid:}&docid={:docid:}&key={:key:}" class="comment-action comment-action-reply dialog" onclick="return false;">ตอบกลับ</a>
 					<!--{:delete_btn:}-->
 				</div>
 			</div>
@@ -169,7 +169,7 @@
 	<!-- 评论展开/折叠按钮模板 -->
 	<div class="comment-toggle" data-root-id="{:root_id:}">
 		<a href="javascript:;" class="toggle-comment-btn" onclick="toggle_child_comments({:root_id:});">
-			<span class="toggle-icon">+</span> 查看更多{:hide_count:}条评论
+			<span class="toggle-icon">+</span> ดูความคิดเห็นเพิ่มเติมอีก {:hide_count:} รายการ
 		</a>
 	</div>
 </script>
@@ -187,32 +187,32 @@
 <script type="html" id="noCommentsTemplate">
 	<!-- 简化的无评论模板 -->
 	<span id="{:key:}_form_{:doid:}_0"></span>
-	<div class="no-comments">暂无评论，快来抢沙发吧！</div>
+	<div class="no-comments">ยังไม่มีความคิดเห็น มาเป็นคนแรกที่เจิมเลย!</div>
 	<div class="comment-triangle"></div>
 </script>
 
 <script type="html" id="toggleOpenTemplate">
 	<!-- 评论展开按钮模板 -->
-	<span class="toggle-icon">-</span> 收起评论
+	<span class="toggle-icon">-</span> พับเก็บความคิดเห็น
 </script>
 
 <script type="html" id="toggleCloseTemplate">
 	<!-- 评论折叠按钮模板 -->
-	<span class="toggle-icon">+</span> 查看更多{:hide_count:}条评论
+	<span class="toggle-icon">+</span> ดูความคิดเห็นเพิ่มเติมอีก {:hide_count:} รายการ
 </script>
 
 <script type="html" id="loadMoreBtnTemplate">
 	<!-- 加载更多按钮模板 -->
-	<a href="javascript:;" onclick="loadMoreComments({:doid:}, '{:key:}', {:next_page:});">加载更多评论...</a>
+	<a href="javascript:;" onclick="loadMoreComments({:doid:}, '{:key:}', {:next_page:});">โหลดความคิดเห็นเพิ่มเติม......</a>
 </script>
 
 <script type="text/javascript">
-// 保存当前页码的全局变量，与电脑版保持一致
+// ตัวแปร Global สำหรับเก็บเลขหน้าปัจจุบัน เพื่อให้สอดคล้องกับเวอร์ชัน PC
 var current_comment_pages = {};
 
-// 生成单个评论项HTML - 使用<script type="html">模板
+// สร้าง HTML สำหรับรายการความคิดเห็นเดี่ยว - ใช้เทมเพลต <script type="html">
 function generateCommentItemHTML(comment, doid, key) {
-	// 如果是展开/折叠按钮，使用toggle模板
+	// หากเป็นปุ่มขยาย/พับเก็บ ให้ใช้เทมเพลต toggle
 	if (comment.is_toggle) {
 		var template = document.getElementById('commentToggleTemplate').innerHTML;
 		var data = {
@@ -223,31 +223,31 @@ function generateCommentItemHTML(comment, doid, key) {
 			.replace(/{:hide_count:}/g, data.hide_count);
 	}
 	
-	// 普通评论，使用commentItem模板
+	// ความคิดเห็นทั่วไป ให้ใช้เทมเพลต commentItem
 	var template = document.getElementById('commentItemTemplate').innerHTML;
 	var commentClass = 'comment-item';
 	if (comment.layer > 0) commentClass += ' comment-item-child';
 	if (comment.is_hidden) commentClass += ' comment-item-hidden';
 	
-	// 生成头像HTML
+	// สร้าง HTML รูปโปรไฟล์
 	var avatarHtml = '';
 	if (comment.layer == 0) {
 		avatarHtml = '<div class="comment-avatar"><a href="home.php?mod=space&uid=' + comment.uid + '"><img src="' + comment.avatar + '" alt="' + comment.username + '" class="avatar-small"></a></div>';
 	}
 	
-	// 生成回复信息HTML
+	// สร้าง HTML ข้อมูลการตอบกลับ
 	var replyToUserHtml = '';
 	if (comment.reply_to_user) {
-		replyToUserHtml = '<span class="comment-reply-to">回复 <a href="home.php?mod=space&uid=' + comment.reply_uid + '">' + comment.reply_to_user + '</a></span>';
+		replyToUserHtml = '<span class="comment-reply-to">ตอบกลับ <a href="home.php?mod=space&uid=' + comment.reply_uid + '">' + comment.reply_to_user + '</a></span>';
 	}
 	
-	// 生成删除按钮HTML
+	// สร้าง HTML ปุ่มลบ
 	var deleteBtnHtml = '';
 	if (comment.can_delete) {
-		deleteBtnHtml = '<a href="home.php?mod=spacecp&ac=doing&op=delete&doid=' + comment.doid + '&docid=' + comment.id + '&handlekey=doinghk_' + comment.doid + '_' + comment.id + '" id="' + key + '_doing_delete_' + comment.doid + '_' + comment.id + '" class="comment-action comment-action-delete dialog">删除</a>';
+		deleteBtnHtml = '<a href="home.php?mod=spacecp&ac=doing&op=delete&doid=' + comment.doid + '&docid=' + comment.id + '&handlekey=doinghk_' + comment.doid + '_' + comment.id + '" id="' + key + '_doing_delete_' + comment.doid + '_' + comment.id + '" class="comment-action comment-action-delete dialog">ลบ</a>';
 	}
 	
-	// 替换模板变量
+	// แทนที่ตัวแปรในเทมเพลต
 	var html = template;
 	html = html.replace(/{:id:}/g, comment.id);
 	html = html.replace(/{:uid:}/g, comment.uid);
@@ -265,48 +265,48 @@ function generateCommentItemHTML(comment, doid, key) {
 	html = html.replace(/{:reply_to_user:}/g, replyToUserHtml);
 	html = html.replace(/{:delete_btn:}/g, deleteBtnHtml);
 	
-	// 移除所有没有内容的注释标签
+	// ลบแท็กคอมเมนต์ที่ไม่มีเนื้อหาออกทั้งหมด
 	html = html.replace(/<!--\s*-->\s*/g, '');
 	
 	return html;
 }
 
-// 生成评论列表HTML - 使用<script type="html">模板
+// สร้าง HTML รายการความคิดเห็น - ใช้เทมเพลต <script type="html">
 function generateCommentHTML(data, doid, key) {
-	// 如果没有评论，使用noComments模板
+	// หากไม่มีความคิดเห็น ให้ใช้เทมเพลต noComments
 	if (!data.list || data.list.length === 0) {
 		var template = document.getElementById('noCommentsTemplate').innerHTML;
 		return template.replace(/{:key:}/g, key)
 			.replace(/{:doid:}/g, doid);
 	}
 	
-	// 有评论，使用commentList模板
+	// หากมีแสดงความคิดเห็น ให้ใช้เทมเพลต commentList
 	var template = document.getElementById('commentListTemplate').innerHTML;
 	
-	// 生成所有评论项的HTML
+	// สร้าง HTML สำหรับรายการความคิดเห็นทั้งหมด
 	var commentItemsHTML = '';
 	for (var i = 0; i < data.list.length; i++) {
 		commentItemsHTML += generateCommentItemHTML(data.list[i], doid, key);
 	}
 	
-	// 生成加载更多按钮HTML
+	// สร้าง HTML สำหรับปุ่มโหลดเพิ่มเติม
 	var loadMoreHtml = '';
 	var hasMore = data.total_pages > 1 && data.page < data.total_pages;
 	if (hasMore) {
 		var nextPage = data.page + 1;
 		loadMoreHtml = '<div class="comment-load-more" data-doid="' + doid + '" data-key="' + key + '" data-next-page="' + nextPage + '">';
-		loadMoreHtml += '<a href="javascript:;" onclick="loadMoreComments(' + doid + ', \'' + key + '\', ' + nextPage + ');">加载更多评论...</a>';
+		loadMoreHtml += '<a href="javascript:;" onclick="loadMoreComments(' + doid + ', \'' + key + '\', ' + nextPage + ');">โหลดความคิดเห็นเพิ่มเติม...</a>';
 		loadMoreHtml += '</div>';
 	}
 	
-	// 替换模板变量
+	// แทนที่ตัวแปรในเทมเพลต
 	var html = template;
 	html = html.replace(/{:key:}/g, key);
 	html = html.replace(/{:doid:}/g, doid);
 	html = html.replace(/{:comment_items:}/g, commentItemsHTML);
 	html = html.replace(/{:load_more_html:}/g, loadMoreHtml);
 	
-	// 移除所有没有内容的注释标签
+	// ลบแท็กคอมเมนต์ที่ไม่มีเนื้อหาออกทั้งหมด
 	html = html.replace(/<!--\s*-->/g, '');
 	
 	return html;
@@ -319,7 +319,7 @@ function generateCommentHTML(data, doid, key) {
 	var hiddenComments = document.querySelectorAll('.comment-item-hidden[data-root-id="' + root_id + '"]');
 	
 	if (toggleIcon.textContent === '+') {
-		// 展开评论
+		// ขยายความคิดเห็น
 		var openTemplate = document.getElementById('toggleOpenTemplate').innerHTML;
 		toggleBtn.innerHTML = openTemplate;
 		for (var i = 0; i < hiddenComments.length; i++) {
@@ -327,7 +327,7 @@ function generateCommentHTML(data, doid, key) {
 			hiddenComments[i].classList.remove('comment-item-hidden');
 		}
 	} else {
-		// 折叠评论
+		// พับเก็บความคิดเห็น
 		var closeTemplate = document.getElementById('toggleCloseTemplate').innerHTML;
 		var data = {
 			hide_count: hiddenComments.length
@@ -346,7 +346,7 @@ function generateCommentHTML(data, doid, key) {
 		var formContainer = document.getElementById(formId);
 		
 		if (formContainer && formContainer.innerHTML === '') {
-			// 如果表单不存在，加载表单
+			// หากยังไม่มีแบบฟอร์ม ให้โหลดแบบฟอร์ม
 			var url = 'home.php?mod=spacecp&ac=doing&op=docomment&handlekey=msg_' + doid + '&doid=' + doid + '&docid=' + docid + '&key=' + key;
 			var xhr = new XMLHttpRequest();
 			xhr.onreadystatechange = function() {
@@ -357,7 +357,7 @@ function generateCommentHTML(data, doid, key) {
 			xhr.open('GET', url, true);
 			xhr.send();
 		} else if (formContainer) {
-			// 如果表单已存在，切换显示/隐藏
+			// หากมีแบบฟอร์มอยู่แล้ว ให้สลับการแสดงผล/ซ่อน
 			if (formContainer.style.display === 'none') {
 				formContainer.style.display = '';
 			} else {
@@ -366,57 +366,57 @@ function generateCommentHTML(data, doid, key) {
 		}
 	}
 
-	// 移动端专用的评论加载函数，请求JSON数据并解析插入 - 定义在全局作用域
+	// ฟังก์ชันโหลดความคิดเห็นเฉพาะสำหรับมือถือ ร้องขอข้อมูล JSON และนำมาแทรก - กำหนดไว้ใน Global Scope
 	function docomment_get(doid, key, page, append) {
 		var showid = key + '_' + doid;
 		var opid = key + '_do_a_op_' + doid;
 		var commentContainerId = key + 'dl' + doid;
 		
-		// 构建请求URL，Discuz!会自动判断移动端并返回JSON数据
+		// สร้าง URL คำร้องขอ Discuz! จะตรวจหาอุปกรณ์เคลื่อนที่โดยอัตโนมัติและส่งข้อมูลกลับเป็น JSON
 		var url = 'home.php?mod=spacecp&ac=doing&op=getcomment&handlekey=msg_' + doid + '&doid=' + doid + '&key=' + key;
 		
-		// 处理页码逻辑
+		// จัดการตรรกะเลขหน้า
 		var current_page = page || current_comment_pages[doid] || 1;
 		current_comment_pages[doid] = current_page;
 		
-		// 检查当前页面URL是否包含doid参数（单条动态详情页）或是否已经保存了页码
+		// ตรวจสอบว่า URL ปัจจุบันมีพารามิเตอร์ doid (หน้าสเตตัสเดี่ยว) หรือบันทึกเลขหน้าไว้แล้วหรือไม่
 		var currentUrl = window.location.href;
 		if (currentUrl.indexOf('doid=') > -1 || typeof current_comment_pages[doid] !== 'undefined') {
-			// 单条动态详情页或已经保存过页码，添加page_c参数
+			// หน้าสเตตัสเดี่ยวหรือบันทึกเลขหน้าแล้ว ให้เพิ่มพารามิเตอร์ page_c
 			url += '&page_c=' + current_page;
 		}
 		
-		// 异步请求评论列表（JSON格式）
+		// ร้องขอรายการความคิดเห็นแบบ Asynchronous (รูปแบบ JSON)
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4 && xhr.status === 200) {
 				try {
-					// 解析JSON数据
+					// วิเคราะห์ข้อมูล JSON
 					var response = JSON.parse(xhr.responseText);
 					
-					// 将结果插入到 {$key}dl{$doid} 容器中
+					// แทรกผลลัพธ์ลงในคอนเทนเนอร์ {$key}dl{$doid}
 					var commentContainer = document.getElementById(commentContainerId);
 					if (commentContainer) {
 						if (append && response.list.length > 0) {
-							// 追加评论到现有列表
+							// เพิ่มความคิดเห็นต่อท้ายรายการที่มีอยู่
 							var commentsHtml = '';
 							for (var i = 0; i < response.list.length; i++) {
 								commentsHtml += generateCommentItemHTML(response.list[i], doid, key);
 							}
 							
-							// 找到评论列表容器
+							// ค้นหาคอนเทนเนอร์รายการความคิดเห็น
 							var commentList = commentContainer.querySelector('.doing-card-comments');
 							if (commentList) {
-								// 找到加载更多按钮，插入到其前面
+								// ค้นหาปุ่มโหลดเพิ่มเติม และแทรกไว้ข้างหน้าปุ่มนั้น
 								var loadMoreBtn = commentContainer.querySelector('.comment-load-more');
 								if (loadMoreBtn) {
 									loadMoreBtn.insertAdjacentHTML('beforebegin', commentsHtml);
 								} else {
-									// 如果没有加载更多按钮，直接添加到列表末尾
+									// หากไม่มีปุ่มโหลดเพิ่มเติม ให้เพิ่มไว้ท้ายรายการโดยตรง
 									commentList.insertAdjacentHTML('beforeend', commentsHtml);
 								}
 								
-								// 更新加载更多按钮
+								// อัปเดตปุ่มโหลดเพิ่มเติม
 			if (loadMoreBtn) {
 				if (response.page < response.total_pages) {
 					var nextPage = response.page + 1;
@@ -432,16 +432,16 @@ function generateCommentHTML(data, doid, key) {
 						.replace(/{:next_page:}/g, data.next_page);
 					loadMoreBtn.innerHTML = html;
 				} else {
-					// 没有更多评论，移除加载更多按钮
+					// ไม่มีเนื้อหาความคิดเห็นเพิ่มเติม ให้ลบปุ่มโหลดเพิ่มเติมออก
 					loadMoreBtn.remove();
 				}
 			}
 							}
 						} else {
-							// 生成评论列表HTML并替换现有内容
+							// สร้าง HTML รายการความคิดเห็นและแทนที่เนื้อหาเดิม
 							var html = generateCommentHTML(response, doid, key);
 							commentContainer.innerHTML = html;
-							// 显示评论容器
+							// แสดงคอนเทนเนอร์ความคิดเห็น
 							commentContainer.style.display = '';
 						}
 					}
@@ -454,19 +454,19 @@ function generateCommentHTML(data, doid, key) {
 		xhr.send();
 	}
 
-	// 加载更多评论函数
+	// ฟังก์ชันโหลดความคิดเห็นเพิ่มเติม
 	function loadMoreComments(doid, key, page) {
 		docomment_get(doid, key, page, true);
 	}
 
-	// 使用Discuz原生样式，几乎不使用自定义CSS
+	// ใช้สไตล์ดั้งเดิมของ Discuz แทบไม่มีการใช้ CSS ที่กำหนดเอง
 var style = document.createElement('style');
-style.textContent = `		/* 评论容器 - 使用Discuz原生.do_comment样式 */
+style.textContent = `		/* คอนเทนเนอร์ความคิดเห็น - ใช้สไตล์ดั้งเดิม .do_comment ของ Discuz */
 		.doing-card-comments {
 			padding: 10px;
 		}
 
-		/* 评论项 - 使用Discuz原生.imglist li样式 */
+		/* รายการความคิดเห็น - ใช้สไตล์ดั้งเดิม .imglist li ของ Discuz */
 		.comment-item {
 			display: flex;
 			margin-bottom: 10px;
@@ -474,88 +474,88 @@ style.textContent = `		/* 评论容器 - 使用Discuz原生.do_comment样式 */
 			border-bottom: 1px solid var(--dz-BOR-ed);
 		}
 
-		/* 子评论 */
+		/* ความคิดเห็นย่อย */
 		.comment-item-child {
 			margin-left: 40px;
 			margin-top: 8px;
 		}
 
-		/* 隐藏的评论 */
+		/* ความคิดเห็นที่ถูกซ่อน */
 		.comment-item-hidden {
 			display: none;
 		}
 
-		/* 评论头像 - 使用Discuz原生.imglist .mimg样式 */
+		/* รูปโปรไฟล์ในความคิดเห็น - ใช้สไตล์ดั้งเดิม .imglist .mimg ของ Discuz */
 		.comment-avatar {
 			margin-right: 10px;
 		}
 
-		/* 小头像 - 使用Discuz原生头像样式 */
+		/* รูปโปรไฟล์ขนาดเล็ก - ใช้สไตล์รูปโปรไฟล์ดั้งเดิมของ Discuz */
 		.comment-avatar img {
 			width: 32px;
 			height: 32px;
 			border-radius: 50%;
 		}
 
-		/* 评论内容 */
+		/* เนื้อหาความคิดเห็น */
 		.comment-content {
 			flex: 1;
 		}
 
-		/* 评论头部 */
+		/* ส่วนหัวความคิดเห็น */
 		.comment-header {
 			margin-bottom: 5px;
 		}
 
-		/* 评论作者 - 使用Discuz原生样式 */
+		/* ผู้เขียนความคิดเห็น - ใช้สไตล์ดั้งเดิมของ Discuz */
 		.comment-author {
 			font-weight: 700;
 			color: var(--dz-FC-color);
 			margin-right: 5px;
 		}
 
-		/* 回复信息 */
+		/* ข้อมูลการตอบกลับ */
 		.comment-reply-to {
 			color: var(--dz-FC-999);
 			font-size: 12px;
 		}
 
-		/* 评论操作 */
+		/* การดำเนินการกับความคิดเห็น */
 		.comment-actions {
 			display: flex;
 			gap: 10px;
 			font-size: 12px;
 		}
 
-		/* 评论操作按钮 - 使用Discuz原生样式 */
+		/* ปุ่มดำเนินการกับความคิดเห็น - ใช้สไตล์ดั้งเดิมของ Discuz */
 		.comment-action {
 			color: var(--dz-FC-999);
 			text-decoration: none;
 		}
 
-		/* 回复按钮 - 使用Discuz原生样式 */
+		/* ปุ่มตอบกลับ - ใช้สไตล์ดั้งเดิมของ Discuz */
 		.comment-action-reply {
 			color: var(--dz-FC-color);
 		}
 
-		/* 删除按钮 - 使用Discuz原生样式 */
+		/* ปุ่มลบ - ใช้สไตล์ดั้งเดิมของ Discuz */
 		.comment-action-delete {
 			color: var(--dz-FC-a);
 		}
 
-		/* 展开/折叠按钮 */
+		/* ปุ่มขยาย/พับเก็บ */
 		.comment-toggle {
 			text-align: center;
 			margin: 10px 0;
 		}
 
-		/* 加载更多按钮 - 使用Discuz原生按钮样式 */
+		/* ปุ่มโหลดเพิ่มเติม - ใช้สไตล์ปุ่มดั้งเดิมของ Discuz */
 		.comment-load-more {
 			text-align: center;
 			margin-top: 10px;
 		}
 
-		/* 无评论提示 - 使用Discuz原生空状态样式 */
+		/* แจ้งเตือนเมื่อไม่มีความคิดเห็น - ใช้สไตล์สถานะว่างดั้งเดิมของ Discuz */
 		.no-comments {
 			text-align: center;
 			color: var(--dz-FC-999);
@@ -566,7 +566,7 @@ style.textContent = `		/* 评论容器 - 使用Discuz原生.do_comment样式 */
 	`;
 document.head.appendChild(style);
 	document.addEventListener('DOMContentLoaded', function() {
-		// 点赞功能
+		// ฟีเจอร์กดถูกใจ
 		var recommendBtns = document.querySelectorAll('.doing_recommend_btn');
 		for (let i = 0; i < recommendBtns.length; i++) {
 			recommendBtns[i].addEventListener('click', function() {
@@ -607,53 +607,53 @@ document.head.appendChild(style);
 			});
 		}
 
-		// 单条记录页面异步加载评论列表
-		// 使用PHP模板变量判断是否为单条记录页面
+		// หน้าสเตตัสเดี่ยว โหลดรายการความคิดเห็นแบบ Asynchronous
+		// ใช้ตัวแปรเทมเพลต PHP เพื่อตรวจสอบว่าเป็นหน้าสเตตัสเดี่ยวหรือไม่
 		<!--{if count($dolist) == 1}-->
-		// 单条记录页面，执行异步加载评论列表
+		// หากเป็นหน้าสเตตัสเดี่ยว ให้ดำเนินการโหลดรายการความคิดเห็นแบบ Asynchronous
 		var doid = '<!--{$doid}-->';
 		var key = '<!--{$key}-->';
 
-		// 调用与电脑版一致的docomment_get函数
+		// เรียกใช้ฟังก์ชัน docomment_get ซึ่งเหมือนกับเวอร์ชัน PC
 		docomment_get(doid, key, 1);
 
-		// 自动加载更多评论功能
+		// ฟีเจอร์โหลดความคิดเห็นเพิ่มเติมโดยอัตโนมัติ
 		var autoLoadEnabled = true;
 		var isLoading = false;
 
-		// 监听滚动事件，实现滑动到底部自动加载
+		// ตรวจจับเหตุการณ์การเลื่อน เพื่อโหลดข้อมูลอัตโนมัติเมื่อเลื่อนลงถึงด้านล่าง
 		window.addEventListener('scroll', function() {
 			if (!autoLoadEnabled || isLoading) {
 				return;
 			}
 
-			// 计算滚动位置
+			// คำนวณตำแหน่งการเลื่อน
 			var scrollTop = window.scrollY || document.documentElement.scrollTop;
 			var scrollHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
 			var clientHeight = window.innerHeight || document.documentElement.clientHeight;
 			var distanceToBottom = scrollHeight - (scrollTop + clientHeight);
 
-			// 检查是否滚动到底部（距离底部100px以内）
+			// ตรวจสอบว่าเลื่อนถึงด้านล่างหรือไม่ (ภายในระยะ 100px จากขอบล่าง)
 			if (distanceToBottom <= 100) {
-				// 获取所有加载更多按钮
+				// ดึงปุ่มโหลดเพิ่มเติมทั้งหมด
 				var loadMoreBtns = document.querySelectorAll('.comment-load-more');
 				if (loadMoreBtns.length > 0) {
 					isLoading = true;
-					// 触发最后一个加载更多按钮的点击事件（处理可能存在的多个动态）
+					// กระตุ้นเหตุการณ์การคลิกที่ปุ่มโหลดเพิ่มเติมปุ่มสุดท้าย (เพื่อรองรับกรณีที่มีหลายสเตตัส)
 					var lastLoadMoreBtn = loadMoreBtns[loadMoreBtns.length - 1];
-					// 直接调用loadMoreComments函数，而不是依赖按钮点击
+					// เรียกใช้ฟังก์ชัน loadMoreComments โดยตรง แทนที่จะพึ่งพาการคลิกปุ่ม
 					var doid = lastLoadMoreBtn.getAttribute('data-doid');
 					var key = lastLoadMoreBtn.getAttribute('data-key');
 					var nextPage = lastLoadMoreBtn.getAttribute('data-next-page');
 					if (doid && key && nextPage) {
 						loadMoreComments(doid, key, nextPage);
 					}
-					// 设置加载状态，防止重复触发
+					// ตั้งค่าสถานะการโหลด เพื่อป้องกันการทำงานซ้ำซ้อน
 					setTimeout(function() {
 						isLoading = false;
-					}, 1500); // 1.5秒后恢复加载状态，给足够的时间完成请求
+					}, 1500); // กลับสู่สถานะพร้อมโหลดหลังจากผ่านไป 1.5 วินาที เพื่อให้เวลาในการประมวลผลคำร้องขออย่างเพียงพอ
 				} else {
-					// 没有更多评论，禁用自动加载
+					// ไม่มีเนื้อหาเพิ่มเติม ให้ปิดการใช้งานการโหลดอัตโนมัติ
 					autoLoadEnabled = false;
 				}
 			}

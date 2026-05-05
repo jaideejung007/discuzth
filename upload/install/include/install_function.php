@@ -575,7 +575,7 @@ function set_lang() {
 	if(!empty($_GET['lang'])) {
 		if($_GET['lang'] != '_') {
 			$lang_items = get_langs();
-			$v = $lang_items[$_GET['lang']] ? $_GET['lang'] : 'SC_UTF8';
+			$v = $lang_items[$_GET['lang']] ? $_GET['lang'] : 'th'; /*discuzth*/
 			setcookie('LANG', $v, time() + 86400);
 			$_COOKIE['LANG'] = $v;
 		} else {
@@ -584,7 +584,7 @@ function set_lang() {
 		}
 	}
 
-	define('INSTALL_LANG', !empty($_COOKIE['LANG']) ? $_COOKIE['LANG'] : (!empty($_config['lang']) ? $_config['lang'] : 'SC_UTF8'));
+	define('INSTALL_LANG', !empty($_COOKIE['LANG']) ? $_COOKIE['LANG'] : (!empty($_config['lang']) ? $_config['lang'] : 'th')); /*discuzth*/
 }
 
 function show_select_lang() {
@@ -642,7 +642,7 @@ function show_version_notice() {
 <div class="main" id="startdiv">
 	<div class="startblock">
 		<div class="start">
-			<h1>Discuz! $version $version_title</h1>
+			<h1>$version_title Discuz! $version</h1><!--discuzth-->
 			$notice
 		</div>
 	</div>
@@ -814,6 +814,7 @@ function show_footer($quit = true) {
 
 	echo <<<EOT
 		<div class="footer">$copy</div>
+		<div class="footer_dzth">Thai Localization by <a href="https://www.discuzth.com/" target="_blank">Discuz! TH</a></div><!--discuzth-->
 	</div>
 </div>
 </body>

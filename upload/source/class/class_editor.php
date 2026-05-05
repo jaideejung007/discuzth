@@ -255,31 +255,31 @@ class editorBlock {
 			const copyBtn$rand = document.getElementById('codeflask-copy-{id}');
 			copyBtn$rand.addEventListener('click', function() {
 			    try {
-			        // 先检查 Clipboard API 是否可用
+			        // ตรวจสอบก่อนว่า Clipboard API สามารถใช้งานได้หรือไม่
 			        if (navigator.clipboard && navigator.clipboard.writeText) {
-			            // 使用 Clipboard API 复制代码
+			            // ใช้ Clipboard API เพื่อคัดลอกโค้ด
 			            navigator.clipboard.writeText(code$rand).then(function() {
-			                // 复制成功提示
+			                // แจ้งเตือนเมื่อคัดลอกสำเร็จ
 			                const originalText = copyBtn$rand.innerHTML;
-			                copyBtn$rand.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> 已复制';
+			                copyBtn$rand.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> คัดลอกแล้ว';
 			                
-			                // 一段时间后恢复原文本
+			                // กลับสู่ข้อความเดิมหลังจากผ่านไปครู่หนึ่ง
 			                setTimeout(function() {
 			                    copyBtn$rand.innerHTML = originalText;
 			                }, 2000);
 			            }).catch(function(err) {
-			                // 复制失败处理
-			                console.error('复制失败:', err);
+			                // จัดการเมื่อการคัดลอกไม่สำเร็จ
+			                console.error('การคัดลอกไม่สำเร็จ:', err);
 			                
-			                // 降级方案：使用传统的复制方法
+			                // วิธีสำรอง: ใช้การคัดลอกรูปแบบเดิม
 			                fallbackCopyTextToClipboard(code$rand);
 			            });
 			        } else {
-			            // Clipboard API 不可用时直接使用降级方案
+			            // เมื่อ Clipboard API ใช้งานไม่ได้ ให้ใช้วิธีสำรองทันที
 			            fallbackCopyTextToClipboard(code$rand);
 			        }
 			        
-			        // 提取降级方案为独立函数
+			        // แยกวิธีสำรองออกเป็นฟังก์ชันอิสระ
 			        function fallbackCopyTextToClipboard(text) {
 			            const textArea = document.createElement('textarea');
 			            textArea.value = text;
@@ -291,19 +291,19 @@ class editorBlock {
 			            try {
 			                document.execCommand('copy');
 			                const originalText = copyBtn$rand.innerHTML;
-			                copyBtn$rand.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> 已复制';
+			                copyBtn$rand.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> คัดลอกแล้ว';
 			                
 			                setTimeout(function() {
 			                    copyBtn$rand.innerHTML = originalText;
 			                }, 2000);
 			            } catch (copyErr) {
-			                console.error('传统复制方法也失败了:', copyErr);
+			                console.error('การคัดลอกด้วยวิธีสำรองไม่สำเร็จเช่นกัน:', copyErr);
 			            } finally {
 			                document.body.removeChild(textArea);
 			            }
 			        }
 			    } catch (err) {
-			        console.error('复制功能不可用:', err);
+			        console.error('ฟีเจอร์การคัดลอกไม่สามารถใช้งานได้:', err);
 			    }
 			});
 			
@@ -311,7 +311,7 @@ class editorBlock {
 			const Toggle$rand = document.getElementById('codeflask-Toggle-{id}');
 			bottomBtn$rand.addEventListener('click', function() {
 			        if (isCollapsed$rand) {
-			            // 展开代码
+			            // ขยายโค้ด
 			            isCollapsed$rand = false;
 				    const codeElement$rand = editorElem$rand.querySelector('.codeflask__code');
 			            if (codeElement$rand) {
@@ -320,10 +320,10 @@ class editorBlock {
 				            editorElem$rand.parentElement.style.height = actualHeight$rand + 'px';
 				            editorElem$rand.style.height = actualHeight$rand + 'px';
 			            }
-			            bottomBtn$rand.innerHTML = '<button class="editorjs-codeFlask_BottomToggle" title="折叠代码"><span class="toggle-icon">▲</span> 折叠</button>';
+			            bottomBtn$rand.innerHTML = '<button class="editorjs-codeFlask_BottomToggle" title="พับเก็บโค้ด"><span class="toggle-icon">▲</span> พับเก็บ</button>';
 			            Toggle$rand.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>';
 				} else {
-			            // 折叠代码
+			            // พับเก็บโค้ด
 			            isCollapsed$rand = true;
 				    if (coderow$rand < 20) {
 			                editorElem$rand.parentElement.style.height = '300px';
@@ -332,7 +332,7 @@ class editorBlock {
 			                editorElem$rand.parentElement.style.height = '500px';
 			                editorElem$rand.style.height = '500px';
 			            }
-			            bottomBtn$rand.innerHTML = '<button class="editorjs-codeFlask_BottomToggle expand-mode" title="展开代码" data-empty="false"><span class="toggle-icon">▼</span> 展开</button>';
+			            bottomBtn$rand.innerHTML = '<button class="editorjs-codeFlask_BottomToggle expand-mode" title="ขยายโค้ด" data-empty="false"><span class="toggle-icon">▼</span> ขยาย</button>';
 			            Toggle$rand.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>';
 				}
 			});

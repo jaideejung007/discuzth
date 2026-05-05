@@ -68,7 +68,8 @@ if($step == 1) {
 
 class discuzUpgrade {
 
-	const ApiUrl = 'https://addon.dismall.com/api/discuzupgrade/?ver=X5';
+	/*discuzth*/
+	const ApiUrl = 'https://logs.discuzth.com/api/discuzupgrade/?ver=X5';
 
 	const RemoteBasePath = 'upload/';
 

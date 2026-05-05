@@ -97,10 +97,10 @@
 					<!--{/if}-->
 				</div>
 				<div class="user-card-area">
-					<a href="home.php?mod=spacecp" class="info_setup" target="_blank">{lang myitem}{lang setup}</a>
-					<a href="home.php?mod=space&do=thread&view=me" class="info_post" target="_blank">{lang myitem}{lang mypost}</a>
-					<a href="home.php?mod=space&do=favorite&view=me" class="info_fav" target="_blank">{lang myitem}{lang favorite}</a>
-					<a href="home.php?mod=space&do=friend" class="info_friend" target="_blank">{lang myitem}{lang friends}</a>
+					<a href="home.php?mod=spacecp" class="info_setup" target="_blank">{lang setup}{lang myitem}</a><!--discuzth-->
+					<a href="home.php?mod=space&do=thread&view=me" class="info_post" target="_blank">{lang mypost}{lang myitem}</a><!--discuzth-->
+					<a href="home.php?mod=space&do=favorite&view=me" class="info_fav" target="_blank">{lang favorite}{lang myitem}</a><!--discuzth-->
+					<a href="home.php?mod=space&do=friend" class="info_friend" target="_blank">{lang friends}{lang myitem}</a><!--discuzth-->
 					<!--{hook/global_usernav_extra1}-->
 					<!--{hook/global_usernav_extra2}-->
 					<!--{hook/global_usernav_extra3}-->

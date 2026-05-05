@@ -14,7 +14,7 @@ if(!defined('IN_DISCUZ')) {
 
 class component_size {
 
-	var $name = '容量值';
+	var $name = 'ค่าความจุ';
 
 	var $desc = 'KB,MB,GB';
 

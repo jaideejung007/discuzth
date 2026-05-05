@@ -1,5 +1,5 @@
 <?PHP exit('Access Denied');?>
-<!--[name]聚合首页[/name]-->
+<!--[name]พอร์ทัลหน้าแรก[/name]-->
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <root>
 	<item id="spacecss"><![CDATA[#portal_block_201 { margin-top:0px !important;margin-right:0px !important;margin-bottom:15px !important;margin-left:0px !important;}#portal_block_202 { margin-top:0px !important;margin-right:0px !important;margin-bottom:15px !important;margin-left:0px !important;}#portal_block_203 { margin-top:0px !important;margin-right:0px !important;margin-bottom:15px !important;margin-left:0px !important;}]]></item>
@@ -29,7 +29,7 @@
 								</item>
 								<item id="style"><![CDATA[]]></item>
 								<item id="first">
-									<item id="text"><![CDATA[推荐问答]]></item>
+									<item id="text"><![CDATA[คำถามและคำตอบแนะนำ]]></item>
 									<item id="href"><![CDATA[]]></item>
 									<item id="color"><![CDATA[]]></item>
 									<item id="float"><![CDATA[]]></item>
@@ -51,7 +51,7 @@
 								</item>
 								<item id="style"><![CDATA[]]></item>
 								<item id="first">
-									<item id="text"><![CDATA[推荐帖子]]></item>
+									<item id="text"><![CDATA[โพสต์แนะนำ]]></item>
 									<item id="href"><![CDATA[]]></item>
 									<item id="color"><![CDATA[]]></item>
 									<item id="float"><![CDATA[]]></item>
@@ -73,7 +73,7 @@
 								</item>
 								<item id="style"><![CDATA[]]></item>
 								<item id="first">
-									<item id="text"><![CDATA[活跃会员]]></item>
+									<item id="text"><![CDATA[สมาชิกที่มีความเคลื่อนไหว]]></item>
 									<item id="href"><![CDATA[]]></item>
 									<item id="color"><![CDATA[]]></item>
 									<item id="float"><![CDATA[]]></item>
@@ -97,7 +97,7 @@
 				<item id="blockclass"><![CDATA[forum_thread]]></item>
 				<item id="blocktype"><![CDATA[0]]></item>
 				<item id="name"><![CDATA[1]]></item>
-				<item id="title"><![CDATA[<div class="blocktitle title"><span class="titletext" style="float:;margin-left:px;font-size:;color: !important;">推荐帖子</span></div>]]></item>
+				<item id="title"><![CDATA[<div class="blocktitle title"><span class="titletext" style="float:;margin-left:px;font-size:;color: !important;">โพสต์แนะนำ</span></div>]]></item>
 				<item id="classname"><![CDATA[]]></item>
 				<item id="summary"><![CDATA[]]></item>
 				<item id="uid"><![CDATA[1]]></item>
@@ -143,8 +143,8 @@
 				<item id="bid"><![CDATA[202]]></item>
 				<item id="blockclass"><![CDATA[forum_thread]]></item>
 				<item id="blocktype"><![CDATA[0]]></item>
-				<item id="name"><![CDATA[热门活动]]></item>
-				<item id="title"><![CDATA[<div class="blocktitle title"><span class="titletext" style="float:;margin-left:px;font-size:;color: !important;">推荐问答</span></div>]]></item>
+				<item id="name"><![CDATA[กิจกรรมยอดนิยม]]></item>
+				<item id="title"><![CDATA[<div class="blocktitle title"><span class="titletext" style="float:;margin-left:px;font-size:;color: !important;">คำถามและคำตอบแนะนำ</span></div>]]></item>
 				<item id="classname"><![CDATA[]]></item>
 				<item id="summary"><![CDATA[]]></item>
 				<item id="uid"><![CDATA[1]]></item>
@@ -174,7 +174,7 @@
             {title}
         </div>
         <div class="dz_hot_qna_btm">
-            {views}人围观，发布于{dateline}
+            มีผู้เข้าชม {views} คน, เผยแพร่เมื่อ {dateline}
         </div>
         <div class="clear"></div>
     </a>
@@ -201,7 +201,7 @@
             {title}
         </div>
         <div class="dz_hot_qna_btm">
-            {views}人围观，发布于{dateline}
+            มีผู้เข้าชม {views} คน, เผยแพร่เมื่อ {dateline}
         </div>
         <div class="clear"></div>
     </a>
@@ -248,8 +248,8 @@
 				<item id="bid"><![CDATA[203]]></item>
 				<item id="blockclass"><![CDATA[member_member]]></item>
 				<item id="blocktype"><![CDATA[0]]></item>
-				<item id="name"><![CDATA[活跃会员]]></item>
-				<item id="title"><![CDATA[<div class="blocktitle title"><span class="titletext" style="float:;margin-left:px;font-size:;color: !important;">活跃会员</span></div>]]></item>
+				<item id="name"><![CDATA[สมาชิกที่มีความเคลื่อนไหว]]></item>
+				<item id="title"><![CDATA[<div class="blocktitle title"><span class="titletext" style="float:;margin-left:px;font-size:;color: !important;">สมาชิกที่มีความเคลื่อนไหว</span></div>]]></item>
 				<item id="classname"><![CDATA[]]></item>
 				<item id="summary"><![CDATA[]]></item>
 				<item id="uid"><![CDATA[1]]></item>
@@ -288,7 +288,7 @@
 					<div class="clear"></div>
 				</h5>
 				<div class="dz_index_member_info_btm">
-					<p>贡献 {threads}个主题<span class="y">{credits}积分</span></p>
+					<p>ผลงาน {threads} กระทู้<span class="y">{credits} เครดิต</span></p>
 				</div>
 			</div>
 			<div class="clear"></div>
@@ -311,7 +311,7 @@
 					<div class="clear"></div>
 				</h5>
 				<div class="dz_index_member_info_btm">
-					<p>贡献 {threads}个主题<span class="y">{credits}积分</span></p>
+					<p>ผลงาน {threads} กระทู้<span class="y">{credits} เครดิต</span></p>
 				</div>
 			</div>
 			<div class="clear"></div>
@@ -334,7 +334,7 @@
 					<div class="clear"></div>
 				</h5>
 				<div class="dz_index_member_info_btm">
-					<p>贡献 {threads}个主题<span class="y">{credits}积分</span></p>
+					<p>ผลงาน {threads} กระทู้<span class="y">{credits} เครดิต</span></p>
 				</div>
 			</div>
 			<div class="clear"></div>
@@ -356,7 +356,7 @@
 					<div class="clear"></div>
 				</h5>
 				<div class="dz_index_member_info_btm">
-					<p>贡献 {threads}个主题<span class="y">{credits}积分</span></p>
+					<p>ผลงาน {threads} กระทู้<span class="y">{credits} เครดิต</span></p>
 				</div>
 			</div>
 			<div class="clear"></div>
@@ -384,7 +384,7 @@
 					<div class="clear"></div>
 				</h5>
 				<div class="dz_index_member_info_btm">
-					<p>贡献 {threads}个主题<span class="y">{credits}积分</span></p>
+					<p>ผลงาน {threads} กระทู้<span class="y">{credits} เครดิต</span></p>
 				</div>
 			</div>
 			<div class="clear"></div>
@@ -404,7 +404,7 @@
 					<div class="clear"></div>
 				</h5>
 				<div class="dz_index_member_info_btm">
-					<p>贡献 {threads}个主题<span class="y">{credits}积分</span></p>
+					<p>ผลงาน {threads} กระทู้<span class="y">{credits} เครดิต</span></p>
 				</div>
 			</div>
 			<div class="clear"></div>
@@ -424,7 +424,7 @@
 					<div class="clear"></div>
 				</h5>
 				<div class="dz_index_member_info_btm">
-					<p>贡献 {threads}个主题<span class="y">{credits}积分</span></p>
+					<p>ผลงาน {threads} กระทู้<span class="y">{credits} เครดิต</span></p>
 				</div>
 			</div>
 			<div class="clear"></div>
@@ -451,7 +451,7 @@
 					<div class="clear"></div>
 				</h5>
 				<div class="dz_index_member_info_btm">
-					<p>贡献 {threads}个主题<span class="y">{credits}积分</span></p>
+					<p>ผลงาน {threads} กระทู้<span class="y">{credits} เครดิต</span></p>
 				</div>
 			</div>
 			<div class="clear"></div>
@@ -494,7 +494,7 @@
 			<item id="9">
 				<item id="styleid"><![CDATA[9]]></item>
 				<item id="blockclass"><![CDATA[forum_thread]]></item>
-				<item id="name"><![CDATA[[内置]帖子标题]]></item>
+				<item id="name"><![CDATA[[บิลต์อิน] หัวข้อโพสต์]]></item>
 				<item id="template">
 					<item id="raw"><![CDATA[<div class="module cl xl xl1">
 <ul>

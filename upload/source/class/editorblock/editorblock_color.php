@@ -13,13 +13,13 @@ if(!defined('IN_DISCUZ')) {
 class editorblock_color {
 
 	var $version = '1.0.5';
-	var $name = '文本颜色';
+	var $name = 'สีข้อความ';
 	var $available = 1; 
 	var $columns = 1; 
 	var $identifier = 'color';
-	var $description = '文本颜色增强';
+	var $description = 'ส่วนเสริมสีข้อความ';
 	var $filename = 'color';
-	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">云诺</a>';
+	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">Yunnuo</a>';
 	var $type = '0'; 
 
 	function __construct() {

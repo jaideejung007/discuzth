@@ -13,13 +13,13 @@ if(!defined('IN_DISCUZ')) {
 class editorblock_columns {
 
 	var $version = '1.0.5';
-	var $name = '多列';
+	var $name = 'หลายคอลัมน์';
 	var $available = 1; 
 	var $columns = 0; 
 	var $identifier = 'columns';
-	var $description = '多列区块，原生支持，不支持配置，并且本身不支持多列嵌套';
+	var $description = 'บล็อกหลายคอลัมน์ รองรับแบบดั้งเดิม ไม่รองรับการตั้งค่า และไม่รองรับการซ้อนคอลัมน์ในตัวเอง';
 	var $filename = 'editorjs-columns';
-	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">云诺</a>';
+	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">Yunnuo</a>';
 	var $type = '0'; 
 
 	function __construct() {
@@ -49,7 +49,7 @@ class editorblock_columns {
                                 "id": "Gi91gbORbV",
                                 "type": "paragraph",
                                 "data": {
-                                    "text": "1列",
+                                    "text": "1 คอลัมน์",
                                     "alignment": "left"
                                 }
                             }
@@ -63,7 +63,7 @@ class editorblock_columns {
                                 "id": "-E6VBirxsd",
                                 "type": "paragraph",
                                 "data": {
-                                    "text": "2列",
+                                    "text": "2 คอลัมน์",
                                     "alignment": "left"
                                 }
                             }
@@ -77,7 +77,7 @@ class editorblock_columns {
                                 "id": "nhF5HL0xeU",
                                 "type": "paragraph",
                                 "data": {
-                                    "text": "3列",
+                                    "text": "3 คอลัมน์",
                                     "alignment": "left"
                                 }
                             }

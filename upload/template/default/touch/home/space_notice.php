@@ -8,8 +8,8 @@
 </div>
 <div class="dhnv flex-box cl">
 	<a href="home.php?mod=space&do=pm" class="flex">{lang mypm}<!--{if $newpmcount}--><strong>($newpmcount)</strong><!--{/if}--></a>
-	<a href="home.php?mod=space&do=notice" class="flex mon">{lang my}{lang remind}<!--{if $_G['member']['newprompt']}--><strong>($_G['member']['newprompt'])</strong><!--{/if}--></a>
-</div>
+	<a href="home.php?mod=space&do=notice" class="flex mon">{lang remind}{lang my}<!--{if $_G['member']['newprompt']}--><strong>($_G['member']['newprompt'])</strong><!--{/if}--></a>
+</div><!--discuzth-->
 <!--{if empty($list)}-->
 <div class="threadlist_box mt10 cl">
 	<!--{if $new == 1}-->

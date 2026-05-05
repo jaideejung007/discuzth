@@ -15,7 +15,7 @@ if(!defined('IN_DISCUZ')) {
 
 class component_perm {
 
-	var $name = '权限选择器';
+	var $name = 'ตัวเลือกสิทธิ์';
 
 	var $desc = '
 <pre>
@@ -23,8 +23,8 @@ class component_perm {
       "permtype": ["group", "verify", "account", "medal", "magic", "tag", "org", "plugin"],   
       "formula": true
 }
-permtype: 显示的权限类型，留空为显示全部权限类型
-formula: 按照权限公式表达式方式显示
+permtype: ประเภทสิทธิ์ที่แสดง เว้นว่างไว้เพื่อแสดงประเภทสิทธิ์ทั้งหมด
+formula: แสดงตามรูปแบบสูตรคำนวณสิทธิ์
 </pre>';
 
 	function show(&$var, &$extra) {

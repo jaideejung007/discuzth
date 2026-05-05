@@ -5,7 +5,7 @@
 			<ul class="swiper-wrapper">
 				<li class="swiper-slide<!--{if $activeus[usergroup]}--> mon<!--{/if}-->"><a href="home.php?mod=spacecp&ac=usergroup">{lang my_usergroups}</a></li>
 				<li class="swiper-slide<!--{if $activeus[list] || $activeus[expiry]}--> mon<!--{/if}-->"><a href="home.php?mod=spacecp&ac=usergroup&do=list">{lang usergroups_joinbuy}</a></li>
-				<li class="swiper-slide<!--{if $activeus[forum]}--> mon<!--{/if}-->"><a href="home.php?mod=spacecp&ac=usergroup&do=forum">{lang my}{$_G['setting']['navs'][2]['navname']}{lang rights}</a></li>
+				<li class="swiper-slide<!--{if $activeus[forum]}--> mon<!--{/if}-->"><a href="home.php?mod=spacecp&ac=usergroup&do=forum">{lang rights}{$_G['setting']['navs'][2]['navname']}{lang my}</a></li><!--discuzth-->
 			</ul>
 		</div>
 	</div>

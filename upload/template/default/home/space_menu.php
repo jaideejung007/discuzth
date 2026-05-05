@@ -71,7 +71,7 @@
 						<a <!--{if helper_access::check_module('forum')}-->href="forum.php?mod=modcp&action=thread&op=post&do=search&searchsubmit=1&users=$encodeusername" <!--{/if}-->id="umanageli" onmouseover="showMenu(this.id)" class="showmenu">{lang content_manage}</a>
 					<!--{/if}-->
 				<!--{if checkperm('allowbanuser') || checkperm('allowedituser')}-->
-				<ul id="usermanageli_menu" class="p_pop" style="width: 80px; display:none;">
+				<ul id="usermanageli_menu" class="p_pop" style="width: 130px; display:none;"><!--discuzth-->
 					<!--{if checkperm('allowbanuser')}-->
 						<li><a href="{if $_G[adminid] == 1}?app=admin&action=members&operation=ban&username=$encodeusername&frames=yes{else}forum.php?mod=modcp&action=member&op=ban&uid=$space[uid]{/if}" target="_blank">{lang user_ban}</a></li>
 					<!--{/if}-->
@@ -81,7 +81,7 @@
 				</ul>
 				<!--{/if}-->
 				<!--{if $_G['adminid'] == 1}-->
-					<ul id="umanageli_menu" class="p_pop" style="width: 80px; display:none;">
+					<ul id="umanageli_menu" class="p_pop" style="width: 130px; display:none;"><!--discuzth-->
 						<!--{if helper_access::check_module('forum')}-->
 							<li><a href="forum.php?mod=modcp&action=thread&op=post&searchsubmit=1&do=search&users=$encodeusername" target="_blank">{lang manage_post}</a></li>
 						<!--{/if}-->

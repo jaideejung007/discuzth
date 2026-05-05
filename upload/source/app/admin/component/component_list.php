@@ -16,27 +16,27 @@ if(!defined('IN_DISCUZ')) {
 
 class component_list {
 
-	var $name = '自定义列表';
+	var $name = 'รายการที่กำหนดเอง';
 
 	var $desc = '
 <pre>	
 [
 	{
-		"type": "类型", "field": "字段名", "name": "显示名称", "options": [
-			{"name":"显示名称","value":"值","default":"默认(bool)"}
+		"type": "ประเภท", "field": "ชื่อฟิลด์", "name": "ชื่อที่ใช้แสดง", "options": [
+			{"name":"ชื่อที่ใช้แสดง","value":"ค่า","default":"เริ่มต้น (bool)"}
 			...
 		]
 	},
 	...
 ]
-type: 支持 text(文本)、radio(开关)、mradio(单选)、checkbox(复选)、select(下拉)、color(颜色)
-options: type 为 mradio、checkbox、select 时有效
-optionstype: type 为 select 时有效，可选值：groups(用户组)、forums(版块)、portalcat(门户分类)、extcredit(积分)
-field: 字段变量名称
-name: 字段显示名称
-width: 显示宽度
-maxlen: 最大长度，type 为 text、color 有效
-mask: 星号掩码，格式“s,l”，s=起始位，l=长度，type 为 text 有效
+type: รองรับ text (ข้อความ), radio (สวิตช์), mradio (เลือกหนึ่งเดียว), checkbox (เลือกหลายรายการ), select (รายการดรอปดาวน์), color (สี)
+options: มีผลเมื่อประเภทเป็น mradio, checkbox หรือ select
+optionstype: มีผลเมื่อประเภทเป็น select, ค่าที่เลือกได้: groups (กลุ่มผู้ใช้), forums (บอร์ด), portalcat (หมวดหมู่พอร์ทัล), extcredit (เครดิต)
+field: ชื่อตัวแปรฟิลด์
+name: ชื่อที่ใช้แสดงของฟิลด์
+width: ความกว้างการแสดงผล
+maxlen: ความยาวสูงสุด มีผลเมื่อประเภทเป็น text หรือ color
+mask: การพรางด้วยดอกจัน รูปแบบ "s,l", s = ตำแหน่งเริ่มต้น, l = ความยาว มีผลเมื่อประเภทเป็น text
 </pre>
 	';
 
@@ -98,7 +98,7 @@ function addRow(id) {
 			$c++;
 		}
 		$addCols .= '{_col_'.$c.'_}<input type="text" name="'.$var['variable'].'[_order_][]" value="{_i_}" style="width: 50px;">{/_col_'.$c.'_}';
-		$var['type'] .= '</table><a href="javascript:;" onclick="addRow(\''.$_id.'\')" class="addtr">添加</a>';
+		$var['type'] .= '</table><a href="javascript:;" onclick="addRow(\''.$_id.'\')" class="addtr">เพิ่ม</a>';
 		$var['type'] .= '<script type="text/html" id="row_'.$_id.'">'.$addCols.'</script>';
 		$var['widemode'] = true;
 	}

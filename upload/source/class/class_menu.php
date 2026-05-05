@@ -14,33 +14,33 @@ class menu {
 
 	const newTemplate = '<?xml version="1.0" encoding="ISO-8859-1"?>
 <root>
-	<name><![CDATA[新平台]]></name>
-	<title><![CDATA[新平台]]></title>
+	<name><![CDATA[แพลตฟอร์มใหม่]]></name>
+	<title><![CDATA[แพลตฟอร์มใหม่]]></title>
 	<framecss><![CDATA[xxx.css]]></framecss>
 	<pagecss><![CDATA[ccc.css]]></pagecss>	
 	<logo><![CDATA[<a class="logo"><img src="static/image/admincp/logo.svg"></a>]]></logo>
 	<navbar><![CDATA[<form></form>]]></navbar>
-	<defaultId><![CDATA[默认首页的menuId]]></defaultId>
+	<defaultId><![CDATA[menuId ของหน้าแรกเริ่มต้น]]></defaultId>
 	<menu>
-		<menuId>主菜单1</menuId>
+		<menuId>เมนูหลัก 1</menuId>
 		<sub>
 			<subId>action_operation_do1</subId>
-			<title>子菜单1</title>
+			<title>เมนูย่อย 1</title>
 		</sub>
 		<sub>
 			<subId>action_operation_do2</subId>
-			<title>子菜单2</title>
+			<title>เมนูย่อย 2</title>
 		</sub>
 	</menu>
 	<menu>
-		<menuId>主菜单2</menuId>
+		<menuId>เมนูหลัก 2</menuId>
 		<sub>
 			<subId>plugin_id:pmod1</subId>
-			<title>子菜单3</title>
+			<title>เมนูย่อย 3</title>
 		</sub>
 		<sub>
 			<subId>plugin_id:pmod2</subId>
-			<title>子菜单4</title>
+			<title>เมนูย่อย 4</title>
 		</sub>
 	</menu>
 	<userdef><![CDATA[1]]></userdef>

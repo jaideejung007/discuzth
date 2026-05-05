@@ -7,27 +7,27 @@ if(!defined('IN_DISCUZ')) {
 
 class forum_portal_threadlist {
 
-	public static $name = '聚合首页主题列表';
+	public static $name = 'รายการกระทู้พอร์ทัลหน้าแรก';
 	public static $useage = '{cells forum/portal/threadlist threadlist}';
 	public static $cellList = array(
-		'forum/threadlist/loop_start' => '循环体开始 (必须包含)',
-		'forum/threadlist/loop_end' => '循环体结束 (必须包含)',
-		'forum/threadlist/subject' => '标题 (必须包含)',
-		'forum/threadlist/url' => '主题 URL',
-		'forum/threadlist/folder_class' => '标题样式',
-		'forum/threadlist/icon' => '图标',
-		'forum/threadlist/message' => '简介',
-		'forum/threadlist/image' => '图片列表',
-		'forum/threadlist/author' => '作者',
-		'forum/threadlist/author_avatar' => '作者头像',
-		'forum/threadlist/dateline' => '发布时间',
-		'forum/threadlist/replies' => '回复数',
-		'forum/threadlist/views' => '查看数',
-		'forum/threadlist/recommend' => '推荐数',
-		'forum/threadlist/lastposter' => '最后回帖人',
-		'forum/threadlist/lastpost' => '最后回复时间',
-		'forum/threadlist/page' => '翻页',
-		'forum/threadlist/nextpage' => '继续加载',
+		'forum/threadlist/loop_start' => 'เริ่มต้นส่วนการวนซ้ำ (ต้องมี)',
+		'forum/threadlist/loop_end' => 'สิ้นสุดส่วนการวนซ้ำ (ต้องมี)',
+		'forum/threadlist/subject' => 'หัวข้อ (ต้องมี)',
+		'forum/threadlist/url' => 'URL กระทู้',
+		'forum/threadlist/folder_class' => 'สไตล์หัวข้อ',
+		'forum/threadlist/icon' => 'ไอคอน',
+		'forum/threadlist/message' => 'บทนำ',
+		'forum/threadlist/image' => 'รายการรูปภาพ',
+		'forum/threadlist/author' => 'ผู้เขียน',
+		'forum/threadlist/author_avatar' => 'รูปโปรไฟล์ผู้เขียน',
+		'forum/threadlist/dateline' => 'เวลาที่เผยแพร่',
+		'forum/threadlist/replies' => 'จำนวนการตอบกลับ',
+		'forum/threadlist/views' => 'จำนวนการเข้าชม',
+		'forum/threadlist/recommend' => 'จำนวนการแนะนำ',
+		'forum/threadlist/lastposter' => 'ผู้ตอบล่าสุด',
+		'forum/threadlist/lastpost' => 'เวลาที่ตอบล่าสุด',
+		'forum/threadlist/page' => 'เลขหน้า',
+		'forum/threadlist/nextpage' => 'โหลดเพิ่มเติม',
 	);
 	public static $requireList = array(
 		'forum/threadlist/loop_start',

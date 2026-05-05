@@ -14,33 +14,33 @@ if(!defined('IN_DISCUZ')) {
 
 class threadtype_list {
 
-	var $name = '自定义列表';
+	var $name = 'รายการที่กำหนดเอง';
 
 	var $desc = '
 <pre>	
 [
 	{
-		"type": "类型", "field": "字段名", "name": "显示名称", "options": [
-			{"name":"显示名称","value":"值","default":"默认(bool)"}
+		"type": "ประเภท", "field": "ชื่อฟิลด์", "name": "ชื่อที่ใช้แสดง", "options": [
+			{"name":"ชื่อที่ใช้แสดง","value":"ค่า","default":"เริ่มต้น (bool)"}
 			...
 		]
 	},
-	{"template": {"global": "全局模板", "viewthread": "帖子页模板"}}
+	{"template": {"global": "เทมเพลตสากล", "viewthread": "เทมเพลตหน้าเนื้อหาโพสต์"}}
 	...
 ]
-type: 支持 text(文本)、radio(单选)、checkbox(复选)、select(下拉)、color(颜色)
-options: type 为 mradio、checkbox、select 时有效
-field: 字段变量名称
-name: 字段显示名称
-width: 显示宽度
-maxlen: 最大长度，type 为 text、color 有效
-mask: 星号掩码，格式“s,l”，s=起始位，l=长度，type 为 text 有效
-template: 模板中用 {字段名} 引用相应的列表字段
+type: รองรับ text (ข้อความ), radio (เลือกหนึ่งเดียว), checkbox (เลือกหลายรายการ), select (รายการดรอปดาวน์), color (สี)
+options: มีผลเมื่อประเภทเป็น mradio, checkbox หรือ select
+field: ชื่อตัวแปรของฟิลด์
+name: ชื่อที่ใช้แสดงของฟิลด์
+width: ความกว้างการแสดงผล
+maxlen: ความยาวสูงสุด มีผลเมื่อประเภทเป็น text หรือ color
+mask: การพรางด้วยดอกจัน รูปแบบ "s,l", s = ตำแหน่งเริ่มต้น, l = ความยาว มีผลเมื่อประเภทเป็น text
+template: ในเทมเพลตให้ใช้ {ชื่อฟิลด์} เพื่ออ้างอิงถึงฟิลด์รายการที่เกี่ยวข้อง
 
-【范例】
+【ตัวอย่าง】
 [
- {"type": "text", "field": "f1", "name": "文本", "width": 80},
- {"type": "radio", "field": "f2", "name": "开关", "options": [{"name":"A","value":"a","default":true},{"name":"B","value":"b"}]},
+ {"type": "text", "field": "f1", "name": "ข้อความ", "width": 80},
+ {"type": "radio", "field": "f2", "name": "สวิตช์", "options": [{"name":"A","value":"a","default":true},{"name":"B","value":"b"}]},
  {"template": {"global": "{f1} - {f2}", "viewthread": "{f1} - {f2}<br>"}}
 ]
 

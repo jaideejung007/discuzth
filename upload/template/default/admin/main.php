@@ -51,14 +51,14 @@ $shownotice
 				<div class="frameuinfo" >
 					<!--{if $sitevip}-->
 						<div id="_siteVip"></div>
-						<script>
+						<!--script>
 							_attachEvent(window, 'load', function () {
 								var _as = document.createElement("script");
 								_as.src = "https://addon.dismall.com/api/sitevip/?$sitevip";
 								var _s = document.getElementsByTagName("script")[0];
 								_s.parentNode.insertBefore(_as, _s);
 							}, document);
-						</script>
+						</script--> <!--discuzth-->
 					<!--{/if}-->
 					<div id="frameuinfo" onmouseover="showMenu({'ctrlid':this.id, 'pos':'34'});" >
 						<p class="greet"><em>{$_G['member']['username']}</em><br />$cpadmingroup</p>

@@ -13,13 +13,13 @@ if(!defined('IN_DISCUZ')) {
 class editorblock_underline {
 
 	var $version = '1.0.1';
-	var $name = '下划线';
+	var $name = 'ขีดเส้นใต้';
 	var $available = 1; 
 	var $columns = 1; 
 	var $identifier = 'underline';
-	var $description = '用于给文本增加下划线';
+	var $description = 'ใช้สำหรับขีดเส้นใต้ข้อความ';
 	var $filename = 'underline';
-	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">云诺</a>';
+	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">Yunnuo</a>';
 	var $type = '0'; 
 
 	function __construct() {
@@ -50,7 +50,7 @@ EOF;
    i18n: {
 	    messages: {
 	        toolNames: {
-	           'Underline': '下划线',
+	           'Underline': 'ขีดเส้นใต้',
 	        }
 	    },
    },

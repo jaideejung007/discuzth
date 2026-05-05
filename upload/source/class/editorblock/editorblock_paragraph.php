@@ -13,13 +13,13 @@ if(!defined('IN_DISCUZ')) {
 class editorblock_paragraph {
 
 	var $version = '1.1.8';
-	var $name = '文本段落(增强版)';
+	var $name = 'ย่อหน้าข้อความ (รุ่นปรับปรุง)';
 	var $available = 1; 
 	var $columns = 1; 
 	var $identifier = 'paragraph';
-	var $description = '文本段落(增强版)内容区块，启用后会自动覆盖默认文本段落区块，支持配置输入指定Markdown标识切换到指定区块';
+	var $description = 'บล็อกเนื้อหาย่อหน้าข้อความ (รุ่นปรับปรุง) เมื่อเปิดใช้งานจะแทนที่บล็อกเดิมโดยอัตโนมัติ รองรับการพิมพ์ Markdown เพื่อสลับไปยังบล็อกที่กำหนด';
 	var $filename = 'paragraph';
-	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">云诺</a>';
+	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">Yunnuo</a>';
 	var $type = '0'; 
 
 	function __construct() {
@@ -39,11 +39,11 @@ class editorblock_paragraph {
 		return <<<EOF
 {
     "data": {
-        "alignment": "left", // 对齐方式
-        "text": "content" // 内容
+        "alignment": "left", // การจัดตำแหน่ง
+        "text": "เนื้อหา" // เนื้อหา
     },
-    "id": "ZT8S70Q34G", // 区块id
-    "type": "paragraph" // 区块类型
+    "id": "ZT8S70Q34G", // ไอดีบล็อก
+    "type": "paragraph" // ประเภทบล็อก
 }
 EOF;
 	}
@@ -58,7 +58,7 @@ EOF;
          class: Paragraph,
          inlineToolbar: true,
          config: {
-            placeholder: "请输入正文内容, 或点击加号添加功能区块",
+            placeholder: "โปรดกรอกเนื้อหา หรือคลิกเครื่องหมายบวกเพื่อเพิ่มบล็อกฟังก์ชัน",
             enableClearFormattingBtn: true,
             markdown: false,
             markdownRules: [

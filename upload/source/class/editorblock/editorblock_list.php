@@ -13,13 +13,13 @@ if(!defined('IN_DISCUZ')) {
 class editorblock_list {
 
 	var $version = '1.0.7';
-	var $name = '列表';
+	var $name = 'รายการ';
 	var $available = 1; 
 	var $columns = 1; 
 	var $identifier = 'list';
-	var $description = '列表区块';
+	var $description = 'บล็อกรายการ';
 	var $filename = 'list';
-	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">云诺</a>';
+	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">Yunnuo</a>';
 	var $type = '0'; 
 
 	function __construct() {
@@ -46,8 +46,8 @@ class editorblock_list {
             "unordered"
         ]
     },
-    "id": "ZT8S70Q34G", // 区块id
-    "type": "list" // 区块类型
+    "id": "ZT8S70Q34G", // ไอดีบล็อก
+    "type": "list" // ประเภทบล็อก
 }
 EOF;
 	}
@@ -69,19 +69,19 @@ EOF;
    i18n: {
        messages: {
           "toolNames": {
-                "Ordered List": "有序列表",
-                "Unordered List": "无序列表",
-                "Checklist": "可勾选列表",
+                "Ordered List": "รายการแบบลำดับตัวเลข",
+                "Unordered List": "รายการแบบสัญลักษณ์",
+                "Checklist": "รายการแบบเลือกได้",
           },
           tools: {
             'list': {
-                  'Start with': '从指定字符开始',
-        	  'Counter type': '计数器类型',
-        	  'Numeric': '数字',
-        	  'Lower Roman': '小写罗马数字',
-        	  'Upper Roman': '大写罗马数字',
-        	  'Lower Alpha': '小写字母 ',
-        	  'Upper Alpha': '大写字母'
+                  'Start with': 'เริ่มจากตัวอักษรที่กำหนด',
+        	  'Counter type': 'ประเภทตัวนับ',
+        	  'Numeric': 'ตัวเลข',
+        	  'Lower Roman': 'ตัวเลขโรมันตัวเล็ก',
+        	  'Upper Roman': 'ตัวเลขโรมันตัวใหญ่',
+        	  'Lower Alpha': 'ตัวอักษรตัวเล็ก',
+        	  'Upper Alpha': 'ตัวอักษรตัวใหญ่'
             }
           }
         },

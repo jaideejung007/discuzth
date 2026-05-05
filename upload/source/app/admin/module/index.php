@@ -63,7 +63,7 @@ if(submitcheck('notesubmit', 1)) {
 require_once libfile('function/cloudaddons');
 $newversion = (CHARSET == 'utf-8') ? dunserialize($_G['setting']['cloudaddons_newversion']) : json_decode($_G['setting']['cloudaddons_newversion'], true);
 if(empty($newversion['newversion']) || !is_array($newversion['newversion']) || abs($_G['timestamp'] - $newversion['updatetime']) > 86400 || (isset($_GET['checknewversion']) && $_G['formhash'] == $_GET['formhash'])) {
-	$newversion = json_decode(cloudaddons_open('&mod=app&ac=upgrade'), true);
+	$newversion = json_decode(cloudaddons_open_dzth('&mod=app&ac=upgrade'), true); /*discuzth*/
 	if(!empty($newversion['newversion'])) {
 		$newversion['updatetime'] = $_G['timestamp'];
 		table_common_setting::t()->update_setting('cloudaddons_newversion', ((CHARSET == 'utf-8') ? $newversion : json_encode($newversion)));

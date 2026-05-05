@@ -41,15 +41,15 @@
 	<body>
 		<div id="output"></div>
 		<div class="wp">
-			<h2 class="bm ptw bw0 xs2">单列布局</h2>
+			<h2 class="bm ptw bw0 xs2">เลย์เอาต์คอลัมน์เดี่ยว</h2>
 			<div class="ct cl">
 				<div class="mn">
 					<div class="bm">
 						<div class="bm_h cl">
-							<strong>标题</strong> class="bm_h cl"
+							<strong>หัวข้อ</strong> class="bm_h cl"
 						</div>
 						<div class="bm_c">
-							<strong>内容</strong> class="bm_c"
+							<strong>เนื้อหา</strong> class="bm_c"
 						</div>
 					</div>
 					<div class="bm bmw">
@@ -57,29 +57,29 @@
 							<span class="o">
 								<img src="../../../static/image/common/collapsed_no.gif" alt="" />
 							</span>
-							<strong>标题</strong> class="bm_h cl"
+							<strong>หัวข้อ</strong> class="bm_h cl"
 						</div>
 						<div class="bm_c">
-							<strong>内容</strong> class="bm_c"
+							<strong>เนื้อหา</strong> class="bm_c"
 						</div>
 					</div>
 				</div>
 			</div>
-			<h2 class="bm ptw bw0 xs2">双列布局 class="ct2 cl"</h2>
+			<h2 class="bm ptw bw0 xs2">เลย์เอาต์สองคอลัมน์ class="ct2 cl"</h2>
 			<div class="ct2 cl">
 				<div class="mn">
 					<div class="bm bmw tl cl">
 						<div class="bm_h cl">
-							<strong>帖子列表:</strong>
+							<strong>รายการโพสต์:</strong>
 						</div>
 						<table cellspacing="0" cellpadding="0" class="th">
 							<tr>
 								<td class="icn"></td>
 								<td class="o"></td>
-								<th>主题</th>
-								<td class="by">作者</td>
-								<td class="num">回复</td>
-								<td class="by">最后发表</td>
+								<th>กระทู้</th>
+								<td class="by">ผู้เขียน</td>
+								<td class="num">ตอบกลับ</td>
+								<td class="by">โพสต์ล่าสุด</td>
 							</tr>
 						</table>
 						<div class="bm_c">
@@ -103,7 +103,7 @@
 								<tr class="ts">
 									<td class="icn"></td>
 									<td class="o"></td>
-									<th>分隔条</th>
+									<th>แถบแบ่ง</th>
 									<td class="by"></td>
 									<td class="num"></td>
 									<td class="by"></td>
@@ -128,7 +128,7 @@
 						</div>
 					</div>
 					<div class="bm bw0">
-						<h2>文字列表</h2>
+						<h2>รายการข้อความ</h2>
 						<ul class="xl">
 							<li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</li>
 							<li>sed diam nonummy nibh euismod tincidunt ut</li>
@@ -143,7 +143,7 @@
 						</ul>
 					</div>
 					<div class="bm bw0">
-						<h2>双列文字列表</h2>
+						<h2>รายการข้อความสองคอลัมน์</h2>
 						<ul class="xl xl2 cl">
 							<li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</li>
 							<li>sed diam nonummy nibh euismod tincidunt ut</li>
@@ -161,10 +161,10 @@
 				<div class="sd">
 					<div class="bm">
 						<div class="bm_h cl">
-							<strong>标题</strong> class="bm_h cl"
+							<strong>หัวข้อ</strong> class="bm_h cl"
 						</div>
 						<div class="bm_c">
-							<h2>单行文字列表(超出自动隐藏)</h2>
+							<h2>รายการข้อความบรรทัดเดียว (ซ่อนส่วนที่เกินโดยอัตโนมัติ)</h2>
 							<ul class="xl xl1">
 								<li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</li>
 								<li>sed diam nonummy nibh euismod tincidunt ut</li>
@@ -181,51 +181,51 @@
 					</div>
 				</div>
 			</div>
-			<h2 class="bm ptw bw0 xs2">带应用栏的双列布局 class="ct2_a cl"</h2>
+			<h2 class="bm ptw bw0 xs2">เลย์เอาต์สองคอลัมน์พร้อมแถบแอปพลิเคชัน class="ct2_a cl"</h2>
 			<div class="ct2_a cl">
 				<div class="mn">
 					<div class="tb cl">
 						<ul>
-							<li class="a"><a href="#">标签一</a></li>
-							<li><a href="#">标签二</a></li>
-							<li><a href="#">标签三</a></li>
+							<li class="a"><a href="#">แท็กที่ 1</a></li>
+							<li><a href="#">แท็กที่ 2</a></li>
+							<li><a href="#">แท็กที่ 3</a></li>
 						</ul>
 					</div>
 					<div class="bm bw0">
-						<h2 class="ptm pbm">图片列表:48px</h2>
+						<h2 class="ptm pbm">รายการรูปภาพ: 48px</h2>
 						<ul class="ml mls cl">
 							<li>
 								<img src="https://discuz.dismall.com/data/attachment/album/cover/1d/9719.jpg" alt="" />
-								<p>标题</p>
-								<span>附加信息</span>
+								<p>หัวข้อ</p>
+								<span>ข้อมูลเพิ่มเติม</span>
 							</li>
 							<li>
 								<img src="https://discuz.dismall.com/data/attachment/album/cover/4d/9575.jpg" alt="" />
-								<p>标题</p>
-								<span>附加信息</span>
+								<p>หัวข้อ</p>
+								<span>ข้อมูลเพิ่มเติม</span>
 							</li>
 							<li>
 								<img src="https://discuz.dismall.com/data/attachment/album/cover/a0/2250.jpg" alt="" />
-								<p>标题</p>
-								<span>附加信息</span>
+								<p>หัวข้อ</p>
+								<span>ข้อมูลเพิ่มเติม</span>
 							</li>
 						</ul>
-						<h2 class="ptm pbm">图片列表:120px</h2>
+						<h2 class="ptm pbm">รายการรูปภาพ: 120px</h2>
 						<ul class="ml mlm cl">
 							<li>
 								<img src="https://discuz.dismall.com/data/attachment/album/cover/1d/9719.jpg" alt="" />
-								<p>标题</p>
-								<span>附加信息</span>
+								<p>หัวข้อ</p>
+								<span>ข้อมูลเพิ่มเติม</span>
 							</li>
 							<li>
 								<img src="https://discuz.dismall.com/data/attachment/album/cover/4d/9575.jpg" alt="" />
-								<p>标题</p>
-								<span>附加信息</span>
+								<p>หัวข้อ</p>
+								<span>ข้อมูลเพิ่มเติม</span>
 							</li>
 							<li>
 								<img src="https://discuz.dismall.com/data/attachment/album/cover/a0/2250.jpg" alt="" />
-								<p>标题</p>
-								<span>附加信息</span>
+								<p>หัวข้อ</p>
+								<span>ข้อมูลเพิ่มเติม</span>
 							</li>
 						</ul>
 					</div>
@@ -250,35 +250,35 @@
 					</ul>
 				</div>
 			</div>
-			<h2 class="bm ptw bw0 xs2">带应用栏的三列布局 class="ct3_a cl"</h2>
+			<h2 class="bm ptw bw0 xs2">เลย์เอาต์สามคอลัมน์พร้อมแถบแอปพลิเคชัน class="ct3_a cl"</h2>
 			<div class="ct3_a cl">
 				<div class="sd">
 					<div class="bm">
 						<div class="bm_h cl">
-							<strong>标题</strong> class="bm_h cl"
+							<strong>หัวข้อ</strong> class="bm_h cl"
 						</div>
 						<div class="bm_c">
-							<strong>内容</strong> class="bm_c"
+							<strong>เนื้อหา</strong> class="bm_c"
 						</div>
 					</div>
 				</div>
 				<div class="mn">
-					<h2 class="pbm">常规表单</h2>
+					<h2 class="pbm">แบบฟอร์มทั่วไป</h2>
 					<table cellspacing="0" cellpadding="0" class="tfm">
 						<tr>
-							<th>输入框</th>
+							<th>ช่องกรอกข้อมูล</th>
 							<td><input type="text" name="" id="" class="px" /></td>
 						</tr>
 						<tr>
-							<th>输入框</th>
+							<th>ช่องกรอกข้อมูล</th>
 							<td><input type="text" name="" id="" class="px" /></td>
 						</tr>
 						<tr>
-							<th>多选按钮</th>
+							<th>ปุ่มเลือกได้หลายรายการ</th>
 							<td><input type="checkbox" name="" id="" class="pc" /> Label</td>
 						</tr>
 						<tr>
-							<th>单选按钮</th>
+							<th>ปุ่มเลือกได้รายการเดียว</th>
 							<td><input type="radio" name="" id="" class="pr" /> Label</td>
 						</tr>
 						<tr>
@@ -290,16 +290,16 @@
 							<td><input type="text" name="" id="" class="px" /></td>
 						</tr>
 						<tr>
-							<th>文本框</th>
+							<th>กล่องข้อความ</th>
 							<td><textarea class="pt"></textarea></td>
 						</tr>
 						<tr>
-							<th>按钮</th>
+							<th>ปุ่ม</th>
 							<td>
-								<button class="pn"><span>按钮</span></button>
-								<button class="pn pnc"><strong>按钮</strong></button>
-								<button class="pn"><span>按钮</span></button>
-								<button class="pn"><span>按钮</span></button>
+								<button class="pn"><span>ปุ่ม</span></button>
+								<button class="pn pnc"><strong>ปุ่ม</strong></button>
+								<button class="pn"><span>ปุ่ม</span></button>
+								<button class="pn"><span>ปุ่ม</span></button>
 							</td>
 						</tr>
 					</table>

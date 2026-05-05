@@ -13,13 +13,13 @@ if(!defined('IN_DISCUZ')) {
 class editorblock_hyperlink {
 
 	var $version = '1.1.1';
-	var $name = '超链接';
+	var $name = 'ลิงก์';
 	var $available = 1; 
 	var $columns = 0; 
 	var $identifier = 'hyperlink';
-	var $description = '超链接';
+	var $description = 'ลิงก์';
 	var $filename = 'hyperlink';
-	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">云诺</a>';
+	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">Yunnuo</a>';
 	var $type = '0'; 
 
 	function __construct() {

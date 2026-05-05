@@ -244,7 +244,7 @@ if(!submitcheck('editsubmit')) {
 
 			foreach($forums as $key => $forumname) {
 
-				if(empty($forumname) || strlen($forumname) > 50) continue;
+				if(empty($forumname) || mb_strlen($forumname, 'UTF-8') > 150) continue; /*discuzth*/
 
 				$forum = $forumfields = [];
 				$inheritedid = !empty($_GET['inherited'][$fup]) ? $fup : (!empty($_GET['newinherited'][$fup][$key]) ? $_GET['newinherited'][$fup][$key] : '');

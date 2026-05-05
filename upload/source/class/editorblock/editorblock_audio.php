@@ -13,13 +13,13 @@ if(!defined('IN_DISCUZ')) {
 class editorblock_audio {
 
 	var $version = '1.1.0';
-	var $name = '音频';
+	var $name = 'เสียง';
 	var $available = 1; 
 	var $columns = 1; 
 	var $identifier = 'audio';
-	var $description = '音频区块';
+	var $description = 'บล็อกเสียง';
 	var $filename = 'audio';
-	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">云诺</a>';
+	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">Yunnuo</a>';
 	var $type = '4'; 
 
 	function __construct() {
@@ -79,9 +79,9 @@ EOF;
                 remote_attachurl: editor_remote_attachurl,
                 attachurl: editor_attachurl,
                 showCoverButton: true,
-                captionPlaceholder: '描述信息',
-                buttonContent: '请选择需要上传的音频（MP3）',
-                coverButtonContent: '请选择需要上传的音频封面图（可选）',
+                captionPlaceholder: 'ข้อมูลคำอธิบาย',
+                buttonContent: 'โปรดเลือกไฟล์เสียงที่ต้องการอัปโหลด (MP3)',
+                coverButtonContent: 'โปรดเลือกรูปหน้าปกเสียงที่ต้องการอัปโหลด (ไม่บังคับ)',
             },
          	tunes: ['anchorTune', 'hideTune']
         },
@@ -90,18 +90,18 @@ EOF;
        messages: {
           tools: {
             'audio': {
-                  'Add border': '添加边框',
-        	  'Stretch': '横向平铺',
-        	  'Add background': '添加背景色',
-        	  'Autoplay': '自动播放',
-        	  'Mute': '静音播放',
-        	  'Controls': '视频控制',
-        	  'Loop': '循环播放',
-        	  'Unsupported file type': '不支持的文件类型',
-        	  'File has exceptions': '文件存在异常',
-        	  'File size cannot exceed ': '文件大小不可超过 ',
-        	  'User group does not support uploading this type of file': '用户组不支持上传该类型的文件',
-        	  'Couldn’t upload audio. Please try another.': '无法上传音频，请尝试另一个。',
+                  'Add border': 'เพิ่มเส้นขอบ',
+        	  'Stretch': 'ขยายแนวนอน',
+        	  'Add background': 'เพิ่มสีพื้นหลัง',
+        	  'Autoplay': 'เล่นอัตโนมัติ',
+        	  'Mute': 'เล่นแบบปิดเสียง',
+        	  'Controls': 'ส่วนควบคุมวิดีโอ',
+        	  'Loop': 'เล่นวนซ้ำ',
+        	  'Unsupported file type': 'ประเภทไฟล์ไม่รองรับ',
+        	  'File has exceptions': 'ไฟล์มีความผิดปกติ',
+        	  'File size cannot exceed ': 'ขนาดไฟล์ต้องไม่เกิน ',
+        	  'User group does not support uploading this type of file': 'กลุ่มผู้ใช้ไม่รองรับการอัปโหลดไฟล์ประเภทนี้',
+        	  'Couldn’t upload audio. Please try another.': 'ไม่สามารถอัปโหลดไฟล์เสียงได้ โปรดลองไฟล์อื่น',
             }
           }
         },
@@ -155,16 +155,16 @@ EOF;
             width: 100%;
             height: 280px;
             border-radius: 8px;
-            object-fit: cover; /* 保持封面比例填充 */
+            object-fit: cover; /* คงสัดส่วนรูปหน้าปก */
             margin-bottom: 16px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
-        /* 原生音频控件美化（适配主流浏览器） */
+        /* ปรับแต่งส่วนควบคุมเสียงแบบดั้งเดิม (รองรับเบราว์เซอร์หลัก) */
     .audio-tool__audio audio {
             width: 100%;
             outline: none;
         }
-        /* 标题样式 */
+        /* สไตล์หัวข้อ */
         .audio-title {
             text-align: center;
             font-size: 18px;

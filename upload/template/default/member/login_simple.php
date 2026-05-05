@@ -10,7 +10,7 @@
 					<!--{if !$_G['setting']['autoidselect']}-->
 						<td>
 							<span class="ftid">
-								<select name="fastloginfield" id="ls_fastloginfield" width="40">
+								<select name="fastloginfield" id="ls_fastloginfield" width="50"><!--discuzth-->
 									<option value="username">{lang username}</option>
 									<!--{if getglobal('setting/uidlogin')}-->
 									<option value="uid">{lang uid}</option>
@@ -34,7 +34,7 @@
 				<tr>
 					<td><label for="ls_password"{if !$_G['setting']['autoidselect']} class="z psw_w"{/if}>{lang password}</label></td>
 					<td><input type="password" name="password" id="ls_password" class="px vm" autocomplete="off" /></td>
-					<td class="fastlg_l"><button type="submit" class="pn vm" style="width: 75px;"><em>{lang login}</em></button></td>
+					<td class="fastlg_l"><button type="submit" class="pn vm" style="width: 85px;"><em>{lang login}</em></button></td><!--discuzth-->
 					<td>&nbsp;<a href="member.php?mod={$_G[setting][regname]}" class="xi2 xw1">$_G['setting']['reglinkname']</a></td>
 				</tr>
 			</table>

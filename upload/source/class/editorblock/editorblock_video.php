@@ -13,13 +13,13 @@ if(!defined('IN_DISCUZ')) {
 class editorblock_video {
 
 	var $version = '1.1.7';
-	var $name = '视频';
+	var $name = 'วิดีโอ';
 	var $available = 1; 
 	var $columns = 1; 
 	var $identifier = 'video';
-	var $description = '视频区块';
+	var $description = 'บล็อกวิดีโอ';
 	var $filename = 'video';
-	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">云诺</a>';
+	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">Yunnuo</a>';
 	var $type = '3'; 
 
 	function __construct() {
@@ -76,8 +76,8 @@ EOF;
                 },
                 remote_attachurl: editor_remote_attachurl,
                 attachurl: editor_attachurl,
-                captionPlaceholder: '描述信息',
-                buttonContent: '请选择需要上传的视频（MP4）',
+                captionPlaceholder: 'ข้อมูลคำอธิบาย',
+                buttonContent: 'โปรดเลือกวิดีโอที่ต้องการอัปโหลด (MP4)',
             },
             tunes: ['anchorTune', 'hideTune']
         },
@@ -86,18 +86,18 @@ EOF;
        messages: {
           tools: {
             'video': {
-                  'Add border': '添加边框',
-        	  'Stretch': '横向平铺',
-        	  'Add background': '添加背景色',
-        	  'Autoplay': '自动播放',
-        	  'Mute': '静音播放',
-        	  'Controls': '视频控制',
-        	  'Loop': '循环播放',
-        	  'Unsupported file type': '不支持的文件类型',
-        	  'File has exceptions': '文件存在异常',
-        	  'File size cannot exceed ': '文件大小不可超过 ',
-        	  'User group does not support uploading this type of file': '用户组不支持上传该类型的文件',
-        	  'Couldn’t upload video. Please try another.': '无法上传视频，请尝试另一个。',
+                  'Add border': 'เพิ่มเส้นขอบ',
+        	  'Stretch': 'ขยายแนวนอน',
+        	  'Add background': 'เพิ่มสีพื้นหลัง',
+        	  'Autoplay': 'เล่นอัตโนมัติ',
+        	  'Mute': 'เล่นแบบปิดเสียง',
+        	  'Controls': 'ส่วนควบคุมวิดีโอ',
+        	  'Loop': 'เล่นวนซ้ำ',
+        	  'Unsupported file type': 'ประเภทไฟล์ไม่รองรับ',
+        	  'File has exceptions': 'ไฟล์มีความผิดปกติ',
+        	  'File size cannot exceed ': 'ขนาดไฟล์ต้องไม่เกิน ',
+        	  'User group does not support uploading this type of file': 'กลุ่มผู้ใช้ไม่รองรับการอัปโหลดไฟล์ประเภทนี้',
+        	  'Couldn’t upload video. Please try another.': 'ไม่สามารถอัปโหลดวิดีโอได้ โปรดลองไฟล์อื่น',
             }
           }
         },

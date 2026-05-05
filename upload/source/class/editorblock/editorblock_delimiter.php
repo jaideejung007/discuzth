@@ -13,13 +13,13 @@ if(!defined('IN_DISCUZ')) {
 class editorblock_delimiter {
 
 	var $version = '1.0.5';
-	var $name = '分隔符';
+	var $name = 'เส้นแบ่ง';
 	var $available = 1; 
 	var $columns = 1; 
 	var $identifier = 'delimiter';
-	var $description = '分隔符';
+	var $description = 'เส้นแบ่ง';
 	var $filename = 'delimiter';
-	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">云诺</a>';
+	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">Yunnuo</a>';
 	var $type = '0'; 
 
 	function __construct() {
@@ -43,8 +43,8 @@ class editorblock_delimiter {
         "lineWidth": 25,
         "lineThickness": 2
     },
-    "id": "ZT8S70Q34G", // 区块id
-    "type": "delimiter" // 区块类型
+    "id": "ZT8S70Q34G", // ไอดีบล็อก
+    "type": "delimiter" // ประเภทบล็อก
 }
 EOF;
 	}

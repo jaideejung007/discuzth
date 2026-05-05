@@ -326,7 +326,7 @@ Created & Modified by Alice, Monkey, Lushnis, Pony, Dfox & DragonLee.
 
 /** forum::viewthread,forum::forumdisplay,forum::post,group **/
 /* 主题图标 by michael */
-#newspecial_menu { min-width: 90px; }
+#newspecial_menu { min-width: 125px; } /* discuzth */
 	#newspecial_menu li, #sti .wx { display: block; zoom: 1; }
 	#newspecial_menu li:before, #sti .wx:before { content: "\f134"; font-family: dzicon; display: inline-block; height: 24px; width: 30px; line-height: 24px; text-align: center; font-size: 20px; color: #FF9C00; vertical-align: middle; }
 	#newspecial_menu li.plugin_special_thread {background-repeat: no-repeat; background-position: left 8px center;}

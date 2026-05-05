@@ -1374,7 +1374,7 @@ CSS 写作注意事项：
 /* pgs --> pages & postbutton 分页、发帖按钮, pgb -->返回首页, nxt -->下一页 */
 .pgs {}
 	.pgs #newspecial, .pgs #newspecialtmp, .pgs #post_reply, .pgs #post_replytmp { float: left; margin-right: 5px; }
-	.pgsbtn { color: #FFF; padding: 10px 16px; font-size: 14px; line-height: 14px; border-radius: 4px; background: {MENUBGCOLOR}; letter-spacing: 2px; transition: .2s background ease; border: 0 }
+	.pgsbtn { color: #FFF; padding: 10px 16px; font-size: 14px; line-height: 14px; border-radius: 4px; background: {MENUBGCOLOR}; transition: .2s background ease; border: 0 } /* discuzth */
 		.pgsbtn:hover { background: {MENUCURBGCOLOR}; text-decoration: none; }
 		.pgsbtn:active { box-shadow: 0 0 0 3px rgba(36,88,167,0.25); }
 		.pgsbtn:focus { outline: 0; }

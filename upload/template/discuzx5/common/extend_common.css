@@ -422,7 +422,8 @@ img{border:none;}
 .dz_btm_layer{padding: 0 20px;min-width:1200px;height:73px;}
 .dz_layer_nav{float:left;width:709px;height:73px;overflow:hidden;}
 .dz_layer_nav ul li{float:left;}
-.dz_layer_nav ul li a{display:inline-block;margin-right:25px;height:73px;line-height:73px;color:var(--dz-alink);font-size:16px;text-align:center;position:relative;font-weight:400;letter-spacing:2px;}
+/*discuzth*/
+.dz_layer_nav ul li a{display:inline-block;margin-right:25px;height:73px;line-height:73px;color:var(--dz-alink);font-size:16px;text-align:center;position:relative;font-weight:400;}
 .dz_layer_nav ul li a:hover{color:var(--dz-nvtxt);}
 .dz_layer_nav ul li.a a{color:var(--dz-nvtxt);}
 .dz_layer_nav span{display:none;}

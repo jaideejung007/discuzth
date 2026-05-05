@@ -13,13 +13,13 @@ if(!defined('IN_DISCUZ')) {
 class editorblock_image {
 
 	var $version = '1.2.2';
-	var $name = '图片';
+	var $name = 'รูปภาพ';
 	var $available = 1; 
 	var $columns = 1; 
 	var $identifier = 'image';
-	var $description = '图片区块';
+	var $description = 'บล็อกรูปภาพ';
 	var $filename = 'image';
-	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">云诺</a>';
+	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">Yunnuo</a>';
 	var $type = '1'; 
 
 	function __construct() {
@@ -76,8 +76,8 @@ EOF;
                 },
                 remote_attachurl: editor_remote_attachurl,
                 attachurl: editor_attachurl,
-                captionPlaceholder: '描述信息',
-                buttonContent: '请选择需要上传的图片',
+                captionPlaceholder: 'ข้อมูลคำอธิบาย',
+                buttonContent: 'โปรดเลือกรูปภาพที่ต้องการอัปโหลด',
             },
             tunes: ['anchorTune', 'hideTune']
         },
@@ -86,14 +86,14 @@ EOF;
        messages: {
           tools: {
             'image': {
-                  'With border': '带边框',
-        	  'Stretch image': '拉伸图像',
-        	  'With background': '带背景色',
-        	  'Unsupported file type': '不支持的文件类型',
-        	  'File has exceptions': '文件存在异常',
-        	  'File size cannot exceed ': '文件大小不可超过 ',
-        	  'User group does not support uploading this type of file': '用户组不支持上传该类型的文件',
-        	  'Couldn’t upload image. Please try another.': '无法上传图片，请尝试另一个。',
+                  'With border': 'มีเส้นขอบ',
+        	  'Stretch image': 'ยืดรูปภาพ',
+        	  'With background': 'มีสีพื้นหลัง',
+        	  'Unsupported file type': 'ประเภทไฟล์ไม่รองรับ',
+        	  'File has exceptions': 'ไฟล์มีความผิดปกติ',
+        	  'File size cannot exceed ': 'ขนาดไฟล์ต้องไม่เกิน ',
+        	  'User group does not support uploading this type of file': 'กลุ่มผู้ใช้ไม่รองรับการอัปโหลดไฟล์ประเภทนี้',
+        	  'Couldn’t upload image. Please try another.': 'ไม่สามารถอัปโหลดรูปภาพได้ โปรดลองไฟล์อื่น',
             }
           }
         },

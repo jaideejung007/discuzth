@@ -53,8 +53,6 @@ $lang = [
 	'database_errno_1044' => '無法創建新的數據庫，請檢查數據庫名稱填寫是否正確',
 	'database_errno_1045' => '無法連接數據庫，請檢查數據庫用戶名或者密碼是否正確',
 	'database_connect_error' => '數據庫連接錯誤',
-	'status_bbclosed_invalid' => '您的站點尚未關閉，請先關閉站點後再進行升級',
-	'status_plugin_available' => '您的插件尚未關閉，請先關閉所有插件後再進行升級',
 	'run_sql_error' => 'Discuz! Database Error',
 
 	'step_title_1' => '檢查安裝環境',

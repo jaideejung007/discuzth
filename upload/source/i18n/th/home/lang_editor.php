@@ -1,0 +1,83 @@
+<?php
+
+/**
+ * [Discuz!] (C)2001-2099 Discuz! Team
+ * This is NOT a freeware, use is subject to license terms
+ * https://license.discuz.vip
+ */
+
+if(!defined('IN_DISCUZ')) {
+	exit('Access Denied');
+}
+
+$lang = [
+	'editor_switch_media' => 'สลับไปยังมัลติมีเดีย',
+	'editor_cut' => 'ตัด',
+	'editor_copy' => 'คัดลอก',
+	'editor_paste' => 'วาง',
+	'editor_font' => 'แบบอักษร',
+	'editor_fontsize' => 'ขนาดอักษร',
+	'editor_fontbold' => 'ตัวหนา',
+	'editor_fontitalic' => 'ตัวเอียง',
+	'editor_fontunderline' => 'ขีดเส้นใต้',
+	'editor_funtcolor' => 'สีตัวอักษร',
+	'editor_align' => 'การจัดแนว',
+	'editor_list' => 'ลำดับรายการ',
+	'editor_indent' => 'ระยะเยื้อง',
+	'editor_hyperlink' => 'ไฮเปอร์ลิงก์',
+	'editor_remove_link' => 'ลบลิงก์',
+	'editor_link_image' => 'เพิ่มรูปภาพ',
+	'editor_link_attach' => 'เพิ่มไฟล์แนบ',
+	'editor_link_flash' => 'เพิ่มวิดีโอ Flash หรือเพลง MP3',
+	'editor_insert_smiley' => 'แทรกอีโมจิ',
+	'editor_doodle' => 'วาดเขียน',
+	'editor_pagebreak' => 'แทรกตัวแบ่งหน้า',
+	'editor_download_remote' => 'ดาวน์โหลดรูปภาพจากภายนอก',
+	'editor_restore' => 'คืนค่าเนื้อหา',
+	'editor_switch_text' => 'สลับไปยังข้อความธรรมดา',
+	'editor_font_song' => 'SimSun',
+	'editor_font_hei' => 'SimHei',
+	'editor_font_kai' => 'KaiTi',
+	'editor_font_li' => 'LiSu',
+	'editor_font_you' => 'YouYuan',
+	'editor_fontsize_xxsmall' => 'เล็กที่สุด',
+	'editor_fontsize_xsmall' => 'เล็กมาก',
+	'editor_fontsize_small' => 'เล็ก',
+	'editor_fontsize_medium' => 'กลาง',
+	'editor_fontsize_large' => 'ใหญ่',
+	'editor_list_order' => 'รายการแบบตัวเลข',
+	'editor_list_unorder' => 'รายการแบบสัญลักษณ์',
+	'editor_align_left' => 'จัดชิดซ้าย',
+	'editor_align_center' => 'จัดกึ่งกลาง',
+	'editor_align_right' => 'จัดชิดขวา',
+	'editor_indent_inc' => 'เพิ่มระยะเยื้อง',
+	'editor_indent_dec' => 'ลดระยะเยื้อง',
+	'editor_color_darkred' => 'สีแดงเข้ม',
+	'editor_color_purple' => 'สีม่วง',
+	'editor_color_red' => 'สีแดง',
+	'editor_color_pink' => 'สีชมพูสด',
+	'editor_color_darkblue' => 'สีน้ำเงินเข้ม',
+	'editor_color_blue' => 'สีน้ำเงิน',
+	'editor_color_lakeblue' => 'สีฟ้าน้ำทะเล',
+	'editor_color_greenblue' => 'สีเขียวแกมน้ำเงิน',
+	'editor_color_green' => 'สีเขียว',
+	'editor_color_olives' => 'สีมะกอก',
+	'editor_color_lightgreen' => 'สีเขียวอ่อน',
+	'editor_color_orange' => 'สีส้มเหลือง',
+	'editor_color_black' => 'สีดำ',
+	'editor_color_grey' => 'สีเทา',
+	'editor_color_silver' => 'สีเงิน',
+	'editor_color_white' => 'สีขาว',
+	'editor_ok' => 'ตกลง',
+	'editor_cancel' => 'ยกเลิก',
+	'editor_prompt_textlink' => 'โปรดระบุ URL สำหรับข้อความที่เลือก',
+	'editor_prompt_imagelink' => 'โปรดระบุ URL ของรูปภาพ',
+	'editor_prompt_pagetitle' => 'โปรดระบุหัวข้อหน้า',
+	'editor_prompt_videolink' => 'โปรดระบุ URL ของวิดีโอ',
+	'editor_prompt_video_flash' => 'แอนิเมชัน Flash',
+	'editor_prompt_video_media' => 'วิดีโอ Media',
+	'editor_prompt_video_real' => 'วิดีโอ Real',
+	'editor_prompt_mp3' => 'เพลง MP3',
+	'editor_full_screen' => 'เต็มจอ',
+];
+

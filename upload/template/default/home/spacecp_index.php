@@ -619,7 +619,7 @@ function succeedhandle_$_GET['handlekey'] (url, message, values) {
 <!--{elseif $_GET['op'] == 'savespaceinfo'}-->
 
 <!--{eval $space['domainurl'] = space_domain($space);}-->
-<strong id="spacename"><!--{if $space[spacename]}-->$space[spacename]<!--{else}-->$space[username]{lang somebody_space}<!--{/if}--></strong>
+<strong id="spacename"><!--{if $space[spacename]}-->$space[spacename]<!--{else}-->{lang somebody_space} $space[username]<!--{/if}--></strong><!--discuzth-->
 <a id="domainurl" href="$space[domainurl]" onclick="setCopy('$space[domainurl]', '{lang copy_space_address}');return false;" class="xs0 xw0">$space[domainurl]</a>
 <span id="spacedescription" class="xw0">$space[spacedescription]</span>
 <script type="text/javascript" reload="1">spaceDiy.initSpaceInfo();</script>

@@ -10,24 +10,21 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-class media_youtube {
+class media_youtube { /*discuzth*/
 
 	public static $version = '1.0';
 	public static $name = 'youtube';
-	public static $checkurl = ['youtube.com/watch?'];
+	public static $checkurl = ['youtube.com', 'youtu.be'];
 
 	public static function parse($url, $width, $height) {
-		if(preg_match('/^https?:\/\/(|m.|www.)youtube.com\/watch\?v=([^\/&]+)&?/i', $url, $matches)) {
-			$flv = 'https://www.youtube.com/v/'.$matches[2].'&fs=1';
-			$iframe = 'https://www.youtube.com/embed/'.$matches[2];
-			if(!$width && !$height) {
-				$str = dfsockopen($url);
-				if(!empty($str) && preg_match("/'VIDEO_HQ_THUMB':\s'(.+?)'/i", $str, $image)) {
-					$url = substr($image[1], 0, strrpos($image[1], '/') + 1);
-					$filename = substr($image[1], strrpos($image[1], '/') + 3);
-					$imgurl = $url.$filename;
-				}
-			}
+		$flv = '';
+		$iframe = '';
+		$imgurl = '';
+		
+		if(preg_match('%(?:youtube(?:-nocookie)?\.com/(?:(?:v|e(?:mbed)?)/|.*[?&]v=|[^/]+/.+/)|youtu\.be/)([^"&?/ ]{11})%i', $url, $matches)) {
+			$flv = 'https://www.youtube.com/v/'.$matches[1].'&fs=1';
+			$iframe = 'https://www.youtube.com/embed/'.$matches[1];
+			$imgurl = 'https://i.ytimg.com/vi/'.$matches[1].'/hqdefault.jpg';
 		}
 		return [$flv, $iframe, $url, $imgurl];
 	}

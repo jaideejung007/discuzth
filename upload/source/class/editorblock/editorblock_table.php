@@ -13,13 +13,13 @@ if(!defined('IN_DISCUZ')) {
 class editorblock_table {
 
 	var $version = '1.0.3';
-	var $name = '表格';
+	var $name = 'ตาราง';
 	var $available = 1; 
 	var $columns = 1; 
 	var $identifier = 'table';
-	var $description = '表格区块';
+	var $description = 'บล็อกตาราง';
 	var $filename = 'table';
-	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">云诺</a>';
+	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">Yunnuo</a>';
 	var $type = '0'; 
 
 	function __construct() {
@@ -42,8 +42,8 @@ class editorblock_table {
 		"withHeadings": true,
 		"content" : [ [ "Kine", "Pigs", "Chicken" ], [ "1 pcs", "3 pcs", "12 pcs" ], [ "100$", "200$", "150$" ] ]
 	  },
-      "id": "ZT8S70Q34G", // 区块id
-      "type": "table" // 区块类型
+      "id": "ZT8S70Q34G", // ไอดีบล็อก
+      "type": "table" // ประเภทบล็อก
 }
 EOF;
 	}
@@ -67,10 +67,10 @@ EOF;
        messages: {
           tools: {
             'table': {
-                  'With headings': '带标题',
-                  'Without headings': '不带标题',
-        	  'Stretch': '拉伸表格',
-        	  'Collapse': '取消拉伸',
+                  'With headings': 'มีหัวข้อ',
+                  'Without headings': 'ไม่มีหัวข้อ',
+        	  'Stretch': 'ยืดตาราง',
+        	  'Collapse': 'ยกเลิกการยืด',
             }
           }
         },

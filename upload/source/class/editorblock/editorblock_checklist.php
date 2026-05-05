@@ -13,13 +13,13 @@ if(!defined('IN_DISCUZ')) {
 class editorblock_checklist {
 
 	var $version = '1.5.6';
-	var $name = '多选列表';
+	var $name = 'รายการเลือกหลายรายการ';
 	var $available = 1; 
 	var $columns = 1; 
 	var $identifier = 'checklist';
-	var $description = '用于添加多选类区块。';
+	var $description = 'ใช้สำหรับเพิ่มบล็อกประเภทรายการเลือกหลายรายการ';
 	var $filename = 'checklist';
-	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">云诺</a>';
+	var $copyright = '<a href="https://addon.dismall.com/developer-32563.html" target="_blank">Yunnuo</a>';
 	var $type = '0'; 
 
 	function __construct() {
@@ -41,17 +41,17 @@ class editorblock_checklist {
     "data": {
         "items": [
             {
-                "text": "选项1",
+                "text": "ตัวเลือกที่ 1",
                 "checked": false
             },
             {
-                "text": "选项2",
+                "text": "ตัวเลือกที่ 2",
                 "checked": false
             }
         ]
     },
-    "id": "UbEUIk82tj", // 区块id
-    "type": "checklist" // 区块类型
+    "id": "UbEUIk82tj", // ไอดีบล็อก
+    "type": "checklist" // ประเภทบล็อก
 }
 EOF;
 	}
