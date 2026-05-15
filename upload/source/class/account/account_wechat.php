@@ -271,6 +271,8 @@ class account_wechat extends account_base {
 		} else {
 			if(!$authcode && $_G['uid']) {
 				showmessage('account_bind_other_exists', (!empty($_GET['referer_url']) ? $_GET['referer_url'] : $_G['siteurl']));
+			} elseif ($authcode && $account->getUid() > 0 && $_G['uid'] && $account->getUid() != $_G['uid']) {
+				showmessage('account_bind_other_exists', 'home.php?mod=spacecp&ac=account');
 			} else {
 				$account->userLogin();
 				
