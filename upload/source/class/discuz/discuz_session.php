@@ -96,7 +96,7 @@ class discuz_session {
 			} else {
 				$this->table->update($this->var['sid'], $this->var);
 			}
-			setglobal('sessoin', $this->var);
+			setglobal('session', $this->var);
 			dsetcookie('sid', $this->sid, 86400);
 		}
 	}
