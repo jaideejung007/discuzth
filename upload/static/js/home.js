@@ -733,7 +733,9 @@ function docomment_get(doid, key, page, inlist) {
 		showElem.className = 'doingreply_box';
 	}
 	
-	ajaxget(url, showid);
+	ajaxget(url, showid, null, null, null, function() {
+		docomment_form(doid, 0, key);
+	});
 
 	if($(opid)) {
 		$(opid).innerHTML = $L('fold');

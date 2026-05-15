@@ -158,9 +158,9 @@
 								<div class="item_info_interactions">
 									<div class="interactions_left">
 										<!--{if $count == 1}-->
-										<a href="javascript:;" class="doing_comment_btn icon_box" onclick="docomment_get($doid, '$key', 1); setTimeout(function(){docomment_form($doid, 0, '$key')}, 100);" data-doid="$doid" data-key="$key" title="{lang reply}"><i class="fico-comment"></i><span><!--{if $dv['replynum']}-->$dv['replynum']<!--{else}-->{lang reply}<!--{/if}--></span></a>
+										<a href="javascript:;" class="doing_comment_btn icon_box" onclick="docomment_get($doid, '$key', 1)" data-doid="$doid" data-key="$key" title="{lang reply}"><i class="fico-comment"></i><span><!--{if $dv['replynum']}-->$dv['replynum']<!--{else}-->{lang reply}<!--{/if}--></span></a>
 										<!--{else}-->
-										<a href="javascript:;" class="doing_comment_btn icon_box" onclick="docomment_get($doid, '$key', 1, true); setTimeout(function(){docomment_form($doid, 0, '$key')}, 100);" data-doid="$doid" data-key="$key" title="{lang reply}"><i class="fico-comment"></i><span><!--{if $dv['replynum']}-->$dv['replynum']<!--{else}-->{lang reply}<!--{/if}--></span></a>
+										<a href="javascript:;" class="doing_comment_btn icon_box" onclick="docomment_get($doid, '$key', 1, true)" data-doid="$doid" data-key="$key" title="{lang reply}"><i class="fico-comment"></i><span><!--{if $dv['replynum']}-->$dv['replynum']<!--{else}-->{lang reply}<!--{/if}--></span></a>
 										<!--{/if}-->
 										<a href="javascript:;" class="doing_recommend_btn icon_box" data-doid="{$doid}" data-status="<!--{if $dv['recommendstatus']}-->1<!--{else}-->0<!--{/if}-->">
 											<i class="<!--{if $dv['recommendstatus']}-->fico-thumbup fc-i<!--{else}-->fico-thumbup fc-s<!--{/if}-->"></i> 
