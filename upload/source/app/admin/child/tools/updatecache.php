@@ -51,12 +51,11 @@ if($step == 1) {
 	$type = implode('_', (array)$_GET['type']);
 	cpmsg(cplang('tools_updatecache_waiting'), "action=tools&operation=updatecache&step=3&type=$type", 'loading', '', FALSE);
 } elseif($step == 3) {
-	if(substr($_GET['type'], 0,6)  != 'plugin')
-    {
-        $type = explode('_', $_GET['type']);
-    }else{
-        $type = [ substr($_GET['type'], 7) ];
-    }
+	if(substr($_GET['type'], 0, 6) != 'plugin') {
+		$type = explode('_', $_GET['type']);
+	} else {
+		$type = [substr($_GET['type'], 7)];
+	}
 	if(in_array('oss', $type)) {
 		define('IN_UPDATECACHE', 1);
 		$type[] = 'data';
@@ -95,7 +94,7 @@ if($step == 1) {
 	if(in_array('csscache', $type)) {
 		if(in_array('data', $type)) {
 			updatecache(['styles']);
-		}else{
+		} else {
 			updatecache(['setting', 'styles', 'smilies_js']);
 		}
 		loadcache('style_default', true);
