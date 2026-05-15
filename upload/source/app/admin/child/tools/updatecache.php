@@ -31,7 +31,7 @@ if($step == 1) {
 			$cachedirhandle = dir($cachedir);
 			while($entry = $cachedirhandle->read()) {
 				if(!in_array($entry, ['.', '..']) && preg_match('/^cache\_([\_\w]+)\.php$/', $entry, $entryr) && str_ends_with($entry, '.php') && is_file($cachedir.'/'.$entry)) {
-					$id = $plugin['identifier'].':'.$entryr[1];
+					$id = 'plugin_'.$plugin['identifier'].':'.$entryr[1];
 					$extra[] = "<input type=\"checkbox\" name=\"type[]\" value=\"{$id}\" id=\"{$id}\" class=\"checkbox\" /><label for=\"{$id}\">".$plugin['name'].'('.$entryr[1].')</label>';
 				}
 			}
@@ -51,7 +51,12 @@ if($step == 1) {
 	$type = implode('_', (array)$_GET['type']);
 	cpmsg(cplang('tools_updatecache_waiting'), "action=tools&operation=updatecache&step=3&type=$type", 'loading', '', FALSE);
 } elseif($step == 3) {
-	$type = explode('_', $_GET['type']);
+	if(substr($_GET['type'], 0,6)  != 'plugin')
+    {
+        $type = explode('_', $_GET['type']);
+    }else{
+        $type = [ substr($_GET['type'], 7) ];
+    }
 	if(in_array('oss', $type)) {
 		define('IN_UPDATECACHE', 1);
 		$type[] = 'data';
