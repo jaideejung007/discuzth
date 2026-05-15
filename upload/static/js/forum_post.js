@@ -102,7 +102,7 @@ function validate(theform) {
 		return false;
 	}
 	if(isfirstpost && $('adddynamic') != null && $('adddynamic').checked && $('postsave') != null && isNaN(parseInt($('postsave').value)) && ($('readperm') != null && $('readperm').value || $('price') != null && $('price').value)) {
-		if(confirm($('readperm_confirm')) == false) {
+		if(confirm($L('readperm_confirm')) == false) {
 			return false;
 		}
 	}
