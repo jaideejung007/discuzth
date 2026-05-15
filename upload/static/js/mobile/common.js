@@ -128,15 +128,7 @@ var page = {
 		pgobj.classList.add('page');
 		pgobj.innerHTML = '<a href="'+ prevpagehref +'">' + $L('page_prev') + '</a>'+ selector +'<a href="'+ nextpagehref +'">' + $L('page_next') + '</a>';
 		qSel('#dumppage').addEventListener('change', function() {
-			var href = (prevpage || nextpage);
-			var newhref = href.replace(/page=\d+/, 'page=' + this.value);
-			if (newhref == href) {
-				newhref = href.replace(/(forum|thread|article|group|blog)-(\d+)-(\d+)(-(\d+))?\.html/i, '$1-$2-' + this.value + '$4.html');
-				if (newhref == href && multipage_url != undefined) {
-					newhref = multipage_url.replace(/{page}/i, this.value);
-				}
-			}
-			window.location.href = newhref;
+			window.location.href = multipage_url + 'page=' + this.value;
 		});
 	},
 };
