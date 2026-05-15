@@ -14,7 +14,7 @@
 .edt .bar a {float:left;border:1px solid var(--dz-bgc);color:var(--dz-fa);overflow:hidden;border-radius:var(--dz-radius-s)}
 .edt .b1r a {padding:35px 2px 0;width:38px;height:20px;text-align:center;font-size:11px;font-family:Arial, PMingLiU, sans-serif;-webkit-text-size-adjust:none}
 .edt .b2r a {width:24px;height:24px;margin:1px;text-indent:-9999px}
-.edt .b2r a.dp {margin-right:3px;padding-left:5px;width:81px;height:24px;line-height:24px;font-size:14px;text-indent:0;border-color:var(--dz-borderb);background:var(--dz-bgf) url({STYLEIMGDIR}/dz_ico_jt.gif) no-repeat 100% 6px;background-size:auto 12px}
+.edt .b2r a.dp {margin-right:3px;padding-left:5px;width:81px;height:24px;line-height:24px;font-size:14px;text-indent:0;border-color:var(--dz-borderb);background:var(--dz-bgf) url({STYLEIMGDIR}/svg/dz_ico_jt.svg) no-repeat 100% 6px;background-size:auto 12px}
 .edt .b2r a:hover.dp {color:var(--dz-ahover)}
 .edt .nbl {border-left:none;padding-left:0}
 .edt .nbr {border-right:none;padding-right:0}
