@@ -22,7 +22,7 @@ class logging_ctl {
 		if(empty($_GET['lssubmit'])) {
 			return;
 		}
-		$auth = authcode($_GET['username']."\t".$_GET['password']."\t".($questionexist ? 1 : 0), 'ENCODE', $_G['config']['security']['authkey']);
+		$auth = authcode($_GET['username']."\t".$_GET['password']."\t".($questionexist ? 1 : 0), 'ENCODE');
 		$js = '<script type="text/javascript">showWindow(\'login\', \'member.php?mod=logging&action=login&auth='.rawurlencode($auth).'&referer='.rawurlencode(dreferer()).(!empty($_GET['cookietime']) ? '&cookietime=1' : '').'\')</script>';
 		showmessage('location_login', '', ['type' => 1], ['extrajs' => $js]);
 	}
@@ -38,7 +38,7 @@ class logging_ctl {
 
 		list($seccodecheck, $secqaacheck) = seccheck('login');
 		if(!empty($_GET['auth'])) {
-			$dauth = authcode($_GET['auth'], 'DECODE', $_G['config']['security']['authkey']);
+			$dauth = authcode($_GET['auth'], 'DECODE');
 			list(, , , $secchecklogin2) = explode("\t", $dauth);
 			if($secchecklogin2) {
 				$seccodecheck = true;
@@ -61,7 +61,7 @@ class logging_ctl {
 			$username = !empty($_G['cookie']['loginuser']) ? dhtmlspecialchars($_G['cookie']['loginuser']) : '';
 
 			if(!empty($_GET['auth'])) {
-				list($username, $password, $questionexist) = explode("\t", authcode($_GET['auth'], 'DECODE', $_G['config']['security']['authkey']));
+				list($username, $password, $questionexist) = explode("\t", authcode($_GET['auth'], 'DECODE'));
 				$username = dhtmlspecialchars($username);
 				$auth = dhtmlspecialchars($_GET['auth']);
 			}
@@ -81,7 +81,7 @@ class logging_ctl {
 
 		} else {
 			if(!empty($_GET['auth'])) {
-				list($_GET['username'], $_GET['password']) = daddslashes(explode("\t", authcode($_GET['auth'], 'DECODE', $_G['config']['security']['authkey'])));
+				list($_GET['username'], $_GET['password']) = daddslashes(explode("\t", authcode($_GET['auth'], 'DECODE')));
 			}
 
 			$loginhash = !empty($_GET['loginhash']) && preg_match('/^\w+$/', $_GET['loginhash']) ? $_GET['loginhash'] : '';
