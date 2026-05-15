@@ -13,7 +13,7 @@ if(!defined('IN_DISCUZ')) {
 class memory_common_session {
 	private $_pre_cache_key;
 
-	const DEFAULT_TTL = 2592000;
+	const DEFAULT_TTL = 86400;
 
 	
 	const LUA_RETURN_DATA = <<<LUA

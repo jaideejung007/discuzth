@@ -19,9 +19,9 @@ if(submitcheck('settingsubmit')) {
 			}
 		}
 		if(isset($memory['common_member'])) {
-			$memory['common_member_count'] = $memory['common_member_status'] = $memory['common_member_profile'] = $memory['common_member_field_home'] = $memory['common_member_field_forum'] = $memory['common_member_verify'] = $memory['common_member'];
+			$memory['common_member_account'] = $memory['common_member_count'] = $memory['common_member_status'] = $memory['common_member_profile'] = $memory['common_member_field_home'] = $memory['common_member_field_forum'] = $memory['common_member_verify'] = $memory['common_member'];
 		} else {
-			unset($memory['common_member_count'], $memory['common_member_status'], $memory['common_member_profile'], $memory['common_member_field_home'], $memory['common_member_field_forum'], $memory['common_member_verify']);
+			unset($memory['common_member_account'], $memory['common_member_count'], $memory['common_member_status'], $memory['common_member_profile'], $memory['common_member_field_home'], $memory['common_member_field_forum'], $memory['common_member_verify']);
 		}
 		$settingnew['memory'] = $memory;
 	}
